@@ -1,0 +1,3287 @@
+.wrapper {
+  padding: 70px 0;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.page-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  margin-bottom: 10px;
+}
+
+.page-sub-title {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--color-text-dark);
+  margin-bottom: 10px;
+  line-height: 1.7;
+}
+
+.container {
+  padding: 30px;
+  margin-bottom: 34px;
+  margin-top: 30px;
+  background-color: #f9f9f9;
+}
+
+.container.container-positive {
+  position: relative;
+}
+
+.page-absolute-image {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.page-list-item {
+  list-style: none;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.7;
+  padding-left: 1em;
+  text-indent: -0.7em;
+}
+.page-list-item::before {
+  content: "- ";
+}
+
+.page-list-dangu {
+  list-style: none;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.7;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+.page-list-dangu::before {
+  content: "※ ";
+}
+
+.page-list-number {
+  list-style: decimal;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.7;
+  margin-left: 20px;
+  padding-left: 4px;
+}
+
+.page-list-plain {
+  list-style: none;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.7;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.content-section {
+  width: 100%;
+  padding: 30px 0;
+  background-color: var(--color-white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 상담 신청 배너 스타일 */
+.consultation-banner {
+  width: 100%;
+  height: 260px;
+  border-radius: 10px;
+  background-image: url("/resources/images/course-registration/banner_cautions.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 20px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.consultation-banner-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.consultation-banner-title {
+  font-size: 34px;
+  font-weight: 300;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.consultation-banner-subtitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.consultation-banner-button {
+  width: auto;
+  min-width: 200px;
+  height: 50px;
+  padding: 0 24px;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333333;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.consultation-banner-button:hover {
+  background-color: #f5f5f5;
+}
+
+.consultation-banner-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+}
+
+.consultation-banner-arrow img {
+  width: 20px;
+  height: 20px;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* 수강신청 탭 스타일 */
+.register-tabs-wrapper {
+  width: 100%;
+}
+
+.register-tabs {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.register-tabs-nav {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid #e5e5e5;
+  background-color: #ffffff;
+}
+
+.register-tab-btn {
+  background: none;
+  border: none;
+  padding: 16px 24px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #010101;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border: 1px solid #eaeaea;
+}
+
+.register-tab-btn:hover {
+  color: #333333;
+  background-color: #f9f9f9;
+}
+
+.register-tab-btn.active {
+  background-color: #cde3ff;
+  color: #010101;
+  font-weight: 600;
+
+  margin: 0px;
+  font-size: 12px;
+}
+
+/* 탭 콘텐츠 스타일 */
+.register-tab-content {
+  width: 100%;
+  margin-top: 0;
+  background-color: #ffffff;
+}
+
+.register-tab-panel {
+  display: none;
+  padding: 0;
+}
+
+.register-tab-panel.active {
+  display: block;
+}
+
+/* 일정 정보 스타일 */
+.register-schedule-info {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #cde3ff;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.register-schedule-row {
+  display: flex;
+  width: 100%;
+  margin-bottom: 8px;
+  gap: 12px;
+}
+
+.register-schedule-item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.register-schedule-label {
+  min-width: 200px;
+  width: 200px;
+  padding: 12px 16px;
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #010101;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.register-schedule-value {
+  flex: 1;
+  padding: 12px 0;
+  background-color: #ffffff;
+  font-size: 12px;
+  font-weight: 500;
+  color: #010101;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.register-schedule-note {
+  flex: 1;
+  text-align: right;
+  margin-top: 0;
+  padding-right: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.register-schedule-note p {
+  font-size: 10px;
+  color: #656565;
+  margin: 4px 0;
+  line-height: 1.4;
+}
+
+/* 데스크탑/모바일 전용 클래스 */
+.mobile-only {
+  display: none;
+}
+
+.desktop-only {
+  display: flex;
+}
+
+/* 데스크탑에서 모바일 요소 숨기기 */
+.mobile-header,
+.mobile-sidebar,
+.mobile-sidebar-overlay,
+.mobile-register-banner,
+.mobile-register-title-banner,
+.mobile-course-list,
+.mobile-payment-info,
+.mobile-footer-section,
+.mobile-register-floating-menu {
+  display: none;
+}
+
+/* 데스크탑에서 데스크탑 헤더 보이기 */
+.header {
+  display: block;
+}
+
+/* 과목 선택 섹션 */
+.course-selection-section {
+  position: relative;
+  width: 100%;
+  margin-top: 40px;
+}
+
+/* 과목 분류 탭 */
+.course-category-tabs {
+  width: 100%;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.course-category-tabs-nav {
+  display: flex;
+  width: 100%;
+  gap: 0;
+  align-items: center;
+}
+
+.course-category-tab-btn {
+  flex: 1;
+  padding: 12px 20px;
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 400;
+  color: #999999;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  text-align: center;
+}
+
+.course-category-tab-btn:hover {
+  color: #666666;
+}
+
+.course-category-tab-btn.active {
+  color: #010101;
+  font-weight: 700;
+}
+
+/* 과목 테이블 및 요약 래퍼 */
+.course-table-summary-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-end;
+}
+
+/* 모바일 전용 요소 - 데스크탑에서 숨김 */
+.mobile-course-list {
+  display: none;
+}
+
+.mobile-register-floating-menu {
+  display: none;
+}
+
+.mobile-register-title-banner {
+  display: none;
+}
+
+/* 데스크탑 전용 요소 - 모바일에서 숨김 */
+.course-table-wrapper {
+  width: 100%;
+  position: relative;
+  overflow: visible;
+  display: block;
+}
+
+.course-summary {
+  display: block;
+}
+
+.course-table-wrapper td {
+  position: relative;
+  overflow: visible;
+}
+
+.course-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: visible;
+}
+
+.course-table th {
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #010101;
+  text-align: center;
+  border-bottom: 1px solid #eaeaea;
+  position: relative;
+}
+
+.course-table th:last-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.select-all-syllabus-checkbox {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #0066cc;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+
+.course-table td {
+  padding: 12px 14px;
+  font-size: 14px;
+  color: #010101;
+  text-align: center;
+  border-bottom: 1px solid #f5f5f5;
+  position: relative;
+  overflow: visible;
+  font-weight: 500;
+}
+
+.course-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.course-table tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+.course-name {
+  text-align: left;
+  font-weight: 500;
+}
+
+.course-major-type {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: center;
+}
+
+.course-major-badge {
+  padding: 4px 8px;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #010101;
+}
+
+.course-major-view-btn {
+  padding: 10px 12px;
+  background-color: #ffffff;
+  border: 1px solid #eaeaea;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #010101;
+  cursor: pointer;
+
+  position: relative;
+}
+
+.course-major-view-btn:hover {
+  background-color: #cde3ff;
+  color: #333333;
+}
+
+.course-fee {
+  font-weight: 500;
+}
+
+.course-sample-btn,
+.course-syllabus-btn {
+  padding: 10px 12px;
+  background-color: #ffffff;
+  border: 1px solid #eaeaea;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #010101;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.course-sample-btn:hover,
+.course-syllabus-btn:hover {
+  background-color: #cde3ff;
+  color: #333333;
+}
+
+.course-syllabus-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.course-syllabus-checkbox {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #0066cc;
+}
+
+/* 전공보기 팝업 */
+.major-popup {
+  display: none;
+  position: absolute;
+  z-index: 1000;
+  background-color: #ffffff;
+  border: 10px solid #3f7efb;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 0;
+  width: 350px;
+}
+
+.major-popup.show {
+  display: block;
+}
+
+.major-popup-content {
+  position: relative;
+  padding: 0;
+}
+
+.major-popup-content::before {
+  content: "";
+  position: absolute;
+  left: -22px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 22px solid transparent;
+  border-bottom: 22px solid transparent;
+  border-right: 22px solid #3f7efb;
+}
+
+.major-popup-content::after {
+  content: "";
+  position: absolute;
+  left: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+}
+
+.major-popup-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+  table-layout: fixed;
+  border: none;
+}
+
+/* major-popup-table의 td 기본 스타일 */
+.major-popup .major-popup-table td {
+  border: 1px solid #eaeaea;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+/* 테이블의 첫 번째 행과 마지막 행의 td border 조정 */
+.major-popup .major-popup-table tr:first-child td {
+  border-top: none;
+}
+
+.major-popup .major-popup-table tr:last-child td {
+  border-bottom: none;
+}
+
+.major-popup .major-popup-table td:first-child {
+  border-left: none;
+}
+
+.major-popup .major-popup-table td:last-child {
+  border-right: none;
+}
+
+/* 관련전공영역 셀 */
+.major-popup-title {
+  padding: 8px 7px;
+  background-color: #f9f9f9;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: #010101;
+  text-align: center;
+  width: 100px !important;
+  min-width: 100px;
+  max-width: 100px;
+}
+
+/* 학사, 전문학사 셀 */
+.major-popup-label {
+  padding: 8px 7px;
+  background-color: #f9f9f9;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  width: 80px !important;
+  min-width: 80px;
+  max-width: 80px;
+}
+
+/* 내용 셀 (학사, 전문학사 내용) */
+.major-popup-value {
+  padding: 8px 7px;
+  background-color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  width: 145px !important;
+  min-width: 145px;
+  max-width: 145px;
+  word-wrap: break-word;
+  word-break: keep-all;
+  line-height: 1.4;
+  text-align: center;
+}
+
+/* 선택된 과목 요약 */
+.course-summary {
+  width: 320px;
+  background-color: #ffffff;
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.course-summary-header {
+  padding: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #010101;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.course-summary-list {
+  max-height: 180px;
+  overflow-y: scroll;
+  padding: 8px;
+}
+
+.course-summary-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  margin-bottom: 4px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+}
+
+.course-summary-item-name {
+  flex: 1;
+  font-size: 14px;
+  color: #010101;
+  font-weight: 600;
+}
+
+.course-summary-item-price {
+  font-size: 14px;
+  font-weight: 600;
+  color: #010101;
+  margin-right: 8px;
+}
+
+.course-summary-total-text {
+  font-size: 14px;
+  color: #939393;
+  font-weight: 600;
+}
+
+.course-count {
+  color: #010101;
+  font-weight: 600;
+  margin-left: 8px;
+  font-size: 18px;
+}
+
+.course-summary-item-remove {
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.course-summary-item-remove:hover {
+  color: #ff0000;
+}
+
+.course-summary-footer {
+  padding: 16px;
+}
+
+.course-summary-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: #010101;
+}
+
+.course-total-price {
+  font-size: 24px;
+  font-weight: 700;
+  color: #010101;
+}
+
+.course-summary-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.course-cart-btn,
+.course-register-btn {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.course-cart-btn {
+  background-color: #cde3ff;
+  color: #181818;
+}
+
+.course-cart-btn:hover {
+  background-color: #cde3ff;
+}
+
+.course-register-btn {
+  background-color: #0032bb;
+  color: #ffffff;
+}
+
+.course-register-btn:hover {
+  background-color: #0052a3;
+}
+
+/* 수강신청 절차 스타일 */
+.process-step {
+  width: 950px;
+  border-radius: 8px;
+  padding: 0 51.5px;
+  margin-bottom: 0;
+  opacity: 1;
+  box-sizing: border-box;
+}
+
+.process-step-content {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  height: 100%;
+}
+
+.process-step-text {
+  flex: 1;
+}
+
+.content-section .process-step-title,
+.process-section .process-step-title {
+  font-size: 20px !important;
+  font-weight: 700;
+  color: #010101;
+  margin: 0 0 8px 0 !important;
+  text-align: left !important;
+}
+
+.process-step-description {
+  font-size: 14px;
+  color: #010101;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.process-step-icon {
+  width: 100px;
+  height: 100px;
+  flex-shrink: 0;
+}
+
+.process-step-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.process-divider {
+  text-align: center;
+  margin: 24px 0;
+}
+
+.process-divider img {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* 수강후기 BEST 배지 */
+.review-best-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  background-color: #3f7efb;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+/* 수강후기 상세페이지 스타일 */
+.review-detail-info-table {
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #d9d9d9;
+
+  margin-bottom: 30px;
+}
+
+.review-detail-best-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.review-detail-info-table th {
+  width: 120px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #eaeaea;
+  border-right: 1px solid #eaeaea;
+  font-size: 14px;
+  font-weight: 700;
+  color: #010101;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.review-detail-info-table td {
+  padding: 20px;
+  border-bottom: 1px solid #eaeaea;
+  font-size: 14px;
+  font-weight: 500;
+  color: #010101;
+  vertical-align: middle;
+  background-color: #ffffff;
+}
+
+.review-detail-info-table tr:last-child th,
+.review-detail-info-table tr:last-child td {
+  border-bottom: none;
+}
+
+.review-detail-content {
+  padding: 40px;
+  background-color: #f3f8ff;
+  margin-bottom: 34px;
+}
+
+.review-detail-section {
+  margin-bottom: 20px;
+  border: 1px solid #cde3ff;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #ffffff;
+  padding: 16px;
+}
+
+.review-detail-question {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  color: #010101;
+  margin-bottom: 4px;
+}
+
+.review-detail-question-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background-color: #3f7efb;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.review-detail-question-text {
+  flex: 1;
+}
+
+.review-detail-answer {
+  background-color: #ffffff;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #010101;
+}
+
+/* 일반 수강후기 상세페이지 스타일 (배경색 없음) */
+.review-detail-content-normal {
+  padding: 40px 0;
+  background-color: transparent;
+  margin-bottom: 34px;
+}
+
+.review-detail-section-normal {
+  margin-bottom: 16px;
+  border: none;
+  border-radius: 0;
+  overflow: visible;
+  background-color: transparent;
+  padding: 0;
+}
+
+.review-detail-question-normal {
+  font-size: 16px;
+  font-weight: 600;
+  color: #010101;
+  margin-bottom: 4px;
+}
+
+.review-detail-question-text-normal {
+  display: block;
+}
+
+/* 수강후기 네비게이션 화살표 */
+.review-nav-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.review-nav-arrow {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.schedule-detail-navigation-table th {
+  text-align: center !important;
+}
+
+/* 게시판 스타일 (learning-support.css에서 가져옴) */
+/* 검색 박스 스타일 */
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.search-select-wrapper {
+  position: relative;
+}
+
+.search-select {
+  padding: 10px 40px 10px 12px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #010101;
+  background-color: #ffffff;
+  appearance: none;
+  cursor: pointer;
+}
+
+.search-input {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #010101;
+}
+
+.search-button {
+  padding: 10px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  background-color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-button img {
+  width: 20px;
+  height: 20px;
+  opacity: 0.7;
+}
+
+.search-button:hover img {
+  opacity: 1;
+}
+
+/* 게시글 목록 영역 */
+.practice-support-notice-list-section {
+  width: 100%;
+  background-color: var(--color-white);
+}
+
+.practice-support-notice-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.practice-support-notice-table th {
+  padding: 15px 20px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #010101;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.practice-support-notice-table th:first-child {
+  width: 80px;
+}
+
+.practice-support-notice-table th:nth-child(2) {
+  text-align: center;
+}
+
+.practice-support-notice-table th:last-child {
+  width: 80px;
+}
+
+.practice-support-notice-table tbody tr {
+  border-bottom: 1px solid #d9d9d9;
+  transition: background-color 0.2s ease;
+}
+
+.practice-support-notice-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.practice-support-notice-table tbody tr:hover {
+  background-color: #f3f8ff;
+}
+
+.practice-support-notice-table td {
+  padding: 20.5px 21.5px;
+  text-align: center;
+  font-size: 14px;
+  color: #010101;
+  vertical-align: middle;
+  font-weight: 500;
+}
+
+.practice-support-notice-table td:first-child {
+  text-align: center;
+  font-size: 12px !important;
+}
+
+.practice-support-notice-table td:nth-child(2) {
+  text-align: left;
+}
+
+.practice-support-notice-table td:last-child {
+  text-align: center;
+  font-size: 12px !important;
+}
+
+.practice-support-notice-badge {
+  display: inline-block;
+  padding: 4px 6px;
+  background-color: #0066cc;
+  color: var(--color-white);
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 4px;
+  width: 33px !important;
+  height: 20px !important;
+}
+
+.practice-support-notice-title {
+  cursor: pointer;
+  color: #010101;
+}
+
+.practice-support-notice-title:hover {
+  color: #0066cc;
+  text-decoration: underline;
+}
+
+.practice-support-notice-link {
+  color: #010101;
+  text-decoration: none;
+}
+
+.practice-support-notice-link:hover {
+  color: #0066cc;
+  text-decoration: underline;
+}
+
+/* 페이지네이션 스타일 */
+.practice-support-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 70px;
+}
+
+.practice-support-pagination-btn {
+  min-width: 28px;
+  height: 28px;
+  padding: 3px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  background-color: var(--color-white);
+  color: #666666;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.practice-support-pagination-btn:hover {
+  background-color: #f5f5f5;
+  border-color: #98c2ff;
+}
+
+.practice-support-pagination-btn.active {
+  background-color: #0066cc;
+  border-color: #0066cc;
+  color: var(--color-white);
+  font-weight: 500;
+}
+
+.practice-support-pagination-arrow {
+  color: #666666;
+}
+
+.practice-support-pagination-arrow:hover {
+  background-color: #f5f5f5;
+  border-color: #98c2ff;
+  color: #666666;
+}
+
+.practice-support-pagination-arrow img {
+  width: 12px;
+  height: 12px;
+  object-fit: contain;
+}
+
+/* 학사일정 상세 페이지 스타일 */
+.schedule-detail-info-table {
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #d9d9d9;
+}
+
+.schedule-detail-info-table th {
+  width: 120px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #eaeaea;
+  border-right: 1px solid #eaeaea;
+  font-size: 14px;
+  font-weight: 700;
+  color: #010101;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.schedule-detail-info-table td {
+  padding: 20px;
+  border-bottom: 1px solid #eaeaea;
+  font-size: 14px;
+  font-weight: 500;
+  color: #010101;
+  vertical-align: middle;
+  background-color: #ffffff;
+}
+
+.schedule-detail-info-table tr:last-child th,
+.schedule-detail-info-table tr:last-child td {
+  border-bottom: none;
+}
+
+.schedule-detail-title-container {
+  padding: 16px 32px;
+}
+
+.schedule-detail-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #010101;
+  padding: 0;
+}
+
+.schedule-detail-content {
+  padding: 30px 0;
+}
+
+.schedule-detail-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 30px 0;
+}
+
+.schedule-detail-list li {
+  font-size: 14px;
+  font-weight: 400;
+  color: #010101;
+  line-height: 1.4;
+  padding-left: 20px;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.schedule-detail-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #010101;
+}
+
+.schedule-detail-banner {
+  width: 100%;
+  margin: 30px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.schedule-detail-banner-image {
+  width: 485px;
+  height: auto;
+  display: block;
+}
+
+.schedule-detail-text {
+  margin-top: 30px;
+}
+
+.schedule-detail-text h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #010101;
+  margin: 30px 0 20px 0;
+  padding: 0;
+}
+
+.schedule-detail-text h2:first-child {
+  margin-top: 0;
+}
+
+.schedule-detail-text h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #010101;
+  margin: 25px 0 15px 0;
+  padding: 0;
+}
+
+.schedule-detail-text h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #010101;
+  margin: 20px 0 10px 0;
+  padding: 0;
+}
+
+.schedule-detail-text p {
+  font-size: 14px;
+  font-weight: 400;
+  color: #010101;
+  line-height: 1.4;
+  margin: 0 0 15px 0;
+}
+
+.schedule-detail-text ul {
+  list-style: none;
+  padding: 0;
+  margin: 15px 0;
+}
+
+.schedule-detail-text ul li {
+  font-size: 14px;
+  font-weight: 400;
+  color: #010101;
+  line-height: 1.4;
+  padding-left: 20px;
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.schedule-detail-text ul li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #010101;
+}
+
+.schedule-detail-navigation-table {
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  overflow: hidden;
+  border: 1px solid #d9d9d9;
+}
+
+.schedule-detail-navigation-table th {
+  width: 120px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #eaeaea;
+  border-right: 1px solid #eaeaea;
+  font-size: 14px;
+  font-weight: 700;
+  color: #010101;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.schedule-detail-navigation-table td {
+  padding: 20px;
+  border-bottom: 1px solid #eaeaea;
+  font-size: 14px;
+  font-weight: 500;
+  color: #010101;
+  vertical-align: middle;
+  background-color: #ffffff;
+}
+
+.schedule-detail-navigation-table tr:last-child th,
+.schedule-detail-navigation-table tr:last-child td {
+  border-bottom: none;
+}
+
+.schedule-detail-nav-link {
+  color: #010101;
+  text-decoration: none;
+}
+
+.schedule-detail-nav-link:hover {
+  text-decoration: underline;
+}
+
+.schedule-detail-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.schedule-detail-list-btn {
+  display: inline-block;
+  padding: 12px 40px;
+  background-color: #0032bb;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.schedule-detail-list-btn:hover {
+  background-color: #002699;
+}
+
+.refund-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.refund-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border: none;
+  overflow: hidden;
+}
+
+.refund-table thead {
+  background-color: #666666;
+}
+
+.refund-table thead th {
+  padding: 12px;
+  text-align: center;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 14px;
+  border: 1px solid #656565;
+  border-top: 1px solid #656565;
+  border-bottom: 1px solid #656565;
+}
+
+.refund-table thead th:first-child {
+  border-left: 1px solid #656565;
+  border-top-left-radius: 8px;
+}
+
+.refund-table thead th:last-child {
+  border-right: 1px solid #656565;
+  border-top-right-radius: 8px;
+}
+
+.refund-table thead th:not(:first-child):not(:last-child) {
+  border-left: none;
+  border-right: none;
+}
+
+.refund-table tbody {
+  background-color: transparent;
+}
+
+.refund-table tbody td {
+  padding: 12px;
+  text-align: center;
+  color: #010101;
+  border: 1px solid #e0e0e0;
+  vertical-align: middle;
+  background-color: #fff !important;
+  font-size: 12px !important;
+}
+
+/* 왼쪽 열(반환사유) 스타일 - 모든 첫 번째 열 셀 */
+.refund-table tbody td:first-child {
+  background-color: #eaeaea !important;
+  font-size: 14px !important;
+}
+
+/* 환불하러 가기 버튼 스타일 */
+.refund-button {
+  width: 140px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 6px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  background-color: #0032bb;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  font-family: "Pretendard", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 100%;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.refund-button:hover {
+  background-color: #002699;
+}
+
+.refund-button span {
+  display: inline-block;
+}
+
+.refund-button-arrow {
+  width: auto;
+  height: 16px;
+  display: inline-block;
+}
+
+/* 수강규정 테이블 스타일 */
+.regulations-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  overflow: hidden;
+  table-layout: fixed;
+}
+
+.regulations-table thead {
+  background-color: #666666;
+}
+
+.regulations-table thead th {
+  padding: 12px;
+  text-align: center;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 14px;
+  border: 1px solid #656565;
+  width: 33.33%;
+}
+
+.regulations-table thead th:first-child {
+  border-left: 1px solid #656565;
+  border-top-left-radius: 8px;
+}
+
+.regulations-table thead th:last-child {
+  border-right: 1px solid #656565;
+  border-top-right-radius: 8px;
+}
+
+.regulations-table thead th:not(:first-child):not(:last-child) {
+  border-left: none;
+  border-right: none;
+}
+
+.regulations-table tbody {
+  background-color: transparent;
+}
+
+.regulations-table tbody td {
+  padding: 12px;
+  text-align: center;
+  color: #010101;
+  border: 1px solid #e0e0e0;
+  vertical-align: middle;
+  background-color: #fff !important;
+  font-size: 14px;
+}
+
+.regulations-table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 8px;
+}
+
+.regulations-table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 8px;
+}
+
+/* 성적 구성 비율 테이블 스타일 */
+.grade-breakdown-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  overflow: hidden;
+  table-layout: fixed;
+}
+
+.grade-breakdown-table thead {
+  background-color: #666666;
+}
+
+.grade-breakdown-table thead th {
+  padding: 12px;
+  text-align: center;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 14px;
+  border: 1px solid #656565;
+  width: 14.28%;
+}
+
+/* 6개 열 테이블용 스타일 */
+.grade-breakdown-table thead th:nth-child(1),
+.grade-breakdown-table thead th:nth-child(2),
+.grade-breakdown-table thead th:nth-child(3),
+.grade-breakdown-table thead th:nth-child(4),
+.grade-breakdown-table thead th:nth-child(5),
+.grade-breakdown-table thead th:nth-child(6) {
+  width: 16.66%;
+}
+
+.grade-breakdown-table thead th:first-child {
+  border-left: 1px solid #656565;
+  border-top-left-radius: 8px;
+}
+
+.grade-breakdown-table thead th:last-child {
+  border-right: 1px solid #656565;
+  border-top-right-radius: 8px;
+}
+
+.grade-breakdown-table thead th:not(:first-child):not(:last-child) {
+  border-left: none;
+  border-right: none;
+}
+
+.grade-breakdown-table tbody {
+  background-color: transparent;
+}
+
+.grade-breakdown-table tbody td {
+  padding: 12px;
+  text-align: center;
+  color: #010101;
+  border: 1px solid #e0e0e0;
+  vertical-align: middle;
+  background-color: #fff !important;
+  font-size: 14px;
+}
+
+.grade-breakdown-table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 8px;
+}
+
+.grade-breakdown-table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 8px;
+}
+
+.page-list {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+/* 무료학습설계 폼 스타일 */
+.learning-design-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 40px;
+}
+
+.consultation-form {
+  width: 100% !important;
+  height: 100% !important;
+  background-color: #fff !important;
+  border-radius: 8px !important;
+  border: 1px solid #ddd !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  opacity: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  margin: 0 auto;
+  box-shadow: none !important;
+}
+
+.form-row {
+  margin-bottom: 0;
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.form-row:last-of-type {
+  border-bottom: none;
+}
+
+.form-label {
+  width: 140px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #010101;
+  padding: 14px 16px;
+  flex-shrink: 0;
+  text-align: left;
+  background-color: #f5f5f5;
+  border-right: 1px solid #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-input,
+.form-textarea {
+  flex: 1;
+  padding: 14px 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 0;
+  font-size: 12px;
+  color: #010101;
+  font-family: inherit;
+  background-color: #ffffff;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: #0032bb;
+  background-color: #ffffff;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: #999;
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 150px;
+  line-height: 1.6;
+}
+
+.form-radio-group {
+  display: flex;
+  gap: 32px;
+  flex: 1;
+  padding: 14px 16px;
+  background-color: #ffffff;
+}
+
+.form-radio-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 12px;
+  color: #010101;
+  transition: color 0.2s ease;
+}
+
+.form-radio-label:hover {
+  color: #0032bb;
+}
+
+.form-radio-label input[type="radio"] {
+  width: 12px;
+  height: 12px;
+  cursor: pointer;
+  accent-color: #0032bb;
+}
+
+.form-consent-section {
+  width: 582px;
+  margin: 34px auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-consent-section .form-checkbox-label {
+  text-align: left;
+  width: 100%;
+  max-width: 100%;
+}
+
+.form-checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  color: #010101;
+
+  line-height: 1.5;
+  justify-content: center;
+}
+
+.form-consent-section .form-checkbox-label {
+  justify-content: flex-start;
+}
+
+.form-checkbox-label input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  cursor: pointer;
+  flex-shrink: 0;
+  accent-color: #0032bb;
+}
+
+.consent-more-btn {
+  color: #010101;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-left: 4px;
+}
+
+.consent-more-btn:hover {
+  color: #010101;
+  opacity: 0.8;
+}
+
+.form-consent-details {
+  margin-top: 20px;
+  padding: 24px;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.8;
+  color: #666;
+  border: 1px solid #e9ecef;
+}
+
+.form-consent-details h4 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #010101;
+  margin-bottom: 16px;
+}
+
+.form-consent-details p {
+  margin-bottom: 10px;
+}
+
+.form-consent-details p:last-child {
+  margin-bottom: 0;
+}
+
+.form-consent-details strong {
+  color: #010101;
+  font-weight: 600;
+}
+
+.form-submit-section {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.consultation-submit-btn {
+  width: 100%;
+  max-width: 140px;
+  height: 44px;
+  padding: 18px;
+  background-color: #0032bb;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.consultation-submit-btn:hover {
+  background-color: #002699;
+}
+
+.consultation-submit-btn:active {
+  transform: translateY(1px);
+}
+
+/* 평가방법 테이블 스타일 */
+.evaluation-method-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  overflow: hidden;
+  table-layout: fixed;
+}
+
+.evaluation-method-table thead {
+  background-color: #666666;
+}
+
+.evaluation-method-table thead th {
+  padding: 12px;
+  text-align: center;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 14px;
+  border: 1px solid #656565;
+}
+
+.evaluation-method-table thead th:first-child {
+  border-left: 1px solid #656565;
+  border-top-left-radius: 8px;
+  width: 30%;
+}
+
+.evaluation-method-table thead th:last-child {
+  border-right: 1px solid #656565;
+  border-top-right-radius: 8px;
+  width: 70%;
+}
+
+.evaluation-method-table thead th:not(:first-child):not(:last-child) {
+  border-left: none;
+  border-right: none;
+}
+
+.evaluation-method-table tbody {
+  background-color: transparent;
+}
+
+.evaluation-method-table tbody td {
+  padding: 12px;
+  text-align: left;
+  color: #010101;
+  border: 1px solid #e0e0e0;
+  vertical-align: middle;
+  background-color: #fff !important;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.evaluation-method-table tbody td:first-child {
+  text-align: center;
+  font-weight: 600;
+}
+
+.evaluation-method-table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 8px;
+}
+
+.evaluation-method-table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 8px;
+}
+
+/* 성적분포 비율 테이블 스타일 */
+.grade-distribution-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  overflow: hidden;
+  table-layout: fixed;
+}
+
+.grade-distribution-table thead {
+  background-color: #666666;
+}
+
+.grade-distribution-table thead th {
+  padding: 12px;
+  text-align: center;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 14px;
+  border: 1px solid #656565;
+}
+
+.grade-distribution-table thead th:first-child {
+  border-left: 1px solid #656565;
+  border-top-left-radius: 8px;
+  width: 40%;
+}
+
+.grade-distribution-table thead th:nth-child(2) {
+  width: 20%;
+}
+
+.grade-distribution-table thead th:nth-child(3) {
+  width: 20%;
+}
+
+.grade-distribution-table thead th:last-child {
+  border-right: 1px solid #656565;
+  border-top-right-radius: 8px;
+  width: 20%;
+}
+
+.grade-distribution-table thead th:not(:first-child):not(:last-child) {
+  border-left: none;
+  border-right: none;
+}
+
+.grade-distribution-table tbody {
+  background-color: transparent;
+}
+
+.grade-distribution-table tbody td {
+  padding: 12px;
+  text-align: center;
+  color: #010101;
+  border: 1px solid #e0e0e0;
+  vertical-align: middle;
+  background-color: #fff !important;
+  font-size: 12px;
+}
+
+.grade-distribution-table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 8px;
+}
+
+.grade-distribution-table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 8px;
+}
+
+.learning-design-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ============================================
+   모바일 스타일 (480px 이하)
+   ============================================ */
+@media (max-width: 480px) {
+  /* 가로 스크롤 방지 */
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  body {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+  }
+
+  /* 데스크탑 헤더 숨기기 */
+  .header {
+    display: none !important;
+  }
+
+  /* 모바일 요소 보이기 */
+  .mobile-header,
+  .mobile-sidebar-overlay,
+  .mobile-register-banner,
+  .mobile-register-title-banner,
+  .mobile-course-list,
+  .mobile-payment-info,
+  .mobile-footer-section,
+  .mobile-register-floating-menu {
+    display: block;
+  }
+
+  .mobile-sidebar {
+    display: flex !important;
+  }
+
+  .mobile-register-banner,
+  .mobile-register-title-banner {
+    display: flex;
+  }
+
+  /* 검색 박스 숨기기 */
+  .search-box {
+    display: none !important;
+  }
+
+  /* 모바일 헤더는 style.css에서 관리하므로 여기서는 가로 스크롤 방지만 추가 */
+  .mobile-header {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
+  }
+
+  .mobile-menu-toggle {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: none;
+    background: none;
+    min-width: 24px;
+  }
+
+  .mobile-menu-toggle-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .mobile-login-btn {
+    font-size: 18px;
+  }
+
+  /* 상담 배너 숨기기 */
+  .consultation-banner {
+    display: none;
+  }
+
+  /* 모바일 수강신청 배너 (헤더 바로 아래) */
+  .mobile-register-banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: #3f7efb;
+    padding: 24px 0;
+    text-align: center;
+    box-sizing: border-box;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
+
+  .mobile-register-banner-text {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 600;
+    display: inline-block;
+  }
+
+  /* 모바일 장바구니 배너 */
+  .mobile-cart-banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: #3f7efb;
+    padding: 24px 0;
+    text-align: center;
+    box-sizing: border-box;
+    position: relative;
+    margin-top: 0;
+    margin-bottom: 0;
+    z-index: 100;
+    overflow: hidden;
+  }
+
+  /* 장바구니 페이지에서 배너가 헤더 아래에 위치하되 위쪽이 잘려 보이도록 */
+  body:has(.mobile-cart-banner) main.wrapper {
+    padding-top: 0;
+    overflow: hidden;
+  }
+
+  body:has(.mobile-cart-banner) .mobile-cart-banner {
+    padding-top: 90px;
+  }
+
+  .mobile-cart-banner-text {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 600;
+    display: inline-block;
+  }
+
+  /* 모바일 전용 요소 표시 */
+  .mobile-register-title-banner {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    background-color: #0032bb;
+    padding: 20px 16px;
+    margin-bottom: 0;
+    box-sizing: border-box;
+    margin-top: 70px;
+  }
+
+  .mobile-course-list {
+    display: block;
+  }
+
+  .mobile-register-floating-menu {
+    display: flex;
+  }
+
+  /* 데스크탑 전용 요소 숨기기 */
+  .course-table-wrapper {
+    display: none;
+  }
+
+  .course-summary {
+    display: none;
+  }
+
+  .mobile-register-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    margin: 0;
+  }
+
+  .register-tabs-nav {
+    display: flex;
+    gap: 8px;
+    border-bottom: none;
+  }
+
+  .register-tab-btn {
+    flex: 1;
+    padding: 14px 12px;
+    font-size: 12px;
+    border-radius: 8px;
+    white-space: normal;
+    line-height: 1.4;
+    background-color: #ffffff;
+    border: 1px solid #eaeaea;
+  }
+
+  .register-tab-btn.active {
+    background-color: #cde3ff;
+  }
+
+  /* 탭 래퍼 모바일 */
+  .register-tabs-wrapper {
+    padding: 0 16px;
+    margin-top: 20px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .register-tabs {
+    margin-bottom: 0;
+  }
+
+  .register-tabs-nav {
+    display: flex;
+    gap: 0;
+    border-bottom: none;
+    background-color: #cde3ff;
+    border-radius: 8px 8px 0 0;
+    color: #010101;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .register-tab-btn {
+    flex: 1;
+    padding: 14px 12px;
+    font-size: 16px !important;
+    border-radius: 0;
+    white-space: normal;
+    line-height: 1.4;
+    background-color: #fff;
+    border: 1px solid #eaeaea;
+    color: #010101;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 60px;
+  }
+
+  /* 탭 콘텐츠 모바일 */
+  .register-tab-content {
+    padding: 0;
+  }
+
+  .register-tab-panel {
+    padding: 0;
+  }
+
+  /* 일정 정보 모바일 */
+  .register-schedule-info {
+    padding: 20px;
+    margin: 0;
+    margin-top: 0;
+    background-color: #ffffff;
+    border: 1px solid #cde3ff;
+    border-radius: 0 0 8px 8px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .register-schedule-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .register-schedule-row:last-child {
+    margin-bottom: 0;
+  }
+
+  .register-schedule-item {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0;
+    width: 100%;
+  }
+
+  .register-schedule-label {
+    min-width: 120px;
+    width: auto;
+    padding: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    background-color: #f9f9f9;
+    border-radius: 6px 0 0 6px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .register-schedule-value {
+    flex: 1;
+    padding: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    border-radius: 0 6px 6px 0;
+    background-color: #ffffff;
+  }
+
+  /* 데스크탑 전용 숨기기 */
+  .desktop-only {
+    display: none;
+  }
+
+  /* 모바일 전용 표시 */
+  .mobile-only {
+    display: block;
+  }
+
+  /* 유의사항 모바일 - 바깥으로 빼서 오른쪽 정렬 */
+  .register-schedule-note.mobile-only {
+    text-align: right;
+    padding: 0 16px;
+    margin-top: 12px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .register-schedule-note.mobile-only p {
+    font-size: 11px;
+    color: #656565;
+    line-height: 1.5;
+    margin: 4px 0;
+  }
+
+  /* 과목 분류 탭 모바일 */
+  .course-category-tabs {
+    padding: 0 16px;
+    overflow-x: visible;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .course-category-tabs-nav {
+    display: flex;
+    gap: 0;
+    width: 100%;
+  }
+
+  .course-category-tab-btn {
+    flex: 1;
+    padding: 12px 8px;
+    font-size: 13px;
+    white-space: normal;
+    text-align: center;
+  }
+
+  /* 모바일 강의 카드 */
+  .mobile-course-list {
+    display: block;
+    margin-top: 20px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .course-table-wrapper {
+    display: none;
+  }
+
+  .mobile-course-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: none !important;
+    border: none !important;
+    border-bottom: 1px solid #eaeaea !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    gap: 16px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .mobile-course-card:last-child {
+    border-bottom: none !important;
+  }
+
+  .mobile-course-card-header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .mobile-course-card-header-top {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .mobile-course-icon {
+    width: 18px;
+    height: 18px;
+    background-color: #43a8ff;
+    color: #ffffff;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  .mobile-course-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333333;
+    width: 100%;
+    line-height: 1.4;
+  }
+
+  .mobile-course-buttons {
+    display: flex;
+    gap: 4px;
+  }
+
+  .mobile-course-sample-btn,
+  .mobile-course-syllabus-btn {
+    padding: 8px 14px;
+    background-color: #ffffff;
+    border: 1px solid #d9d9d9;
+    border-radius: 6px;
+    font-size: 13px;
+    color: #656565;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .mobile-course-footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 14px;
+    flex-shrink: 0;
+    padding-top: 4px;
+  }
+
+  .mobile-course-price {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+  }
+
+  .mobile-course-price-original {
+    font-size: 13px;
+    color: #b8b8b8;
+    text-decoration: line-through;
+    text-align: right;
+  }
+
+  .mobile-course-price-current {
+    font-size: 18px;
+    font-weight: 600;
+    color: #181818;
+  }
+
+  .mobile-course-checkbox {
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    accent-color: #0066cc;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* 선택된 과목 요약 숨기기 (데스크톱용) */
+  .course-summary {
+    display: none;
+  }
+
+  /* 모바일 플로팅 메뉴 */
+  .mobile-register-floating-menu {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-top: 1px solid #eaeaea;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  .mobile-register-floating-summary {
+    display: none;
+  }
+
+  .mobile-register-floating-menu.has-items .mobile-register-floating-summary {
+    display: block;
+    padding: 16px;
+    border-bottom: 1px solid #eaeaea;
+    box-sizing: border-box;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .mobile-register-floating-courses {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+  .mobile-register-floating-course-name {
+    font-size: 18px;
+  }
+
+  .mobile-register-floating-courses-list {
+    display: flex;
+    flex-direction: column;
+    max-height: 124px;
+    overflow-y: auto;
+    gap: 8px;
+    padding: 14px;
+    background-color: #f9f9f9;
+  }
+
+  .mobile-register-floating-course-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    flex-shrink: 0;
+  }
+
+  .mobile-register-floating-course-name {
+    font-size: 18px;
+    font-weight: 400;
+    color: #656565;
+    flex: 1;
+  }
+
+  .mobile-register-floating-course-price {
+    font-size: 18px;
+    font-weight: 400;
+    color: #656565;
+    margin-right: 8px;
+  }
+
+  .mobile-register-floating-course-remove {
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .mobile-register-floating-course-remove:hover {
+    color: #ff0000;
+  }
+
+  .mobile-register-floating-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0 0 0;
+    margin-top: 12px;
+    border-top: none;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  .mobile-register-floating-count {
+    font-size: 18px;
+    color: #939393;
+    font-weight: 400;
+  }
+
+  .mobile-course-count {
+    color: #333333;
+    font-weight: 700;
+    font-size: 24px;
+    margin-left: 4px;
+  }
+
+  .mobile-register-floating-price {
+    font-size: 24px;
+    font-weight: 700;
+    color: #010101;
+  }
+
+  /* 스크롤바 스타일 */
+  .mobile-register-floating-courses-list::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .mobile-register-floating-courses-list::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .mobile-register-floating-courses-list::-webkit-scrollbar-thumb {
+    background: #d9d9d9;
+    border-radius: 2px;
+  }
+
+  .mobile-register-floating-courses-list::-webkit-scrollbar-thumb:hover {
+    background: #b8b8b8;
+  }
+
+  .mobile-register-floating-buttons {
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  .mobile-register-cart-btn,
+  .mobile-register-register-btn {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    min-width: 0;
+    height: 80px;
+  }
+
+  .mobile-register-cart-btn {
+    background-color: #cde3ff;
+    color: #181818;
+  }
+
+  .mobile-register-cart-btn:hover {
+    background-color: #b8d5ff;
+  }
+
+  .mobile-register-register-btn {
+    background-color: #0032bb;
+    color: #ffffff;
+  }
+
+  .mobile-register-register-btn:hover {
+    background-color: #002699;
+  }
+
+  /* 컨테이너 모바일 */
+  .container {
+    padding: 0;
+    margin-top: 0;
+    background-color: #ffffff;
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  .wrapper {
+    padding: 0;
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  main {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  /* 모든 요소에 box-sizing 적용 */
+  * {
+    box-sizing: border-box;
+  }
+
+  /* 모바일 결제 요약 및 회사 정보 */
+  .mobile-payment-info {
+    padding: 20px 16px;
+    background-color: #ffffff;
+    border-top: 1px solid #eaeaea;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  .mobile-payment-summary {
+    padding-bottom: 16px;
+    margin-bottom: 20px;
+  }
+
+  .mobile-payment-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    font-size: 14px;
+  }
+
+  .mobile-payment-item.mobile-payment-total {
+    padding-top: 12px;
+    border-top: 1px solid #eaeaea;
+    margin-top: 12px;
+  }
+
+  .mobile-payment-label {
+    color: #656565;
+    font-weight: 500;
+  }
+
+  .mobile-payment-value {
+    color: #010101;
+    font-weight: 600;
+  }
+
+  .mobile-payment-final {
+    font-size: 20px;
+    font-weight: 700;
+    color: #115aed;
+  }
+
+  /* 푸터 섹션은 style.css에서 관리하므로 여기서는 스타일 오버라이드만 */
+  .mobile-footer-section.mobile-only {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    margin-top: 20px;
+  }
+
+  /* 장바구니 페이지 푸터 - 메인 페이지와 동일한 여백 */
+  body:has(.mobile-cart-payment-button) .mobile-footer-section.mobile-only {
+    margin-top: 20px;
+  }
+
+  body:has(.mobile-cart-payment-button) .mobile-footer-content {
+    padding: 40px 16px;
+    margin: 0;
+  }
+
+  body:has(.mobile-cart-payment-button) .mobile-footer-links {
+    padding: 40px;
+    margin-bottom: 80px;
+    height: 96px;
+    gap: 80px;
+    justify-content: center;
+    border-top: 1px solid #d9d9d9;
+  }
+
+  /* 장바구니 페이지 스타일 */
+  .mobile-cart-list {
+    display: block;
+
+    margin-top: 20px;
+    padding-top: 0;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .mobile-cart-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #eaeaea;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    gap: 16px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+  }
+
+  .mobile-cart-item:last-child {
+    border-bottom: none !important;
+  }
+
+  /* 왼쪽 영역 (아이콘, 제목, 버튼) */
+  .mobile-cart-item-left {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .mobile-cart-item-header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .mobile-cart-icon {
+    width: 20px;
+    height: 20px;
+    background-color: #43a8ff;
+    color: #ffffff;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .mobile-cart-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333333;
+    line-height: 1.4;
+    flex: 1;
+  }
+
+  .mobile-cart-item-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .mobile-cart-buttons {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+
+  .mobile-cart-sample-btn,
+  .mobile-cart-syllabus-btn {
+    padding: 6px 12px;
+    background-color: #ffffff;
+    border: 1px solid #d9d9d9;
+    border-radius: 6px;
+    font-size: 13px;
+    color: #656565;
+    cursor: pointer;
+    white-space: nowrap;
+    font-weight: 400;
+  }
+
+  /* 오른쪽 영역 (가격, 체크박스) */
+  .mobile-cart-item-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  .mobile-cart-price {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+  }
+
+  .mobile-cart-price-original {
+    font-size: 13px;
+    color: #b8b8b8;
+    text-decoration: line-through;
+    text-align: right;
+    line-height: 1.2;
+  }
+
+  .mobile-cart-price-current {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333333;
+    text-align: right;
+    line-height: 1.2;
+  }
+
+  .mobile-cart-checkbox {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    flex-shrink: 0;
+    accent-color: #3f7efb;
+  }
+
+  /* 쿠폰 섹션 */
+  .mobile-coupon-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px 16px;
+    background-color: #f9f9f9;
+    border-top: 1px solid #eaeaea;
+    border-bottom: 1px solid #eaeaea;
+    margin: 20px 0 0 0;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* 장바구니 페이지 결제 요약 */
+  .mobile-payment-info.mobile-only {
+    padding: 20px 16px;
+    margin-top: 0;
+  }
+
+  .mobile-coupon-label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333333;
+    flex-shrink: 0;
+    min-width: 80px;
+  }
+
+  .mobile-coupon-input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 1px solid #d9d9d9;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #333333;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .mobile-coupon-input::placeholder {
+    color: #b8b8b8;
+  }
+
+  .mobile-coupon-input:focus {
+    outline: none;
+    border-color: #3f7efb;
+  }
+
+  /* 장바구니 결제하기 플로팅 버튼 */
+  .mobile-cart-payment-button {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-top: 1px solid #eaeaea;
+    z-index: 9999;
+    box-sizing: border-box;
+    padding: 0;
+  }
+
+  /* 푸터가 결제 버튼 위에 오도록 여백 추가 */
+  body:has(.mobile-cart-payment-button) .mobile-footer-section.mobile-only {
+    margin-bottom: 0;
+  }
+
+  .mobile-cart-payment-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    background-color: #0032bb;
+    color: #ffffff;
+
+    height: 80px;
+    font-size: 24px;
+    font-weight: 600;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease;
+  }
+
+  .mobile-cart-payment-btn:hover {
+    background-color: #2d5fd6;
+  }
+
+  .mobile-cart-payment-btn:active {
+    background-color: #1e4bb3;
+  }
+
+  .mobile-cart-payment-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+  }
+
+  .mobile-cart-payment-text {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  /* 결제내역 페이지 배너 */
+  .mobile-payment-history-banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: #3f7efb;
+    padding: 24px 0;
+    text-align: center;
+    box-sizing: border-box;
+    position: relative;
+    margin-top: 0;
+    margin-bottom: 0;
+    z-index: 100;
+    overflow: hidden;
+  }
+
+  body:has(.mobile-payment-history-banner) main.wrapper {
+    padding-top: 0;
+    overflow: hidden;
+  }
+
+  body:has(.mobile-payment-history-banner) .mobile-payment-history-banner {
+    padding-top: 90px;
+  }
+
+  .mobile-payment-history-banner-text {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 600;
+    display: inline-block;
+  }
+
+  /* 결제내역 페이지 스타일 */
+  .mobile-payment-history-list {
+    display: block;
+
+    margin-top: 20px;
+    padding-top: 0;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .mobile-payment-history-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #eaeaea;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    gap: 16px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+  }
+
+  .mobile-payment-history-item:last-child {
+    border-bottom: none !important;
+  }
+
+  /* 왼쪽 영역 (아이콘, 제목, 버튼) */
+  .mobile-payment-history-item-left {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .mobile-payment-history-item-header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .mobile-payment-history-icon {
+    width: 20px;
+    height: 20px;
+    background-color: #43a8ff;
+    color: #ffffff;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .mobile-payment-history-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333333;
+    line-height: 1.4;
+    flex: 1;
+  }
+
+  .mobile-payment-history-item-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .mobile-payment-history-buttons {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+
+  .mobile-payment-history-sample-btn,
+  .mobile-payment-history-syllabus-btn {
+    padding: 6px 12px;
+    background-color: #ffffff;
+    border: 1px solid #d9d9d9;
+    border-radius: 6px;
+    font-size: 13px;
+    color: #656565;
+    cursor: pointer;
+    white-space: nowrap;
+    font-weight: 400;
+  }
+
+  /* 오른쪽 영역 (가격) */
+  .mobile-payment-history-item-right {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .mobile-payment-history-price {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+  }
+
+  .mobile-payment-history-price-original {
+    font-size: 13px;
+    color: #b8b8b8;
+    text-decoration: line-through;
+    text-align: right;
+    line-height: 1.2;
+  }
+
+  .mobile-payment-history-price-current {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333333;
+    text-align: right;
+    line-height: 1.2;
+  }
+
+  /* 환불 안내 */
+  .mobile-payment-refund-notice {
+    padding: 16px;
+    margin-top: 20px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .mobile-payment-refund-text {
+    font-size: 18px;
+    color: #ff383c;
+    margin: 0;
+    line-height: 1.5;
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 66px;
+  }
+
+  .mobile-payment-refund-asterisk {
+    color: #ff0000;
+    font-weight: 600;
+  }
+
+  /* 결제내역 페이지 푸터 - 메인 페이지와 동일한 여백 */
+  body:has(.mobile-payment-history-banner) .mobile-footer-section.mobile-only {
+    margin-top: 20px;
+    padding: 0 16px;
+  }
+
+  body:has(.mobile-payment-history-banner) .mobile-footer-content {
+    padding: 40px 16px;
+    margin: 0;
+  }
+
+  body:has(.mobile-payment-history-banner) .mobile-footer-links {
+    padding: 40px;
+    margin-bottom: 0px !important; /* 결제내역 페이지에는 버튼이 없으므로 0px */
+    height: 96px;
+    gap: 80px;
+    justify-content: center;
+    border-top: 1px solid #d9d9d9;
+  }
+}

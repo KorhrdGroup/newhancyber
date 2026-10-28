@@ -1,0 +1,14 @@
+node_modules
+.next
+.next.nosync
+out
+*.tsbuildinfo
+next-env.d.ts
+.env*
+.DS_Store
+
+# 로컬 도구 상태 (Claude Code, bkit)
+.claude/
+.bkit/
+docs/.bkit-memory.json
+docs/.pdca-status.json

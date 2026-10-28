@@ -1,0 +1,285 @@
+/* Pretendard 폰트 로컬 파일 */
+@font-face {
+	font-family: 'Pretendard';
+	font-weight: 900;
+	font-display: swap;
+	src: local('Pretendard Black'), url(/resources/fonts/pretendard/woff2/Pretendard-Black.woff2) format('woff2');
+}
+
+@font-face {
+	font-family: 'Pretendard';
+	font-weight: 800;
+	font-display: swap;
+	src: local('Pretendard ExtraBold'), url(/resources/fonts/pretendard/woff2/Pretendard-ExtraBold.woff2) format('woff2');
+}
+
+@font-face {
+	font-family: 'Pretendard';
+	font-weight: 700;
+	font-display: swap;
+	src: local('Pretendard Bold'), url(/resources/fonts/pretendard/woff2/Pretendard-Bold.woff2) format('woff2');
+}
+
+@font-face {
+	font-family: 'Pretendard';
+	font-weight: 600;
+	font-display: swap;
+	src: local('Pretendard SemiBold'), url(/resources/fonts/pretendard/woff2/Pretendard-SemiBold.woff2) format('woff2');
+}
+
+@font-face {
+	font-family: 'Pretendard';
+	font-weight: 500;
+	font-display: swap;
+	src: local('Pretendard Medium'), url(/resources/fonts/pretendard/woff2/Pretendard-Medium.woff2) format('woff2');
+}
+
+@font-face {
+	font-family: 'Pretendard';
+	font-weight: 400;
+	font-display: swap;
+	src: local('Pretendard Regular'), url(/resources/fonts/pretendard/woff2/Pretendard-Regular.woff2) format('woff2');
+}
+
+@font-face {
+	font-family: 'Pretendard';
+	font-weight: 300;
+	font-display: swap;
+	src: local('Pretendard Light'), url(/resources/fonts/pretendard/woff2/Pretendard-Light.woff2) format('woff2');
+}
+
+@font-face {
+	font-family: 'Pretendard';
+	font-weight: 200;
+	font-display: swap;
+	src: local('Pretendard ExtraLight'), url(/resources/fonts/pretendard/woff2/Pretendard-ExtraLight.woff2) format('woff2');
+}
+
+@font-face {
+	font-family: 'Pretendard';
+	font-weight: 100;
+	font-display: swap;
+	src: local('Pretendard Thin'), url(/resources/fonts/pretendard/woff2/Pretendard-Thin.woff2) format('woff2');
+}
+
+/* CSS 변수 정의 */
+:root {
+    /* 색상 */
+    --color-primary: #3F7EFB;
+    --color-primary-hover: #0082ff;
+    --color-primary-dark: #115AED;
+    --color-primary-darker: #0032BB;
+    --color-primary-light: #CDE3FF;
+    --color-primary-bg: #F3F8FF;
+    --color-primary-hover-alt: #1976D2;
+    
+    --color-text: #333;
+    --color-text-dark: #010101;
+    --color-text-secondary: #666;
+    --color-text-light: #656565;
+    --color-text-placeholder: #939393;
+    --color-text-muted: #B8B8B8;
+    --color-text-footer: #9e9e9e;
+    
+    --color-white: #fff;
+    --color-black: #000;
+    
+    --color-bg-light: #f8f9fa;
+    --color-bg-footer: #f7f8fa;
+    --color-bg-hover: #f5f5f5;
+    --color-bg-gray: #f9f9f9
+    
+    --color-border: #ddd;
+    --color-border-light: #EAEAEA;
+    --color-border-divider: #e0e0e0;
+    
+    --color-badge-red: #FF383C;
+    --color-pagination-inactive: #D9D9D9;
+    
+    /* 레이아웃 */
+    --max-width: 1080px;
+    --padding-side: 100px;
+    --padding-side-small: 40px;
+    --padding-base: 20px;
+    --padding-small: 8px;
+    
+    /* 간격 */
+    --gap-xs: 4px;
+    --gap-sm: 6px;
+    --gap-md: 8px;
+    --gap-lg: 12px;
+    --gap-xl: 20px;
+    --gap-xxl: 30px;
+    
+    /* 테두리 반경 */
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+    --radius-xl: 12px;
+    
+    /* 폰트 크기 */
+    --font-size-xs: 10px;
+    --font-size-sm: 12px;
+    --font-size-base: 14px;
+    --font-size-md: 16px;
+    --font-size-lg: 18px;
+    --font-size-xl: 20px;
+    --font-size-xxl: 24px;
+    --font-size-xxxl: 32px;
+    
+    /* 폰트 굵기 */
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    
+    /* 전환 효과 */
+    --transition-base: all 0.3s;
+    --transition-fast: all 0.2s;
+    
+    /* 그림자 */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.1);
+    
+    /* z-index */
+    --z-index-header: 1000;
+    --z-index-submenu: 100;
+    --z-index-pagination: 10;
+}
+
+/* 공통 리셋 스타일 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif;
+    color: var(--color-text);
+    overflow-x: hidden;
+}
+
+/* 공통 컨테이너 */
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--padding-side);
+}
+
+/* 공통 링크 스타일 */
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition-base);
+}
+
+/* 공통 버튼 스타일 */
+button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+/* 공통 입력 필드 스타일 */
+input,
+select,
+textarea {
+    font-family: inherit;
+    font-size: inherit;
+}
+
+/* 공통 유틸리티 클래스 */
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.gap-sm {
+    gap: var(--gap-sm);
+}
+
+.gap-md {
+    gap: var(--gap-md);
+}
+
+.gap-lg {
+    gap: var(--gap-lg);
+}
+
+.gap-xl {
+    gap: var(--gap-xl);
+}
+
+.page-list-item {
+    list-style: none;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.7;
+    padding-left: 1em;
+    text-indent: -0.7em;
+  }
+  .page-list-item::before {
+    content: "- ";
+  }
+  
+  .page-list-dangu {
+    list-style: none;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.7;
+    padding-left: 1em;
+    text-indent: -1em;
+  }
+  .page-list-dangu::before {
+    content: "※ ";
+  }
+  
+  .page-list-number {
+    list-style: decimal;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.7;
+    margin-left: 20px;
+    padding-left: 4px;
+  }
+  
+  .page-list-plain {
+    list-style: none;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.7;
+    margin-left: 0;
+    padding-left: 0;
+  }
+  
+
