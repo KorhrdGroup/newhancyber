@@ -17,9 +17,10 @@ const renamedPages: [string, string][] = [
 ];
 
 const nextConfig: NextConfig = {
-  // 이 폴더는 iCloud(데스크탑·문서 동기화) 안에 있다. 이름이 .nosync 로 끝나면 iCloud 가
+  // 로컬 폴더는 iCloud(데스크탑·문서 동기화) 안에 있다. 이름이 .nosync 로 끝나면 iCloud 가
   // 동기화하지 않아서, 빌드 중 "routes.d 2.ts" 같은 충돌 사본이 생기지 않는다.
-  distDir: ".next.nosync",
+  // Vercel 은 빌드 결과를 .next 에서만 찾으므로 Vercel 빌드(VERCEL=1)에서는 기본값을 쓴다.
+  distDir: process.env.VERCEL ? ".next" : ".next.nosync",
   // 기존 퍼블리싱 주소(*.html)로 들어와도 새 주소로 보낸다.
   async redirects() {
     return [
