@@ -99,6 +99,8 @@
     /* 레이아웃 */
     --max-width: 1080px;
     --padding-side: 100px;
+    /* 헤더 안쪽 여백: 하위 페이지 본문(1020px) 양끝과 맞춤 */
+    --header-padding-side: 30px;
     --padding-side-small: 40px;
     --padding-base: 20px;
     --padding-small: 8px;

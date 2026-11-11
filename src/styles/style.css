@@ -102,7 +102,7 @@
 .header-top-container {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 var(--padding-side);
+  padding: 0 var(--header-padding-side);
   padding-top: 50px;
   margin-bottom: 33px;
   display: flex;
@@ -144,7 +144,7 @@
 .header-logo-container {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 var(--padding-side);
+  padding: 0 var(--header-padding-side);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -250,7 +250,7 @@
 .header-nav-container {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 var(--padding-side);
+  padding: 0 var(--header-padding-side);
   position: relative;
   overflow: visible;
 }
@@ -311,11 +311,11 @@
 .gnb-item.has-submenu:nth-child(4) .submenu {
   left: 0;
   width: var(--max-width);
-  padding-left: var(--padding-side);
-  padding-right: var(--padding-side);
+  padding-left: var(--header-padding-side);
+  padding-right: var(--header-padding-side);
   transform: translateY(0);
   box-sizing: border-box;
-  margin-left: -100px;
+  margin-left: calc(-1 * var(--header-padding-side));
 }
 
 .gnb-link {
@@ -382,7 +382,7 @@
   border-radius: var(--radius-xl);
   background: var(--color-badge-red);
   color: var(--color-white);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: bold;
   white-space: nowrap;
   z-index: 10;
@@ -406,7 +406,7 @@
   width: var(--max-width);
   background-color: var(--color-primary);
   list-style: none;
-  padding: 0 var(--padding-side);
+  padding: 0 var(--header-padding-side);
   margin: 0;
   display: flex;
   flex-direction: row;
@@ -425,11 +425,11 @@
 .gnb-item.has-submenu .submenu {
   left: 0;
   width: var(--max-width);
-  padding-left: var(--padding-side);
-  padding-right: var(--padding-side);
+  padding-left: var(--header-padding-side);
+  padding-right: var(--header-padding-side);
   transform: translateY(0);
   box-sizing: border-box;
-  margin-left: -100px;
+  margin-left: calc(-1 * var(--header-padding-side));
 }
 
 /* 활성 메뉴 항목의 서브메뉴는 항상 표시 */
@@ -524,8 +524,8 @@
     right: 0;
     width: 100%;
     transform: translateY(0);
-    padding-left: var(--padding-side);
-    padding-right: var(--padding-side);
+    padding-left: var(--header-padding-side);
+    padding-right: var(--header-padding-side);
   }
 
   .gnb-item.has-submenu:hover .submenu,
@@ -606,7 +606,7 @@ main {
   max-width: var(--max-width);
   height: 100%;
   margin: 0 auto;
-  padding: 0 var(--padding-side);
+  padding: 0 var(--header-padding-side);
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -658,7 +658,7 @@ main {
 .banner-container {
   max-width: var(--max-width);
   margin: var(--gap-xxl) auto;
-  padding: 0 var(--padding-side);
+  padding: 0 var(--header-padding-side);
   display: flex;
   gap: var(--gap-md);
 }
@@ -672,7 +672,7 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 436px;
+  width: 100%;
   height: 140px;
   padding: 16px 20px;
   border-radius: var(--radius-lg);
@@ -737,7 +737,8 @@ main {
 
 /* 연락처 정보 섹션 */
 .contact-info {
-  width: 880px;
+  width: calc(100% - 2 * var(--header-padding-side));
+  max-width: calc(var(--max-width) - 2 * var(--header-padding-side));
   height: 100px;
   margin: 0 auto;
   padding: 0 var(--padding-side-small);
@@ -927,7 +928,7 @@ main {
 .essential-check-section {
   max-width: 1080px;
   margin: 0 auto;
-  padding: 40px 100px;
+  padding: 40px var(--header-padding-side);
 }
 
 .essential-check-container {
@@ -935,7 +936,7 @@ main {
 }
 
 .essential-check-title {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 700;
   color: #010101;
   margin: 0 0 30px 0;
@@ -953,7 +954,7 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 102.875px;
+  flex: 1;
   height: 100px;
   padding: 0;
   background-color: #fff;
@@ -983,7 +984,7 @@ main {
 }
 
 .essential-card-text {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
   color: #333;
   text-align: center;
@@ -995,7 +996,7 @@ main {
   max-width: 1080px;
 
   margin: 0px auto;
-  padding: 30px 100px;
+  padding: 30px var(--header-padding-side);
 }
 
 .schedule-notice-container {
@@ -1006,7 +1007,8 @@ main {
 
 /* 왼쪽: 학습일정 안내 */
 .schedule-guide {
-  width: 288px;
+  /* 3칸 격자(간격 8px) 중 한 칸 */
+  flex: 0 0 calc((100% - 16px) / 3);
   height: 300px;
   background-color: #fff;
   border-radius: 8px;
@@ -1065,21 +1067,21 @@ main {
 }
 
 .schedule-badge {
-  font-size: 10px;
+  font-size: 12px;
   color: #3f7efb;
   font-weight: 600;
   line-height: 1.2;
 }
 
 .schedule-label {
-  font-size: 12px;
+  font-size: 13px;
   color: #333;
   font-weight: 700;
   letter-spacing: 0.05em;
 }
 
 .schedule-date {
-  font-size: 12px;
+  font-size: 13px;
   color: #666;
   text-align: right;
 }
@@ -1111,7 +1113,8 @@ main {
 
 /* 오른쪽: 공지사항 */
 .notice-board {
-  width: 584px;
+  flex: 1;
+  min-width: 0;
   height: 300px;
   background-color: #fff;
   border-radius: 8px;
@@ -1146,7 +1149,7 @@ main {
   background-color: #ffffff;
   border: 1px solid #eaeaea;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 16px;
   color: #666;
   cursor: pointer;
   transition: all 0.3s;
@@ -1210,7 +1213,7 @@ main {
   height: 16px;
   background-color: #3f7efb;
   color: #fff;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
   border-radius: 4px;
   flex-shrink: 0;
@@ -1219,10 +1222,10 @@ main {
 
 .notice-text {
   flex: 1;
-  font-size: 12px;
+  font-size: 13px;
   color: #333;
   font-weight: 500;
-  line-height: 1.7;
+  line-height: 1.5;
 }
 
 .notice-date {
@@ -1238,14 +1241,15 @@ main {
 .event-consultation-section {
   max-width: 1080px;
   margin: 0 auto;
-  padding: 0 100px;
+  padding: 0 var(--header-padding-side);
   position: relative;
 }
 
 .event-consultation-container {
   display: flex;
   gap: 8px;
-  align-items: flex-start;
+  /* 왼쪽 배너들이 폭에 맞춰 비율대로 커지므로, 상담 폼도 같은 높이로 늘림 */
+  align-items: stretch;
 }
 
 /* 왼쪽: 이벤트 및 지원 영역 */
@@ -1253,6 +1257,8 @@ main {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  flex: 1;
+  min-width: 0;
 }
 
 /* 이벤트 배너 */
@@ -1268,8 +1274,9 @@ main {
 }
 
 .event-banner {
-  width: 584px;
-  height: 177px;
+  /* 배너 이미지가 잘리지 않게 원본 비율 유지 */
+  width: 100%;
+  aspect-ratio: 584 / 177;
   background: transparent;
   padding: 0;
   opacity: 1;
@@ -1432,9 +1439,14 @@ main {
   gap: 8px;
 }
 
+.support-box-link {
+  flex: 1;
+  min-width: 0;
+}
+
 .support-box {
-  width: 288px;
-  height: 115px;
+  width: 100%;
+  aspect-ratio: 288 / 115;
   box-sizing: border-box;
   opacity: 1;
 }
@@ -1498,13 +1510,13 @@ main {
 
 /* 오른쪽: 상담 폼 영역 */
 .consultation-form-area {
-  width: 288px;
-  flex-shrink: 0;
+  flex: 0 0 calc((100% - 16px) / 3);
 }
 
 .consultation-form {
-  width: 288px;
-  height: 300px;
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
   background-color: #fff;
   border-radius: 8px;
   border: 1px solid #ddd;
@@ -1560,7 +1572,7 @@ main {
 }
 
 .form-label {
-  font-size: 10px;
+  font-size: 12px;
   color: #333;
   font-weight: 600;
   min-width: 35px;
@@ -1573,7 +1585,7 @@ main {
   padding: 8px 12px;
   border: 1px solid #ddd;
   border-radius: 6px;
-  font-size: 10px;
+  font-size: 13px;
   color: #939393;
   background-color: #fff;
   box-sizing: border-box;
@@ -1696,6 +1708,7 @@ main {
 }
 
 .checkbox-link {
+  font-size: 13px;
   color: #939393;
   text-decoration: underline;
 }
@@ -1880,7 +1893,7 @@ main {
 .why-choose-container {
   max-width: 1080px;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 var(--header-padding-side);
   box-sizing: border-box;
 }
 
@@ -1998,7 +2011,7 @@ main {
 }
 
 .expert-card-list li {
-  font-size: 12px;
+  font-size: 13px;
   color: #666;
   line-height: 1.4;
   text-align: center;
@@ -2150,14 +2163,14 @@ main {
 
 /* 왼쪽 위: 빠른 메뉴 */
 /*
- * 양옆 플로팅 메뉴: 화면 끝과 '본문(880px)·히어로 배너 글자·그림 중 더 바깥쪽 것' 사이 여백의 가운데에 둠.
+ * 양옆 플로팅 메뉴: 화면 끝과 '본문(1020px)·히어로 배너 글자·그림 중 더 바깥쪽 것' 사이 여백의 가운데에 둠.
  * 배너 그림(1920 기준)의 글자·그림은 가운데 1080 안(왼쪽 끝 420 = 21.875%)에 있고,
  * 배너는 1344px 이상에서 화면 폭에 비례해 커지므로 21.875% 지점이 그대로 글자 시작점이 됨.
  */
 .floating-quick-menu {
   position: fixed;
   top: 290px;
-  left: max(16px, calc((min(50% - 440px, 21.875%) - 120px) / 2));
+  left: max(16px, calc((min(50% - 510px, 21.875%) - 120px) / 2));
   width: auto;
   background-color: #ffffff;
   border-radius: 8px;
@@ -2222,7 +2235,7 @@ main {
 .floating-consultation {
   position: fixed;
   top: 290px;
-  right: max(16px, calc((min(50% - 440px, 21.875%) - 114px) / 2));
+  right: max(16px, calc((min(50% - 510px, 21.875%) - 114px) / 2));
   width: 114px;
   height: 214px;
   background: linear-gradient(135deg, #0032bb 0%, #0055ff 100%);
@@ -2267,7 +2280,7 @@ main {
 }
 
 .phone-number {
-  font-size: 30px;
+  font-size: 24px;
   font-weight: 700;
   color: #ffffff;
   line-height: 1.2;
@@ -2305,7 +2318,7 @@ main {
 .floating-social {
   position: fixed;
   top: 510px;
-  right: max(16px, calc((min(50% - 440px, 21.875%) - 114px) / 2));
+  right: max(16px, calc((min(50% - 510px, 21.875%) - 114px) / 2));
   width: 114px;
   height: 100px;
   background-color: #ffffff;
@@ -3342,7 +3355,7 @@ main {
     background-color: #3f7efb;
     color: #ffffff;
     border-radius: 4px;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
     flex-shrink: 0;
   }
@@ -3357,6 +3370,7 @@ main {
   }
 
   .essential-check-title {
+    font-size: 20px;
     margin-bottom: 16px;
   }
 
@@ -3644,7 +3658,7 @@ main {
   }
 
   .mobile-quick-phone-number {
-    font-size: 30px;
+    font-size: 32px;
     font-weight: 700;
     color: #115aed;
     text-decoration: none;

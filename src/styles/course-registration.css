@@ -118,7 +118,7 @@
 }
 
 .consultation-banner-title {
-  font-size: 34px;
+  font-size: 32px;
   font-weight: 300;
   color: #ffffff;
   margin: 0;
@@ -304,7 +304,7 @@
 }
 
 .register-schedule-note p {
-  font-size: 10px;
+  font-size: 12px;
   color: #656565;
   margin: 4px 0;
   line-height: 1.4;
@@ -1819,7 +1819,7 @@
   align-items: flex-start;
   gap: 10px;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 14px;
   color: #010101;
 
   line-height: 1.5;
@@ -1863,7 +1863,7 @@
 }
 
 .form-consent-details h4 {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
   color: #010101;
   margin-bottom: 16px;
@@ -2395,7 +2395,7 @@
   }
 
   .register-schedule-note.mobile-only p {
-    font-size: 11px;
+    font-size: 12px;
     color: #656565;
     line-height: 1.5;
     margin: 4px 0;

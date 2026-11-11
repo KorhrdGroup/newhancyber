@@ -29,7 +29,7 @@
 }
 
 .login-main-title {
-  font-size: 36px;
+  font-size: 32px;
   font-weight: 700;
   text-align: center;
   margin-bottom: 60px;
@@ -404,7 +404,7 @@
   }
 
   .login-main-title {
-    font-size: 28px;
+    font-size: 24px;
     margin-bottom: 40px;
   }
 
@@ -1040,7 +1040,7 @@
   }
 
   .signup-title {
-    font-size: 28px;
+    font-size: 24px;
     margin-bottom: 40px;
   }
 
@@ -1233,7 +1233,7 @@
   }
 
   .bottom-txt-box table {
-    font-size: 11px;
+    font-size: 12px;
   }
 
   .bottom-txt-box table th,
@@ -1439,7 +1439,7 @@
 }
 
 .custom-select-arrow {
-  font-size: 10px;
+  font-size: 12px;
   color: #666;
   transition: transform 0.3s;
 }
