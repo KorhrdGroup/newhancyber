@@ -15,12 +15,6 @@ export const learningDesignTabs: NavLink[] = [
   { label: "신청 결과 확인", href: "/course-registration/learning-design/result" },
 ];
 
-export const paymentHistoryTabs: NavLink[] = [
-  { label: "결제 내역", href: "/course-registration/payment-history" },
-  { label: "장학 현황", href: "/course-registration/payment-history/scholarship" },
-  { label: "환불", href: "/course-registration/payment-history/refund" },
-];
-
 /* ---------- 결제하기 ---------- */
 export interface Coupon {
   id: string;
@@ -168,8 +162,8 @@ export const sampleRefunds: {
   amount: number;
   status: RefundStatus;
 }[] = [
-  { paymentId: "p2611001", title: "2026년도 2학기 4차 수강료", appliedAt: "2026.11.08", amount: 280000, status: "환불 신청" },
-  { paymentId: "p2606001", title: "2026년도 1학기 3차 수강료", appliedAt: "2026.06.20", amount: 186660, status: "환불 완료" },
+  { paymentId: "p2609002", title: "2026년도 2학기 3차 수강료", appliedAt: "2026.11.08", amount: 280000, status: "환불 신청" },
+  { paymentId: "p2603002", title: "2026년도 1학기 2차 수강료", appliedAt: "2026.03.20", amount: 186660, status: "환불 완료" },
 ];
 
 /* ---------- 운영규칙 (원본 /inc/footer/useTerms.asp) ---------- */

@@ -459,7 +459,37 @@ const payments: Payment[] = [
     paidAt: "2026.06.11",
     status: "결제 완료",
   },
+  {
+    id: "p2609002",
+    title: "2026년도 2학기 3차 수강료",
+    courses: [{ title: "사회복지실천론", price: 280000 }],
+    method: "신용카드 (일시불)",
+    total: 280000,
+    coupon: 0,
+    paid: 280000,
+    appliedAt: "2026.09.02",
+    paidAt: "2026.09.02",
+    status: "환불 신청",
+  },
+  {
+    id: "p2603002",
+    title: "2026년도 1학기 2차 수강료",
+    courses: [{ title: "사회복지조사론", price: 280000 }],
+    method: "신용카드 (일시불)",
+    total: 280000,
+    coupon: 0,
+    paid: 280000,
+    appliedAt: "2026.03.03",
+    paidAt: "2026.03.03",
+    status: "환불 완료",
+  },
 ];
+
+/** 결제 목록 (최근 결제가 위) */
+export function getPayments(): Payment[] {
+  // TODO: API 결제 목록 조회
+  return [...payments].sort((a, b) => b.appliedAt.localeCompare(a.appliedAt));
+}
 
 export function getPayment(id: string): Payment {
   return payments.find((p) => p.id === id) ?? payments[0];

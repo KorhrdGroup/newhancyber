@@ -64,10 +64,10 @@ const sections: { title: string; links: SitemapLink[] }[] = [
     title: "나의 강의",
     links: [
       { label: "나의 강의실", tight: true, href: "/my-classroom" },
-      { label: "나의 결제정보", tight: true, href: "/course-registration/payment-history" },
+      { label: "나의 결제정보", tight: true, href: "/my-page/payments" },
       // 원본은 "#" — 페이지가 있어 연결
       { label: "장바구니", tight: true, href: "/course-registration/cart" },
-      { label: "결제내역/환불요청", tight: true, href: "/course-registration/payment-history" },
+      { label: "결제내역/환불요청", tight: true, href: "/my-page/payments/refund" },
       { label: "개인정보", tight: true, href: "/my-page/profile" },
       { label: "증명서발급", tight: true, href: "/my-page/certificates" },
       { label: "공결신청", tight: true, href: "/my-page/exceptions/absence" },

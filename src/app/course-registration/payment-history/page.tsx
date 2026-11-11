@@ -1,18 +1,6 @@
-import type { Metadata } from "next";
-import ExTabs from "@/components/course-registration/extra/ExTabs";
-import { paymentHistoryTabs } from "@/components/course-registration/extra/extraData";
-import PaymentHistoryContent from "@/components/course-registration/PaymentHistoryContent";
-import MobilePageBanner from "@/components/layout/MobilePageBanner";
-import "@/styles/extra-pages.css";
+import { redirect } from "next/navigation";
 
-export const metadata: Metadata = { title: "결제내역" };
-
-export default function CoursePaymentHistoryPage() {
-  return (
-    <>
-      <MobilePageBanner name="payment-history" text="결제내역" />
-      <ExTabs items={paymentHistoryTabs} />
-      <PaymentHistoryContent />
-    </>
-  );
+/** 결제 내역은 마이페이지로 옮김 — 예전 주소로 들어오면 넘겨준다 */
+export default function OldPaymentHistoryPage() {
+  redirect("/my-page/payments");
 }

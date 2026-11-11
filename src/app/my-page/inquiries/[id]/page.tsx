@@ -9,7 +9,7 @@ export const metadata: Metadata = { title: "1:1 문의 상세 - 문의 내역 - 
 /** U36 문의 내역 — 1:1 문의 상세 */
 export default async function PersonalInquiryDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const inquiry = getInquiry(id, "personal");
+  const inquiry = getInquiry(id);
   if (!inquiry) notFound();
 
   return (

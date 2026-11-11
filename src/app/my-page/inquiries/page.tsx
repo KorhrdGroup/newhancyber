@@ -8,7 +8,7 @@ export const metadata: Metadata = { title: "1:1 문의 - 문의 내역 - 마이�
 export default function PersonalInquiriesPage() {
   return (
     <MyPageShell title="문의 내역" desc="남긴 문의와 답변을 한곳에서 볼 수 있어요.">
-      <InquiryList kind="personal" />
+      <InquiryList />
     </MyPageShell>
   );
 }

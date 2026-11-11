@@ -1,7 +1,8 @@
 import Link from "next/link";
 import PageTabs from "@/components/common/PageTabs";
 import { Badge } from "@/components/my-classroom/ClassroomUI";
-import { appealStatusTone, appealTabs, type Appeal } from "../myPageDataB";
+import { appealStatusTone, type Appeal } from "../myPageDataB";
+import { myPageRequestTabs } from "@/lib/navigation";
 
 /** U34 이의신청 상세 — 신청 내용 + 처리 결과 */
 export default function AppealDetail({ appeal, backHref }: { appeal: Appeal; backHref: string }) {
@@ -9,7 +10,7 @@ export default function AppealDetail({ appeal, backHref }: { appeal: Appeal; bac
 
   return (
     <>
-      <PageTabs items={appealTabs} className="mq-subtabs" />
+      <PageTabs items={myPageRequestTabs} className="mp-subtabs" />
       <section className="pp-box">
         <h3 className="pp-box-title">신청 내용</h3>
         <table className="ds-table ds-table--info">

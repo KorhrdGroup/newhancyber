@@ -10,9 +10,16 @@ import type { NavLink } from "@/types/navigation";
  */
 export default function PageTabs({ items, className }: { items: NavLink[]; className?: string }) {
   const pathname = usePathname();
+  const matchLength = (item: NavLink) =>
+    Math.max(
+      0,
+      ...[item.href, ...(item.match ?? [])]
+        .filter((href) => pathname === href || pathname.startsWith(`${href}/`))
+        .map((href) => href.length),
+    );
   const activeHref = items
-    .filter((item) => pathname === item.href || pathname.startsWith(`${item.href}/`))
-    .sort((a, b) => b.href.length - a.href.length)[0]?.href;
+    .filter((item) => matchLength(item) > 0)
+    .sort((a, b) => matchLength(b) - matchLength(a))[0]?.href;
 
   return (
     <nav className={["page-tabs", className].filter(Boolean).join(" ")}>

@@ -11,13 +11,6 @@ import { getCourse } from "@/components/my-classroom/classroomData";
 /* U28 학습 게시판                                                       */
 /* ------------------------------------------------------------------ */
 
-/** 원본 세 탭(bbs_mng_idx=5·7·6)은 서버 오류로 이름을 확인 못 해서 이름을 정해 붙였다 */
-export const studyBoardTabs: NavLink[] = [
-  { label: "과목 공지", href: "/my-page/study-board" },
-  { label: "학습 Q&A", href: "/my-page/study-board/qna" },
-  { label: "과목 자료실", href: "/my-page/study-board/materials" },
-];
-
 export type BoardKind = "notice" | "qna" | "materials";
 
 export const boardListHref: Record<BoardKind, string> = {
@@ -284,13 +277,6 @@ export function getDemandSurvey(id: string): DemandSurvey | undefined {
 /* ------------------------------------------------------------------ */
 /* U31 각종 예외 신청                                                     */
 /* ------------------------------------------------------------------ */
-
-export const exceptionTabs: NavLink[] = [
-  { label: "공인인증서 예외 신청", href: "/my-page/exceptions" },
-  { label: "중복 PC 등록 신청", href: "/my-page/exceptions/duplicate-pc" },
-  { label: "공결 및 추가시험 신청", href: "/my-page/exceptions/absence" },
-  { label: "신청 결과", href: "/my-page/exceptions/results" },
-];
 
 export type ExceptionType = "cert" | "duplicate-pc" | "absence";
 

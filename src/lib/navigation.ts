@@ -73,7 +73,6 @@ export const gnb: NavGroup[] = [
       { label: "진행 중인 과목", href: "/my-classroom" },
       { label: "종료된 과목", href: "/my-classroom/finished" },
       { label: "장바구니", href: "/course-registration/cart" },
-      { label: "결제내역", href: "/course-registration/payment-history" },
     ],
   },
   {
@@ -96,15 +95,45 @@ export const gnb: NavGroup[] = [
 /** 마이페이지 안의 탭 메뉴 (원본 마이페이지 메뉴 기준, 결제 현황은 나의강의실 > 결제내역 화면을 그대로 씀) */
 export const myPageTabs: NavLink[] = [
   { label: "증명서 발급", href: "/my-page/certificates" },
-  { label: "결제 현황", href: "/course-registration/payment-history" },
+  { label: "결제 내역", href: "/my-page/payments" },
   { label: "쿠폰 사용내역", href: "/my-page/coupons" },
-  { label: "문의 내역", href: "/my-page/inquiries" },
-  { label: "학습 게시판", href: "/my-page/study-board" },
+  { label: "문의·게시판", href: "/my-page/study-board", match: ["/my-page/inquiries"] },
   { label: "설문조사", href: "/my-page/surveys" },
-  { label: "각종 예외 신청", href: "/my-page/exceptions" },
+  { label: "신청 내역", href: "/my-page/exceptions", match: ["/my-page/appeals"] },
+  { label: "내 정보", href: "/my-page/profile", match: ["/my-page/pc"] },
+];
+
+/* 마이페이지 탭 하나에 묶은 화면들의 작은 탭 */
+
+/** 문의·게시판 (원본 학습 게시판 세 탭은 이름을 확인 못 해서 이름을 정해 붙였다) */
+export const myPageBoardTabs: NavLink[] = [
+  { label: "과목 공지", href: "/my-page/study-board" },
+  { label: "과목 자료실", href: "/my-page/study-board/materials" },
+  { label: "학습 Q&A", href: "/my-page/study-board/qna" },
+  { label: "1:1 문의", href: "/my-page/inquiries" },
+];
+
+/** 신청 내역 (각종 예외 신청 + 성적 이의신청) */
+export const myPageRequestTabs: NavLink[] = [
+  { label: "공인인증서 예외 신청", href: "/my-page/exceptions" },
+  { label: "중복 PC 등록 신청", href: "/my-page/exceptions/duplicate-pc" },
+  { label: "공결 및 추가시험 신청", href: "/my-page/exceptions/absence" },
+  { label: "예외 신청 결과", href: "/my-page/exceptions/results" },
   { label: "성적 이의신청", href: "/my-page/appeals" },
-  { label: "학습자 PC 등록", href: "/my-page/pc" },
-  { label: "내 정보 수정", href: "/my-page/profile" },
+  { label: "기타 이의신청", href: "/my-page/appeals/etc" },
+];
+
+/** 결제 내역 */
+export const myPagePaymentTabs: NavLink[] = [
+  { label: "결제 내역", href: "/my-page/payments" },
+  { label: "장학 현황", href: "/my-page/payments/scholarship" },
+  { label: "환불 내역", href: "/my-page/payments/refund" },
+];
+
+/** 내 정보 */
+export const myPageAccountTabs: NavLink[] = [
+  { label: "정보 수정", href: "/my-page/profile" },
+  { label: "PC 등록", href: "/my-page/pc" },
 ];
 
 /** 나의강의실 앞에 구분선이 들어가는 위치 */
@@ -133,7 +162,7 @@ export const mobileQuickLinks: (NavLink & { icon: string })[] = [
 export const mobileMenu: (NavGroup & { icon: string })[] = [
   { label: "수강신청", href: "/course-registration/register", icon: "ham-menu-01.png" },
   { label: "장바구니", href: "/course-registration/cart", icon: "ham-menu-02.png" },
-  { label: "결제내역", href: "/course-registration/payment-history", icon: "ham-menu-03.png" },
+  { label: "결제내역", href: "/my-page/payments", icon: "ham-menu-03.png" },
   { label: "사회복지사", href: "/social-worker/info", icon: "ham-menu-04.png" },
   {
     label: "학습지원",
@@ -163,7 +192,6 @@ export const hasMobileNav = (pathname: string) => matches(pathname, MOBILE_NAV_P
 const MOBILE_FOOTER_PATHS = [
   "/member/*",
   "/course-registration/cart",
-  "/course-registration/payment-history",
   "/course-registration/register",
   "/footer/about",
   "/event",

@@ -1,7 +1,8 @@
 import Link from "next/link";
 import PageTabs from "@/components/common/PageTabs";
 import { Badge } from "@/components/my-classroom/ClassroomUI";
-import { inquiryStatus, inquiryStatusTone, inquiryTabs, type Inquiry } from "../myPageDataB";
+import { inquiryStatus, inquiryStatusTone, type Inquiry } from "../myPageDataB";
+import { myPageBoardTabs } from "@/lib/navigation";
 
 /** U36 문의 상세 — 질문 + 답변 */
 export default function InquiryDetail({ inquiry, backHref }: { inquiry: Inquiry; backHref: string }) {
@@ -9,7 +10,7 @@ export default function InquiryDetail({ inquiry, backHref }: { inquiry: Inquiry;
 
   return (
     <>
-      <PageTabs items={inquiryTabs} className="mq-subtabs" />
+      <PageTabs items={myPageBoardTabs} className="mp-subtabs" />
       <section className="pp-box">
         <div className="mq-meta">
           <Badge tone={inquiryStatusTone[status]}>{status}</Badge>

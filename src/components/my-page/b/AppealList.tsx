@@ -1,8 +1,9 @@
 import Link from "next/link";
 import PageTabs from "@/components/common/PageTabs";
 import { Badge } from "@/components/my-classroom/ClassroomUI";
-import { appealPeriodDays, appealStatusTone, appealTabs, getAppeals, type AppealKind } from "../myPageDataB";
+import { appealPeriodDays, appealStatusTone, getAppeals, type AppealKind } from "../myPageDataB";
 import Guide from "./Guide";
+import { myPageRequestTabs } from "@/lib/navigation";
 
 const base = { grade: "/my-page/appeals", etc: "/my-page/appeals/etc" } as const;
 
@@ -13,7 +14,7 @@ export default function AppealList({ kind }: { kind: AppealKind }) {
 
   return (
     <>
-      <PageTabs items={appealTabs} className="mq-subtabs" />
+      <PageTabs items={myPageRequestTabs} className="mp-subtabs" />
       <Guide
         title="이의신청 기간"
         items={

@@ -26,15 +26,6 @@ export const certificateTabs: NavLink[] = [
   { label: "교육비 납입 증명서", href: "/my-page/certificates/tuition" },
 ];
 
-export const appealTabs: NavLink[] = [
-  { label: "성적 이의신청", href: "/my-page/appeals" },
-  { label: "기타 이의신청", href: "/my-page/appeals/etc" },
-];
-
-export const inquiryTabs: NavLink[] = [
-  { label: "1:1 문의", href: "/my-page/inquiries" },
-  { label: "학습 Q&A", href: "/my-page/inquiries/qna" },
-];
 
 /* ------------------------------------------------------------------ */
 /* U32 증명서 발급                                                      */
@@ -275,7 +266,6 @@ export const educationLevels = [
 /* U36 문의 내역                                                        */
 /* ------------------------------------------------------------------ */
 
-export type InquiryKind = "personal" | "qna";
 export type InquiryStatus = "답변 대기" | "답변 완료";
 
 export const inquiryStatusTone: Record<InquiryStatus, Tone> = {
@@ -285,9 +275,8 @@ export const inquiryStatusTone: Record<InquiryStatus, Tone> = {
 
 export interface Inquiry {
   id: string;
-  kind: InquiryKind;
   no: number;
-  /** 1:1 문의: 문의 분류 / 학습 Q&A: 과목명 */
+  /** 문의 분류 */
   category: string;
   title: string;
   askedAt: string;
@@ -298,7 +287,6 @@ export interface Inquiry {
 const inquiries: Inquiry[] = [
   {
     id: "q1003",
-    kind: "personal",
     no: 3,
     category: "학습 이용",
     title: "학습자 PC를 새 컴퓨터로 바꾸고 싶어요",
@@ -307,7 +295,6 @@ const inquiries: Inquiry[] = [
   },
   {
     id: "q1002",
-    kind: "personal",
     no: 2,
     category: "결제·환불",
     title: "교육비 납입 증명서는 어디서 받나요?",
@@ -321,7 +308,6 @@ const inquiries: Inquiry[] = [
   },
   {
     id: "q1001",
-    kind: "personal",
     no: 1,
     category: "수강 신청",
     title: "수강 신청한 과목을 바꿀 수 있나요?",
@@ -333,39 +319,16 @@ const inquiries: Inquiry[] = [
       body: "개강 전에는 과목 변경이 가능합니다. 1661-7769로 전화 주시면 바로 바꿔 드릴게요.\n개강 뒤에는 환불 규정에 따라 처리되니 참고해 주세요.",
     },
   },
-  {
-    id: "s2002",
-    kind: "qna",
-    no: 2,
-    category: "인간행동과사회환경",
-    title: "2주차 강의 자료는 어디서 받나요?",
-    askedAt: "2026.11.09",
-    body: "2주차 강의에서 말씀하신 참고 자료를 내려받을 곳을 못 찾겠습니다.",
-  },
-  {
-    id: "s2001",
-    kind: "qna",
-    no: 1,
-    category: "사회복지학개론",
-    title: "잔여적 복지와 제도적 복지의 차이가 궁금해요",
-    askedAt: "2026.11.05",
-    body: "1주차 강의에서 나온 잔여적 복지와 제도적 복지를 예를 들어 설명해 주실 수 있을까요?",
-    answer: {
-      answeredAt: "2026.11.06",
-      writer: "김사회 교수",
-      body: "잔여적 복지는 가족·시장이 제 역할을 못 할 때만 국가가 돕는 방식이고, 제도적 복지는 복지를 사회의 기본 기능으로 보고 누구나 받을 수 있게 하는 방식입니다.\n기초생활보장은 잔여적, 아동수당은 제도적 성격에 가깝다고 보면 됩니다.",
-    },
-  },
 ];
 
-export function getInquiries(kind: InquiryKind): Inquiry[] {
+export function getInquiries(): Inquiry[] {
   // TODO: API 문의 목록 조회
-  return inquiries.filter((q) => q.kind === kind);
+  return inquiries;
 }
 
-export function getInquiry(id: string, kind: InquiryKind): Inquiry | undefined {
+export function getInquiry(id: string): Inquiry | undefined {
   // TODO: API 문의 상세 조회
-  return inquiries.find((q) => q.id === id && q.kind === kind);
+  return inquiries.find((q) => q.id === id);
 }
 
 export const inquiryStatus = (q: Inquiry): InquiryStatus => (q.answer ? "답변 완료" : "답변 대기");

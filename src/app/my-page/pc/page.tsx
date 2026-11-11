@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import PageTabs from "@/components/common/PageTabs";
 import MyPageShell from "@/components/my-page/MyPageShell";
 import PcList from "@/components/my-page/a/PcList";
 import { MAX_PCS, registeredPcs } from "@/components/my-page/myPageDataA";
+import { myPageAccountTabs } from "@/lib/navigation";
 
 export const metadata: Metadata = { title: "학습자 PC 등록 - 마이페이지" };
 
@@ -11,6 +13,7 @@ export default function PcPage() {
   // TODO: API 등록 PC 목록 조회
   return (
     <MyPageShell title="학습자 PC 등록" desc="수강할 PC를 미리 등록해 두면, 등록한 PC에서만 강의를 듣고 시험을 볼 수 있습니다.">
+      <PageTabs items={myPageAccountTabs} className="mp-subtabs" />
       <div className="pp-box">
         <h3 className="pp-box-title">왜 PC를 등록하나요?</h3>
         <ul className="pp-list">

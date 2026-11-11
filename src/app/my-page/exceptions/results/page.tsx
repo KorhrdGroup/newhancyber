@@ -3,7 +3,8 @@ import Link from "next/link";
 import PageTabs from "@/components/common/PageTabs";
 import MyPageShell from "@/components/my-page/MyPageShell";
 import StatusBadge from "@/components/my-page/a/StatusBadge";
-import { exceptionLabels, exceptionRequests, exceptionTabs } from "@/components/my-page/myPageDataA";
+import { exceptionLabels, exceptionRequests } from "@/components/my-page/myPageDataA";
+import { myPageRequestTabs } from "@/lib/navigation";
 
 export const metadata: Metadata = { title: "신청 결과 - 각종 예외 신청 - 마이페이지" };
 
@@ -14,7 +15,7 @@ export default function ExceptionResultsPage() {
 
   return (
     <MyPageShell title="각종 예외 신청" desc="학습 규칙을 지키기 어려운 사정이 있을 때 신청합니다. 담당자가 확인한 뒤 결과를 알려 드립니다.">
-      <PageTabs items={exceptionTabs} className="mp-subtabs" />
+      <PageTabs items={myPageRequestTabs} className="mp-subtabs" />
       {requests.length === 0 ? (
         <p className="cr-empty">신청한 내역이 없습니다.</p>
       ) : (

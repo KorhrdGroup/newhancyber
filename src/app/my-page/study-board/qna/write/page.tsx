@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import PageTabs from "@/components/common/PageTabs";
 import MyPageShell from "@/components/my-page/MyPageShell";
 import QnaWriteForm from "@/components/my-page/a/QnaWriteForm";
-import { studyBoardTabs } from "@/components/my-page/myPageDataA";
 import { getOngoingCourses } from "@/components/my-classroom/classroomData";
+import { myPageBoardTabs } from "@/lib/navigation";
 
 export const metadata: Metadata = { title: "학습 Q&A 글쓰기 - 마이페이지" };
 
@@ -13,7 +13,7 @@ export default function QnaWritePage() {
   const courses = getOngoingCourses().map(({ id, title }) => ({ id, title }));
   return (
     <MyPageShell title="학습 게시판" desc="과목 공부 중 궁금한 점을 남기면 교수님이나 운영팀이 답해 드립니다.">
-      <PageTabs items={studyBoardTabs} className="mp-subtabs" />
+      <PageTabs items={myPageBoardTabs} className="mp-subtabs" />
       <QnaWriteForm courses={courses} />
     </MyPageShell>
   );

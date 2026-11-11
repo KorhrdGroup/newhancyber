@@ -2,7 +2,6 @@ import PageTabs from "@/components/common/PageTabs";
 import {
   appealPeriodDays,
   appealSchedules,
-  appealTabs,
   etcAppealItems,
   getAppealCourses,
   gradeAppealItems,
@@ -10,6 +9,7 @@ import {
 } from "../myPageDataB";
 import AppealForm from "./AppealForm";
 import Guide from "./Guide";
+import { myPageRequestTabs } from "@/lib/navigation";
 
 /** U34 이의신청 쓰기 화면 — 기간 안내 + 신청서 */
 export default function AppealNew({ kind }: { kind: AppealKind }) {
@@ -17,7 +17,7 @@ export default function AppealNew({ kind }: { kind: AppealKind }) {
 
   return (
     <>
-      <PageTabs items={appealTabs} className="mq-subtabs" />
+      <PageTabs items={myPageRequestTabs} className="mp-subtabs" />
       <Guide
         title="이의신청 기간"
         items={[
