@@ -416,6 +416,9 @@
   /* transition 제거 - 즉시 표시 */
   z-index: var(--z-index-submenu);
   box-sizing: border-box;
+  /* 파란 바만 화면 가로 끝까지 (항목 위치는 그대로) */
+  box-shadow: 0 0 0 100vmax var(--color-primary);
+  clip-path: inset(0 -100vmax);
 }
 
 /* 서브메뉴를 헤더 네비게이션 컨테이너 기준으로 위치 조정 */
@@ -1325,6 +1328,9 @@ main {
   width: 100%;
   max-width: 1080px;
   margin: 0 auto;
+  /* 이벤트 페이지는 main 위 여백이 0이라, 헤더 아래 파란 하위메뉴 바 높이만큼 내려 줌
+     (바가 헤더 밑줄 1px 위에서 시작해 60 - 1 = 59px) */
+  padding-top: 59px;
 }
 
 .event-image-container {
