@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useSyncExternalStore, type MouseEvent } from "react";
 import { createPortal } from "react-dom";
+import { useRouter } from "next/navigation";
 import { useMobileMenu } from "@/components/layout/MobileMenuContext";
 import {
   courseCategoryTabs,
@@ -41,6 +42,9 @@ export default function RegisterContent() {
   const [majorPopup, setMajorPopup] = useState<MajorPopupState | null>(null);
   const isClient = useSyncExternalStore(noopSubscribe, () => true, () => false);
   const { isOpen: isSidebarOpen } = useMobileMenu();
+  const router = useRouter();
+  // TODO: 고른 과목(selectedCourses)을 장바구니에 담는 API
+  const goCart = () => router.push("/course-registration/cart");
 
   const filteredCourses = category === "all" ? courses : courses.filter((course) => course.category === category);
   const selectedCourses = selectedNames
@@ -318,9 +322,11 @@ export default function RegisterContent() {
                     </span>
                     <span className="course-total-price">{formatPrice(totalPrice)}원</span>
                   </div>
-                  {/* TODO: 장바구니 담기·수강신청 API */}
+                  {/* TODO: 장바구니 담기·수강신청 API — 지금은 담지 않고 장바구니 화면으로만 넘어감 */}
                   <div className="course-summary-buttons">
-                    <button className="course-cart-btn">장바구니</button>
+                    <button className="course-cart-btn" onClick={goCart}>
+                      장바구니
+                    </button>
                     <button className="course-register-btn">수강신청</button>
                   </div>
                 </div>
@@ -358,7 +364,9 @@ export default function RegisterContent() {
           </div>
         </div>
         <div className="mobile-register-floating-buttons">
-          <button className="mobile-register-cart-btn">장바구니</button>
+          <button className="mobile-register-cart-btn" onClick={goCart}>
+            장바구니
+          </button>
           <button className="mobile-register-register-btn">수강신청</button>
         </div>
       </div>

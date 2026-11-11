@@ -95,6 +95,19 @@
 .ex-agree input { flex-shrink: 0; margin-top: 1px; }
 .ex-pay-btn { width: 100%; margin-top: var(--space-16); }
 
+/* ---------- 장바구니 (데스크톱 전용, 모바일은 원본 cart 화면) ---------- */
+/* 위에 파란 하위메뉴 줄이 겹쳐 뜨므로 나의 강의실 화면처럼 줄 아래 여백을 둔다 */
+.ex-cart-desktop { padding-top: 60px; }
+.ex-cart-head { display: flex; justify-content: space-between; align-items: center; gap: var(--space-12); padding-bottom: var(--space-12); border-bottom: 1px solid var(--color-border-default); }
+.ex-cart-check { flex-shrink: 0; width: 18px; height: 18px; accent-color: var(--color-bg-brand); cursor: pointer; }
+.ex-cart-links { display: flex; gap: var(--space-4); }
+.ex-pay-btn + .ex-pay-btn { margin-top: var(--space-8); }
+/* 좁은 화면(태블릿)에서는 과목 목록이 눌리지 않게 금액 상자를 아래로 */
+@media (max-width: 1080px) {
+  .ex-cart-desktop .ex-pay { grid-template-columns: 1fr; }
+  .ex-cart-desktop .ex-pay-side { position: static; }
+}
+
 /* ---------- 평생교육바우처 ---------- */
 .ex-hero { padding: var(--space-32) var(--space-24); border-radius: var(--radius-12); background: var(--color-bg-brand-subtle); text-align: center; }
 .ex-hero-label { font-size: 14px; font-weight: 600; color: var(--color-text-brand); }
@@ -155,6 +168,7 @@
 
 /* ---------- 모바일 ---------- */
 @media (max-width: 480px) {
+  .ex-cart-desktop { display: none; }
   .ex-tabs { padding: var(--space-16) var(--space-16) 0; }
   /* 위에 파란 제목 띠가 없는 화면: 고정 헤더(70px) 아래로 내린다 */
   .ex-tabs--under-header { padding-top: 86px; }
