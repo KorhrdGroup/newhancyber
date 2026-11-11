@@ -36,7 +36,7 @@ export default function MobileHeader() {
           <Link href="/" className="mobile-logo">
             <img
               src={`${MOBILE_IMG}/mobile-logo.png`}
-              alt="덧셈원격평생교육원"
+              alt="한평생원격교육원"
               className="mobile-logo-img"
             />
           </Link>

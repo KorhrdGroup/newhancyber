@@ -14,7 +14,7 @@ const tabs: { key: TabKey; label: string }[] = [
 
 const experts = [
   { title: "학습설계 담당자", icon: "support-tab-001.png", items: ["개인별 맞춤 커리큘럼 설계", "자격증, 학위취득 상담"] },
-  { title: "기술지원 전문가", icon: "support-tab-002.png", items: ["학습 중 불편사항 원격 해결", "덧셈 교육원 전반 기술지원"], highlight: true },
+  { title: "기술지원 전문가", icon: "support-tab-002.png", items: ["학습 중 불편사항 원격 해결", "한평생원격교육원 전반 기술지원"], highlight: true },
   { title: "학습관리 담당자", icon: "support-tab-003.png", items: ["수강, 학사 관련 문의 응대", "학습 진행 상황 지속 관리", "학사일정 알림 서비스"] },
 ];
 
@@ -24,7 +24,7 @@ const managements = [
 ];
 
 const guides = [
-  { title: "덧셈 OT 가이드", icon: "support-tab3-001.png" },
+  { title: "한평생원격교육원 OT 가이드", icon: "support-tab3-001.png" },
   { title: "진행 과정별 가이드", icon: "support-tab3-002.png" },
   { title: "실습 가이드", icon: "support-tab3-003.png" },
   { title: "학습자등록 가이드", icon: "support-tab3-004.png" },
@@ -32,7 +32,7 @@ const guides = [
   { title: "학위신청 가이드", icon: "support-tab3-006.png" },
 ];
 
-/** 왜 덧셈원격평생교육원을 선택할까요? (탭 3개) */
+/** 왜 한평생원격교육원을 선택할까요? (탭 3개) */
 export default function WhyChoose() {
   const [activeTab, setActiveTab] = useState<TabKey>("support");
   const hiddenUnless = (key: TabKey) => (key === activeTab ? undefined : { display: "none" });
@@ -40,7 +40,7 @@ export default function WhyChoose() {
   return (
     <section className="why-choose-section">
       <div className="why-choose-container">
-        <h3 className="why-choose-title">왜 덧셈원격평생교육원을 선택할까요?</h3>
+        <h3 className="why-choose-title">왜 한평생원격교육원을 선택할까요?</h3>
 
         <div className="why-choose-tabs">
           {tabs.map((tab) => (

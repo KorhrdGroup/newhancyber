@@ -29,25 +29,25 @@ const guides: { key: string; label: string; pdf: string; slides: GuideSlide[] }[
   {
     key: "registration-guide",
     label: "학습자 등록 가이드",
-    pdf: "learnerreg/학습자등록가이드_덧셈원격.pdf",
+    pdf: "learnerreg/학습자등록가이드_한평생원격.pdf",
     slides: pages(16, (n) => `learnerreg/learnerreg-img${n}.png`, "학습자 등록 가이드"),
   },
   {
     key: "credit-guide",
     label: "학습인정 신청 가이드",
-    pdf: "learningrec/학점인정신청 가이드_덧셈원격.pdf",
+    pdf: "learningrec/학점인정신청 가이드_한평생원격.pdf",
     slides: pages(10, (n) => `learningrec/learningrec${n}.png`, "학점인정 신청 가이드"),
   },
   {
     key: "degree-guide",
     label: "학위신청 가이드",
-    pdf: "degree/학위신청가이드_덧셈원격.pdf",
+    pdf: "degree/학위신청가이드_한평생원격.pdf",
     slides: pages(8, (n) => `degree/degree-${n}.png`, "학위신청 가이드"),
   },
   {
     key: "degree-link-guide",
     label: "학위연계 신청 가이드",
-    pdf: "degreecon/학위연계신청 가이드_덧셈원격.pdf",
+    pdf: "degreecon/학위연계신청 가이드_한평생원격.pdf",
     slides: pages(9, (n) => `degreecon/degreecon-${n}.png`, "학위연계 신청 가이드"),
   },
 ];

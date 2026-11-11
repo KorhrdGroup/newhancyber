@@ -1,4 +1,4 @@
-# 덧셈원격평생교육원 — Next.js
+# 한평생원격교육원 — Next.js
 
 `~/Desktop/중요한거/src/main/webapp` 의 HTML 퍼블리싱을 Next.js(App Router) + TypeScript 로 옮긴 프로젝트입니다.
 49개 페이지 본문과 jQuery 동작을 모두 옮겼습니다. DB/API 는 아직 붙이지 않았습니다 — 폼 제출·로그인 등은 안내창(alert)만 뜨고, 목록은 샘플 데이터입니다.

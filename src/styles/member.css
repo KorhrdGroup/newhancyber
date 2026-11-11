@@ -2299,7 +2299,7 @@
   }
 
   .mobile-footer-logo-img {
-    width: 130px;
+    width: auto;
     height: 21px;
     object-fit: contain;
   }

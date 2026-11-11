@@ -90,7 +90,7 @@ export default function CourseBestReviewDetailPage() {
               </span>
               {" "}
               <span className="review-detail-question-text">
-                덧셈원격평생교육원을 선택한 이유는?
+                한평생원격교육원을 선택한 이유는?
               </span>
             </div>
             <div className="review-detail-answer">

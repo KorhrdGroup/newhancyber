@@ -74,7 +74,7 @@ export default function Header() {
             <Link href="/">
               <img
                 src="/resources/images/header/logo-main.png"
-                alt="덧셈원격평생교육원"
+                alt="한평생원격교육원"
                 className="logo-main"
               />
             </Link>

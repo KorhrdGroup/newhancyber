@@ -18,7 +18,7 @@ export default function PrivacyCollectOptionalText() {
                 수집항목
               </th>
               <td>
-                관심분야, 담당자, 홈페이지 ID, 덧셈원격평생교육원 소개여부, 덧셈원격평생교육원 이벤트, 프로모션 정보제공 동의
+                관심분야, 담당자, 홈페이지 ID, 한평생원격교육원 소개여부, 한평생원격교육원 이벤트, 프로모션 정보제공 동의
               </td>
             </tr>
             <tr>

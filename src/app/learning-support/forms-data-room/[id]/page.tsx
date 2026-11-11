@@ -31,7 +31,7 @@ export default function FormsDataRoomDetailPage() {
           <div className="schedule-detail-content">
             <div className="schedule-detail-text">
               <p>
-                안녕하십니까? 덧셈원격평생교육원입니다.
+                안녕하십니까? 한평생원격교육원입니다.
                 <br />
                 과제물 작성 가이드라인 파일 공유드립니다.
                 <br />

@@ -201,7 +201,7 @@
 }
 
 .logo-main {
-  width: 300px;
+  width: auto;
   height: 30px;
   object-fit: cover;
   display: block;
@@ -658,33 +658,72 @@ main {
   flex: 1;
 }
 
-.banner-link {
-  display: block;
+.banner-card {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 436px;
   height: 140px;
-  cursor: pointer;
+  padding: 16px 20px;
+  border-radius: var(--radius-lg);
+  color: var(--color-white);
+  overflow: hidden;
   transition: opacity 0.3s;
 }
 
-.banner-link:hover {
+.banner-card:hover {
   opacity: 0.9;
 }
 
-.banner-image {
-  width: 436px;
-  height: 140px;
-  object-fit: cover;
-  border-radius: var(--radius-lg);
-  display: block;
+.banner-card--practice {
+  background-color: var(--color-primary);
+}
+
+.banner-card--pay {
+  background-color: #00208a;
+}
+
+.banner-card-text {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+}
+
+.banner-card-label {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.banner-card-title {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.banner-card-arrow {
+  flex-shrink: 0;
+  color: #98c2ff;
+}
+
+.banner-card-illust {
+  flex-shrink: 0;
+  height: auto;
   pointer-events: none;
 }
 
-.banner-image-desktop {
-  display: block;
+.banner-card-illust--practice {
+  width: 93px;
+  margin-right: 4px;
 }
 
-.banner-image-mobile {
-  display: none;
+.banner-card-illust--pay {
+  width: 96px;
 }
 
 /* 연락처 정보 섹션 */
@@ -875,7 +914,7 @@ main {
   color: #666;
 }
 
-/* 덧셈 학습자 필수 Check! 섹션 */
+/* 한평생원격교육원 학습자 필수 Check! 섹션 */
 .essential-check-section {
   max-width: 1080px;
   margin: 0 auto;
@@ -1817,7 +1856,7 @@ main {
   color: #3f7efb;
 }
 
-/* 왜 덧셈원격평생교육원을 선택할까요? 섹션 */
+/* 왜 한평생원격교육원을 선택할까요? 섹션 */
 .why-choose-section {
   max-width: 1080px;
   margin: 0 auto;
@@ -2501,7 +2540,7 @@ main {
 
   .mobile-logo-img {
     height: 20px;
-    width: 200px;
+    width: auto;
     object-fit: contain;
   }
 
@@ -3079,23 +3118,30 @@ main {
     display: none;
   }
 
-  .banner-image-desktop {
-    display: none;
-  }
-
-  .banner-image-mobile {
-    display: block;
-  }
-
-  .banner-link {
-    display: flex;
-    justify-content: center;
-  }
-
-  .banner-image {
-    width: auto;
+  .banner-card {
+    width: 100%;
     height: auto;
-    max-width: 100%;
+    aspect-ratio: 448 / 140;
+    padding: 12px 16px;
+  }
+
+  .banner-card-label {
+    font-size: 12px;
+  }
+
+  .banner-card-title {
+    gap: 10px;
+    font-size: 18px;
+  }
+
+  .banner-card-arrow {
+    width: 9px;
+    height: 15px;
+  }
+
+  .banner-card-illust--practice {
+    width: 22%;
+    margin-right: 0;
   }
 
   /* 연락처 정보 섹션 숨김 */
@@ -3341,7 +3387,7 @@ main {
     display: none;
   }
 
-  /* 왜 덧셈원격평생교육원을 선택할까요 섹션 숨김 */
+  /* 왜 한평생원격교육원을 선택할까요 섹션 숨김 */
   .why-choose-section {
     display: none;
   }
@@ -3647,7 +3693,7 @@ main {
   }
 
   .mobile-footer-logo-img {
-    width: 130px;
+    width: auto;
     height: 21px;
     object-fit: contain;
   }

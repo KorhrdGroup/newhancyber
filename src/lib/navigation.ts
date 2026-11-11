@@ -127,7 +127,7 @@ export const mobileMenu: (NavGroup & { icon: string })[] = [
     label: "교육원 소개",
     href: "/footer/about",
     icon: "ham-menu-06.png",
-    children: [{ label: "덧셈 소개", href: "/footer/about" }],
+    children: [{ label: "한평생원격교육원 소개", href: "/footer/about" }],
   },
 ];
 

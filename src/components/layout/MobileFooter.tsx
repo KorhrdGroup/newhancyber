@@ -11,7 +11,7 @@ export default function MobileFooter({ className }: { className?: string }) {
         <div className="mobile-footer-logo">
           <img
             src="/resources/images/mobile/mobile-footer-logo.png"
-            alt="덧셈원격평생교육원"
+            alt="한평생원격교육원"
             className="mobile-footer-logo-img"
           />
         </div>
@@ -24,10 +24,10 @@ export default function MobileFooter({ className }: { className?: string }) {
           평일: 09:00 ~ 18:00 / 점심시간 12:00~13:00 / 주말, 공휴일: 휴무
         </p>
         <p className="mobile-footer-business">
-          (주)티엔글로벌 덧셈원격평생교육원 / 대표자: 박미영, 김선종 / 사업자번호: 459-85-02930 /
+          (주)티엔글로벌 한평생원격교육원 / 대표자: 박미영, 김선종 / 사업자번호: 459-85-02930 /
           통신판매번호: 제2025-부천원미-1459호
         </p>
-        <p className="mobile-footer-copyright">COPYRIGHT 덧셈원격평생교육원 ALL RIGHT RESERVED</p>
+        <p className="mobile-footer-copyright">COPYRIGHT 한평생원격교육원 ALL RIGHT RESERVED</p>
       </div>
       <div className="mobile-footer-links">
         <a href={TBD_HREF} className="mobile-footer-link">

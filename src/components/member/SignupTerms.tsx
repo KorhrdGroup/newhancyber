@@ -21,7 +21,7 @@ const terms: {
 }[] = [
   {
     key: "terms",
-    title: "덧셈원격평생교육원 웹사이트의 이용약관에 동의합니다.",
+    title: "한평생원격교육원 웹사이트의 이용약관에 동의합니다.",
     required: true,
     message: "이용약관에 동의해주세요.",
     Text: TermsOfServiceText,

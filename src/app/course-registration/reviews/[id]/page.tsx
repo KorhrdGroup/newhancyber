@@ -77,11 +77,11 @@ export default function CourseReviewDetailPage() {
           <div className="detail-normal-section">
             <div className="detail-normal-question">
               <span className="detail-normal-question-text">
-                3. 덧셈원격평생교육원을 선택한 이유는?
+                3. 한평생원격교육원을 선택한 이유는?
               </span>
             </div>
             <div className="review-detail-answer">
-              인터넷을 통해 덧셈원격평생교육원을 선택하였고 신뢰도가 높은것같아 선택 하였습니다.
+              인터넷을 통해 한평생원격교육원을 선택하였고 신뢰도가 높은것같아 선택 하였습니다.
             </div>
           </div>
           <div className="detail-normal-section">

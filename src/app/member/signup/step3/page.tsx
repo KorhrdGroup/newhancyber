@@ -6,7 +6,7 @@ export const metadata: Metadata = { title: "회원가입 완료" };
 
 // TODO: 가입 API 응답으로 받은 회원 정보로 바꾼다 (원본 샘플 값)
 const member = {
-  name: "김덧셈",
+  name: "홍길동",
   id: "pluskor",
   phone: "010-0000-0000",
   email: "plus@korhrd.com",
@@ -31,7 +31,7 @@ export default function SignupCompletePage() {
             <h2 className="complete-title">
               회원가입이 <span className="complete-highlight">완료</span>되었습니다.
             </h2>
-            <p className="complete-subtitle">덧셈원격평생교육원의 회원이 되신 것을 진심으로 축하합니다.</p>
+            <p className="complete-subtitle">한평생원격교육원의 회원이 되신 것을 진심으로 축하합니다.</p>
           </div>
 
           <div className="complete-icon">
