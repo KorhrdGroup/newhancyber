@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
-import { hasMobileNav, mobileMenu, mobileQuickLinks, TBD_HREF } from "@/lib/navigation";
+import { hasMobileNav, mobileMenu, mobileQuickLinks } from "@/lib/navigation";
 import { useMobileMenu } from "./MobileMenuContext";
 
 const MOBILE_IMG = "/resources/images/mobile";
@@ -52,7 +52,7 @@ export default function MobileHeader() {
             <Link href="/course-registration/register" className="mobile-nav-item">
               수강신청
             </Link>
-            <Link href={TBD_HREF} className="mobile-nav-item">
+            <Link href="/my-classroom" className="mobile-nav-item">
               나의 강의실
             </Link>
           </div>

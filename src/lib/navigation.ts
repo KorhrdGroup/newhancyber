@@ -46,9 +46,9 @@ export const gnb: NavGroup[] = [
       { label: "서류제출", href: "/practice-support/documents" },
       { label: "FAQ", href: "/practice-support/faq" },
       { label: "사회복지사실습", href: "/practice-support/social-worker-practice" },
-      { label: "보육교사실습", href: "/practice-support/childcare-teacher-practice", hidden: true },
-      { label: "한국어교원실습", href: "/practice-support/korean-teacher-practice", hidden: true },
-      { label: "평생교육사실습", href: "/practice-support/lifelong-educator-practice", hidden: true },
+      { label: "보육교사실습", href: "/practice-support/childcare-teacher-practice" },
+      { label: "한국어교원실습", href: "/practice-support/korean-teacher-practice" },
+      { label: "평생교육사실습", href: "/practice-support/lifelong-educator-practice" },
     ],
   },
   {
@@ -70,6 +70,8 @@ export const gnb: NavGroup[] = [
     children: [
       { label: "진행 중인 과목", href: "/my-classroom" },
       { label: "종료된 과목", href: "/my-classroom/finished" },
+      { label: "장바구니", href: "/course-registration/cart" },
+      { label: "결제내역", href: "/course-registration/payment-history" },
     ],
   },
   {
@@ -79,10 +81,11 @@ export const gnb: NavGroup[] = [
     children: [
       { label: "수강신청", href: "/course-registration/register" },
       { label: "수강신청 절차", href: "/course-registration/process" },
-      { label: "수강후기", href: "/course-registration/reviews", hidden: true },
+      { label: "수강후기", href: "/course-registration/reviews" },
       { label: "학습비 반환규정", href: "/course-registration/refund" },
       { label: "수강규정", href: "/course-registration/regulations" },
       { label: "무료학습설계", href: "/course-registration/learning-design" },
+      { label: "이벤트", href: "/event" },
     ],
   },
 ];
