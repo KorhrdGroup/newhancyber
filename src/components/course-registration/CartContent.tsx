@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { useMobileMenu } from "@/components/layout/MobileMenuContext";
 import { cartSummary, formatPrice, sampleCartCourses } from "./courseData";
 import MobilePaymentSummary from "./MobilePaymentSummary";
@@ -10,6 +11,7 @@ export default function CartContent() {
   // TODO: 장바구니 조회 API. 원본 샘플은 처음에 모두 선택된 상태
   const [checked, setChecked] = useState(() => sampleCartCourses.map(() => true));
   const { isOpen: isSidebarOpen } = useMobileMenu();
+  const router = useRouter();
 
   const { totalFee, discount, finalAmount } = cartSummary(
     sampleCartCourses.filter((_, i) => checked[i]).map((course) => course.currentPrice),
@@ -79,8 +81,8 @@ export default function CartContent() {
           id="mobileCartPaymentButton"
           style={isSidebarOpen ? { visibility: "hidden" } : undefined}
         >
-          {/* TODO: 결제 API */}
-          <button className="mobile-cart-payment-btn">
+          {/* TODO: 고른 과목을 결제 화면에 넘기기 (API) */}
+          <button className="mobile-cart-payment-btn" onClick={() => router.push("/course-registration/payment")}>
             <img src="/resources/images/mobile/mobile_card.png" alt="결제" className="mobile-cart-payment-icon" />
             <span className="mobile-cart-payment-text">결제하기</span>
           </button>

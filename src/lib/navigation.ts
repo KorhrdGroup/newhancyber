@@ -14,6 +14,7 @@ export const utilityLinks: NavLink[] = [
 export const authLinks: NavLink[] = [
   { label: "로그인", href: "/member/login" },
   { label: "회원가입", href: "/member/signup" },
+  { label: "마이페이지", href: "/my-page" },
 ];
 
 /** GNB (includes/header.html 기준) */
@@ -58,6 +59,7 @@ export const gnb: NavGroup[] = [
       { label: "공지사항", href: "/learning-support/notice" },
       { label: "학사일정", href: "/learning-support/schedule" },
       { label: "FAQ", href: "/learning-support/faq" },
+      { label: "1:1 문의", href: "/learning-support/inquiry" },
       { label: "수강지원프로그램", href: "/learning-support/program" },
       { label: "모바일학습가이드", href: "/learning-support/mobile-guide" },
       { label: "원격지원", href: "/learning-support/remote-support" },
@@ -85,9 +87,24 @@ export const gnb: NavGroup[] = [
       { label: "학습비 반환규정", href: "/course-registration/refund" },
       { label: "수강규정", href: "/course-registration/regulations" },
       { label: "무료학습설계", href: "/course-registration/learning-design" },
+      { label: "평생교육바우처", href: "/course-registration/voucher" },
       { label: "이벤트", href: "/event" },
     ],
   },
+];
+
+/** 마이페이지 안의 탭 메뉴 (원본 마이페이지 메뉴 기준, 결제 현황은 나의강의실 > 결제내역 화면을 그대로 씀) */
+export const myPageTabs: NavLink[] = [
+  { label: "증명서 발급", href: "/my-page/certificates" },
+  { label: "결제 현황", href: "/course-registration/payment-history" },
+  { label: "쿠폰 사용내역", href: "/my-page/coupons" },
+  { label: "문의 내역", href: "/my-page/inquiries" },
+  { label: "학습 게시판", href: "/my-page/study-board" },
+  { label: "설문조사", href: "/my-page/surveys" },
+  { label: "각종 예외 신청", href: "/my-page/exceptions" },
+  { label: "성적 이의신청", href: "/my-page/appeals" },
+  { label: "학습자 PC 등록", href: "/my-page/pc" },
+  { label: "내 정보 수정", href: "/my-page/profile" },
 ];
 
 /** 나의강의실 앞에 구분선이 들어가는 위치 */
@@ -97,6 +114,7 @@ export const footerLinks: NavLink[] = [
   { label: "교육원 소개", href: "/footer/about" },
   { label: "개인정보처리방침", href: "/footer/privacy" },
   { label: "이용약관", href: "/footer/terms" },
+  { label: "운영규칙", href: "/footer/operating-rules" },
   { label: "이메일무단수집거부", href: "/footer/email-refusal" },
   { label: "불편사항 접수", href: "/footer/contact" },
   { label: "사이트맵", href: "/footer/sitemap" },

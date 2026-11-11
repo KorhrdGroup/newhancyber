@@ -1,19 +1,22 @@
 "use client";
 
 import type { FormEvent } from "react";
+import { useRouter } from "next/navigation";
 
 /** 아이디 찾기 · 비밀번호 재발급 */
 export default function FindUserForms() {
+  const router = useRouter();
+
   const handleFindId = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // TODO: 아이디 찾기 API 연동 (findIdName, findIdPhone)
-    alert("아이디 찾기 API 연동 전입니다.");
+    router.push("/member/find-user/result?type=id");
   };
 
   const handleFindPassword = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // TODO: 비밀번호 재발급 API 연동 (findPwName, findPwUserId, findPwPhone)
-    alert("비밀번호 재발급 API 연동 전입니다.");
+    router.push("/member/find-user/result?type=pw");
   };
 
   return (

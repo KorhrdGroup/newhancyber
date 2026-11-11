@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import ExTabs from "@/components/course-registration/extra/ExTabs";
+import { reviewTabs } from "@/components/course-registration/extra/extraData";
+import "@/styles/extra-pages.css";
 
 export const metadata: Metadata = { title: "수강후기" };
 
@@ -7,6 +10,8 @@ export const metadata: Metadata = { title: "수강후기" };
 
 export default function CourseReviewsPage() {
   return (
+    <>
+    <ExTabs items={reviewTabs} underHeader />
     <main className="wrapper">
       <div className="practice-support-notice-list-section">
         <div className="container" style={{ backgroundColor: "#fff" }}>
@@ -299,5 +304,6 @@ export default function CourseReviewsPage() {
         </div>
       </div>
     </main>
+    </>
   );
 }

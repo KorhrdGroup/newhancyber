@@ -3996,3 +3996,38 @@ main {
     padding: 14px;
   }
 }
+
+/* ---------- 페이지 안 탭 메뉴 (PageTabs, Figma 탭 부품) ---------- */
+.page-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: var(--space-32);
+  border-bottom: 1px solid var(--color-border-default);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.page-tabs::-webkit-scrollbar { display: none; }
+.page-tab {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  height: 48px;
+  padding: 0 var(--space-20);
+  margin-bottom: -1px;
+  border-bottom: 2px solid transparent;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  text-decoration: none;
+}
+.page-tab:hover { color: var(--color-text-strong); }
+.page-tab.is-active {
+  border-bottom-color: var(--color-bg-brand);
+  font-weight: 600;
+  color: var(--color-text-brand);
+}
+@media (max-width: 480px) {
+  .page-tabs { margin-bottom: var(--space-20); }
+  .page-tab { height: 44px; padding: 0 var(--space-12); font-size: 14px; }
+}

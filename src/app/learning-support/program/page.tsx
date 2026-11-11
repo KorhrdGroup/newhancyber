@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ProgramTable, { type Program } from "@/components/learning-support/ProgramTable";
+import SectionTabs, { programTabs } from "@/components/learning-support/extra/SectionTabs";
 
 export const metadata: Metadata = { title: "수강지원프로그램" };
 
@@ -43,6 +44,7 @@ const etcPrograms: Program[] = [
 export default function LearningProgramPage() {
   return (
     <main className="wrapper">
+      <SectionTabs items={programTabs} underHeader />
       <ProgramTable title="기본 프로그램" group="basic" programs={basicPrograms} />
       <ProgramTable title="기타 프로그램" group="etc" programs={etcPrograms} />
     </main>

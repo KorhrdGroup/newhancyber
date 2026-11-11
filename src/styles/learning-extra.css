@@ -1,0 +1,215 @@
+/* 학습지원 추가 화면(1:1 문의·관련기관 소식·연간 학사일정·공동인증서 안내·학습자 OT) 전용 — 클래스는 lx- 로 시작 */
+
+/* ---------- 화면끼리 묶는 탭 줄 (PageTabs) ---------- */
+.lx-tabs {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  background: var(--color-bg-default);
+}
+.lx-tabs .page-tabs { margin-bottom: 0; }
+
+/* ---------- 본문 틀 ---------- */
+.lx-page { color: var(--color-text-default); }
+.lx-desc { margin-top: var(--space-4); font-size: 14px; line-height: 1.6; color: var(--color-text-secondary); }
+.lx-head { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--space-16); }
+.lx-head .ds-btn { flex-shrink: 0; }
+.lx-panel {
+  margin-top: var(--space-20);
+  padding: var(--space-24);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-8);
+  background: var(--color-bg-default);
+}
+.lx-section-title { margin-bottom: var(--space-12); font-size: 18px; font-weight: 700; color: var(--color-text-strong); }
+.lx-text { margin-bottom: var(--space-12); font-size: 14px; line-height: 1.7; }
+.lx-notes { display: flex; flex-direction: column; margin-top: var(--space-12); color: var(--color-text-default); }
+.lx-note { margin-top: var(--space-8); font-size: 13px; line-height: 1.5; color: var(--color-text-secondary); }
+.lx-link { color: var(--color-text-brand); text-decoration: underline; word-break: break-all; }
+.lx-mt-8 { margin-top: var(--space-8); }
+.lx-actions { display: flex; justify-content: center; gap: var(--space-8); margin-top: var(--space-24); }
+.lx-callout {
+  margin-top: var(--space-24);
+  padding: var(--space-16);
+  border-radius: var(--radius-8);
+  background: var(--color-bg-brand-subtle);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-text-brand);
+}
+
+/* ---------- 1:1 문의 ---------- */
+.lx-inquiry-table { table-layout: fixed; }
+.lx-inquiry-table .lx-col-num { width: 80px; }
+.lx-inquiry-table .lx-col-date { width: 120px; }
+.lx-inquiry-table .lx-col-status { width: 120px; }
+.lx-title-link {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--color-text-strong);
+}
+.lx-title-link:hover { color: var(--color-text-brand); text-decoration: underline; }
+
+.lx-post-head { padding-bottom: var(--space-16); border-bottom: 1px solid var(--color-border-subtle); }
+.lx-post-title { margin-top: var(--space-8); font-size: 20px; font-weight: 700; line-height: 1.4; color: var(--color-text-strong); word-break: keep-all; }
+.lx-post-meta { margin-top: var(--space-4); font-size: 13px; color: var(--color-text-secondary); }
+.lx-post-body { padding-top: var(--space-16); font-size: 14px; line-height: 1.7; }
+.lx-post-body p + p { margin-top: var(--space-8); }
+.lx-post-file { margin-top: var(--space-16); padding-top: var(--space-12); border-top: 1px solid var(--color-border-subtle); font-size: 13px; color: var(--color-text-secondary); }
+.lx-post-file span { margin-left: var(--space-8); color: var(--color-text-default); }
+
+.lx-answer {
+  margin-top: var(--space-16);
+  padding: var(--space-24);
+  border: 1px solid var(--color-border-brand);
+  border-radius: var(--radius-8);
+  background: var(--color-bg-brand-subtle);
+}
+.lx-answer-head { display: flex; align-items: baseline; gap: var(--space-8); }
+.lx-answer-head strong { font-size: 16px; color: var(--color-text-brand); }
+.lx-answer-head .lx-post-meta { margin-top: 0; }
+.lx-answer--waiting { border-color: var(--color-border-default); background: var(--color-bg-subtle); text-align: center; }
+.lx-answer--waiting strong { font-size: 16px; color: var(--color-text-strong); }
+.lx-answer--waiting p { margin-top: var(--space-8); font-size: 14px; color: var(--color-text-secondary); }
+
+.lx-field + .lx-field { margin-top: var(--space-20); }
+.lx-textarea { min-height: 240px; }
+.lx-file { display: block; max-width: 100%; font-size: 14px; }
+
+/* ---------- 연간 학사일정 ---------- */
+.lx-year { margin-top: var(--space-32); }
+.lx-term-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-16); }
+.lx-term {
+  padding: var(--space-20);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-8);
+  background: var(--color-bg-default);
+}
+.lx-term.is-open { border-color: var(--color-border-brand); box-shadow: var(--shadow-sm); }
+.lx-term-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+  padding-bottom: var(--space-12);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+.lx-term-title { font-size: 16px; font-weight: 700; color: var(--color-text-strong); }
+.lx-term-list { display: flex; flex-direction: column; gap: var(--space-8); margin-top: var(--space-12); }
+.lx-term-row { display: flex; gap: var(--space-12); font-size: 14px; line-height: 1.5; }
+.lx-term-row dt { flex-shrink: 0; width: 64px; font-weight: 600; color: var(--color-text-secondary); }
+.lx-term-row dd { color: var(--color-text-default); }
+
+/* ---------- 공동인증서 안내 ---------- */
+.lx-subtabs { display: flex; gap: var(--space-8); margin-top: var(--space-20); }
+.lx-subtab {
+  flex: 1;
+  min-height: var(--size-control-lg);
+  padding: var(--space-8) var(--space-12);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-8);
+  background: var(--color-bg-default);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--color-text-secondary);
+  word-break: keep-all;
+}
+.lx-subtab:hover { color: var(--color-text-strong); }
+.lx-subtab.is-active { border-color: var(--color-bg-brand); background: var(--color-bg-brand); font-weight: 600; color: var(--color-text-inverse); }
+
+.lx-block { margin-top: var(--space-32); }
+.lx-table-scroll { overflow-x: auto; }
+.lx-table { background: var(--color-bg-default); line-height: 1.5; }
+.lx-table th,
+.lx-table td { height: auto; padding: var(--space-12); white-space: normal; word-break: keep-all; }
+.lx-table.ds-table--info th { width: 200px; }
+
+.lx-steps { display: flex; flex-direction: column; gap: var(--space-12); list-style: none; }
+.lx-step {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-12);
+  padding: var(--space-16);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-8);
+  background: var(--color-bg-default);
+  font-size: 14px;
+  line-height: 1.6;
+}
+.lx-step-num {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-brand);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text-inverse);
+}
+
+.lx-flow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-8); margin-bottom: var(--space-16); list-style: none; }
+.lx-flow-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  padding: var(--space-16) var(--space-8);
+  border-radius: var(--radius-8);
+  background: var(--color-bg-brand-subtle);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  color: var(--color-text-strong);
+  word-break: keep-all;
+}
+.lx-flow-num { font-size: 12px; font-weight: 700; color: var(--color-text-brand); }
+
+/* ---------- 학습자 OT ---------- */
+.lx-ot { list-style: none; }
+.lx-ot-title { display: flex; align-items: center; gap: var(--space-8); font-size: 18px; font-weight: 700; color: var(--color-text-strong); }
+.lx-ot-links { display: flex; flex-wrap: wrap; gap: var(--space-8); margin-top: var(--space-16); }
+
+/* ---------- 모바일 ---------- */
+@media (max-width: 480px) {
+  .lx-tabs { padding: 0 var(--space-16); }
+  .lx-tabs .page-tab { flex: 1; justify-content: center; }
+  /* 파란 제목 띠가 없는 페이지는 고정 모바일 헤더(70px) 아래에서 시작 */
+  .lx-tabs--under-header { padding-top: 70px; }
+
+  .container.lx-page { margin-top: 0; padding: var(--space-24) var(--space-16) var(--space-40); }
+  /* 탭 줄도 파란 띠도 없는 페이지(1:1 문의) — 고정 모바일 헤더 아래에서 시작 */
+  .container.lx-page--top { padding-top: calc(70px + var(--space-24)); }
+  .lx-head { flex-direction: column; align-items: stretch; }
+  .lx-panel { padding: var(--space-16); }
+  .lx-answer { padding: var(--space-16); }
+  .lx-post-title { font-size: 18px; }
+
+  .lx-inquiry-table .lx-col-num { display: none; }
+  .lx-inquiry-table .lx-col-date { width: 72px; }
+  .lx-inquiry-table td.lx-col-date { font-size: 12px; }
+  .lx-inquiry-table .lx-col-status { width: 84px; }
+  .lx-inquiry-table th,
+  .lx-inquiry-table td { padding: var(--space-8); }
+
+  .lx-actions .ds-btn { flex: 1; }
+
+  .lx-term-grid { grid-template-columns: minmax(0, 1fr); }
+  .lx-term { padding: var(--space-16); }
+
+  .lx-subtabs { gap: var(--space-4); }
+  .lx-subtab { padding: var(--space-8) var(--space-4); font-size: 13px; }
+  .lx-block { margin-top: var(--space-24); }
+  .lx-table { font-size: 13px; }
+  .lx-table th,
+  .lx-table td { padding: var(--space-8); }
+  .lx-table.ds-table--info th { width: 96px; }
+  .lx-flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
