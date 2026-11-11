@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import Script from "next/script";
 import { useRef, useState, type FormEvent } from "react";
 import { flushSync } from "react-dom";
@@ -58,6 +59,7 @@ function Required() {
 
 /** 회원가입 2단계: 정보 입력 */
 export default function SignupForm() {
+  const router = useRouter();
   const [phonePrefix, setPhonePrefix] = useState("010");
   const [emailDomain, setEmailDomain] = useState("");
   // 원본: 처음엔 클래스 없음, 도메인을 고르면 hide, "직접 입력"을 고르면 show
@@ -101,8 +103,8 @@ export default function SignupForm() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO: 회원가입 API 연동 (new FormData(e.currentTarget)) 후 /member/signup/step3 로 이동
-    alert("회원가입 API 연동 전입니다.");
+    // TODO: 회원가입 API 연동 (new FormData(e.currentTarget)) — 지금은 저장 없이 완료 화면으로만 넘어감
+    router.push("/member/signup/step3");
   };
 
   return (
