@@ -511,13 +511,13 @@
 /* 반응형 디자인 - 장학제도 */
 @media (max-width: 768px) {
   .scholarship-table {
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .scholarship-table th,
   .scholarship-table td {
     padding: 12px 8px;
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .scholarship-col-item {
@@ -672,14 +672,14 @@
 }
 
 .privacy-labeling-item-title {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
   color: #010101;
   line-height: 1.7;
 }
 
 .privacy-labeling-item-desc {
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.7;
   color: #333333;
   margin: 0;
@@ -708,7 +708,7 @@
   }
 
   .privacy-labeling-item-desc {
-    font-size: 12px;
+    font-size: 13px;
   }
 }
 
@@ -779,7 +779,7 @@
   padding: 16px 20px;
   vertical-align: middle;
   text-align: left;
-  font-size: 12px;
+  font-size: 14px;
   color: #181818;
   line-height: 1.6;
   border-bottom: 1px solid #e0e0e0;
@@ -885,7 +885,7 @@
   padding: 20px;
   vertical-align: middle;
   text-align: left;
-  font-size: 12px;
+  font-size: 14px;
   color: #010101;
   line-height: 1.6;
   border-bottom: 1px solid #e0e0e0;
@@ -985,7 +985,7 @@
   padding: 20px;
   vertical-align: middle;
   text-align: center;
-  font-size: 12px;
+  font-size: 14px;
   color: #010101;
   line-height: 1.6;
   border-bottom: 1px solid #e0e0e0;
@@ -1061,7 +1061,7 @@
   padding: 20px;
   vertical-align: middle;
   text-align: center;
-  font-size: 12px;
+  font-size: 14px;
   color: #010101;
   line-height: 1.6;
   border-bottom: 1px solid #e0e0e0;
@@ -1144,7 +1144,7 @@
   padding: 20px;
   vertical-align: middle;
   text-align: center;
-  font-size: 12px;
+  font-size: 14px;
   color: #010101;
   line-height: 1.6;
   border-bottom: 1px solid #e0e0e0;
@@ -1226,7 +1226,7 @@
   padding: 20px 18px;
   vertical-align: middle;
   text-align: left;
-  font-size: 12px;
+  font-size: 14px;
   color: #010101;
   line-height: 1.6;
   border-bottom: 1px solid #e0e0e0;
@@ -1338,7 +1338,7 @@
   padding: 20px 18px;
   vertical-align: middle;
   text-align: left;
-  font-size: 12px;
+  font-size: 14px;
   color: #010101;
   line-height: 1.6;
   border-bottom: 1px solid #e0e0e0;

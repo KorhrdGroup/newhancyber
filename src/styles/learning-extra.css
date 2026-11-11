@@ -194,7 +194,7 @@
 
   .lx-inquiry-table .lx-col-num { display: none; }
   .lx-inquiry-table .lx-col-date { width: 72px; }
-  .lx-inquiry-table td.lx-col-date { font-size: 12px; }
+  .lx-inquiry-table td.lx-col-date { font-size: 13px; }
   .lx-inquiry-table .lx-col-status { width: 84px; }
   .lx-inquiry-table th,
   .lx-inquiry-table td { padding: var(--space-8); }

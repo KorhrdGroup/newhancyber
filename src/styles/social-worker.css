@@ -518,7 +518,7 @@
 }
 
 .credit-source-table .table-note {
-  font-size: 12px;
+  font-size: 13px;
   color: #666666;
   display: block;
   margin-top: 4px;
@@ -949,7 +949,7 @@
   border-radius: 10px;
   overflow: hidden;
   margin: 0;
-  font-size: 12px;
+  font-size: 14px;
   text-align: center;
 }
 
@@ -959,7 +959,7 @@
   border-bottom: 1px solid #ddd;
   padding: 16px;
   text-align: center;
-  font-size: 12px;
+  font-size: 14px;
   box-sizing: border-box;
 }
 
@@ -1001,7 +1001,7 @@
   border-radius: 10px;
   overflow: hidden;
   margin: 0;
-  font-size: 12px;
+  font-size: 14px;
   text-align: center;
 }
 
@@ -1011,7 +1011,7 @@
   border-bottom: 1px solid #ddd;
   padding: 16px;
   text-align: center;
-  font-size: 12px;
+  font-size: 14px;
   box-sizing: border-box;
 }
 
@@ -1159,7 +1159,7 @@
   border-right: 1px solid #d9d9d9 !important;
   border-left: 1px solid #d9d9d9 !important;
   border-bottom: 1px solid #d9d9d9;
-  font-size: 12px;
+  font-size: 14px;
   color: #010101;
   font-weight: 400;
   box-sizing: border-box;
@@ -1303,7 +1303,7 @@
   border: none;
   border-right: 1px solid #d9d9d9;
   border-bottom: 1px solid #d9d9d9;
-  font-size: 12px;
+  font-size: 14px;
   color: #010101;
   font-weight: 400;
   box-sizing: border-box;
@@ -1376,7 +1376,7 @@
   border: none;
   border-right: 1px solid #d9d9d9;
   border-bottom: 1px solid #d9d9d9;
-  font-size: 12px;
+  font-size: 14px;
   color: #010101;
   font-weight: 400;
   box-sizing: border-box;
@@ -1407,7 +1407,7 @@
 .law-comparison-table .table-note {
   display: block;
 
-  font-size: 12px;
+  font-size: 13px;
 }
 
 /* 이수과목 수 테이블 스타일 */
@@ -1454,7 +1454,7 @@
   border: none;
   border-right: 1px solid #d9d9d9;
   border-bottom: 1px solid #d9d9d9;
-  font-size: 12px;
+  font-size: 14px;
   color: #010101;
   font-weight: 400;
   box-sizing: border-box;
@@ -1597,7 +1597,7 @@
   border-right: 1px solid #d9d9d9 !important;
   border-left: 1px solid #d9d9d9 !important;
   border-bottom: 1px solid #d9d9d9;
-  font-size: 12px;
+  font-size: 14px;
   color: #010101;
   font-weight: 400;
   box-sizing: border-box;
@@ -1665,7 +1665,7 @@
   border: none;
   border-right: 1px solid #d9d9d9;
   border-bottom: 1px solid #d9d9d9;
-  font-size: 12px;
+  font-size: 14px;
   color: #010101;
   font-weight: 400;
   box-sizing: border-box;
@@ -1740,7 +1740,7 @@
   border-right: 1px solid #d9d9d9 !important;
   border-left: 1px solid #d9d9d9 !important;
   border-bottom: 1px solid #d9d9d9;
-  font-size: 12px;
+  font-size: 14px;
   color: #010101;
   font-weight: 400;
   box-sizing: border-box;
