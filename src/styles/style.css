@@ -607,7 +607,8 @@ main {
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  gap: 43.25px;
+  justify-content: space-between;
+  gap: var(--space-24);
 }
 
 .notice-item {
@@ -1862,15 +1863,19 @@ main {
 }
 
 /* 왜 한평생원격교육원을 선택할까요? 섹션 */
+/* 배경은 화면 가로 전체, 내용은 가운데 1080 안에 */
 .why-choose-section {
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: 24px 40px;
+  width: 100%;
+  margin: 0;
+  padding: 24px 0;
   background-color: #f3f8ff;
 }
 
 .why-choose-container {
-  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 40px;
+  box-sizing: border-box;
 }
 
 .why-choose-title {
@@ -2138,11 +2143,15 @@ main {
 }
 
 /* 왼쪽 위: 빠른 메뉴 */
-/* 본문(880px) 바깥 양옆에 20px 띄워 둠 */
+/*
+ * 양옆 플로팅 메뉴: 화면 끝과 '본문(880px)·히어로 배너 글자·그림 중 더 바깥쪽 것' 사이 여백의 가운데에 둠.
+ * 배너 그림(1920 기준)의 글자·그림은 가운데 1080 안(왼쪽 끝 420 = 21.875%)에 있고,
+ * 배너는 1344px 이상에서 화면 폭에 비례해 커지므로 21.875% 지점이 그대로 글자 시작점이 됨.
+ */
 .floating-quick-menu {
   position: fixed;
   top: 290px;
-  left: max(16px, calc(50% - 440px - 20px - 120px));
+  left: max(16px, calc((min(50% - 440px, 21.875%) - 120px) / 2));
   width: auto;
   background-color: #ffffff;
   border-radius: 8px;
@@ -2207,7 +2216,7 @@ main {
 .floating-consultation {
   position: fixed;
   top: 290px;
-  right: max(16px, calc(50% - 440px - 20px - 114px));
+  right: max(16px, calc((min(50% - 440px, 21.875%) - 114px) / 2));
   width: 114px;
   height: 214px;
   background: linear-gradient(135deg, #0032bb 0%, #0055ff 100%);
@@ -2290,7 +2299,7 @@ main {
 .floating-social {
   position: fixed;
   top: 510px;
-  right: max(16px, calc(50% - 440px - 20px - 114px));
+  right: max(16px, calc((min(50% - 440px, 21.875%) - 114px) / 2));
   width: 114px;
   height: 100px;
   background-color: #ffffff;

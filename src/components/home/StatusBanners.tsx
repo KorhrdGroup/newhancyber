@@ -50,7 +50,7 @@ export function AcademicNotice() {
       <div className="academic-notice-container">
         <div className="notice-item">
           <img src={`${MAIN_IMG}/time.png`} alt="알람" className="notice-icon" />
-          <span className="academic-notice-text">한평생원격교육원 학사알림</span>
+          <span className="academic-notice-text">한평생 학사알림</span>
         </div>
         <div className="notice-item">
           <span className="academic-notice-text academic-notice-text-bold">2025년 2학기 10기</span>
