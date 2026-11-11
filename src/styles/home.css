@@ -1,0 +1,485 @@
+/*
+ * 메인 완성도 보강 — style.css(퍼블리싱 원본) 뒤에 읽혀 덮어쓴다.
+ * 데스크톱 전용 수정은 min-width: 481px 안에 둬서 모바일 규칙과 부딪치지 않게 한다.
+ */
+
+/* ---------- 연락처 줄: 번호는 누르면 전화 ---------- */
+.contact-phone {
+  display: block;
+  text-decoration: none;
+}
+
+/* ---------- 원격지원 카드 (그림 → 글자 + 3D 아이콘) ---------- */
+.support-box-remote {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #3f7efb 0%, #115aed 100%);
+  overflow: hidden;
+}
+
+.support-box-remote .support-box-text {
+  position: relative;
+  z-index: 1;
+  gap: 4px;
+}
+
+.support-remote-icon {
+  position: absolute;
+  right: 12px;
+  bottom: 8px;
+  width: 38%;
+  max-width: 96px;
+  height: auto;
+  pointer-events: none;
+}
+
+.support-box-link:hover .support-box-remote {
+  opacity: 0.92;
+}
+
+/* 마무리 띠의 상담 버튼으로 내려올 때 고정 메뉴에 가리지 않게 */
+#home-consultation {
+  scroll-margin-top: 90px;
+}
+
+@media (min-width: 481px) {
+  /* ---------- 학습일정 안내: 글자 사이 띄어쓰기 대신 줄 정렬 ---------- */
+  /* 줄 간격이 생겨 높이를 내용에 맞추고, 공지사항 상자도 같은 높이로 */
+  .schedule-notice-container {
+    align-items: stretch;
+  }
+
+  .schedule-guide,
+  .notice-board {
+    height: auto;
+    min-height: 300px;
+  }
+
+  .schedule-list {
+    gap: 0;
+    margin-bottom: 14px;
+  }
+
+  .schedule-item {
+    height: auto;
+    padding: 5px 0;
+    border-bottom: 1px dashed #eaeaea;
+  }
+
+  .schedule-item:last-child {
+    border-bottom: none;
+  }
+
+  .schedule-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #666;
+    letter-spacing: 0;
+  }
+
+  .schedule-date {
+    font-size: 13px;
+    font-weight: 500;
+    color: #333;
+  }
+
+  .schedule-item-highlight .schedule-label,
+  .schedule-item-highlight .schedule-date {
+    color: #115aed;
+    font-weight: 700;
+  }
+
+  .schedule-btn {
+    width: 100%;
+    background-color: #115aed;
+    color: #fff;
+  }
+
+  .schedule-btn:hover {
+    background-color: #0032bb;
+  }
+
+  /* ---------- 간편상담: 동의 체크를 글자 앞에, 크게 ---------- */
+  .consultation-form-content {
+    gap: 8px;
+  }
+
+  .form-label {
+    font-size: 13px;
+    min-width: 48px;
+  }
+
+  .form-checkbox-group {
+    justify-content: flex-start;
+    margin: 4px 0 12px 54px;
+  }
+
+  .checkbox-label {
+    flex-direction: row-reverse;
+    gap: 8px;
+    padding: 0;
+    font-size: 13px;
+    color: #666;
+  }
+
+  .checkbox-input {
+    width: 18px;
+    height: 18px;
+    margin-left: 0;
+  }
+
+  .checkbox-input:checked::after {
+    font-size: 12px;
+  }
+
+  .form-submit-btn {
+    padding: 13px;
+    background-color: #115aed;
+  }
+
+  .form-submit-btn:hover {
+    background-color: #0032bb;
+  }
+
+  /* ---------- 왜 한평생: 카드가 본문 폭을 다 쓰게 ---------- */
+  .expert-cards {
+    gap: 16px;
+  }
+
+  .expert-card {
+    flex: 1;
+    width: auto;
+    padding: 36px 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(17, 90, 237, 0.06);
+  }
+
+  .expert-card-list li {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .why-choose-section {
+    padding-bottom: 64px;
+  }
+
+  /* ---------- 필수 Check: 마우스 올리면 살짝 뜨게 ---------- */
+  .essential-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  }
+}
+
+/* ---------- 과정 안내 (새 섹션) ---------- */
+.course-guide-section {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 24px var(--header-padding-side) 64px;
+  box-sizing: border-box;
+}
+
+.course-guide-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #010101;
+}
+
+.course-guide-sub {
+  margin-top: 8px;
+  font-size: 16px;
+  color: #666;
+}
+
+.course-guide-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.course-guide-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 220px;
+  padding: 28px 24px;
+  border-radius: 12px;
+  background: #f3f8ff;
+  color: #010101;
+  text-decoration: none;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.course-guide-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(17, 90, 237, 0.12);
+}
+
+.course-guide-tag {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  color: #115aed;
+}
+
+.course-guide-name {
+  margin-top: 14px;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.course-guide-desc {
+  position: relative;
+  z-index: 1;
+  max-width: 64%;
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #555;
+  word-break: keep-all;
+}
+
+.course-guide-more {
+  margin-top: auto;
+  padding-top: 16px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #115aed;
+}
+
+.course-guide-icon {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  width: 84px;
+  height: 84px;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+/* ---------- 마무리 띠 (새 섹션) ---------- */
+.closing-cta-section {
+  background: linear-gradient(120deg, #0032bb 0%, #115aed 60%, #3f7efb 100%);
+}
+
+.closing-cta-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 56px var(--header-padding-side);
+  box-sizing: border-box;
+  color: #fff;
+}
+
+.closing-cta-label {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.closing-cta-title {
+  margin-top: 14px;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.closing-cta-title em {
+  font-style: normal;
+  color: #ffe55c;
+}
+
+.closing-cta-desc {
+  margin-top: 12px;
+  font-size: 16px;
+  color: #dbe5ff;
+}
+
+.closing-cta-desc a {
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+}
+
+.closing-cta-actions {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-right: 150px;
+}
+
+.closing-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 220px;
+  height: 52px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.closing-cta-btn:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.closing-cta-btn--primary {
+  border-color: #fee500;
+  background: #fee500;
+  color: #1a1a1a;
+}
+
+.closing-cta-btn--primary:hover {
+  background: #ffd900;
+}
+
+.closing-cta-illust {
+  position: absolute;
+  right: var(--header-padding-side);
+  bottom: 0;
+  width: 140px;
+  height: auto;
+  pointer-events: none;
+}
+
+/* 태블릿 */
+@media (max-width: 1080px) and (min-width: 481px) {
+  .course-guide-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .closing-cta-illust {
+    display: none;
+  }
+
+  .closing-cta-actions {
+    margin-right: 0;
+  }
+}
+
+/* ---------- 모바일 ---------- */
+@media (max-width: 480px) {
+  /* 첫 배너: 데스크톱 높이(350px)가 그대로 남아 그림 아래가 100px 비던 것 → 그림 높이에 맞춤 */
+  .hero-swiper {
+    height: auto;
+  }
+
+  .hero-swiper .swiper-pagination {
+    bottom: 12px !important;
+  }
+
+  /* 마감 띠: 검정 → 브랜드 남색, 더 얇게 */
+  .mobile-deadline-banner {
+    height: 52px;
+    background: linear-gradient(90deg, #0032bb, #115aed);
+  }
+
+  .mobile-deadline-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .mobile-deadline-text,
+  .mobile-deadline-text-bold {
+    font-size: 15px;
+  }
+
+  .mobile-deadline-text-bold {
+    font-weight: 700;
+    color: #ffe55c;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* 개강 카드: "개강반"이 두 줄로 쪼개지지 않게 */
+  .mobile-course-semester {
+    font-size: 13px;
+    color: #666;
+  }
+
+  .mobile-course-date {
+    font-size: 18px;
+    white-space: nowrap;
+  }
+
+  .mobile-course-date-muted {
+    color: #939393;
+  }
+
+  /* 필수 Check: "실습지원센터"가 쪼개지지 않게 */
+  .essential-card {
+    padding: 8px 4px;
+  }
+
+  .essential-card-text {
+    word-break: keep-all;
+    letter-spacing: -0.02em;
+  }
+
+  /* 원격지원 카드 */
+  .support-box-remote {
+    padding: 16px;
+  }
+
+  /* 과정 안내 */
+  .course-guide-section {
+    order: 3;
+    width: 100%;
+    max-width: 480px;
+    padding: 20px 16px 32px;
+  }
+
+  .course-guide-title {
+    font-size: 20px;
+  }
+
+  .course-guide-sub {
+    font-size: 14px;
+  }
+
+  .course-guide-cards {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .course-guide-card {
+    min-height: 0;
+    padding: 20px 16px;
+  }
+
+  .course-guide-name {
+    margin-top: 10px;
+    font-size: 18px;
+  }
+
+  .course-guide-icon {
+    width: 72px;
+    height: 72px;
+  }
+
+  /* 마무리 띠는 모바일에서 숨김 (하단 고정 메뉴가 같은 역할) */
+  .closing-cta-section {
+    display: none;
+  }
+}

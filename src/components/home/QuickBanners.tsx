@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Fragment } from "react";
-import { TBD_HREF } from "@/lib/navigation";
-import { CONTACT_PHONE } from "./homeData";
+import { phones } from "./homeData";
 
 const MAIN_IMG = "/resources/images/main";
 
@@ -31,9 +30,9 @@ export function BannerSection() {
             <img src={`${MAIN_IMG}/banner-practice-illust.png`} alt="" className="banner-card-illust banner-card-illust--practice" />
           </Link>
         </div>
-        {/* 결제 페이지 (데스크톱만) — 원본 주소 /payment 는 아직 없는 페이지 */}
+        {/* 결제 (데스크톱만) — 장바구니에서 과목을 골라 결제한다 */}
         <div className="banner-item banner-item-payment">
-          <Link href={TBD_HREF} className="banner-card banner-card--pay">
+          <Link href="/course-registration/cart" className="banner-card banner-card--pay">
             <span className="banner-card-text">
               <span className="banner-card-label">장바구니</span>
               <span className="banner-card-title">
@@ -49,10 +48,10 @@ export function BannerSection() {
   );
 }
 
+/** 실제 사이트와 같은 번호 — 학습지원 번호가 시험오류·학습장애도 받는다 */
 const contacts = [
-  { title: "수강신청 / 학습상담", phone: CONTACT_PHONE },
-  { title: "학습지원", phone: CONTACT_PHONE },
-  { title: "시험오류 / 학습장애", phone: CONTACT_PHONE },
+  { title: "수강신청 / 학습상담", phone: phones.registration },
+  { title: "학습지원 (시험오류 / 학습장애)", phone: phones.support },
 ];
 
 /** 운영시간·연락처 */
@@ -69,7 +68,9 @@ export function ContactInfo() {
             <div className="contact-divider"></div>
             <div className="contact-item">
               <div className="contact-title">{contact.title}</div>
-              <div className="contact-phone">{contact.phone}</div>
+              <a href={`tel:${contact.phone}`} className="contact-phone">
+                {contact.phone}
+              </a>
             </div>
           </Fragment>
         ))}

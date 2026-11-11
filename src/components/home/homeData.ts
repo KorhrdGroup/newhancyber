@@ -31,35 +31,51 @@ export const heroSlides: HeroSlide[] = [
   },
 ];
 
+/** 지금 모집 중인 차수 (실제 사이트 수강신청 화면 2026-11 기준) */
+export const currentTerm = {
+  name: "2026년도 2학기 4차",
+  openingDate: "11월 12일",
+  applyPeriod: "2026.10.15 ~ 2026.11.11",
+  studyPeriod: "2026.11.12 ~ 2027.02.24",
+  /** 수강신청 마감 (모바일 카운트다운) */
+  applyDeadline: "2026-11-11T23:59:59+09:00",
+};
+
+/** 연락처 (실제 사이트 바닥글과 같은 값) */
+export const phones = {
+  registration: "1661-7769",
+  support: "1661-7768",
+};
+
 export interface CourseOpening {
   semester: string;
-  date: string;
+  /** 없으면 "준비 중" */
+  date?: string;
 }
 
+/** 모바일 카드 폭이 좁아 연도는 빼고 쓴다 */
 export const courseOpenings: CourseOpening[] = [
-  { semester: "2026년도 1학기", date: "3월 2일" },
-  { semester: "2026년도 1학기", date: "4월 17일" },
+  { semester: "2학기 4차", date: currentTerm.openingDate },
+  { semester: "다음 개강반" },
 ];
 
 export interface ScheduleItem {
-  /** 글자 사이 간격까지 원본 그대로 (nbsp 포함) */
   label: string;
   date: string;
   highlight?: boolean;
 }
 
-const sp = (chars: string, gap: number) => chars.split("").join(" ".repeat(gap));
-
+/** 시험·과제 기간은 나의 강의실 샘플(classroomData)과 같은 값 */
 export const learningSchedule = {
-  cohort: "2025년 2학기 6차 개강반",
+  cohort: `${currentTerm.name} (${currentTerm.openingDate} 개강)`,
   items: [
-    { label: sp("개강일", 3), date: "25.10.17 (금)", highlight: true },
-    { label: sp("학습기간", 1), date: "25.10.17 ~ 26.01.29" },
-    { label: sp("중간고사", 1), date: "25.10.17 ~ 26.01.29" },
-    { label: sp("기말고사", 1), date: "25.10.17 ~ 26.01.29" },
-    { label: sp("토론", 9), date: "25.10.17 ~ 26.01.29" },
-    { label: sp("과제", 9), date: "25.10.17 ~ 26.01.29" },
-    { label: sp("퀴즈", 9), date: "25.10.17 ~ 26.01.29" },
+    { label: "개강일", date: "26.11.12 (목)", highlight: true },
+    { label: "학습기간", date: "26.11.12 ~ 27.02.24" },
+    { label: "중간고사", date: "26.12.21 ~ 26.12.27" },
+    { label: "기말고사", date: "27.02.15 ~ 27.02.21" },
+    { label: "토론", date: "26.12.14 ~ 26.12.27" },
+    { label: "과제", date: "26.11.30 ~ 26.12.13" },
+    { label: "퀴즈", date: "26.12.07 ~ 27.01.31" },
   ] satisfies ScheduleItem[],
 };
 
@@ -86,13 +102,13 @@ export const noticeTabs: NoticeTab[] = [
     label: "공지사항",
     basePath: "/learning-support/notice",
     posts: [
-      { id: 1, title: "2025년 10월 4분기 학습자 등록 및 학점 인정 신청", date: "25.10.28" },
-      { id: 2, title: "[2025년 10월] 카드사별 무이자 안내", date: "25.10.22" },
-      { id: 3, title: "[국가평생교육진흥원] 25-4차 평생교육사 자격증 발급 안내사항전달", date: "25.10.19", isNew: true },
-      { id: 4, title: "[공지] 2025년도 2학기 7기수(2025년 11월 13일 개강반 모집 안내)", date: "25.10.17", isNew: true },
-      { id: 5, title: "[공지] 2024년도 2학기 6기수(2025년 10월 2일 개강) 학사", date: "25.10.13" },
-      { id: 6, title: "[2025년 9월] 카드사별 무이자 안내", date: "25.10.03" },
-      { id: 7, title: "[공지] 2025년도 2학기 7기수(2025년 11월 13일 개강반 모집 안내)", date: "25.10.01" },
+      { id: 1, title: "[2026년 11월] 카드사 무이자 할부 안내", date: "26.10.31", isNew: true },
+      { id: 2, title: "[공지] 2026년도 2학기 4차(11월 12일 개강) 학사 안내", date: "26.10.28", isNew: true },
+      { id: 3, title: "2026년 4분기 학습자 등록 및 학점 인정 신청 안내", date: "26.10.20" },
+      { id: 4, title: "[국가평생교육진흥원] 26-4차 사회복지사 자격증 발급 안내", date: "26.10.15" },
+      { id: 5, title: "[2026년 10월] 카드사 무이자 할부 안내", date: "26.10.08" },
+      { id: 6, title: "[2026년 9월] 카드사 무이자 할부 안내", date: "26.10.08" },
+      { id: 7, title: "[공지] 2026년도 2학기 3차(10월 15일 개강) 학사 안내", date: "26.10.01" },
     ],
   },
   {
@@ -100,11 +116,11 @@ export const noticeTabs: NoticeTab[] = [
     label: "학사일정",
     basePath: "/learning-support/schedule",
     posts: [
-      { id: 1, title: "2025년 2학기 학사일정 안내", date: "25.10.15" },
-      { id: 2, title: "중간고사 일정 변경 안내", date: "25.10.10" },
-      { id: 3, title: "기말고사 일정 공지", date: "25.10.05" },
-      { id: 4, title: "2025년 1학기 학사일정", date: "25.09.28" },
-      { id: 5, title: "방학 일정 안내", date: "25.09.20" },
+      { id: 1, title: "2026년도 2학기 4차 학사일정 안내", date: "26.10.28", isNew: true },
+      { id: 2, title: "2026년도 2학기 4차 중간고사 일정 안내", date: "26.10.28" },
+      { id: 3, title: "2026년도 2학기 3차 기말고사 일정 안내", date: "26.10.20" },
+      { id: 4, title: "2026년도 2학기 3차 학사일정 안내", date: "26.09.30" },
+      { id: 5, title: "추석 연휴 학습지원센터 운영 안내", date: "26.09.18" },
     ],
   },
   {
@@ -112,10 +128,10 @@ export const noticeTabs: NoticeTab[] = [
     label: "실습공지",
     basePath: "/practice-support/notice",
     posts: [
-      { id: 1, title: "2025년 2학기 실습 일정 안내", date: "25.10.20" },
-      { id: 2, title: "실습 신청 기간 안내", date: "25.10.12" },
-      { id: 3, title: "실습 지도교수 배정 안내", date: "25.10.08" },
-      { id: 4, title: "실습 보고서 제출 안내", date: "25.10.01" },
+      { id: 1, title: "2027년 1학기 사회복지현장실습 신청 안내", date: "26.10.25", isNew: true },
+      { id: 2, title: "실습 기관 선정 및 서류 제출 안내", date: "26.10.18" },
+      { id: 3, title: "실습 지도교수 배정 안내", date: "26.10.08" },
+      { id: 4, title: "실습 보고서 제출 안내", date: "26.09.30" },
     ],
   },
 ];
@@ -190,4 +206,3 @@ export const socialLinks = [
   { label: "유튜브", icon: `${MAIN_IMG}/youtube.png`, href: TBD_HREF },
 ];
 
-export { CONTACT_PHONE } from "@/components/layout/MobileFooter";

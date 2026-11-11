@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useMobileMenu } from "@/components/layout/MobileMenuContext";
 import { TBD_HREF } from "@/lib/navigation";
-import { CONTACT_PHONE, quickMenuLinks, socialLinks } from "./homeData";
+import { phones, quickMenuLinks, socialLinks } from "./homeData";
 
 /** 이 높이(px) 이상 스크롤하면 TOP 버튼을 보인다 */
 const TOP_BUTTON_THRESHOLD = 300;
@@ -46,12 +46,14 @@ export default function FloatingMenu() {
           <div className="consultation-content">
             <div className="consultation-subtitle">처음 오셨나요?</div>
             <div className="consultation-title">빠른 상담</div>
-            {/* 원본 표기 그대로 (다른 곳은 02-2135-5126) — 확인 필요 */}
-            <div className="consultation-phone">
-              <div className="phone-number">02-</div>
-              <div className="phone-number">2135-</div>
-              <div className="phone-number">6126</div>
-            </div>
+            {/* 원본처럼 줄을 나눠 크게 보여 준다 (하이픈 뒤에서 줄바꿈) */}
+            <a href={`tel:${phones.registration}`} className="consultation-phone">
+              {phones.registration.split(/(?<=-)/).map((part) => (
+                <div key={part} className="phone-number">
+                  {part}
+                </div>
+              ))}
+            </a>
           </div>
           <a href={TBD_HREF} className="consultation-kakao-btn">
             <img src="/resources/images/main/kakaotalkFloting.png" alt="카카오톡" className="kakao-icon" />
@@ -78,7 +80,7 @@ export default function FloatingMenu() {
       </div>
 
       <div className={`mobile-bottom-floating-menu${hidden}`}>
-        <a href={`tel:${CONTACT_PHONE}`} className="mobile-floating-btn mobile-floating-btn-phone">
+        <a href={`tel:${phones.registration}`} className="mobile-floating-btn mobile-floating-btn-phone">
           <img src="/resources/images/mobile/mobile-phone.png" alt="전화상담" className="mobile-floating-icon" />
           <span className="mobile-floating-text">전화상담</span>
         </a>
