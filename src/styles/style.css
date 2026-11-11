@@ -262,6 +262,8 @@
 
 .gnb-list {
   display: flex;
+  /* 메뉴 묶음을 가운데 로고와 같은 중심에 둠 (메뉴 사이 간격은 글자 양옆 36px로 모두 72px) */
+  justify-content: center;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -285,7 +287,8 @@
   width: 1px;
   height: 26px;
   background-color: #d9d9d9;
-  margin: 0;
+  /* 메뉴 글자 양옆 36px + 36px = 72px → 세로선 양쪽도 메뉴 사이 간격(72px)과 같게 */
+  margin: 0 36px;
   padding: 0;
   align-self: center;
   flex-shrink: 0;
@@ -475,9 +478,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 113px;
+  /* 칸 폭은 글자수에 맞추고, 양옆 여백만 같게 */
   height: 60px;
-  padding: 0 var(--padding-base);
+  padding: 0 var(--space-20);
   border-bottom-width: var(--gap-xs);
   border-bottom-style: solid;
   border-bottom-color: transparent;
@@ -2551,7 +2554,8 @@ main {
   .mobile-header-top {
     display: flex;
     align-items: center;
-    gap: 100px;
+    justify-content: space-between;
+    gap: 12px;
     padding: 23px 16px;
     height: 70px;
     box-sizing: border-box;
@@ -2573,7 +2577,7 @@ main {
   }
 
   .mobile-logo-img {
-    height: 20px;
+    height: 16px;
     width: auto;
     object-fit: contain;
   }
