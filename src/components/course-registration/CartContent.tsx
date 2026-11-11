@@ -4,7 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useMobileMenu } from "@/components/layout/MobileMenuContext";
-import { cartSummary, formatPrice, sampleCartCourses } from "./courseData";
+import { openPopup } from "@/components/my-classroom/PopupButton";
+import { cartSummary, formatPrice, sampleCartCourses, sampleLectureHref } from "./courseData";
 import MobilePaymentSummary from "./MobilePaymentSummary";
 
 /** 장바구니 — 데스크톱은 결제하기 화면과 같은 틀, 모바일은 원본 cart.html 그대로 */
@@ -66,9 +67,13 @@ export default function CartContent() {
                   />
                   <span className="ex-order-icon">{course.icon}</span>
                   <span className="ex-order-name">{course.name}</span>
-                  {/* TODO: 샘플강의·강의계획서 팝업 연결 */}
+                  {/* TODO: 강의계획서 팝업 연결 */}
                   <span className="ex-cart-links">
-                    <button type="button" className="ds-btn ds-btn--ghost ds-btn--sm">
+                    <button
+                      type="button"
+                      className="ds-btn ds-btn--ghost ds-btn--sm"
+                      onClick={() => openPopup(sampleLectureHref(course.name))}
+                    >
                       샘플강의
                     </button>
                     <button type="button" className="ds-btn ds-btn--ghost ds-btn--sm">
@@ -122,7 +127,9 @@ export default function CartContent() {
                 </div>
                 <div className="mobile-cart-item-content">
                   <div className="mobile-cart-buttons">
-                    <button className="mobile-cart-sample-btn">샘플강의</button>
+                    <button className="mobile-cart-sample-btn" onClick={() => openPopup(sampleLectureHref(course.name))}>
+                      샘플강의
+                    </button>
                     <button className="mobile-cart-syllabus-btn">강의계획서</button>
                   </div>
                 </div>

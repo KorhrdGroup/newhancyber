@@ -201,5 +201,6 @@ const MOBILE_FOOTER_PATHS = [
   "/learning-support/schedule/*",
   "/practice-support/notice/*",
   "/social-worker/info",
+  "/landing/social-worker",
 ];
 export const hasMobileFooter = (pathname: string) => matches(pathname, MOBILE_FOOTER_PATHS);

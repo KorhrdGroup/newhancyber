@@ -10,10 +10,12 @@ import {
   formatPrice,
   majorInfo,
   registerDiscount,
+  sampleLectureHref,
   semesterSchedules,
   type Course,
   type CourseCategory,
 } from "./courseData";
+import { openPopup } from "@/components/my-classroom/PopupButton";
 import MobilePaymentSummary from "./MobilePaymentSummary";
 
 const noopSubscribe = () => () => {};
@@ -219,7 +221,9 @@ export default function RegisterContent() {
                       <div className="mobile-course-title">{course.name}</div>
                     </div>
                     <div className="mobile-course-buttons">
-                      <button className="mobile-course-sample-btn">샘플강의</button>
+                      <button className="mobile-course-sample-btn" onClick={() => openPopup(sampleLectureHref(course.name))}>
+                        샘플강의
+                      </button>
                       <button className="mobile-course-syllabus-btn">강의계획서</button>
                     </div>
                   </div>
@@ -285,7 +289,9 @@ export default function RegisterContent() {
                         </td>
                         <td className="course-fee">{formatPrice(course.fee)}원</td>
                         <td>
-                          <button className="course-sample-btn">샘플강의</button>
+                          <button className="course-sample-btn" onClick={() => openPopup(sampleLectureHref(course.name))}>
+                            샘플강의
+                          </button>
                         </td>
                         <td className="course-syllabus-cell">
                           <button className="course-syllabus-btn">강의계획서</button>

@@ -120,9 +120,38 @@
   background-color: #0d4bc4;
 }
 
-/* 범용 공인인증서 로그인 버튼 위치 조정 (일반 로그인과 같은 높이로 맞춤) */
+/* 공동 인증서·간편 인증 로그인 버튼 위치 조정 (일반 로그인과 같은 높이로 맞춤) */
 #certLoginForm .login-btn-primary {
-  margin-top: 65px;
+  margin-top: 16px;
+}
+
+/* 공동 인증서 / 간편 인증 고르기 */
+.login-auth-tabs {
+  display: flex;
+  width: 248px;
+  height: 40px;
+  margin: 0 auto;
+  padding: 3px;
+  border-radius: 6px;
+  background: #f5f5f5;
+  box-sizing: border-box;
+}
+
+.login-auth-tab {
+  flex: 1;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  font-size: 14px;
+  color: #666;
+  cursor: pointer;
+}
+
+.login-auth-tab.active {
+  background: #fff;
+  color: #0032bb;
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 /* SNS 로그인 버튼 */

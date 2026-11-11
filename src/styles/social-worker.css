@@ -2255,3 +2255,20 @@
     font-size: 14px;
   }
 }
+
+/* 좁은 폰(375px 등): 상담 플로팅 바 문구가 왼쪽으로 잘려서 줄임 */
+@media (max-width: 400px) {
+  .consultation-floating-content {
+    gap: 10px;
+  }
+
+  .consultation-floating-text {
+    min-width: 0;
+    font-size: 16px;
+  }
+
+  .consultation-floating-btn-img {
+    width: 108px;
+    height: 45px;
+  }
+}
