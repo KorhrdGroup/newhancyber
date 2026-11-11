@@ -93,6 +93,10 @@ export default function Header() {
             <ul className="gnb-list">
               {gnb.map((item) => {
                 const children = item.children?.filter(isVisible) ?? [];
+                // 앞부분이 겹치는 메뉴(/my-classroom, /my-classroom/finished)는 가장 길게 맞는 것만 켠다
+                const activeHref = children
+                  .filter((child) => pathname.startsWith(child.href))
+                  .sort((a, b) => b.href.length - a.href.length)[0]?.href;
                 const classes = ["gnb-item"];
                 if (children.length) classes.push("has-submenu");
                 if (item.badge) classes.push("gnb-item-course");
@@ -116,9 +120,7 @@ export default function Header() {
                               <Link
                                 href={child.href}
                                 className={
-                                  pathname.startsWith(child.href)
-                                    ? "active"
-                                    : undefined
+                                  child.href === activeHref ? "active" : undefined
                                 }
                               >
                                 {child.label}

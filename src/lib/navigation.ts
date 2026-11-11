@@ -64,7 +64,14 @@ export const gnb: NavGroup[] = [
       { label: "서식자료실", href: "/learning-support/forms-data-room" },
     ],
   },
-  { label: "나의강의실", href: TBD_HREF },
+  {
+    label: "나의강의실",
+    href: "/my-classroom",
+    children: [
+      { label: "진행 중인 과목", href: "/my-classroom" },
+      { label: "종료된 과목", href: "/my-classroom/finished" },
+    ],
+  },
   {
     label: "수강신청",
     href: "/course-registration/register",
@@ -98,7 +105,7 @@ export const isVisible = (link: NavLink) => !link.hidden;
 export const mobileQuickLinks: (NavLink & { icon: string })[] = [
   { label: "수강신청", href: "/course-registration/register", icon: "mobile-help.png" },
   { label: "상담문의", href: TBD_HREF, icon: "mobile-chat.png" },
-  { label: "내 강의실", href: TBD_HREF, icon: "mobile-user.png" },
+  { label: "내 강의실", href: "/my-classroom", icon: "mobile-user.png" },
 ];
 
 /** 모바일 사이드바 메뉴. children 이 있으면 펼침 메뉴 */
