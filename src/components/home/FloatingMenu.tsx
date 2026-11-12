@@ -42,32 +42,35 @@ export default function FloatingMenu() {
           </ul>
         </div>
 
-        <div className="floating-consultation">
-          <div className="consultation-content">
-            <div className="consultation-subtitle">처음 오셨나요?</div>
-            <div className="consultation-title">빠른 상담</div>
-            {/* 원본처럼 줄을 나눠 크게 보여 준다 (하이픈 뒤에서 줄바꿈) */}
-            <a href={`tel:${phones.registration}`} className="consultation-phone">
-              {phones.registration.split(/(?<=-)/).map((part) => (
-                <div key={part} className="phone-number">
-                  {part}
-                </div>
-              ))}
+        {/* 빠른 상담 · SNS 를 한 줄로 쌓아 간격을 고정 (전에는 각자 top 값을 따로 줘서 높이가 바뀌면 겹쳤다) */}
+        <div className="floating-right">
+          <div className="floating-consultation">
+            <div className="consultation-content">
+              <div className="consultation-subtitle">처음 오셨나요?</div>
+              <div className="consultation-title">빠른 상담</div>
+              {/* 원본처럼 줄을 나눠 크게 보여 준다 (하이픈 뒤에서 줄바꿈) */}
+              <a href={`tel:${phones.registration}`} className="consultation-phone">
+                {phones.registration.split(/(?<=-)/).map((part) => (
+                  <div key={part} className="phone-number">
+                    {part}
+                  </div>
+                ))}
+              </a>
+            </div>
+            <a href={TBD_HREF} className="consultation-kakao-btn">
+              <img src="/resources/images/main/kakaotalkFloting.png" alt="카카오톡" className="kakao-icon" />
+              <span>카톡 상담</span>
             </a>
           </div>
-          <a href={TBD_HREF} className="consultation-kakao-btn">
-            <img src="/resources/images/main/kakaotalkFloting.png" alt="카카오톡" className="kakao-icon" />
-            <span>카톡 상담</span>
-          </a>
-        </div>
 
-        <div className="floating-social">
-          {socialLinks.map((social) => (
-            <a key={social.label} href={social.href} className="social-item">
-              <img src={social.icon} alt={social.label} className="social-icon" />
-              <span>{social.label}</span>
-            </a>
-          ))}
+          <div className="floating-social">
+            {socialLinks.map((social) => (
+              <a key={social.label} href={social.href} className="social-item">
+                <img src={social.icon} alt={social.label} className="social-icon" />
+                <span>{social.label}</span>
+              </a>
+            ))}
+          </div>
         </div>
 
         <button

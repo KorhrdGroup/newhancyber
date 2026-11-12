@@ -33,18 +33,16 @@ export default function EventConsultation() {
                 <img src={`${MAIN_IMG}/support/support-tab-002.png`} alt="" className="support-remote-icon" />
               </div>
             </Link>
-            {/* 카카오톡 채널 주소는 추후 전달 예정 */}
+            {/* 카카오톡 채널 주소는 추후 전달 예정
+                원본은 글자까지 박힌 그림(kakaotalk.png) — 오른쪽 상담 폼 높이에 맞춰 늘어나야 해서
+                원격지원 카드처럼 글자 + 말풍선 아이콘(그림에서 잘라냄)으로 다시 그림 */}
             <a href={TBD_HREF} className="support-box-link">
-              <div className="support-box support-box-yellow">
-                <div className="support-box-content">
-                  <div className="support-box-text">
-                    <p className="support-subtitle">간편 채팅상담</p>
-                    <h4 className="support-title">카카오톡 상담</h4>
-                  </div>
-                  <div className="support-box-image">
-                    <img src={`${MAIN_IMG}/kakaotalk.png`} alt="카카오톡 아이콘" className="support-icon" />
-                  </div>
+              <div className="support-box support-box-kakao">
+                <div className="support-box-text">
+                  <p className="support-subtitle">간편 채팅상담</p>
+                  <h4 className="support-title">카카오톡 상담</h4>
                 </div>
+                <img src={`${MAIN_IMG}/kakao-bubble.png`} alt="" className="support-remote-icon" />
               </div>
             </a>
           </div>
