@@ -435,6 +435,18 @@
   clip-path: inset(0 -100vmax);
 }
 
+/* GNB 와 하위메뉴 사이 그림자 — GNB 아래로 드리우듯 바 위쪽에 화면 가로 전체로 (흰 선택 칸 위에도) */
+.submenu::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100vmax;
+  right: -100vmax;
+  height: 8px;
+  background: linear-gradient(rgba(0, 0, 0, 0.14), rgba(0, 0, 0, 0));
+  pointer-events: none;
+}
+
 /* 서브메뉴를 헤더 네비게이션 컨테이너 기준으로 위치 조정 */
 .gnb-item.has-submenu .submenu {
   left: 0;
