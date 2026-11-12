@@ -115,6 +115,6 @@ export const formPosts: BoardPost[] = [
   number: String(i + 1),
   title,
   date: "25.10.21",
-  emphasized: i < 5,
-  href: i === 0 ? `/learning-support/forms-data-room/${i + 1}` : undefined,
+  // 원본은 1~5번 줄을 강조하고 첫 글에만 링크 — 공지 배지가 없는 글이라 강조는 빼고, 모든 제목을 상세로 잇는다
+  href: `/learning-support/forms-data-room/${i + 1}`,
 }));

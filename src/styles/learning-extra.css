@@ -178,6 +178,24 @@
 .lx-ot-links { display: flex; flex-wrap: wrap; gap: var(--space-8); margin-top: var(--space-16); }
 
 /* ---------- 모바일 ---------- */
+/* ---------- 게시판 목록 (BoardParts: 공지사항·관련기관 소식·학사일정·서식자료실) ---------- */
+.lx-board-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-16);
+  margin-bottom: var(--space-12);
+}
+.lx-board-count { font-size: 14px; color: var(--color-text-secondary); }
+.lx-board-count strong { font-weight: 600; color: var(--color-text-brand); }
+.lx-board-search { display: flex; gap: var(--space-8); width: 480px; max-width: 100%; margin-left: auto; }
+.lx-board-search .ds-select { flex: 0 0 120px; }
+.lx-board-search .ds-input { flex: 1; min-width: 0; }
+.lx-board-col-num { width: 96px; }
+.lx-board-col-date { width: 120px; }
+/* 공지 글: 줄 바탕을 칠하면 Brand 배지가 묻혀서, 제목만 굵게 */
+.lx-board-table tr.is-notice .ds-table-link { font-weight: 600; }
+
 /* ---------- 자주 묻는 질문 (탭 · 검색 · 질문 접기) ---------- */
 .lx-faq-tabs { margin-top: var(--space-24); }
 .lx-faq-bar {
@@ -193,6 +211,9 @@
 .lx-faq-search .ds-input { flex: 1; min-width: 0; }
 
 @media (max-width: 480px) {
+  /* 공통 .mobile-only 가 display:block !important 라 가운데 정렬이 풀려서 다시 flex 로 */
+  .ds-pagination.mobile-only { display: flex !important; margin-bottom: var(--space-32); }
+
   /* 분류 6개 — 한 줄에 3칸씩 */
   .lx-faq-tabs { flex-wrap: wrap; }
   .lx-faq-tabs .ds-tab-box { flex: 1 0 33.334%; height: 44px; margin: 0 0 -1px -1px; padding: 0 var(--space-8); font-size: 14px; }

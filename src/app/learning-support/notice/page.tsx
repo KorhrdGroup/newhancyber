@@ -16,13 +16,13 @@ export default function LearningNoticePage() {
 
         <div className="practice-support-notice-list-section desktop-only">
           <div className="container" style={{ backgroundColor: "#fff" }}>
-            <SearchBox />
+            <SearchBox total={noticePosts.length} />
             <BoardTable posts={noticePosts} />
-            <Pagination prefix="practice-support-pagination" />
+            <Pagination />
           </div>
         </div>
 
-        <Pagination prefix="mobile-notice-pagination" className="mobile-only" />
+        <Pagination className="mobile-only" />
       </main>
     </>
   );

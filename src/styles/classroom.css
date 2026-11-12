@@ -74,6 +74,9 @@
 }
 .ds-table td.is-left { text-align: left; }
 .ds-table tr.is-current td { background: var(--color-bg-brand-subtle); }
+/* Link 칸: 눌러서 상세로 가는 이름·제목 */
+.ds-table-link { color: var(--color-text-brand); text-decoration: none; }
+.ds-table-link:hover { text-decoration: underline; }
 /* 항목 | 값 형태의 세로 표 */
 .ds-table--info th { width: 160px; text-align: left; }
 .ds-table--info td { text-align: left; }
@@ -102,6 +105,29 @@
 .ds-check { display: inline-flex; align-items: center; gap: var(--space-8); font-size: 14px; color: var(--color-text-default); cursor: pointer; }
 .ds-check input { width: 18px; height: 18px; accent-color: var(--color-bg-brand); }
 .ds-label { display: block; margin-bottom: var(--space-8); font-size: 14px; font-weight: 600; color: var(--color-text-strong); }
+
+/* ---------- 페이지 번호 (Figma Pagination) — 표 아래 가운데, 칸 32×32 ---------- */
+.ds-pagination { display: flex; justify-content: center; gap: var(--space-4); margin-top: var(--space-32); }
+.ds-page-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-4);
+  background: var(--color-bg-default);
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+}
+.ds-page-btn img { width: 16px; height: 16px; }
+.ds-page-btn:hover:not(:disabled):not(.is-current) { background: var(--color-bg-subtle); }
+.ds-page-btn.is-current { border-color: var(--color-bg-brand); background: var(--color-bg-brand); font-weight: 600; color: var(--color-text-inverse); }
+.ds-page-btn:disabled { cursor: default; opacity: 0.4; }
 
 /* ---------- 상자 탭 (Figma Tabs/Box) — 칸을 같은 너비로 나눈 선택 탭 ---------- */
 .ds-tabs-box { display: flex; }

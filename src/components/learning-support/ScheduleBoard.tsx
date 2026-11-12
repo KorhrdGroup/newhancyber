@@ -71,11 +71,11 @@ export default function ScheduleBoard() {
             </div>
           ))}
 
-          <Pagination prefix="practice-support-pagination" className="desktop-only" />
+          <Pagination className="desktop-only" />
         </div>
       </div>
 
-      <Pagination prefix="mobile-schedule-pagination" className="mobile-only" />
+      <Pagination className="mobile-only" />
     </>
   );
 }
