@@ -198,7 +198,10 @@
 /* 공지 글: 줄 바탕을 칠하면 Brand 배지가 묻혀서, 제목만 굵게 */
 /* 게시판 제목은 검정, 마우스를 올리면 파랑 + 밑줄 */
 .lx-board-table .ds-table-link { color: var(--color-text-default); }
-.lx-board-table .ds-table-link:hover { color: var(--color-text-brand); }
+/* 호버: 글자 대신 그 줄(칸) 전체를 옅은 회색으로 */
+.lx-board-table .ds-table-link:hover { text-decoration: none; }
+.lx-board-table tbody tr { transition: background-color 0.15s; }
+.lx-board-table tbody tr:hover { background-color: var(--color-bg-subtle); }
 .lx-board-table tr.is-notice .ds-table-link { font-weight: 600; }
 
 /* ---------- 자주 묻는 질문 (탭 · 검색 · 질문 접기) ---------- */
