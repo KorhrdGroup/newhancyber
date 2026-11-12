@@ -172,8 +172,7 @@ export const essentialCards: EssentialCard[] = [
     href: "https://www.cb.or.kr/creditbank/eduOrg/nEduOrg1_1_List.do",
     external: true,
   },
-  // 나의 강의실 > 증명서 발급 메뉴가 생기면 그 주소로 바꾼다.
-  { label: "증명서 발급", alt: "증명서 발급", icon: "check008.png", href: TBD_HREF },
+  { label: "증명서 발급", alt: "증명서 발급", icon: "check008.png", href: "/my-page/certificates" },
 ];
 
 export interface SelectOption {
@@ -200,7 +199,7 @@ export const quickMenuLinks = [
   { label: "원격지원", href: "/learning-support/remote-support" },
   { label: "공지사항", href: "/learning-support/notice" },
   { label: "모바일 학습가이드", href: "/learning-support/mobile-guide", active: true },
-  { label: "증명서 발급", href: TBD_HREF },
+  { label: "증명서 발급", href: "/my-page/certificates" },
   { label: "서식 자료실", href: "/learning-support/forms-data-room" },
 ];
 
