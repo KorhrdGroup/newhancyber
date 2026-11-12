@@ -653,10 +653,12 @@ main {
   font-weight: 700;
 }
 
+/* 학사 알림 줄 라인 아이콘 (StatusBanners 의 NoticeIcon) */
 .notice-icon {
+  flex-shrink: 0;
   width: 24px;
   height: 24px;
-  object-fit: contain;
+  color: var(--color-primary);
 }
 
 .notice-text-bold {
