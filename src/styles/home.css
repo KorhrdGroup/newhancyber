@@ -59,6 +59,11 @@
     min-height: 300px;
   }
 
+  /* 제목·탭·목록 사이가 붙어 보이던 것 */
+  .notice-board {
+    gap: var(--space-16);
+  }
+
   .schedule-list {
     gap: 0;
     margin-bottom: var(--space-16);
@@ -66,7 +71,7 @@
 
   .schedule-item {
     height: auto;
-    padding: var(--space-4) 0;
+    padding: var(--space-8) 0;
     border-bottom: 1px dashed #eaeaea;
   }
 
@@ -75,8 +80,18 @@
   }
 
   /* 공지사항 목록 간격 (notice-list 는 게시판 화면도 같이 써서 메인 안에서만) */
+  /* 옆 학습일정과 같은 줄 모양(위아래 8px + 점선)으로 → 상자 아래가 비지 않게 */
   .notice-board .notice-list {
-    gap: var(--space-4);
+    gap: 0;
+  }
+
+  .notice-board .notice-item {
+    padding: var(--space-8) var(--space-4);
+    border-bottom: 1px dashed #eaeaea;
+  }
+
+  .notice-board .notice-item:last-child {
+    border-bottom: none;
   }
 
   .schedule-label {
@@ -110,18 +125,19 @@
 
   /* ---------- 간편상담: 동의 체크를 글자 앞에, 크게 ---------- */
   .consultation-form-content {
-    gap: 8px;
+    gap: var(--space-12);
   }
 
+  /* "관심분야"·"최종학력"이 48px 보다 넓어 칸이 밀리던 것 → 56px */
   .form-label {
     font-size: 13px;
-    min-width: 48px;
+    min-width: 56px;
   }
 
   .form-checkbox-group {
     justify-content: flex-start;
-    /* 왼쪽 = 이름 칸 48px + 칸 사이 8px */
-    margin: var(--space-4) 0 var(--space-12) 56px;
+    /* 왼쪽 = 이름 칸 56px + 칸 사이 12px */
+    margin: var(--space-4) 0 var(--space-16) 68px;
   }
 
   .checkbox-label {
@@ -148,19 +164,23 @@
   }
 
   .consultation-form-area .form-group {
-    gap: var(--space-8);
+    gap: var(--space-12);
+  }
+
+  .consultation-form-area .form-title {
+    padding-bottom: var(--space-16);
   }
 
   /* form-input·form-select 도 다른 화면과 같이 써서 메인 상담 칸만 */
   .consultation-form-area .form-input,
   .consultation-form-area .form-select {
-    height: var(--size-control-sm);
+    height: var(--size-control-md);
     padding-top: 0;
     padding-bottom: 0;
   }
 
   .form-submit-btn {
-    height: var(--size-control-md);
+    height: var(--size-control-lg);
     padding: 0;
     background-color: #115aed;
   }
@@ -463,6 +483,15 @@
   /* 원격지원 카드 */
   .support-box-remote {
     padding: 16px;
+  }
+
+  /* 상담 칸 줄 사이·동의 줄 위아래가 붙어 보이던 것 */
+  .consultation-form-content {
+    gap: var(--space-12);
+  }
+
+  .form-checkbox-group {
+    margin: var(--space-4) 0 var(--space-16);
   }
 
   /* 상담 입력 칸 (form-input 은 다른 화면도 같이 써서 메인 상담 칸만) */
