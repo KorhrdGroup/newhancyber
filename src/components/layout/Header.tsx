@@ -97,6 +97,8 @@ export default function Header() {
                 const activeHref = children
                   .filter((child) => pathname.startsWith(child.href))
                   .sort((a, b) => b.href.length - a.href.length)[0]?.href;
+                // 지금 보는 페이지가 속한 메뉴 (하위 메뉴가 없으면 주소로 판단)
+                const isActive = children.length ? Boolean(activeHref) : pathname.startsWith(item.href);
                 const classes = ["gnb-item"];
                 if (children.length) classes.push("has-submenu");
                 if (item.badge) classes.push("gnb-item-course");
@@ -107,7 +109,7 @@ export default function Header() {
                       <li className="gnb-separator"></li>
                     )}
                     <li className={classes.join(" ")}>
-                      <Link href={item.href} className="gnb-link">
+                      <Link href={item.href} className={`gnb-link${isActive ? " active" : ""}`}>
                         {item.badge && (
                           <span className="badge-deadline">{item.badge}</span>
                         )}

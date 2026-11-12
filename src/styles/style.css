@@ -262,10 +262,10 @@
 
 .gnb-list {
   display: flex;
-  /* 첫 메뉴 글자는 본문 왼쪽 끝, 마지막 메뉴 글자는 본문 오른쪽 끝에 맞추고 사이는 고르게 (글자 양옆 36px 여백만큼 밖으로) */
+  /* 첫·마지막 메뉴 글자를 본문 양끝에서 20px 안쪽에 두고 사이는 고르게 (글자 양옆 36px 여백 - 20px) */
   justify-content: flex-start;
   list-style: none;
-  margin: 0 -36px;
+  margin: 0 -16px;
   padding: 0;
   gap: 0;
 }
@@ -350,8 +350,9 @@
   display: none; /* 호버 시 밑줄 제거 */
 }
 
+/* 지금 보는 페이지가 속한 메뉴는 파란 글씨 */
 .gnb-link.active {
-  color: var(--color-text);
+  color: var(--color-primary);
 }
 
 .gnb-link.active:hover {
@@ -432,6 +433,18 @@
   /* 파란 바만 화면 가로 끝까지 (항목 위치는 그대로) */
   box-shadow: 0 0 0 100vmax var(--color-primary);
   clip-path: inset(0 -100vmax);
+}
+
+/* GNB 와 하위메뉴 사이 그림자 — GNB 아래로 드리우듯 바 위쪽에 화면 가로 전체로 (흰 선택 칸 위에도) */
+.submenu::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100vmax;
+  right: -100vmax;
+  height: 8px;
+  background: linear-gradient(rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0));
+  pointer-events: none;
 }
 
 /* 서브메뉴를 헤더 네비게이션 컨테이너 기준으로 위치 조정 */
@@ -515,6 +528,12 @@
   background-color: var(--color-white);
   font-weight: bold;
   color: var(--color-text);
+}
+
+/* 윈도우 배율(125·150·175%)에서 흰 칸 아래로 파란 바 1px 이 비치는 것 — 흰색을 1px 아래로 덮음 */
+.submenu a.active,
+.submenu a:hover {
+  box-shadow: 0 1px 0 var(--color-white);
 }
 
 /* 수강후기 메뉴 숨김 - 나중에 오픈 예정으로 주석처리됨 */
@@ -646,10 +665,12 @@ main {
   font-weight: 700;
 }
 
+/* 학사 알림 줄 라인 아이콘 (StatusBanners 의 NoticeIcon) */
 .notice-icon {
+  flex-shrink: 0;
   width: 24px;
   height: 24px;
-  object-fit: contain;
+  color: var(--color-primary);
 }
 
 .notice-text-bold {

@@ -60,7 +60,7 @@ export const sampleNoticeDetail: PracticeNoticeDetail = {
     "1명(한국어학이, 3명(한국어교육)을 합하여 24학점 이상 이수자",
     "반드시 선 이수과목을 이수한 학습자이어야 수강 가능",
   ],
-  bannerImage: "/resources/images/learning-support/exbanner.png",
+  bannerImage: "/resources/images/learning-support/grand-opening.png",
   mobile: {
     prev: { title: "26년 1학기 1차(12월 24일 개강반) 사회복지현장실습", subtitle: "모집 안내문(지방)" },
     next: { title: "26년 1학기 1차(12월 24일 개강반) 사회복지현장실습", subtitle: "모집 안내문(지방)", href: "#" },

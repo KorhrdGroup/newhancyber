@@ -18,21 +18,22 @@
   align-items: center;
 }
 
-/* ---------- 원격지원 · 카카오 카드 (그림 → 글자 + 3D 아이콘) ---------- */
-/* 그림이 아니라서 오른쪽 상담 폼 높이에 맞춰 늘어나도 깨지지 않는다 */
+/* ---------- 원격지원 · 카카오 카드 (Figma 483:5735 · 483:5742) ---------- */
+/* 그림이 아니라서 오른쪽 상담 폼 높이에 맞춰 늘어나도 깨지지 않는다. 아이콘은 오른쪽 아래 75px */
 .support-box-remote,
 .support-box-kakao {
   position: relative;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  gap: 8px;
   padding: 20px;
+  border: 1px solid #eaeaea;
   border-radius: 8px;
-  background: linear-gradient(135deg, #3f7efb 0%, #115aed 100%);
+  background: #04c974;
   overflow: hidden;
 }
 
-/* 노랑은 말풍선 그림 바탕색과 같은 값이어야 이음새가 안 보인다 */
 .support-box-kakao {
   background: #ffe02f;
 }
@@ -41,10 +42,22 @@
 .support-box-kakao .support-box-text {
   position: relative;
   z-index: 1;
-  gap: 4px;
+  gap: 10px;
+  line-height: 1;
+}
+
+.support-box-remote .support-subtitle {
+  font-weight: 700;
+  color: #f9f9f9;
+}
+
+.support-box-remote .support-title {
+  font-weight: 800;
+  color: #fff;
 }
 
 .support-box-kakao .support-subtitle {
+  font-weight: 600;
   color: #333;
 }
 
@@ -52,13 +65,14 @@
   color: #010101;
 }
 
+/* 아이콘은 카드 오른쪽 아래 구석 (카드 안쪽 여백 20px 만큼 떨어뜨림) */
 .support-remote-icon {
   position: absolute;
-  right: 12px;
-  bottom: 8px;
-  width: 38%;
-  max-width: 96px;
-  height: auto;
+  right: 20px;
+  bottom: 20px;
+  width: 75px;
+  height: 75px;
+  object-fit: cover;
   pointer-events: none;
 }
 
@@ -740,4 +754,76 @@
   .closing-cta-section {
     display: none;
   }
+}
+
+/* ---------- 친구추천 배너 (시안 W2: 글자 + 소프트 클레이 그림, 파랑 → 연보라) ---------- */
+/* 그림 배너처럼 폭에 맞춰 통째로 줄고 늘도록, 모든 치수는 717px 폭 기준 값 × --u */
+.event-friend {
+  container-type: inline-size;
+  border-radius: 8px;
+  background: linear-gradient(110deg, #eef3ff 0%, #dde3ff 50%, #c3c9ff 100%);
+  isolation: isolate;
+}
+
+.event-friend * {
+  --u: calc(100cqw / 717);
+}
+
+.event-friend-text {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  padding: calc(32 * var(--u)) calc(36 * var(--u));
+  box-sizing: border-box;
+  color: #1f2a7a;
+}
+
+.event-friend-title {
+  margin: 0;
+  font-size: calc(34 * var(--u));
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.event-friend-title em {
+  font-style: normal;
+  background: linear-gradient(90deg, #3f7efb, #6c4ce0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.event-friend-sub {
+  margin: calc(10 * var(--u)) 0 0;
+  font-size: calc(16 * var(--u));
+  font-weight: 500;
+  color: #384170;
+}
+
+.event-friend-cta {
+  position: absolute;
+  left: calc(36 * var(--u));
+  bottom: calc(28 * var(--u));
+  display: inline-flex;
+  align-items: center;
+  height: calc(34 * var(--u));
+  padding: 0 calc(16 * var(--u));
+  border-radius: calc(17 * var(--u));
+  background: linear-gradient(135deg, #2f5fe0, #5a3fd0);
+  color: #fff;
+  font-size: calc(14 * var(--u));
+  font-weight: 700;
+}
+
+/* 1+1 티켓 · 친구추가 그림 (바탕 투명 3:2) */
+.event-friend-art {
+  position: absolute;
+  z-index: 1;
+  right: calc(26 * var(--u));
+  top: 50%;
+  height: calc(186 * var(--u));
+  width: auto;
+  transform: translateY(-50%);
+  pointer-events: none;
 }
