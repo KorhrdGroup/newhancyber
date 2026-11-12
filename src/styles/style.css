@@ -350,8 +350,9 @@
   display: none; /* 호버 시 밑줄 제거 */
 }
 
+/* 지금 보는 페이지가 속한 메뉴는 파란 글씨 */
 .gnb-link.active {
-  color: var(--color-text);
+  color: var(--color-primary);
 }
 
 .gnb-link.active:hover {
