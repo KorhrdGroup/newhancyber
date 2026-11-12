@@ -52,6 +52,8 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  /* 기관 로고 줄: 본문 가운데 정렬 */
+  justify-content: center;
   gap: var(--space-16) var(--space-32);
 }
 
@@ -79,6 +81,8 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  /* 교육원 소개 링크 줄: 본문 가운데 정렬 */
+  justify-content: center;
   gap: var(--space-8) var(--space-24);
 }
 
