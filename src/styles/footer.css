@@ -52,9 +52,11 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  /* 기관 로고 줄: 본문 가운데 정렬 */
-  justify-content: center;
+  /* 기관 로고 줄: 본문 가운데, 아래 링크 줄과 양끝을 맞추려고 같은 폭(970px) 안에 고르게 */
+  justify-content: space-between;
   gap: var(--space-16) var(--space-48);
+  max-width: 970px;
+  margin: 0 auto;
 }
 
 .footer-auth-list a {
@@ -81,9 +83,11 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  /* 교육원 소개 링크 줄: 본문 가운데 정렬 */
-  justify-content: center;
+  /* 교육원 소개 링크 줄: 위 로고 줄과 같은 폭(970px)에 고르게 펼쳐 양끝을 맞춤 */
+  justify-content: space-between;
   gap: var(--space-8) var(--space-40);
+  max-width: 970px;
+  margin: 0 auto;
 }
 
 .footer-links a {
