@@ -87,8 +87,8 @@
 @media (max-width: 1599px) {
   .floating-menu:not(.is-scrolled) .floating-quick-menu { opacity: 0; visibility: hidden; }
 }
-/* 본문(1200px) 왼쪽 여백이 메뉴 폭(121px)+16px 보다 좁으면 스크롤해도 본문을 가린다 → 숨김 */
-@media (max-width: 1479px) {
+/* 본문(1080px) 왼쪽 여백이 메뉴 폭(121px)+16px 보다 좁으면 스크롤해도 본문을 가린다 → 숨김 */
+@media (max-width: 1359px) {
   .floating-quick-menu { opacity: 0; visibility: hidden; }
 }
 
@@ -128,7 +128,7 @@
 .floating-right {
   position: fixed;
   top: 290px;
-  right: max(16px, calc((min(50% - 600px, 21.875%) - 114px) / 2));
+  right: max(16px, calc((min(50% - 540px, 21.875%) - 114px) / 2));
   width: 114px;
   display: flex;
   flex-direction: column;

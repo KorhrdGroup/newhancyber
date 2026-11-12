@@ -97,9 +97,9 @@
     --color-pagination-inactive: #D9D9D9;
     
     /* 레이아웃 */
-    --max-width: 1260px;
+    --max-width: 1140px;
     --padding-side: 100px;
-    /* 헤더 안쪽 여백: 본문(1200px) 양끝과 맞춤 */
+    /* 헤더 안쪽 여백: 본문(1080px) 양끝과 맞춤 */
     --header-padding-side: 30px;
     --padding-side-small: 40px;
     --padding-base: 20px;

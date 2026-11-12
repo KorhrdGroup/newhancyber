@@ -6,7 +6,7 @@
   box-sizing: border-box;
 }
 
-/* 하단 링크 페이지(교육원 소개·약관 등): 본문 폭(1200px) 양끝에 맞춰 양옆을 띄움 */
+/* 하단 링크 페이지(교육원 소개·약관 등): 본문 폭(1080px) 양끝에 맞춰 양옆을 띄움 */
 @media (min-width: 481px) {
   main.wrapper.ft-page {
     padding-left: var(--header-padding-side);

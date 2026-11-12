@@ -522,7 +522,7 @@
   display: none !important;
 } */
 
-@media (max-width: 1260px) {
+@media (max-width: 1140px) {
   .gnb-item.has-submenu .submenu {
     left: 0;
     right: 0;
@@ -2028,14 +2028,14 @@ main {
 
 /* 왼쪽 위: 빠른 메뉴 */
 /*
- * 양옆 플로팅 메뉴: 화면 끝과 '본문(1200px)·히어로 배너 글자·그림 중 더 바깥쪽 것' 사이 여백의 가운데에 둠.
+ * 양옆 플로팅 메뉴: 화면 끝과 '본문(1080px)·히어로 배너 글자·그림 중 더 바깥쪽 것' 사이 여백의 가운데에 둠.
  * 배너 그림(1920 기준)의 글자·그림은 가운데 1080 안(왼쪽 끝 420 = 21.875%)에 있고,
  * 배너는 1344px 이상에서 화면 폭에 비례해 커지므로 21.875% 지점이 그대로 글자 시작점이 됨.
  */
 .floating-quick-menu {
   position: fixed;
   top: 290px;
-  left: max(16px, calc((min(50% - 600px, 21.875%) - 120px) / 2));
+  left: max(16px, calc((min(50% - 540px, 21.875%) - 120px) / 2));
   width: auto;
   background-color: #ffffff;
   border-radius: 8px;
@@ -2100,7 +2100,7 @@ main {
 .floating-consultation {
   position: fixed;
   top: 290px;
-  right: max(16px, calc((min(50% - 600px, 21.875%) - 114px) / 2));
+  right: max(16px, calc((min(50% - 540px, 21.875%) - 114px) / 2));
   width: 114px;
   height: 214px;
   background: linear-gradient(135deg, #0032bb 0%, #0055ff 100%);
@@ -2185,7 +2185,7 @@ main {
 .floating-social {
   position: fixed;
   top: 510px;
-  right: max(16px, calc((min(50% - 600px, 21.875%) - 114px) / 2));
+  right: max(16px, calc((min(50% - 540px, 21.875%) - 114px) / 2));
   width: 114px;
   height: 100px;
   background-color: #ffffff;
@@ -2252,7 +2252,7 @@ main {
 .floating-top-btn {
   position: fixed;
   bottom: 100px;
-  right: max(16px, calc((100% - 1260px) / 2));
+  right: max(16px, calc((100% - 1140px) / 2));
   width: var(--size-control-lg);
   height: var(--size-control-lg);
   border: none;
@@ -3904,4 +3904,24 @@ main {
 @media (max-width: 480px) {
   .page-tabs { margin-bottom: var(--space-20); }
   .page-tab { height: 44px; padding: 0 var(--space-12); font-size: 14px; }
+}
+
+/* 회색 내용 상자(.container): 상자 양끝을 본문 끝선(1080px)에 맞추고 글자는 상자 안쪽 여백만큼 들어감.
+   흰 배경으로 바꿔 쓴 컨테이너(인라인 배경·FAQ)와 마이페이지·수강신청 틀(cr-page)은 글자를 본문선에 그대로 둔다 */
+@media (min-width: 481px) {
+  main .container:not([style*="background"]):not(.lx-faq):not(.cr-page) {
+    max-width: calc(var(--max-width) - 2 * var(--header-padding-side));
+  }
+  /* 컨테이너 밖에 따로 있는 상자·탭 줄·그림도 같은 끝선에 */
+  main .precautions-tabs,
+  main .requirements-tabs,
+  main .remote-support-steps-container,
+  main .find-id-info-boxes,
+  main .practice-law-info-box,
+  main .consultation-options-section,
+  main img.page-image {
+    max-width: calc(var(--max-width) - 2 * var(--header-padding-side));
+    margin-left: auto;
+    margin-right: auto;
+  }
 }

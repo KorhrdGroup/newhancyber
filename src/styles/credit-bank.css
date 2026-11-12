@@ -946,7 +946,7 @@
   background-color: var(--color-white);
   border-bottom: 1px solid #e5e5e5;
   margin-bottom: 0;
-  /* 탭 줄·밑선을 본문 폭(1200px)에 맞춤 */
+  /* 탭 줄·밑선을 본문 폭(1080px)에 맞춤 */
   max-width: calc(var(--max-width) - 2 * var(--header-padding-side));
   margin: 0 auto;
 }
@@ -999,7 +999,7 @@
 /* 탭 컨텐츠 스타일 */
 .guide-tab-content {
   width: 100%;
-  /* 회색 내용 상자 양끝을 본문 폭(1200px)에 맞춤 */
+  /* 회색 내용 상자 양끝을 본문 폭(1080px)에 맞춤 */
   max-width: calc(var(--max-width) - 2 * var(--header-padding-side));
   margin: 0 auto;
   padding: 0;
