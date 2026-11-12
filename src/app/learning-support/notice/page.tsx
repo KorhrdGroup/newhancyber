@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { BoardTable, MobileBoardList, Pagination, SearchBox } from "@/components/learning-support/BoardParts";
-import { mobileNoticePosts, noticePosts } from "@/components/learning-support/boardData";
+import { mobileNoticePosts, NOTICE_TOTAL, noticePosts } from "@/components/learning-support/boardData";
 import SectionTabs, { noticeTabs } from "@/components/learning-support/extra/SectionTabs";
 import MobilePageBanner from "@/components/layout/MobilePageBanner";
 
@@ -16,7 +16,7 @@ export default function LearningNoticePage() {
 
         <div className="practice-support-notice-list-section desktop-only">
           <div className="container" style={{ backgroundColor: "#fff" }}>
-            <SearchBox total={noticePosts.length} />
+            <SearchBox total={NOTICE_TOTAL} />
             <BoardTable posts={noticePosts} />
             <Pagination />
           </div>

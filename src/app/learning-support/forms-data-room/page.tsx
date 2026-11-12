@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { BoardTable, MobileBoardList, Pagination, SearchBox } from "@/components/learning-support/BoardParts";
-import { formPosts } from "@/components/learning-support/boardData";
+import { FORM_TOTAL, formPosts } from "@/components/learning-support/boardData";
 import MobilePageBanner from "@/components/layout/MobilePageBanner";
 
 export const metadata: Metadata = { title: "서식자료실" };
@@ -15,7 +15,7 @@ export default function FormsDataRoomPage() {
 
         <div className="practice-support-notice-list-section desktop-only">
           <div className="container" style={{ backgroundColor: "#fff" }}>
-            <SearchBox total={formPosts.length} />
+            <SearchBox total={FORM_TOTAL} />
             <BoardTable posts={formPosts} />
             <Pagination />
           </div>

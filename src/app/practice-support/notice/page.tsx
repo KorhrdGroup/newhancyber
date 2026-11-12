@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { NOTICE_NUMBER_PLACEHOLDER, practiceNotices } from "@/components/practice-support/noticeData";
+import { practiceNotices } from "@/components/practice-support/noticeData";
 
 export const metadata: Metadata = { title: "실습공지사항" };
 
@@ -40,7 +40,7 @@ export default function PracticeNoticePage() {
                     {notice.pinned ? (
                       <span className="practice-support-notice-badge">공지</span>
                     ) : (
-                      NOTICE_NUMBER_PLACEHOLDER
+                      notice.number
                     )}
                   </td>
                   <td className="practice-support-notice-title">
