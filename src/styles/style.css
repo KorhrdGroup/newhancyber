@@ -3609,6 +3609,12 @@ main {
     color: #333333;
     line-height: 1.6;
     margin: 0;
+    /* "개인정보보호책임자" 같은 낱말이 중간에서 끊기지 않게 */
+    word-break: keep-all;
+  }
+
+  .mobile-footer-business span {
+    white-space: nowrap;
   }
 
   .mobile-footer-copyright {

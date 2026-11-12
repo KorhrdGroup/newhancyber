@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { CONTACT_PHONE } from "@/components/layout/MobileFooter";
+import { SUPPORT_PHONE } from "@/lib/contact";
 import { Badge } from "@/components/my-classroom/ClassroomUI";
 import { TodoButton } from "@/components/my-classroom/PopupActions";
 import PopupButton from "@/components/my-classroom/PopupButton";
@@ -161,7 +161,7 @@ export default function PracticeDocumentsPage() {
             사회복지현장실습
           </Link>{" "}
           안내를 참고해 주세요. 서류 제출이 어려우면 학습지원센터(
-          {CONTACT_PHONE})로 문의해 주세요.
+          {SUPPORT_PHONE})로 문의해 주세요.
         </p>
       </div>
     </main>

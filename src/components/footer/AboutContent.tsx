@@ -1,5 +1,7 @@
 /** 교육원 소개 본문 (원본 footer/about.html 에서 변환). 탭 전환은 AboutTabs 가 맡는다. */
 
+import { REGISTRATION_PHONE, SUPPORT_PHONE } from "@/lib/contact";
+
 /** 모바일 전용: 비전·교육 이념·미션·오시는 길을 한 화면에 */
 export function MobileAboutContent() {
   return (
@@ -82,16 +84,16 @@ export function MobileAboutContent() {
           <div className="mobile-about-directions-item">
             <span className="mobile-about-directions-label">주소</span>
             {" "}
-            <span className="mobile-about-directions-value">서울시 도봉로 150다길 64 601호</span>
+            <span className="mobile-about-directions-value">(08512) 경기도 의정부시 의정부동 486-11, 601호 일부</span>
           </div>
           <div className="mobile-about-directions-item">
             <span className="mobile-about-directions-label">전화번호</span>
             {" "}
-            <span className="mobile-about-directions-value">02-2135-5126</span>
+            <span className="mobile-about-directions-value">수강신청 문의 {REGISTRATION_PHONE} / 학습지원 문의 {SUPPORT_PHONE}</span>
           </div>
         </div>
         <div className="mobile-about-directions-map">
-          <img src="/resources/images/footer/about/about-map.png" alt="지도" className="mobile-about-map-img" />
+          <img src="/resources/images/footer/about/about-map-uijeongbu.png" alt="지도" className="mobile-about-map-img" />
         </div>
       </div>
     </div>
@@ -381,16 +383,16 @@ export function DirectionsTab() {
           <div className="directions-item">
             <span className="directions-label">주소</span>
             {" "}
-            <span className="directions-value">서울특별시 도봉로 150다길 64 601호</span>
+            <span className="directions-value">(08512) 경기도 의정부시 의정부동 486-11, 601호 일부</span>
           </div>
           <div className="directions-item">
             <span className="directions-label">전화번호</span>
             {" "}
-            <span className="directions-value">02-2135-5126</span>
+            <span className="directions-value">수강신청 문의 {REGISTRATION_PHONE} / 학습지원 문의 {SUPPORT_PHONE}</span>
           </div>
         </div>
       </div>
-      <img src="/resources/images/footer/about/about-map.png" alt="주소" className="directions-map" />
+      <img src="/resources/images/footer/about/about-map-uijeongbu.png" alt="주소" className="directions-map" />
     </>
   );
 }

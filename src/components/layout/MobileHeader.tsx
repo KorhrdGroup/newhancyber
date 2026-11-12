@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 import { hasMobileNav, mobileMenu, mobileQuickLinks } from "@/lib/navigation";
+import { REGISTRATION_PHONE, SUPPORT_PHONE } from "@/lib/contact";
 import { useMobileMenu } from "./MobileMenuContext";
 
 const MOBILE_IMG = "/resources/images/mobile";
@@ -168,9 +169,8 @@ export default function MobileHeader() {
 
         <div className="mobile-sidebar-footer">
           <div className="mobile-sidebar-contact">
-            <div>학습상담 : 02-2135-5126</div>
-            {/* TODO: 원본도 임시 번호 */}
-            <div>시스템 오류 등 : 00-0000-0000</div>
+            <div>수강신청 문의 : {REGISTRATION_PHONE}</div>
+            <div>학습지원 문의 : {SUPPORT_PHONE}</div>
           </div>
         </div>
       </div>

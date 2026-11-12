@@ -14,68 +14,53 @@
   box-sizing: border-box;
 }
 
+/* 데스크톱 푸터 — 한사이버 푸터 틀(위 링크 띠 + 아래 로고·회사 정보)을 따름 */
 .footer {
-  max-width: 1080px;
-  background-color: #f7f8fa;
-  margin: 0 auto;
-  padding: 0 40px;
-  height: 62px;
-  display: flex;
-  align-items: center;
-  box-sizing: border-box;
   width: 100%;
-}
-
-/* 데스크탑 푸터 스타일 명확히 지정 */
-@media (min-width: 481px) {
-  .footer {
-    max-width: 1080px;
-    background-color: #f7f8fa;
-    margin: 0 auto;
-    padding: 0 40px;
-    height: 62px;
-    display: flex;
-    align-items: center;
-    box-sizing: border-box;
-  }
-  
-  .footer-container {
-    max-width: 1080px;
-    width: 100%;
-    margin: 0 auto;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .footer-links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 56px;
-    width: 100%;
-  }
-}
-
-/* 모바일에서 데스크탑 푸터 숨기기 */
-@media (max-width: 480px) {
-  .footer {
-    display: none;
-  }
+  border-top: 1px solid #e0e0e0;
+  box-sizing: border-box;
 }
 
 .footer-container {
-  max-width: 1080px;
+  max-width: var(--max-width);
   width: 100%;
   margin: 0 auto;
+  padding: 0 var(--header-padding-side);
   box-sizing: border-box;
+}
+
+/* 기관 로고 줄 */
+.footer-auth {
+  background-color: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  padding: var(--space-16) 0;
+}
+
+.footer-auth-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
+  gap: var(--space-16) var(--space-32);
+}
+
+.footer-auth-list a {
+  display: block;
+}
+
+.footer-auth-list img {
+  display: block;
+  height: 29px;
+  width: auto;
+}
+
+/* 링크 띠 */
+.footer-menu {
+  background-color: #f7f8fa;
+  border-bottom: 1px solid #e0e0e0;
+  padding: var(--space-20) 0;
 }
 
 .footer-links {
@@ -83,22 +68,92 @@
   padding: 0;
   margin: 0;
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 56px;
-  width: 100%;
+  gap: var(--space-8) var(--space-24);
 }
 
 .footer-links a {
   font-size: 14px;
-  color: #9e9e9e;
+  color: #555;
   text-decoration: none;
   transition: color 0.2s;
   font-weight: 500;
 }
 
+.footer-links a.is-strong {
+  color: #181818;
+  font-weight: 700;
+}
+
 .footer-links a:hover {
   color: #3f7efb;
+}
+
+/* 로고 · 회사 정보 */
+.footer-info {
+  background-color: #f2f4f8;
+  padding: var(--space-32) 0;
+}
+
+.footer-logo {
+  display: block;
+  height: 25px;
+  width: auto;
+  margin-bottom: var(--space-16);
+}
+
+.footer-info-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-4);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: var(--space-24);
+  font-size: 14px;
+  line-height: 1.6;
+  color: #666;
+  /* 줄 맨 앞 항목의 세로줄은 목록 밖으로 나가 잘린다 (좁은 화면에서 줄바뀜 대비) */
+  overflow: hidden;
+}
+
+.footer-info-list li {
+  position: relative;
+}
+
+/* 항목 사이 짧은 세로줄 */
+.footer-info-list li::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--space-12) * -1);
+  top: 50%;
+  width: 1px;
+  height: 11px;
+  background-color: #ccc;
+  transform: translateY(-50%);
+}
+
+.footer-info-list a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.footer-info-list a:hover {
+  color: #3f7efb;
+}
+
+.footer-copyright {
+  margin: var(--space-12) 0 0;
+  font-size: 13px;
+  color: #999;
+}
+
+/* 모바일에서 데스크탑 푸터 숨기기 */
+@media (max-width: 480px) {
+  .footer {
+    display: none;
+  }
 }
 
 /* 교육원 소개 페이지 스타일 */

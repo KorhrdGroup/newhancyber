@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import SectionTabs, { mobileGuideTabs } from "@/components/learning-support/extra/SectionTabs";
-import { CONTACT_PHONE } from "@/components/layout/MobileFooter";
+import { SUPPORT_PHONE } from "@/lib/contact";
 
 export const metadata: Metadata = { title: "모바일학습가이드" };
 
@@ -100,7 +100,7 @@ export default function LearningMobileGuidePage() {
         <p className="lx-callout">
           학습자 PC 등록은 <Link href="/my-page/pc">마이페이지 &gt; 내 정보 &gt; PC 등록</Link>에서, 공동인증서는{" "}
           <Link href="/learning-support/mobile-guide/certificate">공동인증서 안내</Link>에서 확인해 주세요. 그 밖에 궁금한 점은
-          학습지원센터({CONTACT_PHONE})로 문의해 주세요.
+          학습지원센터({SUPPORT_PHONE})로 문의해 주세요.
         </p>
       </div>
     </main>

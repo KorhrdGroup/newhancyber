@@ -3,7 +3,7 @@ import Link from "next/link";
 import SectionTabs, { scheduleTabs } from "@/components/learning-support/extra/SectionTabs";
 import { annualSchedule } from "@/components/learning-support/extra/annualScheduleData";
 import MobilePageBanner from "@/components/layout/MobilePageBanner";
-import { CONTACT_PHONE } from "@/components/layout/MobileFooter";
+import { SUPPORT_PHONE } from "@/lib/contact";
 
 export const metadata: Metadata = { title: "연간 학사일정" };
 
@@ -19,7 +19,7 @@ export default function LearningAnnualSchedulePage() {
             <li className="page-list-item">아래의 연간 학사일정은 교육원 사정에 의해 변경될 수 있습니다.</li>
             {/* 원본은 상담실 번호가 비어 있다 ("상담실(-)") — 원격지원 화면과 같은 대표번호를 넣었다 */}
             <li className="page-list-item">
-              차수별 개설 예정 과목 등 자세한 학사일정은 상담실({CONTACT_PHONE})로 연락하시면 확인할 수 있습니다.
+              차수별 개설 예정 과목 등 자세한 학사일정은 학습지원센터({SUPPORT_PHONE})로 연락하시면 확인할 수 있습니다.
             </li>
           </ul>
 

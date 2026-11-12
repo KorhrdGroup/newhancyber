@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { CONTACT_PHONE } from "@/components/layout/MobileFooter";
+import { SUPPORT_PHONE } from "@/lib/contact";
 
 export const metadata: Metadata = { title: "원격지원" };
 
@@ -40,7 +40,7 @@ export default function LearningRemoteSupportPage() {
             </div>
             <div className="remote-support-contact-box">
               <div className="remote-support-contact-title">출석 및 시험 관련문의</div>
-              <div className="remote-support-contact-content">{CONTACT_PHONE}</div>
+              <div className="remote-support-contact-content">{SUPPORT_PHONE}</div>
             </div>
           </div>
           <Divider />

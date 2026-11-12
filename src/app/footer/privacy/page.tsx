@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { CONTACT_EMAIL, SUPPORT_PHONE } from "@/lib/contact";
 
 export const metadata: Metadata = { title: "개인정보처리방침" };
 
@@ -100,8 +101,7 @@ export default function PrivacyPage() {
                         <img src="/resources/images/footer/privacy/privacy-10.png" alt="개인정보 보호책임자" className="privacy-labeling-icon-img" />
                       </div>
                       <h3 className="privacy-labeling-item-title">개인정보 보호책임자</h3>
-                      {/* 추후에 논의 예정 후 수정 필요 */}
-                      <p className="privacy-labeling-item-desc">송예영, 02-2135-5126, gksvudtod97@naver.com</p>
+                      <p className="privacy-labeling-item-desc">양병웅, {SUPPORT_PHONE}, {CONTACT_EMAIL}</p>
                     </td>
                   </tr>
                 </tbody>
@@ -810,21 +810,21 @@ export default function PrivacyPage() {
                   <tr>
                     <td className="privacy-officer-cell">
                       <ul>
-                        <li className="page-list-clasic">성 명: 송예영</li>
-                        <li className="page-list-clasic">전화번호: 02-2135-5126</li>
+                        <li className="page-list-clasic">성 명: 양병웅</li>
+                        <li className="page-list-clasic">전화번호: {SUPPORT_PHONE}</li>
                         <li className="page-list-clasic">
                           전자우편:{" "}
-                          <a href="mailto:tnglobalco@naver.com">gksvudtod97@naver.com</a>
+                          <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
                         </li>
                       </ul>
                     </td>
                     <td className="privacy-officer-cell">
                       <ul>
                         <li className="page-list-clasic">담 당: 학사운영팀</li>
-                        <li className="page-list-clasic">전화번호: 02-2135-5126</li>
+                        <li className="page-list-clasic">전화번호: {SUPPORT_PHONE}</li>
                         <li className="page-list-clasic">
                           전자우편:{" "}
-                          <a href="mailto:edreamhaksa@naver.com">gksvudtod97@naver.com</a>
+                          <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
                         </li>
                       </ul>
                     </td>

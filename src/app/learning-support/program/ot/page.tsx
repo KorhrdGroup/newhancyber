@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import SectionTabs, { programTabs } from "@/components/learning-support/extra/SectionTabs";
-import { CONTACT_PHONE } from "@/components/layout/MobileFooter";
+import { SUPPORT_PHONE } from "@/lib/contact";
 
 export const metadata: Metadata = { title: "학습자 OT" };
 
@@ -88,7 +88,7 @@ export default function LearningOtPage() {
         </ol>
 
         <p className="lx-callout">
-          학습 중 궁금한 점은 1:1 문의 또는 학습지원센터({CONTACT_PHONE})로 문의해 주세요.
+          학습 중 궁금한 점은 1:1 문의 또는 학습지원센터({SUPPORT_PHONE})로 문의해 주세요.
         </p>
       </div>
     </main>
