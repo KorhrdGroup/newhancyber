@@ -194,6 +194,9 @@
 .lx-board-col-num { width: 96px; }
 .lx-board-col-date { width: 120px; }
 /* 공지 글: 줄 바탕을 칠하면 Brand 배지가 묻혀서, 제목만 굵게 */
+/* 게시판 제목은 검정, 마우스를 올리면 파랑 + 밑줄 */
+.lx-board-table .ds-table-link { color: var(--color-text-default); }
+.lx-board-table .ds-table-link:hover { color: var(--color-text-brand); }
 .lx-board-table tr.is-notice .ds-table-link { font-weight: 600; }
 
 /* ---------- 자주 묻는 질문 (탭 · 검색 · 질문 접기) ---------- */
