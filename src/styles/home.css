@@ -82,6 +82,12 @@
   overflow: visible;
 }
 
+/* 화면 폭이 1600px 보다 좁으면 왼쪽 여백이 좁아 히어로 배너 그림 속 글자와 겹친다 → 배너를 지나 스크롤한 뒤에 보인다 */
+.floating-quick-menu { transition: opacity 0.2s, visibility 0.2s; }
+@media (max-width: 1599px) {
+  .floating-menu:not(.is-scrolled) .floating-quick-menu { opacity: 0; visibility: hidden; }
+}
+
 .quick-menu-header {
   margin-bottom: 0;
   font-weight: 700;

@@ -28,7 +28,7 @@ export default function FloatingMenu() {
 
   return (
     <>
-      <div className={`floating-menu${hidden}`}>
+      <div className={`floating-menu${hidden}${showTop ? " is-scrolled" : ""}`}>
         <div className="floating-quick-menu">
           <div className="quick-menu-header">빠른 메뉴</div>
           <ul className="quick-menu-list">
