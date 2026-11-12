@@ -4,7 +4,7 @@ export const metadata: Metadata = { title: "이메일무단수집거부" };
 
 export default function EmailRefusalPage() {
   return (
-    <main className="wrapper">
+    <main className="wrapper ft-page">
       <div className="email-refusal-container">
         <h1 className="email-refusal-page-title">이메일무단수집거부</h1>
 

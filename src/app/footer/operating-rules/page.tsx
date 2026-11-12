@@ -8,7 +8,7 @@ export const metadata: Metadata = { title: "운영규칙" };
 /** 운영규칙 (원본 /inc/footer/useTerms.asp — 학사관리규정) */
 export default function OperatingRulesPage() {
   return (
-    <main className="wrapper">
+    <main className="wrapper ft-page">
       <div className="terms-container ex-rules" style={{ backgroundColor: "#f3f8ff" }}>
         <h1 className="terms-page-title">운영규칙</h1>
         <div className="ex-rules-head">

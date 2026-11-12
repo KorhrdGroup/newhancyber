@@ -946,13 +946,14 @@
   background-color: var(--color-white);
   border-bottom: 1px solid #e5e5e5;
   margin-bottom: 0;
-  max-width: 1080px;
+  /* 탭 줄·밑선을 본문 폭(1200px)에 맞춤 */
+  max-width: calc(var(--max-width) - 2 * var(--header-padding-side));
   margin: 0 auto;
 }
 
 .guide-tabs-container {
   width: 100%;
-  max-width: 1080px;
+  max-width: var(--max-width);
   margin: 0 auto;
   padding: 0;
   box-sizing: border-box;
@@ -998,9 +999,10 @@
 /* 탭 컨텐츠 스타일 */
 .guide-tab-content {
   width: 100%;
-  max-width: 1080px;
+  /* 회색 내용 상자 양끝을 본문 폭(1200px)에 맞춤 */
+  max-width: calc(var(--max-width) - 2 * var(--header-padding-side));
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -1273,7 +1275,7 @@
 
 .faq-list {
   width: 100%;
-  max-width: 1080px;
+  max-width: var(--max-width);
   margin: 0 auto;
 }
 
@@ -1345,13 +1347,13 @@
   background-color: var(--color-white);
   border-bottom: 1px solid #e5e5e5;
   margin-bottom: 0;
-  max-width: 1080px;
+  max-width: var(--max-width);
   margin: 0 auto;
 }
 
 .precautions-tabs-container {
   width: 100%;
-  max-width: 1080px;
+  max-width: var(--max-width);
   margin: 0 auto;
   padding: 0;
   box-sizing: border-box;
@@ -1396,7 +1398,7 @@
 
 .precautions-content {
   width: 100%;
-  max-width: 1080px;
+  max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 20px;
   box-sizing: border-box;

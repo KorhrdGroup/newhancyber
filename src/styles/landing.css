@@ -7,7 +7,8 @@
   color: #fff;
   word-break: keep-all;
 }
-.ld-inner { max-width: 1080px; margin: 0 auto; padding: 0 20px; box-sizing: border-box; }
+.ld-inner { max-width: var(--max-width); margin: 0 auto; padding: 0 20px; box-sizing: border-box; }
+@media (min-width: 481px) { .ld-inner { padding: 0 var(--header-padding-side); } }
 .ld em { font-style: normal; color: var(--ld-accent); }
 .ld-heading em, .ld-point-title em, .ld-nowrap { white-space: nowrap; }
 .ld-center { text-align: center; }

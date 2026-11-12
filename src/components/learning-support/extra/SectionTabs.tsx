@@ -23,7 +23,7 @@ export const programTabs: NavLink[] = [
 ];
 
 /**
- * 탭 줄을 본문 폭(1080px)에 맞춰 둔다.
+ * 탭 줄을 본문 폭(--max-width)에 맞춰 둔다.
  * underHeader: 모바일 파란 제목 띠가 없는 페이지 — 모바일 고정 헤더(70px) 아래로 내린다.
  */
 export default function SectionTabs({ items, underHeader }: { items: NavLink[]; underHeader?: boolean }) {

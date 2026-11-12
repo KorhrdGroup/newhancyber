@@ -262,10 +262,10 @@
 
 .gnb-list {
   display: flex;
-  /* 메뉴 묶음을 가운데 로고와 같은 중심에 둠 (메뉴 사이 간격은 글자 양옆 36px로 모두 72px) */
-  justify-content: center;
+  /* 첫 메뉴 글자는 본문 왼쪽 끝, 마지막 메뉴 글자는 본문 오른쪽 끝에 맞추고 사이는 고르게 (글자 양옆 36px 여백만큼 밖으로) */
+  justify-content: space-between;
   list-style: none;
-  margin: 0;
+  margin: 0 -36px;
   padding: 0;
   gap: 0;
 }
@@ -314,8 +314,8 @@
 .gnb-item.has-submenu:nth-child(4) .submenu {
   left: 0;
   width: var(--max-width);
-  padding-left: var(--header-padding-side);
-  padding-right: var(--header-padding-side);
+  padding-left: calc(var(--header-padding-side) - var(--space-20));
+  padding-right: calc(var(--header-padding-side) - var(--space-20));
   transform: translateY(0);
   box-sizing: border-box;
   margin-left: calc(-1 * var(--header-padding-side));
@@ -409,7 +409,8 @@
   width: var(--max-width);
   background-color: var(--color-primary);
   list-style: none;
-  padding: 0 var(--header-padding-side);
+  /* 첫 항목 글자를 본문 왼쪽 끝에 맞춤 (항목 안쪽 여백 20px만큼 덜 띄움) */
+  padding: 0 calc(var(--header-padding-side) - var(--space-20));
   margin: 0;
   display: flex;
   flex-direction: row;
@@ -428,8 +429,8 @@
 .gnb-item.has-submenu .submenu {
   left: 0;
   width: var(--max-width);
-  padding-left: var(--header-padding-side);
-  padding-right: var(--header-padding-side);
+  padding-left: calc(var(--header-padding-side) - var(--space-20));
+  padding-right: calc(var(--header-padding-side) - var(--space-20));
   transform: translateY(0);
   box-sizing: border-box;
   margin-left: calc(-1 * var(--header-padding-side));
@@ -521,14 +522,14 @@
   display: none !important;
 } */
 
-@media (max-width: 1080px) {
+@media (max-width: 1260px) {
   .gnb-item.has-submenu .submenu {
     left: 0;
     right: 0;
     width: 100%;
     transform: translateY(0);
-    padding-left: var(--header-padding-side);
-    padding-right: var(--header-padding-side);
+    padding-left: calc(var(--header-padding-side) - var(--space-20));
+    padding-right: calc(var(--header-padding-side) - var(--space-20));
   }
 
   .gnb-item.has-submenu:hover .submenu,
@@ -592,7 +593,7 @@ main {
 }
 
 /* 학사 알림 배너 */
-/* 위아래 선은 화면 가로 전체, 내용은 가운데 1080 안에 */
+/* 위아래 선은 화면 가로 전체, 내용은 가운데 본문 폭 안에 */
 .academic-notice {
   background-color: var(--color-white);
   width: 100%;
@@ -929,7 +930,7 @@ main {
 
 /* 한평생원격교육원 학습자 필수 Check! 섹션 */
 .essential-check-section {
-  max-width: 1080px;
+  max-width: var(--max-width);
   margin: 0 auto;
   padding: 40px var(--header-padding-side);
 }
@@ -996,7 +997,7 @@ main {
 
 /* 학습일정 및 공지사항 섹션 */
 .schedule-notice-section {
-  max-width: 1080px;
+  max-width: var(--max-width);
 
   margin: 0px auto;
   padding: var(--space-32) var(--header-padding-side);
@@ -1242,7 +1243,7 @@ main {
 
 /* 이벤트 및 상담 섹션 */
 .event-consultation-section {
-  max-width: 1080px;
+  max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 var(--header-padding-side);
   position: relative;
@@ -1336,7 +1337,7 @@ main {
 /* 이벤트 페이지 스타일 */
 .event-page {
   width: 100%;
-  max-width: 1080px;
+  max-width: var(--max-width);
   margin: 0 auto;
   /* 이벤트 페이지는 main 위 여백이 0이라, 헤더 아래 파란 하위메뉴 바 높이만큼 내려 줌
      (바가 헤더 밑줄 1px 위에서 시작해 60 - 1 = 59px) */
@@ -1746,7 +1747,7 @@ main {
 
 /* 학습자 후기 섹션 */
 .reviews-section {
-  max-width: 1080px;
+  max-width: var(--max-width);
   margin: 0 auto;
   padding: 40px 100px;
   background-color: #cde3ff;
@@ -1885,7 +1886,7 @@ main {
 }
 
 /* 왜 한평생원격교육원을 선택할까요? 섹션 */
-/* 배경은 화면 가로 전체, 내용은 가운데 1080 안에 */
+/* 배경은 화면 가로 전체, 내용은 가운데 본문 폭 안에 */
 .why-choose-section {
   width: 100%;
   margin: 0;
@@ -1894,7 +1895,7 @@ main {
 }
 
 .why-choose-container {
-  max-width: 1080px;
+  max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 var(--header-padding-side);
   box-sizing: border-box;
@@ -2027,14 +2028,14 @@ main {
 
 /* 왼쪽 위: 빠른 메뉴 */
 /*
- * 양옆 플로팅 메뉴: 화면 끝과 '본문(1020px)·히어로 배너 글자·그림 중 더 바깥쪽 것' 사이 여백의 가운데에 둠.
+ * 양옆 플로팅 메뉴: 화면 끝과 '본문(1200px)·히어로 배너 글자·그림 중 더 바깥쪽 것' 사이 여백의 가운데에 둠.
  * 배너 그림(1920 기준)의 글자·그림은 가운데 1080 안(왼쪽 끝 420 = 21.875%)에 있고,
  * 배너는 1344px 이상에서 화면 폭에 비례해 커지므로 21.875% 지점이 그대로 글자 시작점이 됨.
  */
 .floating-quick-menu {
   position: fixed;
   top: 290px;
-  left: max(16px, calc((min(50% - 510px, 21.875%) - 120px) / 2));
+  left: max(16px, calc((min(50% - 600px, 21.875%) - 120px) / 2));
   width: auto;
   background-color: #ffffff;
   border-radius: 8px;
@@ -2099,7 +2100,7 @@ main {
 .floating-consultation {
   position: fixed;
   top: 290px;
-  right: max(16px, calc((min(50% - 510px, 21.875%) - 114px) / 2));
+  right: max(16px, calc((min(50% - 600px, 21.875%) - 114px) / 2));
   width: 114px;
   height: 214px;
   background: linear-gradient(135deg, #0032bb 0%, #0055ff 100%);
@@ -2184,7 +2185,7 @@ main {
 .floating-social {
   position: fixed;
   top: 510px;
-  right: max(16px, calc((min(50% - 510px, 21.875%) - 114px) / 2));
+  right: max(16px, calc((min(50% - 600px, 21.875%) - 114px) / 2));
   width: 114px;
   height: 100px;
   background-color: #ffffff;
@@ -2251,7 +2252,7 @@ main {
 .floating-top-btn {
   position: fixed;
   bottom: 100px;
-  right: calc((100% - 1080px) / 2);
+  right: max(16px, calc((100% - 1260px) / 2));
   width: var(--size-control-lg);
   height: var(--size-control-lg);
   border: none;

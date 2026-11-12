@@ -204,7 +204,7 @@
 .ds-stat-value small { margin-left: var(--space-4); font-size: 16px; font-weight: 400; color: var(--color-text-secondary); }
 
 /* ---------- 나의 강의실 화면 ---------- */
-.cr-page { padding: 60px 0 100px; color: var(--color-text-default); }
+.cr-page { padding: 60px var(--header-padding-side) 100px; color: var(--color-text-default); }
 .cr-head { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--space-16); margin-bottom: var(--space-24); }
 .cr-title { font-size: 24px; font-weight: 700; line-height: 1.4; color: var(--color-text-strong); }
 .cr-desc { margin-top: var(--space-4); font-size: 14px; color: var(--color-text-secondary); }

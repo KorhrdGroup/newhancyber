@@ -4,7 +4,7 @@ export const metadata: Metadata = { title: "이용약관" };
 
 export default function TermsPage() {
   return (
-    <main className="wrapper">
+    <main className="wrapper ft-page">
       <div className="terms-container" style={{ backgroundColor: "#f3f8ff" }}>
         <h1 className="terms-page-title">이용약관</h1>
         <p>

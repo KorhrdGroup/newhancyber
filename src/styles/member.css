@@ -24,7 +24,7 @@
 /* 로그인 페이지 스타일 */
 
 .login-wrapper {
-  max-width: 1080px;
+  max-width: var(--max-width);
   margin: 60px auto;
 }
 
@@ -284,7 +284,7 @@
 
 /* 아이디 찾기/비밀번호 재발급 페이지 스타일 */
 .find-id-wrapper {
-  max-width: 1080px;
+  max-width: var(--max-width);
   margin: 60px auto;
 }
 
@@ -693,7 +693,7 @@
 
 /* 회원가입 페이지 스타일 */
 .signup-container {
-  max-width: 1080px;
+  max-width: var(--max-width);
   margin: 60px auto;
   padding: 0 20px;
 }

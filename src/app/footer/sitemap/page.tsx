@@ -129,7 +129,7 @@ const sections: { title: string; links: SitemapLink[] }[] = [
 
 export default function SitemapPage() {
   return (
-    <main className="wrapper">
+    <main className="wrapper ft-page">
       <div className="container">
         <div className="sitemap-grid">
           {sections.map((section) => (

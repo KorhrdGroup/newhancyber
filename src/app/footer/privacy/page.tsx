@@ -5,7 +5,7 @@ export const metadata: Metadata = { title: "개인정보처리방침" };
 
 export default function PrivacyPage() {
   return (
-    <main className="wrapper">
+    <main className="wrapper ft-page">
       <div className="container">
         <div className="privacy-content">
           <div className="privacy-article">
