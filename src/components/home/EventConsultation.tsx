@@ -17,7 +17,6 @@ export default function EventConsultation() {
           <Link href="/event" className="event-banner-link">
             <div className="event-banner event-friend">
               <div className="event-friend-text">
-                <span className="event-friend-tag">EVENT</span>
                 <p className="event-friend-title">
                   친구추천 <em>이벤트</em>
                 </p>
