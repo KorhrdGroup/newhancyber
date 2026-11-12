@@ -518,6 +518,12 @@
   color: var(--color-text);
 }
 
+/* 윈도우 배율(125·150·175%)에서 흰 칸 아래로 파란 바 1px 이 비치는 것 — 흰색을 1px 아래로 덮음 */
+.submenu a.active,
+.submenu a:hover {
+  box-shadow: 0 1px 0 var(--color-white);
+}
+
 /* 수강후기 메뉴 숨김 - 나중에 오픈 예정으로 주석처리됨 */
 /* .submenu a[href*="reviews.html"] {
   display: none !important;
