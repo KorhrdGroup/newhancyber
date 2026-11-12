@@ -323,8 +323,8 @@
 .gnb-item.has-submenu:nth-child(4) .submenu {
   left: 0;
   width: var(--max-width);
-  padding-left: calc(var(--header-padding-side) - var(--space-20));
-  padding-right: calc(var(--header-padding-side) - var(--space-20));
+  padding-left: var(--header-padding-side);
+  padding-right: var(--header-padding-side);
   transform: translateY(0);
   box-sizing: border-box;
   margin-left: calc(-1 * var(--header-padding-side));
@@ -418,8 +418,8 @@
   width: var(--max-width);
   background-color: var(--color-primary);
   list-style: none;
-  /* 첫 항목 글자를 본문 왼쪽 끝에 맞춤 (항목 안쪽 여백 20px만큼 덜 띄움) */
-  padding: 0 calc(var(--header-padding-side) - var(--space-20));
+  /* 첫 항목 칸(흰 상자) 왼쪽 끝을 본문선에 맞춤 */
+  padding: 0 var(--header-padding-side);
   margin: 0;
   display: flex;
   flex-direction: row;
@@ -438,8 +438,8 @@
 .gnb-item.has-submenu .submenu {
   left: 0;
   width: var(--max-width);
-  padding-left: calc(var(--header-padding-side) - var(--space-20));
-  padding-right: calc(var(--header-padding-side) - var(--space-20));
+  padding-left: var(--header-padding-side);
+  padding-right: var(--header-padding-side);
   transform: translateY(0);
   box-sizing: border-box;
   margin-left: calc(-1 * var(--header-padding-side));
@@ -537,8 +537,8 @@
     right: 0;
     width: 100%;
     transform: translateY(0);
-    padding-left: calc(var(--header-padding-side) - var(--space-20));
-    padding-right: calc(var(--header-padding-side) - var(--space-20));
+    padding-left: var(--header-padding-side);
+    padding-right: var(--header-padding-side);
   }
 
   .gnb-item.has-submenu:hover .submenu,
@@ -3932,5 +3932,10 @@ main {
     max-width: calc(var(--max-width) - 2 * var(--header-padding-side));
     margin-left: auto;
     margin-right: auto;
+  }
+  /* 사회복지사란? 랜딩 그림·상담 상자는 화면 가득 찬 틀 안에 있어, 좁은 화면에서도 양옆을 본문선만큼 띄움 */
+  main .page-header-banner img.page-image,
+  main .page-header-banner .consultation-options-section {
+    max-width: min(calc(var(--max-width) - 2 * var(--header-padding-side)), calc(100% - 2 * var(--header-padding-side)));
   }
 }
