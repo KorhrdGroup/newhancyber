@@ -5,6 +5,7 @@ const sizes: [prefix: string, width: number, height: number][] = [
   ["/popup/lesson", 1280, 860],
   ["/popup/exam", 1100, 900],
   ["/popup/print", 900, 1000],
+  ["/popup/sample-lecture", 960, 760],
 ];
 
 export function openPopup(href: string) {

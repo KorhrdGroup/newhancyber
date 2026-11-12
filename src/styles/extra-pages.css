@@ -1,0 +1,219 @@
+/* 수강신청·기타 추가 화면(결제하기·평생교육바우처·장학후기·운영규칙·찾기 결과·학습설계 결과·결제현황 탭) 전용 — 클래스는 ex- 로 시작 */
+
+/* ---------- 화면 안 탭 줄 (본문 위) ---------- */
+.ex-tabs {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  /* 위쪽은 본문(.wrapper)과 같은 70px — 데스크톱 파란 하위 메뉴 줄이 이 영역에 겹쳐 뜬다 */
+  padding: 70px 30px 0;
+}
+.ex-tabs + main.wrapper { padding-top: 0; }
+
+/* ---------- 공통 본문 ---------- */
+.ex-page {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 30px;
+  color: var(--color-text-default);
+  background-color: var(--color-bg-default);
+}
+.ex-title { margin-bottom: var(--space-8); font-size: 24px; font-weight: 700; line-height: 1.4; color: var(--color-text-strong); }
+.ex-desc { font-size: 14px; line-height: 1.5; color: var(--color-text-secondary); }
+.ex-section { margin-top: var(--space-40); }
+.ex-section:first-child { margin-top: 0; }
+.ex-section-title { margin-bottom: var(--space-12); font-size: 18px; font-weight: 600; line-height: 1.4; color: var(--color-text-strong); }
+.ex-box { padding: var(--space-24); border: 1px solid var(--color-border-default); border-radius: var(--radius-8); background: var(--color-bg-default); }
+.ex-note { margin-top: var(--space-12); font-size: 13px; line-height: 1.5; color: var(--color-text-secondary); }
+.ex-note a,
+.ex-link { color: var(--color-text-brand); text-decoration: underline; }
+.ex-list { display: flex; flex-direction: column; gap: var(--space-8); padding-left: 18px; font-size: 14px; line-height: 1.6; list-style: disc; }
+.ex-empty { padding: var(--space-48) 0; font-size: 14px; color: var(--color-text-secondary); text-align: center; }
+.ex-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-8); margin-top: var(--space-24); }
+
+/* 모바일에서 표를 카드처럼 (td 의 data-label 을 앞에 붙인다) */
+@media (max-width: 480px) {
+  .ex-rtable thead { display: none; }
+  .ex-rtable,
+  .ex-rtable tbody,
+  .ex-rtable tr,
+  .ex-rtable td { display: block; width: 100%; }
+  .ex-rtable { border-top: 0; }
+  .ex-rtable tr { padding: var(--space-12) 0; border-bottom: 1px solid var(--color-border-default); }
+  .ex-rtable tr:first-child { border-top: 1px solid var(--color-border-default); }
+  .ex-rtable td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-12);
+    height: auto;
+    padding: var(--space-4) 0;
+    border-bottom: 0;
+    text-align: right;
+  }
+  .ex-rtable td::before { content: attr(data-label); flex-shrink: 0; font-size: 13px; color: var(--color-text-secondary); text-align: left; }
+  .ex-rtable td.ex-rtable-head { font-size: 16px; font-weight: 600; color: var(--color-text-strong); text-align: left; }
+  .ex-rtable td.ex-rtable-head::before { display: none; }
+}
+
+/* ---------- 결제하기 ---------- */
+.ex-pay { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: var(--space-24); align-items: start; margin-top: var(--space-24); }
+.ex-pay-main { display: flex; flex-direction: column; gap: var(--space-16); }
+.ex-pay-side { position: sticky; top: var(--space-24); }
+.ex-order { display: flex; flex-direction: column; }
+.ex-order-item { display: flex; align-items: center; gap: var(--space-12); padding: var(--space-12) 0; border-bottom: 1px solid var(--color-border-subtle); }
+.ex-order-item:last-child { border-bottom: 0; }
+.ex-order-icon { display: grid; place-items: center; flex-shrink: 0; width: 24px; height: 24px; border-radius: var(--radius-4); background: var(--color-bg-brand); color: var(--color-text-inverse); font-size: 12px; font-weight: 600; }
+.ex-order-name { flex: 1; min-width: 0; font-size: 16px; font-weight: 500; color: var(--color-text-strong); }
+.ex-order-price { text-align: right; font-size: 16px; font-weight: 600; color: var(--color-text-strong); white-space: nowrap; }
+.ex-order-price del { display: block; font-size: 12px; font-weight: 400; color: var(--color-text-placeholder); }
+.ex-coupon { display: flex; flex-direction: column; gap: var(--space-8); }
+.ex-coupon-row { display: flex; gap: var(--space-8); }
+.ex-coupon-row .ds-input { flex: 1; min-width: 0; }
+.ex-methods { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-8); }
+.ex-method {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  height: var(--size-control-lg);
+  padding: 0 var(--space-16);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-6);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-default);
+  cursor: pointer;
+}
+.ex-method.is-active { border-color: var(--color-border-brand); background: var(--color-bg-brand-subtle); color: var(--color-text-brand); font-weight: 600; }
+.ex-method-guide { margin-top: var(--space-12); padding: var(--space-12) var(--space-16); border-radius: var(--radius-6); background: var(--color-bg-subtle); font-size: 13px; line-height: 1.5; color: var(--color-text-secondary); }
+.ex-sum { display: flex; flex-direction: column; gap: var(--space-12); }
+.ex-sum-row { display: flex; justify-content: space-between; gap: var(--space-12); font-size: 14px; color: var(--color-text-secondary); }
+.ex-sum-row strong { font-weight: 600; color: var(--color-text-strong); }
+.ex-sum-row .is-discount { color: var(--color-text-danger); }
+.ex-sum-total { display: flex; justify-content: space-between; align-items: baseline; padding-top: var(--space-16); border-top: 1px solid var(--color-border-default); font-size: 16px; font-weight: 600; color: var(--color-text-strong); }
+.ex-sum-total strong { font-size: 24px; font-weight: 700; color: var(--color-text-brand); }
+.ex-agree { margin-top: var(--space-20); font-size: 13px; line-height: 1.5; align-items: flex-start; }
+.ex-agree input { flex-shrink: 0; margin-top: 1px; }
+.ex-pay-btn { width: 100%; margin-top: var(--space-16); }
+
+/* ---------- 장바구니 (데스크톱 전용, 모바일은 원본 cart 화면) ---------- */
+/* 위에 파란 하위메뉴 줄이 겹쳐 뜨므로 나의 강의실 화면처럼 줄 아래 여백을 둔다 */
+.ex-cart-desktop { padding-top: 60px; }
+.ex-cart-head { display: flex; justify-content: space-between; align-items: center; gap: var(--space-12); padding-bottom: var(--space-12); border-bottom: 1px solid var(--color-border-default); }
+.ex-cart-check { flex-shrink: 0; width: 18px; height: 18px; accent-color: var(--color-bg-brand); cursor: pointer; }
+.ex-cart-links { display: flex; gap: var(--space-4); }
+.ex-pay-btn + .ex-pay-btn { margin-top: var(--space-8); }
+/* 좁은 화면(태블릿)에서는 과목 목록이 눌리지 않게 금액 상자를 아래로 */
+@media (max-width: 1080px) {
+  .ex-cart-desktop .ex-pay { grid-template-columns: 1fr; }
+  .ex-cart-desktop .ex-pay-side { position: static; }
+}
+
+/* ---------- 평생교육바우처 ---------- */
+.ex-hero { padding: var(--space-32) var(--space-24); border-radius: var(--radius-12); background: var(--color-bg-brand-subtle); text-align: center; }
+.ex-hero-label { font-size: 14px; font-weight: 600; color: var(--color-text-brand); }
+.ex-hero-title { margin-top: var(--space-8); font-size: 24px; font-weight: 700; line-height: 1.4; color: var(--color-text-strong); }
+.ex-hero-title em { font-style: normal; color: var(--color-text-brand); }
+.ex-hero-desc { margin-top: var(--space-8); font-size: 14px; line-height: 1.6; color: var(--color-text-secondary); }
+.ex-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-12); counter-reset: ex-step; }
+.ex-step { padding: var(--space-20); border: 1px solid var(--color-border-default); border-radius: var(--radius-8); counter-increment: ex-step; }
+.ex-step::before { content: "STEP " counter(ex-step); display: block; margin-bottom: var(--space-8); font-size: 12px; font-weight: 600; color: var(--color-text-brand); }
+.ex-step-title { font-size: 16px; font-weight: 600; color: var(--color-text-strong); }
+.ex-step-desc { margin-top: var(--space-4); font-size: 13px; line-height: 1.5; color: var(--color-text-secondary); }
+.ex-contacts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-12); }
+.ex-contact { padding: var(--space-16) var(--space-20); border-radius: var(--radius-8); background: var(--color-bg-subtle); }
+.ex-contact dt { font-size: 13px; color: var(--color-text-secondary); }
+.ex-contact dd { margin-top: var(--space-4); font-size: 18px; font-weight: 600; color: var(--color-text-strong); word-break: break-all; }
+
+/* ---------- 장학후기 목록 ---------- */
+.ex-board-count { margin-bottom: var(--space-12); font-size: 14px; color: var(--color-text-secondary); }
+.ex-board-count strong { color: var(--color-text-brand); }
+.ex-file { font-size: 12px; color: var(--color-text-secondary); }
+
+/* ---------- 운영규칙 ---------- */
+.ex-rules { color: var(--color-text-strong); }
+.ex-rules-head { margin-bottom: var(--space-24); }
+.ex-rules-head h2 { font-size: 18px; font-weight: 600; line-height: 1.5; }
+.ex-rules-head p { font-size: 16px; line-height: 1.5; color: var(--color-text-secondary); }
+.ex-rules-section + .ex-rules-section { margin-top: var(--space-24); }
+.ex-rules-section h3 { margin-bottom: var(--space-8); font-size: 16px; font-weight: 700; line-height: 1.5; }
+.ex-rules-article + .ex-rules-article { margin-top: var(--space-12); }
+.ex-rules-article h4 { font-size: 16px; font-weight: 600; line-height: 1.6; }
+.ex-rules-text { font-size: 16px; line-height: 1.6; }
+.ex-rules-list { margin-top: var(--space-4); }
+.ex-rules-list li { font-size: 16px; line-height: 1.6; list-style: none; }
+.ex-rules-list li.is-sub { padding-left: var(--space-20); }
+.ex-rules-list li.is-note { font-size: 14px; color: var(--color-text-secondary); }
+.ex-rules-table { max-width: 480px; margin-top: var(--space-8); background: var(--color-bg-default); }
+
+/* ---------- 아이디·비밀번호 찾기 결과 ---------- */
+.ex-find-card { max-width: 560px; margin: 0 auto; padding: var(--space-48) var(--space-32); border: 1px solid var(--color-border-default); border-radius: var(--radius-8); background: var(--color-bg-default); text-align: center; }
+.ex-find-icon { display: inline-grid; place-items: center; width: 56px; height: 56px; border-radius: var(--radius-full); background: var(--color-bg-brand-subtle); color: var(--color-icon-brand); font-size: 24px; font-weight: 700; }
+.ex-find-title { margin-top: var(--space-16); font-size: 20px; font-weight: 600; line-height: 1.4; color: var(--color-text-strong); }
+.ex-find-desc { margin-top: var(--space-8); font-size: 14px; line-height: 1.6; color: var(--color-text-secondary); }
+.ex-find-value { margin-top: var(--space-24); padding: var(--space-20); border-radius: var(--radius-8); background: var(--color-bg-subtle); }
+.ex-find-id { font-size: 24px; font-weight: 700; color: var(--color-text-brand); letter-spacing: 0.02em; }
+.ex-find-meta { margin-top: var(--space-4); font-size: 13px; color: var(--color-text-secondary); }
+.ex-find-card .ex-actions .ds-btn { min-width: 140px; }
+
+/* ---------- 무료 학습설계 신청 결과 ---------- */
+.ex-lookup { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; gap: var(--space-12); align-items: end; }
+.ex-lookup .ds-label { margin-bottom: var(--space-8); }
+.ex-result-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-8); margin-bottom: var(--space-16); }
+.ex-result-head h3 { font-size: 18px; font-weight: 600; color: var(--color-text-strong); }
+.ex-memo { margin-top: var(--space-16); padding: var(--space-16); border-radius: var(--radius-6); background: var(--color-bg-brand-subtle); font-size: 14px; line-height: 1.6; color: var(--color-text-default); }
+.ex-memo strong { display: block; margin-bottom: var(--space-4); font-size: 13px; color: var(--color-text-brand); }
+
+/* ---------- 결제 현황 탭 ---------- */
+.ex-summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-12); margin-bottom: var(--space-24); }
+
+/* ---------- 모바일 ---------- */
+@media (max-width: 480px) {
+  .ex-cart-desktop { display: none; }
+  .ex-tabs { padding: var(--space-16) var(--space-16) 0; }
+  /* 위에 파란 제목 띠가 없는 화면: 고정 헤더(70px) 아래로 내린다 */
+  .ex-tabs--under-header { padding-top: 86px; }
+
+  .ex-page { padding: var(--space-20) var(--space-16) var(--space-48); }
+  .ex-page--under-header { padding-top: 90px; }
+  .ex-tabs + main.wrapper .ex-page { padding-top: 0; }
+  .ex-section { margin-top: var(--space-32); }
+  .ex-box { padding: var(--space-16); }
+
+  /* 모바일은 파란 제목 띠가 제목을 대신한다 */
+  .ex-page-head { display: none; }
+  .ex-pay { grid-template-columns: 1fr; margin-top: 0; }
+  .ex-pay-side { position: static; }
+  .ex-methods { grid-template-columns: 1fr; }
+
+  .ex-hero { padding: var(--space-24) var(--space-16); }
+  .ex-hero-title { font-size: 20px; }
+  .ex-steps,
+  .ex-contacts { grid-template-columns: 1fr; }
+
+  .ex-board-count { padding: 0 var(--space-16); }
+  .ex-board td.ex-hide-m,
+  .ex-board th.ex-hide-m { display: none; }
+  .ex-board td { padding: var(--space-12) var(--space-8); }
+  .ex-board th { padding: var(--space-12) var(--space-8); }
+  .ex-board th:first-child { width: 56px; }
+  .ex-board th:last-child { width: 72px; }
+
+  .ex-rules-list li,
+  .ex-rules-text,
+  .ex-rules-article h4,
+  .ex-rules-head p { font-size: 14px; }
+  .ex-rules-list li.is-note { font-size: 13px; }
+
+  .ex-find-card { padding: var(--space-32) 0; border: 0; }
+  .ex-find-card .ex-actions { flex-direction: column; }
+  .ex-find-card .ex-actions .ds-btn { width: 100%; }
+
+  .ex-lookup { grid-template-columns: 1fr; }
+  .ex-lookup .ds-btn { width: 100%; }
+
+  .ex-summary { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-8); }
+  .ex-summary .ds-stat { padding: var(--space-12); }
+  .ex-summary .ds-stat-label { font-size: 12px; }
+  .ex-summary .ds-stat-value { font-size: 16px; }
+  .ex-summary .ds-stat-value small { font-size: 12px; }
+}

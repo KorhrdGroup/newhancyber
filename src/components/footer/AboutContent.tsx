@@ -1,5 +1,7 @@
 /** 교육원 소개 본문 (원본 footer/about.html 에서 변환). 탭 전환은 AboutTabs 가 맡는다. */
 
+import { REGISTRATION_PHONE, SUPPORT_PHONE } from "@/lib/contact";
+
 /** 모바일 전용: 비전·교육 이념·미션·오시는 길을 한 화면에 */
 export function MobileAboutContent() {
   return (
@@ -70,28 +72,28 @@ export function MobileAboutContent() {
       {/* 미션 문구 */}
       <div className="mobile-about-mission">
         <p className="mobile-about-mission-text">
-          저희 덧셈교육원은 &quot;배움이 곧 기회가 되는 사회&quot;를 만들어가기 위해 앞으로도 학습자
+          저희 한평생원격교육원은 &quot;배움이 곧 기회가 되는 사회&quot;를 만들어가기 위해 앞으로도 학습자
           <br />
           한 분 한 분의 내일을 응원하며 함께하겠습니다.
         </p>
       </div>
       {/* 오시는 길 */}
       <div className="mobile-about-directions">
-        <h2 className="mobile-about-section-title">덧셈원격평생교육원 오시는 길</h2>
+        <h2 className="mobile-about-section-title">한평생원격교육원 오시는 길</h2>
         <div className="mobile-about-directions-info">
           <div className="mobile-about-directions-item">
             <span className="mobile-about-directions-label">주소</span>
             {" "}
-            <span className="mobile-about-directions-value">서울시 도봉로 150다길 64 601호</span>
+            <span className="mobile-about-directions-value">(08512) 경기도 의정부시 의정부동 486-11, 601호 일부</span>
           </div>
           <div className="mobile-about-directions-item">
             <span className="mobile-about-directions-label">전화번호</span>
             {" "}
-            <span className="mobile-about-directions-value">02-2135-5126</span>
+            <span className="mobile-about-directions-value">수강신청 문의 {REGISTRATION_PHONE} / 학습지원 문의 {SUPPORT_PHONE}</span>
           </div>
         </div>
         <div className="mobile-about-directions-map">
-          <img src="/resources/images/footer/about/about-map.png" alt="지도" className="mobile-about-map-img" />
+          <img src="/resources/images/footer/about/about-map-uijeongbu.png" alt="지도" className="mobile-about-map-img" />
         </div>
       </div>
     </div>
@@ -139,7 +141,7 @@ export function PhilosophyTab() {
         <h1 className="philosophy-intro-title">교육 이념</h1>
         <p className="philosophy-intro-text">배움의 즐거움으로, 삶의 변화를 이끌다</p>
         <p className="philosophy-intro-text">
-          덧셈교육원은 누구나 자신의 속도와 방식으로 배울 수 있는
+          한평생원격교육원은 누구나 자신의 속도와 방식으로 배울 수 있는
           <br />
           “평생학습의 장(場)”을 만들어가고 있습니다.
           <br />
@@ -214,7 +216,7 @@ export function PhilosophyTab() {
         </div>
       </div>
       <h1 className="philosophy-conclusion">
-        저희 덧셈교육원은 “배움이 곧 기회가 되는 사회”를 만들어가기 위해 앞으로도 학습자 한 분 한 분의 내일을 응원하며 함께하겠습니다.
+        저희 한평생원격교육원은 “배움이 곧 기회가 되는 사회”를 만들어가기 위해 앞으로도 학습자 한 분 한 분의 내일을 응원하며 함께하겠습니다.
       </h1>
     </>
   );
@@ -226,8 +228,8 @@ export function FeaturesTab() {
     <>
       <div className="features-content">
         <div className="features-content-inner">
-          <h1 className="features-title">덧셈 교육원의 특징</h1>
-          <p className="features-subtitle">배움의 기회가 곧 삶의 기회가 될 수 있도록, 덧셈 교육원은 학습자 한 분 한 분의 여정을 세심하게 함께합니다.</p>
+          <h1 className="features-title">한평생원격교육원의 특징</h1>
+          <p className="features-subtitle">배움의 기회가 곧 삶의 기회가 될 수 있도록, 한평생원격교육원은 학습자 한 분 한 분의 여정을 세심하게 함께합니다.</p>
         </div>
         {/* 특징 리스트 */}
         <div className="features-list">
@@ -376,21 +378,21 @@ export function DirectionsTab() {
   return (
     <>
       <div className="directions-content">
-        <h1 className="directions-title">덧셈원격평생교육원 오시는 길</h1>
+        <h1 className="directions-title">한평생원격교육원 오시는 길</h1>
         <div className="directions-info">
           <div className="directions-item">
             <span className="directions-label">주소</span>
             {" "}
-            <span className="directions-value">서울특별시 도봉로 150다길 64 601호</span>
+            <span className="directions-value">(08512) 경기도 의정부시 의정부동 486-11, 601호 일부</span>
           </div>
           <div className="directions-item">
             <span className="directions-label">전화번호</span>
             {" "}
-            <span className="directions-value">02-2135-5126</span>
+            <span className="directions-value">수강신청 문의 {REGISTRATION_PHONE} / 학습지원 문의 {SUPPORT_PHONE}</span>
           </div>
         </div>
       </div>
-      <img src="/resources/images/footer/about/about-map.png" alt="주소" className="directions-map" />
+      <img src="/resources/images/footer/about/about-map-uijeongbu.png" alt="주소" className="directions-map" />
     </>
   );
 }

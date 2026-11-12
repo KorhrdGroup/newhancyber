@@ -1,6 +1,6 @@
 .wrapper {
   padding: 70px 0;
-  max-width: 1080px;
+  max-width: var(--max-width);
   margin: 0 auto;
 }
 
@@ -118,7 +118,7 @@
 }
 
 .consultation-banner-title {
-  font-size: 34px;
+  font-size: 32px;
   font-weight: 300;
   color: #ffffff;
   margin: 0;
@@ -269,7 +269,7 @@
   padding: 12px 16px;
   background-color: #f9f9f9;
   border-radius: 6px;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
   color: #010101;
   text-align: center;
@@ -284,7 +284,7 @@
   flex: 1;
   padding: 12px 0;
   background-color: #ffffff;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   color: #010101;
   display: flex;
@@ -304,7 +304,7 @@
 }
 
 .register-schedule-note p {
-  font-size: 10px;
+  font-size: 13px;
   color: #656565;
   margin: 4px 0;
   line-height: 1.4;
@@ -1123,7 +1123,7 @@
 
 .practice-support-notice-table td:first-child {
   text-align: center;
-  font-size: 12px !important;
+  font-size: 13px !important;
 }
 
 .practice-support-notice-table td:nth-child(2) {
@@ -1132,7 +1132,7 @@
 
 .practice-support-notice-table td:last-child {
   text-align: center;
-  font-size: 12px !important;
+  font-size: 13px !important;
 }
 
 .practice-support-notice-badge {
@@ -1498,7 +1498,7 @@
   border: 1px solid #e0e0e0;
   vertical-align: middle;
   background-color: #fff !important;
-  font-size: 12px !important;
+  font-size: 14px !important;
 }
 
 /* 왼쪽 열(반환사유) 스타일 - 모든 첫 번째 열 셀 */
@@ -1819,7 +1819,7 @@
   align-items: flex-start;
   gap: 10px;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 14px;
   color: #010101;
 
   line-height: 1.5;
@@ -1863,7 +1863,7 @@
 }
 
 .form-consent-details h4 {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
   color: #010101;
   margin-bottom: 16px;
@@ -2048,7 +2048,7 @@
   border: 1px solid #e0e0e0;
   vertical-align: middle;
   background-color: #fff !important;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .grade-distribution-table tbody tr:last-child td:first-child {
@@ -2395,7 +2395,7 @@
   }
 
   .register-schedule-note.mobile-only p {
-    font-size: 11px;
+    font-size: 13px;
     color: #656565;
     line-height: 1.5;
     margin: 4px 0;

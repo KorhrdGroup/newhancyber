@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import CustomSelect from "@/components/common/CustomSelect";
-import { CONTACT_PHONE, educationOptions, interestOptions, type SelectOption } from "./homeData";
+import { educationOptions, interestOptions, phones, type SelectOption } from "./homeData";
 import PrivacyConsentPopup from "./PrivacyConsentPopup";
 
 interface SelectFieldProps {
@@ -139,8 +139,8 @@ export default function ConsultationForm() {
         </form>
         <div className="mobile-quick-phone">
           <p className="mobile-quick-phone-question">보다 빠른 학습상담을 원한다면?</p>
-          <a href={`tel:${CONTACT_PHONE}`} className="mobile-quick-phone-number">
-            {CONTACT_PHONE}
+          <a href={`tel:${phones.registration}`} className="mobile-quick-phone-number">
+            {phones.registration}
           </a>
         </div>
       </div>

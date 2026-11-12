@@ -12,12 +12,14 @@ import {
   sampleLearner,
   type Course,
 } from "@/components/my-classroom/classroomData";
+import { getTuitionPayments } from "@/components/my-page/myPageDataB";
 
 const titles = {
   enrollment: "수강확인서",
   transcript: "성적증명서",
   certificate: "수료증",
   "payment-receipt": "영수증",
+  tuition: "교육비 납입 증명서",
 } as const;
 type DocType = keyof typeof titles;
 
@@ -131,6 +133,58 @@ export default async function PrintPopup({ params }: { params: Promise<{ docType
           </tbody>
         </table>
         <p className="doc-text">위 사람은 본 교육원에서 위 과목의 모든 과정을 마쳤기에 이 증서를 드립니다.</p>
+      </>
+    );
+  } else if (type === "tuition") {
+    // id: 연도(2026)면 그 해 결제 전체, 결제 번호면 그 한 건
+    const { payments, period } = getTuitionPayments(id);
+    if (payments.length === 0) notFound();
+    const total = payments.reduce((s, p) => s + p.paid, 0);
+    body = (
+      <>
+        <LearnerTable />
+        <table className="doc-table ds-mt-16">
+          <tbody>
+            <tr>
+              <th>교육기관</th>
+              <td>{institution.name}</td>
+            </tr>
+            <tr>
+              <th>사업자등록번호</th>
+              <td>{institution.businessNo}</td>
+            </tr>
+            <tr>
+              <th>납입 기간</th>
+              <td>{period}</td>
+            </tr>
+          </tbody>
+        </table>
+        <table className="doc-table doc-table--list ds-mt-16">
+          <thead>
+            <tr>
+              <th>납입일</th>
+              <th>결제명</th>
+              <th>결제 수단</th>
+              <th>납입 금액</th>
+            </tr>
+          </thead>
+          <tbody>
+            {payments.map((p) => (
+              <tr key={p.id}>
+                <td>{p.paidAt}</td>
+                <td>{p.title}</td>
+                <td>{p.method}</td>
+                <td>{formatWon(p.paid)}</td>
+              </tr>
+            ))}
+            <tr>
+              <th colSpan={3}>합계</th>
+              <th>{formatWon(total)}</th>
+            </tr>
+          </tbody>
+        </table>
+        <p className="doc-text">위 사람이 본 교육원에 위 금액을 교육비로 납입하였음을 증명합니다.</p>
+        <p className="doc-foot">이 증명서는 연말정산 교육비 공제 신청용입니다. 환불된 금액은 들어가지 않습니다.</p>
       </>
     );
   } else {

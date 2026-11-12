@@ -247,7 +247,7 @@
 /* 장학제도 스타일 */
 .scholarship-content {
   width: 100%;
-  max-width: 1080px;
+  max-width: var(--max-width);
   margin: 0 auto;
   padding: 40px 20px;
   box-sizing: border-box;
@@ -297,7 +297,7 @@
 
 .scholarship-table tbody td {
   padding: 12px;
-  font-size: 12px;
+  font-size: 14px;
   color: #333;
   border-right: 1px solid #eaeaea;
   border-bottom: 1px solid #eaeaea;
@@ -356,7 +356,7 @@
   }
 
   .scholarship-table {
-    font-size: 12px;
+    font-size: 13px;
     display: block;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;

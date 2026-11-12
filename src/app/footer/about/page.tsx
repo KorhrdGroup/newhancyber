@@ -9,7 +9,7 @@ export default function AboutPage() {
   return (
     <>
       <MobilePageBanner name="about" text="교육원소개" />
-      <main className="wrapper">
+      <main className="wrapper ft-page">
         <AboutTabs />
       </main>
     </>

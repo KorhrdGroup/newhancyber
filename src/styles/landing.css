@@ -1,0 +1,204 @@
+/* 사회복지사 안내 랜딩 (/landing/social-worker) */
+.ld {
+  --ld-navy: #0a1a5c;
+  --ld-blue: #115aed;
+  --ld-accent: #4ff0b0;
+  background: var(--ld-navy);
+  color: #fff;
+  word-break: keep-all;
+}
+.ld-inner { max-width: var(--max-width); margin: 0 auto; padding: 0 20px; box-sizing: border-box; }
+@media (min-width: 481px) { .ld-inner { padding: 0 var(--header-padding-side); } }
+.ld em { font-style: normal; color: var(--ld-accent); }
+.ld-heading em, .ld-point-title em, .ld-nowrap { white-space: nowrap; }
+.ld-center { text-align: center; }
+
+/* 첫 화면 */
+.ld-hero {
+  padding: 96px 0 88px;
+  text-align: center;
+  background: radial-gradient(circle at 50% 0%, #1d47c9 0%, var(--ld-navy) 70%);
+}
+.ld-hero-eyebrow { font-size: 14px; font-weight: 700; letter-spacing: 0.2em; color: var(--ld-accent); }
+.ld-hero-lead { margin-top: 24px; font-size: 20px; color: #dbe5ff; }
+.ld-hero-title { margin-top: 12px; font-size: 56px; font-weight: 800; line-height: 1.2; }
+.ld-hero-actions { display: flex; justify-content: center; gap: 12px; margin-top: 40px; }
+.ld-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 52px; padding: 0 28px; border-radius: 999px;
+  font-size: 16px; font-weight: 700; text-decoration: none;
+}
+.ld-btn--accent { background: var(--ld-accent); color: var(--ld-navy); }
+.ld-btn--line { border: 1px solid rgba(255, 255, 255, 0.6); color: #fff; }
+.ld-btn:hover { opacity: 0.9; }
+
+.ld-define { padding: 24px 0; background: #050d33; }
+.ld-define .ld-inner { display: flex; align-items: center; gap: 24px; }
+.ld-define strong { flex: none; font-size: 18px; }
+.ld-define p { font-size: 14px; line-height: 1.6; color: #c9d4f2; }
+.ld-define small { font-size: 12px; color: #8d9cc8; }
+
+/* 공통 섹션 */
+.ld-section { padding: 88px 0; }
+.ld-section--why { background: linear-gradient(180deg, #1238b8 0%, var(--ld-blue) 100%); }
+.ld-section--light { background: #eaf1ff; color: #1a1a1a; }
+.ld-section--benefit { background: linear-gradient(135deg, #4b2fd6 0%, #1d47c9 100%); }
+.ld-section--consult { background: var(--ld-navy); }
+.ld-kicker { text-align: center; font-size: 40px; font-weight: 800; font-style: italic; color: var(--ld-accent); }
+.ld-heading { text-align: center; font-size: 32px; font-weight: 800; line-height: 1.35; }
+.ld-heading small { display: block; margin-bottom: 8px; font-size: 20px; font-weight: 500; }
+.ld-heading--dark { color: #1a1a1a; }
+.ld-heading--dark em, .ld-section--light em { color: var(--ld-blue); }
+.ld-sub { margin-top: 12px; text-align: center; font-size: 16px; color: #dbe5ff; }
+.ld-mt { margin-top: 88px; }
+.ld-source { margin-top: 16px; text-align: center; font-size: 12px; color: #c9d4f2; }
+.ld-source--dark { color: #666; }
+
+/* 1 · 2 · 3 포인트 */
+.ld-point-head { margin-top: 72px; text-align: center; }
+.ld-point-num {
+  display: inline-grid; place-items: center; width: 32px; height: 32px;
+  border-radius: 6px; background: var(--ld-accent); color: var(--ld-navy);
+  font-size: 16px; font-weight: 800;
+}
+.ld-point-title { margin-top: 12px; font-size: 26px; font-weight: 700; line-height: 1.4; }
+.ld-section--why > .ld-inner > .ld-point-title { margin-top: 56px; }
+
+.ld-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 32px; }
+.ld-stat { padding: 28px; border-radius: 12px; background: #fff; color: #1a1a1a; text-align: center; }
+.ld-stat-label { font-size: 14px; color: #666; }
+.ld-stat-value { display: block; margin: 8px 0; font-size: 36px; font-weight: 800; color: var(--ld-blue); }
+.ld-stat p { font-size: 16px; font-weight: 600; }
+.ld-stat small { display: block; margin-top: 12px; font-size: 12px; color: #939393; }
+
+.ld-tiles, .ld-benefits, .ld-managers {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px;
+}
+.ld-tile {
+  display: flex; flex-direction: column; gap: 8px; padding: 24px;
+  border-radius: 12px; background: #fff; color: #1a1a1a; text-align: center;
+}
+.ld-tile strong { font-size: 18px; font-weight: 700; color: var(--ld-navy); }
+.ld-tile span { font-size: 14px; line-height: 1.5; color: #666; }
+
+.ld-careers { display: flex; flex-direction: column; gap: 12px; margin-top: 32px; }
+.ld-career {
+  display: flex; gap: 16px; align-items: flex-start; padding: 24px 28px;
+  border-radius: 12px; background: #fff; color: #1a1a1a;
+}
+.ld-career-num {
+  flex: none; display: grid; place-items: center; width: 28px; height: 28px;
+  border-radius: 6px; background: var(--ld-blue); color: #fff; font-size: 14px; font-weight: 700;
+}
+.ld-career strong { font-size: 18px; }
+.ld-career p { margin-top: 6px; font-size: 14px; line-height: 1.6; color: #555; }
+
+/* 급여 · 공무원 */
+.ld-card { margin-top: 32px; padding: 32px; border-radius: 12px; background: #fff; }
+.ld-card-lead { font-size: 18px; font-weight: 700; text-align: center; }
+.ld-bars { display: flex; justify-content: center; gap: 40px; margin-top: 32px; }
+.ld-bar { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 120px; }
+.ld-bar-track { display: flex; align-items: flex-end; width: 56px; height: 180px; }
+.ld-bar-fill { width: 100%; border-radius: 8px 8px 0 0; background: linear-gradient(180deg, #6e9bff, var(--ld-blue)); }
+.ld-bar strong { margin-top: 6px; font-size: 16px; }
+.ld-bar span { font-size: 14px; color: #555; }
+.ld-bar:last-child strong, .ld-bar:last-child span { color: var(--ld-blue); font-weight: 700; }
+
+.ld-compare { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.ld-compare .ld-card { text-align: center; }
+.ld-chip {
+  display: inline-block; padding: 6px 16px; border-radius: 999px;
+  background: var(--ld-blue); color: #fff; font-size: 14px; font-weight: 700;
+}
+.ld-vs { display: flex; justify-content: center; gap: 24px; margin-top: 24px; }
+.ld-vs div { flex: 1; max-width: 160px; padding: 20px 12px; border-radius: 10px; background: #f3f3f3; }
+.ld-vs dt { font-size: 14px; color: #666; }
+.ld-vs dd { margin-top: 8px; font-size: 26px; font-weight: 800; color: #999; }
+.ld-vs .is-highlight { background: #eaf1ff; }
+.ld-vs .is-highlight dd { color: var(--ld-blue); }
+.ld-vs-note { margin-top: 12px; font-size: 14px; font-weight: 600; color: var(--ld-blue); }
+
+/* 한평생 이유 */
+.ld-managers + .ld-point-title { margin-top: 56px; }
+.ld-env { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 24px; }
+.ld-env li {
+  padding: 10px 22px; border-radius: 999px; background: rgba(255, 255, 255, 0.15);
+  font-size: 16px; font-weight: 600;
+}
+
+/* 상담 */
+.ld-consult { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: stretch; }
+.ld-contact { display: flex; flex-direction: column; gap: 16px; }
+.ld-contact-card {
+  flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 8px;
+  padding: 28px; border-radius: 12px; background: #fff; color: #1a1a1a; text-decoration: none;
+}
+.ld-contact-card span { font-size: 16px; color: #555; }
+.ld-contact-card strong { font-size: 28px; font-weight: 800; color: var(--ld-blue); }
+.ld-contact-card--kakao { background: #fee500; }
+.ld-contact-card--kakao strong { font-size: 22px; color: #3c1e1e; }
+
+.ld-form { padding: 28px; border-radius: 12px; background: #fff; color: #1a1a1a; }
+.ld-form-title { font-size: 22px; font-weight: 800; }
+.ld-form-title span { color: var(--ld-blue); }
+.ld-form-fields { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+.ld-input {
+  width: 100%; height: 48px; padding: 0 14px; border: 1px solid #e0e0e0; border-radius: 6px;
+  font-size: 16px; box-sizing: border-box; background: #fff;
+}
+.ld-input:focus { outline: none; border-color: var(--ld-blue); }
+.ld-phone { display: flex; align-items: center; gap: 8px; }
+.ld-phone span { color: #939393; }
+.ld-agree { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; font-size: 14px; }
+.ld-agree label { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.ld-agree input { width: 18px; height: 18px; accent-color: var(--ld-blue); }
+.ld-agree a { color: var(--ld-blue); text-decoration: underline; }
+.ld-agree-all { padding-bottom: 10px; border-bottom: 1px solid #eaeaea; font-weight: 700; }
+.ld-form-btn {
+  width: 100%; height: 52px; margin-top: 20px; border: none; border-radius: 6px;
+  background: var(--ld-blue); color: #fff; font-size: 16px; font-weight: 700; cursor: pointer;
+}
+.ld-form-btn:hover { background: #0032bb; }
+
+/* 태블릿 */
+@media (max-width: 1080px) {
+  .ld-tiles, .ld-benefits { grid-template-columns: repeat(2, 1fr); }
+  .ld-consult { grid-template-columns: 1fr; }
+}
+
+/* 모바일 */
+@media (max-width: 480px) {
+  .ld { padding-top: 56px; }
+  .ld-hero { padding: 56px 0 48px; }
+  .ld-hero-lead { margin-top: 16px; font-size: 16px; }
+  .ld-hero-title { font-size: 34px; }
+  .ld-hero-actions { flex-direction: column; align-items: stretch; margin-top: 28px; }
+  .ld-define .ld-inner { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .ld-section { padding: 56px 0; }
+  .ld-kicker { font-size: 30px; }
+  .ld-heading { font-size: 22px; }
+  .ld-heading small { font-size: 16px; }
+  .ld-point-head { margin-top: 48px; }
+  .ld-point-title { font-size: 19px; }
+  .ld-mt { margin-top: 56px; }
+  .ld-stats, .ld-compare, .ld-managers { grid-template-columns: 1fr; }
+  .ld-stat p { font-size: 15px; }
+  .ld-tiles, .ld-benefits { gap: 10px; }
+  .ld-tile { padding: 16px 12px; }
+  .ld-tile strong { font-size: 15px; }
+  .ld-tile span { font-size: 13px; }
+  .ld-career { padding: 18px 16px; gap: 12px; }
+  .ld-career strong { font-size: 16px; }
+  .ld-card { padding: 24px 16px; }
+  .ld-card-lead { font-size: 16px; }
+  .ld-bars { gap: 8px; }
+  .ld-bar { width: auto; flex: 1; }
+  .ld-bar-track { width: 40px; height: 140px; }
+  .ld-bar strong { font-size: 14px; }
+  .ld-bar span { font-size: 12px; }
+  .ld-vs { gap: 12px; }
+  .ld-vs dd { font-size: 22px; }
+  .ld-contact-card { padding: 20px; }
+  .ld-contact-card strong { font-size: 24px; }
+  .ld-form { padding: 24px 16px; }
+}

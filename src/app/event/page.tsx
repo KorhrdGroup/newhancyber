@@ -12,7 +12,7 @@ export default function EventPage() {
           <span className="mobile-event-title-text">친구추천 이벤트</span>
         </div>
         <img
-          src="/resources/images/main/friends-event-mobile.png"
+          src="/resources/images/main/friends-event-mobile.webp"
           alt="친구 추천 이벤트"
           className="mobile-event-banner-img"
         />
@@ -23,7 +23,7 @@ export default function EventPage() {
           <div className="event-page desktop-only">
             <div className="event-image-container">
               <img
-                src="/resources/images/main/friends-event.png"
+                src="/resources/images/main/friends-event.webp"
                 alt="친구 추천 이벤트"
                 className="event-page-image"
               />

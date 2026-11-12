@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { isVisible, TBD_HREF } from "@/lib/navigation";
+import { isVisible } from "@/lib/navigation";
 import type { NavLink } from "@/types/navigation";
 
 export const metadata: Metadata = { title: "사이트맵" };
@@ -38,20 +38,24 @@ const sections: { title: string; links: SitemapLink[] }[] = [
       { label: "서류제출", href: "/practice-support/documents" },
       { label: "FAQ", href: "/practice-support/faq" },
       { label: "사회복지사실습", href: "/practice-support/social-worker-practice" },
-      // 나중에 오픈 예정
-      { label: "보육교사실습", href: "/practice-support/childcare-teacher-practice", hidden: true },
-      { label: "한국어교원실습", href: "/practice-support/korean-teacher-practice", hidden: true },
-      { label: "평생교육 실습", href: "/practice-support/lifelong-educator-practice", hidden: true },
+      { label: "보육교사실습", href: "/practice-support/childcare-teacher-practice" },
+      { label: "한국어교원실습", href: "/practice-support/korean-teacher-practice" },
+      { label: "평생교육 실습", href: "/practice-support/lifelong-educator-practice" },
     ],
   },
   {
     title: "학습지원",
     links: [
       { label: "공지사항", href: "/learning-support/notice" },
+      { label: "관련기관 소식", href: "/learning-support/notice/news" },
       { label: "학사일정", href: "/learning-support/schedule" },
+      { label: "연간 학사일정", href: "/learning-support/schedule/annual" },
       { label: "FAQ", href: "/learning-support/faq" },
+      { label: "1:1 문의", href: "/learning-support/inquiry" },
       { label: "수강지원프로그램", href: "/learning-support/program" },
+      { label: "학습자 OT", href: "/learning-support/program/ot" },
       { label: "모바일학습가이드", href: "/learning-support/mobile-guide" },
+      { label: "공동인증서 안내", href: "/learning-support/mobile-guide/certificate" },
       { label: "원격지원", href: "/learning-support/remote-support" },
       { label: "서식자료실", href: "/learning-support/forms-data-room" },
     ],
@@ -59,14 +63,28 @@ const sections: { title: string; links: SitemapLink[] }[] = [
   {
     title: "나의 강의",
     links: [
-      { label: "나의 강의실", tight: true, href: TBD_HREF },
-      { label: "나의 결제정보", tight: true, href: TBD_HREF },
+      { label: "나의 강의실", tight: true, href: "/my-classroom" },
+      { label: "나의 결제정보", tight: true, href: "/my-page/payments" },
       // 원본은 "#" — 페이지가 있어 연결
       { label: "장바구니", tight: true, href: "/course-registration/cart" },
-      { label: "결제내역/환불요청", tight: true, href: "/course-registration/payment-history" },
-      { label: "개인정보", tight: true, href: TBD_HREF },
-      { label: "증명서발급", tight: true, href: TBD_HREF },
-      { label: "공결신청", tight: true, href: TBD_HREF },
+      { label: "결제내역/환불요청", tight: true, href: "/my-page/payments/refund" },
+      { label: "개인정보", tight: true, href: "/my-page/profile" },
+      { label: "증명서발급", tight: true, href: "/my-page/certificates" },
+      { label: "공결신청", tight: true, href: "/my-page/exceptions/absence" },
+    ],
+  },
+  {
+    title: "마이페이지",
+    links: [
+      { label: "증명서 발급", href: "/my-page/certificates" },
+      { label: "쿠폰 사용내역", href: "/my-page/coupons" },
+      { label: "문의 내역", href: "/my-page/inquiries" },
+      { label: "학습 게시판", href: "/my-page/study-board" },
+      { label: "설문조사", href: "/my-page/surveys" },
+      { label: "각종 예외 신청", href: "/my-page/exceptions" },
+      { label: "성적 이의신청", href: "/my-page/appeals" },
+      { label: "학습자 PC 등록", href: "/my-page/pc" },
+      { label: "내 정보 수정", href: "/my-page/profile" },
     ],
   },
   {
@@ -74,11 +92,13 @@ const sections: { title: string; links: SitemapLink[] }[] = [
     links: [
       { label: "수강신청", href: "/course-registration/register" },
       { label: "수강신청 절차", href: "/course-registration/process" },
-      // 수강후기 숨김 처리
-      { label: "수강후기", href: "/course-registration/reviews", hidden: true },
+      { label: "수강후기", href: "/course-registration/reviews" },
+      { label: "장학후기", href: "/course-registration/reviews/scholarship" },
       { label: "학습비 반환규정", href: "/course-registration/refund" },
       { label: "수강규정", href: "/course-registration/regulations" },
       { label: "무료학습설계", href: "/course-registration/learning-design" },
+      { label: "평생교육바우처", href: "/course-registration/voucher" },
+      { label: "이벤트", href: "/event" },
     ],
   },
   {
@@ -90,6 +110,7 @@ const sections: { title: string; links: SitemapLink[] }[] = [
       { label: "아이디/비밀번호찾기", tight: true, href: "/member/find-user" },
       { label: "개인정보처리방침", href: "/footer/privacy" },
       { label: "이용약관", tight: true, href: "/footer/terms" },
+      { label: "운영규칙", href: "/footer/operating-rules" },
       { label: "이메일무단수집거부", href: "/footer/email-refusal" },
       { label: "불편사항접수", tight: true, href: "/footer/contact" },
     ],
@@ -108,7 +129,7 @@ const sections: { title: string; links: SitemapLink[] }[] = [
 
 export default function SitemapPage() {
   return (
-    <main className="wrapper">
+    <main className="wrapper ft-page">
       <div className="container">
         <div className="sitemap-grid">
           {sections.map((section) => (

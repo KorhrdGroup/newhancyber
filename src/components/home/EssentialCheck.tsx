@@ -17,12 +17,12 @@ function CardLabel({ card }: { card: EssentialCard }) {
   ));
 }
 
-/** 덧셈 학습자 필수 Check! */
+/** 한평생원격교육원 학습자 필수 Check! */
 export default function EssentialCheck() {
   return (
     <section className="essential-check-section">
       <div className="essential-check-container">
-        <h3 className="essential-check-title">덧셈 학습자 필수 Check!</h3>
+        <h3 className="essential-check-title">한평생원격교육원 학습자 필수 Check!</h3>
         <div className="essential-check-cards">
           {essentialCards.map((card) => {
             const content = (

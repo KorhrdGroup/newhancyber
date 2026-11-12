@@ -12,7 +12,7 @@ function SlideContent({ slide }: { slide: HeroSlide }) {
     <div className="hero-content">
       <div className="hero-text">
         <div className="hero-subtitle">교육부 평가인정 학점은행제 기관</div>
-        <div className="hero-title">덧셈원격평생교육원</div>
+        <div className="hero-title">한평생원격교육원</div>
       </div>
       <div className="hero-image">
         <img src={slide.desktopImage} alt="히어로 배너" className="hero-image-desktop" />

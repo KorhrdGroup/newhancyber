@@ -1,4 +1,4 @@
-import { CONTACT_PHONE } from "@/components/layout/MobileFooter";
+import { REGISTRATION_PHONE } from "@/lib/contact";
 import { TBD_HREF } from "@/lib/navigation";
 
 const SW_IMG = "/resources/images/social-worker";
@@ -41,12 +41,12 @@ export default function ConsultationOptions({ variant }: { variant: "mobile" | "
               <div className="consultation-option-icon">
                 <img src={`${SW_IMG}/button_call.png`} alt="전화 상담" className="consultation-option-icon-img" />
               </div>
-              <a href={`tel:${CONTACT_PHONE}`} className="consultation-option-btn consultation-option-btn-call">
+              <a href={`tel:${REGISTRATION_PHONE}`} className="consultation-option-btn consultation-option-btn-call">
                 {isMobile ? (
-                  <span className="mobile-only">{CONTACT_PHONE}</span>
+                  <span className="mobile-only">{REGISTRATION_PHONE}</span>
                 ) : (
                   <>
-                    <span className="desktop-only">{CONTACT_PHONE}</span>
+                    <span className="desktop-only">{REGISTRATION_PHONE}</span>
                     <span className="mobile-only">
                       전화 연결하기
                       <ArrowIcon className="consultation-option-arrow-mobile" />

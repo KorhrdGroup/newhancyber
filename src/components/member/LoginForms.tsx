@@ -1,11 +1,20 @@
 "use client";
 
-import type { FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 
 const MEMBER_IMG = "/resources/images/member";
 
-/** 일반 로그인 · 범용 공인인증서 로그인 · SNS 로그인 */
+type AuthMethod = "cert" | "simple";
+
+const authMethods: { key: AuthMethod; label: string }[] = [
+  { key: "cert", label: "공동 인증서" },
+  { key: "simple", label: "간편 인증" },
+];
+
+/** 일반 로그인 · 공동 인증서/간편 인증 로그인 · SNS 로그인 */
 export default function LoginForms() {
+  const [authMethod, setAuthMethod] = useState<AuthMethod>("cert");
+
   const handleGeneralLogin = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // TODO: 로그인 API 연동 (userId, userPassword)
@@ -14,8 +23,8 @@ export default function LoginForms() {
 
   const handleCertLogin = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO: 공인인증서 인증 연동 (certUserId)
-    alert("공인인증서 로그인 연동 전입니다.");
+    // TODO: 공동 인증서(certUserId) · 간편 인증 모듈 연동. 원본도 간편 인증은 "모듈을 연동해 주세요." 상태
+    alert(authMethod === "cert" ? "공동 인증서 로그인 연동 전입니다." : "간편 인증 로그인 연동 전입니다.");
   };
 
   // TODO: 네이버/카카오 로그인 URL 로 이동
@@ -57,9 +66,23 @@ export default function LoginForms() {
       </div>
 
       <div className="login-section">
-        <h2 className="login-section-title">범용 공인인증서 로그인</h2>
+        <h2 className="login-section-title">인증서 · 간편 인증 로그인</h2>
         {/* member.css 가 #certLoginForm 으로 버튼 간격을 잡는다 */}
         <form className="login-form" id="certLoginForm" onSubmit={handleCertLogin}>
+          <div className="login-auth-tabs" role="tablist" aria-label="인증 방법">
+            {authMethods.map((m) => (
+              <button
+                key={m.key}
+                type="button"
+                role="tab"
+                aria-selected={authMethod === m.key}
+                className={`login-auth-tab${authMethod === m.key ? " active" : ""}`}
+                onClick={() => setAuthMethod(m.key)}
+              >
+                {m.label}
+              </button>
+            ))}
+          </div>
           <div className="form-group">
             <input
               type="text"

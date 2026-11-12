@@ -6,59 +6,156 @@
   box-sizing: border-box;
 }
 
+/* 하단 링크 페이지(교육원 소개·약관 등): 본문 폭(1080px) 양끝에 맞춰 양옆을 띄움 */
+@media (min-width: 481px) {
+  main.wrapper.ft-page {
+    padding-left: var(--header-padding-side);
+    padding-right: var(--header-padding-side);
+  }
+  main.wrapper.ft-page > * { max-width: calc(var(--max-width) - 2 * var(--header-padding-side)); }
+}
+
 .container {
   width: 100%;
-  max-width: 1080px;
+  max-width: var(--max-width);
   margin: 0 auto;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* 데스크톱 푸터 — 한사이버 푸터 틀(위 링크 띠 + 아래 로고·회사 정보)을 따름 */
 .footer {
-  max-width: 1080px;
-  background-color: #f7f8fa;
-  margin: 0 auto;
-  padding: 0 40px;
-  height: 62px;
-  display: flex;
-  align-items: center;
-  box-sizing: border-box;
   width: 100%;
+  border-top: 1px solid #e0e0e0;
+  box-sizing: border-box;
 }
 
-/* 데스크탑 푸터 스타일 명확히 지정 */
-@media (min-width: 481px) {
-  .footer {
-    max-width: 1080px;
-    background-color: #f7f8fa;
-    margin: 0 auto;
-    padding: 0 40px;
-    height: 62px;
-    display: flex;
-    align-items: center;
-    box-sizing: border-box;
-  }
-  
-  .footer-container {
-    max-width: 1080px;
-    width: 100%;
-    margin: 0 auto;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .footer-links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 56px;
-    width: 100%;
-  }
+.footer-container {
+  max-width: var(--max-width);
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--header-padding-side);
+  box-sizing: border-box;
+}
+
+/* 기관 로고 줄 */
+.footer-auth {
+  background-color: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  padding: var(--space-16) 0;
+}
+
+.footer-auth-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-16) var(--space-32);
+}
+
+.footer-auth-list a {
+  display: block;
+}
+
+.footer-auth-list img {
+  display: block;
+  height: 29px;
+  width: auto;
+}
+
+/* 링크 띠 */
+.footer-menu {
+  background-color: #f7f8fa;
+  border-bottom: 1px solid #e0e0e0;
+  padding: var(--space-20) 0;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-8) var(--space-24);
+}
+
+.footer-links a {
+  font-size: 14px;
+  color: #555;
+  text-decoration: none;
+  transition: color 0.2s;
+  font-weight: 500;
+}
+
+.footer-links a.is-strong {
+  color: #181818;
+  font-weight: 700;
+}
+
+.footer-links a:hover {
+  color: #3f7efb;
+}
+
+/* 로고 · 회사 정보 */
+.footer-info {
+  background-color: #f2f4f8;
+  padding: var(--space-32) 0;
+}
+
+.footer-logo {
+  display: block;
+  height: 25px;
+  width: auto;
+  margin-bottom: var(--space-16);
+}
+
+.footer-info-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-4);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: var(--space-24);
+  font-size: 14px;
+  line-height: 1.6;
+  color: #666;
+  /* 줄 맨 앞 항목의 세로줄은 목록 밖으로 나가 잘린다 (좁은 화면에서 줄바뀜 대비) */
+  overflow: hidden;
+}
+
+.footer-info-list li {
+  position: relative;
+}
+
+/* 항목 사이 짧은 세로줄 */
+.footer-info-list li::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--space-12) * -1);
+  top: 50%;
+  width: 1px;
+  height: 11px;
+  background-color: #ccc;
+  transform: translateY(-50%);
+}
+
+.footer-info-list a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.footer-info-list a:hover {
+  color: #3f7efb;
+}
+
+.footer-copyright {
+  margin: var(--space-12) 0 0;
+  font-size: 13px;
+  color: #999;
 }
 
 /* 모바일에서 데스크탑 푸터 숨기기 */
@@ -68,42 +165,9 @@
   }
 }
 
-.footer-container {
-  max-width: 1080px;
-  width: 100%;
-  margin: 0 auto;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.footer-links {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 56px;
-  width: 100%;
-}
-
-.footer-links a {
-  font-size: 14px;
-  color: #9e9e9e;
-  text-decoration: none;
-  transition: color 0.2s;
-  font-weight: 500;
-}
-
-.footer-links a:hover {
-  color: #3f7efb;
-}
-
 /* 교육원 소개 페이지 스타일 */
 .about-nav {
-  max-width: 1080px;
+  max-width: var(--max-width);
   width: 100%;
   background-color: #ffffff;
   border-bottom: 1px solid #e5e5e5;
@@ -112,7 +176,7 @@
 }
 
 .about-nav-container {
-  max-width: 1080px;
+  max-width: var(--max-width);
   margin: 0 auto;
   width: 100%;
 }
@@ -158,7 +222,7 @@
 /* 인사말 탭 스타일 */
 .greeting-main-image {
   width: 100%;
-  max-width: 1080px;
+  max-width: var(--max-width);
   margin: 0 auto 40px;
   text-align: center;
   box-sizing: border-box;
@@ -166,7 +230,7 @@
 
 .greeting-image {
   width: 100%;
-  max-width: 1080px;
+  max-width: var(--max-width);
   height: auto;
   display: block;
   margin: 0 auto;
@@ -175,7 +239,7 @@
 
 .greeting-content {
   width: 100%;
-  max-width: 1080px;
+  max-width: var(--max-width);
   margin: 0 auto;
 
   box-sizing: border-box;
@@ -196,7 +260,7 @@
 /* 교육이념 탭 인트로 스타일 */
 .philosophy-intro-content {
   width: 100%;
-  max-width: 1080px;
+  max-width: var(--max-width);
   margin: 0 auto;
   padding: 24px;
   margin-bottom: 24px;
@@ -238,7 +302,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
-  max-width: 1080px;
+  max-width: var(--max-width);
   margin: 0 auto;
   padding: 30px 0;
   box-sizing: border-box;
@@ -301,7 +365,7 @@
 /* 교육원 특징 탭 스타일 */
 .features-content {
   width: 100%;
-  max-width: 1080px;
+  max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 20px 60px;
   box-sizing: border-box;
@@ -313,7 +377,7 @@
 }
 
 .features-title {
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 700;
   color: #010101;
   margin: 0 0 16px 0;
@@ -418,7 +482,7 @@
 /* 장학제도 탭 스타일 */
 .scholarship-content {
   width: 100%;
-  max-width: 1080px;
+  max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 20px 60px;
   box-sizing: border-box;
@@ -511,13 +575,13 @@
 /* 반응형 디자인 - 장학제도 */
 @media (max-width: 768px) {
   .scholarship-table {
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .scholarship-table th,
   .scholarship-table td {
     padding: 12px 8px;
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .scholarship-col-item {
@@ -536,7 +600,7 @@
 /* 오시는길 탭 스타일 */
 .directions-content {
   width: 100%;
-  max-width: 1080px;
+  max-width: var(--max-width);
   margin: 0 auto;
   padding: 24px;
   box-sizing: border-box;
@@ -588,7 +652,7 @@
 /* 개인정보처리방침 스타일 */
 .privacy-content {
   width: 100%;
-  max-width: 1080px;
+  max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 20px 60px;
   box-sizing: border-box;
@@ -672,14 +736,14 @@
 }
 
 .privacy-labeling-item-title {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
   color: #010101;
   line-height: 1.7;
 }
 
 .privacy-labeling-item-desc {
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.7;
   color: #333333;
   margin: 0;
@@ -708,7 +772,7 @@
   }
 
   .privacy-labeling-item-desc {
-    font-size: 12px;
+    font-size: 13px;
   }
 }
 
@@ -779,7 +843,7 @@
   padding: 16px 20px;
   vertical-align: middle;
   text-align: left;
-  font-size: 12px;
+  font-size: 14px;
   color: #181818;
   line-height: 1.6;
   border-bottom: 1px solid #e0e0e0;
@@ -885,7 +949,7 @@
   padding: 20px;
   vertical-align: middle;
   text-align: left;
-  font-size: 12px;
+  font-size: 14px;
   color: #010101;
   line-height: 1.6;
   border-bottom: 1px solid #e0e0e0;
@@ -985,7 +1049,7 @@
   padding: 20px;
   vertical-align: middle;
   text-align: center;
-  font-size: 12px;
+  font-size: 14px;
   color: #010101;
   line-height: 1.6;
   border-bottom: 1px solid #e0e0e0;
@@ -1061,7 +1125,7 @@
   padding: 20px;
   vertical-align: middle;
   text-align: center;
-  font-size: 12px;
+  font-size: 14px;
   color: #010101;
   line-height: 1.6;
   border-bottom: 1px solid #e0e0e0;
@@ -1144,7 +1208,7 @@
   padding: 20px;
   vertical-align: middle;
   text-align: center;
-  font-size: 12px;
+  font-size: 14px;
   color: #010101;
   line-height: 1.6;
   border-bottom: 1px solid #e0e0e0;
@@ -1226,7 +1290,7 @@
   padding: 20px 18px;
   vertical-align: middle;
   text-align: left;
-  font-size: 12px;
+  font-size: 14px;
   color: #010101;
   line-height: 1.6;
   border-bottom: 1px solid #e0e0e0;
@@ -1338,7 +1402,7 @@
   padding: 20px 18px;
   vertical-align: middle;
   text-align: left;
-  font-size: 12px;
+  font-size: 14px;
   color: #010101;
   line-height: 1.6;
   border-bottom: 1px solid #e0e0e0;
@@ -1405,7 +1469,7 @@
 
 .terms-container {
   width: 100%;
-  max-width: 1080px;
+  max-width: var(--max-width);
   margin: 0 auto;
   padding: 24px;
   box-sizing: border-box;
@@ -1422,7 +1486,7 @@
 
 .email-refusal-container {
   width: 100%;
-  max-width: 1080px;
+  max-width: var(--max-width);
   margin: 0 auto;
   padding: 24px;
   box-sizing: border-box;
@@ -1527,7 +1591,7 @@
   align-items: center;
   gap: 5px;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 14px;
   color: #010101;
   line-height: 1.5;
   justify-content: center;
@@ -1592,7 +1656,7 @@
 }
 
 .contact-form-consent-details h4 {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
   color: #010101;
   margin: 0 0 16px 0;

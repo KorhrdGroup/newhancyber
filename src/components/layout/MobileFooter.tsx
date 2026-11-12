@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { TBD_HREF } from "@/lib/navigation";
-
-export const CONTACT_PHONE = "02-2135-5126";
+import { CONTACT_EMAIL, REGISTRATION_PHONE, SUPPORT_PHONE } from "@/lib/contact";
 
 /** 모바일 푸터 (회사 정보). 데스크톱 푸터는 480px 이하에서 숨겨진다. */
 export default function MobileFooter({ className }: { className?: string }) {
@@ -11,23 +10,24 @@ export default function MobileFooter({ className }: { className?: string }) {
         <div className="mobile-footer-logo">
           <img
             src="/resources/images/mobile/mobile-footer-logo.png"
-            alt="덧셈원격평생교육원"
+            alt="한평생원격교육원"
             className="mobile-footer-logo-img"
           />
         </div>
-        <p className="mobile-footer-address">
-          주소: 경기도 부천시 원미구 길주로 347, 2층 201호, 2023호 (중동)
-        </p>
+        {/* 회사 정보는 한사이버 푸터 내용 (데스크톱 푸터와 같음) */}
+        <p className="mobile-footer-address">주소: 경기도 의정부시 의정부동 486-11, 601호 일부</p>
         <p className="mobile-footer-contact">
-          대표전화: {CONTACT_PHONE} / 팩스: 00-0000-0000
+          수강신청 문의: {REGISTRATION_PHONE} / 학습지원 문의: {SUPPORT_PHONE}
           <br />
-          평일: 09:00 ~ 18:00 / 점심시간 12:00~13:00 / 주말, 공휴일: 휴무
+          이메일: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
         </p>
+        {/* 항목마다 span 으로 묶어 번호가 하이픈에서 끊기지 않게 한다 */}
         <p className="mobile-footer-business">
-          (주)티엔글로벌 덧셈원격평생교육원 / 대표자: 박미영, 김선종 / 사업자번호: 459-85-02930 /
-          통신판매번호: 제2025-부천원미-1459호
+          <span>사업자명: (주)한평생그룹</span> / <span>대표자: 양병웅</span> /{" "}
+          <span>개인정보보호책임자: 양병웅</span> / <span>사업자등록번호: 227-88-03196</span> /{" "}
+          <span>통신판매신고: 제2024-서울도봉-0983호</span>
         </p>
-        <p className="mobile-footer-copyright">COPYRIGHT 덧셈원격평생교육원 ALL RIGHT RESERVED</p>
+        <p className="mobile-footer-copyright">COPYRIGHT 한평생원격교육원 ALL RIGHT RESERVED</p>
       </div>
       <div className="mobile-footer-links">
         <a href={TBD_HREF} className="mobile-footer-link">

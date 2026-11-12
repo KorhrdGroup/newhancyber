@@ -1,0 +1,743 @@
+/*
+ * 메인 완성도 보강 — style.css(퍼블리싱 원본) 뒤에 읽혀 덮어쓴다.
+ * 데스크톱 전용 수정은 min-width: 481px 안에 둬서 모바일 규칙과 부딪치지 않게 한다.
+ */
+
+/* ---------- 연락처 줄: 번호는 누르면 전화 ---------- */
+.contact-phone {
+  display: block;
+  text-decoration: none;
+}
+
+/* 운영시간 · 연락처 세 칸을 같은 폭으로 나누고 글자는 각 칸 가운데
+   (전에는 칸 폭이 글자 길이대로라 구분선 · 글자가 한쪽으로 쏠려 보였다) */
+.contact-item {
+  flex: 1 1 0;
+  /* 태블릿처럼 좁아도 글자가 줄바꿈되지 않게 칸은 글자 폭 아래로 줄지 않음 */
+  min-width: max-content;
+  align-items: center;
+}
+
+/* ---------- 원격지원 · 카카오 카드 (그림 → 글자 + 3D 아이콘) ---------- */
+/* 그림이 아니라서 오른쪽 상담 폼 높이에 맞춰 늘어나도 깨지지 않는다 */
+.support-box-remote,
+.support-box-kakao {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #3f7efb 0%, #115aed 100%);
+  overflow: hidden;
+}
+
+/* 노랑은 말풍선 그림 바탕색과 같은 값이어야 이음새가 안 보인다 */
+.support-box-kakao {
+  background: #ffe02f;
+}
+
+.support-box-remote .support-box-text,
+.support-box-kakao .support-box-text {
+  position: relative;
+  z-index: 1;
+  gap: 4px;
+}
+
+.support-box-kakao .support-subtitle {
+  color: #333;
+}
+
+.support-box-kakao .support-title {
+  color: #010101;
+}
+
+.support-remote-icon {
+  position: absolute;
+  right: 12px;
+  bottom: 8px;
+  width: 38%;
+  max-width: 96px;
+  height: auto;
+  pointer-events: none;
+}
+
+.support-box-link:hover .support-box-remote,
+.support-box-link:hover .support-box-kakao {
+  opacity: 0.92;
+}
+
+/* 마무리 띠의 상담 버튼으로 내려올 때 고정 메뉴에 가리지 않게 */
+#home-consultation {
+  scroll-margin-top: 90px;
+}
+
+/* ---------- 왼쪽 고정 메뉴: 빠른 메뉴 (모바일에서는 메뉴 전체 숨김) ---------- */
+/* 제목 · 목록을 떨어진 두 상자로, 오른쪽 메뉴처럼 그림자를 줘 배경과 구분 */
+.floating-quick-menu {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  background-color: transparent;
+  overflow: visible;
+}
+
+/* 화면 폭이 1600px 보다 좁으면 왼쪽 여백이 좁아 히어로 배너 그림 속 글자와 겹친다 → 배너를 지나 스크롤한 뒤에 보인다 */
+.floating-quick-menu { transition: opacity 0.2s, visibility 0.2s; }
+@media (max-width: 1599px) {
+  .floating-menu:not(.is-scrolled) .floating-quick-menu { opacity: 0; visibility: hidden; }
+}
+/* 본문(1080px) 왼쪽 여백이 메뉴 폭(121px)+16px 보다 좁으면 스크롤해도 본문을 가린다 → 숨김 */
+@media (max-width: 1359px) {
+  .floating-quick-menu { opacity: 0; visibility: hidden; }
+}
+
+.quick-menu-header {
+  margin-bottom: 0;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(63, 126, 251, 0.3);
+}
+
+.quick-menu-list {
+  /* 좌우 8: "모바일 학습가이드"(100px)가 한 줄에 들어가는 폭 */
+  padding: var(--space-4) var(--space-8);
+  background-color: #fff;
+  box-sizing: border-box;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 글자는 가운데, 위아래 12 로 여유 있게 (전에는 왼쪽 정렬 · 위아래 8) */
+.quick-menu-list a {
+  padding: var(--space-12) 0;
+  color: #333;
+  text-align: center;
+}
+
+/* 구분선은 항목 사이에만, 칸 폭에 맞춰 */
+.quick-menu-list a::after {
+  left: 0;
+  right: 0;
+}
+
+.quick-menu-list li:last-child a::after {
+  display: none;
+}
+
+/* ---------- 오른쪽 고정 메뉴: 빠른 상담 + SNS (모바일에서는 메뉴 전체 숨김) ---------- */
+/* 두 상자를 한 묶음으로 쌓아 사이 간격 8 고정, 높이는 내용에 맞춤 */
+.floating-right {
+  position: fixed;
+  top: 290px;
+  right: max(16px, calc((min(50% - 540px, 21.875%) - 114px) / 2));
+  width: 114px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.floating-right .floating-consultation,
+.floating-right .floating-social {
+  position: static;
+  width: 100%;
+  height: auto;
+}
+
+/* 빠른 상담: 고정 높이(214) 안에서 내용이 가운데 떠 위아래가 비던 것 → 내용 높이대로 */
+.floating-consultation {
+  padding: var(--space-12) var(--space-8) var(--space-8);
+  gap: var(--space-12);
+}
+
+.consultation-content {
+  gap: var(--space-4);
+}
+
+.consultation-title {
+  line-height: 1.2;
+}
+
+/* 전화번호가 가장 눈에 띄게 (피그마 30px) */
+.consultation-phone {
+  margin-top: var(--space-4);
+}
+
+.phone-number {
+  font-size: 28px;
+  line-height: 1.15;
+}
+
+.consultation-kakao-btn {
+  height: var(--size-control-md);
+  gap: var(--space-8);
+}
+
+.consultation-kakao-btn .kakao-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* SNS: 아이콘 테두리로 흰 바탕 로고도 칸이 보이게, 줄 간격 8 */
+.floating-social {
+  padding: var(--space-12);
+  gap: var(--space-8);
+  align-items: stretch;
+}
+
+.floating-social .social-icon {
+  border: 1px solid #eaeaea;
+  box-sizing: border-box;
+}
+
+@media (min-width: 481px) {
+  /* ---------- 이벤트 · 간편상담 줄: 왼쪽 묶음 아래 끝을 상담 폼과 맞춤 ---------- */
+  /* 이벤트 배너는 글자 박힌 그림이라 비율 고정, 남는 높이는 아래 두 카드가 나눠 가짐 */
+  .support-boxes {
+    flex: 1;
+  }
+
+  .support-box-link {
+    display: flex;
+  }
+
+  .support-box {
+    aspect-ratio: auto;
+    min-height: 115px;
+  }
+
+  /* ---------- TOP 버튼: 화면 폭과 상관없이 항상 오른쪽 아래 구석 ---------- */
+  .floating-top-btn {
+    right: var(--space-24);
+    bottom: var(--space-24);
+  }
+
+  /* ---------- 필수 Check: 위 섹션과 간격이 72px 이던 것 → 다른 섹션처럼 32px ---------- */
+  .essential-check-section {
+    padding-top: 0;
+  }
+
+  /* ---------- 학습일정 안내: 글자 사이 띄어쓰기 대신 줄 정렬 ---------- */
+  /* 줄 간격이 생겨 높이를 내용에 맞추고, 공지사항 상자도 같은 높이로 */
+  .schedule-notice-container {
+    align-items: stretch;
+  }
+
+  .schedule-guide,
+  .notice-board {
+    height: auto;
+    min-height: 300px;
+  }
+
+  /* 제목·탭·목록 사이가 붙어 보이던 것 */
+  .notice-board {
+    gap: var(--space-16);
+  }
+
+  .schedule-list {
+    gap: 0;
+    margin-bottom: var(--space-16);
+  }
+
+  .schedule-item {
+    height: auto;
+    padding: var(--space-8) 0;
+    border-bottom: 1px dashed #eaeaea;
+  }
+
+  .schedule-item:last-child {
+    border-bottom: none;
+  }
+
+  /* 공지사항 탭: 72×32 칸에 글자가 꽉 차 답답하던 것 → 폭은 글자에 맞추고 좌우 16 · 높이 40
+     (notice-tab 은 게시판 화면도 같이 써서 메인 안에서만) */
+  .notice-board .notice-tab {
+    width: auto;
+    height: var(--size-control-md);
+    padding: 0 var(--space-16);
+  }
+
+  /* 공지사항 목록 간격 (notice-list 는 게시판 화면도 같이 써서 메인 안에서만) */
+  /* 옆 학습일정과 같은 줄 모양(위아래 8px + 점선)으로 → 상자 아래가 비지 않게 */
+  .notice-board .notice-list {
+    gap: 0;
+  }
+
+  .notice-board .notice-item {
+    padding: var(--space-8) var(--space-4);
+    border-bottom: 1px dashed #eaeaea;
+  }
+
+  .notice-board .notice-item:last-child {
+    border-bottom: none;
+  }
+
+  .schedule-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #666;
+    letter-spacing: 0;
+  }
+
+  .schedule-date {
+    font-size: 13px;
+    font-weight: 500;
+    color: #333;
+  }
+
+  .schedule-item-highlight .schedule-label,
+  .schedule-item-highlight .schedule-date {
+    color: #115aed;
+    font-weight: 700;
+  }
+
+  /* 바로 위 "상담 신청하기"(진한 파랑)가 주 버튼으로 보이게 → 연한 파랑 보조 버튼 (피그마 시안) */
+  .schedule-btn {
+    width: 100%;
+    background-color: #cde3ff;
+    color: #181818;
+  }
+
+  .schedule-btn:hover {
+    background-color: #b5d4ff;
+  }
+
+  /* ---------- 간편상담: 동의 체크를 글자 앞에, 크게 ---------- */
+  .consultation-form-content {
+    gap: var(--space-12);
+  }
+
+  /* "관심분야"·"최종학력"이 48px 보다 넓어 칸이 밀리던 것 → 56px */
+  .form-label {
+    font-size: 13px;
+    min-width: 56px;
+  }
+
+  .form-checkbox-group {
+    justify-content: flex-start;
+    /* 왼쪽 = 이름 칸 56px + 칸 사이 12px */
+    margin: var(--space-4) 0 var(--space-16) 68px;
+  }
+
+  .checkbox-label {
+    flex-direction: row-reverse;
+    gap: 8px;
+    padding: 0;
+    font-size: 13px;
+    color: #666;
+  }
+
+  .checkbox-input {
+    width: 18px;
+    height: 18px;
+    margin-left: 0;
+  }
+
+  .checkbox-input:checked::after {
+    font-size: 12px;
+  }
+
+  /* form-group·consultation-form 은 회원·학습설계 화면도 같이 써서 메인 안에서만 바꾼다 */
+  .consultation-form-area .consultation-form {
+    padding: var(--space-20);
+  }
+
+  .consultation-form-area .form-group {
+    gap: var(--space-12);
+  }
+
+  .consultation-form-area .form-title {
+    padding-bottom: var(--space-16);
+  }
+
+  /* form-input·form-select 도 다른 화면과 같이 써서 메인 상담 칸만 */
+  .consultation-form-area .form-input,
+  .consultation-form-area .form-select {
+    height: var(--size-control-md);
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .form-submit-btn {
+    height: var(--size-control-lg);
+    padding: 0;
+    background-color: #115aed;
+  }
+
+  .form-submit-btn:hover {
+    background-color: #0032bb;
+  }
+
+  .why-choose-section {
+    padding-bottom: var(--space-48);
+  }
+
+  /* ---------- 필수 Check: 정사각형 카드, 마우스 올리면 살짝 뜨게 ---------- */
+  .essential-check-cards {
+    align-items: flex-start;
+  }
+
+  .essential-card {
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+
+  .essential-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  }
+}
+
+/* 필수 Check: 한 줄 8개로는 카드(정사각형)에 글자가 다 안 들어가는 폭 → 4개씩 두 줄 */
+@media (min-width: 481px) and (max-width: 1080px) {
+  .essential-check-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* 좁은 태블릿: 카드가 100px 안팎이라 아이콘·글자를 줄여 정사각형 안에 담는다 */
+@media (min-width: 481px) and (max-width: 600px) {
+  .essential-card-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .essential-card-text {
+    font-size: 12px;
+  }
+}
+
+/* ---------- 왜 한평생: 세 탭이 같은 카드 틀 (모바일에서는 섹션 숨김) ---------- */
+/* 탭 버튼: 긴 이름("학습자 만족을 위한 완벽 가이드")도 좌우·위아래 여유가 있게 넓고 높게 */
+.why-choose-tab {
+  width: 320px;
+  height: var(--size-control-lg);
+}
+
+/* 세 탭을 한 칸에 겹쳐서 영역 높이 = 가장 긴 탭(카드 두 줄) */
+.why-choose-panels {
+  display: grid;
+}
+
+.why-choose-panels > .why-choose-content {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.why-choose-content.is-hidden {
+  visibility: hidden;
+}
+
+/* 제목은 위, 요약은 아래에 두고 카드 묶음은 그 사이 가운데 */
+.why-cards {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  gap: var(--space-16);
+}
+
+/* 카드 수가 2·3·6개로 달라도 칸 폭은 한 줄 3칸 기준으로 같게 */
+.why-card {
+  flex: 0 0 calc((100% - 2 * var(--space-16)) / 3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-32) var(--space-24);
+  border-radius: var(--radius-12);
+  background-color: #fff;
+  box-shadow: 0 4px 16px rgba(17, 90, 237, 0.06);
+  text-align: center;
+  box-sizing: border-box;
+  /* 카드 높이를 맞추고, 짧은 카드는 내용을 세로 가운데로 */
+  min-height: 224px;
+  justify-content: center;
+}
+
+.why-card-icon {
+  width: 80px;
+  height: 80px;
+  margin-bottom: var(--space-16);
+  object-fit: contain;
+}
+
+.why-card-title {
+  margin: 0 0 var(--space-8);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #010101;
+  word-break: keep-all;
+}
+
+.why-card-desc {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #666;
+  word-break: keep-all;
+}
+
+/* 3탭(6개): 피그마처럼 아이콘 위 · 제목 아래인 작은 카드를 3×2로.
+   아이콘을 줄이고 카드를 조금 높여 위아래 여백을 확보한다
+   (두 줄 + 줄 사이 16 = 240 → 다른 탭 카드 한 줄(224)과 8px 차이라 빈 곳이 거의 안 생김) */
+.why-cards--compact .why-card {
+  min-height: 112px;
+  padding: var(--space-16);
+}
+
+.why-cards--compact .why-card-icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: var(--space-8);
+}
+
+.why-cards--compact .why-card-title {
+  margin: 0;
+  font-size: 16px;
+}
+
+/* ---------- 마무리 배너 ---------- */
+/* 위쪽 배너(실습 수강 신청 · 수강료 결제)와 같은 톤:
+   화면 끝까지 꽉 찬 띠 → 본문 폭 안의 둥근 카드, 남색 바탕 · 연파랑 강조 · 그림은 카드 안 오른쪽 */
+.closing-cta-section {
+  padding: var(--space-48) 0;
+  background-color: var(--color-white);
+}
+
+.closing-cta-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--header-padding-side);
+  box-sizing: border-box;
+}
+
+.closing-cta-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-32);
+  padding: var(--space-32) var(--space-40);
+  border-radius: var(--radius-lg);
+  background-color: #00208a;
+  color: #fff;
+  overflow: hidden;
+}
+
+.closing-cta-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.closing-cta-label {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #cde3ff;
+}
+
+.closing-cta-title {
+  margin-top: var(--space-4);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.closing-cta-title em {
+  font-style: normal;
+  color: #98c2ff;
+}
+
+.closing-cta-desc {
+  margin-top: var(--space-8);
+  font-size: 14px;
+  color: #cde3ff;
+}
+
+.closing-cta-desc a {
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+}
+
+.closing-cta-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  flex-shrink: 0;
+}
+
+.closing-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: var(--size-control-lg);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  box-sizing: border-box;
+  transition: background-color 0.2s;
+}
+
+.closing-cta-btn:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* 주 버튼: 흰 바탕 · 남색 글자 (노랑은 카카오 전용이라 쓰지 않음) */
+.closing-cta-btn--primary {
+  border-color: #fff;
+  background-color: #fff;
+  color: #00208a;
+}
+
+.closing-cta-btn--primary:hover {
+  background-color: #e8f1ff;
+}
+
+/* 그림: 카드 맨 앞, 바탕보다 한 단계 밝은 남색 원 안에 */
+.closing-cta-graphic {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  background-color: #0a2fa3;
+}
+
+.closing-cta-graphic img {
+  width: 76px;
+  height: auto;
+  pointer-events: none;
+}
+
+/* 태블릿: 그림까지 들어갈 폭이 안 돼 그림만 숨김 */
+@media (max-width: 1080px) and (min-width: 481px) {
+  .closing-cta-graphic {
+    display: none;
+  }
+
+  .closing-cta-card {
+    padding: var(--space-32);
+  }
+}
+
+/* ---------- 모바일 ---------- */
+@media (max-width: 480px) {
+  /* 공지사항 탭: 91px 고정폭에 18px 글자가 꽉 차던 것 → 폭은 글자에 맞추고 좌우 16 */
+  .notice-board .notice-tab {
+    width: auto;
+    padding: 0 var(--space-16);
+  }
+
+  /* 첫 배너: 데스크톱 높이(350px)가 그대로 남아 그림 아래가 100px 비던 것 → 그림 높이에 맞춤 */
+  .hero-swiper {
+    height: auto;
+  }
+
+  .hero-swiper .swiper-pagination {
+    bottom: 12px !important;
+  }
+
+  /* 마감 띠: 검정 → 브랜드 남색, 더 얇게 */
+  .mobile-deadline-banner {
+    height: 52px;
+    background: linear-gradient(90deg, #0032bb, #115aed);
+  }
+
+  .mobile-deadline-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .mobile-deadline-text,
+  .mobile-deadline-text-bold {
+    font-size: 15px;
+  }
+
+  .mobile-deadline-text-bold {
+    font-weight: 700;
+    color: #ffe55c;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* 개강 카드: "개강반"이 두 줄로 쪼개지지 않게 */
+  .mobile-course-semester {
+    font-size: 13px;
+    color: #666;
+  }
+
+  .mobile-course-date {
+    font-size: 18px;
+    white-space: nowrap;
+  }
+
+  .mobile-course-date-muted {
+    color: #939393;
+  }
+
+  /* 필수 Check: 카드 폭(80px)에 글자가 다 안 들어가서
+     아이콘을 정사각형 칸에 담고 이름은 칸 아래에 둔다 */
+  .essential-check-cards {
+    row-gap: var(--space-16);
+  }
+
+  .essential-card {
+    justify-content: flex-start;
+    gap: var(--space-8);
+    height: auto;
+    padding: 0;
+    border: none;
+    background: none;
+  }
+
+  .essential-card-icon {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    margin: 0;
+    padding: var(--space-12);
+    border: 1px solid #f0f0f0;
+    border-radius: 8px;
+    background-color: #fff;
+    box-sizing: border-box;
+  }
+
+  /* "실습지원센터"가 쪼개지지 않게 */
+  .essential-card-text {
+    word-break: keep-all;
+    letter-spacing: -0.02em;
+  }
+
+  /* 원격지원 카드 */
+  .support-box-remote {
+    padding: 16px;
+  }
+
+  /* 상담 칸 줄 사이·동의 줄 위아래가 붙어 보이던 것 */
+  .consultation-form-content {
+    gap: var(--space-12);
+  }
+
+  .form-checkbox-group {
+    margin: var(--space-4) 0 var(--space-16);
+  }
+
+  /* 상담 입력 칸 (form-input 은 다른 화면도 같이 써서 메인 상담 칸만) */
+  .consultation-form-area .form-input,
+  .consultation-form-area .form-select {
+    height: var(--size-control-lg);
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  /* 마무리 띠는 모바일에서 숨김 (하단 고정 메뉴가 같은 역할) */
+  .closing-cta-section {
+    display: none;
+  }
+}

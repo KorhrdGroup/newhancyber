@@ -1,0 +1,89 @@
+/* 마이페이지 화면 2묶음(증명서·이의신청·내 정보 수정·문의 내역) 전용 — 클래스는 mq- 로 시작 */
+
+/* ---------- 화면 안 두 번째 탭 줄 (PageTabs + mq-subtabs): 마이페이지 탭과 구분되게 알약 모양 ---------- */
+.page-tabs.mq-subtabs {
+  display: inline-flex;
+  max-width: 100%;
+  gap: var(--space-4);
+  margin-bottom: var(--space-24);
+  padding: var(--space-4);
+  border-bottom: 0;
+  border-radius: var(--radius-8);
+  background: var(--color-bg-muted);
+}
+.mq-subtabs .page-tab {
+  height: 36px;
+  margin: 0;
+  padding: 0 var(--space-16);
+  border-bottom: 0;
+  border-radius: var(--radius-6);
+  font-size: 14px;
+}
+.mq-subtabs .page-tab.is-active {
+  background: var(--color-bg-default);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ---------- 안내 상자 ---------- */
+.mq-guide {
+  margin-bottom: var(--space-24);
+  padding: var(--space-16) var(--space-20);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-8);
+  background: var(--color-bg-subtle);
+  color: var(--color-text-default);
+}
+.mq-guide-title { margin-bottom: var(--space-8); font-size: 14px; font-weight: 600; color: var(--color-text-strong); }
+
+/* 표 위 줄: 건수 + 버튼 */
+.mq-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: var(--space-8); margin-bottom: var(--space-12); }
+.mq-toolbar--between { justify-content: space-between; }
+
+.mq-link { font-weight: 500; color: var(--color-text-strong); text-decoration: none; }
+.mq-link:hover { color: var(--color-text-brand); text-decoration: underline; }
+
+/* ---------- 상세: 질문·신청 내용 + 답변 ---------- */
+.mq-meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-8) var(--space-12); font-size: 13px; color: var(--color-text-secondary); }
+.mq-post-title { font-size: 18px; font-weight: 600; line-height: 1.4; color: var(--color-text-strong); }
+.mq-body { font-size: 14px; line-height: 1.7; color: var(--color-text-default); white-space: pre-line; word-break: keep-all; }
+.pp-box.mq-answer { border-color: var(--color-border-brand); background: var(--color-bg-brand-subtle); }
+.mq-answer-result { font-size: 16px; font-weight: 600; color: var(--color-text-brand); }
+.pp-box.mq-waiting { padding: var(--space-40) var(--space-24); background: var(--color-bg-subtle); text-align: center; }
+.mq-waiting-title { font-size: 16px; font-weight: 600; color: var(--color-text-strong); }
+
+/* ---------- 내 정보 수정 ---------- */
+.pp-box.mq-confirm { max-width: 480px; margin: 0 auto; padding: var(--space-32); }
+.mq-confirm-title { font-size: 18px; font-weight: 600; color: var(--color-text-strong); }
+.mq-full { width: 100%; }
+
+.mq-fields { border-top: 1px solid var(--color-border-default); }
+.mq-field {
+  display: grid;
+  grid-template-columns: 160px minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-16);
+  padding: var(--space-12) 0;
+  border-bottom: 1px solid var(--color-border-subtle);
+  font-size: 14px;
+}
+.mq-field-label { font-weight: 600; color: var(--color-text-strong); }
+.mq-field-control { min-width: 0; max-width: 560px; color: var(--color-text-default); }
+.mq-phone { display: grid; grid-template-columns: 96px minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-8); }
+.mq-inline { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-8); }
+.mq-inline > .ds-input,
+.mq-inline > .ds-select { flex: 1 1 140px; width: auto; min-width: 0; }
+.mq-inline > .mq-postal { flex: 0 1 160px; }
+.mq-inline > .mq-fixed,
+.mq-at { flex: none; }
+.mq-at { color: var(--color-text-secondary); }
+.mq-checks { display: flex; flex-wrap: wrap; gap: var(--space-8) var(--space-24); }
+.mq-withdraw { margin-top: var(--space-16); text-align: right; }
+
+@media (max-width: 768px) {
+  .page-tabs.mq-subtabs { display: flex; }
+  .mq-subtabs .page-tab { flex: 1 0 auto; justify-content: center; padding: 0 var(--space-12); font-size: 13px; }
+  .mq-guide { padding: var(--space-12) var(--space-16); }
+  .pp-box.mq-confirm { padding: var(--space-20); }
+  .mq-field { grid-template-columns: 1fr; gap: var(--space-8); }
+  .mq-field-control { max-width: none; }
+}

@@ -4,13 +4,13 @@ export const metadata: Metadata = { title: "이용약관" };
 
 export default function TermsPage() {
   return (
-    <main className="wrapper">
+    <main className="wrapper ft-page">
       <div className="terms-container" style={{ backgroundColor: "#f3f8ff" }}>
         <h1 className="terms-page-title">이용약관</h1>
         <p>
           제 1 조 (목적)
           <br />
-          이 약관은 덧셈(이하 &apos;교육원&apos;)이 운영하는 서비스(이하 &apos;서비스&apos;)의 회원 권리, 의무 및 책임 사항을 규정하는 것을 목적으로 합니다.{" "}
+          이 약관은 한평생원격교육원(이하 &apos;교육원&apos;)이 운영하는 서비스(이하 &apos;서비스&apos;)의 회원 권리, 의무 및 책임 사항을 규정하는 것을 목적으로 합니다.{" "}
           <br />
           · 제 2 조 (정의)
           <br />

@@ -14,8 +14,8 @@ import "@/styles/footer.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "덧셈원격평생교육원",
-    template: "%s - 덧셈원격평생교육원",
+    default: "한평생원격교육원",
+    template: "%s - 한평생원격교육원",
   },
 };
 

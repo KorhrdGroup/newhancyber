@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CONTACT_PHONE } from "@/components/layout/MobileFooter";
+import { SUPPORT_PHONE } from "@/lib/contact";
 import FindUserForms from "@/components/member/FindUserForms";
 
 export const metadata: Metadata = { title: "아이디 찾기/비밀번호 재발급" };
@@ -16,8 +16,8 @@ export default function FindUserPage() {
             <p className="find-id-info-text">
               휴대폰 번호 변경 등 로그인에 문제가 있을 경우
               <br />
-              <a href={`tel:${CONTACT_PHONE}`} className="find-id-phone-link">
-                학사운영팀 {CONTACT_PHONE}
+              <a href={`tel:${SUPPORT_PHONE}`} className="find-id-phone-link">
+                학습지원센터 {SUPPORT_PHONE}
               </a>
               으로 문의바랍니다.
             </p>

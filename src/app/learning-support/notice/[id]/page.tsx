@@ -14,7 +14,7 @@ export default function LearningNoticeDetailPage() {
       <main className="wrapper">
         <PostDetail
           mobileInfoTitle="26년 1학기 1차(12월 24일 개강반) 사회복지현장실습 모집 안내문(지방)"
-          title="26년 1학기 1차(12월 24일 개강반) 사회복지..."
+          title="26년 1학기 1차(12월 24일 개강반) 사회복지현장실습 모집 안내문(지방)"
           date="25.10.21"
           fileName="파일명.PDF"
           bannerAlt="공지사항 배너"

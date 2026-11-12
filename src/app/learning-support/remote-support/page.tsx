@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { CONTACT_PHONE } from "@/components/layout/MobileFooter";
+import { SUPPORT_PHONE } from "@/lib/contact";
 
 export const metadata: Metadata = { title: "원격지원" };
 
@@ -23,7 +23,7 @@ export default function LearningRemoteSupportPage() {
           <div className="remote-support-content">
             {/* "함꼐" 는 원본 표기 그대로 */}
             <p className="remote-support-content-text">
-              덧셈원격평생교육원 서비스 이용 시 발생하는 문의사항을 담당자가 회원님의 동의 하에 PC 화면을 함꼐
+              한평생원격교육원 서비스 이용 시 발생하는 문의사항을 담당자가 회원님의 동의 하에 PC 화면을 함꼐
               보면서 신속하고 정확하게 도와드리는 원격지원 서비스입니다.
             </p>
           </div>
@@ -40,7 +40,7 @@ export default function LearningRemoteSupportPage() {
             </div>
             <div className="remote-support-contact-box">
               <div className="remote-support-contact-title">출석 및 시험 관련문의</div>
-              <div className="remote-support-contact-content">{CONTACT_PHONE}</div>
+              <div className="remote-support-contact-content">{SUPPORT_PHONE}</div>
             </div>
           </div>
           <Divider />

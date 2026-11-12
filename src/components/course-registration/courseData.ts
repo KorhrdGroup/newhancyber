@@ -81,6 +81,13 @@ export const semesterSchedules: SemesterSchedule[] = [
   },
 ];
 
+/** 과목명으로 찾기 (장바구니 샘플은 "가족 복지론"처럼 띄어 쓴 이름도 있다) */
+export const findCourseByName = (name: string) =>
+  courses.find((course) => course.name.replace(/\s/g, "") === name.replace(/\s/g, ""));
+
+/** 맛보기(샘플강의) 팝업 주소 — 원본: /vod/(과목 번호)/pc/1/1.html */
+export const sampleLectureHref = (name: string) => `/popup/sample-lecture/${encodeURIComponent(name)}`;
+
 export interface CartCourse {
   name: string;
   icon: string;
