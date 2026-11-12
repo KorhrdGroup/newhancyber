@@ -262,10 +262,10 @@
 
 .gnb-list {
   display: flex;
-  /* 첫 메뉴 글자는 본문 왼쪽 끝, 마지막 메뉴 글자는 본문 오른쪽 끝에 맞추고 사이는 고르게 (글자 양옆 36px 여백만큼 밖으로) */
+  /* 첫·마지막 메뉴 글자를 본문 양끝에서 20px 안쪽에 두고 사이는 고르게 (글자 양옆 36px 여백 - 20px) */
   justify-content: flex-start;
   list-style: none;
-  margin: 0 -36px;
+  margin: 0 -16px;
   padding: 0;
   gap: 0;
 }
