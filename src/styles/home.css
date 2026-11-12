@@ -18,21 +18,22 @@
   align-items: center;
 }
 
-/* ---------- 원격지원 · 카카오 카드 (그림 → 글자 + 3D 아이콘) ---------- */
-/* 그림이 아니라서 오른쪽 상담 폼 높이에 맞춰 늘어나도 깨지지 않는다 */
+/* ---------- 원격지원 · 카카오 카드 (Figma 483:5735 · 483:5742) ---------- */
+/* 그림이 아니라서 오른쪽 상담 폼 높이에 맞춰 늘어나도 깨지지 않는다. 아이콘은 오른쪽 위 75px */
 .support-box-remote,
 .support-box-kakao {
   position: relative;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  gap: 8px;
   padding: 20px;
+  border: 1px solid #eaeaea;
   border-radius: 8px;
-  background: linear-gradient(135deg, #3f7efb 0%, #115aed 100%);
+  background: #04c974;
   overflow: hidden;
 }
 
-/* 노랑은 말풍선 그림 바탕색과 같은 값이어야 이음새가 안 보인다 */
 .support-box-kakao {
   background: #ffe02f;
 }
@@ -41,10 +42,22 @@
 .support-box-kakao .support-box-text {
   position: relative;
   z-index: 1;
-  gap: 4px;
+  gap: 10px;
+  line-height: 1;
+}
+
+.support-box-remote .support-subtitle {
+  font-weight: 700;
+  color: #f9f9f9;
+}
+
+.support-box-remote .support-title {
+  font-weight: 800;
+  color: #fff;
 }
 
 .support-box-kakao .support-subtitle {
+  font-weight: 600;
   color: #333;
 }
 
@@ -53,12 +66,10 @@
 }
 
 .support-remote-icon {
-  position: absolute;
-  right: 12px;
-  bottom: 8px;
-  width: 38%;
-  max-width: 96px;
-  height: auto;
+  flex-shrink: 0;
+  width: 75px;
+  height: 75px;
+  object-fit: cover;
   pointer-events: none;
 }
 

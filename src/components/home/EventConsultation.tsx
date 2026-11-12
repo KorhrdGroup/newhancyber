@@ -23,26 +23,26 @@ export default function EventConsultation() {
             </div>
           </Link>
           <div className="support-boxes">
-            {/* 원본은 초록 그림(phone.png) — 화면 색을 파랑 계열로 맞추려고 글자 + 3D 아이콘으로 다시 그림 */}
+            {/* Figma(483:5735) — 초록 카드 + 3D 전화 아이콘 */}
             <Link href="/learning-support/remote-support" className="support-box-link">
               <div className="support-box support-box-remote">
                 <div className="support-box-text">
                   <p className="support-subtitle">도움이 필요하신가요?</p>
                   <h4 className="support-title">원격지원</h4>
                 </div>
-                <img src={`${MAIN_IMG}/support/support-tab-002.png`} alt="" className="support-remote-icon" />
+                <img src={`${MAIN_IMG}/support/support-remote-phone.png`} alt="" className="support-remote-icon" />
               </div>
             </Link>
             {/* 카카오톡 채널 주소는 추후 전달 예정
                 원본은 글자까지 박힌 그림(kakaotalk.png) — 오른쪽 상담 폼 높이에 맞춰 늘어나야 해서
-                원격지원 카드처럼 글자 + 말풍선 아이콘(그림에서 잘라냄)으로 다시 그림 */}
+                원격지원 카드처럼 글자 + 3D 말풍선 아이콘으로 다시 그림 — Figma(483:5742) */}
             <a href={TBD_HREF} className="support-box-link">
               <div className="support-box support-box-kakao">
                 <div className="support-box-text">
                   <p className="support-subtitle">간편 채팅상담</p>
                   <h4 className="support-title">카카오톡 상담</h4>
                 </div>
-                <img src={`${MAIN_IMG}/kakao-bubble.png`} alt="" className="support-remote-icon" />
+                <img src={`${MAIN_IMG}/support/support-kakao-bubble.png`} alt="" className="support-remote-icon" />
               </div>
             </a>
           </div>
