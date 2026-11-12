@@ -11,7 +11,7 @@ export const metadata: Metadata = { title: "결제 내역 - 마이페이지" };
 
 const statusBadge: Record<PaymentStatus, string> = {
   "결제 완료": "ds-badge--success",
-  "입금 대기": "ds-badge--warning",
+  "입금 대기": "ds-badge--neutral",
   "환불 신청": "ds-badge--brand",
   "환불 완료": "ds-badge--neutral",
 };
@@ -29,7 +29,7 @@ export default function PaymentsPage() {
         <table className="ds-table ex-rtable">
           <thead>
             <tr>
-              <th>결제명</th>
+              <th className="is-left">결제명</th>
               <th>결제일</th>
               <th>결제 과목</th>
               <th>결제 수단</th>

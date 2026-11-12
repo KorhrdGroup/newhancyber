@@ -72,6 +72,7 @@
   color: var(--color-text-default);
   text-align: center;
 }
+.ds-table th.is-left,
 .ds-table td.is-left { text-align: left; }
 .ds-table tr.is-current td { background: var(--color-bg-brand-subtle); }
 /* Link 칸: 눌러서 상세로 가는 이름·제목 */
