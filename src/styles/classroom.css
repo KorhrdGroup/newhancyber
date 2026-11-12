@@ -103,6 +103,57 @@
 .ds-check input { width: 18px; height: 18px; accent-color: var(--color-bg-brand); }
 .ds-label { display: block; margin-bottom: var(--space-8); font-size: 14px; font-weight: 600; color: var(--color-text-strong); }
 
+/* ---------- 상자 탭 (Figma Tabs/Box) — 칸을 같은 너비로 나눈 선택 탭 ---------- */
+.ds-tabs-box { display: flex; }
+.ds-tab-box {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 48px;
+  padding: 0 var(--space-20);
+  border: 1px solid var(--color-border-default);
+  background: var(--color-bg-default);
+  font: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  cursor: pointer;
+}
+.ds-tab-box + .ds-tab-box { margin-left: -1px; }
+.ds-tab-box:hover { color: var(--color-text-strong); }
+.ds-tab-box.is-active {
+  position: relative;
+  border-color: var(--color-bg-brand);
+  background: var(--color-bg-brand);
+  font-weight: 600;
+  color: var(--color-text-inverse);
+}
+
+/* ---------- 질문 접기 (Figma Accordion) — 위에 진한 선, 줄마다 구분선 ---------- */
+.ds-accordion { border-top: 2px solid var(--color-text-strong); }
+.ds-accordion-item { border-bottom: 1px solid var(--color-border-subtle); background: var(--color-bg-default); }
+.ds-accordion-q,
+.ds-accordion-a { display: flex; gap: var(--space-12); padding: var(--space-16) var(--space-20); line-height: 1.5; word-break: keep-all; }
+.ds-accordion-q {
+  width: 100%;
+  align-items: center;
+  border: 0;
+  background: none;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.ds-accordion-q .ds-accordion-mark { font-size: 16px; font-weight: 600; color: var(--color-text-brand); }
+.ds-accordion-q .ds-accordion-text { flex: 1; min-width: 0; font-size: 16px; color: var(--color-text-strong); }
+.ds-accordion-item.is-open .ds-accordion-q .ds-accordion-text { font-weight: 600; }
+.ds-accordion-chevron { flex-shrink: 0; width: 16px; height: 16px; transition: transform 0.2s; }
+.ds-accordion-item.is-open .ds-accordion-chevron { transform: rotate(180deg); }
+.ds-accordion-a { align-items: flex-start; padding: var(--space-20); background: var(--color-bg-subtle); }
+.ds-accordion-a .ds-accordion-mark { font-size: 16px; font-weight: 600; color: var(--color-text-secondary); }
+.ds-accordion-a .ds-accordion-text { flex: 1; min-width: 0; margin: 0; font-size: 14px; line-height: 1.5; color: var(--color-text-default); }
+.ds-accordion-empty { padding: var(--space-48) 0; border-bottom: 1px solid var(--color-border-subtle); font-size: 14px; text-align: center; color: var(--color-text-secondary); }
+
 /* ---------- 진도 막대 ---------- */
 .ds-progress { display: flex; align-items: center; gap: var(--space-12); }
 .ds-progress-track { flex: 1; height: 8px; border-radius: var(--radius-full); background: var(--color-bg-muted); overflow: hidden; }

@@ -178,7 +178,30 @@
 .lx-ot-links { display: flex; flex-wrap: wrap; gap: var(--space-8); margin-top: var(--space-16); }
 
 /* ---------- 모바일 ---------- */
+/* ---------- 자주 묻는 질문 (탭 · 검색 · 질문 접기) ---------- */
+.lx-faq-tabs { margin-top: var(--space-24); }
+.lx-faq-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-16);
+  margin: var(--space-32) 0 var(--space-12);
+}
+.lx-faq-count { font-size: 14px; color: var(--color-text-secondary); }
+.lx-faq-count strong { font-weight: 600; color: var(--color-text-brand); }
+.lx-faq-search { display: flex; gap: var(--space-8); width: 400px; max-width: 100%; }
+.lx-faq-search .ds-input { flex: 1; min-width: 0; }
+
 @media (max-width: 480px) {
+  /* 분류 6개 — 한 줄에 3칸씩 */
+  .lx-faq-tabs { flex-wrap: wrap; }
+  .lx-faq-tabs .ds-tab-box { flex: 1 0 33.334%; height: 44px; margin: 0 0 -1px -1px; padding: 0 var(--space-8); font-size: 14px; }
+  .lx-faq-bar { flex-direction: column-reverse; align-items: stretch; margin-top: var(--space-24); }
+  .lx-faq-search { width: 100%; }
+  .ds-accordion-q,
+  .ds-accordion-a { padding: var(--space-16); }
+  .ds-accordion-q .ds-accordion-text { font-size: 15px; }
+
   .lx-tabs { padding: 0 var(--space-16); }
   .lx-tabs .page-tab { flex: 1; justify-content: center; }
   /* 파란 제목 띠가 없는 페이지는 고정 모바일 헤더(70px) 아래에서 시작 */
