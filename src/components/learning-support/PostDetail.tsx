@@ -121,7 +121,7 @@ export default function PostDetail({
           </ul>
           <div className="mobile-notice-detail-banner">
             <img
-              src="/resources/images/learning-support/exbanner.png"
+              src="/resources/images/learning-support/grand-opening.png"
               alt={bannerAlt}
               className="mobile-notice-detail-banner-image"
             />
@@ -171,7 +171,7 @@ export default function PostDetail({
             <li key={point}>{point}</li>
           ))}
         </ul>
-        <img src="/resources/images/learning-support/exbanner.png" alt={bannerAlt} className="lx-article-banner" />
+        <img src="/resources/images/learning-support/grand-opening.png" alt={bannerAlt} className="lx-article-banner" />
         <SampleText />
       </PostView>
     </>
