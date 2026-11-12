@@ -1,4 +1,5 @@
 import Link from "next/link";
+import PostView from "../PostView";
 import type { NewsPost } from "./newsData";
 
 interface SiblingLink {
@@ -82,36 +83,17 @@ export default function NewsDetail({ post, prev, next }: NewsDetailProps) {
         </div>
       </div>
 
-      <div className="container desktop-only" style={{ backgroundColor: "#fff" }}>
-        <table className="schedule-detail-info-table">{infoRows}</table>
-
-        <div className="schedule-detail-title-container">
-          <h1 className="schedule-detail-title">{post.title}</h1>
-
-          <div className="schedule-detail-content">
-            <div className="schedule-detail-text">{body}</div>
-          </div>
-
-          <table className="schedule-detail-navigation-table">
-            <tbody>
-              <tr>
-                <th>이전글</th>
-                <td>{navCell(prev, "schedule-detail-nav-link")}</td>
-              </tr>
-              <tr>
-                <th>다음글</th>
-                <td>{navCell(next, "schedule-detail-nav-link")}</td>
-              </tr>
-            </tbody>
-          </table>
-
-          <div className="schedule-detail-actions">
-            <Link href={LIST_HREF} className="schedule-detail-list-btn">
-              목록으로
-            </Link>
-          </div>
-        </div>
-      </div>
+      <PostView
+        className="desktop-only"
+        title={post.title}
+        date={post.date}
+        fileName={post.fileName}
+        prev={prev}
+        next={next}
+        listHref={LIST_HREF}
+      >
+        {body}
+      </PostView>
     </>
   );
 }

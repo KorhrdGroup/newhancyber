@@ -210,6 +210,33 @@
 .lx-faq-search { display: flex; gap: var(--space-8); width: 400px; max-width: 100%; }
 .lx-faq-search .ds-input { flex: 1; min-width: 0; }
 
+/* 게시글 상세 (공지사항·관련기관 소식·학사일정·서식자료실) — PostView */
+.lx-article { padding-top: var(--space-40); padding-bottom: var(--space-48); background: var(--color-bg-default); }
+.lx-article-head { padding: var(--space-24) var(--space-8); border-top: 2px solid var(--color-border-strong); border-bottom: 1px solid var(--color-border-default); }
+.lx-article-title { font-size: 24px; font-weight: 700; line-height: 1.4; color: var(--color-text-strong); word-break: keep-all; }
+.lx-article-meta { display: flex; flex-wrap: wrap; gap: var(--space-8) var(--space-24); margin-top: var(--space-12); font-size: 14px; line-height: 1.5; }
+.lx-article-meta > div { display: flex; gap: var(--space-8); }
+.lx-article-meta dt { font-weight: 600; color: var(--color-text-default); }
+.lx-article-meta dd { color: var(--color-text-secondary); }
+.lx-article-file { color: var(--color-text-brand); text-decoration: underline; text-underline-offset: 2px; }
+.lx-article-body { padding: var(--space-40) var(--space-8); border-bottom: 1px solid var(--color-border-default); font-size: 16px; line-height: 1.7; color: var(--color-text-default); word-break: keep-all; }
+.lx-article-body > :first-child { margin-top: 0; }
+.lx-article-body h2 { margin: var(--space-40) 0 var(--space-16); font-size: 20px; font-weight: 700; line-height: 1.4; color: var(--color-text-strong); }
+.lx-article-body h3 { margin: var(--space-32) 0 var(--space-12); font-size: 18px; font-weight: 600; line-height: 1.4; color: var(--color-text-strong); }
+.lx-article-body h4 { margin: var(--space-24) 0 var(--space-8); font-size: 16px; font-weight: 600; color: var(--color-text-strong); }
+.lx-article-body p { margin: 0 0 var(--space-12); }
+.lx-article-body ul { margin: var(--space-12) 0 var(--space-16); padding-left: var(--space-20); list-style: disc; }
+.lx-article-body li + li { margin-top: var(--space-4); }
+.lx-article-banner { display: block; width: 485px; max-width: 100%; height: auto; margin: var(--space-32) auto; border-radius: var(--radius-8); }
+.lx-article-nav { border-bottom: 1px solid var(--color-border-default); }
+.lx-article-nav-row { display: flex; gap: var(--space-24); padding: var(--space-16) var(--space-8); font-size: 14px; line-height: 1.5; }
+.lx-article-nav-row + .lx-article-nav-row { border-top: 1px solid var(--color-border-subtle); }
+.lx-article-nav-label { flex: none; width: 56px; font-weight: 600; color: var(--color-text-default); }
+.lx-article-nav-link { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--color-text-default); text-decoration: none; }
+.lx-article-nav-link:hover { color: var(--color-text-brand); text-decoration: underline; }
+.lx-article-nav-empty { color: var(--color-text-placeholder); }
+.lx-article-actions { display: flex; justify-content: center; margin-top: var(--space-40); }
+
 @media (max-width: 480px) {
   /* 공통 .mobile-only 가 display:block !important 라 가운데 정렬이 풀려서 다시 flex 로 */
   .ds-pagination.mobile-only { display: flex !important; margin-bottom: var(--space-32); }
@@ -235,6 +262,12 @@
   .lx-panel { padding: var(--space-16); }
   .lx-answer { padding: var(--space-16); }
   .lx-post-title { font-size: 18px; }
+  .lx-article-title { font-size: 20px; }
+  .lx-article-head,
+  .lx-article-body,
+  .lx-article-nav-row { padding-left: 0; padding-right: 0; }
+  .lx-article-body { padding-top: var(--space-24); padding-bottom: var(--space-24); font-size: 15px; }
+  .lx-article-actions .ds-btn { width: 100%; }
 
   .lx-inquiry-table .lx-col-num { display: none; }
   .lx-inquiry-table .lx-col-date { width: 72px; }

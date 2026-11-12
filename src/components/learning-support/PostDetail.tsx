@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { TBD_HREF } from "@/lib/navigation";
+import PostView from "./PostView";
 
 /** 이전글/다음글 제목 (모바일은 제목·부제목 두 줄로 나눠 보여준다) */
 export interface NavPost {
@@ -157,54 +158,22 @@ export default function PostDetail({
         </div>
       </div>
 
-      <div className="container desktop-only" style={{ backgroundColor: "#fff" }}>
-        <table className="schedule-detail-info-table">{infoRows(title)}</table>
-
-        <div className="schedule-detail-title-container">
-          <h1 className="schedule-detail-title">{title}</h1>
-
-          <div className="schedule-detail-content">
-            <ul className="schedule-detail-list">
-              {lessonPoints.map((point) => (
-                <li key={point}>{point}</li>
-              ))}
-            </ul>
-            <div className="schedule-detail-banner">
-              <img
-                src="/resources/images/learning-support/exbanner.png"
-                alt={bannerAlt}
-                className="schedule-detail-banner-image"
-              />
-            </div>
-            <div className="schedule-detail-text">
-              <SampleText />
-            </div>
-          </div>
-
-          <table className="schedule-detail-navigation-table">
-            <tbody>
-              <tr>
-                <th>이전글</th>
-                <td>없음</td>
-              </tr>
-              <tr>
-                <th>다음글</th>
-                <td>
-                  <a href={TBD_HREF} className="schedule-detail-nav-link">
-                    {desktopNext}
-                  </a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-          <div className="schedule-detail-actions">
-            <Link href={listHref} className="schedule-detail-list-btn">
-              목록으로
-            </Link>
-          </div>
-        </div>
-      </div>
+      <PostView
+        className="desktop-only"
+        title={title}
+        date={date}
+        fileName={fileName}
+        next={{ title: desktopNext }}
+        listHref={listHref}
+      >
+        <ul>
+          {lessonPoints.map((point) => (
+            <li key={point}>{point}</li>
+          ))}
+        </ul>
+        <img src="/resources/images/learning-support/exbanner.png" alt={bannerAlt} className="lx-article-banner" />
+        <SampleText />
+      </PostView>
     </>
   );
 }
