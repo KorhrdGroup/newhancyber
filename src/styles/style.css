@@ -263,12 +263,21 @@
 .gnb-list {
   display: flex;
   /* 첫 메뉴 글자는 본문 왼쪽 끝, 마지막 메뉴 글자는 본문 오른쪽 끝에 맞추고 사이는 고르게 (글자 양옆 36px 여백만큼 밖으로) */
-  justify-content: space-between;
+  justify-content: flex-start;
   list-style: none;
   margin: 0 -36px;
   padding: 0;
   gap: 0;
 }
+
+/* 남는 폭은 각 메뉴 오른쪽에 똑같이 나눠 붙인다 (마지막 메뉴는 오른쪽 끝에 붙도록 0).
+   구분선 앞 메뉴와 구분선이 반씩 나눠 가져서, 구분선~글자 간격 = 메뉴 글자 사이 간격의 반 */
+.gnb-list > .gnb-item {
+  display: flex;
+  flex: 1 0 auto;
+}
+.gnb-list > .gnb-item:last-child { flex-grow: 0; }
+.gnb-list > .gnb-item:has(+ .gnb-separator) { flex-grow: 0.5; }
 
 .gnb-item {
   position: static;
@@ -284,11 +293,11 @@
 
 /* 학습지원과 나의강의실 사이 구분선 */
 .gnb-separator {
-  width: 1px;
+  flex: 0.5 0 1px;
   height: 26px;
-  background-color: #d9d9d9;
-  /* 메뉴 글자 양옆 36px + 36px = 72px → 세로선 양쪽도 메뉴 사이 간격(72px)과 같게 */
-  margin: 0 36px;
+  /* 상자는 남는 폭의 반만큼 넓어지고, 선(1px)은 상자 왼쪽 끝에 그린다 */
+  background: linear-gradient(#d9d9d9, #d9d9d9) left center / 1px 100% no-repeat;
+  margin: 0;
   padding: 0;
   align-self: center;
   flex-shrink: 0;
