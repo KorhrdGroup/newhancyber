@@ -61,17 +61,22 @@
 
   .schedule-list {
     gap: 0;
-    margin-bottom: 14px;
+    margin-bottom: var(--space-16);
   }
 
   .schedule-item {
     height: auto;
-    padding: 5px 0;
+    padding: var(--space-4) 0;
     border-bottom: 1px dashed #eaeaea;
   }
 
   .schedule-item:last-child {
     border-bottom: none;
+  }
+
+  /* 공지사항 목록 간격 (notice-list 는 게시판 화면도 같이 써서 메인 안에서만) */
+  .notice-board .notice-list {
+    gap: var(--space-4);
   }
 
   .schedule-label {
@@ -115,7 +120,8 @@
 
   .form-checkbox-group {
     justify-content: flex-start;
-    margin: 4px 0 12px 54px;
+    /* 왼쪽 = 이름 칸 48px + 칸 사이 8px */
+    margin: var(--space-4) 0 var(--space-12) 56px;
   }
 
   .checkbox-label {
@@ -136,8 +142,26 @@
     font-size: 12px;
   }
 
+  /* form-group·consultation-form 은 회원·학습설계 화면도 같이 써서 메인 안에서만 바꾼다 */
+  .consultation-form-area .consultation-form {
+    padding: var(--space-20);
+  }
+
+  .consultation-form-area .form-group {
+    gap: var(--space-8);
+  }
+
+  /* form-input·form-select 도 다른 화면과 같이 써서 메인 상담 칸만 */
+  .consultation-form-area .form-input,
+  .consultation-form-area .form-select {
+    height: var(--size-control-sm);
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
   .form-submit-btn {
-    padding: 13px;
+    height: var(--size-control-md);
+    padding: 0;
     background-color: #115aed;
   }
 
@@ -164,7 +188,7 @@
   }
 
   .why-choose-section {
-    padding-bottom: 64px;
+    padding-bottom: var(--space-48);
   }
 
   /* ---------- 필수 Check: 마우스 올리면 살짝 뜨게 ---------- */
@@ -178,7 +202,7 @@
 .course-guide-section {
   max-width: 1080px;
   margin: 0 auto;
-  padding: 24px var(--header-padding-side) 64px;
+  padding: var(--space-24) var(--header-padding-side) var(--space-48);
   box-sizing: border-box;
 }
 
@@ -198,7 +222,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
-  margin-top: 28px;
+  margin-top: var(--space-24);
 }
 
 .course-guide-card {
@@ -207,7 +231,7 @@
   flex-direction: column;
   align-items: flex-start;
   min-height: 220px;
-  padding: 28px 24px;
+  padding: var(--space-24);
   border-radius: 12px;
   background: #f3f8ff;
   color: #010101;
@@ -222,7 +246,7 @@
 }
 
 .course-guide-tag {
-  padding: 4px 10px;
+  padding: var(--space-4) var(--space-12);
   border-radius: 999px;
   background: #fff;
   font-size: 13px;
@@ -231,7 +255,7 @@
 }
 
 .course-guide-name {
-  margin-top: 14px;
+  margin-top: var(--space-16);
   font-size: 22px;
   font-weight: 700;
 }
@@ -278,7 +302,7 @@
   gap: 32px;
   max-width: 1080px;
   margin: 0 auto;
-  padding: 56px var(--header-padding-side);
+  padding: var(--space-48) var(--header-padding-side);
   box-sizing: border-box;
   color: #fff;
 }
@@ -293,7 +317,7 @@
 }
 
 .closing-cta-title {
-  margin-top: 14px;
+  margin-top: var(--space-16);
   font-size: 30px;
   font-weight: 800;
   line-height: 1.4;
@@ -321,7 +345,7 @@
   z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--space-12);
   margin-right: 150px;
 }
 
@@ -330,7 +354,7 @@
   align-items: center;
   justify-content: center;
   width: 220px;
-  height: 52px;
+  height: var(--size-control-lg);
   border: 1px solid rgba(255, 255, 255, 0.7);
   border-radius: 8px;
   font-size: 16px;
@@ -441,6 +465,14 @@
     padding: 16px;
   }
 
+  /* 상담 입력 칸 (form-input 은 다른 화면도 같이 써서 메인 상담 칸만) */
+  .consultation-form-area .form-input,
+  .consultation-form-area .form-select {
+    height: var(--size-control-lg);
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
   /* 과정 안내 */
   .course-guide-section {
     order: 3;
@@ -459,7 +491,7 @@
 
   .course-guide-cards {
     grid-template-columns: 1fr;
-    gap: 10px;
+    gap: var(--space-12);
     margin-top: 16px;
   }
 
@@ -469,7 +501,7 @@
   }
 
   .course-guide-name {
-    margin-top: 10px;
+    margin-top: var(--space-12);
     font-size: 18px;
   }
 
