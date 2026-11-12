@@ -55,3 +55,8 @@
   .mp-field-grid { grid-template-columns: 1fr; }
   .mp-info.ds-table--info th { width: 100px; }
 }
+
+/* 마이페이지는 파란 하위 메뉴 줄이 없어 .wrapper 위 70px 가 빈칸으로 남는다 → 데스크톱에서 없앰 */
+@media (min-width: 481px) {
+  main.wrapper.mp-wrapper { padding-top: 0; }
+}

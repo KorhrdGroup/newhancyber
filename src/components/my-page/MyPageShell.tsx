@@ -20,7 +20,7 @@ export default function MyPageShell({
   return (
     <>
       <MobilePageBanner name="my-page" text="마이페이지" />
-      <main className="wrapper">
+      <main className="wrapper mp-wrapper">
         <div className="container cr-page">
           <PageTabs items={myPageTabs} />
           <div className="cr-head">
