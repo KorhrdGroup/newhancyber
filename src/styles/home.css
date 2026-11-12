@@ -753,12 +753,12 @@
   }
 }
 
-/* ---------- 친구추천 배너 (시안 D1: 글자 + 티켓 + 3D 친구추가 아이콘) ---------- */
+/* ---------- 친구추천 배너 (시안 W2: 글자 + 소프트 클레이 그림, 파랑 → 연보라) ---------- */
 /* 그림 배너처럼 폭에 맞춰 통째로 줄고 늘도록, 모든 치수는 717px 폭 기준 값 × --u */
 .event-friend {
   container-type: inline-size;
   border-radius: 8px;
-  background: linear-gradient(110deg, #d6e6ff 0%, #a9c8ff 50%, #78a6ff 100%);
+  background: linear-gradient(110deg, #eef3ff 0%, #dde3ff 50%, #c3c9ff 100%);
   isolation: isolate;
 }
 
@@ -772,7 +772,7 @@
   height: 100%;
   padding: calc(32 * var(--u)) calc(36 * var(--u));
   box-sizing: border-box;
-  color: #0032bb;
+  color: #1f2a7a;
 }
 
 .event-friend-tag {
@@ -781,7 +781,7 @@
   height: calc(26 * var(--u));
   padding: 0 calc(12 * var(--u));
   border-radius: calc(13 * var(--u));
-  background: #115aed;
+  background: linear-gradient(135deg, #3f7efb, #6c4ce0);
   color: #fff;
   font-size: calc(13 * var(--u));
   font-weight: 800;
@@ -796,11 +796,19 @@
   line-height: 1.2;
 }
 
+.event-friend-title em {
+  font-style: normal;
+  background: linear-gradient(90deg, #3f7efb, #6c4ce0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 .event-friend-sub {
   margin: calc(10 * var(--u)) 0 0;
   font-size: calc(16 * var(--u));
   font-weight: 500;
-  color: #1b2c5a;
+  color: #384170;
 }
 
 .event-friend-cta {
@@ -812,107 +820,20 @@
   height: calc(34 * var(--u));
   padding: 0 calc(16 * var(--u));
   border-radius: calc(17 * var(--u));
-  background: #0032bb;
+  background: linear-gradient(135deg, #2f5fe0, #5a3fd0);
   color: #fff;
   font-size: calc(14 * var(--u));
   font-weight: 700;
 }
 
+/* 1+1 티켓 · 친구추가 그림 (바탕 투명 3:2) */
 .event-friend-art {
   position: absolute;
-  inset: 0;
+  z-index: 1;
+  right: calc(26 * var(--u));
+  top: 50%;
+  height: calc(186 * var(--u));
+  width: auto;
+  transform: translateY(-50%);
   pointer-events: none;
-}
-
-.event-friend-art > * {
-  position: absolute;
-}
-
-.event-friend-glow {
-  right: calc(30 * var(--u));
-  top: 50%;
-  width: calc(200 * var(--u));
-  height: calc(200 * var(--u));
-  transform: translateY(-50%);
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.25) 40%, transparent 68%);
-}
-
-/* 티켓: 양옆 반원 홈 + 점선 절취선 */
-.event-friend-ticket {
-  z-index: 3;
-  right: calc(116 * var(--u));
-  top: calc(54 * var(--u));
-  width: calc(160 * var(--u));
-  height: calc(104 * var(--u));
-  padding: calc(13 * var(--u)) calc(15 * var(--u));
-  box-sizing: border-box;
-  transform: rotate(-8deg);
-  border-radius: calc(10 * var(--u));
-  background: linear-gradient(135deg, #fff 0%, #f1f6ff 100%);
-  box-shadow: 0 calc(10 * var(--u)) calc(22 * var(--u)) rgba(0, 40, 140, 0.28);
-  -webkit-mask:
-    radial-gradient(circle calc(8 * var(--u)) at 0 50%, transparent 98%, #000) left / 51% 100% no-repeat,
-    radial-gradient(circle calc(8 * var(--u)) at 100% 50%, transparent 98%, #000) right / 51% 100% no-repeat;
-  mask:
-    radial-gradient(circle calc(10 * var(--u)) at 0 50%, transparent 98%, #000) left / 51% 100% no-repeat,
-    radial-gradient(circle calc(10 * var(--u)) at 100% 50%, transparent 98%, #000) right / 51% 100% no-repeat;
-}
-
-.event-friend-ticket::after {
-  content: "";
-  position: absolute;
-  left: 68%;
-  top: calc(10 * var(--u));
-  bottom: calc(10 * var(--u));
-  border-left: calc(2 * var(--u)) dashed #c5d6f5;
-}
-
-.event-friend-ticket-label {
-  display: block;
-  font-size: calc(9 * var(--u));
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  color: #3f7efb;
-}
-
-.event-friend-ticket strong {
-  display: block;
-  margin-top: calc(6 * var(--u));
-  font-size: calc(18 * var(--u));
-  font-weight: 900;
-  line-height: 1.1;
-  color: #0032bb;
-}
-
-.event-friend-ticket-plus {
-  position: absolute;
-  right: calc(12 * var(--u));
-  top: 50%;
-  transform: translateY(-50%);
-  display: grid;
-  place-items: center;
-  width: calc(27 * var(--u));
-  height: calc(27 * var(--u));
-  border-radius: 50%;
-  background: #ffe02f;
-  color: #0032bb;
-  font-size: calc(17 * var(--u));
-  font-weight: 900;
-}
-
-.event-friend-add {
-  z-index: 4;
-  right: calc(30 * var(--u));
-  bottom: calc(24 * var(--u));
-  width: calc(108 * var(--u));
-  transform: rotate(6deg);
-  filter: drop-shadow(0 calc(10 * var(--u)) calc(14 * var(--u)) rgba(0, 40, 140, 0.3));
-}
-
-.event-friend-deco {
-  z-index: 5;
-  inset: 0;
-  width: 100%;
-  height: 100%;
 }
