@@ -1,79 +1,46 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { BoardTable, MobileBoardList, Pagination, SearchBox } from "@/components/learning-support/BoardParts";
+import type { BoardPost } from "@/components/learning-support/boardData";
 import { practiceNotices } from "@/components/practice-support/noticeData";
+import MobilePageBanner from "@/components/layout/MobilePageBanner";
+// 모바일 목록 · 파란 제목 띠 스타일은 학습지원 CSS 에만 있어서 같이 불러온다 (실습지원 CSS 엔 모바일 스타일이 없음)
+import "@/styles/learning-support.css";
+import "@/styles/classroom.css";
+import "@/styles/learning-extra.css";
 
 export const metadata: Metadata = { title: "실습공지사항" };
 
-const IMG = "/resources/images/pratice-support";
+/** 실습공지사항 전체 글 수 (가데이터) — 가장 큰 글 번호와 같다 */
+const PRACTICE_NOTICE_TOTAL = 87;
 
+/** 학습지원 공지사항과 같은 목록 부품으로 그리도록 글 모양을 맞춘다 */
+const posts: BoardPost[] = practiceNotices.map((notice) => ({
+  number: notice.pinned ? "공지" : String(notice.number),
+  title: notice.title,
+  date: notice.date,
+  isNotice: notice.pinned,
+  emphasized: notice.pinned,
+  href: `/practice-support/notice/${notice.id}`,
+}));
+
+/** 학습지원 공지사항과 같은 화면 (검색 줄 · 표 · 페이지 번호, 모바일은 파란 제목 띠 + 목록) */
 export default function PracticeNoticePage() {
   return (
-    <main className="wrapper">
-      <div className="practice-support-notice-list-section">
-        <div className="container" style={{ backgroundColor: "#fff" }}>
-          {/* TODO: 검색 API 연동 (원본도 동작 없음) */}
-          <div className="search-box">
-            <div className="search-select-wrapper">
-              <select className="search-select">
-                <option value="title">제목</option>
-                <option value="content">내용</option>
-                <option value="all">제목+내용</option>
-              </select>
-            </div>
-            <input type="text" className="search-input" placeholder="검색어를 입력하세요" />
-            <button type="button" className="search-button">
-              <img src={`${IMG}/search.png`} alt="검색" />
-            </button>
-          </div>
-          <table className="practice-support-notice-table">
-            <thead>
-              <tr>
-                <th>번호</th>
-                <th>제목</th>
-                <th>작성일</th>
-              </tr>
-            </thead>
-            <tbody>
-              {practiceNotices.map((notice) => (
-                <tr key={notice.id} className={notice.pinned ? "practice-support-notice-row" : undefined}>
-                  <td>
-                    {notice.pinned ? (
-                      <span className="practice-support-notice-badge">공지</span>
-                    ) : (
-                      notice.number
-                    )}
-                  </td>
-                  <td className="practice-support-notice-title">
-                    <Link href={`/practice-support/notice/${notice.id}`} className="practice-support-notice-link">
-                      {notice.title}
-                    </Link>
-                  </td>
-                  <td>{notice.date}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+    <>
+      <MobilePageBanner name="notice" text="실습공지사항" />
+      <main className="wrapper">
+        <MobileBoardList kind="notice" posts={posts} />
 
-          {/* TODO: 페이지네이션 (원본도 동작 없음) */}
-          <div className="practice-support-pagination">
-            {[1, 2, 3, 4, 5].map((page) => (
-              <button
-                key={page}
-                type="button"
-                className={`practice-support-pagination-btn${page === 1 ? " active" : ""}`}
-              >
-                {page}
-              </button>
-            ))}
-            <button type="button" className="practice-support-pagination-btn practice-support-pagination-arrow">
-              <img src={`${IMG}/page-right.png`} alt="다음" />
-            </button>
-            <button type="button" className="practice-support-pagination-btn practice-support-pagination-arrow">
-              <img src={`${IMG}/page-right-plus.png`} alt="마지막" />
-            </button>
+        <div className="practice-support-notice-list-section desktop-only">
+          <div className="container" style={{ backgroundColor: "#fff" }}>
+            <SearchBox total={PRACTICE_NOTICE_TOTAL} />
+            <BoardTable posts={posts} />
+            <Pagination />
           </div>
         </div>
-      </div>
-    </main>
+
+        <Pagination className="mobile-only" />
+      </main>
+    </>
   );
 }

@@ -1,26 +1,39 @@
 "use client";
 
 import { Fragment, useState } from "react";
-import { faqSections } from "./faqData";
+import { faqSections, type FaqSection } from "./faqData";
 
 const ALL = "전체";
-const tabs = [ALL, ...faqSections.map((section) => section.title)];
 
 /** 모든 질문을 한 줄로 편다. 원본 답변 앞의 "A. " 는 화면에서 따로 그리므로 뗀다 */
-const allItems = faqSections.flatMap((section) =>
-  section.items.map((item, i) => ({
-    key: `${section.title}-${i}`,
-    category: section.title,
-    question: item.question,
-    answer: item.answer.map((line, l) => (l === 0 ? line.replace(/^A\.\s*/, "") : line)),
-  })),
-);
+const flatten = (sections: FaqSection[]) =>
+  sections.flatMap((section) =>
+    section.items.map((item, i) => ({
+      key: `${section.title}-${i}`,
+      category: section.title,
+      question: item.question,
+      answer: item.answer.map((line, l) => (l === 0 ? line.replace(/^A\.\s*/, "") : line)),
+    })),
+  );
+
+interface FaqListProps {
+  title?: string;
+  desc?: string;
+  /** 분류가 둘 이상일 때만 위에 분류 탭이 나온다 (실습지원 FAQ 는 분류 하나 → 탭 없음) */
+  sections?: FaqSection[];
+}
 
 /**
- * 자주 묻는 질문 — Figma 디자인 시스템 부품으로 짠다.
+ * 자주 묻는 질문 — 학습지원 FAQ · 실습지원 FAQ 가 함께 쓴다. Figma 디자인 시스템 부품으로 짠다.
  * 분류: 상자 탭(Tabs/Box) · 검색: 입력 칸(TextField) + 버튼 · 목록: 질문 접기(Accordion), 한 번에 하나만 열린다.
  */
-export default function FaqList() {
+export default function FaqList({
+  title = "자주 묻는 질문",
+  desc = "궁금한 내용을 분류나 검색어로 찾아보세요. 찾는 답이 없으면 1:1 문의를 남겨 주세요.",
+  sections = faqSections,
+}: FaqListProps) {
+  const allItems = flatten(sections);
+  const tabs = sections.length > 1 ? [ALL, ...sections.map((section) => section.title)] : [];
   const [tab, setTab] = useState(ALL);
   const [draft, setDraft] = useState("");
   const [keyword, setKeyword] = useState("");
@@ -36,26 +49,28 @@ export default function FaqList() {
 
   return (
     <div className="container lx-page lx-page--top lx-faq">
-      <h1 className="page-title">자주 묻는 질문</h1>
-      <p className="lx-desc">궁금한 내용을 분류나 검색어로 찾아보세요. 찾는 답이 없으면 1:1 문의를 남겨 주세요.</p>
+      <h1 className="page-title">{title}</h1>
+      <p className="lx-desc">{desc}</p>
 
-      <div className="ds-tabs-box lx-faq-tabs" role="tablist" aria-label="질문 분류">
-        {tabs.map((label) => (
-          <button
-            key={label}
-            type="button"
-            role="tab"
-            aria-selected={tab === label}
-            className={`ds-tab-box${tab === label ? " is-active" : ""}`}
-            onClick={() => {
-              setTab(label);
-              setOpenKey(null);
-            }}
-          >
-            {label}
-          </button>
-        ))}
-      </div>
+      {tabs.length > 0 && (
+        <div className="ds-tabs-box lx-faq-tabs" role="tablist" aria-label="질문 분류">
+          {tabs.map((label) => (
+            <button
+              key={label}
+              type="button"
+              role="tab"
+              aria-selected={tab === label}
+              className={`ds-tab-box${tab === label ? " is-active" : ""}`}
+              onClick={() => {
+                setTab(label);
+                setOpenKey(null);
+              }}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+      )}
 
       <form
         className="lx-faq-bar"

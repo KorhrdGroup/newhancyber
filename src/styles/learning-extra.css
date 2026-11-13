@@ -14,6 +14,8 @@
 
 /* ---------- 본문 틀 ---------- */
 .lx-page { color: var(--color-text-default); }
+/* 실습지원(FAQ·서류제출)에서 써도 제목이 학습지원과 같은 24px — 다른 화면 CSS 의 32px 제목을 덮음 */
+.lx-page .page-title { font-size: 24px; }
 .lx-desc { margin-top: var(--space-4); font-size: 14px; line-height: 1.6; color: var(--color-text-secondary); }
 .lx-head { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--space-16); }
 .lx-head .ds-btn { flex-shrink: 0; }
