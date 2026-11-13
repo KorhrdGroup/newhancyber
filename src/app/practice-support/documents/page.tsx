@@ -49,7 +49,7 @@ export default function PracticeDocumentsPage() {
   return (
     <main className="wrapper">
       {/* .content-section 은 안의 h2 를 32px 로 키워서(style.css) 학습자 OT 화면과 같은 틀을 쓴다 */}
-      <div className="container lx-page">
+      <div className="container lx-page lx-page--plain">
         <h1 className="page-title">서류제출</h1>
         <p className="lx-desc">
           실습 과목을 신청했다면 실습을 시작하기 전에 아래 서류 6가지를 모두

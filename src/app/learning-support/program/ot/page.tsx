@@ -56,7 +56,7 @@ export default function LearningOtPage() {
   return (
     <main className="wrapper">
       <SectionTabs items={programTabs} underHeader />
-      <div className="container lx-page">
+      <div className="container lx-page lx-page--plain">
         <h1 className="page-title">학습자 OT</h1>
         <p className="lx-desc">처음 수강하는 학습자를 위한 학습 안내입니다. 개강 전에 꼭 읽어 주세요.</p>
 

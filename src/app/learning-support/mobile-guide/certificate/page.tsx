@@ -8,7 +8,7 @@ export default function LearningCertificatePage() {
   return (
     <main className="wrapper">
       <SectionTabs items={mobileGuideTabs} underHeader />
-      <div className="container lx-page">
+      <div className="container lx-page lx-page--plain">
         <h1 className="page-title">공동인증서 안내</h1>
         <CertificateGuide />
       </div>
