@@ -93,7 +93,7 @@
 .lx-inquiry-list .ds-accordion-item.is-open .lx-inquiry-q { background-color: var(--color-bg-subtle); }
 .lx-inquiry-date { flex-shrink: 0; font-size: 14px; color: var(--color-text-secondary); font-variant-numeric: tabular-nums; }
 .lx-inquiry-detail { padding: 0 var(--space-20) var(--space-20) calc(var(--space-20) + 72px + var(--space-12)); }
-.lx-inquiry-detail > .lx-post-body:first-child { padding-top: var(--space-4); }
+.lx-inquiry-detail > .lx-post-body:first-child { padding-top: var(--space-20); }
 
 .lx-post-head { padding-bottom: var(--space-16); border-bottom: 1px solid var(--color-border-subtle); }
 .lx-post-title { margin-top: var(--space-8); font-size: 20px; font-weight: 700; line-height: 1.4; color: var(--color-text-strong); word-break: keep-all; }
