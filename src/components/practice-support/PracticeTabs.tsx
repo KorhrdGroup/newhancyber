@@ -35,7 +35,7 @@ export default function PracticeTabs({ title, desc, step1Label, step1, step2, st
       <h1 className="page-title">{title}</h1>
       <p className="lx-desc">{desc}</p>
 
-      <div className="lx-practice-tabs" role="tablist" aria-label="실습 진행 단계">
+      <div className="ds-tabs-box ds-tabs-box--step lx-practice-tabs" role="tablist" aria-label="실습 진행 단계">
         {tabs.map((tab, i) => {
           const isActive = tab.key === activeTab;
           return (
@@ -46,13 +46,13 @@ export default function PracticeTabs({ title, desc, step1Label, step1, step2, st
               id={`practice-tab-${tab.key}`}
               aria-selected={isActive}
               aria-controls={`practice-panel-${tab.key}`}
-              className={`lx-practice-tab${isActive ? " is-active" : ""}`}
+              className={`ds-tab-box${isActive ? " is-active" : ""}`}
               onClick={() => setActiveTab(tab.key)}
             >
-              <img src={`${IMG}/${tab.icon}`} alt="" className="lx-practice-tab-icon" />
-              <span className="lx-practice-tab-text">
-                <span className="lx-step-label">STEP {i + 1}</span>
-                {tab.label}
+              <img src={`${IMG}/${tab.icon}`} alt="" className="ds-tab-icon" />
+              <span className="ds-tab-text">
+                <span className="ds-tab-step">STEP {i + 1}</span>
+                <span className="ds-tab-title">{tab.label}</span>
               </span>
             </button>
           );

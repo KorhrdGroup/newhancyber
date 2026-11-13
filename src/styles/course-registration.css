@@ -170,58 +170,7 @@
   object-fit: contain;
 }
 
-/* 수강신청 탭 스타일 */
-.register-tabs-wrapper {
-  width: 100%;
-}
-
-.register-tabs {
-  width: 100%;
-  margin-bottom: 0;
-}
-
-.register-tabs-nav {
-  display: flex;
-  gap: 0;
-  border-bottom: 1px solid #e5e5e5;
-  background-color: #ffffff;
-}
-
-.register-tab-btn {
-  background: none;
-  border: none;
-  padding: 16px 24px;
-  font-size: 12px;
-  font-weight: 600;
-  color: #010101;
-  cursor: pointer;
-  position: relative;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  background-color: #ffffff;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  border: 1px solid #eaeaea;
-}
-
-.register-tab-btn:hover {
-  color: #333333;
-  background-color: #f9f9f9;
-}
-
-.register-tab-btn.active {
-  background-color: #cde3ff;
-  color: #010101;
-  font-weight: 600;
-
-  margin: 0px;
-  font-size: 12px;
-}
-
+/* 수강신청 개강 차수 탭 (ButtonTabs 세그먼트 두 줄) */
 /* 탭 콘텐츠 스타일 */
 .register-tab-content {
   width: 100%;
@@ -241,10 +190,11 @@
 /* 일정 정보 스타일 */
 .register-schedule-info {
   width: 100%;
+  margin-top: 16px;
   margin-bottom: 20px;
   padding: 20px;
   background-color: #ffffff;
-  border: 1px solid #cde3ff;
+  border: 1px solid var(--color-border-default);
   border-radius: 8px;
   box-sizing: border-box;
 }
@@ -344,41 +294,9 @@
   margin-top: 40px;
 }
 
-/* 과목 분류 탭 */
+/* 과목 분류 탭 (ButtonTabs 세그먼트) */
 .course-category-tabs {
-  width: 100%;
   margin-bottom: 20px;
-  border-bottom: 1px solid #eaeaea;
-}
-
-.course-category-tabs-nav {
-  display: flex;
-  width: 100%;
-  gap: 0;
-  align-items: center;
-}
-
-.course-category-tab-btn {
-  flex: 1;
-  padding: 12px 20px;
-  background: none;
-  border: none;
-  font-size: 14px;
-  font-weight: 400;
-  color: #999999;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-  text-align: center;
-}
-
-.course-category-tab-btn:hover {
-  color: #666666;
-}
-
-.course-category-tab-btn.active {
-  color: #010101;
-  font-weight: 700;
 }
 
 /* 과목 테이블 및 요약 래퍼 */
@@ -2185,27 +2103,6 @@
     margin: 0;
   }
 
-  .register-tabs-nav {
-    display: flex;
-    gap: 8px;
-    border-bottom: none;
-  }
-
-  .register-tab-btn {
-    flex: 1;
-    padding: 14px 12px;
-    font-size: 12px;
-    border-radius: 8px;
-    white-space: normal;
-    line-height: 1.4;
-    background-color: #ffffff;
-    border: 1px solid #eaeaea;
-  }
-
-  .register-tab-btn.active {
-    background-color: #cde3ff;
-  }
-
   /* 탭 래퍼 모바일 */
   .register-tabs-wrapper {
     padding: 0 16px;
@@ -2213,40 +2110,6 @@
     box-sizing: border-box;
     width: 100%;
     max-width: 100%;
-  }
-
-  .register-tabs {
-    margin-bottom: 0;
-  }
-
-  .register-tabs-nav {
-    display: flex;
-    gap: 0;
-    border-bottom: none;
-    background-color: #cde3ff;
-    border-radius: 8px 8px 0 0;
-    color: #010101;
-    padding: 0;
-    overflow: hidden;
-  }
-
-  .register-tab-btn {
-    flex: 1;
-    padding: 14px 12px;
-    font-size: 16px !important;
-    border-radius: 0;
-    white-space: normal;
-    line-height: 1.4;
-    background-color: #fff;
-    border: 1px solid #eaeaea;
-    color: #010101;
-    font-weight: 600;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    min-height: 60px;
   }
 
   /* 탭 콘텐츠 모바일 */
@@ -2261,11 +2124,10 @@
   /* 일정 정보 모바일 */
   .register-schedule-info {
     padding: 20px;
-    margin: 0;
-    margin-top: 0;
+    margin: 16px 0 0;
     background-color: #ffffff;
-    border: 1px solid #cde3ff;
-    border-radius: 0 0 8px 8px;
+    border: 1px solid var(--color-border-default);
+    border-radius: 8px;
     box-sizing: border-box;
     width: 100%;
     max-width: 100%;
@@ -2343,24 +2205,6 @@
   /* 과목 분류 탭 모바일 */
   .course-category-tabs {
     padding: 0 16px;
-    overflow-x: visible;
-    box-sizing: border-box;
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .course-category-tabs-nav {
-    display: flex;
-    gap: 0;
-    width: 100%;
-  }
-
-  .course-category-tab-btn {
-    flex: 1;
-    padding: 12px 8px;
-    font-size: 13px;
-    white-space: normal;
-    text-align: center;
   }
 
   /* 모바일 강의 카드 */

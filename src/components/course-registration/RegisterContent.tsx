@@ -17,6 +17,7 @@ import {
 } from "./courseData";
 import { openPopup } from "@/components/my-classroom/PopupButton";
 import MobilePaymentSummary from "./MobilePaymentSummary";
+import ButtonTabs from "@/components/common/ButtonTabs";
 
 const noopSubscribe = () => () => {};
 
@@ -138,20 +139,21 @@ export default function RegisterContent() {
 
           {/* 학사일정 탭 */}
           <div className="register-tabs-wrapper">
-            <div className="register-tabs">
-              <div className="register-tabs-nav">
-                {semesterSchedules.map((semester) => (
-                  <button
-                    key={semester.key}
-                    className={`register-tab-btn${semester.key === activeSemester ? " active" : ""}`}
-                    onClick={() => setActiveSemester(semester.key)}
-                  >
-                    <span>{semester.title}</span>
-                    <span>{semester.openingNote}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
+            <ButtonTabs
+              items={semesterSchedules.map((semester) => ({
+                key: semester.key,
+                label: (
+                  <>
+                    <span className="ds-tab-title">{semester.title}</span>
+                    <span className="ds-tab-sub">{semester.openingNote.replace(/[()]/g, "")}</span>
+                  </>
+                ),
+              }))}
+              active={activeSemester}
+              onSelect={setActiveSemester}
+              className="ds-tabs-box--2line"
+              ariaLabel="개강 차수"
+            />
 
             <div className="register-tab-content">
               {semesterSchedules.map((semester) => (
@@ -197,19 +199,13 @@ export default function RegisterContent() {
 
           {/* 과목 선택 */}
           <div className="course-selection-section">
-            <div className="course-category-tabs">
-              <div className="course-category-tabs-nav">
-                {courseCategoryTabs.map((tab) => (
-                  <button
-                    key={tab.key}
-                    className={`course-category-tab-btn${tab.key === category ? " active" : ""}`}
-                    onClick={() => changeCategory(tab.key)}
-                  >
-                    {tab.label}
-                  </button>
-                ))}
-              </div>
-            </div>
+            <ButtonTabs
+              items={courseCategoryTabs}
+              active={category}
+              onSelect={(key) => changeCategory(key as CourseCategory | "all")}
+              className="course-category-tabs"
+              ariaLabel="과목 구분"
+            />
 
             {/* 모바일 강의 카드 */}
             <div className="mobile-course-list">

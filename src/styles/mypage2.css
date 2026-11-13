@@ -1,29 +1,5 @@
 /* 마이페이지 화면 2묶음(증명서·이의신청·내 정보 수정·문의 내역) 전용 — 클래스는 mq- 로 시작 */
 
-/* ---------- 화면 안 두 번째 탭 줄 (PageTabs + mq-subtabs): 마이페이지 탭과 구분되게 알약 모양 ---------- */
-.page-tabs.mq-subtabs {
-  display: inline-flex;
-  max-width: 100%;
-  gap: var(--space-4);
-  margin-bottom: var(--space-24);
-  padding: var(--space-4);
-  border-bottom: 0;
-  border-radius: var(--radius-8);
-  background: var(--color-bg-muted);
-}
-.mq-subtabs .page-tab {
-  height: 36px;
-  margin: 0;
-  padding: 0 var(--space-16);
-  border-bottom: 0;
-  border-radius: var(--radius-6);
-  font-size: 14px;
-}
-.mq-subtabs .page-tab.is-active {
-  background: var(--color-bg-default);
-  box-shadow: var(--shadow-sm);
-}
-
 /* ---------- 안내 상자 ---------- */
 .mq-guide {
   margin-bottom: var(--space-24);
@@ -80,8 +56,6 @@
 .mq-withdraw { margin-top: var(--space-16); text-align: right; }
 
 @media (max-width: 768px) {
-  .page-tabs.mq-subtabs { display: flex; }
-  .mq-subtabs .page-tab { flex: 1 0 auto; justify-content: center; padding: 0 var(--space-12); font-size: 13px; }
   .mq-guide { padding: var(--space-12) var(--space-16); }
   .pp-box.mq-confirm { padding: var(--space-20); }
   .mq-field { grid-template-columns: 1fr; gap: var(--space-8); }

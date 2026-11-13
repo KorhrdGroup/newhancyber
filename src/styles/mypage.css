@@ -24,10 +24,11 @@
 .page-tabs.mp-subtabs .page-tab:hover { color: var(--color-text-strong); }
 .page-tabs.mp-subtabs .page-tab.is-active {
   position: relative;
-  border-color: var(--color-bg-brand);
-  background: var(--color-bg-brand);
+  z-index: 1;
+  border-color: var(--color-border-brand-subtle);
+  background: var(--color-bg-brand-subtle);
   font-weight: 600;
-  color: var(--color-text-inverse);
+  color: var(--color-text-brand);
 }
 /* 모바일: 한 줄에 3칸까지, 넘치면 다음 줄 (FAQ 분류 탭과 같은 규칙) */
 @media (max-width: 480px) {

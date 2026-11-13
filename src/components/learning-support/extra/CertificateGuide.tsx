@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import ButtonTabs from "@/components/common/ButtonTabs";
 
 type TabKey = "info" | "copy" | "login";
 
@@ -201,20 +202,7 @@ export default function CertificateGuide() {
 
   return (
     <>
-      <div className="lx-subtabs" role="tablist">
-        {tabs.map((tab) => (
-          <button
-            key={tab.key}
-            type="button"
-            role="tab"
-            aria-selected={tab.key === active}
-            className={`lx-subtab${tab.key === active ? " is-active" : ""}`}
-            onClick={() => setActive(tab.key)}
-          >
-            {tab.label}
-          </button>
-        ))}
-      </div>
+      <ButtonTabs items={tabs} active={active} onSelect={(key) => setActive(key as typeof active)} className="lx-subtabs" ariaLabel="공동인증서 안내 구분" />
       <div role="tabpanel">
         {active === "info" && <InfoTab />}
         {active === "copy" && <CopyTab />}

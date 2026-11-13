@@ -3926,6 +3926,8 @@ main {
   text-decoration: none;
 }
 .page-tab:hover { color: var(--color-text-strong); }
+/* 화면 안 전환 탭(ButtonTabs line)은 버튼이라 기본 테두리·바탕을 지운다 */
+button.page-tab { border-width: 0 0 2px; border-style: solid; border-color: transparent; background: none; font-family: inherit; cursor: pointer; }
 .page-tab.is-active {
   border-bottom-color: var(--color-bg-brand);
   font-weight: 600;
@@ -3943,8 +3945,6 @@ main {
     max-width: calc(var(--max-width) - 2 * var(--header-padding-side));
   }
   /* 컨테이너 밖에 따로 있는 상자·탭 줄·그림도 같은 끝선에 */
-  main .precautions-tabs,
-  main .requirements-tabs,
   main .find-id-info-boxes,
   main .consultation-options-section,
   main img.page-image {

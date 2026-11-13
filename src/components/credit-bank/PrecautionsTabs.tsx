@@ -1,6 +1,7 @@
 "use client";
 
-import { Fragment, useState } from "react";
+import { useState } from "react";
+import ButtonTabs from "@/components/common/ButtonTabs";
 
 export interface PrecautionsPanel {
   key: string;
@@ -14,24 +15,13 @@ export default function PrecautionsTabs({ panels }: { panels: PrecautionsPanel[]
 
   return (
     <>
-      <div className="precautions-tabs">
-        <div className="precautions-tabs-container">
-          <nav className="precautions-tabs-nav">
-            {panels.map((panel, i) => (
-              <Fragment key={panel.key}>
-                {i > 0 && " "}
-                <button
-                  type="button"
-                  className={`precautions-tab-btn${panel.key === activeKey ? " active" : ""}`}
-                  onClick={() => setActiveKey(panel.key)}
-                >
-                  {panel.label}
-                </button>
-              </Fragment>
-            ))}
-          </nav>
-        </div>
-      </div>
+      <ButtonTabs
+        variant="line"
+        items={panels}
+        active={activeKey}
+        onSelect={setActiveKey}
+        ariaLabel="주의사항 구분"
+      />
 
       <section className="precautions-content">
         <div className="container">

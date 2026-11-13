@@ -1190,61 +1190,6 @@
   border-bottom-right-radius: 8px;
 }
 
-/* 급수별 자격요건 탭 네비게이션 스타일 */
-.requirements-tabs {
-  width: 100%;
-  background-color: var(--color-white);
-  border-bottom: 1px solid #e5e5e5;
-  margin-bottom: 0;
-  max-width: var(--max-width);
-  margin: 0 auto;
-}
-
-.requirements-tabs-container {
-  width: 100%;
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0;
-  box-sizing: border-box;
-  display: block;
-}
-
-.requirements-tabs-nav {
-  display: flex;
-  width: 100%;
-  gap: 0;
-  align-items: center;
-  justify-content: flex-start;
-}
-
-.requirements-tab-btn {
-  background: none;
-  border: none;
-  flex: 1;
-  height: 60px;
-  padding: 0 20px;
-  font-size: 16px;
-  font-weight: 400;
-  color: #666666;
-  cursor: pointer;
-  position: relative;
-  transition: color 0.3s ease;
-  white-space: nowrap;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-}
-
-.requirements-tab-btn:hover {
-  color: #333333;
-}
-
-.requirements-tab-btn.active {
-  color: #0066cc;
-  font-weight: 500;
-}
-
 .requirements-content {
   width: 100%;
   max-width: var(--max-width);
@@ -1489,55 +1434,9 @@
   font-weight: 700;
 }
 
-/* 사회복지사 1급 서브 탭 네비게이션 스타일 */
+/* 사회복지사 1급 서브 탭 (ButtonTabs 세그먼트) */
 .requirements-sub-tabs {
-  width: 100%;
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.requirements-sub-tabs-nav {
-  display: flex;
-  width: 100%;
-  gap: 8px;
-  align-items: center;
-  justify-content: flex-start;
-  margin-top: 30px;
-  margin-bottom: 20px;
-  padding: 0 20px;
-  box-sizing: border-box;
-}
-
-.requirements-sub-tab-btn {
-  flex: 1;
-  width: 214px;
-  height: 64px;
-  padding: 0 20px;
-  font-size: 16px;
-  font-weight: 400;
-  color: #656565;
-  background-color: #fff;
-  border: 1px solid #eaeaea;
-  border-radius: 8px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  transition: all 0.3s ease;
-}
-
-.requirements-sub-tab-btn:hover {
-  background-color: #f5f5f5;
-}
-
-.requirements-sub-tab-btn.active {
-  background-color: #f3f8ff;
-  border: 1px solid #98c2ff;
-  color: #0032bb;
-  font-weight: 500;
+  margin: 30px 0 20px;
 }
 
 .requirements-sub-tab-panel {
