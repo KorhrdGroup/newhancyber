@@ -72,13 +72,14 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  background: var(--color-border-brand);
+  background: #98c2ff; /* Figma 원격지원 mark 색 (연한 파랑, 다른 화면 테두리와 같은 값) */
   color: var(--color-text-inverse);
   box-shadow: 0 0 0 8px var(--color-bg-default);
 }
+.lx-step-divider-icon svg { width: 14px; height: 14px; }
 
 /* ---------- 1:1 문의 ---------- */
 .lx-inquiry-table { table-layout: fixed; }
