@@ -126,8 +126,9 @@
 .lx-answer-head strong { font-size: 16px; color: var(--color-text-brand); }
 .lx-answer-head .lx-post-meta { margin-top: 0; }
 .lx-answer--waiting { background: var(--color-bg-subtle); text-align: center; }
-/* 답변 대기: 두 줄 모두 같은 위계의 작은 글씨 */
+/* 답변 대기: 두 줄 모두 같은 크기의 작은 글씨, 첫 줄만 굵게 */
 .lx-answer--waiting p { font-size: 14px; line-height: 1.6; color: var(--color-text-secondary); }
+.lx-answer--waiting p:first-child { font-weight: 700; color: var(--color-text-default); }
 
 .lx-field + .lx-field { margin-top: var(--space-20); }
 .lx-textarea { min-height: 240px; }
