@@ -229,9 +229,13 @@
 .lx-flow-num { font-size: 12px; font-weight: 700; color: var(--color-text-brand); }
 
 /* ---------- 학습자 OT ---------- */
-.lx-ot { list-style: none; }
-.lx-ot-title { display: flex; align-items: center; gap: var(--space-8); font-size: 18px; font-weight: 700; color: var(--color-text-strong); }
 .lx-ot-links { display: flex; flex-wrap: wrap; gap: var(--space-8); margin-top: var(--space-16); }
+
+/* ---------- 수강신청 절차: 글 왼쪽 + 단계 그림 오른쪽 ---------- */
+.lx-process-step { display: flex; align-items: center; gap: var(--space-24); }
+.lx-process-text { flex: 1; min-width: 0; }
+.lx-process-desc { font-size: 14px; line-height: 1.7; color: var(--color-text-default); }
+.lx-process-icon { flex-shrink: 0; width: 88px; height: 88px; object-fit: contain; }
 
 /* ---------- 모바일 ---------- */
 /* ---------- 게시판 목록 (BoardParts: 공지사항·관련기관 소식·학사일정·서식자료실) ---------- */
@@ -355,6 +359,8 @@
   .lx-remote-contacts,
   .lx-remote-buttons { grid-template-columns: 1fr; }
   .lx-remote-contacts .ds-stat-value { font-size: 16px; }
+  .lx-process-step { gap: var(--space-16); }
+  .lx-process-icon { width: 56px; height: 56px; }
   .lx-inquiry-table .lx-col-num { display: none; }
   .lx-inquiry-table .lx-col-date { width: 72px; }
   .lx-inquiry-table td.lx-col-date { font-size: 13px; }

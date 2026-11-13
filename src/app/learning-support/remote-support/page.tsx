@@ -1,24 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import StepDivider from "@/components/learning-support/extra/StepDivider";
 import { SUPPORT_PHONE } from "@/lib/contact";
 
 export const metadata: Metadata = { title: "원격지원" };
 
 // TODO: 원본처럼 두 버튼 모두 무료학습설계로 연결된다. 실제 원격지원 프로그램 주소가 정해지면 바꾼다.
 const remoteButtons = ["수강신청 및 학습문의 바로가기", "출석 및 시험 관련문의 바로가기"];
-
-/** STEP 사이 연결선 — 점선 가운데 파란 동그라미 아래 화살표 (원본 wrapper_divider.png 를 코드로) */
-function StepDivider() {
-  return (
-    <div className="lx-step-divider" aria-hidden="true">
-      <span className="lx-step-divider-icon">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-          <path d="M4.5 6.25 8 9.75l3.5-3.5" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </span>
-    </div>
-  );
-}
 
 /** 원격지원 — 공지사항·FAQ 와 같은 흰 바탕 틀, 단계는 STEP 소제목 + 내용, 단계 사이는 연결선 (디자인 시스템 카드·버튼) */
 export default function LearningRemoteSupportPage() {
