@@ -105,7 +105,7 @@ export default function KoreanTeacherPracticePage() {
 
             {/* 원본 제목 "사회복지현장실습 기관섭외" 는 다른 화면에서 복사된 것이라 한국어교원으로 바로잡는다 */}
             <PracticeSection title="한국어교원 실습 기관섭외">
-              <OrgLinks items={[{ logo: "branch-04.png", alt: "국립국어원" }]} />
+              <OrgLinks items={[{ href: "https://kteacher.korean.go.kr/", logo: "branch-04.png", alt: "국립국어원" }]} />
               <p className="lx-table-note">* 현재 코로나 19이후, 오프라인 현장실습 대신 온라인 실습으로 대체되었습니다.</p>
             </PracticeSection>
           </>

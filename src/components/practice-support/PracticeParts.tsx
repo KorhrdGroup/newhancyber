@@ -1,6 +1,5 @@
 import { Fragment } from "react";
 import Link from "next/link";
-import { TBD_HREF } from "@/lib/navigation";
 import "@/styles/classroom.css";
 import "@/styles/learning-extra.css";
 
@@ -113,12 +112,16 @@ export function RegisterSection({ title = "실습과목 접수 / 실습기관 �
   );
 }
 
-/** 실습기관 섭외 바로가기 카드 — 기관 로고(또는 글자) + 화살표. TODO: 기관별 실제 주소 */
-export function OrgLinks({ items }: { items: ({ logo: string; alt: string } | { text: React.ReactNode })[] }) {
+/** 실습기관 섭외 바로가기 카드 — 기관 로고(또는 글자) + 화살표. 기관 사이트는 새 창으로 엽니다. */
+export function OrgLinks({
+  items,
+}: {
+  items: ({ href: string } & ({ logo: string; alt: string } | { text: React.ReactNode }))[];
+}) {
   return (
     <div className="lx-org-links">
       {items.map((item, i) => (
-        <a key={i} href={TBD_HREF} className="lx-org-link">
+        <a key={i} href={item.href} target="_blank" rel="noopener noreferrer" title="새 창으로 열기" className="lx-org-link">
           {"logo" in item ? (
             <img src={`${IMG}/${item.logo}`} alt={item.alt} className="lx-org-logo" />
           ) : (

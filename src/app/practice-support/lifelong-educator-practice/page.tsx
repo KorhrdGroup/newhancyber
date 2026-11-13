@@ -85,8 +85,8 @@ export default function LifelongEducatorPracticePage() {
             <PracticeSection title="평생교육사 현장실습 기관섭외">
               <OrgLinks
                 items={[
-                  { logo: "branch-05.png", alt: "평생교육사 자격관리" },
-                  { logo: "branch-06.png", alt: "국가평생교육진흥원" },
+                  { href: "https://lledu.nile.or.kr/", logo: "branch-05.png", alt: "평생교육사 자격관리" },
+                  { href: "https://www.nile.or.kr/", logo: "branch-06.png", alt: "국가평생교육진흥원" },
                 ]}
               />
               <InfoTable
@@ -125,7 +125,15 @@ export default function LifelongEducatorPracticePage() {
                     ],
                   },
                   // 원본 주소 "lledu.nile.ork.kr" 는 오타라 바로잡는다
-                  { label: "참고 사이트", lines: ["평생교육사 자격관리 사이트(https://lledu.nile.or.kr)"] },
+                  { label: "참고 사이트", lines: [
+                    <>
+                      평생교육사 자격관리 사이트(
+                      <a href="https://lledu.nile.or.kr" target="_blank" rel="noopener noreferrer" className="ds-text-brand">
+                        https://lledu.nile.or.kr
+                      </a>
+                      )
+                    </>,
+                  ] },
                 ]}
               />
             </PracticeSection>

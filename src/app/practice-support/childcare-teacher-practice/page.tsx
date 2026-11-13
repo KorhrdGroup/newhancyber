@@ -81,7 +81,12 @@ export default function ChildcareTeacherPracticePage() {
 
             {/* 원본 표 제목 "사회복지현장실습 기관 섭외" 는 다른 화면에서 복사된 것이라 보육교사로 바로잡는다 */}
             <PracticeSection title="보육교사 실습 기관섭외">
-              <OrgLinks items={[{ text: "통합정보공시홈페이지 바로가기" }, { logo: "branch-03.png", alt: "아이사랑" }]} />
+              <OrgLinks
+                items={[
+                  { href: "https://info.childcare.go.kr/", text: "통합정보공시홈페이지 바로가기" },
+                  { href: "https://www.childcare.go.kr/", logo: "branch-03.png", alt: "아이사랑" },
+                ]}
+              />
               <InfoTable
                 caption="보육교사 실습 기관 섭외"
                 rows={[
@@ -123,7 +128,13 @@ export default function ChildcareTeacherPracticePage() {
                   {
                     label: "참고 사이트",
                     lines: [
-                      "한국보육진흥원 보육인력개발국 홈페이지 (https://chrd.childcare.go.kr)",
+                      <>
+                        한국보육진흥원 보육인력개발국 홈페이지 (
+                        <a href="https://chrd.childcare.go.kr" target="_blank" rel="noopener noreferrer" className="ds-text-brand">
+                          https://chrd.childcare.go.kr
+                        </a>
+                        )
+                      </>,
                       "[자격증 종류 및 자격기준 → 보육관련 교과목/실습기준]",
                     ],
                   },

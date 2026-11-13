@@ -115,9 +115,9 @@ export default function SocialWorkerPracticePage() {
             <PracticeSection title="사회복지현장실습 기관섭외">
               <OrgLinks
                 items={[
-                  { logo: "branch-01.png", alt: "한국사회복지사협회 자격관리센터" },
-                  { logo: "branch-02.png", alt: "사회복지포털 복지넷" },
-                  { text: "사회복지현장실습기관 선정 현황" },
+                  { href: "https://www.welfare.net/lic/", logo: "branch-01.png", alt: "한국사회복지사협회 자격관리센터" },
+                  { href: "https://www.bokji.net/", logo: "branch-02.png", alt: "사회복지포털 복지넷" },
+                  { href: "https://www.welfare.net/prm/find-training-center/current-stat/", text: "사회복지현장실습기관 선정 현황" },
                 ]}
               />
               <InfoTable
