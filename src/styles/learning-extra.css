@@ -126,8 +126,8 @@
 .lx-answer-head strong { font-size: 16px; color: var(--color-text-brand); }
 .lx-answer-head .lx-post-meta { margin-top: 0; }
 .lx-answer--waiting { background: var(--color-bg-subtle); text-align: center; }
-.lx-answer--waiting strong { font-size: 16px; color: var(--color-text-strong); }
-.lx-answer--waiting p { margin-top: var(--space-8); font-size: 14px; color: var(--color-text-secondary); }
+/* 답변 대기: 두 줄 모두 같은 위계의 작은 글씨 */
+.lx-answer--waiting p { font-size: 14px; line-height: 1.6; color: var(--color-text-secondary); }
 
 .lx-field + .lx-field { margin-top: var(--space-20); }
 .lx-textarea { min-height: 240px; }

@@ -75,7 +75,7 @@ export default function InquiryList({ items }: { items: Inquiry[] }) {
                     </section>
                   ) : (
                     <section className="lx-answer lx-answer--waiting">
-                      <strong>답변 대기 중입니다.</strong>
+                      <p>답변 대기 중입니다.</p>
                       <p>담당자가 확인한 뒤 답변을 드립니다.</p>
                     </section>
                   )}
