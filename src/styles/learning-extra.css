@@ -33,6 +33,10 @@
 .lx-link { color: var(--color-text-brand); text-decoration: underline; word-break: break-all; }
 .lx-mt-8 { margin-top: var(--space-8); }
 .lx-actions { display: flex; justify-content: center; gap: var(--space-8); margin-top: var(--space-24); }
+/* 흰 바탕 틀 (1:1 문의 · 모바일학습가이드) — 공지사항·FAQ 처럼 회색 상자 없이 글을 본문선에 둠.
+   안의 설명 상자(lx-panel)도 테두리 없이 제목 + 내용으로 펼침 */
+.container.lx-page--plain { background: var(--color-bg-default); }
+.lx-page--plain .lx-panel { margin-top: var(--space-40); padding: 0; border: 0; border-radius: 0; }
 .lx-callout {
   margin-top: var(--space-24);
   padding: var(--space-16);
@@ -48,14 +52,9 @@
 .lx-inquiry-table .lx-col-num { width: 80px; }
 .lx-inquiry-table .lx-col-date { width: 120px; }
 .lx-inquiry-table .lx-col-status { width: 120px; }
-.lx-title-link {
-  display: block;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  color: var(--color-text-strong);
-}
-.lx-title-link:hover { color: var(--color-text-brand); text-decoration: underline; }
+.lx-inquiry-bar { margin-top: var(--space-32); }
+/* 제목이 길면 말줄임 (줄 전체 클릭·호버는 lx-board-table 과 같음) */
+.lx-inquiry-table .ds-table-link { display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 
 .lx-post-head { padding-bottom: var(--space-16); border-bottom: 1px solid var(--color-border-subtle); }
 .lx-post-title { margin-top: var(--space-8); font-size: 20px; font-weight: 700; line-height: 1.4; color: var(--color-text-strong); word-break: keep-all; }

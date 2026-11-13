@@ -51,7 +51,7 @@ export default function LearningMobileGuidePage() {
   return (
     <main className="wrapper">
       <SectionTabs items={mobileGuideTabs} underHeader />
-      <div className="container lx-page">
+      <div className="container lx-page lx-page--plain">
         <h1 className="page-title">모바일학습가이드</h1>
         <p className="lx-desc">스마트폰으로 한평생원격교육원을 이용하는 방법입니다. 출석·과제·시험은 PC에서 해 주세요.</p>
 

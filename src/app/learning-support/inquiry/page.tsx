@@ -9,7 +9,7 @@ export const metadata: Metadata = { title: "1:1 문의" };
 export default function LearningInquiryPage() {
   return (
     <main className="wrapper">
-      <div className="container lx-page lx-page--top">
+      <div className="container lx-page lx-page--top lx-page--plain">
         <div className="lx-head">
           <div>
             <h1 className="page-title">1:1 문의</h1>
@@ -20,43 +20,46 @@ export default function LearningInquiryPage() {
           </Link>
         </div>
 
-        <div className="lx-panel">
-          <table className="ds-table lx-inquiry-table">
-            <thead>
-              <tr>
-                <th className="lx-col-num">번호</th>
-                <th>제목</th>
-                <th className="lx-col-date">문의일</th>
-                <th className="lx-col-status">답변 상태</th>
-              </tr>
-            </thead>
-            <tbody>
-              {inquiries.length === 0 && (
-                <tr>
-                  <td colSpan={4}>남긴 문의가 없습니다.</td>
-                </tr>
-              )}
-              {inquiries.map((item) => (
-                <tr key={item.id}>
-                  <td className="lx-col-num">{item.number}</td>
-                  <td className="is-left">
-                    <Link href={`/learning-support/inquiry/${item.id}`} className="lx-title-link">
-                      {item.title}
-                    </Link>
-                  </td>
-                  <td className="lx-col-date">{item.date}</td>
-                  <td className="lx-col-status">
-                    {item.answer ? (
-                      <span className="ds-badge ds-badge--success">답변 완료</span>
-                    ) : (
-                      <span className="ds-badge ds-badge--neutral">답변 대기</span>
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="lx-board-bar lx-inquiry-bar">
+          <p className="lx-board-count">
+            총 <strong>{inquiries.length}</strong>건
+          </p>
         </div>
+        <table className="ds-table lx-board-table lx-inquiry-table">
+          <thead>
+            <tr>
+              <th className="lx-col-num">번호</th>
+              <th>제목</th>
+              <th className="lx-col-date">문의일</th>
+              <th className="lx-col-status">답변 상태</th>
+            </tr>
+          </thead>
+          <tbody>
+            {inquiries.length === 0 && (
+              <tr>
+                <td colSpan={4}>남긴 문의가 없습니다.</td>
+              </tr>
+            )}
+            {inquiries.map((item) => (
+              <tr key={item.id}>
+                <td className="lx-col-num">{item.number}</td>
+                <td className="is-left">
+                  <Link href={`/learning-support/inquiry/${item.id}`} className="ds-table-link">
+                    {item.title}
+                  </Link>
+                </td>
+                <td className="lx-col-date">{item.date}</td>
+                <td className="lx-col-status">
+                  {item.answer ? (
+                    <span className="ds-badge ds-badge--success">답변 완료</span>
+                  ) : (
+                    <span className="ds-badge ds-badge--neutral">답변 대기</span>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </main>
   );

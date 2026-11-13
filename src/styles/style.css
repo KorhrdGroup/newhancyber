@@ -3937,9 +3937,9 @@ main {
 }
 
 /* 회색 내용 상자(.container): 상자 양끝을 본문 끝선(1080px)에 맞추고 글자는 상자 안쪽 여백만큼 들어감.
-   흰 배경으로 바꿔 쓴 컨테이너(인라인 배경·FAQ)와 마이페이지·수강신청 틀(cr-page)은 글자를 본문선에 그대로 둔다 */
+   흰 배경으로 바꿔 쓴 컨테이너(인라인 배경·FAQ·lx-page--plain)와 마이페이지·수강신청 틀(cr-page)은 글자를 본문선에 그대로 둔다 */
 @media (min-width: 481px) {
-  main .container:not([style*="background"]):not(.lx-faq):not(.cr-page) {
+  main .container:not([style*="background"]):not(.lx-faq):not(.lx-page--plain):not(.cr-page) {
     max-width: calc(var(--max-width) - 2 * var(--header-padding-side));
   }
   /* 컨테이너 밖에 따로 있는 상자·탭 줄·그림도 같은 끝선에 */
