@@ -15,7 +15,7 @@ export default function TuitionCertificatePage() {
 
   return (
     <MyPageShell title="증명서 발급" desc="필요한 증명서를 골라 바로 출력할 수 있어요.">
-      <PageTabs items={certificateTabs} className="mp-subtabs" />
+      <PageTabs items={certificateTabs} />
       <Guide
         items={[
           "연말정산 교육비 공제를 신청할 때 쓰는 증명서예요.",

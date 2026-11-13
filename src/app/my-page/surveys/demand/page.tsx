@@ -14,7 +14,7 @@ export default function DemandSurveysPage() {
 
   return (
     <MyPageShell title="설문조사" desc="여러분의 의견은 이름 없이 모아 강의와 학습 환경을 고치는 데 씁니다.">
-      <PageTabs items={surveyTabs} className="mp-subtabs" />
+      <PageTabs items={surveyTabs} />
       {surveys.length === 0 ? (
         <p className="cr-empty">진행 중인 수요 조사가 없습니다.</p>
       ) : (

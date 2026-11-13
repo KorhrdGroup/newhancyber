@@ -17,7 +17,7 @@ export default function AppealNew({ kind }: { kind: AppealKind }) {
 
   return (
     <>
-      <PageTabs items={myPageRequestTabs} className="mp-subtabs" />
+      <PageTabs items={myPageRequestTabs} />
       <Guide
         title="이의신청 기간"
         items={[

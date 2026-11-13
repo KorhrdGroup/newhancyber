@@ -10,7 +10,7 @@ export default function InquiryDetail({ inquiry, backHref }: { inquiry: Inquiry;
 
   return (
     <>
-      <PageTabs items={myPageBoardTabs} className="mp-subtabs" />
+      <PageTabs items={myPageBoardTabs} />
       <section className="pp-box">
         <div className="mq-meta">
           <Badge tone={inquiryStatusTone[status]}>{status}</Badge>

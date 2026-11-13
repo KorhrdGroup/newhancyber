@@ -13,7 +13,7 @@ export default function QnaWritePage() {
   const courses = getOngoingCourses().map(({ id, title }) => ({ id, title }));
   return (
     <MyPageShell title="학습 게시판" desc="과목 공부 중 궁금한 점을 남기면 교수님이나 운영팀이 답해 드립니다.">
-      <PageTabs items={myPageBoardTabs} className="mp-subtabs" />
+      <PageTabs items={myPageBoardTabs} />
       <QnaWriteForm courses={courses} />
     </MyPageShell>
   );

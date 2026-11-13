@@ -11,7 +11,7 @@ export default function InquiryList() {
 
   return (
     <>
-      <PageTabs items={myPageBoardTabs} className="mp-subtabs" />
+      <PageTabs items={myPageBoardTabs} />
       <Guide
         items={[
           "수강·결제·학습 이용처럼 궁금한 점을 남기면 학습지원센터가 답변해 드려요.",

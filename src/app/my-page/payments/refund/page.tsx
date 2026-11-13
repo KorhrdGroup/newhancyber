@@ -21,7 +21,7 @@ export default function PaymentRefundPage() {
 
   return (
     <MyPageShell title="환불 내역" desc="환불 신청과 처리 상태를 확인할 수 있어요.">
-      <PageTabs items={myPagePaymentTabs} className="mp-subtabs" />
+      <PageTabs items={myPagePaymentTabs} />
       {list.length === 0 ? (
         <p className="ex-empty">환불 신청 내역이 없어요.</p>
       ) : (

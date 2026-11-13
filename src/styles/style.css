@@ -530,6 +530,14 @@
   color: var(--color-text);
 }
 
+/* GNB 에 없는 메뉴(마이페이지)의 파란 줄: 늘 보이고, 다른 메뉴에 마우스를 올리면 그 하위 메뉴가 위에 덮인다 */
+.submenu.submenu--standalone {
+  margin-left: calc(-1 * var(--header-padding-side));
+  opacity: 1;
+  visibility: visible;
+  z-index: 999;
+}
+
 /* 윈도우 배율(125·150·175%)에서 흰 칸 아래로 파란 바 1px 이 비치는 것 — 흰색을 1px 아래로 덮음 */
 .submenu a.active,
 .submenu a:hover {

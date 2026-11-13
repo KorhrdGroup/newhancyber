@@ -25,7 +25,7 @@ export default async function StudyBoardPostPage({ params }: { params: Promise<{
   return (
     <MyPageShell title="학습 게시판" desc="수강 중인 과목의 공지, 질문과 답변, 학습 자료를 모아 볼 수 있습니다.">
       {/* 글 보기 주소는 게시판마다 같아서, 글이 속한 게시판 탭을 직접 켠다 */}
-      <nav className="page-tabs mp-subtabs">
+      <nav className="page-tabs">
         {myPageBoardTabs.map((tab) => (
           <Link key={tab.href} href={tab.href} className={`page-tab${tab.href === listHref ? " is-active" : ""}`}>
             {tab.label}

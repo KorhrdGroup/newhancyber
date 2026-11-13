@@ -26,7 +26,7 @@ export default function PaymentScholarshipPage() {
 
   return (
     <MyPageShell title="장학 현황" desc="받은 장학금과 지급 상태를 확인할 수 있어요.">
-      <PageTabs items={myPagePaymentTabs} className="mp-subtabs" />
+      <PageTabs items={myPagePaymentTabs} />
       <div className="ds-stats ex-summary">
         <div className="ds-stat">
           <p className="ds-stat-label">받은 장학금 합계</p>

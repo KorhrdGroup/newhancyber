@@ -13,7 +13,7 @@ export default function CertExceptionPage() {
   const courses = getOngoingCourses().map(({ id, title }) => ({ id, title }));
   return (
     <MyPageShell title="각종 예외 신청" desc="학습 규칙을 지키기 어려운 사정이 있을 때 신청합니다. 담당자가 확인한 뒤 결과를 알려 드립니다.">
-      <PageTabs items={myPageRequestTabs} className="mp-subtabs" />
+      <PageTabs items={myPageRequestTabs} />
       <ExceptionForm type="cert" courses={courses} />
     </MyPageShell>
   );
