@@ -61,7 +61,10 @@
 /* ---------- 원격지원 (STEP 소제목 + 연락처 카드 + 바로가기 버튼) ---------- */
 .lx-step-label { margin-right: var(--space-8); color: var(--color-text-brand); }
 .lx-remote-contacts { grid-template-columns: repeat(2, 1fr); }
-.lx-remote-contacts .ds-stat-value { font-size: 20px; }
+/* Figma 원격지원: 연한 파랑 바탕, 가운데 정렬, 파란 제목 */
+.lx-remote-contacts .ds-stat { border-color: transparent; background: var(--color-bg-brand-subtle); text-align: center; }
+.lx-remote-contacts .ds-stat-label { color: var(--color-text-brand); }
+.lx-remote-contacts .ds-stat-value { font-size: 18px; }
 .lx-remote-buttons { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-16); }
 .lx-remote-buttons .ds-btn { justify-content: space-between; }
 /* STEP 사이 연결선: 회색 점선 + 가운데 파란 동그라미 아래 화살표 */
@@ -351,7 +354,7 @@
   .lx-program-actions .ds-btn { flex: 1; }
   .lx-remote-contacts,
   .lx-remote-buttons { grid-template-columns: 1fr; }
-  .lx-remote-contacts .ds-stat-value { font-size: 18px; }
+  .lx-remote-contacts .ds-stat-value { font-size: 16px; }
   .lx-inquiry-table .lx-col-num { display: none; }
   .lx-inquiry-table .lx-col-date { width: 72px; }
   .lx-inquiry-table td.lx-col-date { font-size: 13px; }
