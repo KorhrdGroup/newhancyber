@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import DraftNote from "@/components/common/DraftNote";
 import { absenceExams, absenceKinds, exceptionGuides, exceptionLabels, type ExceptionType } from "../myPageDataA";
 
 /**
@@ -33,6 +34,10 @@ export default function ExceptionForm({ type, courses }: { type: ExceptionType; 
             <li key={g}>{g}</li>
           ))}
         </ul>
+        <DraftNote>
+          원본 신청 화면(로그인 후)을 보지 못해 위 안내와 신청 사유 목록은 임시로 작성했습니다. 원본
+          화면과 실제 규정을 확인한 뒤 바꿔야 합니다.
+        </DraftNote>
       </div>
 
       <form onSubmit={submit} className="pp-box">

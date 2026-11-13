@@ -4,6 +4,7 @@ import { Fragment } from "react";
 import SectionTabs, { programTabs } from "@/components/learning-support/extra/SectionTabs";
 import StepDivider from "@/components/learning-support/extra/StepDivider";
 import { SUPPORT_PHONE } from "@/lib/contact";
+import DraftNote from "@/components/common/DraftNote";
 
 export const metadata: Metadata = { title: "학습자 OT" };
 
@@ -62,6 +63,10 @@ export default function LearningOtPage() {
       <div className="container lx-page lx-page--plain">
         <h1 className="page-title">학습자 OT</h1>
         <p className="lx-desc">처음 수강하는 학습자를 위한 학습 안내입니다. 개강 전에 꼭 읽어 주세요.</p>
+        <DraftNote>
+          원본은 &quot;준비 중&quot; 그림뿐이라 이 사이트의 FAQ와 공동인증서 안내를 바탕으로 임시로
+          작성했습니다. 교육원의 OT 영상·자료가 나오면 바꿔야 합니다.
+        </DraftNote>
 
         {sections.map((section, i) => (
           <Fragment key={section.title}>

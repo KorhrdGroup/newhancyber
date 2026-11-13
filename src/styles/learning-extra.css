@@ -236,8 +236,8 @@
 /* ---------- 학습자 OT ---------- */
 .lx-ot-links { display: flex; flex-wrap: wrap; gap: var(--space-8); margin-top: var(--space-16); }
 
-/* ---------- 서류제출 ---------- */
-/* 임시로 쓴 내용 표시 (실제 규정 확인 전) */
+/* ---------- 검토 필요 표시 (DraftNote) ---------- */
+/* 원본에 내용이 없어 안내 문구를 임시로 쓴 곳 */
 .lx-draft-note {
   margin-top: var(--space-16);
   padding: var(--space-12) var(--space-16);
@@ -249,6 +249,8 @@
   color: var(--color-text-warning);
 }
 .lx-draft-note strong { margin-right: var(--space-8); }
+
+/* ---------- 서류제출 ---------- */
 /* 내 제출 현황: 과목·숫자(왼쪽) + 버튼(오른쪽) 한 카드 */
 .lx-doc-status {
   display: flex;
