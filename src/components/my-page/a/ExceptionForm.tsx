@@ -1,147 +1,181 @@
 "use client";
 
 import { useState } from "react";
-import { absenceExams, absenceKinds, exceptionGuides, exceptionLabels, type ExceptionType } from "../myPageDataA";
+import {
+  absenceKinds,
+  absenceProofs,
+  absenceReasons,
+  EXCEPTION_FILE_NOTE,
+  exceptionHalves,
+  exceptionLabels,
+  exceptionRounds,
+  exceptionYears,
+  type ExceptionType,
+} from "../myPageDataA";
+
+const WEEKS = Array.from({ length: 16 }, (_, i) => `${i + 1}주차`);
+
+/** 필수 칸 표시 */
+const Req = () => <span className="mp-req">* </span>;
 
 /**
- * U31 각종 예외 신청서 (공인인증서 예외·중복 PC 등록·공결 및 추가시험 공통).
- * 종류마다 붙는 칸: 공인인증서 → 예외 기간, 중복 PC → 함께 쓰는 학습자, 공결 → 신청 종류·과목·시험·결석 기간
+ * U31 각종 예외 신청서 — 원본 /stdMng/exception.asp(공인인증서·중복 PC), absentApply.asp(공결 및 추가시험) 와 같은 칸.
+ * 공통: 학기 구분 → 신청 과목 → 증빙서류. 공인인증서·중복 PC 는 예외 사유·신청 기간, 공결은 신청 종류·공결 사유·주차가 붙는다.
  */
 export default function ExceptionForm({ type, courses }: { type: ExceptionType; courses: { id: string; title: string }[] }) {
-  const { guide, reasons } = exceptionGuides[type];
-  const [reason, setReason] = useState("");
-  const [agreed, setAgreed] = useState(false);
-  const [kind, setKind] = useState(absenceKinds[0]);
-  const label = exceptionLabels[type];
+  const [year, setYear] = useState("");
+  const [half, setHalf] = useState("");
+  const [round, setRound] = useState("");
+  const isAbsence = type === "absence";
+  const termChosen = Boolean(year && half && round);
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!reason) {
-      alert("신청 사유를 골라 주세요.");
+    if (!termChosen) {
+      alert("학기 구분(연도, 학기, 기수)을 선택해 주세요.");
       return;
     }
-    // TODO: API 예외 신청 등록 (type, 사유, 기간·과목·시험, 증빙 파일)
-    alert(`${label} 신청 API 연동 전입니다.`);
+    // TODO: API 예외 신청 등록 (학기, 과목, 사유, 기간·주차, 증빙 파일)
+    alert(`${exceptionLabels[type]} 신청 API 연동 전입니다.`);
   };
 
   return (
-    <>
-      <div className="pp-box">
-        <h3 className="pp-box-title">신청 전에 읽어 주세요</h3>
-        <ul className="pp-list">
-          {guide.map((g) => (
-            <li key={g}>{g}</li>
-          ))}
-        </ul>
-      </div>
+    <form onSubmit={submit} className="pp-box">
+      <h3 className="pp-box-title">{exceptionLabels[type]} 신청</h3>
+      <p className="pp-note mp-req-note">
+        <Req />
+        표시는 필수 입력 사항입니다.
+      </p>
 
-      <form onSubmit={submit} className="pp-box">
-        <h3 className="pp-box-title">{label} 신청서</h3>
-
-        {type === "absence" && (
-          <>
-            <div className="pp-field">
-              <span className="ds-label">신청 종류</span>
-              <div className="mp-choices">
-                {absenceKinds.map((k) => (
-                  <label key={k} className="ds-check">
-                    <input type="radio" name="absence-kind" className="ds-radio" checked={kind === k} onChange={() => setKind(k)} />
-                    {k}
-                  </label>
-                ))}
-              </div>
-            </div>
-            <div className="pp-field mp-field-grid">
-              <div>
-                <label className="ds-label" htmlFor="ex-course">
-                  과목
-                </label>
-                <select id="ex-course" className="ds-select" defaultValue="">
-                  <option value="">골라 주세요</option>
-                  {courses.map((c) => (
-                    <option key={c.id} value={c.id}>
-                      {c.title}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              {kind === "추가시험 신청" && (
-                <div>
-                  <label className="ds-label" htmlFor="ex-exam">
-                    시험
-                  </label>
-                  <select id="ex-exam" className="ds-select" defaultValue="">
-                    <option value="">골라 주세요</option>
-                    {absenceExams.map((x) => (
-                      <option key={x}>{x}</option>
-                    ))}
-                  </select>
-                </div>
-              )}
-            </div>
-          </>
-        )}
-
+      {isAbsence && (
         <div className="pp-field">
-          <label className="ds-label" htmlFor="ex-reason">
-            신청 사유
-          </label>
-          <select id="ex-reason" className="ds-select" value={reason} onChange={(e) => setReason(e.target.value)}>
-            <option value="">골라 주세요</option>
-            {reasons.map((r) => (
+          <span className="ds-label">신청 종류</span>
+          <div className="mp-choices">
+            {absenceKinds.map((k, i) => (
+              <label key={k} className="ds-check">
+                <input type="radio" name="absence-kind" className="ds-radio" defaultChecked={i === 0} />
+                {k}
+              </label>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div className="pp-field">
+        <span className="ds-label">
+          <Req />
+          학기 구분
+        </span>
+        <div className="mp-term">
+          <select className="ds-select" aria-label="연도" value={year} onChange={(e) => setYear(e.target.value)}>
+            <option value="">연도</option>
+            {exceptionYears.map((y) => (
+              <option key={y}>{y}</option>
+            ))}
+          </select>
+          <select className="ds-select" aria-label="학기" value={half} onChange={(e) => setHalf(e.target.value)}>
+            <option value="">학기</option>
+            {exceptionHalves.map((h) => (
+              <option key={h}>{h}</option>
+            ))}
+          </select>
+          <select className="ds-select" aria-label="기수" value={round} onChange={(e) => setRound(e.target.value)}>
+            <option value="">기수</option>
+            {exceptionRounds.map((r) => (
               <option key={r}>{r}</option>
             ))}
           </select>
         </div>
+      </div>
 
-        {type !== "duplicate-pc" && (
-          <div className="pp-field">
-            <span className="ds-label">{type === "cert" ? "예외 기간" : "결석(미응시) 기간"}</span>
-            <div className="pp-row">
-              <input type="date" className="ds-input" aria-label="시작일" />
-              <span>~</span>
-              <input type="date" className="ds-input" aria-label="종료일" />
-            </div>
+      <div className="pp-field">
+        <span className="ds-label">
+          <Req />
+          신청 과목
+        </span>
+        {termChosen ? (
+          // TODO: API 고른 학기의 수강 과목 조회
+          <div className="mp-choices">
+            {courses.map((c) => (
+              <label key={c.id} className="ds-check">
+                <input type="checkbox" name="course" value={c.id} />
+                {c.title}
+              </label>
+            ))}
+          </div>
+        ) : (
+          <p className="pp-note">연도, 학기, 기수를 선택해 주세요.</p>
+        )}
+      </div>
+
+      {isAbsence ? (
+        <div className="pp-field">
+          <span className="ds-label">
+            <Req />
+            공결 사유
+          </span>
+          <div className="mp-choices mp-choices--column">
+            {absenceReasons.map((r, i) => (
+              <label key={r} className="ds-check">
+                <input type="radio" name="absence-reason" className="ds-radio" defaultChecked={i === 0} />
+                {r}
+              </label>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div className="pp-field">
+          <label className="ds-label" htmlFor="ex-reason">
+            <Req />
+            예외 사유
+          </label>
+          <input id="ex-reason" className="ds-input" />
+        </div>
+      )}
+
+      <div className="pp-field">
+        <span className="ds-label">
+          <Req />
+          {isAbsence ? "신청 기간 및 주차" : "신청 기간"}
+        </span>
+        <div className="pp-row mp-dates">
+          <input type="date" className="ds-input" aria-label="시작일" />
+          <span>~</span>
+          <input type="date" className="ds-input" aria-label="종료일" />
+        </div>
+        {isAbsence && (
+          <div className="mp-weeks">
+            {WEEKS.map((w) => (
+              <label key={w} className="ds-check">
+                <input type="checkbox" name="week" value={w} />
+                {w}
+              </label>
+            ))}
           </div>
         )}
+      </div>
 
-        {type === "duplicate-pc" && (
-          <div className="pp-field">
-            <label className="ds-label" htmlFor="ex-mate">
-              함께 쓰는 학습자
-            </label>
-            <input id="ex-mate" className="ds-input" placeholder="같은 PC로 수강하는 학습자의 이름과 아이디를 적어 주세요" />
-          </div>
+      <div className="pp-field">
+        <label className="ds-label" htmlFor="ex-file">
+          증빙서류 업로드
+        </label>
+        {isAbsence && (
+          <select className="ds-select mp-proof" aria-label="증빙서류 종류" defaultValue="">
+            <option value="">증빙서류 선택</option>
+            {absenceProofs.map((p) => (
+              <option key={p}>{p}</option>
+            ))}
+          </select>
         )}
+        <input id="ex-file" type="file" className="mp-file" />
+        <p className="pp-note ds-mt-4">{EXCEPTION_FILE_NOTE}</p>
+      </div>
 
-        <div className="pp-field">
-          <label className="ds-label" htmlFor="ex-detail">
-            상세 사유
-          </label>
-          <textarea id="ex-detail" className="ds-textarea ds-textarea--sm" placeholder="어떤 사정인지 자세히 적어 주세요." />
-        </div>
-
-        <div className="pp-field">
-          <label className="ds-label" htmlFor="ex-file">
-            증빙 서류
-          </label>
-          <input id="ex-file" type="file" className="mp-file" multiple />
-          <p className="pp-note ds-mt-4">사정을 확인할 수 있는 서류를 붙여 주세요. 서류가 없으면 승인되지 않을 수 있습니다.</p>
-        </div>
-
-        <div className="pp-field">
-          <label className="ds-check">
-            <input type="checkbox" checked={agreed} onChange={(e) => setAgreed(e.target.checked)} />
-            적은 내용이 사실이며, 사실과 다르면 승인이 취소될 수 있음에 동의합니다.
-          </label>
-        </div>
-
-        <div className="pp-actions">
-          <button type="submit" className="ds-btn ds-btn--primary ds-btn--lg" disabled={!agreed}>
-            신청하기
-          </button>
-        </div>
-      </form>
-    </>
+      <div className="pp-actions">
+        <button type="submit" className="ds-btn ds-btn--primary ds-btn--lg">
+          신청하기
+        </button>
+      </div>
+    </form>
   );
 }

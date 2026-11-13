@@ -9,6 +9,7 @@ import {
   PhilosophyTab,
   ScholarshipTab,
 } from "./AboutContent";
+import ButtonTabs from "@/components/common/ButtonTabs";
 
 const tabs = [
   { key: "greeting", label: "인사말", Panel: GreetingTab },
@@ -61,28 +62,8 @@ export default function AboutTabs() {
 
   return (
     <>
-      <nav ref={navRef} className="about-nav">
-        <div className="about-nav-container">
-          <ul className="about-nav-list">
-            {tabs.map((tab) => (
-              <li
-                key={tab.key}
-                className={`about-nav-item${tab.key === activeTab ? " active" : ""}`}
-                onClick={() => setSelected(tab.key)}
-              >
-                <a
-                  href="#"
-                  role="button"
-                  onClick={(e) => {
-                    e.preventDefault();
-                  }}
-                >
-                  {tab.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
+      <nav ref={navRef} className="about-nav" aria-label="교육원 소개">
+        <ButtonTabs variant="line" items={[...tabs]} active={activeTab} onSelect={(key) => setSelected(key as TabKey)} />
       </nav>
 
       <MobileAboutContent />

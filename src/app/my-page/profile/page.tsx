@@ -12,7 +12,7 @@ export default function ProfileConfirmPage() {
   // TODO: API 로그인한 회원 아이디 조회
   return (
     <MyPageShell title="내 정보 수정">
-      <PageTabs items={myPageAccountTabs} className="mp-subtabs" />
+      <PageTabs items={myPageAccountTabs} />
       <PasswordConfirmForm userId={sampleMember.userId} />
     </MyPageShell>
   );

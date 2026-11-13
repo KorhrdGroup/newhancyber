@@ -45,8 +45,12 @@ export default function LearningProgramPage() {
   return (
     <main className="wrapper">
       <SectionTabs items={programTabs} underHeader />
-      <ProgramTable title="기본 프로그램" group="basic" programs={basicPrograms} />
-      <ProgramTable title="기타 프로그램" group="etc" programs={etcPrograms} />
+      <div className="container lx-page lx-page--plain">
+        <h1 className="page-title">수강지원프로그램</h1>
+        <p className="lx-desc">학습 자료를 열어 보거나 증명서를 출력할 때 필요한 프로그램입니다. 필요한 것을 골라 내려받으세요.</p>
+        <ProgramTable title="기본 프로그램" group="basic" programs={basicPrograms} />
+        <ProgramTable title="기타 프로그램" group="etc" programs={etcPrograms} />
+      </div>
     </main>
   );
 }

@@ -13,6 +13,12 @@ export interface BoardPost {
   emphasized?: boolean;
   /** 원본에서 링크가 있던 글만 */
   href?: string;
+  /** 번호 대신 보일 배지 글자 (예: 수강후기 "BEST"). isNotice 면 "공지" */
+  badge?: string;
+  /** 더 붙는 칸의 값 (BoardTable columns 의 key 로 찾음) */
+  cells?: Record<string, React.ReactNode>;
+  /** 모바일 목록에서 제목 아래 한 줄 (과목·답변 상태 등) */
+  meta?: React.ReactNode;
 }
 
 const notice = (title: string, id: number): BoardPost => ({

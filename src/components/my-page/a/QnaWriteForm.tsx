@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 
-/** U28 학습 Q&A 글쓰기 */
+/** U28 학습 Q&A 문의하기 */
 export default function QnaWriteForm({ courses }: { courses: { id: string; title: string }[] }) {
   const [courseId, setCourseId] = useState("");
   const [title, setTitle] = useState("");

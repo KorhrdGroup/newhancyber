@@ -10,7 +10,7 @@ export default function AppealDetail({ appeal, backHref }: { appeal: Appeal; bac
 
   return (
     <>
-      <PageTabs items={myPageRequestTabs} className="mp-subtabs" />
+      <PageTabs items={myPageRequestTabs} />
       <section className="pp-box">
         <h3 className="pp-box-title">신청 내용</h3>
         <table className="ds-table ds-table--info">

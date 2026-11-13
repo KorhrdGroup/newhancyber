@@ -13,7 +13,7 @@ export default function LearningAnnualSchedulePage() {
       <MobilePageBanner name="schedule" text="연간 학사일정" />
       <main className="wrapper">
         <SectionTabs items={scheduleTabs} />
-        <div className="container lx-page">
+        <div className="container lx-page lx-page--plain">
           <h1 className="page-title">연간 학사일정</h1>
           <ul className="lx-notes">
             <li className="page-list-item">아래의 연간 학사일정은 교육원 사정에 의해 변경될 수 있습니다.</li>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import SectionTabs, { mobileGuideTabs } from "@/components/learning-support/extra/SectionTabs";
 import { SUPPORT_PHONE } from "@/lib/contact";
+import DraftNote from "@/components/common/DraftNote";
 
 export const metadata: Metadata = { title: "모바일학습가이드" };
 
@@ -51,9 +52,14 @@ export default function LearningMobileGuidePage() {
   return (
     <main className="wrapper">
       <SectionTabs items={mobileGuideTabs} underHeader />
-      <div className="container lx-page">
+      <div className="container lx-page lx-page--plain">
         <h1 className="page-title">모바일학습가이드</h1>
         <p className="lx-desc">스마트폰으로 한평생원격교육원을 이용하는 방법입니다. 출석·과제·시험은 PC에서 해 주세요.</p>
+        <DraftNote>
+          원본은 &quot;준비 중&quot; 그림뿐이라 이 페이지 내용(모바일·PC에서 할 수 있는 일, 접속 방법, 권장
+          환경 등)은 임시로 작성했습니다. 교육원의 모바일 수강 정책(모바일 출석 인정 여부 등)을 확인한 뒤
+          바꿔야 합니다.
+        </DraftNote>
 
         <section className="lx-panel">
           <h2 className="lx-section-title">모바일과 PC에서 할 수 있는 일</h2>

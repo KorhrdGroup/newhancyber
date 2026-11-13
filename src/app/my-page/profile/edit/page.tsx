@@ -13,7 +13,7 @@ export default function ProfileEditPage() {
   // TODO: API 회원 정보 조회
   return (
     <MyPageShell title="내 정보 수정" desc="바뀐 연락처와 주소를 고쳐 두면 학습 안내를 놓치지 않아요.">
-      <PageTabs items={myPageAccountTabs} className="mp-subtabs" />
+      <PageTabs items={myPageAccountTabs} />
       <ProfileEditForm member={sampleMember} />
     </MyPageShell>
   );

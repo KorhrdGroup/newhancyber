@@ -9,8 +9,10 @@ import {
   gnb,
   GNB_SEPARATOR_BEFORE,
   isVisible,
+  myPageTabs,
   utilityLinks,
 } from "@/lib/navigation";
+import { activeNavHref } from "@/components/common/PageTabs";
 
 /** 이 높이(px) 이상 스크롤하면 GNB 를 상단에 고정한다 (common.js 와 동일) */
 const STICKY_THRESHOLD = 100;
@@ -155,6 +157,21 @@ export default function Header() {
                 );
               })}
             </ul>
+            {/* 마이페이지는 GNB 에 없어서, 다른 메뉴의 파란 하위 메뉴 줄 자리에 마이페이지 메뉴를 늘 띄운다 */}
+            {pathname.startsWith("/my-page") && (
+              <ul className="submenu submenu--standalone" aria-label="마이페이지 메뉴">
+                {myPageTabs.map((tab) => (
+                  <li key={tab.href}>
+                    <Link
+                      href={tab.href}
+                      className={tab.href === activeNavHref(myPageTabs, pathname) ? "active" : undefined}
+                    >
+                      {tab.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
           </nav>
         </div>
       </div>

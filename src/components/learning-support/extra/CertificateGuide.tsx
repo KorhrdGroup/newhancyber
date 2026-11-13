@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import ButtonTabs from "@/components/common/ButtonTabs";
+import DraftNote from "@/components/common/DraftNote";
 
 type TabKey = "info" | "copy" | "login";
 
@@ -165,6 +167,10 @@ function InfoTab() {
 function CopyTab() {
   return (
     <>
+      <DraftNote>
+        원본은 &quot;준비 중&quot; 그림뿐이라 일반적인 은행 인증센터 절차로 임시로 작성했습니다. 교육원에서
+        쓰는 인증서 관리 프로그램을 확인한 뒤 바꿔야 합니다.
+      </DraftNote>
       <section className="lx-block">
         <h2 className="lx-section-title">PC → 이동식디스크(USB)·다른 PC로 복사하기</h2>
         <Steps steps={copyToDiskSteps} />
@@ -201,20 +207,7 @@ export default function CertificateGuide() {
 
   return (
     <>
-      <div className="lx-subtabs" role="tablist">
-        {tabs.map((tab) => (
-          <button
-            key={tab.key}
-            type="button"
-            role="tab"
-            aria-selected={tab.key === active}
-            className={`lx-subtab${tab.key === active ? " is-active" : ""}`}
-            onClick={() => setActive(tab.key)}
-          >
-            {tab.label}
-          </button>
-        ))}
-      </div>
+      <ButtonTabs items={tabs} active={active} onSelect={(key) => setActive(key as typeof active)} className="lx-subtabs" ariaLabel="공동인증서 안내 구분" />
       <div role="tabpanel">
         {active === "info" && <InfoTab />}
         {active === "copy" && <CopyTab />}

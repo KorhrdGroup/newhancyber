@@ -16,7 +16,7 @@ export default async function DemandSurveyPage({ params }: { params: Promise<{ i
 
   return (
     <MyPageShell title="설문조사" desc="여러분의 의견은 이름 없이 모아 강의와 학습 환경을 고치는 데 씁니다.">
-      <PageTabs items={surveyTabs} className="mp-subtabs" />
+      <PageTabs items={surveyTabs} />
       <div className="pp-box">
         <h3 className="pp-box-title">{survey.title}</h3>
         <p className="pp-text">{survey.intro}</p>

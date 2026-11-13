@@ -19,7 +19,7 @@ interface ProgramTableProps {
   programs: Program[];
 }
 
-/** 프로그램 표 한 개: 전체 선택 체크박스 + 선택/전체 다운로드 */
+/** 프로그램 표 한 개 (디자인 시스템 표·버튼): 전체 선택 체크박스 + 선택/전체 다운로드 */
 export default function ProgramTable({ title, group, programs }: ProgramTableProps) {
   const [checked, setChecked] = useState<Set<string>>(new Set());
   const allChecked = checked.size === programs.length;
@@ -47,76 +47,75 @@ export default function ProgramTable({ title, group, programs }: ProgramTablePro
   };
 
   return (
-    <div className="container">
-      <h1 className="page-title">{title}</h1>
-      <table className="program-table">
-        <thead>
-          <tr>
-            <th>구분</th>
-            <th>설명</th>
-            <th>
-              <div className="program-download-header">
-                <span className="program-download-label">다운로드</span>
+    <section className="lx-panel">
+      <h2 className="lx-section-title">{title}</h2>
+      <div className="lx-table-scroll">
+        <table className="ds-table lx-program-table">
+          <colgroup>
+            <col className="lx-program-col-name" />
+            <col />
+            <col className="lx-program-col-down" />
+            <col className="lx-program-col-check" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th scope="col" className="is-left">
+                구분
+              </th>
+              <th scope="col" className="is-left">
+                설명
+              </th>
+              <th scope="col">다운로드</th>
+              <th scope="col">
                 <input
                   type="checkbox"
-                  id={`select-all-${group}`}
-                  className="program-checkbox"
+                  className="lx-program-check"
+                  aria-label={`${title} 전체 선택`}
                   checked={allChecked}
                   onChange={(e) => setChecked(e.target.checked ? new Set(programs.map((p) => p.key)) : new Set())}
                 />
-              </div>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {programs.map((program) => (
-            <tr key={program.key}>
-              <td>
-                <div className="program-item">
-                  <img
-                    src={`/resources/images/learning-support/${program.icon}`}
-                    alt={program.alt}
-                    className="program-icon"
-                  />
-                  <span className="program-item-text">{program.name}</span>
-                </div>
-              </td>
-              <td>{program.description}</td>
-              <td>
-                <div className="program-download-cell">
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {programs.map((program) => (
+              <tr key={program.key}>
+                <td className="is-left">
+                  <span className="lx-program-name">
+                    <img src={`/resources/images/learning-support/${program.icon}`} alt={program.alt} />
+                    {program.name}
+                  </span>
+                </td>
+                <td className="is-left lx-program-desc">{program.description}</td>
+                <td>
                   {/* TODO: 프로그램별 다운로드 링크 */}
-                  <button type="button" className="program-download-btn">
+                  <button type="button" className="ds-btn ds-btn--secondary ds-btn--sm">
                     다운로드
                   </button>
+                </td>
+                <td>
                   <input
                     type="checkbox"
-                    className={`program-checkbox program-item-checkbox program-${group}-checkbox`}
+                    className="lx-program-check"
+                    aria-label={`${program.name} 선택`}
                     data-program={program.key}
                     checked={checked.has(program.key)}
                     onChange={(e) => toggle(program.key, e.target.checked)}
                   />
-                </div>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className="program-actions">
-        <button
-          type="button"
-          className={`program-action-btn program-select-btn program-${group}-select-btn`}
-          onClick={handleSelectedDownload}
-        >
-          선택 다운로드
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div className="lx-program-actions">
+        <button type="button" className="ds-btn ds-btn--secondary" onClick={handleSelectedDownload}>
+          선택 다운로드{checked.size > 0 && ` (${checked.size})`}
         </button>
-        <button
-          type="button"
-          className={`program-action-btn program-all-btn program-${group}-all-btn`}
-          onClick={handleAllDownload}
-        >
+        <button type="button" className="ds-btn ds-btn--primary" onClick={handleAllDownload}>
           전체 다운로드
         </button>
       </div>
-    </div>
+    </section>
   );
 }

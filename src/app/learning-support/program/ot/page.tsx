@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Fragment } from "react";
 import SectionTabs, { programTabs } from "@/components/learning-support/extra/SectionTabs";
+import StepDivider from "@/components/learning-support/extra/StepDivider";
 import { SUPPORT_PHONE } from "@/lib/contact";
+import DraftNote from "@/components/common/DraftNote";
 
 export const metadata: Metadata = { title: "학습자 OT" };
 
@@ -14,12 +17,13 @@ const sections: { title: string; items: string[]; links?: { label: string; href:
   {
     title: "학습 전 준비",
     items: [
-      "회원가입 후 수강신청과 결제를 마치면 개강일부터 나의 강의실에서 학습할 수 있습니다.",
+      "아직 수강신청 전이라면 수강신청 절차를 먼저 확인해 주세요. 결제까지 마치면 개강일부터 나의 강의실에서 학습할 수 있습니다.",
       "대리출석·대리시험을 막기 위해 학습할 PC를 학습자 PC(IP)로 등록해야 합니다. 등록된 PC에서만 출석·시험이 인정됩니다.",
       "출석·과제·시험은 공동인증서로 로그인해야 합니다. 시험은 PC에서만 볼 수 있습니다.",
       "강의 자료를 열려면 한글·PDF 뷰어 등 수강지원프로그램을 미리 설치해 주세요.",
     ],
     links: [
+      { label: "수강신청 절차", href: "/course-registration/process" },
       { label: "학습자 PC 등록", href: "/my-page/pc" },
       { label: "공동인증서 안내", href: "/learning-support/mobile-guide/certificate" },
       { label: "수강지원프로그램", href: "/learning-support/program" },
@@ -56,16 +60,20 @@ export default function LearningOtPage() {
   return (
     <main className="wrapper">
       <SectionTabs items={programTabs} underHeader />
-      <div className="container lx-page">
+      <div className="container lx-page lx-page--plain">
         <h1 className="page-title">학습자 OT</h1>
         <p className="lx-desc">처음 수강하는 학습자를 위한 학습 안내입니다. 개강 전에 꼭 읽어 주세요.</p>
+        <DraftNote>
+          원본은 &quot;준비 중&quot; 그림뿐이라 이 사이트의 FAQ와 공동인증서 안내를 바탕으로 임시로
+          작성했습니다. 교육원의 OT 영상·자료가 나오면 바꿔야 합니다.
+        </DraftNote>
 
-        <ol className="lx-ot">
-          {sections.map((section, i) => (
-            <li key={section.title} className="lx-panel lx-ot-item">
-              <h2 className="lx-ot-title">
-                <span className="lx-flow-num">STEP {i + 1}</span>
-                {section.title}
+        {sections.map((section, i) => (
+          <Fragment key={section.title}>
+            {i > 0 && <StepDivider />}
+            <section className="lx-panel">
+              <h2 className="lx-section-title">
+                <span className="lx-step-label">STEP {i + 1}</span> {section.title}
               </h2>
               <ul className="lx-notes">
                 {section.items.map((item) => (
@@ -83,9 +91,9 @@ export default function LearningOtPage() {
                   ))}
                 </div>
               )}
-            </li>
-          ))}
-        </ol>
+            </section>
+          </Fragment>
+        ))}
 
         <p className="lx-callout">
           학습 중 궁금한 점은 1:1 문의 또는 학습지원센터({SUPPORT_PHONE})로 문의해 주세요.

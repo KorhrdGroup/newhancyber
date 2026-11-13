@@ -18,7 +18,7 @@ export default function CertificateList({
 }) {
   return (
     <>
-      <PageTabs items={certificateTabs} className="mq-subtabs" />
+      <PageTabs items={certificateTabs} />
       <Guide items={guide} />
       {actions && <div className="mq-toolbar">{actions}</div>}
       {rows.length === 0 ? (

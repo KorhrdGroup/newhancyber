@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SUPPORT_PHONE } from "@/lib/contact";
+import DraftNote from "@/components/common/DraftNote";
 import { Badge } from "@/components/my-classroom/ClassroomUI";
 import { TodoButton } from "@/components/my-classroom/PopupActions";
 import PopupButton from "@/components/my-classroom/PopupButton";
@@ -49,7 +50,7 @@ export default function PracticeDocumentsPage() {
   return (
     <main className="wrapper">
       {/* .content-section 은 안의 h2 를 32px 로 키워서(style.css) 학습자 OT 화면과 같은 틀을 쓴다 */}
-      <div className="container lx-page">
+      <div className="container lx-page lx-page--plain">
         <h1 className="page-title">서류제출</h1>
         <p className="lx-desc">
           실습 과목을 신청했다면 실습을 시작하기 전에 아래 서류 6가지를 모두
@@ -57,44 +58,56 @@ export default function PracticeDocumentsPage() {
           열립니다.
         </p>
 
+        <DraftNote>
+          원본에 내용이 없던 페이지라 서류 이름 외의 안내(제출 순서, 서류 설명·준비 방법, 파일
+          형식·10MB, 실습 2주 전 기한, 실습기관 배정 순서)는 임시로 작성했습니다. 실제 규정을 확인한
+          뒤 바꿔야 합니다.
+        </DraftNote>
+
         <section className="lx-panel">
           <h2 className="lx-section-title">내 제출 현황</h2>
-          <p className="lx-desc">
-            {course.title} · {course.term}
-          </p>
-          <div className="ds-stats ds-mt-12">
-            <div className="ds-stat">
-              <p className="ds-stat-label">낸 서류</p>
-              <p className="ds-stat-value">
-                {done}
-                <small> / {practiceDocs.length}</small>
+          {/* 과목·숫자·버튼을 한 카드에 — 왼쪽 현황, 오른쪽 할 일 */}
+          <div className="lx-doc-status">
+            <div className="lx-doc-status-info">
+              <p className="lx-doc-status-course">
+                {course.title} · {course.term}
               </p>
+              <dl className="lx-doc-status-stats">
+                <div>
+                  <dt className="ds-stat-label">낸 서류</dt>
+                  <dd className="ds-stat-value">
+                    {done}
+                    <small> / {practiceDocs.length}</small>
+                  </dd>
+                </div>
+                <div>
+                  <dt className="ds-stat-label">다시 내야 할 서류</dt>
+                  <dd className={`ds-stat-value${rejected > 0 ? " ds-text-danger" : ""}`}>{rejected}</dd>
+                </div>
+              </dl>
             </div>
-            <div className="ds-stat">
-              <p className="ds-stat-label">다시 내야 할 서류</p>
-              <p className="ds-stat-value ds-text-danger">{rejected}</p>
-            </div>
-          </div>
-          <div className="lx-ot-links">
-            <PopupButton
+            <div className="lx-doc-status-actions">
+              <PopupButton
               href={`/popup/practice-documents/${course.id}`}
               className="ds-btn ds-btn--primary"
             >
-              실습 서류 제출하기
-            </PopupButton>
-            <Link href="/my-classroom" className="ds-btn ds-btn--secondary">
-              나의 강의실로 가기
-            </Link>
+                실습 서류 제출하기
+              </PopupButton>
+              <Link href="/my-classroom" className="ds-btn ds-btn--secondary">
+                나의 강의실로 가기
+              </Link>
+            </div>
           </div>
         </section>
 
         <section className="lx-panel">
           <h2 className="lx-section-title">제출 순서</h2>
-          <ol className="lx-notes">
+          <ol className="lx-flow lx-flow--3">
             {steps.map((step, i) => (
-              <li key={step.title} className="page-list-item">
-                <span className="lx-flow-num">STEP {i + 1}</span>{" "}
-                <strong>{step.title}</strong> — {step.text}
+              <li key={step.title} className="lx-flow-item">
+                <span className="lx-flow-num">STEP {i + 1}</span>
+                <strong>{step.title}</strong>
+                <span className="lx-flow-desc">{step.text}</span>
               </li>
             ))}
           </ol>
@@ -103,7 +116,7 @@ export default function PracticeDocumentsPage() {
         <section className="lx-panel">
           <h2 className="lx-section-title">제출 서류</h2>
           <div className="lx-table-scroll">
-            <table className="ds-table lx-table">
+            <table className="ds-table lx-table lx-practice-grid lx-doc-table">
               <thead>
                 <tr>
                   <th>서류</th>
@@ -116,7 +129,7 @@ export default function PracticeDocumentsPage() {
               <tbody>
                 {practiceDocs.map((doc) => (
                   <tr key={doc.id}>
-                    <td>
+                    <td className="is-left">
                       <strong>{doc.name}</strong>
                     </td>
                     <td className="is-left">{doc.description}</td>

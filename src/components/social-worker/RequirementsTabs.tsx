@@ -1,36 +1,12 @@
 "use client";
 
-import { Fragment, useState } from "react";
+import { useState } from "react";
+import ButtonTabs from "@/components/common/ButtonTabs";
 
 export interface TabPanel {
   key: string;
   label: string;
   content: React.ReactNode;
-}
-
-function TabButtons({
-  panels,
-  activeKey,
-  onSelect,
-  buttonClass,
-}: {
-  panels: TabPanel[];
-  activeKey: string;
-  onSelect: (key: string) => void;
-  buttonClass: string;
-}) {
-  return panels.map((panel, i) => (
-    <Fragment key={panel.key}>
-      {i > 0 && " "}
-      <button
-        type="button"
-        className={`${buttonClass}${panel.key === activeKey ? " active" : ""}`}
-        onClick={() => onSelect(panel.key)}
-      >
-        {panel.label}
-      </button>
-    </Fragment>
-  ));
 }
 
 /** 급수별 자격요건 탭 (사회복지사 자격 / 2급 / 1급) */
@@ -39,13 +15,7 @@ export default function RequirementsTabs({ panels }: { panels: TabPanel[] }) {
 
   return (
     <>
-      <div className="requirements-tabs">
-        <div className="requirements-tabs-container">
-          <div className="requirements-tabs-nav">
-            <TabButtons panels={panels} activeKey={activeKey} onSelect={setActiveKey} buttonClass="requirements-tab-btn" />
-          </div>
-        </div>
-      </div>
+      <ButtonTabs variant="line" items={panels} active={activeKey} onSelect={setActiveKey} ariaLabel="자격 구분" />
       <div className="requirements-content">
         {panels.map((panel) => (
           <div
@@ -68,14 +38,7 @@ export function RequirementsSubTabs({ panels }: { panels: TabPanel[] }) {
   return (
     <>
       <div className="requirements-sub-tabs">
-        <div className="requirements-sub-tabs-nav">
-          <TabButtons
-            panels={panels}
-            activeKey={activeKey}
-            onSelect={setActiveKey}
-            buttonClass="requirements-sub-tab-btn"
-          />
-        </div>
+        <ButtonTabs items={panels} active={activeKey} onSelect={setActiveKey} ariaLabel="1급 안내 구분" />
       </div>
       {panels.map((panel) => (
         <div

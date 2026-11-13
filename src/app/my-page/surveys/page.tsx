@@ -15,7 +15,7 @@ export default function SatisfactionSurveysPage() {
 
   return (
     <MyPageShell title="설문조사" desc="여러분의 의견은 이름 없이 모아 강의와 학습 환경을 고치는 데 씁니다.">
-      <PageTabs items={surveyTabs} className="mp-subtabs" />
+      <PageTabs items={surveyTabs} />
       <div className="cr-table-wrap">
         <table className="ds-table">
           <thead>

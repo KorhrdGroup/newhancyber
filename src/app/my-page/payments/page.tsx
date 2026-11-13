@@ -22,7 +22,7 @@ export default function PaymentsPage() {
 
   return (
     <MyPageShell title="결제 내역" desc="수강료 결제와 환불 상태를 확인할 수 있어요.">
-      <PageTabs items={myPagePaymentTabs} className="mp-subtabs" />
+      <PageTabs items={myPagePaymentTabs} />
       {list.length === 0 ? (
         <p className="ex-empty">결제 내역이 없어요.</p>
       ) : (

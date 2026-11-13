@@ -173,58 +173,10 @@
   }
 }
 
-/* 교육원 소개 페이지 스타일 */
+/* 교육원 소개 페이지 스타일 — 탭 줄은 ButtonTabs(line) */
 .about-nav {
   max-width: var(--max-width);
-  width: 100%;
-  background-color: #ffffff;
-  border-bottom: 1px solid #e5e5e5;
   margin: 0 auto 40px;
-  box-sizing: border-box;
-}
-
-.about-nav-container {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  width: 100%;
-}
-
-.about-nav-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
-
-.about-nav-item {
-  position: relative;
-  flex: 1;
-  text-align: center;
-}
-
-.about-nav-item a {
-  display: block;
-  padding: 16px 32px;
-  color: #181818;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 400;
-  transition: color 0.2s ease;
-  cursor: pointer;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.about-nav-item.active a {
-  color: #115aed;
-  font-weight: 600;
-}
-
-.about-nav-item a:hover {
-  color: #3f7efb;
 }
 
 /* 인사말 탭 스타일 */

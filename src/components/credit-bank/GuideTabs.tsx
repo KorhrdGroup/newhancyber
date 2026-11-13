@@ -1,6 +1,7 @@
 "use client";
 
-import { Fragment, useState } from "react";
+import { useState } from "react";
+import ButtonTabs from "@/components/common/ButtonTabs";
 import GuideSlider, { type GuideSlide } from "./GuideSlider";
 
 type InfoTabKey = "procedure" | "registration" | "credit" | "degree";
@@ -61,24 +62,7 @@ export default function GuideTabs({ panels }: { panels: Record<InfoTabKey, React
 
   return (
     <>
-      <div className="guide-tabs">
-        <div className="guide-tabs-container">
-          <nav className="guide-tabs-nav">
-            {tabs.map((tab, i) => (
-              <Fragment key={tab.key}>
-                {i > 0 && " "}
-                <button
-                  type="button"
-                  className={`guide-tab-btn${tab.key === activeTab ? " active" : ""}`}
-                  onClick={() => setActiveTab(tab.key)}
-                >
-                  {tab.label}
-                </button>
-              </Fragment>
-            ))}
-          </nav>
-        </div>
-      </div>
+      <ButtonTabs variant="line" items={tabs} active={activeTab} onSelect={(key) => setActiveTab(key as TabKey)} ariaLabel="행정절차 가이드" />
 
       <section className="page-header">
         <div className="guide-tab-content">
@@ -89,20 +73,7 @@ export default function GuideTabs({ panels }: { panels: Record<InfoTabKey, React
           ))}
 
           <div className="guide-sub-tabs" style={activeTab === "download" ? undefined : { display: "none" }}>
-            <div className="guide-sub-tabs-nav">
-              {guides.map((guide, i) => (
-                <Fragment key={guide.key}>
-                  {i > 0 && " "}
-                  <button
-                    type="button"
-                    className={`guide-sub-tab-btn${guide.key === activeGuide ? " active" : ""}`}
-                    onClick={() => setActiveGuide(guide.key)}
-                  >
-                    {guide.label}
-                  </button>
-                </Fragment>
-              ))}
-            </div>
+            <ButtonTabs items={guides} active={activeGuide} onSelect={setActiveGuide} ariaLabel="가이드 종류" />
           </div>
 
           <div className={panelClass("download")} id="tab-download">

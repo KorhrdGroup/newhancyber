@@ -20,9 +20,9 @@ export const boardListHref: Record<BoardKind, string> = {
 };
 
 export const boardLabels: Record<BoardKind, string> = {
-  notice: "과목 공지",
+  notice: "학습 공지사항",
   qna: "학습 Q&A",
-  materials: "과목 자료실",
+  materials: "학습 자료실",
 };
 
 export type AnswerStatus = "답변 완료" | "답변 대기";
@@ -165,6 +165,7 @@ export function getAdjacentPosts(post: BoardPost): { prev?: BoardPost; next?: Bo
 }
 
 export const courseTitle = (courseId: string) => getCourse(courseId).title;
+export const courseTerm = (courseId: string) => getCourse(courseId).term;
 
 /* ------------------------------------------------------------------ */
 /* U29 쿠폰 사용내역                                                     */
@@ -286,42 +287,28 @@ export const exceptionLabels: Record<ExceptionType, string> = {
   absence: "공결 및 추가시험",
 };
 
-/** 신청 화면 안내·사유 목록. TODO: 안내 문구와 사유는 원본(로그인 후 화면) 확인 뒤 맞춘다 */
-export const exceptionGuides: Record<ExceptionType, { guide: string[]; reasons: string[] }> = {
-  cert: {
-    guide: [
-      "시험·과제에 참여하기 전에 공인인증서(공동·금융인증서)로 본인 확인을 합니다.",
-      "외국 국적이거나 해외에 머무는 등 인증서를 쓸 수 없는 사정이 있으면 예외를 신청해 주세요.",
-      "승인되면 정한 기간 동안 휴대폰 본인 인증으로 대신할 수 있습니다.",
-    ],
-    reasons: ["외국 국적이라 인증서 발급이 어려움", "해외 체류 중", "장애로 인증서 사용이 어려움", "기타"],
-  },
-  "duplicate-pc": {
-    guide: [
-      "부정 수강을 막기 위해 한 PC에서는 학습자 한 명만 수강할 수 있습니다.",
-      "가족이 같은 PC로 함께 공부하는 등 다른 학습자와 PC를 같이 써야 하면 신청해 주세요.",
-      "승인되면 함께 쓰는 학습자도 이 PC에서 수강할 수 있습니다.",
-    ],
-    reasons: ["가족과 같은 PC를 씀", "직장 공용 PC를 씀", "기타"],
-  },
-  absence: {
-    guide: [
-      "질병·입원, 가족의 경조사, 천재지변 등 어쩔 수 없는 사정으로 출석하거나 시험을 치르지 못했을 때 신청합니다.",
-      "사정을 확인할 수 있는 증빙 서류(진단서, 입원 확인서, 가족관계증명서 등)를 꼭 붙여 주세요.",
-      "신청은 사유가 생긴 날부터 7일 안에 해 주세요. 처리 결과는 '신청 결과'에서 볼 수 있습니다.",
-    ],
-    reasons: ["질병·입원", "본인·가족의 경조사", "천재지변·재난", "예비군·민방위 훈련", "기타"],
-  },
-};
-
-export const absenceKinds = ["공결 신청", "추가시험 신청"];
-export const absenceExams = ["중간고사", "기말고사", "퀴즈", "쪽지시험"];
+/* 신청서 선택지 — 원본 /stdMng/exception.asp · absentApply.asp 와 같은 값 */
+export const exceptionYears = ["2026년", "2027년"];
+export const exceptionHalves = ["1학기", "2학기"];
+/** 기수 목록. TODO: API 연도·학기에 맞는 기수 조회 (원본은 연도·학기를 고르면 채운다) */
+export const exceptionRounds = ["1차", "2차", "3차", "4차"];
+export const absenceKinds = ["공결", "추가시험"];
+export const absenceReasons = [
+  "배우자, 본인 또는 배우자의 직계가족의 사망",
+  "병역법 등 관계 법령에 의한 동원 소집된 사람",
+  "본인의 결혼 또는 질병 등으로 입원한 사람",
+  "천재지변으로 인한 사고",
+];
+export const absenceProofs = ["입원확인서", "청첩장 또는 혼인신고서", "사망진단서", "동원훈련소집증", "기타"];
+export const EXCEPTION_FILE_NOTE = "(첨부파일 최대 용량 : 10MB / 확장자 : doc, pdf, hwp, ppt, xls, txt, jpg, png, gif)";
 
 export type ExceptionStatus = "접수" | "처리 중" | "승인" | "반려";
 
 export interface ExceptionRequest {
   id: string;
   type: ExceptionType;
+  /** 신청 기간 */
+  period: string;
   appliedAt: string;
   status: ExceptionStatus;
   processedAt?: string;
@@ -336,13 +323,14 @@ export const exceptionRequests: ExceptionRequest[] = [
   {
     id: "ex2610002",
     type: "duplicate-pc",
+    period: "2026.10.13 ~ 2026.12.31",
     appliedAt: "2026.10.12",
     status: "승인",
     processedAt: "2026.10.14",
     details: [
-      { label: "사유", value: "가족과 같은 PC를 씀" },
-      { label: "함께 쓰는 학습자", value: "홍길순" },
-      { label: "상세 사유", value: "배우자와 같은 집 PC로 함께 공부합니다." },
+      { label: "학기 구분", value: "2026년 2학기 4차" },
+      { label: "신청 과목", value: "사회복지학개론, 인간행동과사회환경" },
+      { label: "예외 사유", value: "배우자와 같은 집 PC로 함께 공부합니다." },
     ],
     files: ["가족관계증명서.pdf"],
     resultNote: "승인되었습니다. 이제 함께 쓰는 학습자도 등록한 PC에서 수강할 수 있습니다.",
@@ -350,27 +338,29 @@ export const exceptionRequests: ExceptionRequest[] = [
   {
     id: "ex2609003",
     type: "absence",
+    period: "2026.09.21 ~ 2026.09.23",
     appliedAt: "2026.09.24",
     status: "처리 중",
     details: [
-      { label: "신청 종류", value: "추가시험 신청" },
-      { label: "과목", value: "사회복지정책론" },
-      { label: "시험", value: "기말고사" },
-      { label: "사유", value: "질병·입원" },
-      { label: "상세 사유", value: "시험 기간에 입원해 기말고사를 치르지 못했습니다." },
+      { label: "신청 종류", value: "공결" },
+      { label: "학기 구분", value: "2026년 2학기 4차" },
+      { label: "신청 과목", value: "사회복지학개론" },
+      { label: "공결 사유", value: "본인의 결혼 또는 질병 등으로 입원한 사람" },
+      { label: "신청 주차", value: "4주차" },
     ],
     files: ["입원확인서.pdf"],
   },
   {
     id: "ex2609001",
     type: "cert",
+    period: "2026.09.05 ~ 2026.09.30",
     appliedAt: "2026.09.02",
     status: "반려",
     processedAt: "2026.09.04",
     details: [
-      { label: "사유", value: "해외 체류 중" },
-      { label: "예외 기간", value: "2026.09.05 ~ 2026.09.30" },
-      { label: "상세 사유", value: "출장으로 해외에 머물러 인증서를 쓸 수 없습니다." },
+      { label: "학기 구분", value: "2026년 2학기 4차" },
+      { label: "신청 과목", value: "사회복지학개론" },
+      { label: "예외 사유", value: "출장으로 해외에 머물러 인증서를 쓸 수 없습니다." },
     ],
     files: [],
     resultNote: "해외 체류를 확인할 수 있는 서류(출입국 사실 증명서 등)가 없습니다. 서류를 붙여 다시 신청해 주세요.",

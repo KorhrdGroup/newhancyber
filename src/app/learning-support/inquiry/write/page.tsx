@@ -7,7 +7,7 @@ export const metadata: Metadata = { title: "1:1 문의하기" };
 export default function LearningInquiryWritePage() {
   return (
     <main className="wrapper">
-      <div className="container lx-page lx-page--top">
+      <div className="container lx-page lx-page--top lx-page--plain">
         <h1 className="page-title">1:1 문의하기</h1>
         <p className="lx-desc">답변이 등록되면 1:1 문의 목록에서 확인하실 수 있습니다.</p>
         <InquiryWriteForm />

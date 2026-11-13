@@ -14,6 +14,8 @@
 
 /* ---------- 본문 틀 ---------- */
 .lx-page { color: var(--color-text-default); }
+/* 실습지원(FAQ·서류제출)에서 써도 제목이 학습지원과 같은 24px — 다른 화면 CSS 의 32px 제목을 덮음 */
+.lx-page .page-title { font-size: 24px; }
 .lx-desc { margin-top: var(--space-4); font-size: 14px; line-height: 1.6; color: var(--color-text-secondary); }
 .lx-head { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--space-16); }
 .lx-head .ds-btn { flex-shrink: 0; }
@@ -31,6 +33,11 @@
 .lx-link { color: var(--color-text-brand); text-decoration: underline; word-break: break-all; }
 .lx-mt-8 { margin-top: var(--space-8); }
 .lx-actions { display: flex; justify-content: center; gap: var(--space-8); margin-top: var(--space-24); }
+/* 흰 바탕 틀 (1:1 문의 · 모바일학습가이드) — 공지사항·FAQ 처럼 회색 상자 없이 글을 본문선에 둠.
+   안의 설명 상자(lx-panel)도 테두리 없이 제목 + 내용으로 펼침 */
+.container.lx-page--plain { background: var(--color-bg-default); }
+.lx-page--plain .lx-panel { margin-top: var(--space-40); padding: 0; border: 0; border-radius: 0; }
+.lx-callout a { font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
 .lx-callout {
   margin-top: var(--space-24);
   padding: var(--space-16);
@@ -41,45 +48,108 @@
   color: var(--color-text-brand);
 }
 
-/* ---------- 1:1 문의 ---------- */
-.lx-inquiry-table { table-layout: fixed; }
-.lx-inquiry-table .lx-col-num { width: 80px; }
-.lx-inquiry-table .lx-col-date { width: 120px; }
-.lx-inquiry-table .lx-col-status { width: 120px; }
-.lx-title-link {
-  display: block;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  color: var(--color-text-strong);
+/* ---------- 수강지원프로그램 (표 + 선택/전체 다운로드) ---------- */
+.lx-program-table { table-layout: fixed; }
+.lx-program-col-name { width: 260px; }
+.lx-program-col-down { width: 120px; }
+.lx-program-col-check { width: 64px; }
+.lx-program-name { display: inline-flex; align-items: center; gap: var(--space-12); font-weight: 600; color: var(--color-text-strong); }
+.lx-program-name img { flex-shrink: 0; width: 24px; height: 24px; object-fit: contain; }
+.lx-program-desc { color: var(--color-text-secondary); }
+.lx-program-check { width: 18px; height: 18px; vertical-align: middle; accent-color: var(--color-bg-brand); cursor: pointer; }
+.lx-program-actions { display: flex; justify-content: flex-end; gap: var(--space-8); margin-top: var(--space-16); }
+
+/* ---------- 원격지원 (STEP 소제목 + 연락처 카드 + 바로가기 버튼) ---------- */
+.lx-step-label { margin-right: var(--space-8); color: var(--color-text-brand); }
+.lx-remote-contacts { grid-template-columns: repeat(2, 1fr); }
+/* Figma 원격지원: 연한 파랑 바탕, 가운데 정렬, 파란 제목 */
+.lx-remote-contacts .ds-stat { border-color: transparent; background: var(--color-bg-brand-subtle); text-align: center; }
+.lx-remote-contacts .ds-stat-label { color: var(--color-text-brand); }
+.lx-remote-contacts .ds-stat-value { font-size: 18px; }
+.lx-remote-buttons { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-16); }
+.lx-remote-buttons .ds-btn { justify-content: space-between; }
+/* STEP 사이 연결선: 회색 점선 + 가운데 파란 동그라미 아래 화살표 */
+.lx-step-divider { position: relative; display: flex; justify-content: center; margin-top: var(--space-40); }
+.lx-step-divider::before { content: ""; position: absolute; top: 50%; left: 0; right: 0; border-top: 2px dotted var(--color-border-default); }
+.lx-step-divider-icon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #98c2ff; /* Figma 원격지원 mark 색 (연한 파랑, 다른 화면 테두리와 같은 값) */
+  color: var(--color-text-inverse);
+  box-shadow: 0 0 0 8px var(--color-bg-default);
 }
-.lx-title-link:hover { color: var(--color-text-brand); text-decoration: underline; }
+.lx-step-divider-icon svg { width: 14px; height: 14px; }
+
+/* ---------- 1:1 문의 ---------- */
+.lx-inquiry-bar { margin-top: var(--space-32); }
+/* 목록 = FAQ 질문 접기: 상태 배지 · 제목 · 문의일 · 화살표, 펼치면 내 글 + 답변 상자 */
+.lx-inquiry-status { flex-shrink: 0; width: 72px; }
+.lx-inquiry-q .ds-accordion-text { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+/* 열린 문의 줄은 회색으로 선택된 것처럼 (호버와 같은 색) */
+.lx-inquiry-list .ds-accordion-item.is-open .lx-inquiry-q { background-color: var(--color-bg-subtle); }
+.lx-inquiry-date { flex-shrink: 0; font-size: 14px; color: var(--color-text-secondary); font-variant-numeric: tabular-nums; }
+.lx-inquiry-detail { padding: 0 var(--space-20) var(--space-20) calc(var(--space-20) + 72px + var(--space-12)); }
+.lx-inquiry-detail > .lx-post-body:first-child { padding-top: var(--space-20); }
 
 .lx-post-head { padding-bottom: var(--space-16); border-bottom: 1px solid var(--color-border-subtle); }
 .lx-post-title { margin-top: var(--space-8); font-size: 20px; font-weight: 700; line-height: 1.4; color: var(--color-text-strong); word-break: keep-all; }
 .lx-post-meta { margin-top: var(--space-4); font-size: 13px; color: var(--color-text-secondary); }
 .lx-post-body { padding-top: var(--space-16); font-size: 14px; line-height: 1.7; }
 .lx-post-body p + p { margin-top: var(--space-8); }
-.lx-post-file { margin-top: var(--space-16); padding-top: var(--space-12); border-top: 1px solid var(--color-border-subtle); font-size: 13px; color: var(--color-text-secondary); }
-.lx-post-file span { margin-left: var(--space-8); color: var(--color-text-default); }
+/* 첨부파일: 위 구분선 없이 클립 아이콘 + 파일 이름을 옅은 회색 알약 모양으로 */
+.lx-file-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-6, 6px);
+  max-width: 100%;
+  margin-top: var(--space-12);
+  padding: var(--space-6, 6px) var(--space-12);
+  border-radius: var(--radius-6);
+  background: var(--color-bg-subtle);
+  font-size: 13px;
+  color: var(--color-text-default);
+  overflow-wrap: anywhere;
+}
+.lx-file-chip svg { flex-shrink: 0; color: var(--color-text-secondary); }
 
 .lx-answer {
   margin-top: var(--space-16);
   padding: var(--space-24);
-  border: 1px solid var(--color-border-brand);
   border-radius: var(--radius-8);
   background: var(--color-bg-brand-subtle);
 }
 .lx-answer-head { display: flex; align-items: baseline; gap: var(--space-8); }
 .lx-answer-head strong { font-size: 16px; color: var(--color-text-brand); }
 .lx-answer-head .lx-post-meta { margin-top: 0; }
-.lx-answer--waiting { border-color: var(--color-border-default); background: var(--color-bg-subtle); text-align: center; }
-.lx-answer--waiting strong { font-size: 16px; color: var(--color-text-strong); }
-.lx-answer--waiting p { margin-top: var(--space-8); font-size: 14px; color: var(--color-text-secondary); }
+.lx-answer--waiting { background: var(--color-bg-subtle); text-align: center; }
+/* 답변 대기: 두 줄 모두 같은 크기의 작은 글씨, 첫 줄만 굵게 */
+.lx-answer--waiting p { font-size: 14px; line-height: 1.6; color: var(--color-text-secondary); }
+.lx-answer--waiting p:first-child { font-weight: 700; color: var(--color-text-default); }
 
 .lx-field + .lx-field { margin-top: var(--space-20); }
 .lx-textarea { min-height: 240px; }
-.lx-file { display: block; max-width: 100%; font-size: 14px; }
+.lx-file { display: block; max-width: 100%; font-size: 14px; color: var(--color-text-secondary); }
+/* 파일 선택 버튼 = 디자인 시스템 보조 버튼(작은 크기) */
+.lx-file::file-selector-button {
+  height: var(--size-control-sm);
+  margin-right: var(--space-12);
+  padding: 0 var(--space-12);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-4);
+  background: var(--color-bg-default);
+  color: var(--color-text-default);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+.lx-file::file-selector-button:hover { background: var(--color-bg-subtle); }
 
 /* ---------- 연간 학사일정 ---------- */
 .lx-year { margin-top: var(--space-32); }
@@ -106,22 +176,7 @@
 .lx-term-row dd { color: var(--color-text-default); }
 
 /* ---------- 공동인증서 안내 ---------- */
-.lx-subtabs { display: flex; gap: var(--space-8); margin-top: var(--space-20); }
-.lx-subtab {
-  flex: 1;
-  min-height: var(--size-control-lg);
-  padding: var(--space-8) var(--space-12);
-  border: 1px solid var(--color-border-strong);
-  border-radius: var(--radius-8);
-  background: var(--color-bg-default);
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.4;
-  color: var(--color-text-secondary);
-  word-break: keep-all;
-}
-.lx-subtab:hover { color: var(--color-text-strong); }
-.lx-subtab.is-active { border-color: var(--color-bg-brand); background: var(--color-bg-brand); font-weight: 600; color: var(--color-text-inverse); }
+.lx-subtabs { margin-top: var(--space-20); }
 
 .lx-block { margin-top: var(--space-32); }
 .lx-table-scroll { overflow-x: auto; }
@@ -173,11 +228,95 @@
   word-break: keep-all;
 }
 .lx-flow-num { font-size: 12px; font-weight: 700; color: var(--color-text-brand); }
+/* 3단계 + 설명 (서류제출) */
+.lx-flow--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-bottom: 0; }
+.lx-flow--3 .lx-flow-item { justify-content: flex-start; padding: var(--space-20) var(--space-16); }
+.lx-flow-desc { font-size: 13px; font-weight: 400; line-height: 1.5; color: var(--color-text-secondary); }
 
 /* ---------- 학습자 OT ---------- */
-.lx-ot { list-style: none; }
-.lx-ot-title { display: flex; align-items: center; gap: var(--space-8); font-size: 18px; font-weight: 700; color: var(--color-text-strong); }
 .lx-ot-links { display: flex; flex-wrap: wrap; gap: var(--space-8); margin-top: var(--space-16); }
+
+/* ---------- 검토 필요 표시 (DraftNote) ---------- */
+/* 원본에 내용이 없어 안내 문구를 임시로 쓴 곳 */
+.lx-draft-note {
+  margin-top: var(--space-16);
+  padding: var(--space-12) var(--space-16);
+  border: 1px dashed var(--color-text-warning);
+  border-radius: var(--radius-8);
+  background: var(--color-bg-warning-subtle);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-text-warning);
+}
+.lx-draft-note strong { margin-right: var(--space-8); }
+
+/* ---------- 서류제출 ---------- */
+/* 내 제출 현황: 과목·숫자(왼쪽) + 버튼(오른쪽) 한 카드 */
+.lx-doc-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-24);
+  padding: var(--space-24);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-8);
+  background: var(--color-bg-default);
+}
+.lx-doc-status-course { font-size: 14px; font-weight: 600; color: var(--color-text-strong); }
+.lx-doc-status-stats { display: flex; gap: var(--space-40); margin-top: var(--space-12); }
+.lx-doc-status-actions { display: flex; flex-wrap: wrap; gap: var(--space-8); }
+.lx-doc-table td:first-child { white-space: nowrap; }
+
+/* ---------- 실습 안내 4종 (사회복지사·보육교사·한국어교원·평생교육사) ---------- */
+/* STEP 1~3 그림 탭: 테두리 카드, 선택된 탭은 브랜드 테두리 + 연한 파랑 */
+.lx-practice-tabs { margin-top: var(--space-32); }
+.lx-practice-text { font-size: 14px; line-height: 1.7; color: var(--color-text-default); }
+.lx-practice-register { margin-top: var(--space-16); }
+/* 항목 이름 | 내용 표: 위 표 제목 줄은 연한 파랑 */
+.lx-practice-info th { white-space: normal; word-break: keep-all; }
+.lx-practice-info thead th { width: auto; background: var(--color-bg-brand-subtle); color: var(--color-text-brand); }
+.lx-ref-notes { margin-top: var(--space-12); color: var(--color-text-secondary); }
+.lx-red { font-weight: 700; color: var(--color-text-danger); }
+.lx-table-note { margin-top: var(--space-12); font-size: 13px; line-height: 1.6; color: var(--color-text-secondary); }
+/* 여러 칸짜리 과목 표 (한국어교원·평생교육사) */
+.lx-practice-grid thead th { background: var(--color-bg-brand-subtle); color: var(--color-text-brand); white-space: nowrap; }
+.lx-practice-grid tbody th { width: 120px; }
+.lx-practice-grid td:last-child:not(.is-left) { white-space: nowrap; }
+.lx-practice-sub { width: 96px; font-weight: 600; color: var(--color-text-strong); }
+.lx-practice-total th,
+.lx-practice-total td { font-weight: 700; color: var(--color-text-strong); }
+/* 실습기관 섭외 바로가기 카드: 로고 + 화살표 */
+.lx-org-links { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-12); margin-bottom: var(--space-24); }
+.lx-org-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-12);
+  min-height: 72px;
+  padding: var(--space-12) var(--space-20);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-8);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+.lx-org-link:hover { border-color: var(--color-border-brand); background: var(--color-bg-brand-subtle); }
+.lx-org-link svg { flex-shrink: 0; }
+.lx-org-logo { min-width: 0; max-width: 180px; max-height: 40px; object-fit: contain; }
+.lx-org-text { font-size: 15px; font-weight: 600; color: var(--color-text-strong); word-break: keep-all; }
+/* 구법·신법 안내: 원본 캐릭터 그림 + 연한 파랑 상자 */
+.lx-law-box { display: flex; align-items: center; gap: var(--space-24); margin-top: var(--space-40); padding: var(--space-24) var(--space-32); border-radius: var(--radius-8); background: var(--color-bg-brand-subtle); }
+.lx-law-img { flex-shrink: 0; width: 96px; }
+.lx-law-title { font-size: 18px; font-weight: 700; color: var(--color-text-brand); }
+.lx-law-list { margin-top: var(--space-12); padding-left: 1.2em; list-style: disc; font-size: 14px; line-height: 1.7; color: var(--color-text-default); }
+.lx-law-list strong { color: var(--color-text-strong); }
+.lx-law-note { margin-top: var(--space-8); font-size: 13px; color: var(--color-text-secondary); }
+
+/* ---------- 수강신청 절차: 글 왼쪽 + 단계 그림 오른쪽 ---------- */
+.lx-process-step { display: flex; align-items: center; gap: var(--space-24); }
+.lx-process-text { flex: 1; min-width: 0; }
+.lx-process-desc { font-size: 14px; line-height: 1.7; color: var(--color-text-default); }
+.lx-process-icon { flex-shrink: 0; width: 88px; height: 88px; object-fit: contain; }
 
 /* ---------- 모바일 ---------- */
 /* ---------- 게시판 목록 (BoardParts: 공지사항·관련기관 소식·학사일정·서식자료실) ---------- */
@@ -188,11 +327,18 @@
   gap: var(--space-16);
   margin-bottom: var(--space-12);
 }
+/* 학사일정 이론/실습 탭 (FAQ 분류와 같은 상자 탭) — 아래 검색 줄과 간격은 FAQ 와 같게 */
+.lx-schedule-tabs { margin-bottom: var(--space-32); }
 .lx-board-count { font-size: 14px; color: var(--color-text-secondary); }
 .lx-board-count strong { font-weight: 600; color: var(--color-text-brand); }
 .lx-board-search { display: flex; gap: var(--space-8); width: 480px; max-width: 100%; margin-left: auto; }
 .lx-board-search .ds-select { flex: 0 0 120px; }
 .lx-board-search .ds-input { flex: 1; min-width: 0; }
+.lx-board-search--wide { width: 760px; }
+.lx-board-search--wide .ds-select { flex-basis: 96px; }
+.lx-board-search--wide .ds-input { min-width: 160px; }
+.lx-board-search .lx-board-filter { flex: 0 1 160px; min-width: 0; }
+.lx-board-term { display: block; font-size: 13px; color: var(--color-text-secondary); }
 .lx-board-col-num { width: 96px; }
 .lx-board-col-date { width: 120px; }
 /* 공지 글: 줄 바탕을 칠하면 Brand 배지가 묻혀서, 제목만 굵게 */
@@ -205,6 +351,158 @@
 .lx-board-table .ds-table-link::after { content: ""; position: absolute; inset: 0; }
 .lx-board-table tbody tr:hover { background-color: var(--color-bg-subtle); }
 .lx-board-table tr.is-notice .ds-table-link { font-weight: 600; }
+/* 더 붙는 칸(과목·작성자·조회 등): 줄바꿈 없이 */
+.lx-board-cell { white-space: nowrap; }
+/* 목록 아래 버튼 줄 (학습 Q&A 글쓰기) */
+.lx-board-actions { display: flex; justify-content: flex-end; margin-top: var(--space-16); }
+/* 모바일 게시판 목록 (MobileBoardList kind="notice") — learning-support.css 에서 옮김.
+   학습지원 CSS 는 .wrapper·.container 도 바꿔서 마이페이지·수강신청 화면에서는 불러오지 않는다 */
+@media (max-width: 480px) {
+  /* 모바일 공지사항 목록 */
+  .mobile-notice-list {
+    display: block;
+    padding: 0 16px;
+    margin-top: 20px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* 모바일 공지사항 헤더 */
+  .mobile-notice-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 12px 16px;
+    background-color: #f9f9f9;
+    border-radius: 8px 8px 0 0;
+    margin-bottom: 0;
+    box-sizing: border-box;
+  }
+
+  .mobile-notice-header-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 50px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333333;
+  }
+
+  .mobile-notice-header-title {
+    flex: 1;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333333;
+    text-align: center;
+  }
+
+  .mobile-notice-header-date {
+    flex-shrink: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333333;
+    min-width: 60px;
+    text-align: right;
+  }
+
+  .mobile-notice-item {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    border-bottom: 1px solid #eaeaea;
+    border-radius: 0;
+    padding: 16px;
+    margin-bottom: 0;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .mobile-notice-item:hover {
+    background-color: #f9f9f9;
+  }
+
+  .mobile-notice-item:last-child {
+    border-radius: 0 0 8px 8px;
+    margin-bottom: 12px;
+  }
+
+  .mobile-notice-item-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .mobile-notice-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 50px;
+    text-align: center;
+    font-size: 16px;
+    color: #656565;
+  }
+
+  .mobile-notice-badge {
+    padding: 4px 6px;
+    background-color: #0066cc;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 4px;
+    width: 60px;
+    height: 24px;
+    line-height: 20px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mobile-notice-title {
+    flex: 1;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333333;
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .mobile-notice-date {
+    flex-shrink: 0;
+    font-size: 16px;
+    color: #656565;
+    min-width: 60px;
+    text-align: right;
+  }
+}
+/* 모바일 목록: 제목 아래 작은 한 줄 (과목·답변 상태) */
+.mobile-board-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  margin-top: var(--space-4);
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--color-text-secondary);
+}
+/* 과목 이름이 길면 말줄임, 배지는 줄지 않게 */
+.mobile-board-meta > span:first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.mobile-board-meta .ds-badge { flex-shrink: 0; }
+/* 마이페이지 틀은 이미 좌우 여백이 있어서 목록 자체 여백은 뺀다 */
+.mp-wrapper .mobile-notice-list { padding: 0; }
 
 /* ---------- 자주 묻는 질문 (탭 · 검색 · 질문 접기) ---------- */
 /* 전역 .container 회색 배경(#f9f9f9) 대신 흰 배경 — 공지사항 목록과 맞춤 */
@@ -258,6 +556,9 @@
   .lx-faq-tabs .ds-tab-box { flex: 1 0 33.334%; height: 44px; margin: 0 0 -1px -1px; padding: 0 var(--space-8); font-size: 14px; }
   .lx-faq-bar { flex-direction: column-reverse; align-items: stretch; margin-top: var(--space-24); }
   .lx-faq-search { width: 100%; }
+  /* 학사일정 모바일 이론/실습 탭 — FAQ 모바일 탭과 같은 크기 */
+  .mobile-schedule-tabs .ds-tabs-box { width: 100%; }
+  .mobile-schedule-tabs .ds-tab-box { height: 44px; padding: 0 var(--space-8); font-size: 14px; }
   .ds-accordion-q,
   .ds-accordion-a { padding: var(--space-16); }
   .ds-accordion-q .ds-accordion-text { font-size: 15px; }
@@ -281,24 +582,52 @@
   .lx-article-body { padding-top: var(--space-24); padding-bottom: var(--space-24); font-size: 15px; }
   .lx-article-actions .ds-btn { width: 100%; }
 
-  .lx-inquiry-table .lx-col-num { display: none; }
-  .lx-inquiry-table .lx-col-date { width: 72px; }
-  .lx-inquiry-table td.lx-col-date { font-size: 13px; }
-  .lx-inquiry-table .lx-col-status { width: 84px; }
-  .lx-inquiry-table th,
-  .lx-inquiry-table td { padding: var(--space-8); }
+  /* 폰: 설명 칸은 숨기고 이름 · 다운로드 · 선택만 한 화면에 */
+  .lx-program-table { table-layout: auto; }
+  .lx-program-table th:nth-child(2),
+  .lx-program-desc { display: none; }
+  /* 칸 하나를 숨기면 col 폭이 한 칸씩 밀리므로 col 대신 칸에 폭을 준다 */
+  .lx-program-table colgroup { display: none; }
+  .lx-program-table th:nth-child(3),
+  .lx-program-table td:nth-child(3) { width: 88px; }
+  .lx-program-table th:nth-child(4),
+  .lx-program-table td:nth-child(4) { width: 44px; padding-left: 0; padding-right: 0; }
+  .lx-program-name { gap: var(--space-8); font-size: 13px; }
+  .lx-program-actions .ds-btn { flex: 1; }
+  .lx-remote-contacts,
+  .lx-remote-buttons { grid-template-columns: 1fr; }
+  .lx-remote-contacts .ds-stat-value { font-size: 16px; }
+  .lx-process-step { gap: var(--space-16); }
+  .lx-process-icon { width: 56px; height: 56px; }
+  .lx-practice-tabs { margin-top: var(--space-24); }
+  .lx-practice-register { width: 100%; }
+  .lx-practice-info th { width: 96px; }
+  .lx-practice-grid { min-width: 560px; }
+  .lx-practice-grid tbody th { width: 72px; }
+  .lx-org-links { grid-template-columns: 1fr; }
+  .lx-law-box { flex-direction: column; align-items: flex-start; gap: var(--space-12); padding: var(--space-20); }
+  .lx-law-img { width: 64px; }
+  .lx-law-title { font-size: 16px; }
+  .lx-inquiry-q { flex-wrap: wrap; row-gap: var(--space-4); }
+  .lx-inquiry-status { width: auto; }
+  .lx-inquiry-q .ds-accordion-text { flex-basis: 100%; order: 3; white-space: normal; }
+  .lx-inquiry-date { flex: 1; font-size: 13px; }
+  .lx-inquiry-detail { padding: 0 var(--space-16) var(--space-16); }
 
   .lx-actions .ds-btn { flex: 1; }
 
   .lx-term-grid { grid-template-columns: minmax(0, 1fr); }
   .lx-term { padding: var(--space-16); }
 
-  .lx-subtabs { gap: var(--space-4); }
-  .lx-subtab { padding: var(--space-8) var(--space-4); font-size: 13px; }
   .lx-block { margin-top: var(--space-24); }
   .lx-table { font-size: 13px; }
   .lx-table th,
   .lx-table td { padding: var(--space-8); }
   .lx-table.ds-table--info th { width: 96px; }
   .lx-flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .lx-flow--3 { grid-template-columns: minmax(0, 1fr); }
+  .lx-flow--3 .lx-flow-item { align-items: flex-start; text-align: left; padding: var(--space-16); }
+  .lx-doc-status { flex-direction: column; align-items: stretch; gap: var(--space-16); padding: var(--space-16); }
+  .lx-doc-status-stats { gap: var(--space-24); }
+  .lx-doc-status-actions .ds-btn { flex: 1; }
 }

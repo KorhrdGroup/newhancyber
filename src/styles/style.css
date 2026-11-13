@@ -442,7 +442,7 @@
   top: 0;
   left: -100vmax;
   right: -100vmax;
-  height: 8px;
+  height: 4px;
   background: linear-gradient(rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0));
   pointer-events: none;
 }
@@ -528,6 +528,14 @@
   background-color: var(--color-white);
   font-weight: bold;
   color: var(--color-text);
+}
+
+/* GNB 에 없는 메뉴(마이페이지)의 파란 줄: 늘 보이고, 다른 메뉴에 마우스를 올리면 그 하위 메뉴가 위에 덮인다 */
+.submenu.submenu--standalone {
+  margin-left: calc(-1 * var(--header-padding-side));
+  opacity: 1;
+  visibility: visible;
+  z-index: 999;
 }
 
 /* 윈도우 배율(125·150·175%)에서 흰 칸 아래로 파란 바 1px 이 비치는 것 — 흰색을 1px 아래로 덮음 */
@@ -3926,6 +3934,8 @@ main {
   text-decoration: none;
 }
 .page-tab:hover { color: var(--color-text-strong); }
+/* 화면 안 전환 탭(ButtonTabs line)은 버튼이라 기본 테두리·바탕을 지운다 */
+button.page-tab { border-width: 0 0 2px; border-style: solid; border-color: transparent; background: none; font-family: inherit; cursor: pointer; }
 .page-tab.is-active {
   border-bottom-color: var(--color-bg-brand);
   font-weight: 600;
@@ -3937,17 +3947,13 @@ main {
 }
 
 /* 회색 내용 상자(.container): 상자 양끝을 본문 끝선(1080px)에 맞추고 글자는 상자 안쪽 여백만큼 들어감.
-   흰 배경으로 바꿔 쓴 컨테이너(인라인 배경·FAQ)와 마이페이지·수강신청 틀(cr-page)은 글자를 본문선에 그대로 둔다 */
+   흰 배경으로 바꿔 쓴 컨테이너(인라인 배경·FAQ·lx-page--plain)와 마이페이지·수강신청 틀(cr-page)은 글자를 본문선에 그대로 둔다 */
 @media (min-width: 481px) {
-  main .container:not([style*="background"]):not(.lx-faq):not(.cr-page) {
+  main .container:not([style*="background"]):not(.lx-faq):not(.lx-page--plain):not(.cr-page) {
     max-width: calc(var(--max-width) - 2 * var(--header-padding-side));
   }
   /* 컨테이너 밖에 따로 있는 상자·탭 줄·그림도 같은 끝선에 */
-  main .precautions-tabs,
-  main .requirements-tabs,
-  main .remote-support-steps-container,
   main .find-id-info-boxes,
-  main .practice-law-info-box,
   main .consultation-options-section,
   main img.page-image {
     max-width: calc(var(--max-width) - 2 * var(--header-padding-side));

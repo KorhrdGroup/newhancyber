@@ -22,7 +22,10 @@ export default function MyPageShell({
       <MobilePageBanner name="my-page" text="마이페이지" />
       <main className="wrapper mp-wrapper">
         <div className="container cr-page">
-          <PageTabs items={myPageTabs} />
+          {/* PC 는 헤더의 파란 줄이 같은 메뉴를 보여 준다 */}
+          <div className="mobile-only">
+            <PageTabs items={myPageTabs} />
+          </div>
           <div className="cr-head">
             <div>
               <h2 className="cr-title">{title}</h2>

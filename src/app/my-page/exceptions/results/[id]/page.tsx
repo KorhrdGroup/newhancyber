@@ -19,7 +19,7 @@ export default async function ExceptionResultPage({ params }: { params: Promise<
 
   return (
     <MyPageShell title="각종 예외 신청" desc="학습 규칙을 지키기 어려운 사정이 있을 때 신청합니다. 담당자가 확인한 뒤 결과를 알려 드립니다.">
-      <PageTabs items={myPageRequestTabs} className="mp-subtabs" />
+      <PageTabs items={myPageRequestTabs} />
 
       <section className="pp-box">
         <h3 className="pp-box-title">신청 내용</h3>
@@ -28,6 +28,10 @@ export default async function ExceptionResultPage({ params }: { params: Promise<
             <tr>
               <th>신청 구분</th>
               <td>{exceptionLabels[r.type]} 신청</td>
+            </tr>
+            <tr>
+              <th>신청 기간</th>
+              <td>{r.period}</td>
             </tr>
             <tr>
               <th>신청일</th>
