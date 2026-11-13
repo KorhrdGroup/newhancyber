@@ -18,11 +18,11 @@ export default function LearningNewsPage() {
           <div className="container" style={{ backgroundColor: "#fff" }}>
             <SearchBox total={newsBoardPosts.length} />
             <BoardTable posts={newsBoardPosts} />
-            <Pagination />
+            <Pagination pages={1} />
           </div>
         </div>
 
-        <Pagination className="mobile-only" />
+        <Pagination className="mobile-only" pages={1} />
       </main>
     </>
   );

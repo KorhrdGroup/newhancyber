@@ -346,6 +346,158 @@
 .lx-board-table .ds-table-link::after { content: ""; position: absolute; inset: 0; }
 .lx-board-table tbody tr:hover { background-color: var(--color-bg-subtle); }
 .lx-board-table tr.is-notice .ds-table-link { font-weight: 600; }
+/* 더 붙는 칸(과목·작성자·조회 등): 줄바꿈 없이 */
+.lx-board-cell { white-space: nowrap; }
+/* 목록 아래 버튼 줄 (학습 Q&A 글쓰기) */
+.lx-board-actions { display: flex; justify-content: flex-end; margin-top: var(--space-16); }
+/* 모바일 게시판 목록 (MobileBoardList kind="notice") — learning-support.css 에서 옮김.
+   학습지원 CSS 는 .wrapper·.container 도 바꿔서 마이페이지·수강신청 화면에서는 불러오지 않는다 */
+@media (max-width: 480px) {
+  /* 모바일 공지사항 목록 */
+  .mobile-notice-list {
+    display: block;
+    padding: 0 16px;
+    margin-top: 20px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* 모바일 공지사항 헤더 */
+  .mobile-notice-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 12px 16px;
+    background-color: #f9f9f9;
+    border-radius: 8px 8px 0 0;
+    margin-bottom: 0;
+    box-sizing: border-box;
+  }
+
+  .mobile-notice-header-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 50px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333333;
+  }
+
+  .mobile-notice-header-title {
+    flex: 1;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333333;
+    text-align: center;
+  }
+
+  .mobile-notice-header-date {
+    flex-shrink: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333333;
+    min-width: 60px;
+    text-align: right;
+  }
+
+  .mobile-notice-item {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    border-bottom: 1px solid #eaeaea;
+    border-radius: 0;
+    padding: 16px;
+    margin-bottom: 0;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .mobile-notice-item:hover {
+    background-color: #f9f9f9;
+  }
+
+  .mobile-notice-item:last-child {
+    border-radius: 0 0 8px 8px;
+    margin-bottom: 12px;
+  }
+
+  .mobile-notice-item-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .mobile-notice-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 50px;
+    text-align: center;
+    font-size: 16px;
+    color: #656565;
+  }
+
+  .mobile-notice-badge {
+    padding: 4px 6px;
+    background-color: #0066cc;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 4px;
+    width: 60px;
+    height: 24px;
+    line-height: 20px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mobile-notice-title {
+    flex: 1;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333333;
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .mobile-notice-date {
+    flex-shrink: 0;
+    font-size: 16px;
+    color: #656565;
+    min-width: 60px;
+    text-align: right;
+  }
+}
+/* 모바일 목록: 제목 아래 작은 한 줄 (과목·답변 상태) */
+.mobile-board-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  margin-top: var(--space-4);
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--color-text-secondary);
+}
+/* 과목 이름이 길면 말줄임, 배지는 줄지 않게 */
+.mobile-board-meta > span:first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.mobile-board-meta .ds-badge { flex-shrink: 0; }
+/* 마이페이지 틀은 이미 좌우 여백이 있어서 목록 자체 여백은 뺀다 */
+.mp-wrapper .mobile-notice-list { padding: 0; }
 
 /* ---------- 자주 묻는 질문 (탭 · 검색 · 질문 접기) ---------- */
 /* 전역 .container 회색 배경(#f9f9f9) 대신 흰 배경 — 공지사항 목록과 맞춤 */
