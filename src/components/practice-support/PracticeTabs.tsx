@@ -7,6 +7,9 @@ const IMG = "/resources/images/pratice-support";
 type StepKey = "step1" | "step2" | "step3";
 
 interface PracticeTabsProps {
+  /** 페이지 제목 (예: 사회복지현장실습) */
+  title: string;
+  desc: string;
   /** STEP 1 버튼 두 번째 줄 (과정마다 다름) */
   step1Label: string;
   step1: React.ReactNode;
@@ -14,8 +17,11 @@ interface PracticeTabsProps {
   step3: React.ReactNode;
 }
 
-/** 실습 안내 페이지의 STEP 1~3 탭 (원본 .practice-tab-btn 스크립트) */
-export default function PracticeTabs({ step1Label, step1, step2, step3 }: PracticeTabsProps) {
+/**
+ * 실습 안내 4개 화면(사회복지사·보육교사·한국어교원·평생교육사)의 공통 틀.
+ * 학습지원 화면과 같은 흰 바탕(lx-page--plain) + 제목 + STEP 1~3 그림 탭. 탭을 누르면 아래 내용만 바뀐다.
+ */
+export default function PracticeTabs({ title, desc, step1Label, step1, step2, step3 }: PracticeTabsProps) {
   const [activeTab, setActiveTab] = useState<StepKey>("step1");
 
   const tabs: { key: StepKey; icon: string; label: string; panel: React.ReactNode }[] = [
@@ -25,34 +31,41 @@ export default function PracticeTabs({ step1Label, step1, step2, step3 }: Practi
   ];
 
   return (
-    <div className="content-section">
-      <div className="practice-tabs">
-        <div className="practice-tabs-container">
-          <div className="practice-tabs-nav">
-            {tabs.map((tab, i) => (
-              <button
-                key={tab.key}
-                type="button"
-                className={`practice-tab-btn${tab.key === activeTab ? " active" : ""}`}
-                onClick={() => setActiveTab(tab.key)}
-              >
-                <img src={`${IMG}/${tab.icon}`} alt={`STEP ${i + 1}`} className="practice-tab-icon" />
-                <span className="practice-tab-text">
-                  STEP {i + 1}
-                  <br />
-                  {tab.label}
-                </span>
-              </button>
-            ))}
-          </div>
-        </div>
+    <div className="container lx-page lx-page--top lx-page--plain">
+      <h1 className="page-title">{title}</h1>
+      <p className="lx-desc">{desc}</p>
+
+      <div className="lx-practice-tabs" role="tablist" aria-label="실습 진행 단계">
+        {tabs.map((tab, i) => {
+          const isActive = tab.key === activeTab;
+          return (
+            <button
+              key={tab.key}
+              type="button"
+              role="tab"
+              id={`practice-tab-${tab.key}`}
+              aria-selected={isActive}
+              aria-controls={`practice-panel-${tab.key}`}
+              className={`lx-practice-tab${isActive ? " is-active" : ""}`}
+              onClick={() => setActiveTab(tab.key)}
+            >
+              <img src={`${IMG}/${tab.icon}`} alt="" className="lx-practice-tab-icon" />
+              <span className="lx-practice-tab-text">
+                <span className="lx-step-label">STEP {i + 1}</span>
+                {tab.label}
+              </span>
+            </button>
+          );
+        })}
       </div>
 
       {tabs.map((tab) => (
         <div
           key={tab.key}
-          className={`practice-tab-panel${tab.key === activeTab ? " active" : ""}`}
-          id={`tab-${tab.key}`}
+          role="tabpanel"
+          id={`practice-panel-${tab.key}`}
+          aria-labelledby={`practice-tab-${tab.key}`}
+          hidden={tab.key !== activeTab}
         >
           {tab.panel}
         </div>

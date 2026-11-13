@@ -3946,7 +3946,6 @@ main {
   main .precautions-tabs,
   main .requirements-tabs,
   main .find-id-info-boxes,
-  main .practice-law-info-box,
   main .consultation-options-section,
   main img.page-image {
     max-width: calc(var(--max-width) - 2 * var(--header-padding-side));
