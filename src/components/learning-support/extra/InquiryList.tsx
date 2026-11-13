@@ -76,7 +76,7 @@ export default function InquiryList({ items }: { items: Inquiry[] }) {
                   ) : (
                     <section className="lx-answer lx-answer--waiting">
                       <strong>답변 대기 중입니다.</strong>
-                      <p>담당자가 확인한 뒤 답변을 드립니다. 평일 09:00~18:00 (점심시간 12:00~13:00 제외)</p>
+                      <p>담당자가 확인한 뒤 답변을 드립니다.</p>
                     </section>
                   )}
                 </div>
