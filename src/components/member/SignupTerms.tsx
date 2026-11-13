@@ -8,6 +8,7 @@ import PrivacyCollectRequiredText from "./terms/PrivacyCollectRequiredText";
 import PrivacyProvideText from "./terms/PrivacyProvideText";
 import TermsOfServiceText from "./terms/TermsOfServiceText";
 import TermsBox from "./TermsBox";
+import { SIGNUP_CONSENT_KEY, type SignupConsent } from "@/lib/signupOptions";
 
 type TermKey = "terms" | "agreement1" | "agreement2" | "privacy1" | "privacy2";
 
@@ -67,7 +68,14 @@ export default function SignupTerms() {
       alert(missing.message);
       return;
     }
-    // TODO: 선택 약관 동의 여부(privacy1, privacy2)를 2단계로 넘기기
+    // 동의 내용을 2단계로 넘긴다 — 가입할 때 함께 저장하고, 필수 동의 없이 2단계로 바로 들어오면 1단계로 돌려보낸다
+    const consent: SignupConsent = { required: true, privacyOptional: checks.privacy1, marketing: checks.privacy2 };
+    try {
+      sessionStorage.setItem(SIGNUP_CONSENT_KEY, JSON.stringify(consent));
+    } catch {
+      alert("브라우저 저장소를 쓸 수 없어 가입을 이어갈 수 없어요. 사생활 보호 모드를 끄고 다시 시도해 주세요.");
+      return;
+    }
     router.push("/member/signup/step2");
   };
 

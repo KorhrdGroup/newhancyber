@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Fragment, useEffect, useRef, useState } from "react";
+import { useMember } from "./MemberContext";
 import {
   authLinks,
   gnb,
@@ -19,6 +20,7 @@ export default function Header() {
   const navRef = useRef<HTMLDivElement>(null);
   const [isSticky, setIsSticky] = useState(false);
   const [navHeight, setNavHeight] = useState(0);
+  const { member, signOut } = useMember();
 
   useEffect(() => {
     const onScroll = () => {
@@ -47,11 +49,28 @@ export default function Header() {
             ))}
           </div>
           <div className="header-top-right">
-            {authLinks.map((link) => (
-              <Link key={link.href} href={link.href}>
-                {link.label}
-              </Link>
-            ))}
+            {member === undefined ? null : member ? (
+              <>
+                <span className="header-member-name">{member.name}님</span>
+                {/* 로그인 · 회원가입을 뺀 나머지(마이페이지)는 로그인해도 그대로 둔다 */}
+                {authLinks
+                  .filter((link) => !link.href.startsWith("/member/"))
+                  .map((link) => (
+                    <Link key={link.href} href={link.href}>
+                      {link.label}
+                    </Link>
+                  ))}
+                <button type="button" className="header-logout-btn" onClick={() => void signOut()}>
+                  로그아웃
+                </button>
+              </>
+            ) : (
+              authLinks.map((link) => (
+                <Link key={link.href} href={link.href}>
+                  {link.label}
+                </Link>
+              ))
+            )}
           </div>
         </div>
       </div>

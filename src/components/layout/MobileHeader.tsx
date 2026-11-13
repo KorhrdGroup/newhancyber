@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 import { hasMobileNav, mobileMenu, mobileQuickLinks } from "@/lib/navigation";
 import { REGISTRATION_PHONE, SUPPORT_PHONE } from "@/lib/contact";
+import { useMember } from "./MemberContext";
 import { useMobileMenu } from "./MobileMenuContext";
 
 const MOBILE_IMG = "/resources/images/mobile";
@@ -13,6 +14,7 @@ const MOBILE_IMG = "/resources/images/mobile";
 /** 모바일 헤더 + 햄버거 사이드바 (데스크톱에서는 CSS 로 숨김) */
 export default function MobileHeader() {
   const pathname = usePathname();
+  const { member, signOut } = useMember();
   const { isOpen, open, close } = useMobileMenu();
   const [expanded, setExpanded] = useState<string | null>(null);
 
@@ -41,15 +43,25 @@ export default function MobileHeader() {
               className="mobile-logo-img"
             />
           </Link>
-          <Link href="/member/login" className="mobile-login-btn">
-            로그인
-          </Link>
+          {member === undefined ? (
+            <span className="mobile-login-btn" aria-hidden />
+          ) : member ? (
+            <button type="button" className="mobile-login-btn" onClick={() => void signOut()}>
+              로그아웃
+            </button>
+          ) : (
+            <Link href="/member/login" className="mobile-login-btn">
+              로그인
+            </Link>
+          )}
         </div>
         {hasMobileNav(pathname) && (
           <div className="mobile-nav">
-            <Link href="/member/signup" className="mobile-nav-item">
-              회원가입
-            </Link>
+            {!member && (
+              <Link href="/member/signup" className="mobile-nav-item">
+                회원가입
+              </Link>
+            )}
             <Link href="/course-registration/register" className="mobile-nav-item">
               수강신청
             </Link>
@@ -74,16 +86,35 @@ export default function MobileHeader() {
       >
         <div className="mobile-sidebar-header">
           <div className="mobile-sidebar-login">
-            {/* TODO: 로그인 상태에 따라 사용자 정보 표시 */}
-            <h3>로그인을 해주세요</h3>
-            <div className="mobile-sidebar-buttons">
-              <Link href="/member/login" className="mobile-sidebar-login-btn">
-                로그인
-              </Link>
-              <Link href="/member/signup" className="mobile-sidebar-signup-btn">
-                회원가입
-              </Link>
-            </div>
+            {member ? (
+              <>
+                <h3>{member.name}님, 반가워요</h3>
+                <div className="mobile-sidebar-buttons">
+                  <button
+                    type="button"
+                    className="mobile-sidebar-login-btn"
+                    onClick={() => {
+                      close();
+                      void signOut();
+                    }}
+                  >
+                    로그아웃
+                  </button>
+                </div>
+              </>
+            ) : (
+              <>
+                <h3>로그인을 해주세요</h3>
+                <div className="mobile-sidebar-buttons">
+                  <Link href="/member/login" className="mobile-sidebar-login-btn">
+                    로그인
+                  </Link>
+                  <Link href="/member/signup" className="mobile-sidebar-signup-btn">
+                    회원가입
+                  </Link>
+                </div>
+              </>
+            )}
           </div>
           <button type="button" className="mobile-sidebar-close" onClick={close}>
             <img

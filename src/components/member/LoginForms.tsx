@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useActionState, useState, type FormEvent } from "react";
+import { login, type LoginState } from "@/app/member/actions";
 
 const MEMBER_IMG = "/resources/images/member";
 
@@ -15,11 +16,9 @@ const authMethods: { key: AuthMethod; label: string }[] = [
 export default function LoginForms() {
   const [authMethod, setAuthMethod] = useState<AuthMethod>("cert");
 
-  const handleGeneralLogin = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // TODO: 로그인 API 연동 (userId, userPassword)
-    alert("로그인 API 연동 전입니다.");
-  };
+  // form 의 action 에 서버 액션을 바로 건다 — 화면 스크립트가 아직 준비되기 전에 눌러도 POST 로 서버에 가고
+  // (주소창에 비밀번호가 붙지 않는다), 틀렸을 때는 돌려받은 아이디를 다시 채운다.
+  const [state, formAction, pending] = useActionState<LoginState, FormData>(login, {});
 
   const handleCertLogin = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -36,15 +35,17 @@ export default function LoginForms() {
     <div className="login-sections">
       <div className="login-section">
         <h2 className="login-section-title">일반 로그인</h2>
-        <form className="login-form" id="generalLoginForm" onSubmit={handleGeneralLogin}>
+        <form className="login-form" id="generalLoginForm" action={formAction}>
           <div className="form-group">
             <input
               type="text"
+              key={state.id ?? ""}
               id="userId"
               name="userId"
               className="form-input"
               placeholder="아이디를 입력해주세요."
               autoComplete="username"
+              defaultValue={state.id}
               required
             />
           </div>
@@ -59,8 +60,13 @@ export default function LoginForms() {
               required
             />
           </div>
-          <button type="submit" className="login-btn-primary">
-            로그인
+          {state.error && (
+            <p className="login-error" role="alert">
+              {state.error}
+            </p>
+          )}
+          <button type="submit" className="login-btn-primary" disabled={pending}>
+            {pending ? "로그인하는 중…" : "로그인"}
           </button>
         </form>
       </div>

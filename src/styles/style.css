@@ -3960,3 +3960,39 @@ main {
     max-width: min(calc(var(--max-width) - 2 * var(--header-padding-side)), calc(100% - 2 * var(--header-padding-side)));
   }
 }
+
+/* ── 회원 로그인 상태 (2026-11-13) ───────────────────────── */
+.header-member-name {
+  font-size: var(--font-size-base);
+  color: var(--color-text-light);
+  font-weight: var(--font-weight-medium);
+}
+
+.header-logout-btn {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: var(--font-size-base);
+  color: var(--color-text-light);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: var(--transition-base);
+}
+
+.header-logout-btn:hover {
+  color: #007bff;
+}
+
+button.mobile-login-btn,
+button.mobile-sidebar-login-btn {
+  border: 0;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* 머리말의 「로그아웃」은 「로그인」 링크처럼 글씨만 */
+button.mobile-login-btn {
+  padding: 0;
+  background: none;
+}

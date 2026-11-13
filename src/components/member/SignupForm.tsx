@@ -2,56 +2,43 @@
 
 import { useRouter } from "next/navigation";
 import Script from "next/script";
-import { useRef, useState, type FormEvent } from "react";
+import { startTransition, useActionState, useEffect, useRef, useState, type FormEvent } from "react";
 import { flushSync } from "react-dom";
+import { checkLoginId, signup, type IdCheckResult, type SignupState } from "@/app/member/actions";
 import CustomSelect, { type CustomSelectOption } from "@/components/common/CustomSelect";
 import { importantStyle } from "@/lib/importantStyle";
+import {
+  EDUCATION_LEVELS,
+  EMAIL_DOMAINS,
+  INTEREST_AREAS,
+  JOIN_PATH_ROWS,
+  PHONE_PREFIXES,
+  SIGNUP_CONSENT_KEY,
+  SIGNUP_DONE_KEY,
+  type SignupConsent,
+} from "@/lib/signupOptions";
 
 const DAUM_POSTCODE_SRC = "https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js";
 
-const phonePrefixes: CustomSelectOption[] = ["010", "011", "016", "017", "018", "019"].map((v) => ({
-  value: v,
-  label: v,
-}));
+const phonePrefixes: CustomSelectOption[] = PHONE_PREFIXES.map((v) => ({ value: v, label: v }));
 
 const emailDomains: CustomSelectOption[] = [
   { value: "", label: "직접 입력" },
-  ...["naver.com", "gmail.com", "daum.net", "hanmail.net", "yahoo.com"].map((v) => ({ value: v, label: v })),
+  ...EMAIL_DOMAINS.map((v) => ({ value: v, label: v })),
 ];
 
 const educationLevels: CustomSelectOption[] = [
   { value: "", label: "최종학력" },
-  { value: "high-school", label: "고등학교 졸업" },
-  { value: "college-2", label: "전문대학 졸업(2년제)" },
-  { value: "college-3", label: "전문대학 졸업(3년제)" },
-  { value: "university-enrolled", label: "대학교 재학" },
-  { value: "university-dropout", label: "대학교 중퇴" },
-  { value: "university-4", label: "대학교 졸업(4년제)" },
-  { value: "other", label: "기타" },
+  ...EDUCATION_LEVELS.map(({ value, label }) => ({ value, label })),
 ];
 
 const interestAreas: CustomSelectOption[] = [
   { value: "", label: "관심분야를 선택해주세요." },
-  { value: "social-welfare", label: "사회복지" },
-  { value: "etc", label: "기타" },
+  ...INTEREST_AREAS.map(({ value, label }) => ({ value, label })),
 ];
 
 /** 가입경로 체크박스 (화면의 줄 나눔 그대로) */
-const registrationPathRows = [
-  [
-    { id: "pathNaver", value: "naver", label: "네이버검색" },
-    { id: "pathDaum", value: "daum", label: "다음검색" },
-    { id: "pathOtherSite", value: "other-site", label: "기타사이트검색" },
-  ],
-  [
-    { id: "pathFriend", value: "friend", label: "지인 추천" },
-    { id: "pathAd", value: "ad", label: "인터넷 광고물 이미지" },
-  ],
-  [
-    { id: "pathPoster", value: "poster", label: "포스터(길거리, 버스, 지하철)" },
-    { id: "pathOther", value: "other", label: "기타" },
-  ],
-];
+const registrationPathRows = JOIN_PATH_ROWS;
 
 function Required() {
   return <span className="required">*</span>;
@@ -60,6 +47,11 @@ function Required() {
 /** 회원가입 2단계: 정보 입력 */
 export default function SignupForm() {
   const router = useRouter();
+  const [state, formAction, pending] = useActionState<SignupState, FormData>(signup, {});
+  // 1단계(약관)에서 넘어온 동의 — 없으면 1단계로 돌려보낸다
+  const [consent, setConsent] = useState<SignupConsent | null>(null);
+  const [idCheck, setIdCheck] = useState<IdCheckResult | null>(null);
+  const [checkingId, setCheckingId] = useState(false);
   const [phonePrefix, setPhonePrefix] = useState("010");
   const [emailDomain, setEmailDomain] = useState("");
   // 원본: 처음엔 클래스 없음, 도메인을 고르면 hide, "직접 입력"을 고르면 show
@@ -71,6 +63,52 @@ export default function SignupForm() {
 
   const domainInputRef = useRef<HTMLInputElement>(null);
   const addressDetailRef = useRef<HTMLInputElement>(null);
+  const userIdRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    let saved: SignupConsent | null = null;
+    try {
+      saved = JSON.parse(sessionStorage.getItem(SIGNUP_CONSENT_KEY) ?? "null");
+    } catch {
+      saved = null;
+    }
+    if (saved?.required === true) {
+      // 브라우저 저장소에서 한 번 읽어 화면 상태로 옮긴다 (서버 렌더에서는 읽을 수 없다)
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setConsent(saved);
+    } else {
+      alert("약관 동의 후 가입할 수 있어요.");
+      router.replace("/member/signup");
+    }
+  }, [router]);
+
+  // 가입 결과 — 끝났으면 완료 화면으로, 문제가 있으면 알리고 그 칸으로 커서를 옮긴다
+  useEffect(() => {
+    if (state.done) {
+      try {
+        sessionStorage.setItem(SIGNUP_DONE_KEY, JSON.stringify(state.done));
+        sessionStorage.removeItem(SIGNUP_CONSENT_KEY);
+      } catch {
+        // 저장소를 못 써도 가입은 끝났다 — 완료 화면이 기본 문구만 보인다
+      }
+      router.push("/member/signup/step3");
+    } else if (state.error) {
+      alert(state.error);
+      if (state.field) document.getElementById(state.field)?.focus();
+    }
+  }, [state, router]);
+
+  const handleCheckId = async () => {
+    const id = userIdRef.current?.value ?? "";
+    setCheckingId(true);
+    try {
+      setIdCheck(await checkLoginId(id));
+    } catch {
+      setIdCheck({ ok: false, message: "지금은 확인할 수 없어요. 잠시 뒤 다시 시도해 주세요." });
+    } finally {
+      setCheckingId(false);
+    }
+  };
 
   const handleEmailDomain = (value: string) => {
     setEmailDomain(value);
@@ -103,15 +141,20 @@ export default function SignupForm() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO: 회원가입 API 연동 (new FormData(e.currentTarget)) — 지금은 저장 없이 완료 화면으로만 넘어감
-    router.push("/member/signup/step3");
+    if (pending || !consent) return;
+    const formData = new FormData(e.currentTarget);
+    formData.set("consentRequired", "1");
+    formData.set("consentPrivacyOptional", consent.privacyOptional ? "1" : "0");
+    formData.set("consentMarketing", consent.marketing ? "1" : "0");
+    // form 의 action 으로 넘기면 끝난 뒤 칸이 모두 비워진다 — 오류가 나도 입력이 남도록 직접 부른다
+    startTransition(() => formAction(formData));
   };
 
   return (
     <div className="step2-wrapper">
       <Script src={DAUM_POSTCODE_SRC} strategy="afterInteractive" />
       <h2 className="step2-title">개인정보</h2>
-      <form className="signup-form" id="signupForm" onSubmit={handleSubmit}>
+      <form className="signup-form" id="signupForm" method="post" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="userName" className="form-label">
             이름 <Required />
@@ -129,25 +172,55 @@ export default function SignupForm() {
         </div>
 
         <div className="form-group">
+          <label htmlFor="birthDate" className="form-label">
+            생년월일 <Required />
+          </label>
+          <div className="form-group-content">
+            <input
+              type="text"
+              id="birthDate"
+              name="birthDate"
+              className="form-input"
+              placeholder="8자리 숫자로 입력해주세요. 예) 19900101"
+              inputMode="numeric"
+              autoComplete="bday"
+              maxLength={10}
+              // 자동완성은 1990-01-01 처럼 넣기도 해서 두 모양을 다 받는다
+              pattern="[0-9]{8}|[0-9]{4}-[0-9]{2}-[0-9]{2}"
+              title="8자리 숫자로 입력해 주세요. 예) 19900101"
+              required
+            />
+            <p className="form-consent-text">만 14세 이상만 회원가입할 수 있어요.</p>
+          </div>
+        </div>
+
+        <div className="form-group">
           <label htmlFor="userId" className="form-label">
             아이디 <Required />
           </label>
           <div className="form-group-content">
             <div className="form-input-group">
               <input
+                ref={userIdRef}
                 type="text"
                 id="userId"
                 name="userId"
                 className="form-input"
                 placeholder="6~10자 이내의 영문 소문자/숫자"
                 autoComplete="username"
+                maxLength={10}
+                onChange={() => setIdCheck(null)}
                 required
               />
-              {/* TODO: 아이디 중복확인 API */}
-              <button type="button" className="btn-check-duplicate">
+              <button type="button" className="btn-check-duplicate" onClick={handleCheckId} disabled={checkingId}>
                 중복확인
               </button>
             </div>
+            {idCheck && (
+              <p className={`form-id-check ${idCheck.ok ? "ok" : "fail"}`} role="status">
+                {idCheck.message}
+              </p>
+            )}
           </div>
         </div>
 
@@ -449,8 +522,8 @@ export default function SignupForm() {
         </div>
 
         <div className="signup-btn-wrapper">
-          <button type="submit" className="signup-next-btn">
-            가입하기
+          <button type="submit" className="signup-next-btn" disabled={pending || !consent}>
+            {pending ? "가입하는 중…" : "가입하기"}
           </button>
         </div>
       </form>

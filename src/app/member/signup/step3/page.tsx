@@ -1,25 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import SignupCompleteInfo from "@/components/member/SignupCompleteInfo";
 import SignupProgress from "@/components/member/SignupProgress";
 
 export const metadata: Metadata = { title: "회원가입 완료" };
 
-// TODO: 가입 API 응답으로 받은 회원 정보로 바꾼다 (원본 샘플 값)
-const member = {
-  name: "홍길동",
-  id: "pluskor",
-  phone: "010-0000-0000",
-  email: "plus@korhrd.com",
-};
-
 export default function SignupCompletePage() {
-  const rows = [
-    { label: "이름", value: member.name },
-    { label: "아이디", value: member.id },
-    { label: "핸드폰", value: member.phone },
-    { label: "이메일", value: member.email },
-  ];
-
   return (
     <main className="wrapper">
       <div className="signup-container">
@@ -38,17 +24,7 @@ export default function SignupCompletePage() {
             <img src="/resources/images/member/signsucess.png" alt="가입 완료" className="success-icon" />
           </div>
 
-          <div className="member-info-section">
-            <h3 className="member-info-title">회원님의 가입정보입니다.</h3>
-            <div className="member-info-table">
-              {rows.map((row) => (
-                <div key={row.label} className="member-info-row">
-                  <div className="member-info-label">{row.label}</div>
-                  <div className="member-info-value">{row.value}</div>
-                </div>
-              ))}
-            </div>
-          </div>
+          <SignupCompleteInfo />
 
           <div className="complete-btn-wrapper">
             <Link href="/" className="complete-btn btn-home">

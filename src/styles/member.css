@@ -2640,3 +2640,37 @@
     display: block !important;
   }
 }
+
+/* ── 회원가입 · 로그인 DB 연동 (2026-11-13) ─────────────────── */
+
+/* 로그인 실패 안내 — 로그인 버튼 바로 위 */
+.login-error {
+  margin: 8px 0 0;
+  color: #e5383b;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
+  word-break: keep-all;
+}
+
+/* 아이디 중복확인 결과 */
+.form-id-check {
+  margin: 8px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.form-id-check.ok {
+  color: #115aed;
+}
+
+.form-id-check.fail {
+  color: #e5383b;
+}
+
+.login-btn-primary:disabled,
+.signup-next-btn:disabled,
+.btn-check-duplicate:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
