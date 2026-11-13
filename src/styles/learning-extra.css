@@ -237,6 +237,18 @@
 .lx-ot-links { display: flex; flex-wrap: wrap; gap: var(--space-8); margin-top: var(--space-16); }
 
 /* ---------- 서류제출 ---------- */
+/* 임시로 쓴 내용 표시 (실제 규정 확인 전) */
+.lx-draft-note {
+  margin-top: var(--space-16);
+  padding: var(--space-12) var(--space-16);
+  border: 1px dashed var(--color-text-warning);
+  border-radius: var(--radius-8);
+  background: var(--color-bg-warning-subtle);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-text-warning);
+}
+.lx-draft-note strong { margin-right: var(--space-8); }
 /* 내 제출 현황: 과목·숫자(왼쪽) + 버튼(오른쪽) 한 카드 */
 .lx-doc-status {
   display: flex;

@@ -57,6 +57,13 @@ export default function PracticeDocumentsPage() {
           열립니다.
         </p>
 
+        {/* 원본은 빈 페이지라 안내 내용을 임시로 썼다 — 실제 규정 확인 뒤 이 표시와 함께 고칠 것 */}
+        <p className="lx-draft-note" role="note">
+          <strong>검토 필요</strong> 원본에 내용이 없던 페이지라 서류 이름 외의 안내(제출 순서, 서류
+          설명·준비 방법, 파일 형식·10MB, 실습 2주 전 기한, 실습기관 배정 순서)는 임시로
+          작성했습니다. 실제 규정을 확인한 뒤 바꿔야 합니다.
+        </p>
+
         <section className="lx-panel">
           <h2 className="lx-section-title">내 제출 현황</h2>
           {/* 과목·숫자·버튼을 한 카드에 — 왼쪽 현황, 오른쪽 할 일 */}
