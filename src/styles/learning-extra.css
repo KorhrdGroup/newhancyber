@@ -85,13 +85,13 @@
 .lx-step-divider-icon svg { width: 14px; height: 14px; }
 
 /* ---------- 1:1 문의 ---------- */
-.lx-inquiry-table { table-layout: fixed; }
-.lx-inquiry-table .lx-col-num { width: 80px; }
-.lx-inquiry-table .lx-col-date { width: 120px; }
-.lx-inquiry-table .lx-col-status { width: 120px; }
 .lx-inquiry-bar { margin-top: var(--space-32); }
-/* 제목이 길면 말줄임 (줄 전체 클릭·호버는 lx-board-table 과 같음) */
-.lx-inquiry-table .ds-table-link { display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+/* 목록 = FAQ 질문 접기: 상태 배지 · 제목 · 문의일 · 화살표, 펼치면 내 글 + 답변 상자 */
+.lx-inquiry-status { flex-shrink: 0; width: 72px; }
+.lx-inquiry-q .ds-accordion-text { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.lx-inquiry-date { flex-shrink: 0; font-size: 14px; color: var(--color-text-secondary); font-variant-numeric: tabular-nums; }
+.lx-inquiry-detail { padding: 0 var(--space-20) var(--space-20) calc(var(--space-20) + 72px + var(--space-12)); }
+.lx-inquiry-detail > .lx-post-body:first-child { padding-top: var(--space-4); }
 
 .lx-post-head { padding-bottom: var(--space-16); border-bottom: 1px solid var(--color-border-subtle); }
 .lx-post-title { margin-top: var(--space-8); font-size: 20px; font-weight: 700; line-height: 1.4; color: var(--color-text-strong); word-break: keep-all; }
@@ -360,12 +360,11 @@
   .lx-remote-contacts .ds-stat-value { font-size: 16px; }
   .lx-process-step { gap: var(--space-16); }
   .lx-process-icon { width: 56px; height: 56px; }
-  .lx-inquiry-table .lx-col-num { display: none; }
-  .lx-inquiry-table .lx-col-date { width: 72px; }
-  .lx-inquiry-table td.lx-col-date { font-size: 13px; }
-  .lx-inquiry-table .lx-col-status { width: 84px; }
-  .lx-inquiry-table th,
-  .lx-inquiry-table td { padding: var(--space-8); }
+  .lx-inquiry-q { flex-wrap: wrap; row-gap: var(--space-4); }
+  .lx-inquiry-status { width: auto; }
+  .lx-inquiry-q .ds-accordion-text { flex-basis: 100%; order: 3; white-space: normal; }
+  .lx-inquiry-date { flex: 1; font-size: 13px; }
+  .lx-inquiry-detail { padding: 0 var(--space-16) var(--space-16); }
 
   .lx-actions .ds-btn { flex: 1; }
 
