@@ -37,6 +37,7 @@
    안의 설명 상자(lx-panel)도 테두리 없이 제목 + 내용으로 펼침 */
 .container.lx-page--plain { background: var(--color-bg-default); }
 .lx-page--plain .lx-panel { margin-top: var(--space-40); padding: 0; border: 0; border-radius: 0; }
+.lx-callout a { font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
 .lx-callout {
   margin-top: var(--space-24);
   padding: var(--space-16);
@@ -227,9 +228,30 @@
   word-break: keep-all;
 }
 .lx-flow-num { font-size: 12px; font-weight: 700; color: var(--color-text-brand); }
+/* 3단계 + 설명 (서류제출) */
+.lx-flow--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-bottom: 0; }
+.lx-flow--3 .lx-flow-item { justify-content: flex-start; padding: var(--space-20) var(--space-16); }
+.lx-flow-desc { font-size: 13px; font-weight: 400; line-height: 1.5; color: var(--color-text-secondary); }
 
 /* ---------- 학습자 OT ---------- */
 .lx-ot-links { display: flex; flex-wrap: wrap; gap: var(--space-8); margin-top: var(--space-16); }
+
+/* ---------- 서류제출 ---------- */
+/* 내 제출 현황: 과목·숫자(왼쪽) + 버튼(오른쪽) 한 카드 */
+.lx-doc-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-24);
+  padding: var(--space-24);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-8);
+  background: var(--color-bg-default);
+}
+.lx-doc-status-course { font-size: 14px; font-weight: 600; color: var(--color-text-strong); }
+.lx-doc-status-stats { display: flex; gap: var(--space-40); margin-top: var(--space-12); }
+.lx-doc-status-actions { display: flex; flex-wrap: wrap; gap: var(--space-8); }
+.lx-doc-table td:first-child { white-space: nowrap; }
 
 /* ---------- 실습 안내 4종 (사회복지사·보육교사·한국어교원·평생교육사) ---------- */
 /* STEP 1~3 그림 탭: 테두리 카드, 선택된 탭은 브랜드 테두리 + 연한 파랑 */
@@ -432,4 +454,9 @@
   .lx-table td { padding: var(--space-8); }
   .lx-table.ds-table--info th { width: 96px; }
   .lx-flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .lx-flow--3 { grid-template-columns: minmax(0, 1fr); }
+  .lx-flow--3 .lx-flow-item { align-items: flex-start; text-align: left; padding: var(--space-16); }
+  .lx-doc-status { flex-direction: column; align-items: stretch; gap: var(--space-16); padding: var(--space-16); }
+  .lx-doc-status-stats { gap: var(--space-24); }
+  .lx-doc-status-actions .ds-btn { flex: 1; }
 }
