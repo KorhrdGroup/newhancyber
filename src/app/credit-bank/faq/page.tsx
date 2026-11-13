@@ -4,9 +4,9 @@ import { creditBankFaqs } from "@/components/credit-bank/faqData";
 import "@/styles/classroom.css";
 import "@/styles/learning-extra.css";
 
-export const metadata: Metadata = { title: "관련법령" };
+export const metadata: Metadata = { title: "FAQ" };
 
-/** 학습지원·실습지원 FAQ 와 같은 화면 — 분류가 하나라 위쪽 분류 탭은 없다 (페이지 제목은 원본 그대로 "관련법령") */
+/** 학습지원·실습지원 FAQ 와 같은 화면 — 분류가 하나라 위쪽 분류 탭은 없다 */
 export default function CreditBankFaqPage() {
   return (
     <main className="wrapper">
