@@ -98,7 +98,23 @@
 
 .lx-field + .lx-field { margin-top: var(--space-20); }
 .lx-textarea { min-height: 240px; }
-.lx-file { display: block; max-width: 100%; font-size: 14px; }
+.lx-file { display: block; max-width: 100%; font-size: 14px; color: var(--color-text-secondary); }
+/* 파일 선택 버튼 = 디자인 시스템 보조 버튼(작은 크기) */
+.lx-file::file-selector-button {
+  height: var(--size-control-sm);
+  margin-right: var(--space-12);
+  padding: 0 var(--space-12);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-4);
+  background: var(--color-bg-default);
+  color: var(--color-text-default);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+.lx-file::file-selector-button:hover { background: var(--color-bg-subtle); }
 
 /* ---------- 연간 학사일정 ---------- */
 .lx-year { margin-top: var(--space-32); }

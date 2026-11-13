@@ -14,7 +14,7 @@ export default async function LearningInquiryDetailPage({ params }: { params: Pr
 
   return (
     <main className="wrapper">
-      <div className="container lx-page lx-page--top">
+      <div className="container lx-page lx-page--top lx-page--plain">
         <h1 className="page-title">1:1 문의</h1>
 
         <article className="lx-panel lx-post">
