@@ -100,8 +100,21 @@
 .lx-post-meta { margin-top: var(--space-4); font-size: 13px; color: var(--color-text-secondary); }
 .lx-post-body { padding-top: var(--space-16); font-size: 14px; line-height: 1.7; }
 .lx-post-body p + p { margin-top: var(--space-8); }
-.lx-post-file { margin-top: var(--space-16); padding-top: var(--space-12); border-top: 1px solid var(--color-border-subtle); font-size: 13px; color: var(--color-text-secondary); }
-.lx-post-file span { margin-left: var(--space-8); color: var(--color-text-default); }
+/* 첨부파일: 위 구분선 없이 클립 아이콘 + 파일 이름을 옅은 회색 알약 모양으로 */
+.lx-file-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-6, 6px);
+  max-width: 100%;
+  margin-top: var(--space-12);
+  padding: var(--space-6, 6px) var(--space-12);
+  border-radius: var(--radius-6);
+  background: var(--color-bg-subtle);
+  font-size: 13px;
+  color: var(--color-text-default);
+  overflow-wrap: anywhere;
+}
+.lx-file-chip svg { flex-shrink: 0; color: var(--color-text-secondary); }
 
 .lx-answer {
   margin-top: var(--space-16);
