@@ -179,7 +179,10 @@
   font: inherit;
   text-align: left;
   cursor: pointer;
+  transition: background-color 0.15s;
 }
+/* 호버하면 질문 줄 전체를 옅은 회색 — 게시판 목록 호버와 같은 색 */
+.ds-accordion-q:hover { background-color: var(--color-bg-subtle); }
 .ds-accordion-q .ds-accordion-mark { font-size: 16px; font-weight: 600; color: var(--color-text-brand); }
 .ds-accordion-q .ds-accordion-text { flex: 1; min-width: 0; font-size: 16px; color: var(--color-text-strong); }
 .ds-accordion-item.is-open .ds-accordion-q .ds-accordion-text { font-weight: 600; }
