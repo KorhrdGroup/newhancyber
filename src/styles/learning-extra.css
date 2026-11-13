@@ -64,6 +64,21 @@
 .lx-remote-contacts .ds-stat-value { font-size: 20px; }
 .lx-remote-buttons { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-16); }
 .lx-remote-buttons .ds-btn { justify-content: space-between; }
+/* STEP 사이 연결선: 회색 점선 + 가운데 파란 동그라미 아래 화살표 */
+.lx-step-divider { position: relative; display: flex; justify-content: center; margin-top: var(--space-40); }
+.lx-step-divider::before { content: ""; position: absolute; top: 50%; left: 0; right: 0; border-top: 2px dotted var(--color-border-default); }
+.lx-step-divider-icon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-border-brand);
+  color: var(--color-text-inverse);
+  box-shadow: 0 0 0 8px var(--color-bg-default);
+}
 
 /* ---------- 1:1 문의 ---------- */
 .lx-inquiry-table { table-layout: fixed; }
