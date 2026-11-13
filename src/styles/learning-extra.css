@@ -104,14 +104,13 @@
 .lx-answer {
   margin-top: var(--space-16);
   padding: var(--space-24);
-  border: 1px solid var(--color-border-brand);
   border-radius: var(--radius-8);
   background: var(--color-bg-brand-subtle);
 }
 .lx-answer-head { display: flex; align-items: baseline; gap: var(--space-8); }
 .lx-answer-head strong { font-size: 16px; color: var(--color-text-brand); }
 .lx-answer-head .lx-post-meta { margin-top: 0; }
-.lx-answer--waiting { border-color: var(--color-border-default); background: var(--color-bg-subtle); text-align: center; }
+.lx-answer--waiting { background: var(--color-bg-subtle); text-align: center; }
 .lx-answer--waiting strong { font-size: 16px; color: var(--color-text-strong); }
 .lx-answer--waiting p { margin-top: var(--space-8); font-size: 14px; color: var(--color-text-secondary); }
 
