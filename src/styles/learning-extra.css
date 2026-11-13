@@ -89,6 +89,8 @@
 /* 목록 = FAQ 질문 접기: 상태 배지 · 제목 · 문의일 · 화살표, 펼치면 내 글 + 답변 상자 */
 .lx-inquiry-status { flex-shrink: 0; width: 72px; }
 .lx-inquiry-q .ds-accordion-text { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+/* 열린 문의 줄은 회색으로 선택된 것처럼 (호버와 같은 색) */
+.lx-inquiry-list .ds-accordion-item.is-open .lx-inquiry-q { background-color: var(--color-bg-subtle); }
 .lx-inquiry-date { flex-shrink: 0; font-size: 14px; color: var(--color-text-secondary); font-variant-numeric: tabular-nums; }
 .lx-inquiry-detail { padding: 0 var(--space-20) var(--space-20) calc(var(--space-20) + 72px + var(--space-12)); }
 .lx-inquiry-detail > .lx-post-body:first-child { padding-top: var(--space-4); }
