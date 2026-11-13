@@ -115,21 +115,24 @@ export default function FaqList({
               >
                 <span className="ds-accordion-mark">Q.</span>
                 <span className="ds-accordion-text">{item.question}</span>
-                <img src="/resources/images/ds/chevron-down.svg" alt="" className="ds-accordion-chevron" />
+                <img src="/resources/images/ds/select-chevron.svg" alt="" className="ds-accordion-chevron" />
               </button>
-              {isOpen && (
-                <div id={answerId} className="ds-accordion-a">
-                  <span className="ds-accordion-mark">A.</span>
-                  <p className="ds-accordion-text">
-                    {item.answer.map((line, l) => (
-                      <Fragment key={l}>
-                        {l > 0 && <br />}
-                        {line}
-                      </Fragment>
-                    ))}
-                  </p>
+              {/* 답변은 늘 그려 두고 높이만 0 ↔ 원래 높이로 부드럽게 펼친다. 닫혀 있을 땐 inert 로 읽기·포커스 제외 */}
+              <div id={answerId} className="ds-accordion-panel" inert={!isOpen}>
+                <div className="ds-accordion-panel-inner">
+                  <div className="ds-accordion-a">
+                    <span className="ds-accordion-mark">A.</span>
+                    <p className="ds-accordion-text">
+                      {item.answer.map((line, l) => (
+                        <Fragment key={l}>
+                          {l > 0 && <br />}
+                          {line}
+                        </Fragment>
+                      ))}
+                    </p>
+                  </div>
                 </div>
-              )}
+              </div>
             </div>
           );
         })}

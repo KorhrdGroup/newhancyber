@@ -183,8 +183,17 @@
 .ds-accordion-q .ds-accordion-mark { font-size: 16px; font-weight: 600; color: var(--color-text-brand); }
 .ds-accordion-q .ds-accordion-text { flex: 1; min-width: 0; font-size: 16px; color: var(--color-text-strong); }
 .ds-accordion-item.is-open .ds-accordion-q .ds-accordion-text { font-weight: 600; }
-.ds-accordion-chevron { flex-shrink: 0; width: 16px; height: 16px; transition: transform 0.2s; }
+/* 화살표: 드롭다운과 같은 작고 끝이 둥근 선 화살표(select-chevron.svg), 펼침과 같은 속도로 뒤집힘 */
+.ds-accordion-chevron { flex-shrink: 0; width: 16px; height: 16px; transition: transform 0.3s ease; }
 .ds-accordion-item.is-open .ds-accordion-chevron { transform: rotate(180deg); }
+/* 답변 펼침: 높이를 0 → 내용 높이로 부드럽게 (grid 0fr → 1fr) + 살짝 나타나기 */
+.ds-accordion-panel { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows 0.3s ease, opacity 0.3s ease; }
+.ds-accordion-item.is-open .ds-accordion-panel { grid-template-rows: 1fr; opacity: 1; }
+.ds-accordion-panel-inner { min-height: 0; overflow: hidden; }
+@media (prefers-reduced-motion: reduce) {
+  .ds-accordion-panel,
+  .ds-accordion-chevron { transition: none; }
+}
 .ds-accordion-a { align-items: flex-start; padding: var(--space-20); background: var(--color-bg-subtle); }
 .ds-accordion-a .ds-accordion-mark { font-size: 16px; font-weight: 600; color: var(--color-text-secondary); }
 .ds-accordion-a .ds-accordion-text { flex: 1; min-width: 0; margin: 0; font-size: 14px; line-height: 1.5; color: var(--color-text-default); }
