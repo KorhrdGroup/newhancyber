@@ -9,68 +9,59 @@ const tabs: { key: ScheduleTabKey; label: string }[] = [
   { key: "practice", label: "실습과목" },
 ];
 
-// 원본 데스크톱 표는 이론 과목 첫 글만 상세 링크가 있다
-const desktopPosts: Record<ScheduleTabKey, typeof schedulePosts.theory> = {
-  theory: schedulePosts.theory.map((post, i) => (i === 0 ? { ...post, href: scheduleDetailHref(0) } : post)),
-  practice: schedulePosts.practice,
-};
+/** 탭별 전체 글 수 (가데이터) — 가장 큰 글 번호와 같다 */
+const totalOf = (key: ScheduleTabKey) =>
+  Math.max(...schedulePosts[key].map((post) => Number(post.number)).filter(Number.isFinite));
 
-/** 학사일정 목록: 이론/실습 탭 (모바일과 데스크톱 탭은 원본처럼 따로 움직인다) */
+/**
+ * 학사일정 목록: 이론/실습 탭 + 공지사항과 같은 목록 부품(검색 줄 · 표 · 페이지 번호).
+ * 이론/실습 탭은 모바일·데스크톱 모두 FAQ 분류와 같은 상자 탭이고, 같은 탭 상태를 쓴다.
+ */
 export default function ScheduleBoard() {
-  const [mobileTab, setMobileTab] = useState<ScheduleTabKey>("theory");
-  const [desktopTab, setDesktopTab] = useState<ScheduleTabKey>("theory");
+  const [tab, setTab] = useState<ScheduleTabKey>("theory");
 
-  const mobilePosts = schedulePosts[mobileTab].map((post, i) => ({ ...post, href: scheduleDetailHref(i) }));
+  // TODO: API — 탭별 학사일정 목록 조회 (지금은 모든 글이 같은 샘플 상세로 간다)
+  const posts = schedulePosts[tab].map((post, i) => ({ ...post, href: scheduleDetailHref(i) }));
 
   return (
     <>
       <div className="mobile-schedule-tabs mobile-only">
-        <div className="mobile-schedule-tabs-nav">
-          {tabs.map((tab) => (
+        <div className="ds-tabs-box" role="tablist" aria-label="과목 구분">
+          {tabs.map((t) => (
             <button
-              key={tab.key}
+              key={t.key}
               type="button"
-              className={`mobile-schedule-tab-btn${tab.key === mobileTab ? " active" : ""}`}
-              onClick={() => setMobileTab(tab.key)}
+              role="tab"
+              aria-selected={t.key === tab}
+              className={`ds-tab-box${t.key === tab ? " is-active" : ""}`}
+              onClick={() => setTab(t.key)}
             >
-              {tab.label}
+              {t.label}
             </button>
           ))}
         </div>
       </div>
 
-      <MobileBoardList kind="schedule" posts={mobilePosts} />
+      <MobileBoardList kind="schedule" posts={posts} />
 
       <div className="practice-support-notice-list-section desktop-only">
         <div className="container" style={{ backgroundColor: "#fff" }}>
-          <div className="schedule-tabs desktop-only">
-            <div className="schedule-tabs-container">
-              <div className="schedule-tabs-nav">
-                {tabs.map((tab) => (
-                  <button
-                    key={tab.key}
-                    type="button"
-                    className={`schedule-tab-btn${tab.key === desktopTab ? " active" : ""}`}
-                    onClick={() => setDesktopTab(tab.key)}
-                  >
-                    {tab.label}
-                  </button>
-                ))}
-              </div>
-            </div>
+          <div className="ds-tabs-box lx-schedule-tabs" role="tablist" aria-label="과목 구분">
+            {tabs.map((t) => (
+              <button
+                key={t.key}
+                type="button"
+                role="tab"
+                aria-selected={t.key === tab}
+                className={`ds-tab-box${t.key === tab ? " is-active" : ""}`}
+                onClick={() => setTab(t.key)}
+              >
+                {t.label}
+              </button>
+            ))}
           </div>
-          <SearchBox />
-
-          {tabs.map((tab) => (
-            <div
-              key={tab.key}
-              id={`tab-${tab.key}`}
-              className={`schedule-tab-panel${tab.key === desktopTab ? " active" : ""}`}
-            >
-              <BoardTable posts={desktopPosts[tab.key]} />
-            </div>
-          ))}
-
+          <SearchBox total={totalOf(tab)} />
+          <BoardTable posts={posts} />
           <Pagination className="desktop-only" />
         </div>
       </div>

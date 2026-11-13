@@ -190,6 +190,8 @@
   gap: var(--space-16);
   margin-bottom: var(--space-12);
 }
+/* 학사일정 이론/실습 탭 (FAQ 분류와 같은 상자 탭) — 아래 검색 줄과 간격은 FAQ 와 같게 */
+.lx-schedule-tabs { margin-bottom: var(--space-32); }
 .lx-board-count { font-size: 14px; color: var(--color-text-secondary); }
 .lx-board-count strong { font-weight: 600; color: var(--color-text-brand); }
 .lx-board-search { display: flex; gap: var(--space-8); width: 480px; max-width: 100%; margin-left: auto; }
@@ -260,6 +262,9 @@
   .lx-faq-tabs .ds-tab-box { flex: 1 0 33.334%; height: 44px; margin: 0 0 -1px -1px; padding: 0 var(--space-8); font-size: 14px; }
   .lx-faq-bar { flex-direction: column-reverse; align-items: stretch; margin-top: var(--space-24); }
   .lx-faq-search { width: 100%; }
+  /* 학사일정 모바일 이론/실습 탭 — FAQ 모바일 탭과 같은 크기 */
+  .mobile-schedule-tabs .ds-tabs-box { width: 100%; }
+  .mobile-schedule-tabs .ds-tab-box { height: 44px; padding: 0 var(--space-8); font-size: 14px; }
   .ds-accordion-q,
   .ds-accordion-a { padding: var(--space-16); }
   .ds-accordion-q .ds-accordion-text { font-size: 15px; }
