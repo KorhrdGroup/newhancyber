@@ -442,7 +442,7 @@
   top: 0;
   left: -100vmax;
   right: -100vmax;
-  height: 8px;
+  height: 4px;
   background: linear-gradient(rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0));
   pointer-events: none;
 }
