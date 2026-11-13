@@ -4,74 +4,59 @@ import { SUPPORT_PHONE } from "@/lib/contact";
 
 export const metadata: Metadata = { title: "원격지원" };
 
-const IMG = "/resources/images/learning-support";
-const stepBox = { backgroundColor: "#fff", padding: "30px" };
-
-function Divider() {
-  return <img src={`${IMG}/wrapper_divider.png`} alt="원격지원 서비스 이용 방법" className="remote-support-divider" />;
-}
-
 // TODO: 원본처럼 두 버튼 모두 무료학습설계로 연결된다. 실제 원격지원 프로그램 주소가 정해지면 바꾼다.
 const remoteButtons = ["수강신청 및 학습문의 바로가기", "출석 및 시험 관련문의 바로가기"];
 
+/** 원격지원 — 공지사항·FAQ 와 같은 흰 바탕 틀, 단계는 STEP 소제목 + 내용 (디자인 시스템 카드·버튼) */
 export default function LearningRemoteSupportPage() {
   return (
     <main className="wrapper">
-      <div className="remote-support-steps-container">
-        <div className="container" style={stepBox}>
-          <h1 className="page-title">원격지원 서비스란?</h1>
-          <div className="remote-support-content">
-            {/* "함꼐" 는 원본 표기 그대로 */}
-            <p className="remote-support-content-text">
-              한평생원격교육원 서비스 이용 시 발생하는 문의사항을 담당자가 회원님의 동의 하에 PC 화면을 함꼐
-              보면서 신속하고 정확하게 도와드리는 원격지원 서비스입니다.
-            </p>
-          </div>
-        </div>
+      <div className="container lx-page lx-page--top lx-page--plain">
+        <h1 className="page-title">원격지원 서비스</h1>
+        <p className="lx-desc">
+          한평생원격교육원 서비스 이용 중 궁금한 점이 생기면, 담당자가 회원님의 동의 하에 PC 화면을 함께 보면서
+          신속하고 정확하게 도와드립니다.
+        </p>
 
-        <div className="container" style={stepBox}>
-          <h1 className="page-step1-title">
-            <span className="page-step1-title-number">STEP 1</span> 회원님의 상황에 맞게 전화합니다.
-          </h1>
-          <div className="remote-support-contact-boxes">
-            <div className="remote-support-contact-box">
-              <div className="remote-support-contact-title">수강상담 및 학습문의</div>
-              <div className="remote-support-contact-content">각 학습담당자 직통번호</div>
+        <section className="lx-panel">
+          <h2 className="lx-section-title">
+            <span className="lx-step-label">STEP 1</span> 회원님의 상황에 맞게 전화합니다.
+          </h2>
+          <div className="ds-stats lx-remote-contacts">
+            <div className="ds-stat">
+              <p className="ds-stat-label">수강상담 및 학습문의</p>
+              <p className="ds-stat-value">각 학습담당자 직통번호</p>
             </div>
-            <div className="remote-support-contact-box">
-              <div className="remote-support-contact-title">출석 및 시험 관련문의</div>
-              <div className="remote-support-contact-content">{SUPPORT_PHONE}</div>
+            <div className="ds-stat">
+              <p className="ds-stat-label">출석 및 시험 관련문의</p>
+              <p className="ds-stat-value">{SUPPORT_PHONE}</p>
             </div>
           </div>
-          <Divider />
-        </div>
+        </section>
 
-        <div className="container" style={stepBox}>
-          <h1 className="page-step1-title">
-            <span className="page-step1-title-number">STEP 2</span> 원격지원 서비스 바로가기 버튼을 누릅니다.
-          </h1>
-          <div className="remote-support-button-boxes">
+        <section className="lx-panel">
+          <h2 className="lx-section-title">
+            <span className="lx-step-label">STEP 2</span> 원격지원 서비스 바로가기 버튼을 누릅니다.
+          </h2>
+          <div className="lx-remote-buttons">
             {remoteButtons.map((label) => (
-              <Link key={label} href="/course-registration/learning-design" className="remote-support-button">
-                <span className="remote-support-button-text">{label}</span>
-                <img src={`${IMG}/arrow.png`} alt="화살표" className="remote-support-button-arrow" />
+              <Link key={label} href="/course-registration/learning-design" className="ds-btn ds-btn--primary ds-btn--lg">
+                {label}
+                <span aria-hidden="true">→</span>
               </Link>
             ))}
           </div>
-          <Divider />
-        </div>
+        </section>
 
-        <div className="container" style={stepBox}>
-          <h1 className="page-step1-title">
-            <span className="page-step1-title-number">STEP 3</span> 기술지원 담당자의 안내에 따라주세요.
-          </h1>
-          <ul style={{ marginTop: "8px", display: "flex", flexDirection: "column" }}>
-            <li className="page-list-item">
-              원격지원서비스 이용 가능 시간: 평일 09:00 ~ 18:00 (점심시간 제외: 12:00~13:00)
-            </li>
-            <li className="page-list-plain">* 토요일/공휴일 휴무</li>
+        <section className="lx-panel">
+          <h2 className="lx-section-title">
+            <span className="lx-step-label">STEP 3</span> 기술지원 담당자의 안내에 따라 주세요.
+          </h2>
+          <ul className="lx-notes">
+            <li className="page-list-item">원격지원 서비스 이용 가능 시간: 평일 09:00 ~ 18:00 (점심시간 12:00 ~ 13:00 제외)</li>
+            <li className="page-list-item">토요일 · 공휴일은 쉽니다.</li>
           </ul>
-        </div>
+        </section>
       </div>
     </main>
   );

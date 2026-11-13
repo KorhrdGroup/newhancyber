@@ -3945,7 +3945,6 @@ main {
   /* 컨테이너 밖에 따로 있는 상자·탭 줄·그림도 같은 끝선에 */
   main .precautions-tabs,
   main .requirements-tabs,
-  main .remote-support-steps-container,
   main .find-id-info-boxes,
   main .practice-law-info-box,
   main .consultation-options-section,

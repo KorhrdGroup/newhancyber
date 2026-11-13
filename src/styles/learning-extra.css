@@ -47,6 +47,24 @@
   color: var(--color-text-brand);
 }
 
+/* ---------- 수강지원프로그램 (표 + 선택/전체 다운로드) ---------- */
+.lx-program-table { table-layout: fixed; }
+.lx-program-col-name { width: 260px; }
+.lx-program-col-down { width: 120px; }
+.lx-program-col-check { width: 64px; }
+.lx-program-name { display: inline-flex; align-items: center; gap: var(--space-12); font-weight: 600; color: var(--color-text-strong); }
+.lx-program-name img { flex-shrink: 0; width: 24px; height: 24px; object-fit: contain; }
+.lx-program-desc { color: var(--color-text-secondary); }
+.lx-program-check { width: 18px; height: 18px; vertical-align: middle; accent-color: var(--color-bg-brand); cursor: pointer; }
+.lx-program-actions { display: flex; justify-content: flex-end; gap: var(--space-8); margin-top: var(--space-16); }
+
+/* ---------- 원격지원 (STEP 소제목 + 연락처 카드 + 바로가기 버튼) ---------- */
+.lx-step-label { margin-right: var(--space-8); color: var(--color-text-brand); }
+.lx-remote-contacts { grid-template-columns: repeat(2, 1fr); }
+.lx-remote-contacts .ds-stat-value { font-size: 20px; }
+.lx-remote-buttons { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-16); }
+.lx-remote-buttons .ds-btn { justify-content: space-between; }
+
 /* ---------- 1:1 문의 ---------- */
 .lx-inquiry-table { table-layout: fixed; }
 .lx-inquiry-table .lx-col-num { width: 80px; }
@@ -287,6 +305,21 @@
   .lx-article-body { padding-top: var(--space-24); padding-bottom: var(--space-24); font-size: 15px; }
   .lx-article-actions .ds-btn { width: 100%; }
 
+  /* 폰: 설명 칸은 숨기고 이름 · 다운로드 · 선택만 한 화면에 */
+  .lx-program-table { table-layout: auto; }
+  .lx-program-table th:nth-child(2),
+  .lx-program-desc { display: none; }
+  /* 칸 하나를 숨기면 col 폭이 한 칸씩 밀리므로 col 대신 칸에 폭을 준다 */
+  .lx-program-table colgroup { display: none; }
+  .lx-program-table th:nth-child(3),
+  .lx-program-table td:nth-child(3) { width: 88px; }
+  .lx-program-table th:nth-child(4),
+  .lx-program-table td:nth-child(4) { width: 44px; padding-left: 0; padding-right: 0; }
+  .lx-program-name { gap: var(--space-8); font-size: 13px; }
+  .lx-program-actions .ds-btn { flex: 1; }
+  .lx-remote-contacts,
+  .lx-remote-buttons { grid-template-columns: 1fr; }
+  .lx-remote-contacts .ds-stat-value { font-size: 18px; }
   .lx-inquiry-table .lx-col-num { display: none; }
   .lx-inquiry-table .lx-col-date { width: 72px; }
   .lx-inquiry-table td.lx-col-date { font-size: 13px; }
