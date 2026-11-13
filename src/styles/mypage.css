@@ -66,9 +66,19 @@
 .mp-choices { display: flex; flex-wrap: wrap; gap: var(--space-8) var(--space-24); }
 .mp-field-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-16); }
 .mp-file { display: block; width: 100%; font-size: 14px; color: var(--color-text-default); }
+.mp-req { color: var(--color-text-danger); }
+.mp-req-note { margin-bottom: var(--space-20); }
+.mp-dates .ds-input { flex: 0 1 200px; min-width: 0; }
+.mp-choices--column { flex-direction: column; }
+.mp-term { display: grid; grid-template-columns: repeat(3, minmax(0, 160px)); gap: var(--space-8); }
+.mp-weeks { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: var(--space-8) var(--space-16); margin-top: var(--space-12); }
+.mp-proof { max-width: 240px; margin-bottom: var(--space-8); }
 
 @media (max-width: 768px) {
   .mp-field-grid { grid-template-columns: 1fr; }
+  .mp-term { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .mp-weeks { grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: var(--space-8); }
+  .mp-weeks .ds-check { white-space: nowrap; }
   .mp-info.ds-table--info th { width: 100px; }
 }
 

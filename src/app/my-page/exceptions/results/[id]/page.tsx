@@ -30,6 +30,10 @@ export default async function ExceptionResultPage({ params }: { params: Promise<
               <td>{exceptionLabels[r.type]} 신청</td>
             </tr>
             <tr>
+              <th>신청 기간</th>
+              <td>{r.period}</td>
+            </tr>
+            <tr>
               <th>신청일</th>
               <td>{r.appliedAt}</td>
             </tr>

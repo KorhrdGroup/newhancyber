@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 import type { BoardPost } from "./boardData";
 
 const DS_IMG = "/resources/images/ds";
@@ -9,8 +10,25 @@ const DS_IMG = "/resources/images/ds";
  * 모양은 Figma 디자인 시스템 부품(입력 칸·버튼·표·배지·페이지 번호)을 따른다.
  */
 
-/** 목록 위 검색 줄: 왼쪽 글 수, 오른쪽 검색 (원본도 동작 없음) */
-export function SearchBox({ total }: { total?: number }) {
+const DEFAULT_SCOPES = [
+  { value: "title", label: "제목" },
+  { value: "content", label: "내용" },
+  { value: "all", label: "제목+내용" },
+];
+
+/**
+ * 목록 위 검색 줄: 왼쪽 글 수, 오른쪽 검색 (원본도 동작 없음).
+ * filters 는 검색 범위 앞에 붙는 선택 칸(예: 마이페이지 학습 게시판의 학기·과목)
+ */
+export function SearchBox({
+  total,
+  filters,
+  scopes = DEFAULT_SCOPES,
+}: {
+  total?: number;
+  filters?: ReactNode;
+  scopes?: { value: string; label: string }[];
+}) {
   return (
     <form className="lx-board-bar" role="search">
       {total !== undefined && (
@@ -18,11 +36,14 @@ export function SearchBox({ total }: { total?: number }) {
           총 <strong>{total}</strong>건
         </p>
       )}
-      <div className="lx-board-search">
+      <div className={`lx-board-search${filters ? " lx-board-search--wide" : ""}`}>
+        {filters}
         <select className="ds-select" aria-label="검색 범위">
-          <option value="title">제목</option>
-          <option value="content">내용</option>
-          <option value="all">제목+내용</option>
+          {scopes.map((s) => (
+            <option key={s.value} value={s.value}>
+              {s.label}
+            </option>
+          ))}
         </select>
         <input type="search" className="ds-input" placeholder="검색어를 입력하세요" aria-label="검색어" />
         {/* TODO: 검색 API */}
@@ -46,7 +67,7 @@ export interface BoardColumn {
   width?: number;
 }
 
-/** 데스크톱 게시판 표 (Figma Table: 제목은 Link 칸, 공지는 Brand 배지) */
+/** 데스크톱 게시판 표 (Figma Table: 제목은 Link 칸, 공지는 Brand 배지). dateLabel 을 null 로 주면 날짜 칸을 뺀다 */
 export function BoardTable({
   posts,
   columns = [],
@@ -54,7 +75,7 @@ export function BoardTable({
 }: {
   posts: BoardPost[];
   columns?: BoardColumn[];
-  dateLabel?: string;
+  dateLabel?: string | null;
 }) {
   const at = (where: NonNullable<BoardColumn["at"]>) => columns.filter((c) => (c.at ?? "before-date") === where);
   const cols = (list: BoardColumn[]) =>
@@ -80,7 +101,7 @@ export function BoardTable({
         {cols(beforeTitle)}
         <col />
         {cols(beforeDate)}
-        <col className="lx-board-col-date" />
+        {dateLabel !== null && <col className="lx-board-col-date" />}
         {cols(end)}
       </colgroup>
       <thead>
@@ -89,7 +110,7 @@ export function BoardTable({
           {heads(beforeTitle)}
           <th scope="col">제목</th>
           {heads(beforeDate)}
-          <th scope="col">{dateLabel}</th>
+          {dateLabel !== null && <th scope="col">{dateLabel}</th>}
           {heads(end)}
         </tr>
       </thead>
@@ -114,7 +135,7 @@ export function BoardTable({
               )}
             </td>
             {cells(beforeDate, post)}
-            <td>{post.date}</td>
+            {dateLabel !== null && <td>{post.date}</td>}
             {cells(end, post)}
           </tr>
         ))}
@@ -150,7 +171,7 @@ export function Pagination({ className, pages = 5 }: { className?: string; pages
 /** 원본 스크립트가 a 태그에 직접 넣던 인라인 스타일 */
 const plainLink = { textDecoration: "none", color: "inherit" };
 
-/** 모바일 게시판 목록 (원본은 jQuery 로 그리던 부분). kind 에 따라 클래스 이름만 다르다 */
+/** 모바일 게시판 목록 (원본은 jQuery 로 그리던 부분). kind 에 따라 클래스 이름만 다르다. dateLabel 이 null 이면 날짜 칸을 뺀다 */
 export function MobileBoardList({
   kind,
   posts,
@@ -158,7 +179,7 @@ export function MobileBoardList({
 }: {
   kind: "notice" | "schedule";
   posts: BoardPost[];
-  dateLabel?: string;
+  dateLabel?: string | null;
 }) {
   const c = (name: string) => `mobile-${kind}-${name}`;
   return (
@@ -166,7 +187,7 @@ export function MobileBoardList({
       <div className={c("header")}>
         <div className={c("header-number")}>번호</div>
         <div className={c("header-title")}>제목</div>
-        <div className={c("header-date")}>{dateLabel}</div>
+        {dateLabel !== null && <div className={c("header-date")}>{dateLabel}</div>}
       </div>
       {posts.map((post, i) => (
         <Link key={i} href={post.href ?? "#"} className={c("item")} style={plainLink}>
@@ -182,7 +203,7 @@ export function MobileBoardList({
               {post.title}
               {post.meta && <span className="mobile-board-meta">{post.meta}</span>}
             </div>
-            <div className={c("date")}>{post.date}</div>
+            {dateLabel !== null && <div className={c("date")}>{post.date}</div>}
           </div>
         </Link>
       ))}

@@ -105,10 +105,10 @@ export const myPageTabs: NavLink[] = [
 
 /* 마이페이지 탭 하나에 묶은 화면들의 작은 탭 */
 
-/** 문의·게시판 (원본 학습 게시판 세 탭은 이름을 확인 못 해서 이름을 정해 붙였다) */
+/** 문의·게시판 (앞의 세 탭은 원본 학습 게시판 탭 이름 그대로) */
 export const myPageBoardTabs: NavLink[] = [
-  { label: "과목 공지", href: "/my-page/study-board" },
-  { label: "과목 자료실", href: "/my-page/study-board/materials" },
+  { label: "학습 공지사항", href: "/my-page/study-board" },
+  { label: "학습 자료실", href: "/my-page/study-board/materials" },
   { label: "학습 Q&A", href: "/my-page/study-board/qna" },
   { label: "1:1 문의", href: "/my-page/inquiries" },
 ];

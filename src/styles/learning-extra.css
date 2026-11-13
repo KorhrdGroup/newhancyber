@@ -334,6 +334,11 @@
 .lx-board-search { display: flex; gap: var(--space-8); width: 480px; max-width: 100%; margin-left: auto; }
 .lx-board-search .ds-select { flex: 0 0 120px; }
 .lx-board-search .ds-input { flex: 1; min-width: 0; }
+.lx-board-search--wide { width: 760px; }
+.lx-board-search--wide .ds-select { flex-basis: 96px; }
+.lx-board-search--wide .ds-input { min-width: 160px; }
+.lx-board-search .lx-board-filter { flex: 0 1 160px; min-width: 0; }
+.lx-board-term { display: block; font-size: 13px; color: var(--color-text-secondary); }
 .lx-board-col-num { width: 96px; }
 .lx-board-col-date { width: 120px; }
 /* 공지 글: 줄 바탕을 칠하면 Brand 배지가 묻혀서, 제목만 굵게 */

@@ -5,9 +5,9 @@ import QnaWriteForm from "@/components/my-page/a/QnaWriteForm";
 import { getOngoingCourses } from "@/components/my-classroom/classroomData";
 import { myPageBoardTabs } from "@/lib/navigation";
 
-export const metadata: Metadata = { title: "학습 Q&A 글쓰기 - 마이페이지" };
+export const metadata: Metadata = { title: "학습 Q&A 문의하기 - 마이페이지" };
 
-/** U28 학습 게시판 — 학습 Q&A 글쓰기 */
+/** U28 학습 게시판 — 학습 Q&A 문의하기 */
 export default function QnaWritePage() {
   // TODO: API 수강 중인 과목 조회
   const courses = getOngoingCourses().map(({ id, title }) => ({ id, title }));
