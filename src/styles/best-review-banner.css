@@ -39,8 +39,9 @@
   max-width: none; pointer-events: none;
 }
 .brb-bubble {
-  position: relative; flex: 1 1 0; min-width: 0; height: calc(182 * var(--u));
-  display: flex; flex-direction: column; justify-content: space-between;
+  /* 줄간격을 넓힌 소감이 넘치지 않게 높이는 내용만큼 (피그마 182 는 최소) */
+  position: relative; flex: 1 1 0; min-width: 0; min-height: calc(182 * var(--u));
+  display: flex; flex-direction: column; justify-content: center; gap: calc(12 * var(--u));
   padding: calc(18 * var(--u)) calc(20 * var(--u));
   border-radius: calc(10 * var(--u)); background: #fff; color: #010101; line-height: normal;
 }
@@ -51,9 +52,9 @@
   transform: translateY(-50%) rotate(-90deg);
 }
 .brb-who { display: flex; flex-direction: column; gap: calc(2 * var(--u)); white-space: nowrap; }
-.brb-who span { font-size: calc(18 * var(--u)); font-weight: 600; }
+.brb-who span { font-size: calc(18 * var(--u)); font-weight: 600; color: var(--color-text-secondary); }
 .brb-who strong { font-size: calc(24 * var(--u)); font-weight: 700; }
-.brb-quote { font-size: calc(18 * var(--u)); font-weight: 500; text-align: justify; word-break: keep-all; }
+.brb-quote { font-size: calc(16 * var(--u)); font-weight: 500; line-height: 1.65; text-align: justify; word-break: keep-all; }
 
 /* 휴대폰: 통째로 줄이면 글자가 너무 작아져서 제목 → 사진 → 말풍선 순으로 쌓는다 */
 @media (max-width: 480px) {
@@ -65,10 +66,10 @@
   .brb-title { font-size: 36px; }
   .brb-profile { flex-direction: column; gap: 52px; } /* 월계수가 사진 아래로 30px 나와서, 말풍선 꼬리가 겹치지 않게 */
   .brb-photo { width: 120px; height: 120px; }
-  .brb-bubble { flex: none; width: 100%; height: auto; gap: 12px; padding: 16px; border-radius: 10px; }
+  .brb-bubble { flex: none; width: 100%; min-height: 0; gap: 12px; padding: 16px; border-radius: 10px; }
   .brb-bubble-tail { left: 50%; top: -15px; width: 22px; height: 18px; transform: translateX(-50%); }
   .brb-who { gap: 2px; white-space: normal; }
   .brb-who span { font-size: 14px; }
   .brb-who strong { font-size: 18px; }
-  .brb-quote { font-size: 14px; line-height: 1.6; text-align: left; }
+  .brb-quote { font-size: 13px; line-height: 1.7; text-align: left; }
 }
