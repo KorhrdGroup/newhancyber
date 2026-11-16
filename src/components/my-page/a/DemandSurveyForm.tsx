@@ -2,10 +2,14 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import type { DemandQuestion } from "../myPageDataA";
+import type { DemandSurvey } from "../myPageDataA";
 
-/** U30 수요 조사 응답 — 고르기(radio)·여러 개 고르기(checkbox)·글로 적기(textarea, 선택) */
-export default function DemandSurveyForm({ questions }: { questions: DemandQuestion[] }) {
+/** 필수 칸 표시 */
+const Req = () => <span className="mp-req">*</span>;
+
+/** U30 수요 조사 응답 — 고르기(radio)·여러 개 고르기(checkbox)는 필수, 글로 적기(textarea)는 선택. 다른 신청서와 같은 한 상자 틀 */
+export default function DemandSurveyForm({ survey }: { survey: DemandSurvey }) {
+  const { questions } = survey;
   const router = useRouter();
   const [answers, setAnswers] = useState<Record<string, string[]>>({});
 
@@ -29,15 +33,28 @@ export default function DemandSurveyForm({ questions }: { questions: DemandQuest
   };
 
   return (
-    <form onSubmit={submit} className="ds-mt-16">
+    <form onSubmit={submit} className="pp-box mp-form">
+      <div className="mp-form-head">
+        <h3 className="pp-box-title">{survey.title}</h3>
+        <p className="pp-note">
+          <Req /> 표시는 필수 입력 사항입니다.
+        </p>
+      </div>
+      <div className="mq-form-desc">
+        <p className="pp-text">{survey.intro}</p>
+        <p className="pp-note ds-mt-4">
+          조사 기간 {survey.start} ~ {survey.end}
+        </p>
+      </div>
       {questions.map((q, i) => (
-        <div key={q.id} className="pp-question" role="group" aria-labelledby={`dq-${q.id}`}>
-          <p id={`dq-${q.id}`} className="pp-question-text">
+        <div key={q.id} className="pp-field" role="group" aria-labelledby={`dq-${q.id}`}>
+          <p id={`dq-${q.id}`} className="ds-label">
             {i + 1}. {q.text}
+            {q.type !== "textarea" && <Req />}
           </p>
           {q.type === "textarea" ? (
             <textarea
-              className="ds-textarea ds-textarea--sm"
+              className="ds-textarea"
               placeholder={q.placeholder}
               aria-label={`${i + 1}번 답`}
               value={answers[q.id]?.[0] ?? ""}
@@ -66,7 +83,7 @@ export default function DemandSurveyForm({ questions }: { questions: DemandQuest
         <button type="button" className="ds-btn ds-btn--secondary" onClick={() => router.push("/my-page/surveys/demand")}>
           취소
         </button>
-        <button type="submit" className="ds-btn ds-btn--primary ds-btn--lg">
+        <button type="submit" className="ds-btn ds-btn--primary">
           제출
         </button>
       </div>
