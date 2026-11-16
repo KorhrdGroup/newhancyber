@@ -45,7 +45,8 @@
   border-radius: calc(10 * var(--u)); background: #fff; color: #010101; line-height: normal;
 }
 .brb-bubble-tail {
-  position: absolute; left: calc(-25 * var(--u)); top: 50%;
+  /* 돌리면 보이는 폭이 20.9 — 밑변이 말풍선 안으로 2 들어가 틈이 없게 (피그마와 같음) */
+  position: absolute; left: calc(-21.45 * var(--u)); top: 50%;
   width: calc(26 * var(--u)); height: calc(20.91 * var(--u)); max-width: none;
   transform: translateY(-50%) rotate(-90deg);
 }
