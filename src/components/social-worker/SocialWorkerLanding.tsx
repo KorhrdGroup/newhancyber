@@ -450,8 +450,9 @@ export default function SocialWorkerLanding() {
               </li>
             ))}
           </ul>
-          <img className="swl-plus-mark" src={`${IMG}/plus-mark.svg`} alt="" />
         </section>
+        {/* 혜택 칸과 아래 상담 상자 경계에 반쯤 걸치는 + 표시 — 칸 밖에 두어 잘리거나 가려지지 않게 */}
+        <img className="swl-plus-mark" src={`${IMG}/plus-mark.svg`} alt="" />
       </div>
     </div>
   );
