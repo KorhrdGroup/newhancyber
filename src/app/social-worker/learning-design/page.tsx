@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PracticeSection, RefNotes } from "@/components/practice-support/PracticeParts";
-import { Figure } from "@/components/social-worker/SwParts";
+import { CreditFlow } from "@/components/social-worker/SwSteps";
 
 export const metadata: Metadata = { title: "대상별 학습설계" };
 
@@ -34,19 +34,59 @@ export default function SocialWorkerLearningDesignPage() {
         </div>
 
         <PracticeSection title="고등학교 졸업자">
-          <Figure src="social-woorker04.png" alt="고등학교 졸업자 학습설계" />
+          <CreditFlow
+            label="고등학교 졸업자 학습설계"
+            credits={[
+              { label: "전공", value: "45학점" },
+              { label: "교양", value: "15학점" },
+              { label: "일반", value: "20학점" },
+            ]}
+            total="총 80학점 이수"
+            results={[
+              { icon: "degree-cap.png", title: "전문 학사 학위 취득!" },
+              { icon: "license.png", title: "사회복지2급 자격증 취득" },
+            ]}
+          />
         </PracticeSection>
 
         <PracticeSection title="전문대/4년제 졸업자">
-          <Figure src="social-woorker05.png" alt="전문대/4년제 졸업자 학습설계" />
+          <CreditFlow
+            label="전문대/4년제 졸업자 학습설계"
+            credits={[
+              { label: "필수", value: "10 과목" },
+              { label: "선택", value: "7 과목" },
+            ]}
+            results={[{ icon: "license.png", title: "사회복지2급 자격증 취득" }]}
+          />
         </PracticeSection>
 
         <PracticeSection title="사회복지 2년제 학위취득 과정">
-          <Figure src="social-woorker07.png" alt="사회복지 2년제 학위취득 과정" />
+          <CreditFlow
+            label="사회복지 2년제 학위취득 과정"
+            credits={[
+              { label: "전공", value: "45학점" },
+              { label: "교양", value: "15학점" },
+              { label: "일반", value: "20학점" },
+            ]}
+            total="총 80학점 이수"
+            results={[
+              { icon: "degree-cap.png", title: "전문 학사 학위 취득!" },
+              { icon: "license.png", title: "사회복지2급 자격증 취득" },
+            ]}
+          />
         </PracticeSection>
 
         <PracticeSection title="사회복지 학사 학위취득 과정">
-          <Figure src="social-woorker06.png" alt="사회복지 학사 학위취득 과정" />
+          <CreditFlow
+            label="사회복지 학사 학위취득 과정"
+            credits={[
+              { label: "전공", value: "60학점" },
+              { label: "교양", value: "30학점" },
+              { label: "일반", value: "50학점" },
+            ]}
+            total="총 140학점 이수"
+            results={[{ icon: "degree-cap.png", title: "학사 학위 취득!" }]}
+          />
           <RefNotes
             items={[
               "전적대 성적증명서를 확인하여 이수한 학점을 전공, 교양, 일반으로 분류하여 부족한 학점만 추가적으로 이수하면 됩니다. 따라서 학습자에 따라 취득기간에 다소 차이가 있으므로 성적증명서를 토대로 학습설계를 받으셔야 합니다.",

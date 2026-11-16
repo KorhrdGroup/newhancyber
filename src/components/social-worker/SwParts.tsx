@@ -18,12 +18,3 @@ export function DataTable({ head, children }: { head: React.ReactNode[]; childre
     </div>
   );
 }
-
-/** 단계·흐름 그림 (원본 그림 그대로, 본문 폭에 맞춤). 폰에서는 글자가 너무 작아져 가로로 밀어 보게 한다 */
-export function Figure({ src, alt }: { src: string; alt: string }) {
-  return (
-    <div className="sw-figure">
-      <img src={`/resources/images/social-worker/${src}`} alt={alt} />
-    </div>
-  );
-}

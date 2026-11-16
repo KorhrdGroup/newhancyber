@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import DraftNote from "@/components/common/DraftNote";
 import { PracticeSection, RefNotes } from "@/components/practice-support/PracticeParts";
-import { DataTable, Figure } from "@/components/social-worker/SwParts";
+import { DataTable } from "@/components/social-worker/SwParts";
+import { IssueFlow } from "@/components/social-worker/SwSteps";
 
 export const metadata: Metadata = { title: "자격증 발급 안내" };
 
@@ -22,7 +23,7 @@ export default function SocialWorkerCertificatePage() {
               <strong>자격증, 회원증 신청 접수처</strong> : 전국 시•도 지방협회
             </li>
           </ul>
-          <Figure src="social-wooker08.png" alt="사회복지사자격증 신청절차" />
+          <IssueFlow />
           <RefNotes
             items={[
               "제출하신 서류를 심사한 후 자격이 인정될 경우에만 자격증이 발급됩니다. 신원조회 또는 사실조회 실시 후 부적격자는 사안에 따라 자격증 발급취소 또는 무효처분을 받습니다.",

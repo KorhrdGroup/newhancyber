@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Notes, PracticeSection, RefNotes } from "@/components/practice-support/PracticeParts";
 import RequirementsTabs, { RequirementsSubTabs } from "@/components/social-worker/RequirementsTabs";
-import { DataTable, Figure } from "@/components/social-worker/SwParts";
+import { DataTable } from "@/components/social-worker/SwParts";
+import { ApplyFlow, Level1Flow, Level2Flow } from "@/components/social-worker/SwSteps";
 
 export const metadata: Metadata = { title: "급수별 자격요건" };
 
@@ -24,7 +25,7 @@ const qualification = (
     </PracticeSection>
 
     <PracticeSection title="사회복지사자격증 신청절차">
-      <Figure src="social-wooker01.png" alt="사회복지사자격증 신청절차" />
+      <ApplyFlow />
       <ol className="lx-notes sw-steps">
         <li className="page-list-plain">(1) 자택이나 직장이 위치한 지역에 따라 지방협회를 선정</li>
         <li className="page-list-plain">(2) 해당지방협회로 구비 서류를 우편발송 또는 직접 방문하여 제출</li>
@@ -44,7 +45,7 @@ const qualification = (
 const level2 = (
   <>
     <PracticeSection title="사회복지사 2급 취득 절차">
-      <Figure src="social-wooker02.png" alt="사회복지사 2급 취득 절차" />
+      <Level2Flow />
     </PracticeSection>
 
     <PracticeSection title="교과목 이수기준">
@@ -137,7 +138,7 @@ const level2 = (
 // 원본은 이 블록 제목이 "사회복지 현장실습"(2급 탭 표 제목)으로 잘못 복사돼 있었다. 그림·글이 1급 응시자격이라 제목을 바로잡는다
 const level1Qualification = (
   <PracticeSection title="사회복지사 1급 응시자격">
-    <Figure src="social-wooker03.png" alt="사회복지사 1급 응시자격" />
+    <Level1Flow />
     <p className="lx-practice-text sw-law">관련법령: 사회복지사업법시행령 제4조관련</p>
     <ul className="lx-notes sw-law-list">
       <li className="page-list-plain">
