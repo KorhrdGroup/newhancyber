@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import FileField from "@/components/common/FileField";
 import { closePopup } from "../PopupActions";
 
 /** 과제·학습심화활동·토론 글쓰기 */
@@ -34,7 +35,7 @@ export default function WriteForm({ withFile, submitLabel, placeholder }: { with
           <label className="ds-label" htmlFor="write-file">
             첨부 파일
           </label>
-          <input id="write-file" type="file" accept=".hwp,.hwpx,.doc,.docx,.pdf" />
+          <FileField id="write-file" accept=".hwp,.hwpx,.doc,.docx,.pdf" />
           <p className="pp-note ds-mt-4">
             한글·워드·PDF 파일, 10MB까지 올릴 수 있습니다.
           </p>

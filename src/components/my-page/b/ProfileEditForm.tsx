@@ -6,18 +6,27 @@ import { educationLevels, emailDomains, phonePrefixes, type sampleMember } from 
 
 type Member = typeof sampleMember;
 
-/** 한 줄: 왼쪽 항목 이름, 오른쪽 값·입력 칸 */
-function Field({ label, htmlFor, children }: { label: string; htmlFor?: string; children: React.ReactNode }) {
+/** 필수 칸 표시 */
+const Req = () => <span className="mp-req">*</span>;
+
+/** 한 칸: 위에 항목 이름, 아래 값·입력 칸 (다른 신청서와 같은 모양) */
+function Field({ label, htmlFor, req, children }: { label: string; htmlFor?: string; req?: boolean; children: React.ReactNode }) {
+  const name = (
+    <>
+      {label}
+      {req && <Req />}
+    </>
+  );
   return (
-    <div className="mq-field">
+    <div className="pp-field">
       {htmlFor ? (
-        <label className="mq-field-label" htmlFor={htmlFor}>
-          {label}
+        <label className="ds-label" htmlFor={htmlFor}>
+          {name}
         </label>
       ) : (
-        <span className="mq-field-label">{label}</span>
+        <span className="ds-label">{name}</span>
       )}
-      <div className="mq-field-control">{children}</div>
+      {children}
     </div>
   );
 }
@@ -81,99 +90,104 @@ export default function ProfileEditForm({ member }: { member: Member }) {
 
   return (
     <form onSubmit={submit}>
-      <section className="pp-box">
-        <h3 className="pp-box-title">기본 정보</h3>
-        <p className="pp-note">아이디·이름·생년월일은 바꿀 수 없어요. 이름이 바뀌었다면 학습지원센터로 문의해 주세요.</p>
-        <div className="mq-fields ds-mt-12">
-          <Field label="아이디">{member.userId}</Field>
-          <Field label="이름">{member.name}</Field>
-          <Field label="생년월일">{member.birth}</Field>
+      <section className="pp-box mp-form">
+        <div className="mp-form-head">
+          <h3 className="pp-box-title">기본 정보</h3>
+          <p className="pp-note">
+            <Req /> 표시는 필수 입력 사항입니다.
+          </p>
         </div>
+        <p className="pp-note mq-form-desc">아이디·이름·생년월일은 바꿀 수 없어요. 이름이 바뀌었다면 학습지원센터로 문의해 주세요.</p>
+        <Field label="아이디">
+          <p className="mp-static">{member.userId}</p>
+        </Field>
+        <Field label="이름">
+          <p className="mp-static">{member.name}</p>
+        </Field>
+        <Field label="생년월일">
+          <p className="mp-static">{member.birth}</p>
+        </Field>
       </section>
 
-      <section className="pp-box">
-        <h3 className="pp-box-title">연락처·주소</h3>
-        <div className="mq-fields">
-          <Field label="휴대폰" htmlFor="edit-phone">
-            <div className="mq-phone">
-              <select id="edit-phone" className="ds-select" value={phone[0]} onChange={(e) => setPhonePart(0, e.target.value)}>
-                {phonePrefixes.map((p) => (
-                  <option key={p}>{p}</option>
-                ))}
-              </select>
-              <input className="ds-input" inputMode="numeric" maxLength={4} aria-label="휴대폰 가운데 번호" value={phone[1]} onChange={(e) => setPhonePart(1, e.target.value)} />
-              <input className="ds-input" inputMode="numeric" maxLength={4} aria-label="휴대폰 끝 번호" value={phone[2]} onChange={(e) => setPhonePart(2, e.target.value)} />
-            </div>
-          </Field>
-          <Field label="이메일" htmlFor="edit-email">
-            <div className="mq-inline">
-              <input id="edit-email" className="ds-input" value={emailId} onChange={(e) => setEmailId(e.target.value)} />
-              <span className="mq-at">@</span>
-              <select className="ds-select" aria-label="이메일 도메인" value={emailDomain} onChange={(e) => setEmailDomain(e.target.value)}>
-                <option value="">직접 입력</option>
-                {emailDomains.map((d) => (
-                  <option key={d}>{d}</option>
-                ))}
-              </select>
-              {!emailDomain && (
-                <input className="ds-input" placeholder="직접 입력" aria-label="이메일 도메인 직접 입력" value={emailDomainInput} onChange={(e) => setEmailDomainInput(e.target.value)} />
-              )}
-            </div>
-          </Field>
-          <Field label="주소" htmlFor="edit-postal">
-            <div className="mq-inline">
-              <input id="edit-postal" className="ds-input mq-postal" value={postalCode} readOnly placeholder="우편번호" />
-              <button type="button" className="ds-btn ds-btn--secondary mq-fixed" onClick={findPostcode}>
-                우편번호 찾기
-              </button>
-            </div>
-            <input className="ds-input ds-mt-8" value={address} readOnly placeholder="주소" aria-label="주소" />
-            <input className="ds-input ds-mt-8" value={addressDetail} placeholder="상세주소" aria-label="상세주소" onChange={(e) => setAddressDetail(e.target.value)} />
-          </Field>
-          <Field label="최종학력" htmlFor="edit-education">
-            <select id="edit-education" className="ds-select" value={education} onChange={(e) => setEducation(e.target.value)}>
-              <option value="">골라 주세요</option>
-              {educationLevels.map((l) => (
-                <option key={l.value} value={l.value}>
-                  {l.label}
-                </option>
+      <section className="pp-box mp-form">
+        <h3 className="pp-box-title mq-form-title">연락처·주소</h3>
+        <Field label="휴대폰" htmlFor="edit-phone" req>
+          <div className="mq-phone">
+            <select id="edit-phone" className="ds-select" value={phone[0]} onChange={(e) => setPhonePart(0, e.target.value)}>
+              {phonePrefixes.map((p) => (
+                <option key={p}>{p}</option>
               ))}
             </select>
-          </Field>
-        </div>
+            <input className="ds-input" inputMode="numeric" maxLength={4} aria-label="휴대폰 가운데 번호" value={phone[1]} onChange={(e) => setPhonePart(1, e.target.value)} />
+            <input className="ds-input" inputMode="numeric" maxLength={4} aria-label="휴대폰 끝 번호" value={phone[2]} onChange={(e) => setPhonePart(2, e.target.value)} />
+          </div>
+        </Field>
+        <Field label="이메일" htmlFor="edit-email" req>
+          <div className="mq-inline">
+            <input id="edit-email" className="ds-input" value={emailId} onChange={(e) => setEmailId(e.target.value)} />
+            <span className="mq-at">@</span>
+            <select className="ds-select" aria-label="이메일 도메인" value={emailDomain} onChange={(e) => setEmailDomain(e.target.value)}>
+              <option value="">직접 입력</option>
+              {emailDomains.map((d) => (
+                <option key={d}>{d}</option>
+              ))}
+            </select>
+            {!emailDomain && (
+              <input className="ds-input" placeholder="직접 입력" aria-label="이메일 도메인 직접 입력" value={emailDomainInput} onChange={(e) => setEmailDomainInput(e.target.value)} />
+            )}
+          </div>
+        </Field>
+        <Field label="주소" htmlFor="edit-postal">
+          <div className="mq-inline">
+            <input id="edit-postal" className="ds-input mq-postal" value={postalCode} readOnly placeholder="우편번호" />
+            <button type="button" className="ds-btn ds-btn--secondary mq-fixed" onClick={findPostcode}>
+              우편번호 찾기
+            </button>
+          </div>
+          <input className="ds-input ds-mt-8" value={address} readOnly placeholder="주소" aria-label="주소" />
+          <input className="ds-input ds-mt-8" value={addressDetail} placeholder="상세주소" aria-label="상세주소" onChange={(e) => setAddressDetail(e.target.value)} />
+        </Field>
+        <Field label="최종학력" htmlFor="edit-education">
+          <select id="edit-education" className="ds-select" value={education} onChange={(e) => setEducation(e.target.value)}>
+            <option value="">최종학력을 선택해 주세요.</option>
+            {educationLevels.map((l) => (
+              <option key={l.value} value={l.value}>
+                {l.label}
+              </option>
+            ))}
+          </select>
+        </Field>
       </section>
 
-      <section className="pp-box">
-        <h3 className="pp-box-title">비밀번호 변경</h3>
-        <p className="pp-note">바꿀 때만 입력하세요. 비워 두면 지금 비밀번호를 그대로 써요.</p>
-        <div className="mq-fields ds-mt-12">
-          <Field label="새 비밀번호" htmlFor="edit-new-password">
-            <input
-              id="edit-new-password"
-              type="password"
-              className="ds-input"
-              placeholder="8~20자 이내의 영문/숫자/특수문자"
-              autoComplete="new-password"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-            />
-          </Field>
-          <Field label="새 비밀번호 확인" htmlFor="edit-new-password-confirm">
-            <input
-              id="edit-new-password-confirm"
-              type="password"
-              className="ds-input"
-              placeholder="새 비밀번호를 한 번 더 입력해 주세요."
-              autoComplete="new-password"
-              value={newPasswordConfirm}
-              onChange={(e) => setNewPasswordConfirm(e.target.value)}
-            />
-          </Field>
-        </div>
+      <section className="pp-box mp-form">
+        <h3 className="pp-box-title mq-form-title">비밀번호 변경</h3>
+        <p className="pp-note mq-form-desc">바꿀 때만 입력하세요. 비워 두면 지금 비밀번호를 그대로 써요.</p>
+        <Field label="새 비밀번호" htmlFor="edit-new-password">
+          <input
+            id="edit-new-password"
+            type="password"
+            className="ds-input"
+            placeholder="8~20자 이내의 영문/숫자/특수문자"
+            autoComplete="new-password"
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+          />
+        </Field>
+        <Field label="새 비밀번호 확인" htmlFor="edit-new-password-confirm">
+          <input
+            id="edit-new-password-confirm"
+            type="password"
+            className="ds-input"
+            placeholder="새 비밀번호를 한 번 더 입력해 주세요."
+            autoComplete="new-password"
+            value={newPasswordConfirm}
+            onChange={(e) => setNewPasswordConfirm(e.target.value)}
+          />
+        </Field>
       </section>
 
-      <section className="pp-box">
-        <h3 className="pp-box-title">마케팅 수신 동의</h3>
+      <section className="pp-box mp-form">
+        <h3 className="pp-box-title mq-form-title">마케팅 수신 동의</h3>
         <div className="mq-checks">
           <label className="ds-check">
             <input type="checkbox" checked={smsConsent} onChange={(e) => setSmsConsent(e.target.checked)} />
@@ -190,10 +204,10 @@ export default function ProfileEditForm({ member }: { member: Member }) {
       </section>
 
       <div className="pp-actions">
-        <Link href="/my-page/certificates" className="ds-btn ds-btn--secondary ds-btn--lg">
+        <Link href="/my-page/certificates" className="ds-btn ds-btn--secondary">
           취소
         </Link>
-        <button type="submit" className="ds-btn ds-btn--primary ds-btn--lg">
+        <button type="submit" className="ds-btn ds-btn--primary">
           저장
         </button>
       </div>

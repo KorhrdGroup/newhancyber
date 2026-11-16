@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { Inquiry } from "./inquiryData";
+import "@/styles/learning-extra.css";
 
 /**
  * 1:1 문의 목록 — FAQ 와 같은 질문 접기(Accordion). 줄을 누르면 페이지 이동 없이 그 자리에서

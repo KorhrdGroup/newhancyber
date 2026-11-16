@@ -1,34 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useState, type ChangeEvent, type FormEvent } from "react";
-
-/** 원본 글쓰기 화면 기준: 최대 10MB, doc·pdf·hwp·ppt·xls·txt·jpg·png·gif */
-const MAX_FILE_SIZE = 10 * 1024 * 1024;
-const ALLOWED_EXTENSIONS = ["doc", "pdf", "hwp", "ppt", "xls", "txt", "jpg", "png", "gif"];
+import { useState, type FormEvent } from "react";
+import FileField from "@/components/common/FileField";
+import { checkUserUpload, USER_UPLOAD_ACCEPT, USER_UPLOAD_NOTE } from "@/lib/upload";
 
 /** 1:1 문의 쓰기 (제목·내용·첨부파일) */
 export default function InquiryWriteForm() {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const [fileError, setFileError] = useState("");
-
-  const handleFile = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    setFileError("");
-    if (!file) return;
-
-    const ext = file.name.split(".").pop()?.toLowerCase() ?? "";
-    let error = "";
-    if (!ALLOWED_EXTENSIONS.includes(ext)) error = "올릴 수 없는 파일 형식입니다.";
-    else if (file.size > MAX_FILE_SIZE) error = "10MB 이하 파일만 올릴 수 있습니다.";
-
-    if (error) {
-      setFileError(error);
-      e.target.value = "";
-    }
-  };
-
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!title.trim()) {
@@ -77,15 +57,8 @@ export default function InquiryWriteForm() {
         <label className="ds-label" htmlFor="inquiry-file">
           첨부파일
         </label>
-        <input
-          id="inquiry-file"
-          type="file"
-          className="lx-file"
-          accept={ALLOWED_EXTENSIONS.map((ext) => `.${ext}`).join(",")}
-          onChange={handleFile}
-        />
-        {fileError && <p className="lx-note ds-text-danger">{fileError}</p>}
-        <p className="lx-note">최대 10MB, doc·pdf·hwp·ppt·xls·txt·jpg·png·gif 파일만 올릴 수 있습니다.</p>
+        <FileField id="inquiry-file" accept={USER_UPLOAD_ACCEPT} validate={checkUserUpload} />
+        <p className="lx-note">{USER_UPLOAD_NOTE}</p>
       </div>
 
       <div className="lx-actions">

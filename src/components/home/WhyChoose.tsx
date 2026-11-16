@@ -8,8 +8,8 @@ type TabKey = "support" | "management" | "guide";
 
 type WhyCard = { title: string; icon: string; lines: string[] };
 
-/** 세 탭이 같은 카드 틀(아이콘 · 제목 · 설명 줄)을 쓴다 */
-const tabs: {
+/** 세 탭이 같은 카드 틀(아이콘 · 제목 · 설명 줄)을 쓴다 — /sample 시안도 같은 내용을 쓴다 */
+export const tabs: {
   key: TabKey;
   label: string;
   subtitle: string;

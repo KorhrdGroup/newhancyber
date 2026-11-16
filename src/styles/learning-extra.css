@@ -89,9 +89,13 @@
 .lx-inquiry-bar { margin-top: var(--space-32); }
 /* 목록 = FAQ 질문 접기: 상태 배지 · 제목 · 문의일 · 화살표, 펼치면 내 글 + 답변 상자 */
 .lx-inquiry-status { flex-shrink: 0; width: 72px; }
+/* 상태 배지는 글자 길이와 상관없이 같은 너비로 줄을 맞춘다 */
+.lx-inquiry-status .ds-badge { min-width: 64px; justify-content: center; }
 .lx-inquiry-q .ds-accordion-text { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 /* 열린 문의 줄은 회색으로 선택된 것처럼 (호버와 같은 색) */
 .lx-inquiry-list .ds-accordion-item.is-open .lx-inquiry-q { background-color: var(--color-bg-subtle); }
+/* 이의신청 목록: 제목 앞 평가 항목·신청 구분 */
+.lx-inquiry-cat { margin-right: var(--space-8); font-weight: 400; color: var(--color-text-secondary); }
 .lx-inquiry-date { flex-shrink: 0; font-size: 14px; color: var(--color-text-secondary); font-variant-numeric: tabular-nums; }
 .lx-inquiry-detail { padding: 0 var(--space-20) var(--space-20) calc(var(--space-20) + 72px + var(--space-12)); }
 .lx-inquiry-detail > .lx-post-body:first-child { padding-top: var(--space-20); }
@@ -126,6 +130,8 @@
 .lx-answer-head { display: flex; align-items: baseline; gap: var(--space-8); }
 .lx-answer-head strong { font-size: 16px; color: var(--color-text-brand); }
 .lx-answer-head .lx-post-meta { margin-top: 0; }
+.lx-answer-result { font-weight: 600; color: var(--color-text-strong); }
+.lx-answer-result--danger { color: var(--color-text-danger); }
 .lx-answer--waiting { background: var(--color-bg-subtle); text-align: center; }
 /* 답변 대기: 두 줄 모두 같은 크기의 작은 글씨, 첫 줄만 굵게 */
 .lx-answer--waiting p { font-size: 14px; line-height: 1.6; color: var(--color-text-secondary); }
@@ -133,23 +139,6 @@
 
 .lx-field + .lx-field { margin-top: var(--space-20); }
 .lx-textarea { min-height: 240px; }
-.lx-file { display: block; max-width: 100%; font-size: 14px; color: var(--color-text-secondary); }
-/* 파일 선택 버튼 = 디자인 시스템 보조 버튼(작은 크기) */
-.lx-file::file-selector-button {
-  height: var(--size-control-sm);
-  margin-right: var(--space-12);
-  padding: 0 var(--space-12);
-  border: 1px solid var(--color-border-strong);
-  border-radius: var(--radius-4);
-  background: var(--color-bg-default);
-  color: var(--color-text-default);
-  font: inherit;
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.15s;
-}
-.lx-file::file-selector-button:hover { background: var(--color-bg-subtle); }
 
 /* ---------- 연간 학사일정 ---------- */
 .lx-year { margin-top: var(--space-32); }

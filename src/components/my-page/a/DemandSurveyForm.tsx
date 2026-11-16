@@ -66,7 +66,7 @@ export default function DemandSurveyForm({ questions }: { questions: DemandQuest
         <button type="button" className="ds-btn ds-btn--secondary" onClick={() => router.push("/my-page/surveys/demand")}>
           취소
         </button>
-        <button type="submit" className="ds-btn ds-btn--primary ds-btn--lg">
+        <button type="submit" className="ds-btn ds-btn--primary">
           제출
         </button>
       </div>

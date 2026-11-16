@@ -131,8 +131,8 @@ export type AppealKind = "grade" | "etc";
 export type AppealStatus = "접수" | "검토 중" | "처리 완료";
 
 export const appealStatusTone: Record<AppealStatus, Tone> = {
-  접수: "brand",
-  "검토 중": "warning",
+  접수: "neutral",
+  "검토 중": "neutral",
   "처리 완료": "success",
 };
 
@@ -140,7 +140,9 @@ export interface Appeal {
   id: string;
   kind: AppealKind;
   courseTitle: string;
-  /** 성적: 평가 항목 / 기타: 신청 구분 */
+  /** 제목 — 성적 이의신청만 있다 (기타 이의신청 원본에는 제목 칸이 없음) */
+  title?: string;
+  /** 구분 (gradeAppealItems / etcAppealItems 중 하나) */
   item: string;
   appliedAt: string;
   status: AppealStatus;
@@ -152,16 +154,11 @@ export interface Appeal {
 /** 이의신청 기간: 성적 공개일부터 7일 */
 export const appealPeriodDays = 7;
 
-export const appealSchedules = [
-  { term: "2026년도 1학기 3차", openedAt: "2026.10.05", period: "2026.10.05 ~ 2026.10.11" },
-  { term: "2026년도 2학기 4차", openedAt: "2027.03.03 (예정)", period: "2027.03.03 ~ 2027.03.09" },
-];
+/** 성적 이의신청 구분 (원본 bbsAppealIn.asp 선택지) */
+export const gradeAppealItems = ["중간고사", "기말고사", "과제", "퀴즈", "토론", "학습심화활동", "진도/출석", "기타"];
 
-/** 성적 이의신청에서 고를 평가 항목 */
-export const gradeAppealItems = ["출석", "중간고사", "기말고사", "과제", "퀴즈", "토론"];
-
-/** 기타 이의신청 구분 */
-export const etcAppealItems = ["출석·진도 인정", "수료 판정", "학점 인정", "기타"];
+/** 기타 이의신청 구분 (원본 appealEtcIn.asp 선택지) */
+export const etcAppealItems = ["과제", "토론", "학습심화활동", "진도/출석", "기타"];
 
 /** 이의신청할 수 있는 과목 (성적이 나온 과목) */
 export function getAppealCourses(): { id: string; title: string; term: string }[] {
@@ -174,6 +171,7 @@ const appeals: Appeal[] = [
     id: "ap1002",
     kind: "grade",
     courseTitle: "지역사회복지론",
+    title: "과제 점수 확인 요청",
     item: "과제",
     appliedAt: "2026.10.08",
     status: "검토 중",
@@ -185,6 +183,7 @@ const appeals: Appeal[] = [
     id: "ap1001",
     kind: "grade",
     courseTitle: "사회복지정책론",
+    title: "기말고사 18번 문항 정답 이의",
     item: "기말고사",
     appliedAt: "2026.10.06",
     status: "처리 완료",
@@ -199,7 +198,7 @@ const appeals: Appeal[] = [
     id: "ap2001",
     kind: "etc",
     courseTitle: "사회복지정책론",
-    item: "출석·진도 인정",
+    item: "진도/출석",
     appliedAt: "2026.09.20",
     status: "처리 완료",
     reason: "7주차 강의를 끝까지 들었는데 진도율이 90%로 표시됩니다. 학습 기록을 확인해 주세요.",
@@ -213,7 +212,7 @@ const appeals: Appeal[] = [
     id: "ap2002",
     kind: "etc",
     courseTitle: "지역사회복지론",
-    item: "수료 판정",
+    item: "기타",
     appliedAt: "2026.10.07",
     status: "접수",
     reason: "수료 기준을 모두 채웠다고 생각하는데 수료 처리가 늦어지고 있어 문의드립니다.",
@@ -261,74 +260,3 @@ export const educationLevels = [
   { value: "university-4", label: "대학교 졸업(4년제)" },
   { value: "other", label: "기타" },
 ];
-
-/* ------------------------------------------------------------------ */
-/* U36 문의 내역                                                        */
-/* ------------------------------------------------------------------ */
-
-export type InquiryStatus = "답변 대기" | "답변 완료";
-
-export const inquiryStatusTone: Record<InquiryStatus, Tone> = {
-  "답변 대기": "warning",
-  "답변 완료": "success",
-};
-
-export interface Inquiry {
-  id: string;
-  no: number;
-  /** 문의 분류 */
-  category: string;
-  title: string;
-  askedAt: string;
-  body: string;
-  answer?: { answeredAt: string; writer: string; body: string };
-}
-
-const inquiries: Inquiry[] = [
-  {
-    id: "q1003",
-    no: 3,
-    category: "학습 이용",
-    title: "학습자 PC를 새 컴퓨터로 바꾸고 싶어요",
-    askedAt: "2026.11.10",
-    body: "컴퓨터를 새로 사서 등록된 PC를 바꾸고 싶습니다. 어떻게 하면 되나요?",
-  },
-  {
-    id: "q1002",
-    no: 2,
-    category: "결제·환불",
-    title: "교육비 납입 증명서는 어디서 받나요?",
-    askedAt: "2026.11.06",
-    body: "연말정산에 쓰려고 하는데 교육비 납입 증명서를 어디서 받을 수 있는지 궁금합니다.",
-    answer: {
-      answeredAt: "2026.11.07",
-      writer: "학습지원센터",
-      body: "마이페이지 > 증명서 발급 > 교육비 납입 증명서 탭에서 바로 발급받을 수 있습니다.\n연도별로 한 장에 모아서 뽑을 수도 있어요.",
-    },
-  },
-  {
-    id: "q1001",
-    no: 1,
-    category: "수강 신청",
-    title: "수강 신청한 과목을 바꿀 수 있나요?",
-    askedAt: "2026.11.03",
-    body: "인간행동과사회환경 대신 다른 전공선택 과목을 듣고 싶은데 변경이 가능한가요?",
-    answer: {
-      answeredAt: "2026.11.04",
-      writer: "학습지원센터",
-      body: "개강 전에는 과목 변경이 가능합니다. 1661-7769로 전화 주시면 바로 바꿔 드릴게요.\n개강 뒤에는 환불 규정에 따라 처리되니 참고해 주세요.",
-    },
-  },
-];
-
-export function getInquiries(): Inquiry[] {
-  // TODO: API 문의 목록 조회
-  return inquiries;
-}
-
-export function getInquiry(id: string): Inquiry | undefined {
-  // TODO: API 문의 상세 조회
-  return inquiries.find((q) => q.id === id);
-}
-
-export const inquiryStatus = (q: Inquiry): InquiryStatus => (q.answer ? "답변 완료" : "답변 대기");

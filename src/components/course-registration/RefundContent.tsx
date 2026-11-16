@@ -2,6 +2,9 @@
 
 import { importantStyle } from "@/lib/importantStyle";
 import { importantStyles } from "@/lib/importantStyle";
+import { CbIconFlow } from "@/components/credit-bank/CbFlow";
+import "@/styles/learning-extra.css";
+import "@/styles/credit-bank.css";
 
 /** 원본 refund.html 본문. 인라인 !important 스타일(ref)을 쓰려고 클라이언트 컴포넌트로 둔다. */
 export default function RefundContent() {
@@ -12,7 +15,17 @@ export default function RefundContent() {
           환불 절차
         </h1>
         <div className="content-section">
-          <img src="/resources/images/course-registration/refund-01.png" alt="학습비 반환규정" className="refund-image" />
+          <section className="lx-panel cr-step-panel" aria-label="환불 절차">
+            <CbIconFlow
+              size="lg"
+              items={[
+                { icon: "scroll-pen", label: "환불신청서" },
+                { icon: "coin-cycle", label: "환불금 산정" },
+                { icon: "receipt-check", label: "환불완료" },
+              ]}
+              joins={["arrow", "arrow"]}
+            />
+          </section>
         </div>
         <ul className="page-list" style={{ textAlign: "center" }}>
           <li className="page-list-plain">

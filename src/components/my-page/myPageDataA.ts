@@ -292,6 +292,17 @@ export const exceptionYears = ["2026년", "2027년"];
 export const exceptionHalves = ["1학기", "2학기"];
 /** 기수 목록. TODO: API 연도·학기에 맞는 기수 조회 (원본은 연도·학기를 고르면 채운다) */
 export const exceptionRounds = ["1차", "2차", "3차", "4차"];
+/** 공결 신청 주차 수 */
+export const EXCEPTION_WEEKS = 16;
+/**
+ * 고른 학기의 1주차 월요일.
+ * TODO: API 연도·학기·기수에 맞는 학기 시작일 조회. 지금은 임시 값 — 1학기 3월·2학기 9월 첫 월요일에서 기수마다 2주씩 늦춤.
+ */
+export function exceptionTermStart(year: string, half: string, round: string): Date {
+  const d = new Date(parseInt(year, 10), half.startsWith("1") ? 2 : 8, 1);
+  d.setDate(d.getDate() + ((8 - d.getDay()) % 7) + (parseInt(round, 10) - 1) * 14);
+  return d;
+}
 export const absenceKinds = ["공결", "추가시험"];
 export const absenceReasons = [
   "배우자, 본인 또는 배우자의 직계가족의 사망",
@@ -300,7 +311,6 @@ export const absenceReasons = [
   "천재지변으로 인한 사고",
 ];
 export const absenceProofs = ["입원확인서", "청첩장 또는 혼인신고서", "사망진단서", "동원훈련소집증", "기타"];
-export const EXCEPTION_FILE_NOTE = "(첨부파일 최대 용량 : 10MB / 확장자 : doc, pdf, hwp, ppt, xls, txt, jpg, png, gif)";
 
 export type ExceptionStatus = "접수" | "처리 중" | "승인" | "반려";
 

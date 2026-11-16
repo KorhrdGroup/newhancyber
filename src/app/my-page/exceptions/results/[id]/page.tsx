@@ -5,7 +5,8 @@ import PageTabs from "@/components/common/PageTabs";
 import MyPageShell from "@/components/my-page/MyPageShell";
 import StatusBadge from "@/components/my-page/a/StatusBadge";
 import { exceptionLabels, getExceptionRequest } from "@/components/my-page/myPageDataA";
-import { myPageRequestTabs } from "@/lib/navigation";
+import { myPageExceptionTabs } from "@/lib/navigation";
+import "@/styles/learning-extra.css";
 
 export const metadata: Metadata = { title: "신청 상세 - 각종 예외 신청 - 마이페이지" };
 
@@ -19,57 +20,67 @@ export default async function ExceptionResultPage({ params }: { params: Promise<
 
   return (
     <MyPageShell title="각종 예외 신청" desc="학습 규칙을 지키기 어려운 사정이 있을 때 신청합니다. 담당자가 확인한 뒤 결과를 알려 드립니다.">
-      <PageTabs items={myPageRequestTabs} />
+      <PageTabs items={myPageExceptionTabs} />
 
-      <section className="pp-box">
-        <h3 className="pp-box-title">신청 내용</h3>
-        <table className="ds-table ds-table--info mp-info">
-          <tbody>
-            <tr>
-              <th>신청 구분</th>
-              <td>{exceptionLabels[r.type]} 신청</td>
-            </tr>
-            <tr>
-              <th>신청 기간</th>
-              <td>{r.period}</td>
-            </tr>
-            <tr>
-              <th>신청일</th>
-              <td>{r.appliedAt}</td>
-            </tr>
-            {r.details.map((d) => (
-              <tr key={d.label}>
-                <th>{d.label}</th>
-                <td>{d.value}</td>
-              </tr>
-            ))}
-            <tr>
-              <th>증빙 서류</th>
-              {/* TODO: API 첨부파일 내려받기 주소 */}
-              <td>{r.files.length ? r.files.join(", ") : "없음"}</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-
-      <section className={`pp-box${r.status === "반려" ? " mp-result--danger" : r.status === "승인" ? " mp-answer" : ""}`}>
-        <h3 className="pp-box-title">처리 결과</h3>
-        <p className="pp-row">
+      <article className="lx-panel lx-post">
+        <div className="lx-post-head">
           <StatusBadge>{r.status}</StatusBadge>
-          {r.processedAt && <span className="pp-note">처리일 {r.processedAt}</span>}
-        </p>
-        {done ? (
-          <p className="pp-text ds-mt-12">
-            {r.status === "반려" && <strong className="ds-text-danger">반려 사유 </strong>}
-            {r.resultNote}
+          <h2 className="lx-post-title">{exceptionLabels[r.type]} 신청</h2>
+          <p className="lx-post-meta">신청일 {r.appliedAt}</p>
+        </div>
+        <div className="lx-post-body">
+          <table className="ds-table ds-table--info mp-info">
+            <tbody>
+              <tr>
+                <th>신청 기간</th>
+                <td>{r.period}</td>
+              </tr>
+              {r.details.map((d) => (
+                <tr key={d.label}>
+                  <th>{d.label}</th>
+                  <td>{d.value}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        {/* TODO: API 첨부파일 내려받기 주소 */}
+        {r.files.map((file) => (
+          <p key={file} className="lx-file-chip" aria-label={`증빙 서류 ${file}`}>
+            <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none">
+              <path
+                d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            {file}
           </p>
-        ) : (
-          <p className="pp-text ds-mt-12">담당자가 신청 내용을 확인하고 있습니다. 처리되면 이 화면에서 결과를 볼 수 있습니다.</p>
-        )}
-      </section>
+        ))}
+      </article>
 
-      <div className="pp-actions">
-        <Link href="/my-page/exceptions/results" className="ds-btn ds-btn--secondary">
+      {done ? (
+        <section className="lx-answer">
+          <div className="lx-answer-head">
+            <strong>처리 결과</strong>
+            {r.processedAt && <span className="lx-post-meta">처리일 {r.processedAt}</span>}
+          </div>
+          <div className="lx-post-body">
+            {r.status === "반려" && <p className="lx-answer-result lx-answer-result--danger">반려 사유</p>}
+            <p>{r.resultNote}</p>
+          </div>
+        </section>
+      ) : (
+        <section className="lx-answer lx-answer--waiting">
+          <p>{r.status === "접수" ? "접수되었습니다." : "처리 중입니다."}</p>
+          <p>담당자가 신청 내용을 확인한 뒤 결과를 알려 드립니다.</p>
+        </section>
+      )}
+
+      <div className="lx-actions">
+        <Link href="/my-page/exceptions/results" className="ds-btn ds-btn--secondary ds-btn--lg">
           목록
         </Link>
       </div>

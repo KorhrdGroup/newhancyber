@@ -1,22 +1,30 @@
 "use client";
 
 import { useState } from "react";
+import DraftNote from "@/components/common/DraftNote";
+import FileField from "@/components/common/FileField";
+import { checkUserUpload, USER_UPLOAD_ACCEPT, USER_UPLOAD_NOTE } from "@/lib/upload";
 import {
   absenceKinds,
   absenceProofs,
   absenceReasons,
-  EXCEPTION_FILE_NOTE,
+  EXCEPTION_WEEKS,
   exceptionHalves,
   exceptionLabels,
   exceptionRounds,
+  exceptionTermStart,
   exceptionYears,
   type ExceptionType,
 } from "../myPageDataA";
 
-const WEEKS = Array.from({ length: 16 }, (_, i) => `${i + 1}주차`);
+const WEEKS = Array.from({ length: EXCEPTION_WEEKS }, (_, i) => i + 1);
+
+const addDays = (d: Date, n: number) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
+/** 주차 칩 아래 짧은 날짜 (M/D) */
+const toShort = (d: Date) => `${d.getMonth() + 1}/${d.getDate()}`;
 
 /** 필수 칸 표시 */
-const Req = () => <span className="mp-req">* </span>;
+const Req = () => <span className="mp-req">*</span>;
 
 /**
  * U31 각종 예외 신청서 — 원본 /stdMng/exception.asp(공인인증서·중복 PC), absentApply.asp(공결 및 추가시험) 와 같은 칸.
@@ -26,8 +34,20 @@ export default function ExceptionForm({ type, courses }: { type: ExceptionType; 
   const [year, setYear] = useState("");
   const [half, setHalf] = useState("");
   const [round, setRound] = useState("");
+  const [weeks, setWeeks] = useState<number[]>([]);
   const isAbsence = type === "absence";
   const termChosen = Boolean(year && half && round);
+  const termStart = termChosen ? exceptionTermStart(year, half, round) : null;
+  /** 학기 구분을 다 고르기 전에는 주차를 고를 수 없다 (주차 날짜가 학기에 따라 달라서) */
+  const pickedWeeks = termChosen ? weeks : [];
+  /** n주차의 월요일~일요일 */
+  const weekRange = (start: Date, n: number) => {
+    const from = addDays(start, (n - 1) * 7);
+    return { from, to: addDays(from, 6) };
+  };
+
+  const toggleWeek = (n: number) =>
+    setWeeks(weeks.includes(n) ? weeks.filter((w) => w !== n) : [...weeks, n].sort((a, b) => a - b));
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,12 +60,13 @@ export default function ExceptionForm({ type, courses }: { type: ExceptionType; 
   };
 
   return (
-    <form onSubmit={submit} className="pp-box">
-      <h3 className="pp-box-title">{exceptionLabels[type]} 신청</h3>
-      <p className="pp-note mp-req-note">
-        <Req />
-        표시는 필수 입력 사항입니다.
-      </p>
+    <form onSubmit={submit} className="pp-box mp-form">
+      <div className="mp-form-head">
+        <h3 className="pp-box-title">{exceptionLabels[type]} 신청</h3>
+        <p className="pp-note">
+          <Req /> 표시는 필수 입력 사항입니다.
+        </p>
+      </div>
 
       {isAbsence && (
         <div className="pp-field">
@@ -63,8 +84,8 @@ export default function ExceptionForm({ type, courses }: { type: ExceptionType; 
 
       <div className="pp-field">
         <span className="ds-label">
-          <Req />
           학기 구분
+          <Req />
         </span>
         <div className="mp-term">
           <select className="ds-select" aria-label="연도" value={year} onChange={(e) => setYear(e.target.value)}>
@@ -90,8 +111,8 @@ export default function ExceptionForm({ type, courses }: { type: ExceptionType; 
 
       <div className="pp-field">
         <span className="ds-label">
-          <Req />
           신청 과목
+          <Req />
         </span>
         {termChosen ? (
           // TODO: API 고른 학기의 수강 과목 조회
@@ -104,15 +125,15 @@ export default function ExceptionForm({ type, courses }: { type: ExceptionType; 
             ))}
           </div>
         ) : (
-          <p className="pp-note">연도, 학기, 기수를 선택해 주세요.</p>
+          <p className="mp-empty-field">연도, 학기, 기수를 먼저 선택하면 수강 과목이 나옵니다.</p>
         )}
       </div>
 
       {isAbsence ? (
         <div className="pp-field">
           <span className="ds-label">
-            <Req />
             공결 사유
+            <Req />
           </span>
           <div className="mp-choices mp-choices--column">
             {absenceReasons.map((r, i) => (
@@ -126,8 +147,8 @@ export default function ExceptionForm({ type, courses }: { type: ExceptionType; 
       ) : (
         <div className="pp-field">
           <label className="ds-label" htmlFor="ex-reason">
-            <Req />
             예외 사유
+            <Req />
           </label>
           <input id="ex-reason" className="ds-input" />
         </div>
@@ -135,8 +156,8 @@ export default function ExceptionForm({ type, courses }: { type: ExceptionType; 
 
       <div className="pp-field">
         <span className="ds-label">
-          <Req />
           {isAbsence ? "신청 기간 및 주차" : "신청 기간"}
+          <Req />
         </span>
         <div className="pp-row mp-dates">
           <input type="date" className="ds-input" aria-label="시작일" />
@@ -144,14 +165,46 @@ export default function ExceptionForm({ type, courses }: { type: ExceptionType; 
           <input type="date" className="ds-input" aria-label="종료일" />
         </div>
         {isAbsence && (
-          <div className="mp-weeks">
-            {WEEKS.map((w) => (
-              <label key={w} className="ds-check">
-                <input type="checkbox" name="week" value={w} />
-                {w}
-              </label>
+          <>
+            <DraftNote>
+              원본에는 주차별 날짜가 없어 임시로 계산해 표시했습니다(1학기 3월·2학기 9월 첫 월요일부터 한 주씩, 기수마다
+              2주 늦춤). 실제 학기·기수별 주차 날짜와 주차 수(원본 강의실 출석은 15주, 신청서는 16주차)를 확인해야 합니다.
+            </DraftNote>
+            <p className="pp-note mp-weeks-hint">
+              {termChosen ? "신청할 주차를 모두 골라 주세요." : "학기 구분(연도, 학기, 기수)을 먼저 선택하면 주차를 고를 수 있습니다."}
+            </p>
+            <div className="mp-weeks" role="group" aria-label="신청 주차">
+              {WEEKS.map((n) => {
+                const on = pickedWeeks.includes(n);
+                const range = termStart ? weekRange(termStart, n) : null;
+                return (
+                  <button
+                    key={n}
+                    type="button"
+                    className="mp-week"
+                    aria-pressed={on}
+                    disabled={!termChosen}
+                    onClick={() => toggleWeek(n)}
+                  >
+                    <span className="mp-week-name">{n}주차</span>
+                    {range && (
+                      <span className="mp-week-date">
+                        {toShort(range.from)}~{toShort(range.to)}
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+            {pickedWeeks.map((n) => (
+              <input key={n} type="hidden" name="week" value={`${n}주차`} />
             ))}
-          </div>
+            {pickedWeeks.length > 0 && (
+              <p className="mp-weeks-picked">
+                선택한 주차 <strong>{pickedWeeks.map((n) => `${n}주차`).join(", ")}</strong>
+              </p>
+            )}
+          </>
         )}
       </div>
 
@@ -167,8 +220,8 @@ export default function ExceptionForm({ type, courses }: { type: ExceptionType; 
             ))}
           </select>
         )}
-        <input id="ex-file" type="file" className="mp-file" />
-        <p className="pp-note ds-mt-4">{EXCEPTION_FILE_NOTE}</p>
+        <FileField id="ex-file" accept={USER_UPLOAD_ACCEPT} validate={checkUserUpload} />
+        <p className="pp-note ds-mt-4">{USER_UPLOAD_NOTE}</p>
       </div>
 
       <div className="pp-actions">

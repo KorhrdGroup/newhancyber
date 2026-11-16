@@ -3,6 +3,9 @@
 import { useState, useTransition, type FormEvent } from "react";
 import { applyStudyPlan } from "@/app/course-registration/learning-design/actions";
 import { importantStyle } from "@/lib/importantStyle";
+import { CbIconFlow } from "@/components/credit-bank/CbFlow";
+import "@/styles/learning-extra.css";
+import "@/styles/credit-bank.css";
 
 /** 무료학습설계 신청 (원본 learning-design.html) — 관리자 「학습설계 관리」로 들어간다 */
 export default function LearningDesignContent() {
@@ -33,7 +36,17 @@ export default function LearningDesignContent() {
   return (
     <main className="wrapper">
       <div className="container">
-        <img src="/resources/images/course-registration/learning-design-01.png" alt="무료학습설계" className="learning-design-image" />
+        <section className="lx-panel cr-step-panel" aria-label="무료학습설계 진행 순서">
+          <CbIconFlow
+            size="lg"
+            items={[
+              { icon: "scroll-pen", label: "무료학습설계 신청" },
+              { icon: "magnifier", label: "검토" },
+              { icon: "chat-person", label: "전문가 연결" },
+            ]}
+            joins={["arrow", "arrow"]}
+          />
+        </section>
       </div>
       <div className="container" ref={importantStyle("background-color", "#fff")}>
         <form className="consultation-form" id="consultation-form" onSubmit={handleSubmit}>
