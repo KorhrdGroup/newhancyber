@@ -142,9 +142,8 @@ const procedure = (
 
 const registration = (
   <>
-    <section className="lx-panel cb-panel--icon">
+    <section className="lx-panel">
       <h2 className="lx-section-title">학습자 등록이란?</h2>
-      <img src="/resources/images/guide/guide-2.png" alt="" className="cb-panel-icon" />
       <ul className="lx-notes">
         <li className="page-list-item">
           학습자 학점을 인정받아 학위를 취득하기 위하여 학점은행제 학습자로 등록하는 것으로, 희망 학위 과정 및 전공을 선택하여
@@ -465,9 +464,8 @@ const registration = (
 
 const credit = (
   <>
-    <section className="lx-panel cb-panel--icon">
+    <section className="lx-panel">
       <h2 className="lx-section-title">학점인정 신청이란?</h2>
-      <img src="/resources/images/guide/guide-3.png" alt="" className="cb-panel-icon" />
       <ul className="lx-notes">
         <li className="page-list-item">
           학점인정 신청은 여러 방법을 통하여 취득한 학점을 학점은행제 학점으로 인정 받기 위한 신청절차로 신청기간 중에 학점인정 신청을 해야만
@@ -874,9 +872,8 @@ const credit = (
 
 const degree = (
   <>
-    <section className="lx-panel cb-panel--icon">
+    <section className="lx-panel">
       <h2 className="lx-section-title">학위신청이란?</h2>
-      <img src="/resources/images/guide/guide-4.png" alt="" className="cb-panel-icon" />
       <ul className="lx-notes">
         <li className="page-list-item">
           학위요건이 충족되어 학위취득을 희망하는 경우 신청하는 절차이며, 매년 2월과 8월 두 번 학위수여가 이루어집니다.

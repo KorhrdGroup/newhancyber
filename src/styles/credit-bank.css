@@ -27,12 +27,6 @@
 /* 한 묶음 안에서 둘째 소제목부터 위를 띄움 */
 .cb-title-next { margin-top: var(--space-40); }
 
-/* 오른쪽 위 그림이 있는 묶음 (학습자 등록이란? 등) */
-.cb-panel--icon { position: relative; }
-.cb-panel--icon > .lx-section-title,
-.cb-panel--icon > .lx-notes { padding-right: 104px; }
-.cb-panel-icon { position: absolute; top: 0; right: 0; width: 80px; height: 80px; object-fit: contain; }
-
 /* 목록 안 강조 · 번호 목록 */
 .cb-page .page-list-number { margin-left: var(--space-20); list-style: decimal; font-size: 14px; line-height: 1.7; }
 .cb-page .page-list-number ul { margin: var(--space-4) 0; }
@@ -111,9 +105,6 @@
 
 @media (max-width: 480px) {
   .cb-title-next { margin-top: var(--space-32); }
-  .cb-panel--icon > .lx-section-title,
-  .cb-panel--icon > .lx-notes { padding-right: 64px; }
-  .cb-panel-icon { width: 56px; height: 56px; }
   .cb-consult { flex-direction: column; align-items: stretch; padding: var(--space-16); }
   .cb-consult .ds-btn { justify-content: center; }
   .cb-guide-head { flex-wrap: wrap; }
