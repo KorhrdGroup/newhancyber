@@ -37,6 +37,8 @@ export default function ExceptionForm({ type, courses }: { type: ExceptionType; 
   const isAbsence = type === "absence";
   const termChosen = Boolean(year && half && round);
   const termStart = termChosen ? exceptionTermStart(year, half, round) : null;
+  /** 학기 구분을 다 고르기 전에는 주차를 고를 수 없다 (주차 날짜가 학기에 따라 달라서) */
+  const pickedWeeks = termChosen ? weeks : [];
   /** n주차의 월요일~일요일 */
   const weekRange = (start: Date, n: number) => {
     const from = addDays(start, (n - 1) * 7);
@@ -168,14 +170,21 @@ export default function ExceptionForm({ type, courses }: { type: ExceptionType; 
               2주 늦춤). 실제 학기·기수별 주차 날짜와 주차 수(원본 강의실 출석은 15주, 신청서는 16주차)를 확인해야 합니다.
             </DraftNote>
             <p className="pp-note mp-weeks-hint">
-              신청할 주차를 모두 골라 주세요.{!termChosen && " 학기 구분을 고르면 주차마다 날짜가 표시됩니다."}
+              {termChosen ? "신청할 주차를 모두 골라 주세요." : "학기 구분(연도, 학기, 기수)을 먼저 선택하면 주차를 고를 수 있습니다."}
             </p>
             <div className="mp-weeks" role="group" aria-label="신청 주차">
               {WEEKS.map((n) => {
-                const on = weeks.includes(n);
+                const on = pickedWeeks.includes(n);
                 const range = termStart ? weekRange(termStart, n) : null;
                 return (
-                  <button key={n} type="button" className="mp-week" aria-pressed={on} onClick={() => toggleWeek(n)}>
+                  <button
+                    key={n}
+                    type="button"
+                    className="mp-week"
+                    aria-pressed={on}
+                    disabled={!termChosen}
+                    onClick={() => toggleWeek(n)}
+                  >
                     <span className="mp-week-name">{n}주차</span>
                     {range && (
                       <span className="mp-week-date">
@@ -186,12 +195,12 @@ export default function ExceptionForm({ type, courses }: { type: ExceptionType; 
                 );
               })}
             </div>
-            {weeks.map((n) => (
+            {pickedWeeks.map((n) => (
               <input key={n} type="hidden" name="week" value={`${n}주차`} />
             ))}
-            {weeks.length > 0 && (
+            {pickedWeeks.length > 0 && (
               <p className="mp-weeks-picked">
-                선택한 주차 <strong>{weeks.map((n) => `${n}주차`).join(", ")}</strong>
+                선택한 주차 <strong>{pickedWeeks.map((n) => `${n}주차`).join(", ")}</strong>
               </p>
             )}
           </>
