@@ -3,9 +3,10 @@
 import Link from "next/link";
 import { useState, useSyncExternalStore, type FormEvent } from "react";
 import type { Swiper as SwiperType } from "swiper";
-import { Autoplay } from "swiper/modules";
+import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import "swiper/css/pagination";
 import {
   currentTerm,
   essentialCards,
@@ -40,7 +41,7 @@ function PlayPause({ playing }: { playing: boolean }) {
   );
 }
 
-/* ---------- 1. 배너 (아래 제목 탭 + 진행 막대) ---------- */
+/* ---------- 1. 배너 (아래 제목 탭 + 진행 막대 — 번호·화살표 대신) ---------- */
 
 function HeroSlideBody({ slide }: { slide: HeroSlide }) {
   return (
@@ -115,28 +116,32 @@ function SampleHero() {
   );
 }
 
-/* ---------- 2. 개강 카드 (배너 오른쪽에 세로로) ---------- */
+/* ---------- 2. 개강 일정 한 줄 ---------- */
 
 const DEADLINE = new Date(currentTerm.applyDeadline).getTime();
 const applyEnd = currentTerm.applyPeriod.split("~")[1].trim();
+
 const noopSubscribe = () => () => {};
 function ddayLabel() {
   const days = Math.ceil((DEADLINE - Date.now()) / 86400000);
   return days < 0 ? "마감" : days === 0 ? "D-day" : `D-${days}`;
 }
 
-function TermCard() {
+function TermStrip() {
   // 서버 시각과 어긋나지 않게 화면에서만 계산 (서버 그림에는 빈칸)
   const dday = useSyncExternalStore(noopSubscribe, ddayLabel, () => null);
 
   return (
-    <aside className="sh-term">
+    <section className="sh-term">
       <p className="sh-term-eyebrow">
         <span className="sh-term-dot" aria-hidden="true" />
         지금 모집 중
       </p>
-      <h3 className="sh-term-name">{currentTerm.name}</h3>
       <dl className="sh-term-list">
+        <div>
+          <dt>모집</dt>
+          <dd>{currentTerm.name}</dd>
+        </div>
         <div>
           <dt>수강신청 마감</dt>
           <dd>
@@ -153,44 +158,128 @@ function TermCard() {
           <dd>{currentTerm.studyPeriod}</dd>
         </div>
       </dl>
-      <div className="sh-term-actions">
-        <Link href="/course-registration/register" className="sh-btn sh-btn--primary">
-          수강신청 <Chevron />
-        </Link>
-        <Link href="/learning-support/schedule" className="sh-btn">
-          학사일정
-        </Link>
-      </div>
-    </aside>
-  );
-}
-
-/* ---------- 3. 바로가기 카드 4장 (연한 바탕) ---------- */
-
-const quickCards = [
-  { tone: "purple", label: "추천한 나도, 받은 친구도", title: "친구추천 이벤트", art: `${IMG}/main/event-friend-gift.webp`, href: "/event" },
-  { tone: "blue", label: "실습반 모집", title: "사회복지사 실습 신청", art: `${IMG}/main/banner-practice-illust.png`, href: "/course-registration/register" },
-  { tone: "green", label: "장바구니에 담은 과목", title: "수강료 결제하기", art: `${IMG}/main/banner-pay-illust.png`, href: "/course-registration/cart" },
-  { tone: "navy", label: "언제 어디서나", title: "모바일 수강 가이드", art: `${IMG}/main/sample-guide-phone.png`, href: "/learning-support/mobile-guide" },
-];
-
-function QuickCards() {
-  return (
-    <section className="sh-quick" aria-label="바로가기">
-      {quickCards.map((c) => (
-        <Link key={c.title} href={c.href} className={`sh-quick-card sh-quick--${c.tone}`}>
-          <span className="sh-quick-label">{c.label}</span>
-          <span className="sh-quick-title">
-            {c.title} <Chevron />
-          </span>
-          <img src={c.art} alt="" className="sh-quick-art" />
-        </Link>
-      ))}
+      <Link href="/course-registration/register" className="sh-term-go">
+        수강신청 <Chevron />
+      </Link>
     </section>
   );
 }
 
-/* ---------- 4. 공지 탭 + 고객센터 ---------- */
+/* ---------- 3. 특별한 혜택 (배너 넘김) + 모바일 학습가이드 ---------- */
+
+const benefits = [
+  {
+    tone: "purple",
+    label: "추천한 나도, 추천받은 친구도",
+    title: "친구추천 이벤트",
+    art: `${IMG}/main/event-friend-gift.webp`,
+    href: "/event",
+  },
+  {
+    tone: "blue",
+    label: "실습반 모집",
+    title: "사회복지사 실습 수강 신청",
+    art: `${IMG}/main/banner-practice-illust.png`,
+    href: "/course-registration/register",
+  },
+  {
+    tone: "green",
+    label: "장바구니에 담은 과목",
+    title: "수강료 결제하기",
+    art: `${IMG}/main/banner-pay-illust.png`,
+    href: "/course-registration/cart",
+  },
+];
+
+function Benefits() {
+  return (
+    <section className="sh-sec" aria-label="한평생의 특별한 혜택">
+      <div className="sh-benefit">
+        <Swiper
+          className="sh-benefit-swiper"
+          modules={[Autoplay, Pagination]}
+          loop
+          autoplay={{ delay: 4000, disableOnInteraction: false }}
+          pagination={{ clickable: true }}
+        >
+          {benefits.map((b) => (
+            <SwiperSlide key={b.title}>
+              <Link href={b.href} className={`sh-benefit-card sh-tone--${b.tone}`}>
+                <span className="sh-benefit-text">
+                  <span className="sh-benefit-label">{b.label}</span>
+                  <span className="sh-benefit-title">{b.title}</span>
+                  <span className="sh-benefit-more">자세히 보기 →</span>
+                </span>
+                <img src={b.art} alt="" className="sh-benefit-art" />
+              </Link>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        <Link href="/learning-support/mobile-guide" className="sh-guide">
+          <span className="sh-guide-text">
+            <span className="sh-guide-label">언제 어디서나</span>
+            <span className="sh-guide-title">
+              모바일로{" "}
+              <br />
+              수강하는 법
+            </span>
+          </span>
+          <img src={`${IMG}/main/sample-guide-phone.png`} alt="" className="sh-guide-art" />
+        </Link>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- 4. 고객센터 · 혜택 · 학점은행 카드 ---------- */
+
+function InfoCards() {
+  return (
+    <section className="sh-info">
+      <div className="sh-info-card sh-info-card--call">
+        <h3 className="sh-info-title">고객센터 대표번호</h3>
+        <dl className="sh-call">
+          <div>
+            <dt>수강신청 · 학습상담</dt>
+            <dd>
+              <a href={`tel:${phones.registration}`}>{phones.registration}</a>
+            </dd>
+          </div>
+          <div>
+            <dt>학습지원 (시험오류 · 학습장애)</dt>
+            <dd>
+              <a href={`tel:${phones.support}`}>{phones.support}</a>
+            </dd>
+          </div>
+        </dl>
+        <p className="sh-call-hours">
+          <b>평일 09:00 ~ 18:00</b>
+          <span>점심 12:00 ~ 13:00 · 주말/공휴일 휴무</span>
+        </p>
+      </div>
+      <Link href="/footer/about#tab-scholarship" className="sh-info-card">
+        <h3 className="sh-info-title">수강 혜택</h3>
+        <ul className="sh-info-list">
+          <li>교육원 장학제도</li>
+          <li>친구추천 이벤트</li>
+          <li>카드사 무이자 할부</li>
+        </ul>
+        <img src={`${IMG}/credit-bank/cb-icon-coin-cycle.png`} alt="" className="sh-info-art" />
+      </Link>
+      <Link href="/credit-bank/info" className="sh-info-card">
+        <h3 className="sh-info-title">학점은행제 안내</h3>
+        <ul className="sh-info-list">
+          <li>학점은행제란?</li>
+          <li>학위 · 자격증 취득 과정</li>
+          <li>교육부 평가인정 기관</li>
+        </ul>
+        <img src={`${IMG}/credit-bank/cb-icon-school.png`} alt="" className="sh-info-art" />
+      </Link>
+    </section>
+  );
+}
+
+/* ---------- 5. 공지 탭 + 알려드립니다 ---------- */
 
 function Notices() {
   const [active, setActive] = useState<NoticeTabKey>("notice");
@@ -228,36 +317,34 @@ function Notices() {
           ))}
         </ul>
       </div>
-      <div className="sh-call">
-        <h3 className="sh-call-title">고객센터</h3>
-        <dl className="sh-call-list">
-          <div>
-            <dt>수강신청 · 학습상담</dt>
-            <dd>
-              <a href={`tel:${phones.registration}`}>{phones.registration}</a>
-            </dd>
-          </div>
-          <div>
-            <dt>학습지원 (시험오류 · 학습장애)</dt>
-            <dd>
-              <a href={`tel:${phones.support}`}>{phones.support}</a>
-            </dd>
-          </div>
-        </dl>
-        <p className="sh-call-hours">
-          평일 09:00 ~ 18:00 · 점심 12:00 ~ 13:00
-          <br />
-          주말 · 공휴일 휴무
-        </p>
-        <Link href="/learning-support/remote-support" className="sh-btn sh-call-remote">
-          원격지원 받기 <Chevron />
-        </Link>
+      <div className="sh-promo">
+        <h3 className="sh-sec-title">한평생에서 알려드립니다</h3>
+        <div className="sh-promo-cards">
+          <Link href="/learning-support/forms-data-room" className="sh-promo-card sh-tone--green">
+            <span className="sh-promo-label">자격증 신청 전 꼭 확인!</span>
+            <span className="sh-promo-title">
+              사회복지사 자격증
+              <br />
+              신청 가이드
+            </span>
+            <img src={`${IMG}/credit-bank/cb-icon-license.png`} alt="" className="sh-promo-art" />
+          </Link>
+          <Link href="/practice-support/notice" className="sh-promo-card sh-tone--blue">
+            <span className="sh-promo-label">실습 접수부터 진행까지</span>
+            <span className="sh-promo-title">
+              실습지원센터
+              <br />
+              바로가기
+            </span>
+            <img src={`${IMG}/pratice-support/pratice-support-02.png`} alt="" className="sh-promo-art" />
+          </Link>
+        </div>
       </div>
     </section>
   );
 }
 
-/* ---------- 5. 왜 한평생일까요 (기존 메인 탭 3개 → 탭 없이 세 칸에 모두 펼침) ---------- */
+/* ---------- 6. 왜 한평생일까요 (기존 메인 탭 3개 → 탭 없이 세 칸에 모두 펼침) ---------- */
 
 function WhyHanpyeong() {
   return (
@@ -293,7 +380,7 @@ function WhyHanpyeong() {
   );
 }
 
-/* ---------- 6. 1:1 무료 학습상담 (학습설계 안내 + 간편상담 폼) ---------- */
+/* ---------- 7. 1:1 무료 학습상담 (학습설계 안내 + 간편상담 폼) ---------- */
 
 function Consult() {
   const [privacyOpen, setPrivacyOpen] = useState(false);
@@ -356,7 +443,7 @@ function Consult() {
   );
 }
 
-/* ---------- 7. 꼭 확인하세요 ---------- */
+/* ---------- 8. 꼭 확인하세요 ---------- */
 
 function Essentials() {
   return (
@@ -378,16 +465,15 @@ function Essentials() {
   );
 }
 
-/** /sample — 메인 시안 B (배너 + 개강 카드 · 바로가기 4장 · 공지/고객센터 · 왜 한평생 · 무료 상담 · 꼭 확인) */
+/** /sample — 메인 시안 B (첫 시안 배치 + 제목 탭 배너 · 모집 중 표시 · 페이지 안 무료 상담) */
 export default function SampleHome() {
   return (
     <main className="sh-main">
       <div className="sh-wrap">
-        <div className="sh-top">
-          <SampleHero />
-          <TermCard />
-        </div>
-        <QuickCards />
+        <SampleHero />
+        <TermStrip />
+        <Benefits />
+        <InfoCards />
         <Notices />
         <WhyHanpyeong />
         <Consult />
