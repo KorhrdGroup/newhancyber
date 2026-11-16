@@ -7,33 +7,40 @@ export interface GuideSlide {
   alt: string;
 }
 
+const Chevron = ({ dir }: { dir: "left" | "right" }) => (
+  <svg aria-hidden="true" width="20" height="20" viewBox="0 0 16 16" fill="none">
+    <path
+      d={dir === "left" ? "M9.75 4.5 6.25 8l3.5 3.5" : "M6.25 4.5 9.75 8l-3.5 3.5"}
+      stroke="currentColor"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
 /** 가이드 이미지 슬라이더 — 이전/다음은 처음·끝에서 반대쪽으로 넘어간다 */
 export default function GuideSlider({ slides }: { slides: GuideSlide[] }) {
   const [index, setIndex] = useState(0);
   const move = (step: number) => setIndex((i) => (i + step + slides.length) % slides.length);
+  const slide = slides[index];
 
   return (
-    <div className="guide-slider">
-      <button type="button" className="guide-slider-nav guide-slider-prev" aria-label="이전" onClick={() => move(-1)}>
-        <img src="/resources/images/guide/arrow_left.png" alt="이전" />
-      </button>
-      <div className="guide-slider-container">
-        <div className="guide-slider-pagination">
-          ({index + 1}/{slides.length})
-        </div>
-        {slides.map((slide, i) => (
-          <div key={slide.src} className={`guide-slide${i === index ? " active" : ""}`}>
-            <div className="guide-slide-content">
-              <div className="guide-slide-body">
-                <img src={slide.src} alt={slide.alt} style={{ width: "100%", height: "auto", display: "block" }} />
-              </div>
-            </div>
-          </div>
-        ))}
+    <div className="cb-slider">
+      <div className="cb-slider-frame">
+        <img src={slide.src} alt={slide.alt} className="cb-slider-image" />
       </div>
-      <button type="button" className="guide-slider-nav guide-slider-next" aria-label="다음" onClick={() => move(1)}>
-        <img src="/resources/images/guide/arrow_right.png" alt="다음" />
-      </button>
+      <div className="cb-slider-bar">
+        <button type="button" className="cb-slider-nav" aria-label="이전 페이지" onClick={() => move(-1)}>
+          <Chevron dir="left" />
+        </button>
+        <span className="cb-slider-count" aria-live="polite">
+          <strong>{index + 1}</strong> / {slides.length}
+        </span>
+        <button type="button" className="cb-slider-nav" aria-label="다음 페이지" onClick={() => move(1)}>
+          <Chevron dir="right" />
+        </button>
+      </div>
     </div>
   );
 }
