@@ -115,7 +115,7 @@ export function MobileAboutContent() {
 export function GreetingTab() {
   return (
     <section className="about-section">
-      <img src={`${IMG}/about-main-banner.png`} alt="" className="about-banner" />
+      <img src={`${IMG}/about-main-banner.jpg`} alt="" className="about-banner" />
       <div className="about-body">
         <p>
           저희 교육원은 학점은행제를 중심으로 한 평생교육 전문기관으로, 누구나 배움을 통해 새로운 기회를 얻을 수 있도록 돕는 것을 사명으로 하고 있습니다.
