@@ -364,3 +364,8 @@
 @media (max-width: 480px) {
   .mobile-social-worker-banner .swl { margin-top: 56px; }
 }
+
+/* 랜딩 아래 상담 상자와의 경계: 밝은 파란 선(+ 표시 위로 지나감)과, PC 상담 카드를 경계에서 80px 아래부터 — 원래 사이트 모습과 같게 */
+.swl-inner::after { content: ""; position: absolute; z-index: 2; left: 0; right: 0; top: 100%; height: calc(3 * var(--u)); background: #4597f7; }
+.page-header-banner > .swl ~ .consultation-options-outer-wrapper .consultation-options-content { padding-top: 115px; }
+.page-header-banner:has(> .swl) { padding-bottom: 475px; }
