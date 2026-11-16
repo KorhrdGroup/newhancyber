@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import PostView from "@/components/learning-support/PostView";
 import MyPageShell from "@/components/my-page/MyPageShell";
 import {
   boardLabels,
@@ -9,11 +10,15 @@ import {
   getAdjacentPosts,
   getBoardPost,
 } from "@/components/my-page/myPageDataA";
-import { myPageBoardTabs } from "@/lib/navigation";
+import { myPageBoardTabs, TBD_HREF } from "@/lib/navigation";
+// 글 상세 틀(PostView)·답변 상자 스타일
+import "@/styles/learning-extra.css";
 
 export const metadata: Metadata = { title: "학습 게시판 - 마이페이지" };
 
-/** U28 학습 게시판 — 글 보기 (세 게시판 공통) */
+const postHref = (id: string) => `/my-page/study-board/post/${id}`;
+
+/** U28 학습 게시판 — 글 보기 (세 게시판 공통). 공지사항 상세와 같은 글 상세 틀(PostView), Q&A 는 아래에 답변 상자 */
 export default async function StudyBoardPostPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   // TODO: API 학습 게시판 글 조회 (조회수 올림 포함)
@@ -33,73 +38,64 @@ export default async function StudyBoardPostPage({ params }: { params: Promise<{
         ))}
       </nav>
 
-      <article className="mp-post">
-        <header className="mp-post-head">
-          <p className="pp-note">
-            {boardLabels[post.kind]} · {courseTitle(post.courseId)}
-          </p>
-          <h3 className="mp-post-title">{post.title}</h3>
-          <p className="mp-post-meta">
-            <span>{post.author}</span>
-            <span>{post.date}</span>
-            <span>조회 {post.views}</span>
-          </p>
-        </header>
-        <div className="mp-post-body">
-          {post.body.map((p) => (
-            <p key={p}>{p}</p>
-          ))}
-        </div>
-        {post.files && (
-          <div className="mp-post-files">
-            <span className="ds-label">첨부파일</span>
-            <ul>
-              {post.files.map((f) => (
-                // TODO: API 첨부파일 내려받기 주소
-                <li key={f}>{f}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </article>
+      <PostView
+        framed={false}
+        className="ds-mt-20"
+        title={post.title}
+        date={post.date}
+        meta={[
+          { label: "게시판", value: boardLabels[post.kind] },
+          { label: "과목", value: courseTitle(post.courseId) },
+          { label: "작성자", value: post.author },
+          { label: "작성일", value: post.date },
+          { label: "조회", value: post.views },
+          ...(post.files
+            ? [
+                {
+                  label: "첨부파일",
+                  value: post.files.map((f, i) => (
+                    <span key={f}>
+                      {i > 0 && ", "}
+                      {/* TODO: API 첨부파일 내려받기 주소 */}
+                      <a href={TBD_HREF} className="lx-article-file">
+                        {f}
+                      </a>
+                    </span>
+                  )),
+                },
+              ]
+            : []),
+        ]}
+        prev={prev && { title: prev.title, href: postHref(prev.id) }}
+        next={next && { title: next.title, href: postHref(next.id) }}
+        listHref={listHref}
+      >
+        {post.body.map((p) => (
+          <p key={p}>{p}</p>
+        ))}
 
-      {post.kind === "qna" && (
-        <section className={`pp-box ds-mt-20${post.answer ? " mp-answer" : ""}`}>
-          <h3 className="pp-box-title">답변</h3>
-          {post.answer ? (
-            <>
-              <p className="mp-post-meta">
-                <span>{post.answer.author}</span>
-                <span>{post.answer.date}</span>
-              </p>
-              <div className="mp-post-body mp-post-body--flush">
+        {post.kind === "qna" &&
+          (post.answer ? (
+            <section className="lx-answer">
+              <div className="lx-answer-head">
+                <strong>답변</strong>
+                <span className="lx-post-meta">
+                  {post.answer.author} · {post.answer.date}
+                </span>
+              </div>
+              <div className="lx-post-body">
                 {post.answer.body.map((p) => (
                   <p key={p}>{p}</p>
                 ))}
               </div>
-            </>
+            </section>
           ) : (
-            <p className="pp-text">아직 답변이 없습니다. 답변이 달리면 이 화면에서 볼 수 있습니다.</p>
-          )}
-        </section>
-      )}
-
-      <ul className="mp-post-nav">
-        <li>
-          <span className="mp-post-nav-label">이전글</span>
-          {prev ? <Link href={`/my-page/study-board/post/${prev.id}`}>{prev.title}</Link> : <span className="ds-text-disabled">이전 글이 없습니다.</span>}
-        </li>
-        <li>
-          <span className="mp-post-nav-label">다음글</span>
-          {next ? <Link href={`/my-page/study-board/post/${next.id}`}>{next.title}</Link> : <span className="ds-text-disabled">다음 글이 없습니다.</span>}
-        </li>
-      </ul>
-
-      <div className="pp-actions">
-        <Link href={listHref} className="ds-btn ds-btn--secondary">
-          목록
-        </Link>
-      </div>
+            <section className="lx-answer lx-answer--waiting">
+              <p>답변 대기 중입니다.</p>
+              <p>답변이 달리면 이 화면에서 볼 수 있습니다.</p>
+            </section>
+          ))}
+      </PostView>
     </MyPageShell>
   );
 }

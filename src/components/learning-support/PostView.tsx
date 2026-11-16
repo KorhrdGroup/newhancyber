@@ -18,6 +18,8 @@ interface PostViewProps {
   /** 제목 아래 정보 줄. 주면 기본(작성일 · 첨부파일) 대신 이 항목들을 순서대로 보여 준다 (예: 수강후기의 작성자 · 수강 과정 · 조회) */
   meta?: { label: string; value: ReactNode }[];
   listHref: string;
+  /** false 면 바깥 container 틀 없이 (마이페이지처럼 이미 틀 안에 있는 화면) */
+  framed?: boolean;
   className?: string;
   children: ReactNode;
 }
@@ -38,9 +40,9 @@ function NavRow({ label, link }: { label: string; link?: PostNavLink }) {
 }
 
 /** 게시글 상세 (공지사항·관련기관 소식·학사일정·서식자료실). 디자인 시스템 색·간격·버튼으로 그린다 */
-export default function PostView({ title, date, fileName, prev, next, meta, listHref, className, children }: PostViewProps) {
+export default function PostView({ title, date, fileName, prev, next, meta, listHref, framed = true, className, children }: PostViewProps) {
   return (
-    <article className={["container lx-page lx-article", className].filter(Boolean).join(" ")}>
+    <article className={[framed ? "container lx-page lx-article" : "lx-article lx-article--bare", className].filter(Boolean).join(" ")}>
       <header className="lx-article-head">
         <h1 className="lx-article-title">{title}</h1>
         <dl className="lx-article-meta">

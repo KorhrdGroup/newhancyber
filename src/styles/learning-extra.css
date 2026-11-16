@@ -527,6 +527,8 @@
 .lx-article-body ul { margin: var(--space-12) 0 var(--space-16); padding-left: var(--space-20); list-style: disc; }
 .lx-article-body li + li { margin-top: var(--space-4); }
 .lx-article-banner { display: block; width: 485px; max-width: 100%; height: auto; margin: var(--space-32) auto; border-radius: var(--radius-8); }
+/* 마이페이지처럼 이미 틀 안에 있는 글 상세: 바깥 여백·배경 없이 */
+.lx-article--bare { padding: 0; background: none; }
 .lx-article-nav { border-bottom: 1px solid var(--color-border-default); }
 .lx-article-nav-row { display: flex; gap: var(--space-24); padding: var(--space-16) var(--space-8); font-size: 14px; line-height: 1.5; }
 .lx-article-nav-row + .lx-article-nav-row { border-top: 1px solid var(--color-border-subtle); }
