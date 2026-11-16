@@ -6,14 +6,23 @@ import {
   absenceProofs,
   absenceReasons,
   EXCEPTION_FILE_NOTE,
+  EXCEPTION_WEEKS,
   exceptionHalves,
   exceptionLabels,
   exceptionRounds,
+  exceptionTermStart,
   exceptionYears,
   type ExceptionType,
 } from "../myPageDataA";
 
-const WEEKS = Array.from({ length: 16 }, (_, i) => `${i + 1}주차`);
+const WEEKS = Array.from({ length: EXCEPTION_WEEKS }, (_, i) => i + 1);
+
+const addDays = (d: Date, n: number) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
+const pad = (n: number) => String(n).padStart(2, "0");
+/** date 입력 칸 값 (YYYY-MM-DD) */
+const toInput = (d: Date) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+/** 주차 칩 아래 짧은 날짜 (M/D) */
+const toShort = (d: Date) => `${d.getMonth() + 1}/${d.getDate()}`;
 
 /** 필수 칸 표시 */
 const Req = () => <span className="mp-req">*</span>;
@@ -26,8 +35,38 @@ export default function ExceptionForm({ type, courses }: { type: ExceptionType; 
   const [year, setYear] = useState("");
   const [half, setHalf] = useState("");
   const [round, setRound] = useState("");
+  const [weeks, setWeeks] = useState<number[]>([]);
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const isAbsence = type === "absence";
   const termChosen = Boolean(year && half && round);
+  const termStart = termChosen ? exceptionTermStart(year, half, round) : null;
+  /** n주차의 월요일~일요일 */
+  const weekRange = (start: Date, n: number) => {
+    const from = addDays(start, (n - 1) * 7);
+    return { from, to: addDays(from, 6) };
+  };
+
+  /** 신청 기간을 고른 주차의 첫 주 월요일 ~ 마지막 주 일요일로 채운다 (날짜는 직접 고칠 수 있음) */
+  const fillDates = (picked: number[], start: Date | null) => {
+    if (!start) return;
+    setStartDate(picked.length ? toInput(weekRange(start, picked[0]).from) : "");
+    setEndDate(picked.length ? toInput(weekRange(start, picked[picked.length - 1]).to) : "");
+  };
+
+  const toggleWeek = (n: number) => {
+    const next = weeks.includes(n) ? weeks.filter((w) => w !== n) : [...weeks, n].sort((a, b) => a - b);
+    setWeeks(next);
+    fillDates(next, termStart);
+  };
+
+  /** 학기 구분을 바꾸면, 이미 고른 주차가 있을 때 새 학기 날짜로 다시 채운다 */
+  const changeTerm = (y: string, h: string, r: string) => {
+    setYear(y);
+    setHalf(h);
+    setRound(r);
+    if (isAbsence && weeks.length && y && h && r) fillDates(weeks, exceptionTermStart(y, h, r));
+  };
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -68,19 +107,19 @@ export default function ExceptionForm({ type, courses }: { type: ExceptionType; 
           <Req />
         </span>
         <div className="mp-term">
-          <select className="ds-select" aria-label="연도" value={year} onChange={(e) => setYear(e.target.value)}>
+          <select className="ds-select" aria-label="연도" value={year} onChange={(e) => changeTerm(e.target.value, half, round)}>
             <option value="">연도</option>
             {exceptionYears.map((y) => (
               <option key={y}>{y}</option>
             ))}
           </select>
-          <select className="ds-select" aria-label="학기" value={half} onChange={(e) => setHalf(e.target.value)}>
+          <select className="ds-select" aria-label="학기" value={half} onChange={(e) => changeTerm(year, e.target.value, round)}>
             <option value="">학기</option>
             {exceptionHalves.map((h) => (
               <option key={h}>{h}</option>
             ))}
           </select>
-          <select className="ds-select" aria-label="기수" value={round} onChange={(e) => setRound(e.target.value)}>
+          <select className="ds-select" aria-label="기수" value={round} onChange={(e) => changeTerm(year, half, e.target.value)}>
             <option value="">기수</option>
             {exceptionRounds.map((r) => (
               <option key={r}>{r}</option>
@@ -139,21 +178,56 @@ export default function ExceptionForm({ type, courses }: { type: ExceptionType; 
           {isAbsence ? "신청 기간 및 주차" : "신청 기간"}
           <Req />
         </span>
-        <div className="pp-row mp-dates">
-          <input type="date" className="ds-input" aria-label="시작일" />
-          <span>~</span>
-          <input type="date" className="ds-input" aria-label="종료일" />
-        </div>
         {isAbsence && (
-          <div className="mp-weeks">
-            {WEEKS.map((w) => (
-              <label key={w} className="ds-check">
-                <input type="checkbox" name="week" value={w} />
-                {w}
-              </label>
+          <>
+            <p className="pp-note mp-weeks-hint">
+              {termChosen
+                ? "주차를 누르면 신청 기간이 자동으로 채워집니다. 여러 주차를 고를 수 있습니다."
+                : "학기 구분을 고르면 주차마다 날짜가 표시되고, 신청 기간이 자동으로 채워집니다."}
+            </p>
+            <div className="mp-weeks" role="group" aria-label="신청 주차">
+              {WEEKS.map((n) => {
+                const on = weeks.includes(n);
+                const range = termStart ? weekRange(termStart, n) : null;
+                return (
+                  <button key={n} type="button" className="mp-week" aria-pressed={on} onClick={() => toggleWeek(n)}>
+                    <span className="mp-week-name">{n}주차</span>
+                    {range && (
+                      <span className="mp-week-date">
+                        {toShort(range.from)}~{toShort(range.to)}
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+            {weeks.map((n) => (
+              <input key={n} type="hidden" name="week" value={`${n}주차`} />
             ))}
-          </div>
+            {weeks.length > 0 && (
+              <p className="mp-weeks-picked">
+                선택한 주차 <strong>{weeks.map((n) => `${n}주차`).join(", ")}</strong>
+              </p>
+            )}
+          </>
         )}
+        <div className="pp-row mp-dates">
+          <input
+            type="date"
+            className="ds-input"
+            aria-label="시작일"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+          />
+          <span>~</span>
+          <input
+            type="date"
+            className="ds-input"
+            aria-label="종료일"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+          />
+        </div>
       </div>
 
       <div className="pp-field">

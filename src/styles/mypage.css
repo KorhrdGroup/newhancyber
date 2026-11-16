@@ -78,14 +78,24 @@
 .mp-dates .ds-input { flex: 0 1 200px; min-width: 0; }
 .mp-choices--column { flex-direction: column; }
 .mp-term { display: grid; grid-template-columns: repeat(3, minmax(0, 160px)); gap: var(--space-8); }
-.mp-weeks { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: var(--space-8) var(--space-16); margin-top: var(--space-12); }
+/* 공결 주차 칩: 이름 + 그 주 날짜, 누르면 파란 테두리·옅은 파랑 바탕 */
+.mp-weeks-hint { margin-bottom: var(--space-12); }
+.mp-weeks { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: var(--space-8); margin-bottom: var(--space-12); }
+.mp-week { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-height: 52px; padding: var(--space-8) var(--space-4); border: 1px solid var(--color-border-strong); border-radius: var(--radius-6); background: var(--color-bg-default); font: inherit; color: var(--color-text-default); cursor: pointer; }
+.mp-week:hover { border-color: var(--color-border-brand-subtle); }
+.mp-week[aria-pressed="true"] { border-color: var(--color-border-brand); background: var(--color-bg-brand-subtle); color: var(--color-text-brand); }
+.mp-week:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
+.mp-week-name { font-size: 14px; font-weight: 600; }
+.mp-week-date { font-size: 12px; color: var(--color-text-secondary); }
+.mp-week[aria-pressed="true"] .mp-week-date { color: var(--color-text-brand); }
+.mp-weeks-picked { margin-bottom: var(--space-12); font-size: 14px; color: var(--color-text-secondary); }
+.mp-weeks-picked strong { margin-left: var(--space-8); font-weight: 600; color: var(--color-text-brand); }
 .mp-proof { max-width: 240px; margin-bottom: var(--space-8); }
 
 @media (max-width: 768px) {
   .mp-field-grid { grid-template-columns: 1fr; }
   .mp-term { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .mp-weeks { grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: var(--space-8); }
-  .mp-weeks .ds-check { white-space: nowrap; }
+  .mp-weeks { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .mp-info.ds-table--info th { width: 100px; }
 }
 
