@@ -62,15 +62,24 @@ export default function AboutTabs() {
 
   return (
     <>
-      <nav ref={navRef} className="about-nav" aria-label="교육원 소개">
-        <ButtonTabs variant="line" items={[...tabs]} active={activeTab} onSelect={(key) => setSelected(key as TabKey)} />
-      </nav>
-
       <MobileAboutContent />
 
-      <div className="container desktop-only">
+      <div className="container lx-page lx-page--top lx-page--plain about-page desktop-only">
+        <h1 className="page-title">교육원 소개</h1>
+        <p className="lx-desc">한평생원격교육원의 인사말, 교육 이념, 특징, 장학제도, 오시는 길을 안내합니다.</p>
+
+        <nav ref={navRef} className="about-nav" aria-label="교육원 소개">
+          <ButtonTabs
+            variant="line"
+            className="about-tabs"
+            items={[...tabs]}
+            active={activeTab}
+            onSelect={(key) => setSelected(key as TabKey)}
+          />
+        </nav>
+
         {tabs.map(({ key, Panel }) => (
-          <div key={key} className={`about-tab-content${key === activeTab ? " active" : ""}`} id={`tab-${key}`}>
+          <div key={key} id={`tab-${key}`} hidden={key !== activeTab}>
             <Panel />
           </div>
         ))}

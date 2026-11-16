@@ -1,450 +1,105 @@
-/* 교육원 소개 페이지 스타일 */
+/* 교육원 소개 (/footer/about) — 학습지원 안내와 같은 흰 바탕 틀(lx-page--plain). 클래스는 about- 로 시작 */
 
-/* 모바일 전용 클래스 */
-.mobile-only {
-  display: none;
+/* footer.css 의 .container { padding: 0 } 이 다른 안내 화면과 달리 먼저 걸려서, 본문선(양옆 30px)을 다시 맞춘다 */
+.container.about-page { padding: 0 var(--header-padding-side); }
+
+/* ---------- 탭 줄: 본문 안에 두므로 lx-tabs 양옆 여백을 뺀다 ---------- */
+.about-nav { margin-top: var(--space-24); }
+.lx-tabs.about-tabs { padding: 0; }
+
+.about-section { margin-top: var(--space-40); }
+.about-section > .lx-section-title { margin-bottom: var(--space-16); }
+
+/* 본문 글 */
+.about-body { display: flex; flex-direction: column; gap: var(--space-16); font-size: 15px; line-height: 1.8; color: var(--color-text-default); word-break: keep-all; }
+.about-lead { margin-bottom: var(--space-16); font-size: 18px; font-weight: 600; color: var(--color-text-brand); }
+.about-lead-box {
+  margin-top: var(--space-40);
+  padding: var(--space-24);
+  border-radius: var(--radius-8);
+  background: var(--color-bg-brand-subtle);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.7;
+  color: var(--color-text-strong);
+  text-align: center;
+  word-break: keep-all;
 }
 
-/* 모바일 스타일 */
+/* 인사말 */
+.about-banner { display: block; width: 100%; height: auto; margin-bottom: var(--space-32); border-radius: var(--radius-8); }
+
+/* 목록 점 없애기 (교육 이념 카드 · 특징 줄) */
+.about-philosophy-grid,
+.about-philosophy-list,
+.about-feature-list { padding: 0; list-style: none; }
+.about-philosophy-item,
+.about-feature { list-style: none; }
+
+/* 교육 이념: 사진 카드 2열 */
+.about-philosophy-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-32) var(--space-24); margin-top: var(--space-40); }
+.about-philosophy-img { display: block; width: 100%; aspect-ratio: 1688 / 868; object-fit: cover; border-radius: var(--radius-8); }
+.about-item-title { margin-top: var(--space-16); font-size: 16px; font-weight: 700; color: var(--color-text-strong); }
+.about-item-desc { margin-top: var(--space-8); font-size: 14px; line-height: 1.7; color: var(--color-text-secondary); word-break: keep-all; }
+
+/* 교육원 특징: 아이콘 + 글 줄 */
+.about-feature-list { margin-top: var(--space-24); border-top: 1px solid var(--color-border-default); }
+.about-feature { display: flex; align-items: center; gap: var(--space-24); padding: var(--space-24) 0; border-bottom: 1px solid var(--color-border-subtle); }
+.about-feature-icon { flex-shrink: 0; width: 80px; height: 80px; object-fit: contain; }
+.about-feature .about-item-title { margin-top: 0; }
+
+/* 장학제도 표 */
+.about-scholarship-table { table-layout: fixed; }
+.about-col-item { width: 200px; }
+.about-col-grade { width: 140px; }
+.about-col-benefit { width: 120px; }
+.about-scholarship-table tbody th { background: var(--color-bg-subtle); font-weight: 600; color: var(--color-text-strong); }
+.about-cell-list { padding-left: var(--space-16); list-style: disc; }
+.about-cell-list + .about-cell-note { margin-top: var(--space-8); }
+.about-cell-note { color: var(--color-text-secondary); }
+
+/* 오시는 길 */
+.about-info { border-top: 1px solid var(--color-border-default); }
+.about-info-row { display: grid; grid-template-columns: 160px minmax(0, 1fr); gap: var(--space-16); padding: var(--space-12) 0; border-bottom: 1px solid var(--color-border-subtle); font-size: 14px; line-height: 1.6; }
+.about-info dt { font-weight: 600; color: var(--color-text-strong); }
+.about-info dd { margin: 0; color: var(--color-text-default); }
+.about-map { display: block; max-width: 100%; height: auto; margin-top: var(--space-24); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-8); }
+
+/* ---------- 모바일: 탭 없이 비전 · 교육 이념 · 미션 · 오시는 길을 한 화면에 ---------- */
 @media (max-width: 480px) {
-  /* 데스크톱 헤더 숨김 */
-  .header {
-    display: none !important;
-  }
+  main.wrapper:has(.mobile-about-content) { padding: 0; }
 
-  /* 데스크톱 푸터 숨김 */
-  .footer.desktop-only {
-    display: none !important;
-  }
-
-  /* 데스크톱 네비게이션 탭 숨김 */
-  .about-nav {
-    display: none !important;
-  }
-
-  /* 데스크톱 컨테이너 숨김 */
-  .container.desktop-only {
-    display: none !important;
-  }
-
-  /* 모바일 전용 요소 표시 */
-  .mobile-only {
-    display: block !important;
-  }
-
-  /* 데스크톱 전용 요소 숨김 */
-  .desktop-only {
-    display: none !important;
-  }
-
-  /* 메인 콘텐츠 영역 */
-  main.wrapper {
-    padding: 0 !important;
-    padding-bottom: 0 !important;
-    max-width: 480px;
-    margin: 0 auto;
-    margin-bottom: 0 !important;
-    overflow-x: hidden;
-  }
-
-  /* 모바일 배너 */
+  /* 파란 제목 띠 (MobilePageBanner name="about") — 다른 화면 띠와 같은 모양, 고정 모바일 헤더(70px) 아래 */
   .mobile-about-banner {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    max-width: 480px;
-    background-color: #3f7efb;
-    padding: 24px 0;
-    text-align: center;
-    box-sizing: border-box;
-    position: relative;
+    /* .mobile-only 가 display: block !important 로 덮으므로 가운데 정렬은 text-align 으로 */
     margin-top: 70px;
-    z-index: 100;
-    overflow: hidden;
-  }
-
-  .mobile-about-banner-text {
-    color: #ffffff;
-    font-size: 24px;
-    font-weight: 600;
-    display: inline-block;
-  }
-
-  /* 모바일 콘텐츠 */
-  .mobile-about-content {
-    width: 100%;
-    max-width: 480px;
-    margin: 0 auto;
-    margin-bottom: 0 !important;
-    padding: 20px 16px 0 16px;
-    padding-bottom: 0 !important;
-    box-sizing: border-box;
-  }
-
-  /* 섹션 제목 */
-  .mobile-about-section-title {
-    font-size: 24px;
-    font-weight: 700;
-    color: #181818;
-    margin: 0 0 16px 0;
-    padding: 0;
-  }
-
-  /* 비전 섹션 */
-  .mobile-about-vision {
-    margin-bottom: 40px;
-  }
-
-  .mobile-about-vision-box {
-    background-color: #e3f2fd;
-    border-radius: 8px;
-    padding: 24px 20px;
-    box-sizing: border-box;
-  }
-
-  .mobile-about-vision-text {
-    font-size: 20px;
-    font-weight: 600;
-    color: #333333;
-    line-height: 1.7;
-    margin: 0;
     text-align: center;
+    padding: 24px 0;
+    background-color: #3f7efb;
   }
+  .mobile-about-banner-text { font-size: 24px; font-weight: 600; color: var(--color-text-inverse); }
 
-  /* 교육 이념 섹션 */
-  .mobile-about-philosophy {
-    margin-bottom: 40px;
-  }
+  .mobile-about-content { padding: var(--space-24) var(--space-16) var(--space-40); }
+  .about-m-section + .about-m-section { margin-top: var(--space-40); }
+  .about-m-title { margin-bottom: var(--space-16); font-size: 20px; font-weight: 700; color: var(--color-text-strong); }
 
-  .mobile-about-philosophy-item {
-    margin-bottom: 32px;
-  }
+  .about-lead-box { margin-top: 0; padding: var(--space-20) var(--space-16); font-size: 15px; }
+  .about-philosophy-list { display: flex; flex-direction: column; gap: var(--space-32); }
+  .about-philosophy-list .about-item-title,
+  .about-philosophy-list .about-item-desc { text-align: center; }
 
-  .mobile-about-philosophy-item:last-child {
-    margin-bottom: 0;
-  }
+  .about-info-row { grid-template-columns: 1fr; gap: var(--space-4); }
+  .about-map { margin-top: var(--space-16); }
 
-  .mobile-about-philosophy-image {
-    width: 100%;
-    height: 300px;
-    margin-bottom: 16px;
-    box-sizing: border-box;
-  }
-
-  .mobile-about-philosophy-img {
-    width: 100%;
-    height: 300px;
-    display: block;
-    border-radius: 8px;
-  }
-
-  .mobile-about-philosophy-title {
-    font-size: 20px;
-    font-weight: 700;
-    color: #333333;
-    margin: 0 0 8px 0;
-    padding: 0;
-    text-align: center;
-  }
-
-  .mobile-about-philosophy-text {
-    font-size: 18px;
-    font-weight: 500;
-    color: #656565;
-    line-height: 1.5;
-    margin: 0;
-    text-align: center;
-  }
-
-  /* 미션 섹션 */
-  .mobile-about-mission {
-    background-color: #e3f2fd;
-    border-radius: 8px;
-    padding: 24px 20px;
-    margin-bottom: 40px;
-    box-sizing: border-box;
-  }
-
-  .mobile-about-mission-text {
-    font-size: 20px;
-    font-weight: 500;
-    color: #333333;
-    line-height: 1.7;
-    margin: 0;
-    text-align: center;
-  }
-
-  /* 오시는 길 섹션 */
-  .mobile-about-directions {
-    margin-bottom: 0;
-  }
-
-  /* 모바일 콘텐츠의 마지막 요소는 하단 여백 제거 */
-  .mobile-about-content > *:last-child {
-    margin-bottom: 0 !important;
-  }
-
-  .mobile-about-directions-info {
-    margin-bottom: 24px;
-  }
-
-  .mobile-about-directions-item {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 16px;
-  }
-
-  .mobile-about-directions-item:last-child {
-    margin-bottom: 0;
-  }
-
-  .mobile-about-directions-label {
-    font-size: 20px;
-    font-weight: 700;
-    color: #333333;
-    margin-bottom: 8px;
-  }
-
-  .mobile-about-directions-value {
-    font-size: 20px;
-    font-weight: 400;
-    color: #333333;
-  }
-
-  .mobile-about-directions-map {
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .mobile-about-map-img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 8px;
-  }
-
-  /* about 페이지 푸터 - 메인 페이지와 동일한 여백 */
-  body:has(.mobile-about-content) .mobile-footer-section.mobile-only {
-    margin-top: 20px;
-  }
-
-  body:has(.mobile-about-content) .mobile-footer-content {
-    padding: 40px 16px;
-    margin: 0;
-  }
-
+  /* 이 화면 모바일 푸터 — 메인 페이지와 같은 여백 */
+  body:has(.mobile-about-content) .mobile-footer-section.mobile-only { margin-top: 20px; }
+  body:has(.mobile-about-content) .mobile-footer-content { padding: 40px 16px; margin: 0; }
   body:has(.mobile-about-content) .mobile-footer-links {
     padding: 40px;
-    margin-bottom: 0px !important; /* about 페이지에는 버튼이 없으므로 0px */
+    margin-bottom: 0 !important; /* 이 화면에는 아래 고정 버튼이 없다 */
     height: 96px;
     gap: 80px;
     justify-content: center;
     border-top: 1px solid #d9d9d9;
-  }
-}
-
-/* 장학제도 스타일 */
-.scholarship-content {
-  width: 100%;
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 40px 20px;
-  box-sizing: border-box;
-}
-
-.scholarship-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: #010101;
-  margin: 0 0 30px 0;
-  text-align: center;
-}
-
-.scholarship-table {
-  width: 100%;
-  border: 1px solid #d9d9d9 !important;
-  border-collapse: separate;
-  border-spacing: 0;
-  border-radius: 8px;
-  background-color: #ffffff;
-  margin: 0 auto;
-  overflow: hidden;
-}
-
-.scholarship-table colgroup col {
-  width: auto;
-}
-
-.scholarship-table thead {
-  background-color: #f5f5f5;
-}
-
-.scholarship-table-header th {
-  padding: 16px 12px;
-  font-size: 14px;
-  font-weight: 700;
-  color: #fff;
-  text-align: center;
-  border-right: 1px solid #eaeaea;
-  border-bottom: 1px solid #eaeaea;
-  background-color: #656565;
-}
-
-.scholarship-table-header th:last-child {
-  border-right: none;
-}
-
-.scholarship-table tbody td {
-  padding: 12px;
-  font-size: 14px;
-  color: #333;
-  border-right: 1px solid #eaeaea;
-  border-bottom: 1px solid #eaeaea;
-  vertical-align: middle;
-  text-align: center;
-}
-
-.scholarship-table tbody td:last-child {
-  border-right: none;
-}
-
-.scholarship-table tbody tr:last-child td {
-  border-bottom: none;
-}
-
-.scholarship-table tbody td p {
-  margin: 4px 0;
-  line-height: 1.6;
-}
-
-.scholarship-table tbody td p:first-child {
-  margin-top: 0;
-}
-
-.scholarship-table tbody td p:last-child {
-  margin-bottom: 0;
-}
-
-.scholarship-table-category {
-  background-color: #eaeaea !important;
-  font-weight: 600;
-  font-size: 14px !important;
-  text-align: center;
-  vertical-align: middle;
-}
-
-.scholarship-table-category p {
-  font-weight: 600;
-  color: #010101;
-}
-
-.scholarship-table-detail {
-  text-align: left;
-  padding: 20px 12px !important;
-}
-
-/* 모바일 반응형 */
-@media (max-width: 768px) {
-  .scholarship-content {
-    padding: 20px 16px;
-  }
-
-  .scholarship-title {
-    font-size: 20px;
-    margin-bottom: 20px;
-  }
-
-  .scholarship-table {
-    font-size: 13px;
-    display: block;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .scholarship-table thead,
-  .scholarship-table tbody,
-  .scholarship-table tr,
-  .scholarship-table td,
-  .scholarship-table th {
-    display: block;
-  }
-
-  .scholarship-table thead {
-    display: none;
-  }
-
-  .scholarship-table tr {
-    margin-bottom: 12px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    overflow: hidden;
-    background-color: #ffffff;
-  }
-
-  .scholarship-table td {
-    border: none;
-    border-bottom: 1px solid #eee;
-    padding: 12px;
-    text-align: left;
-    position: relative;
-    padding-left: 40%;
-  }
-
-  .scholarship-table td:last-child {
-    border-bottom: none;
-  }
-
-  .scholarship-table td:before {
-    content: attr(data-label);
-    position: absolute;
-    left: 12px;
-    width: 35%;
-    font-weight: 600;
-    color: #010101;
-  }
-
-  .scholarship-table-category {
-    background-color: #eaeaea !important;
-    font-weight: 700;
-    padding: 12px !important;
-    text-align: center;
-  }
-
-  .scholarship-table-category:before {
-    display: none;
-  }
-
-  .scholarship-table-detail {
-    padding: 12px !important;
-    padding-left: 12px !important;
-  }
-
-  .scholarship-table-detail:before {
-    content: "조건 및 제출서류: ";
-    font-weight: 600;
-  }
-}
-
-/* 데스크톱 테이블 레이아웃 */
-@media (min-width: 769px) {
-  .scholarship-table {
-    table-layout: fixed;
-  }
-
-  .scholarship-table colgroup col:nth-child(1) {
-    width: 200px;
-  }
-
-  .scholarship-table colgroup col:nth-child(2) {
-    width: auto;
-  }
-
-  .scholarship-table colgroup col:nth-child(3) {
-    width: 100px;
-  }
-
-  .scholarship-table colgroup col:nth-child(4) {
-    width: 300px;
   }
 }
