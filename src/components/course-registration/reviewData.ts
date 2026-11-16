@@ -39,6 +39,21 @@ export const reviewHref = (review: CourseReview) =>
 /** 제목 앞 [과정명] — 상세의 '수강 과정' 칸 */
 export const reviewCourse = (review: CourseReview) => review.title.match(/^\[(.+?)\]/)?.[1] ?? "";
 
+/** 제목의 "2025-1학기 … 김지현 학습자" 부분 — 베스트 배너의 학기 · 이름 */
+export function reviewPerson(review: CourseReview) {
+  const [, year = "", term = ""] = review.title.match(/(\d{4})-(\d)학기/) ?? [];
+  return {
+    semester: year ? `${year}-${term}학기` : "",
+    semesterLabel: year ? `${year}년 ${term}학기` : "",
+    name: review.title.match(/(\S+) 학습자/)?.[1] ?? "",
+  };
+}
+
+/** 베스트 배너의 사진 · 한 줄 소감 샘플 (원본 그림 속 내용). TODO: API 의 학습자 사진 · 소감 */
+export const SAMPLE_BEST_PHOTO = "/resources/images/course-registration/best/photo-sample.webp";
+export const SAMPLE_BEST_QUOTE =
+  "대면이 어려운 원격강의 특성에도 불구하고 학습자별 밀착 관리 시스템을 통해 학습자가 도움을 청할 때 빠르게 답변해 주신 한평생원격교육원 플래너분들의 존재 덕분에 편안한 마음으로 학습을 진행할 수 있었습니다.";
+
 /** 목록에 보이는 순서대로 찾고, 위 줄을 다음글 · 아래 줄을 이전글로 (다른 게시판과 같은 규칙) */
 export function findReviewWithSiblings(id: string, best = false) {
   const index = courseReviews.findIndex((r) => String(r.id) === id && !!r.best === best);

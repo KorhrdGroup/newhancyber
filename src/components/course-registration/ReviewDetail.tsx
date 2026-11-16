@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { Fragment } from "react";
+import BestReviewBanner from "@/components/course-registration/BestReviewBanner";
 import MobilePageBanner from "@/components/layout/MobilePageBanner";
 import PostView from "@/components/learning-support/PostView";
 import {
@@ -15,7 +16,7 @@ import "@/styles/learning-support.css";
 import "@/styles/classroom.css";
 import "@/styles/learning-extra.css";
 
-/** 수강후기 · 베스트 수강후기 상세 (같은 글 상세 틀, 베스트는 본문 위에 BEST 그림)
+/** 수강후기 · 베스트 수강후기 상세 (같은 글 상세 틀, 베스트는 본문 위에 BEST 배너)
  *  TODO: API — id 로 후기 상세와 이전글/다음글을 조회한다 (지금은 목록 샘플에서 찾고 본문은 원본 샘플) */
 export default function ReviewDetail({ id, best = false }: { id: string; best?: boolean }) {
   const found = findReviewWithSiblings(id, best);
@@ -40,9 +41,7 @@ export default function ReviewDetail({ id, best = false }: { id: string; best?: 
           next={found.next}
           listHref={REVIEWS_HREF}
         >
-          {best && (
-            <img src="/resources/images/course-registration/best.png" alt="베스트 수강후기" className="lx-article-hero" />
-          )}
+          {best && <BestReviewBanner review={review} />}
           {qna.map(([question, answer]) => (
             <Fragment key={question}>
               <h3>{question}</h3>
