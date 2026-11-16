@@ -6,7 +6,8 @@ import FileField from "@/components/common/FileField";
 
 /** 원본 글쓰기 화면 기준: 최대 10MB, doc·pdf·hwp·ppt·xls·txt·jpg·png·gif */
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
-const ALLOWED_EXTENSIONS = ["doc", "pdf", "hwp", "ppt", "xls", "txt", "jpg", "png", "gif"];
+/** 원본 /bbs/bbsIn.asp 의 실제 확장자 검사(expExractAllUsr) 목록. 원본 화면 문구(ppt·txt·gif 포함)는 검사와 달랐음 */
+const ALLOWED_EXTENSIONS = ["jpg", "jpeg", "png", "pdf", "hwp", "hwpx", "doc", "docx", "xls", "xlsx"];
 
 /** 1:1 문의 쓰기 (제목·내용·첨부파일) */
 export default function InquiryWriteForm() {
@@ -21,8 +22,8 @@ export default function InquiryWriteForm() {
 
     const ext = file.name.split(".").pop()?.toLowerCase() ?? "";
     let error = "";
-    if (!ALLOWED_EXTENSIONS.includes(ext)) error = "올릴 수 없는 파일 형식입니다.";
-    else if (file.size > MAX_FILE_SIZE) error = "10MB 이하 파일만 올릴 수 있습니다.";
+    if (file.size >= MAX_FILE_SIZE) error = "파일은 최대 10MB까지 올릴 수 있습니다.";
+    else if (!ALLOWED_EXTENSIONS.includes(ext)) error = "올릴 수 없는 파일 형식입니다. 아래 확장자의 파일만 올릴 수 있습니다.";
 
     if (error) {
       setFileError(error);
@@ -84,7 +85,7 @@ export default function InquiryWriteForm() {
           onChange={handleFile}
         />
         {fileError && <p className="lx-note ds-text-danger">{fileError}</p>}
-        <p className="lx-note">최대 10MB, doc·pdf·hwp·ppt·xls·txt·jpg·png·gif 파일만 올릴 수 있습니다.</p>
+        <p className="lx-note">최대 10MB, {ALLOWED_EXTENSIONS.join("·")} 파일만 올릴 수 있습니다.</p>
       </div>
 
       <div className="lx-actions">
