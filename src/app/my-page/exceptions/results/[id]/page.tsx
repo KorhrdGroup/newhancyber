@@ -5,7 +5,7 @@ import PageTabs from "@/components/common/PageTabs";
 import MyPageShell from "@/components/my-page/MyPageShell";
 import StatusBadge from "@/components/my-page/a/StatusBadge";
 import { exceptionLabels, getExceptionRequest } from "@/components/my-page/myPageDataA";
-import { myPageRequestTabs } from "@/lib/navigation";
+import { myPageExceptionTabs } from "@/lib/navigation";
 import "@/styles/learning-extra.css";
 
 export const metadata: Metadata = { title: "신청 상세 - 각종 예외 신청 - 마이페이지" };
@@ -20,7 +20,7 @@ export default async function ExceptionResultPage({ params }: { params: Promise<
 
   return (
     <MyPageShell title="각종 예외 신청" desc="학습 규칙을 지키기 어려운 사정이 있을 때 신청합니다. 담당자가 확인한 뒤 결과를 알려 드립니다.">
-      <PageTabs items={myPageRequestTabs} />
+      <PageTabs items={myPageExceptionTabs} />
 
       <article className="lx-panel lx-post">
         <div className="lx-post-head">

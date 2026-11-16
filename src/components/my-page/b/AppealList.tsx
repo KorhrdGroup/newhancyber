@@ -4,7 +4,7 @@ import PageTabs from "@/components/common/PageTabs";
 import { appealPeriodDays, getAppeals, type AppealKind } from "../myPageDataB";
 import AppealAccordion from "./AppealAccordion";
 import Guide from "./Guide";
-import { myPageRequestTabs } from "@/lib/navigation";
+import { myPageAppealTabs } from "@/lib/navigation";
 
 const base = { grade: "/my-page/appeals", etc: "/my-page/appeals/etc" } as const;
 
@@ -15,7 +15,7 @@ export default function AppealList({ kind }: { kind: AppealKind }) {
 
   return (
     <>
-      <PageTabs items={myPageRequestTabs} />
+      <PageTabs items={myPageAppealTabs} />
       <Guide
         title="이의신청 기간"
         items={

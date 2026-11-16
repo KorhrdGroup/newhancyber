@@ -5,7 +5,7 @@ import PageTabs from "@/components/common/PageTabs";
 import MyPageShell from "@/components/my-page/MyPageShell";
 import AppealDetail from "@/components/my-page/b/AppealDetail";
 import { getAppeal } from "@/components/my-page/myPageDataB";
-import { myPageRequestTabs } from "@/lib/navigation";
+import { myPageAppealTabs } from "@/lib/navigation";
 
 export const metadata: Metadata = { title: "성적 이의신청 상세 - 마이페이지" };
 
@@ -17,7 +17,7 @@ export default async function GradeAppealDetailPage({ params }: { params: Promis
 
   return (
     <MyPageShell title="성적 이의신청">
-      <PageTabs items={myPageRequestTabs} />
+      <PageTabs items={myPageAppealTabs} />
       <AppealDetail appeal={appeal} />
       <div className="lx-actions">
         <Link href="/my-page/appeals" className="ds-btn ds-btn--secondary ds-btn--lg">

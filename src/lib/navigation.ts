@@ -99,7 +99,8 @@ export const myPageTabs: NavLink[] = [
   { label: "쿠폰 사용내역", href: "/my-page/coupons" },
   { label: "문의·게시판", href: "/my-page/study-board", match: ["/my-page/inquiries"] },
   { label: "설문조사", href: "/my-page/surveys" },
-  { label: "신청 내역", href: "/my-page/exceptions", match: ["/my-page/appeals"] },
+  { label: "각종 예외 신청", href: "/my-page/exceptions" },
+  { label: "성적 이의신청", href: "/my-page/appeals" },
   { label: "내 정보", href: "/my-page/profile", match: ["/my-page/pc"] },
 ];
 
@@ -113,12 +114,16 @@ export const myPageBoardTabs: NavLink[] = [
   { label: "1:1 문의", href: "/my-page/inquiries" },
 ];
 
-/** 신청 내역 (각종 예외 신청 + 성적 이의신청) */
-export const myPageRequestTabs: NavLink[] = [
+/** 각종 예외 신청 (원본 /stdMng/exception.asp 탭 그대로) */
+export const myPageExceptionTabs: NavLink[] = [
   { label: "공인인증서 예외 신청", href: "/my-page/exceptions" },
   { label: "중복 PC 등록 신청", href: "/my-page/exceptions/duplicate-pc" },
   { label: "공결 및 추가시험 신청", href: "/my-page/exceptions/absence" },
-  { label: "예외 신청 결과", href: "/my-page/exceptions/results" },
+  { label: "신청 결과", href: "/my-page/exceptions/results" },
+];
+
+/** 성적 이의신청 (원본 /stdMng/bbsAppealList.asp 탭 그대로) */
+export const myPageAppealTabs: NavLink[] = [
   { label: "성적 이의신청", href: "/my-page/appeals" },
   { label: "기타 이의신청", href: "/my-page/appeals/etc" },
 ];
