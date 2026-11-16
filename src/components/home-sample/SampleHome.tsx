@@ -190,8 +190,7 @@ const benefits = [
 
 function Benefits() {
   return (
-    <section className="sh-sec">
-      <h3 className="sh-sec-title">한평생의 특별한 혜택</h3>
+    <section className="sh-sec" aria-label="한평생의 특별한 혜택">
       <div className="sh-benefit">
         <Swiper
           className="sh-benefit-swiper"
