@@ -465,6 +465,72 @@ function Essentials() {
   );
 }
 
+/* ---------- 9. 맨 아래 신뢰 띠 (월계수 + 기관 이름) ---------- */
+
+/** 월계수 한쪽 가지 — 호를 따라 잎 두 장씩. flip 이면 좌우를 뒤집어 오른쪽 가지 */
+function Laurel({ flip = false }: { flip?: boolean }) {
+  const cx = 76;
+  const cy = 66;
+  const r = 58;
+  const at = (deg: number) => {
+    const t = (deg * Math.PI) / 180;
+    return [cx + r * Math.cos(t), cy + r * Math.sin(t)] as const;
+  };
+  const leaves = [];
+  for (let i = 0; i < 11; i++) {
+    const deg = 106 + i * 14.6;
+    const [x, y] = at(deg);
+    // 가지를 따라 아래에서 위로 올라가는 방향(접선) 기준으로 바깥 · 안쪽에 한 장씩, 위로 갈수록 조금 크게
+    for (const side of [-34, 30]) {
+      leaves.push(
+        <path
+          key={`${i}${side}`}
+          d="M0 0C5.5-5 5.5-14 0-20C-5.5-14-5.5-5 0 0Z"
+          transform={`translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${(deg + 180 + side).toFixed(1)}) scale(${(0.72 + i * 0.03).toFixed(2)})`}
+        />,
+      );
+    }
+  }
+  const [sx, sy] = at(102);
+  const [ex, ey] = at(254);
+  const id = `sh-laurel-${flip ? "r" : "l"}`;
+  return (
+    <svg className={`sh-trust-laurel${flip ? " is-right" : ""}`} viewBox="0 0 72 136" aria-hidden>
+      <defs>
+        <linearGradient id={id} x1="0" y1="1" x2="0" y2="0">
+          <stop offset="0" stopColor="#8db4ff" />
+          <stop offset="0.55" stopColor="#dce8ff" />
+          <stop offset="1" stopColor="#ffffff" />
+        </linearGradient>
+      </defs>
+      <path
+        d={`M${sx.toFixed(1)} ${sy.toFixed(1)}A${r} ${r} 0 0 1 ${ex.toFixed(1)} ${ey.toFixed(1)}`}
+        fill="none"
+        stroke={`url(#${id})`}
+        strokeWidth="1.6"
+        strokeLinecap="round"
+      />
+      <g fill={`url(#${id})`}>{leaves}</g>
+      <path className="sh-trust-spark" d="M50 4l2.2 5.3 5.3 2.2-5.3 2.2-2.2 5.3-2.2-5.3-5.3-2.2 5.3-2.2z" />
+    </svg>
+  );
+}
+
+function TrustBand() {
+  return (
+    <section className="sh-trust" aria-label="한평생원격교육원">
+      <div className="sh-trust-inner">
+        <Laurel />
+        <div className="sh-trust-text">
+          <p className="sh-trust-sub">한평생만이 가진 교육 노하우, 신뢰할 수 있는 교육기관</p>
+          <p className="sh-trust-name">한평생원격교육원</p>
+        </div>
+        <Laurel flip />
+      </div>
+    </section>
+  );
+}
+
 /** /sample — 메인 시안 B (첫 시안 배치 + 제목 탭 배너 · 모집 중 표시 · 페이지 안 무료 상담) */
 export default function SampleHome() {
   return (
@@ -479,6 +545,7 @@ export default function SampleHome() {
         <Consult />
       </div>
       <Essentials />
+      <TrustBand />
     </main>
   );
 }

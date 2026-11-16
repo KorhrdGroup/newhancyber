@@ -411,6 +411,41 @@ a.sh-info-card:hover .sh-info-title { color: var(--color-primary-dark); }
 .sh-essential-grid a:hover { box-shadow: 0 4px 16px rgba(17, 90, 237, 0.12); }
 .sh-essential-grid img { width: 56px; height: 56px; object-fit: contain; }
 
+/* ---------- 9. 맨 아래 신뢰 띠 ---------- */
+.sh-trust {
+  position: relative;
+  overflow: hidden;
+  padding: 26px 0 28px;
+  background:
+    radial-gradient(ellipse 38% 140% at 50% 50%, rgba(63, 126, 251, 0.45), rgba(63, 126, 251, 0) 70%),
+    linear-gradient(160deg, #1c3f9e, #0f2a6e);
+}
+.sh-trust-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-20);
+}
+.sh-trust-laurel { flex: none; width: 60px; height: 114px; filter: drop-shadow(0 0 6px rgba(141, 180, 255, 0.45)); }
+.sh-trust-laurel.is-right { transform: scaleX(-1); }
+.sh-trust-spark { fill: #fff; }
+.sh-trust-text { text-align: center; }
+.sh-trust-sub { margin: 0 0 6px; font-size: 16px; font-weight: 600; color: #dce8ff; letter-spacing: -0.01em; }
+.sh-trust-name {
+  margin: 0;
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: transparent;
+  background: linear-gradient(90deg, #8db4ff 0%, #ffffff 42%, #c9f3ff 58%, #8db4ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
 /* ---------- 태블릿 ---------- */
 @media (max-width: 1024px) {
   .sh-term { flex-wrap: wrap; }
@@ -495,6 +530,12 @@ a.sh-info-card:hover .sh-info-title { color: var(--color-primary-dark); }
   .sh-essential-grid { gap: 8px; }
   .sh-essential-grid a { padding: 14px 4px; font-size: 12px; }
   .sh-essential-grid img { width: 40px; height: 40px; }
+
+  .sh-trust { padding: 20px 0 22px; }
+  .sh-trust-inner { gap: 12px; padding: 0 16px; }
+  .sh-trust-laurel { width: 38px; height: 72px; }
+  .sh-trust-sub { margin-bottom: 4px; font-size: 12px; word-break: keep-all; }
+  .sh-trust-name { font-size: 24px; }
 }
 
 /* 폰 머리줄(70px, 고정)은 480px 이하에서만 나온다 — 그 아래로 내려 시작 */
