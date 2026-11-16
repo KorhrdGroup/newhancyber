@@ -140,6 +140,8 @@ export interface Appeal {
   id: string;
   kind: AppealKind;
   courseTitle: string;
+  /** 제목 — 성적 이의신청만 있다 (기타 이의신청 원본에는 제목 칸이 없음) */
+  title?: string;
   /** 구분 (gradeAppealItems / etcAppealItems 중 하나) */
   item: string;
   appliedAt: string;
@@ -169,6 +171,7 @@ const appeals: Appeal[] = [
     id: "ap1002",
     kind: "grade",
     courseTitle: "지역사회복지론",
+    title: "과제 점수 확인 요청",
     item: "과제",
     appliedAt: "2026.10.08",
     status: "검토 중",
@@ -180,6 +183,7 @@ const appeals: Appeal[] = [
     id: "ap1001",
     kind: "grade",
     courseTitle: "사회복지정책론",
+    title: "기말고사 18번 문항 정답 이의",
     item: "기말고사",
     appliedAt: "2026.10.06",
     status: "처리 완료",

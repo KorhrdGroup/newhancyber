@@ -60,16 +60,16 @@ export function AppealResult({ appeal }: { appeal: Appeal }) {
   );
 }
 
-/** U34 이의신청 상세 — 1:1 문의 상세와 같은 틀 (상태 배지 · 과목명 · 항목/신청일 → 사유 → 처리 결과) */
+/** U34 이의신청 상세 — 1:1 문의 상세와 같은 틀 (상태 배지 · 제목(없으면 과목명) · 과목/구분/신청일 → 사유 → 처리 결과) */
 export default function AppealDetail({ appeal }: { appeal: Appeal }) {
   return (
     <>
       <article className="lx-panel lx-post">
         <div className="lx-post-head">
           <AppealBadge appeal={appeal} />
-          <h2 className="lx-post-title">{appeal.courseTitle}</h2>
+          <h2 className="lx-post-title">{appeal.title ?? appeal.courseTitle}</h2>
           <p className="lx-post-meta">
-            구분 {appeal.item} · 신청일 {appeal.appliedAt}
+            {appeal.title && `과목 ${appeal.courseTitle} · `}구분 {appeal.item} · 신청일 {appeal.appliedAt}
           </p>
         </div>
         <AppealBody appeal={appeal} />

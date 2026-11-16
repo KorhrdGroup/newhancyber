@@ -27,8 +27,10 @@ export default function AppealAccordion({ items }: { items: Appeal[] }) {
                 <AppealBadge appeal={item} />
               </span>
               <span className="ds-accordion-text">
-                <span className="lx-inquiry-cat">{item.item}</span>
-                {item.courseTitle}
+                <span className="lx-inquiry-cat">
+                  {item.title ? `${item.courseTitle} · ${item.item}` : item.item}
+                </span>
+                {item.title ?? item.courseTitle}
               </span>
               <span className="lx-inquiry-date">{item.appliedAt}</span>
               <img src="/resources/images/ds/select-chevron.svg" alt="" className="ds-accordion-chevron" />
