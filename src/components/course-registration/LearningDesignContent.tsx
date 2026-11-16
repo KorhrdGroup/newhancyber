@@ -1,17 +1,33 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState, useTransition, type FormEvent } from "react";
+import { applyStudyPlan } from "@/app/course-registration/learning-design/actions";
 import { importantStyle } from "@/lib/importantStyle";
 
-/** 무료학습설계 신청 (원본 learning-design.html) */
+/** 무료학습설계 신청 (원본 learning-design.html) — 관리자 「학습설계 관리」로 들어간다 */
 export default function LearningDesignContent() {
   const [isConsentOpen, setIsConsentOpen] = useState(false);
+  const [pending, startTransition] = useTransition();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO: 학습설계 신청 API 연동 (new FormData(e.currentTarget))
-    // 원본처럼 개인정보 동의 체크박스는 폼 밖에 있어 제출 값·필수 검사에 들어가지 않는다.
-    alert("학습설계 신청 API 연동 전입니다.");
+    if (pending) return;
+    const form = e.currentTarget;
+    // 개인정보 동의 체크박스는 화면 배치 때문에 폼 밖에 있지만 form 속성으로 이 폼에 묶여 함께 검사 · 제출된다.
+    const data = new FormData(form);
+    startTransition(async () => {
+      try {
+        const result = await applyStudyPlan(data);
+        alert(result.message);
+        if (result.ok) {
+          form.reset();
+        } else if (result.field) {
+          document.getElementById(result.field)?.focus();
+        }
+      } catch {
+        alert("지금은 신청을 받을 수 없어요. 잠시 뒤 다시 시도해 주세요.");
+      }
+    });
   };
 
   return (
@@ -62,19 +78,24 @@ export default function LearningDesignContent() {
               희망상담 시간
             </label>
             {" "}
-            <input type="text" id="consultation-time" name="consultation-time" className="form-input" placeholder="문의내용" />
+            <input type="text" id="consultation-time" name="consultation-time" className="form-input" placeholder="문의내용" maxLength={100} />
           </div>
           <div className="form-row">
             <label htmlFor="inquiry" className="form-label">
               문의내용
             </label>
             {" "}
-            <textarea id="inquiry" name="inquiry" className="form-textarea" rows={5}></textarea>
+            <textarea id="inquiry" name="inquiry" className="form-textarea" rows={5} maxLength={1500}></textarea>
+          </div>
+          {/* 자동 등록 프로그램 거르기 — 사람에게는 보이지 않고 화면 읽기 프로그램 · 탭 이동에서도 빠진다. 채워져 오면 서버가 저장하지 않는다 */}
+          <div aria-hidden="true" style={{ position: "absolute", left: "-10000px", width: 1, height: 1, overflow: "hidden" }}>
+            <label htmlFor="ld-extra">이 칸은 비워 두세요</label>
+            <input type="text" id="ld-extra" name="ld-extra" tabIndex={-1} autoComplete="off" defaultValue="" />
           </div>
         </form>
         <div className="form-consent-section">
           <label className="form-checkbox-label">
-            <input type="checkbox" id="privacy-consent" name="privacy-consent" required />
+            <input type="checkbox" id="privacy-consent" name="privacy-consent" form="consultation-form" required />
             {" "}
             <span>
               <strong>
@@ -140,8 +161,8 @@ export default function LearningDesignContent() {
           </div>
         </div>
         <div className="form-submit-section">
-          <button type="submit" className="consultation-submit-btn" form="consultation-form">
-            신청하기
+          <button type="submit" className="consultation-submit-btn" form="consultation-form" disabled={pending}>
+            {pending ? "신청 중…" : "신청하기"}
           </button>
         </div>
       </div>
