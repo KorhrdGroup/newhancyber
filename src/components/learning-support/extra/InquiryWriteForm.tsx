@@ -1,36 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useState, type ChangeEvent, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import FileField from "@/components/common/FileField";
-
-/** 원본 글쓰기 화면 기준: 최대 10MB, doc·pdf·hwp·ppt·xls·txt·jpg·png·gif */
-const MAX_FILE_SIZE = 10 * 1024 * 1024;
-/** 원본 /bbs/bbsIn.asp 의 실제 확장자 검사(expExractAllUsr) 목록. 원본 화면 문구(ppt·txt·gif 포함)는 검사와 달랐음 */
-const ALLOWED_EXTENSIONS = ["jpg", "jpeg", "png", "pdf", "hwp", "hwpx", "doc", "docx", "xls", "xlsx"];
+import { checkUserUpload, USER_UPLOAD_ACCEPT, USER_UPLOAD_NOTE } from "@/lib/upload";
 
 /** 1:1 문의 쓰기 (제목·내용·첨부파일) */
 export default function InquiryWriteForm() {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const [fileError, setFileError] = useState("");
-
-  const handleFile = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    setFileError("");
-    if (!file) return;
-
-    const ext = file.name.split(".").pop()?.toLowerCase() ?? "";
-    let error = "";
-    if (file.size >= MAX_FILE_SIZE) error = "파일은 최대 10MB까지 올릴 수 있습니다.";
-    else if (!ALLOWED_EXTENSIONS.includes(ext)) error = "올릴 수 없는 파일 형식입니다. 아래 확장자의 파일만 올릴 수 있습니다.";
-
-    if (error) {
-      setFileError(error);
-      e.target.value = "";
-    }
-  };
-
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!title.trim()) {
@@ -79,13 +57,8 @@ export default function InquiryWriteForm() {
         <label className="ds-label" htmlFor="inquiry-file">
           첨부파일
         </label>
-        <FileField
-          id="inquiry-file"
-          accept={ALLOWED_EXTENSIONS.map((ext) => `.${ext}`).join(",")}
-          onChange={handleFile}
-        />
-        {fileError && <p className="lx-note ds-text-danger">{fileError}</p>}
-        <p className="lx-note">최대 10MB, {ALLOWED_EXTENSIONS.join("·")} 파일만 올릴 수 있습니다.</p>
+        <FileField id="inquiry-file" accept={USER_UPLOAD_ACCEPT} validate={checkUserUpload} />
+        <p className="lx-note">{USER_UPLOAD_NOTE}</p>
       </div>
 
       <div className="lx-actions">

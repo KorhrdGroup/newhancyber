@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import FileField from "@/components/common/FileField";
+import { checkUserUpload, USER_UPLOAD_ACCEPT, USER_UPLOAD_NOTE } from "@/lib/upload";
 
 /** U28 학습 Q&A 문의하기 */
 export default function QnaWriteForm({ courses }: { courses: { id: string; title: string }[] }) {
@@ -57,8 +58,8 @@ export default function QnaWriteForm({ courses }: { courses: { id: string; title
         <label className="ds-label" htmlFor="qna-file">
           첨부파일 (선택)
         </label>
-        <FileField id="qna-file" />
-        <p className="pp-note ds-mt-4">10MB 이하 파일 한 개를 붙일 수 있습니다.</p>
+        <FileField id="qna-file" accept={USER_UPLOAD_ACCEPT} validate={checkUserUpload} />
+        <p className="pp-note ds-mt-4">{USER_UPLOAD_NOTE}</p>
       </div>
       <div className="pp-actions">
         <Link href="/my-page/study-board/qna" className="ds-btn ds-btn--secondary">
