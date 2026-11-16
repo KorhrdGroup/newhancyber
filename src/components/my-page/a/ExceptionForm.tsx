@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import DraftNote from "@/components/common/DraftNote";
 import {
   absenceKinds,
   absenceProofs,
@@ -162,6 +163,10 @@ export default function ExceptionForm({ type, courses }: { type: ExceptionType; 
         </div>
         {isAbsence && (
           <>
+            <DraftNote>
+              원본에는 주차별 날짜가 없어 임시로 계산해 표시했습니다(1학기 3월·2학기 9월 첫 월요일부터 한 주씩, 기수마다
+              2주 늦춤). 실제 학기·기수별 주차 날짜와 주차 수(원본 강의실 출석은 15주, 신청서는 16주차)를 확인해야 합니다.
+            </DraftNote>
             <p className="pp-note mp-weeks-hint">
               신청할 주차를 모두 골라 주세요.{!termChosen && " 학기 구분을 고르면 주차마다 날짜가 표시됩니다."}
             </p>
