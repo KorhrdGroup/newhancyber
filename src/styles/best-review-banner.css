@@ -51,7 +51,7 @@
   width: calc(26 * var(--u)); height: calc(20.91 * var(--u)); max-width: none;
   transform: translateY(-50%) rotate(-90deg);
 }
-.brb-who { display: flex; flex-direction: column; gap: calc(2 * var(--u)); white-space: nowrap; }
+.brb-who { display: flex; flex-direction: column; gap: calc(6 * var(--u)); white-space: nowrap; }
 .brb-who span { font-size: calc(18 * var(--u)); font-weight: 600; color: var(--color-text-secondary); }
 .brb-who strong { font-size: calc(24 * var(--u)); font-weight: 700; }
 .brb-quote { font-size: calc(16 * var(--u)); font-weight: 500; line-height: 1.65; text-align: justify; word-break: keep-all; }
@@ -68,7 +68,7 @@
   .brb-photo { width: 120px; height: 120px; }
   .brb-bubble { flex: none; width: 100%; min-height: 0; gap: 12px; padding: 16px; border-radius: 10px; }
   .brb-bubble-tail { left: 50%; top: -15px; width: 22px; height: 18px; transform: translateX(-50%); }
-  .brb-who { gap: 2px; white-space: normal; }
+  .brb-who { gap: 4px; white-space: normal; }
   .brb-who span { font-size: 14px; }
   .brb-who strong { font-size: 18px; }
   .brb-quote { font-size: 13px; line-height: 1.7; text-align: left; }
