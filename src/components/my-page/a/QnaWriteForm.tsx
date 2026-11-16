@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import FileField from "@/components/common/FileField";
 
 /** U28 학습 Q&A 문의하기 */
 export default function QnaWriteForm({ courses }: { courses: { id: string; title: string }[] }) {
@@ -56,7 +57,7 @@ export default function QnaWriteForm({ courses }: { courses: { id: string; title
         <label className="ds-label" htmlFor="qna-file">
           첨부파일 (선택)
         </label>
-        <input id="qna-file" type="file" className="mp-file" />
+        <FileField id="qna-file" />
         <p className="pp-note ds-mt-4">10MB 이하 파일 한 개를 붙일 수 있습니다.</p>
       </div>
       <div className="pp-actions">

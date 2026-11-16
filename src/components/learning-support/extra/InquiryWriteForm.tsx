@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, type ChangeEvent, type FormEvent } from "react";
+import FileField from "@/components/common/FileField";
 
 /** 원본 글쓰기 화면 기준: 최대 10MB, doc·pdf·hwp·ppt·xls·txt·jpg·png·gif */
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
@@ -77,10 +78,8 @@ export default function InquiryWriteForm() {
         <label className="ds-label" htmlFor="inquiry-file">
           첨부파일
         </label>
-        <input
+        <FileField
           id="inquiry-file"
-          type="file"
-          className="lx-file"
           accept={ALLOWED_EXTENSIONS.map((ext) => `.${ext}`).join(",")}
           onChange={handleFile}
         />

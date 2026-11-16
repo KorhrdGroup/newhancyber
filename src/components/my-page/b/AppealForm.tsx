@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import FileField from "@/components/common/FileField";
 import type { AppealKind } from "../myPageDataB";
 
 /** U34 이의신청 쓰기 (성적 / 기타) */
@@ -78,7 +79,7 @@ export default function AppealForm({
         <label className="ds-label" htmlFor="appeal-file">
           첨부 파일 <span className="pp-note">(선택)</span>
         </label>
-        <input id="appeal-file" type="file" accept=".jpg,.jpeg,.png,.pdf,.hwp,.hwpx,.doc,.docx" />
+        <FileField id="appeal-file" accept=".jpg,.jpeg,.png,.pdf,.hwp,.hwpx,.doc,.docx" />
         <p className="pp-note ds-mt-4">화면 캡처·답안 사진 같은 근거 자료를 올려 주세요. 10MB까지 올릴 수 있어요.</p>
       </div>
       <div className="pp-actions">
