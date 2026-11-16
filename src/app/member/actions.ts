@@ -3,10 +3,20 @@
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { isDbConfigured } from "@/lib/db/client";
-import { createMember, findMemberForLogin, isDuplicateKey, isLoginIdTaken, recordMemberLogin } from "@/lib/db/members";
+import {
+  createMember,
+  findMemberForLogin,
+  isDuplicateKey,
+  isLoginIdTaken,
+  recordMemberLogin,
+  getMemberStatus,
+  upgradeMemberPasswordHash,
+} from "@/lib/db/members";
+import { registerMemberPc } from "@/lib/db/pcRegistrations";
 import { clearFailures, lockedMinutes, recordFailure } from "@/lib/loginThrottle";
 import { createMemberSession, deleteMemberSession, getCurrentMember } from "@/lib/memberAuth";
-import { hashPassword, passwordVersion, verifyPassword } from "@/lib/password";
+import { ensureDeviceId } from "@/lib/memberDevice";
+import { hashPassword, needsRehash, passwordVersion, verifyPassword } from "@/lib/password";
 import {
   EDUCATION_LEVELS,
   INTEREST_AREAS,
@@ -116,23 +126,59 @@ export async function login(_prev: LoginState, formData: FormData): Promise<Logi
     console.error("로그인 실패 기록 지우기 실패", errorSummary(err));
   }
 
+  // 옛 사이트에서 옮겨 온 SHA-256 비밀번호면 지금 새 방식(scrypt)으로 바꿔 저장한다.
+  // 저장에 실패하면 로그인은 그대로 진행하고(다음 로그인 때 다시 바꾼다), 그사이 저장값이 바뀌었으면 다시 확인한다.
+  let hashForSession = member.passwordHash;
+  if (member.passwordHash && needsRehash(member.passwordHash)) {
+    try {
+      const upgraded = await hashPassword(password);
+      if (await upgradeMemberPasswordHash(member.memberId, member.passwordHash, upgraded)) {
+        hashForSession = upgraded;
+      } else {
+        // 그사이 다른 로그인(다른 탭 · 기기)이 먼저 바꿨거나 관리자가 비밀번호를 바꿨다.
+        // 지금 저장값으로 다시 확인해서 맞으면 그 값으로 세션을 만들고(바로 튕기지 않게), 틀리면 로그인 실패로 돌린다.
+        let current: string | null;
+        try {
+          current = (await getMemberStatus(member.memberId))?.passwordHash ?? null;
+        } catch {
+          // 다시 읽지 못하면 옛 지문으로 세션을 만들게 되어 바로 튕긴다 — 차라리 잠시 뒤 다시 하게 한다
+          return { error: SERVER_PROBLEM, id };
+        }
+        if (!(await verifyPassword(password, current))) {
+          await noteFailure(ip, id);
+          return { error: LOGIN_FAILED, id };
+        }
+        hashForSession = current;
+      }
+    } catch (err) {
+      console.error("회원 비밀번호 새 방식 저장 실패", errorSummary(err));
+    }
+  }
+
   try {
     await createMemberSession({
       memberId: member.memberId,
       loginId: member.loginId,
       name: member.name,
-      passwordVersion: passwordVersion(member.passwordHash),
+      passwordVersion: passwordVersion(hashForSession),
     });
   } catch (err) {
     // 대개 SESSION_SECRET 설정 문제 — 서버 로그에 원인이 남는다.
     console.error("회원 세션 만들기 실패", errorSummary(err));
     return { error: SERVER_PROBLEM, id };
   }
+  const userAgent = (await headers()).get("user-agent") ?? "";
   try {
-    await recordMemberLogin(member.memberId, ip, (await headers()).get("user-agent") ?? "");
+    await recordMemberLogin(member.memberId, ip, userAgent);
   } catch (err) {
     // 마지막 로그인 시각·접속 기록에 실패해도 로그인은 막지 않는다.
     console.error("회원 접속 기록 실패", errorSummary(err));
+  }
+  try {
+    // 이 기기를 PC 등록에 남긴다(처음 보는 기기만). 관리자 「PC등록 관리」가 본다. 실패해도 로그인은 막지 않는다.
+    await registerMemberPc(member.memberId, await ensureDeviceId(), ip, userAgent);
+  } catch (err) {
+    console.error("PC 등록 실패", errorSummary(err));
   }
   redirect(safeNext(formData.get("next")));
 }

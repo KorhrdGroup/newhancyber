@@ -43,6 +43,21 @@ export async function isLoginIdTaken(loginId: string): Promise<boolean> {
   return (r.recordset[0]?.n ?? 0) > 0;
 }
 
+/**
+ * 옛 사이트 SHA-256 비밀번호로 로그인에 성공했을 때 새 방식(scrypt)으로 바꿔 저장한다.
+ * 그사이 다른 곳에서 비밀번호가 바뀌었으면(저장값이 옛 값과 다르면) 바꾸지 않는다. 바꿨으면 true.
+ */
+export async function upgradeMemberPasswordHash(memberId: number, oldHash: string, newHash: string): Promise<boolean> {
+  const pool = await getPool();
+  const r = await pool
+    .request()
+    .input("id", sql.Int, memberId)
+    .input("oldHash", sql.NVarChar(200), oldHash)
+    .input("newHash", sql.NVarChar(200), newHash)
+    .query(`UPDATE dbo.members SET password_hash = @newHash WHERE member_id = @id AND password_hash = @oldHash`);
+  return (r.rowsAffected[0] ?? 0) > 0;
+}
+
 /** 마지막 로그인 시각과 접속 기록 */
 export async function recordMemberLogin(memberId: number, ip: string, userAgent: string): Promise<void> {
   const pool = await getPool();
