@@ -6,17 +6,19 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { heroSlides, type HeroSlide } from "./homeData";
+import "@/styles/hero.css";
 
 function SlideContent({ slide }: { slide: HeroSlide }) {
   return (
-    <div className="hero-content">
-      <div className="hero-text">
-        <div className="hero-subtitle">교육부 평가인정 학점은행제 기관</div>
-        <div className="hero-title">한평생원격교육원</div>
-      </div>
-      <div className="hero-image">
-        <img src={slide.desktopImage} alt="히어로 배너" className="hero-image-desktop" />
-        <img src={slide.mobileImage} alt="모바일 배너" className="hero-image-mobile" />
+    <div className={`hb-slide hb-slide--${slide.theme}`}>
+      <div className="hb-inner">
+        <div className="hb-text">
+          <p className="hb-eyebrow">{slide.eyebrow}</p>
+          <h2 className="hb-title">{slide.title}</h2>
+          <p className="hb-desc">{slide.desc}</p>
+          {slide.href && <span className="hb-more">자세히보기</span>}
+        </div>
+        <img src={slide.art} alt="" className="hb-art" />
       </div>
     </div>
   );
@@ -35,7 +37,7 @@ export default function HeroSwiper() {
           pagination={{ clickable: true, type: "bullets" }}
         >
           {heroSlides.map((slide) => (
-            <SwiperSlide key={slide.desktopImage}>
+            <SwiperSlide key={slide.title}>
               {slide.href ? (
                 <Link href={slide.href} className="hero-slide-link">
                   <SlideContent slide={slide} />

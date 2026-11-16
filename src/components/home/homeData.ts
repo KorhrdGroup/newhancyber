@@ -5,28 +5,42 @@
 import { TBD_HREF } from "@/lib/navigation";
 
 const MAIN_IMG = "/resources/images/main";
-const MOBILE_IMG = "/resources/images/mobile";
 
 export interface HeroSlide {
-  desktopImage: string;
-  mobileImage: string;
-  /** 없으면 링크 없는 슬라이드 */
+  /** 바탕·글자 색 묶음 (hero.css 의 hb-slide--{theme}) */
+  theme: "blue" | "green" | "purple";
+  eyebrow: string;
+  title: string;
+  desc: string;
+  /** 오른쪽 그림 (바탕 투명) */
+  art: string;
+  /** 없으면 링크·자세히보기 없는 슬라이드 */
   href?: string;
 }
 
+/** 메인 배너 — 글자는 코드, 오른쪽 그림만 파일 (예전엔 글자까지 한 장짜리 그림이었음) */
 export const heroSlides: HeroSlide[] = [
   {
-    desktopImage: `${MAIN_IMG}/hero_banner.png`,
-    mobileImage: `${MOBILE_IMG}/mobile-banner.png`,
+    theme: "blue",
+    eyebrow: "교육부 평가인정 학점은행제 기관",
+    title: "한평생원격교육원",
+    desc: "배움의 과정, 한평생이 함께합니다.",
+    art: `${MAIN_IMG}/hero-art-01.png`,
   },
   {
-    desktopImage: `${MAIN_IMG}/hero_banner02.png`,
-    mobileImage: `${MOBILE_IMG}/mobile-banner02.png`,
+    theme: "green",
+    eyebrow: "비전 있는 복지 전문직으로 커리어 전환",
+    title: "사회복지사 2급",
+    desc: "100% 온라인 수업으로 평생 직장 자격증을 취득해보세요!",
+    art: `${MAIN_IMG}/hero-art-02.png`,
     href: "/social-worker/info",
   },
   {
-    desktopImage: `${MAIN_IMG}/hero_banner03.png`,
-    mobileImage: `${MOBILE_IMG}/mobile-banner03.png`,
+    theme: "purple",
+    eyebrow: "친구와 함께 시작해보세요",
+    title: "친구추천 이벤트",
+    desc: "친구가 수강신청하면 친구도 혜택, 나도 혜택!",
+    art: `${MAIN_IMG}/hero-art-03.png`,
     href: "/event",
   },
 ];
