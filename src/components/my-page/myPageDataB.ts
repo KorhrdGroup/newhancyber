@@ -140,7 +140,7 @@ export interface Appeal {
   id: string;
   kind: AppealKind;
   courseTitle: string;
-  /** 성적: 평가 항목 / 기타: 신청 구분 */
+  /** 구분 (gradeAppealItems / etcAppealItems 중 하나) */
   item: string;
   appliedAt: string;
   status: AppealStatus;
@@ -152,16 +152,11 @@ export interface Appeal {
 /** 이의신청 기간: 성적 공개일부터 7일 */
 export const appealPeriodDays = 7;
 
-export const appealSchedules = [
-  { term: "2026년도 1학기 3차", openedAt: "2026.10.05", period: "2026.10.05 ~ 2026.10.11" },
-  { term: "2026년도 2학기 4차", openedAt: "2027.03.03 (예정)", period: "2027.03.03 ~ 2027.03.09" },
-];
+/** 성적 이의신청 구분 (원본 bbsAppealIn.asp 선택지) */
+export const gradeAppealItems = ["중간고사", "기말고사", "과제", "퀴즈", "토론", "학습심화활동", "진도/출석", "기타"];
 
-/** 성적 이의신청에서 고를 평가 항목 */
-export const gradeAppealItems = ["출석", "중간고사", "기말고사", "과제", "퀴즈", "토론"];
-
-/** 기타 이의신청 구분 */
-export const etcAppealItems = ["출석·진도 인정", "수료 판정", "학점 인정", "기타"];
+/** 기타 이의신청 구분 (원본 appealEtcIn.asp 선택지) */
+export const etcAppealItems = ["과제", "토론", "학습심화활동", "진도/출석", "기타"];
 
 /** 이의신청할 수 있는 과목 (성적이 나온 과목) */
 export function getAppealCourses(): { id: string; title: string; term: string }[] {
@@ -199,7 +194,7 @@ const appeals: Appeal[] = [
     id: "ap2001",
     kind: "etc",
     courseTitle: "사회복지정책론",
-    item: "출석·진도 인정",
+    item: "진도/출석",
     appliedAt: "2026.09.20",
     status: "처리 완료",
     reason: "7주차 강의를 끝까지 들었는데 진도율이 90%로 표시됩니다. 학습 기록을 확인해 주세요.",
@@ -213,7 +208,7 @@ const appeals: Appeal[] = [
     id: "ap2002",
     kind: "etc",
     courseTitle: "지역사회복지론",
-    item: "수료 판정",
+    item: "기타",
     appliedAt: "2026.10.07",
     status: "접수",
     reason: "수료 기준을 모두 채웠다고 생각하는데 수료 처리가 늦어지고 있어 문의드립니다.",

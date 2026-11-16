@@ -12,8 +12,11 @@ export default function FileField({
   id,
   accept,
   validate,
+  label,
 }: {
   id: string;
+  /** 바깥 라벨이 이 칸을 가리키지 않을 때(첨부 칸 여러 개 등) 읽어 줄 이름 */
+  label?: string;
   accept?: string;
   /** 통과하면 빈 문자열, 걸리면 안내 문구 */
   validate?: (file: File) => string;
@@ -31,6 +34,7 @@ export default function FileField({
           type="file"
           className="ds-file-input"
           accept={accept}
+          aria-label={label}
           onChange={(e) => {
             const file = e.target.files?.[0];
             const message = file && validate ? validate(file) : "";

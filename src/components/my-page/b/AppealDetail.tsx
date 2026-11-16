@@ -62,8 +62,6 @@ export function AppealResult({ appeal }: { appeal: Appeal }) {
 
 /** U34 이의신청 상세 — 1:1 문의 상세와 같은 틀 (상태 배지 · 과목명 · 항목/신청일 → 사유 → 처리 결과) */
 export default function AppealDetail({ appeal }: { appeal: Appeal }) {
-  const isGrade = appeal.kind === "grade";
-
   return (
     <>
       <article className="lx-panel lx-post">
@@ -71,7 +69,7 @@ export default function AppealDetail({ appeal }: { appeal: Appeal }) {
           <AppealBadge appeal={appeal} />
           <h2 className="lx-post-title">{appeal.courseTitle}</h2>
           <p className="lx-post-meta">
-            {isGrade ? "평가 항목" : "신청 구분"} {appeal.item} · 신청일 {appeal.appliedAt}
+            구분 {appeal.item} · 신청일 {appeal.appliedAt}
           </p>
         </div>
         <AppealBody appeal={appeal} />

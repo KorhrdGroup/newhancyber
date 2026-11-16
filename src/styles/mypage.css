@@ -92,6 +92,10 @@
 .mp-weeks-picked { font-size: 14px; color: var(--color-text-secondary); }
 .mp-weeks-picked strong { margin-left: var(--space-8); font-weight: 600; color: var(--color-text-brand); }
 .mp-proof { max-width: 240px; margin-bottom: var(--space-8); }
+/* 고칠 수 없는 값(신청일 등) */
+.mp-static { font-size: 14px; color: var(--color-text-default); }
+/* 첨부 칸 여러 개 */
+.mp-file-list { display: flex; flex-direction: column; gap: var(--space-8); }
 
 @media (max-width: 768px) {
   .mp-field-grid { grid-template-columns: 1fr; }
