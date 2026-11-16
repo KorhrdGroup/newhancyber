@@ -1008,30 +1008,8 @@
   text-align: left;
 }
 
-.email-refusal-container {
-  width: 100%;
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 24px;
-  box-sizing: border-box;
-  background-color: #f3f8ff;
-}
 
-.email-refusal-page-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: #010101;
-  margin: 0 0 16px 0;
-  text-align: left;
-}
 
-.email-refusal-content {
-  font-size: 14px;
-  line-height: 1.7;
-  color: #333333;
-  margin: 0;
-  text-align: left;
-}
 
 /* 불편사항 접수 — 마이페이지 신청서(mp-form)와 같은 틀 */
 .contact-consent { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-8); }

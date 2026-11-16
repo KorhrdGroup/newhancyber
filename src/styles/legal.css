@@ -1,0 +1,111 @@
+/* 규정·약관 화면 공통 틀 (LegalDoc) — 이용약관 · 개인정보처리방침 · 이메일무단수집거부.
+   흰 바탕 안내 틀(lx-page--plain) 위에 조항 제목과 본문을 크기 · 굵기 · 구분선으로 나눈다 */
+
+/* footer.css 의 .container { padding: 0 } 이 먼저 걸려서, 본문선(양옆 30px)을 다시 맞춘다 (교육원 소개와 같음) */
+@media (min-width: 481px) {
+  .container.legal-page { padding: 0 var(--header-padding-side); }
+}
+
+.legal-doc { margin-top: var(--space-32); border-top: 1px solid var(--color-text-strong); }
+
+/* 조항 */
+.legal-article { padding: var(--space-24) 0; border-bottom: 1px solid var(--color-border-subtle); }
+.legal-article-title { margin: 0 0 var(--space-12); font-size: 17px; font-weight: 700; line-height: 1.5; color: var(--color-text-strong); word-break: keep-all; }
+.legal-text { margin: 0; font-size: 15px; line-height: 1.8; color: var(--color-text-default); word-break: keep-all; }
+.legal-text + .legal-text { margin-top: var(--space-8); }
+
+/* 번호 항목 (1. 2. …): 번호를 왼쪽에 두고 글은 번호 뒤에서 줄을 맞춘다 */
+.legal-items,
+.legal-sub { margin: 0; padding: 0; list-style: none; }
+.legal-items { display: flex; flex-direction: column; gap: var(--space-8); }
+.legal-items > li,
+.legal-sub > li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-4); }
+.legal-mark { min-width: 1.4em; font-weight: 600; }
+.legal-items > li > .legal-mark { font-size: 15px; line-height: 1.8; color: var(--color-text-strong); }
+
+/* 가) 나) 목록: 옅은 회색 상자로 묶어 번호 항목과 한 단계 구분 */
+.legal-sub {
+  display: flex; flex-direction: column; gap: var(--space-4);
+  margin-top: var(--space-8); padding: var(--space-12) var(--space-16);
+  border-radius: var(--radius-8); background: var(--color-bg-subtle);
+  font-size: 14px; line-height: 1.7; color: var(--color-text-default); word-break: keep-all;
+}
+.legal-sub .legal-mark { color: var(--color-text-secondary); }
+.legal-text + .legal-sub,
+.legal-text + .legal-items { margin-top: var(--space-12); }
+
+/* ---------- 개인정보처리방침: 원래 마크업(privacy-*)은 그대로 두고 같은 조항 틀 · 디자인 시스템 표 모양으로 맞춘다 ---------- */
+.legal-page .privacy-content { padding: 0; }
+.legal-page .privacy-article:first-child { padding-top: var(--space-24); }
+.legal-page .privacy-article-title,
+.legal-page .privacy-article-title-icons { margin: 0 0 var(--space-12); font-size: 17px; font-weight: 700; line-height: 1.5; color: var(--color-text-strong); word-break: keep-all; }
+/* 조항마다 위에 구분선 (제목이 섹션 상자 안에 있기도, 바로 놓이기도 함) */
+.legal-page .privacy-article-section,
+.legal-page .privacy-content > h2.privacy-article-title-icons {
+  margin-top: var(--space-32); padding-top: var(--space-24);
+  border-top: 1px solid var(--color-border-subtle);
+}
+.legal-page .privacy-article-section .privacy-article-title-icons { margin-bottom: 0; }
+.legal-page .privacy-article-icon { width: 28px; height: 28px; }
+
+/* 개인정보 처리 표시(라벨링): 개인정보보호위원회 공식 아이콘(컬러형)을 알아볼 수 있는 크기로 */
+.legal-page .privacy-labeling-icon { width: 56px; height: 56px; margin-bottom: var(--space-12); }
+@media (max-width: 768px) {
+  /* 칸을 한 줄씩 쌓으면 너무 길어서 2열로 */
+  .legal-page .privacy-labeling-table thead,
+  .legal-page .privacy-labeling-table thead tr,
+  .legal-page .privacy-labeling-table thead th { display: block; }
+  .legal-page .privacy-labeling-table tbody { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .legal-page .privacy-labeling-table tr { display: contents; }
+  .legal-page .privacy-labeling-cell { width: auto; border-width: 0 1px 1px 0; border-color: var(--color-border-subtle); padding: var(--space-16) var(--space-8); }
+  .legal-page .privacy-labeling-cell:nth-child(odd) { border-left-width: 1px; }
+  .legal-page .privacy-labeling-icon { width: 48px; height: 48px; margin-bottom: var(--space-8); }
+}
+.legal-page .privacy-article-text,
+.legal-page .privacy-content > ul > li { font-size: 15px; line-height: 1.8; color: var(--color-text-default); word-break: keep-all; }
+.legal-page .privacy-content > ul { margin: var(--space-12) 0 0; padding-left: 0; list-style: none; }
+.legal-page .privacy-content > ul > li { list-style: none; padding-left: 0; }
+/* ※ 줄: 다른 화면 CSS 에 기대지 않고 여기서 모양을 정함 */
+.legal-page .privacy-content > ul > li.page-list-dangu { padding-left: 1.2em; text-indent: -1.2em; color: var(--color-text-secondary); font-size: 14px; }
+.legal-page .privacy-content > ul > li.page-list-dangu::before { content: "※ "; }
+
+/* 표 머리: 진회색 바탕 → 디자인 시스템 표(ds-table) 머리 (옅은 회색 · 진한 글자) */
+.legal-page :is(.privacy-labeling-title, .privacy-toc-title, .privacy-data-header, .privacy-entrust-header,
+  .privacy-thirdparty-header, .privacy-retention-header, .privacy-protection-header, .privacy-officer-header) {
+  background-color: var(--color-bg-subtle);
+  color: var(--color-text-strong);
+  font-weight: 600;
+  border-bottom: 1px solid var(--color-border-default);
+}
+
+/* ---------- 휴대폰: 파란 제목 띠 (MobilePageBanner name="legal"), 본문 제목은 띠와 겹쳐서 숨김 ---------- */
+@media (max-width: 480px) {
+  main.wrapper:has(.legal-page) { padding: 0; }
+  .mobile-legal-banner {
+    /* .mobile-only 가 display: block !important 로 덮으므로 가운데 정렬은 text-align 으로 */
+    margin-top: 70px;
+    padding: 24px 0;
+    background-color: #3f7efb;
+    text-align: center;
+  }
+  /* 원본처럼 약관 화면은 헤더 아래 "회원가입·수강신청·나의 강의실" 줄(41px)이 붙어서 그만큼 더 내린다 */
+  body:has(.mobile-nav) .mobile-legal-banner { margin-top: 111px; }
+  .mobile-legal-banner-text { font-size: 24px; font-weight: 600; color: var(--color-text-inverse); }
+
+  .legal-page > .page-title { display: none; }
+  .legal-page > .lx-desc { margin-top: 0; }
+  .legal-doc { margin-top: var(--space-20); }
+  .legal-article { padding: var(--space-20) 0; }
+  .legal-article-title { font-size: 16px; }
+  .legal-text,
+  .legal-items > li > .legal-mark { font-size: 14px; line-height: 1.75; }
+  .legal-sub { padding: var(--space-12); font-size: 13px; }
+
+  .legal-page .privacy-article-title,
+  .legal-page .privacy-article-title-icons { font-size: 16px; }
+  .legal-page .privacy-article-text,
+  .legal-page .privacy-content > ul > li { font-size: 14px; line-height: 1.75; }
+  /* 여러 열 표는 좁은 화면에서 글자가 한두 자씩 꺾여서, 표만 옆으로 밀어 보게 (라벨링 · 목차 표는 제외) */
+  .legal-page .privacy-content [class$="-table-wrapper"] { overflow-x: auto; }
+  .legal-page .privacy-content table:not(.privacy-labeling-table):not(.privacy-toc-table) { min-width: 640px; }
+}

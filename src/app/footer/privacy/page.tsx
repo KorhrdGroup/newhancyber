@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
+import LegalDoc from "@/components/footer/LegalDoc";
 import { CONTACT_EMAIL, SUPPORT_PHONE } from "@/lib/contact";
 
 export const metadata: Metadata = { title: "개인정보처리방침" };
 
 export default function PrivacyPage() {
   return (
-    <main className="wrapper ft-page">
-      <div className="container">
+    <LegalDoc title="개인정보처리방침" desc="한평생원격교육원이 이용자의 개인정보를 어떻게 수집 · 이용 · 보관 · 파기하는지 안내합니다.">
         <div className="privacy-content">
           <div className="privacy-article">
             <h2 className="privacy-article-title">제1조. 서문</h2>
@@ -861,7 +861,6 @@ export default function PrivacyPage() {
             <li className="page-list-plain">• 본 개인정보처리방침은 2023년 9월 11일 부터 적용됩니다.</li>
           </ul>
         </div>
-      </div>
-    </main>
+    </LegalDoc>
   );
 }
