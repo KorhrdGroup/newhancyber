@@ -34,6 +34,16 @@
 .legal-text + .legal-sub,
 .legal-text + .legal-items { margin-top: var(--space-12); }
 
+/* 장 아래 조문 (운영규칙: 1. 총칙 → 2-1. 조문 → 1) 항목) */
+.legal-clause + .legal-clause { margin-top: var(--space-20); }
+.legal-clause-title { margin: 0 0 var(--space-8); font-size: 15px; font-weight: 600; line-height: 1.6; color: var(--color-text-strong); word-break: keep-all; }
+.legal-clause--text { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-4); }
+.legal-clause--text > .legal-mark { font-size: 15px; line-height: 1.8; color: var(--color-text-strong); }
+.legal-note { margin: 0; font-size: 14px; line-height: 1.7; color: var(--color-text-secondary); word-break: keep-all; }
+.legal-note + .legal-items { margin-top: var(--space-8); }
+.legal-items > li.legal-items-note { display: block; padding-left: calc(1.4em + var(--space-4)); }
+.legal-table { max-width: 480px; margin-top: var(--space-12); }
+
 /* ---------- 개인정보처리방침: 원래 마크업(privacy-*)은 그대로 두고 같은 조항 틀 · 디자인 시스템 표 모양으로 맞춘다 ---------- */
 .legal-page .privacy-content { padding: 0; }
 .legal-page .privacy-article:first-child { padding-top: var(--space-24); }
@@ -98,7 +108,9 @@
   .legal-article { padding: var(--space-20) 0; }
   .legal-article-title { font-size: 16px; }
   .legal-text,
-  .legal-items > li > .legal-mark { font-size: 14px; line-height: 1.75; }
+  .legal-items > li > .legal-mark,
+  .legal-clause--text > .legal-mark { font-size: 14px; line-height: 1.75; }
+  .legal-note { font-size: 13px; }
   .legal-sub { padding: var(--space-12); font-size: 13px; }
 
   .legal-page .privacy-article-title,
