@@ -131,8 +131,8 @@ export type AppealKind = "grade" | "etc";
 export type AppealStatus = "접수" | "검토 중" | "처리 완료";
 
 export const appealStatusTone: Record<AppealStatus, Tone> = {
-  접수: "brand",
-  "검토 중": "warning",
+  접수: "neutral",
+  "검토 중": "neutral",
   "처리 완료": "success",
 };
 
