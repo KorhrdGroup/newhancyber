@@ -1,5 +1,6 @@
 import type { CSSProperties, ReactNode } from "react";
 import "@/styles/social-worker-landing.css";
+import BurstOnView from "./BurstOnView";
 
 const IMG = "/resources/images/social-worker/info";
 
@@ -386,7 +387,7 @@ export default function SocialWorkerLanding() {
         </section>
 
         {/* 9. 한평생 선택의 이유 */}
-        <section className="swl-reason">
+        <BurstOnView className="swl-reason">
           <img className="swl-reason-bg" src={`${IMG}/confetti.webp`} alt="" />
           <div className="swl-reason-head">
             <div className="swl-reason-glow">
@@ -431,7 +432,7 @@ export default function SocialWorkerLanding() {
               <figcaption>웨일 · 크롬 · 엣지 · 안드로이드 · iOS 수업 수강 가능!</figcaption>
             </figure>
           </div>
-        </section>
+        </BurstOnView>
 
         {/* 10. 추가 혜택 */}
         <section className="swl-benefits">

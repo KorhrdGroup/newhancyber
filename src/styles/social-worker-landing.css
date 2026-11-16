@@ -117,7 +117,7 @@
 
 /* 5. 다양한 기관으로 취업 */
 .swl-places { gap: calc(20 * var(--u)); padding: calc(100 * var(--u)) 0; background: linear-gradient(180deg, #cde3ff 11.012%, #73a5fd); }
-.swl-places-bg { position: absolute; z-index: -1; left: 50%; bottom: calc(-132 * var(--u)); width: calc(1079.5 * var(--u)); height: calc(1619 * var(--u)); transform: translateX(-33.3333%); object-fit: cover; mix-blend-mode: multiply; }
+.swl-places-bg { position: absolute; z-index: -1; left: 0; bottom: calc(-132 * var(--u)); width: 100%; height: calc(1619 * var(--u)); object-fit: cover; mix-blend-mode: multiply; }
 .swl-places .swl-heading { margin-top: 0; }
 .swl-places-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: calc(16 * var(--u)); width: calc(740 * var(--u)); margin-top: 0; }
 .swl-place { display: flex; flex-direction: column; align-items: center; justify-content: center; box-sizing: border-box; width: calc(230 * var(--u)); height: calc(200 * var(--u)); padding: 0 calc(20 * var(--u)); border-radius: calc(10 * var(--u)); background: #fff; }
@@ -190,6 +190,28 @@
 /* 9. 한평생 선택의 이유 */
 .swl-reason { gap: calc(80 * var(--u)); padding: calc(140 * var(--u)) calc(100 * var(--u)) calc(100 * var(--u)); background: linear-gradient(180deg, #05f, #000d41); }
 .swl-reason-bg { position: absolute; z-index: -1; left: 0; top: 0; width: calc(1080 * var(--u)); height: calc(665 * var(--u)); object-fit: cover; mix-blend-mode: luminosity; opacity: 0.7; }
+/* 선택의 이유: 화면에 들어오면 양쪽 아래에서 꽃가루가 터지고(빵빠레), 제목이 튀어나오며 배경 꽃가루가 내려앉음 */
+.swl-burst { position: absolute; z-index: -1; left: 0; top: 0; width: 100%; height: calc(665 * var(--u)); pointer-events: none; --pu: var(--u); --su: var(--u); }
+.swl-burst i { position: absolute; top: calc(600 * var(--pu)); width: calc(14 * var(--su)); height: calc(22 * var(--su)); background: var(--c); border-radius: calc(2 * var(--su)); opacity: 0; }
+.swl-burst--l { left: calc(70 * var(--pu)); }
+.swl-burst--r { right: calc(70 * var(--pu)); }
+.swl-burst--ribbon { width: calc(6 * var(--su)) !important; height: calc(36 * var(--su)) !important; border-radius: 999px !important; }
+.swl-burst--dot { width: calc(13 * var(--su)) !important; height: calc(13 * var(--su)) !important; border-radius: 50% !important; }
+.swl-burst--star { width: calc(26 * var(--su)) !important; height: calc(26 * var(--su)) !important; border-radius: 0 !important; clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); }
+.swl-reason.is-in .swl-burst i { animation: swl-confetti 2.8s cubic-bezier(0.12, 0.8, 0.3, 1) var(--d) both; }
+@keyframes swl-confetti {
+  0% { transform: translate(0, 0) rotate(0deg) scale(0.3); opacity: 0; }
+  6% { opacity: 1; }
+  40% { transform: translate(calc(var(--dx) * var(--pu)), calc(var(--dy) * var(--pu))) rotate(calc(var(--r) * 1deg)) rotateX(calc(var(--r) * 2deg)) scale(1); opacity: 1; animation-timing-function: ease-in; }
+  100% { transform: translate(calc((var(--dx) + var(--drift)) * var(--pu)), calc((var(--dy) + var(--fall)) * var(--pu))) rotate(calc(var(--r) * 2.4deg)) rotateX(calc(var(--r) * 5deg)) scale(1); opacity: 0; }
+}
+.swl-reason.is-armed:not(.is-in) :is(.swl-reason-bg, .swl-reason-glow, .swl-reason-sub) { opacity: 0; }
+.swl-reason.is-in .swl-reason-bg { animation: swl-settle 1.6s ease-out 0.5s both; }
+.swl-reason.is-in .swl-reason-glow { animation: swl-pop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s both; }
+.swl-reason.is-in .swl-reason-sub { animation: swl-rise 0.6s ease-out 0.55s both; }
+@keyframes swl-settle { from { opacity: 0; transform: translateY(-8%) scale(1.06); } }
+@keyframes swl-pop { from { opacity: 0; transform: scale(0.55); } }
+@keyframes swl-rise { from { opacity: 0; transform: translateY(calc(16 * var(--u))); } }
 .swl-reason-head { display: flex; flex-direction: column; align-items: center; gap: calc(20 * var(--u)); }
 .swl-reason-glow { display: flex; flex-direction: column; align-items: center; filter: drop-shadow(0 0 calc(11.5 * var(--u)) #002a7e); }
 .swl-reason-why { width: calc(221 * var(--u)); height: calc(75 * var(--u)); margin: calc(12 * var(--u)) 0 calc(-32 * var(--u)); }
@@ -343,6 +365,7 @@
   /* 9 */
   .swl-reason { gap: calc(40 * var(--u)); padding: calc(70 * var(--u)) 0; }
   .swl-reason-bg { width: calc(480 * var(--u)); height: calc(295 * var(--u)); }
+  .swl-burst { height: calc(295 * var(--u)); --pu: calc(var(--u) * 480 / 1080); --su: calc(var(--u) * 0.6); }
   .swl-reason-glow { filter: drop-shadow(0 0 calc(6.9 * var(--u)) #002a7e); }
   .swl-reason-why { width: calc(132.6 * var(--u)); height: calc(45 * var(--u)); margin: calc(7.2 * var(--u)) 0 calc(-20.2 * var(--u)); }
   .swl-reason-title { font-size: calc(50 * var(--u)); }
@@ -376,4 +399,4 @@
 
 /* 랜딩 아래 상담 상자: PC 상담 카드를 경계에서 80px 아래부터 — 원래 사이트 모습과 같게 */
 .page-header-banner > .swl ~ .consultation-options-outer-wrapper .consultation-options-content { padding-top: 115px; }
-.page-header-banner:has(> .swl) { padding-bottom: 475px; }
+.page-header-banner:has(> .swl) { padding-top: 60px; padding-bottom: 475px; } /* 위 60px: 항상 펼쳐진 하위메뉴 바(60px) 아래에서 시작 */
