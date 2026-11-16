@@ -1,13 +1,23 @@
 import type { Metadata } from "next";
 import GuideTabs from "@/components/credit-bank/GuideTabs";
 import { ChevronRight } from "@/components/credit-bank/CreditBankParts";
+import { CbIconFlow } from "@/components/credit-bank/CbFlow";
 
 export const metadata: Metadata = { title: "행정절차 가이드" };
 
 const procedure = (
   <>
     <section className="lx-panel">
-      <img src="/resources/images/guide/guide-1.png" alt="학습자 등록, 학점인정 신청, 학위신청, 학위수여" className="cb-image" />
+      <CbIconFlow
+        size="lg"
+        items={[
+          { icon: "person", label: "학습자 등록" },
+          { icon: "aplus", label: "학점인정 신청" },
+          { icon: "certificate", label: "학위신청" },
+          { icon: "graduation", label: "학위수여" },
+        ]}
+        joins={["arrow", "arrow", "arrow"]}
+      />
       <div className="lx-table-scroll">
         <table className="ds-table lx-table cb-schedule">
           <thead>
