@@ -84,7 +84,7 @@ const schedule = (title: string, number?: number): BoardPost => ({
 });
 
 /** 학사일정 — 이론 과목 / 실습과목 (원본 schedule.html) */
-export const schedulePosts: Record<ScheduleTabKey, BoardPost[]> = {
+const scheduleByTab: Record<ScheduleTabKey, BoardPost[]> = {
   theory: [
     schedule("[공지] 25년 제 4차 평생교육사 자격증 단체 접수 안내"),
     schedule("[2025년 2학기 2차] (07/10 개강반) 학사일정 안내"),
@@ -104,7 +104,12 @@ export const schedulePosts: Record<ScheduleTabKey, BoardPost[]> = {
   ],
 };
 
-export const scheduleDetailHref = (index: number) => `/learning-support/schedule/${index}`;
+/** 상세 주소 id 는 두 탭 글을 이어 붙인 순번 (이론 0~9, 실습 10~) */
+let scheduleSeq = 0;
+export const schedulePosts: Record<ScheduleTabKey, BoardPost[]> = {
+  theory: scheduleByTab.theory.map((p) => ({ ...p, href: `/learning-support/schedule/${scheduleSeq++}` })),
+  practice: scheduleByTab.practice.map((p) => ({ ...p, href: `/learning-support/schedule/${scheduleSeq++}` })),
+};
 
 /** 서식자료실 전체 글 수 (가데이터). 번호는 최신 글부터 이 수에서 1씩 줄어든다 */
 export const FORM_TOTAL = 58;
@@ -130,3 +135,18 @@ export const formPosts: BoardPost[] = [
   // 원본은 1~5번 줄을 강조하고 첫 글에만 링크 — 공지 배지가 없는 글이라 강조는 빼고, 모든 제목을 상세로 잇는다
   href: `/learning-support/forms-data-room/${i + 1}`,
 }));
+
+/**
+ * 목록에서 상세 주소(href)가 같은 글과 앞뒤 글을 찾는다.
+ * 목록이 최신 글부터라서 앞 칸이 다음글, 뒤 칸이 이전글이다.
+ * TODO: API — 글 상세 조회가 이전글/다음글을 함께 돌려주면 이 함수는 없앤다.
+ */
+export function findPostWithSiblings(lists: BoardPost[][], href: string) {
+  for (const posts of lists) {
+    const index = posts.findIndex((p) => p.href === href);
+    if (index < 0) continue;
+    const link = (p?: BoardPost) => (p?.href ? { title: p.title, href: p.href } : undefined);
+    return { post: posts[index], next: link(posts[index - 1]), prev: link(posts[index + 1]) };
+  }
+  return undefined;
+}

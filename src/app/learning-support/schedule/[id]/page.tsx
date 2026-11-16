@@ -1,28 +1,36 @@
 import type { Metadata } from "next";
-import PostDetail from "@/components/learning-support/PostDetail";
+import { notFound } from "next/navigation";
+import PostView from "@/components/learning-support/PostView";
+import SampleBody from "@/components/learning-support/SampleBody";
+import { findPostWithSiblings, schedulePosts } from "@/components/learning-support/boardData";
 import MobilePageBanner from "@/components/layout/MobilePageBanner";
 
 export const metadata: Metadata = { title: "학사일정 상세" };
 
-const TITLE = "[공지] 25년 제4차 평생교육사 자격증 단체 접수 안내";
-const NEXT_TITLE = "[한국어교원] 2024-2학기 성적우수수강생 진로선택 학습자 수기";
+// TODO: API — id 로 학사일정 상세와 이전글/다음글을 조회한다 (지금은 목록 샘플에서 찾고 본문은 원본 샘플)
+export default async function LearningScheduleDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  // 이전글/다음글은 같은 탭(이론 과목 · 실습과목) 안에서만 잇는다
+  const found = findPostWithSiblings(
+    [schedulePosts.theory, schedulePosts.practice],
+    `/learning-support/schedule/${id}`,
+  );
+  if (!found) notFound();
 
-// TODO: params.id 로 학사일정 상세를 조회한다 (지금은 원본 샘플 그대로)
-export default function LearningScheduleDetailPage() {
   return (
     <>
       <MobilePageBanner name="notice-detail" text="학사일정" />
       <main className="wrapper">
-        <PostDetail
-          mobileInfoTitle={TITLE}
-          title={TITLE}
-          date="25.10.21"
+        <PostView
+          title={found.post.title}
+          date={found.post.date}
           fileName="파일명.PDF"
-          bannerAlt="학사일정 배너"
-          mobileNext={{ title: NEXT_TITLE }}
-          desktopNext={NEXT_TITLE}
+          prev={found.prev}
+          next={found.next}
           listHref="/learning-support/schedule"
-        />
+        >
+          <SampleBody bannerAlt="학사일정 배너" />
+        </PostView>
       </main>
     </>
   );
