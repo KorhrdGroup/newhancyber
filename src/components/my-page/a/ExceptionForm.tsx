@@ -7,6 +7,8 @@ import {
   absenceKinds,
   absenceProofs,
   absenceReasons,
+  EXCEPTION_FILE_EXTENSIONS,
+  EXCEPTION_FILE_MAX,
   EXCEPTION_FILE_NOTE,
   EXCEPTION_WEEKS,
   exceptionHalves,
@@ -35,6 +37,7 @@ export default function ExceptionForm({ type, courses }: { type: ExceptionType; 
   const [half, setHalf] = useState("");
   const [round, setRound] = useState("");
   const [weeks, setWeeks] = useState<number[]>([]);
+  const [fileError, setFileError] = useState("");
   const isAbsence = type === "absence";
   const termChosen = Boolean(year && half && round);
   const termStart = termChosen ? exceptionTermStart(year, half, round) : null;
@@ -48,6 +51,21 @@ export default function ExceptionForm({ type, courses }: { type: ExceptionType; 
 
   const toggleWeek = (n: number) =>
     setWeeks(weeks.includes(n) ? weeks.filter((w) => w !== n) : [...weeks, n].sort((a, b) => a - b));
+
+  /** 원본처럼 고를 때 바로 용량·확장자를 검사하고, 걸리면 칸을 비운다 */
+  const checkFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    setFileError("");
+    if (!file) return;
+    const ext = file.name.split(".").pop()?.toLowerCase() ?? "";
+    let error = "";
+    if (file.size >= EXCEPTION_FILE_MAX) error = "파일은 최대 10MB까지 올릴 수 있습니다.";
+    else if (!EXCEPTION_FILE_EXTENSIONS.includes(ext)) error = "올릴 수 없는 파일 형식입니다. 아래 확장자의 파일만 올릴 수 있습니다.";
+    if (error) {
+      setFileError(error);
+      e.target.value = "";
+    }
+  };
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -220,7 +238,12 @@ export default function ExceptionForm({ type, courses }: { type: ExceptionType; 
             ))}
           </select>
         )}
-        <FileField id="ex-file" />
+        <FileField
+          id="ex-file"
+          accept={EXCEPTION_FILE_EXTENSIONS.map((ext) => `.${ext}`).join(",")}
+          onChange={checkFile}
+        />
+        {fileError && <p className="pp-note ds-mt-4 ds-text-danger">{fileError}</p>}
         <p className="pp-note ds-mt-4">{EXCEPTION_FILE_NOTE}</p>
       </div>
 
