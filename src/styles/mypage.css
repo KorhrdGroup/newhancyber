@@ -90,6 +90,7 @@
 .mp-week[aria-pressed="true"] .mp-week-date { color: var(--color-text-brand); }
 .mp-weeks-picked { margin-bottom: var(--space-12); font-size: 14px; color: var(--color-text-secondary); }
 .mp-weeks-picked strong { margin-left: var(--space-8); font-weight: 600; color: var(--color-text-brand); }
+.mp-weeks-gap { margin-bottom: var(--space-12); padding: var(--space-8) var(--space-12); border-radius: var(--radius-6); background: var(--color-bg-warning-subtle); font-size: 13px; color: var(--color-text-warning); }
 .mp-proof { max-width: 240px; margin-bottom: var(--space-8); }
 
 @media (max-width: 768px) {

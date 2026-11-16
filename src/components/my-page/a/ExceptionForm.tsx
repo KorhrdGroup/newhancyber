@@ -54,6 +54,9 @@ export default function ExceptionForm({ type, courses }: { type: ExceptionType; 
     setEndDate(picked.length ? toInput(weekRange(start, picked[picked.length - 1]).to) : "");
   };
 
+  /** 고른 첫 주차 ~ 마지막 주차 사이에서 빠진 주차 (신청 기간에는 들어간다) */
+  const gapWeeks = weeks.length > 1 ? WEEKS.filter((n) => n > weeks[0] && n < weeks[weeks.length - 1] && !weeks.includes(n)) : [];
+
   const toggleWeek = (n: number) => {
     const next = weeks.includes(n) ? weeks.filter((w) => w !== n) : [...weeks, n].sort((a, b) => a - b);
     setWeeks(next);
@@ -207,6 +210,12 @@ export default function ExceptionForm({ type, courses }: { type: ExceptionType; 
             {weeks.length > 0 && (
               <p className="mp-weeks-picked">
                 선택한 주차 <strong>{weeks.map((n) => `${n}주차`).join(", ")}</strong>
+              </p>
+            )}
+            {gapWeeks.length > 0 && (
+              <p className="mp-weeks-gap" role="status">
+                고르지 않은 {gapWeeks.map((n) => `${n}주차`).join(", ")}도 신청 기간에 들어갑니다. 떨어진 기간은 따로
+                신청하거나 신청 기간을 고쳐 주세요.
               </p>
             )}
           </>
