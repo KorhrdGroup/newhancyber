@@ -117,7 +117,7 @@
 
 /* 5. 다양한 기관으로 취업 */
 .swl-places { gap: calc(20 * var(--u)); padding: calc(100 * var(--u)) 0; background: linear-gradient(180deg, #cde3ff 11.012%, #73a5fd); }
-.swl-places-bg { position: absolute; z-index: -1; left: 50%; bottom: calc(-132 * var(--u)); width: calc(1079.5 * var(--u)); height: calc(1619 * var(--u)); transform: translateX(-50%); object-fit: cover; mix-blend-mode: multiply; }
+.swl-places-bg { position: absolute; z-index: -1; left: 50%; bottom: calc(-132 * var(--u)); width: calc(1079.5 * var(--u)); height: calc(1619 * var(--u)); transform: translateX(-33.3333%); object-fit: cover; mix-blend-mode: multiply; }
 .swl-places .swl-heading { margin-top: 0; }
 .swl-places-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: calc(16 * var(--u)); width: calc(740 * var(--u)); margin-top: 0; }
 .swl-place { display: flex; flex-direction: column; align-items: center; justify-content: center; box-sizing: border-box; width: calc(230 * var(--u)); height: calc(200 * var(--u)); padding: 0 calc(20 * var(--u)); border-radius: calc(10 * var(--u)); background: #fff; }
@@ -127,7 +127,7 @@
 
 /* 6. 공신력 있는 전문가로 진출 */
 .swl-careers { gap: calc(20 * var(--u)); padding: calc(100 * var(--u)) 0; background: #115aed; }
-.swl-careers-bg { position: absolute; z-index: -2; left: 50%; top: -4.56%; height: 104.56%; aspect-ratio: 4096 / 2726; transform: translateX(-50%); object-fit: cover; mix-blend-mode: overlay; }
+.swl-careers-bg { position: absolute; z-index: -2; left: 50%; top: -4.56%; height: 104.56%; aspect-ratio: 4096 / 2726; transform: translateX(-33.3333%); object-fit: cover; mix-blend-mode: overlay; }
 .swl-careers-blur { position: absolute; z-index: -1; inset: 0; background: rgba(217, 217, 217, 0.01); backdrop-filter: blur(calc(3 * var(--u))); -webkit-backdrop-filter: blur(calc(3 * var(--u))); }
 .swl-career { display: flex; align-items: center; gap: calc(20 * var(--u)); box-sizing: border-box; width: calc(740 * var(--u)); padding: calc(20 * var(--u)); border-radius: calc(8 * var(--u)); background: #fff; text-align: left; }
 .swl-career > img { flex: none; width: calc(220 * var(--u)); height: calc(150 * var(--u)); border-radius: calc(8 * var(--u)); object-fit: cover; }
@@ -171,7 +171,13 @@
 .swl-compete-gap em { color: #115aed; }
 .swl-chart-source--compete { font-size: calc(14 * var(--u)); line-height: normal !important; }
 .swl-pay-strip { position: relative; flex: none; width: calc(1080 * var(--u)); height: calc(155 * var(--u)); }
-.swl-pay-row { position: absolute; display: flex; gap: calc(10 * var(--u)); }
+/* 급여 카드 두 줄: 윗줄은 왼쪽으로, 아랫줄은 오른쪽으로 천천히 흐름. 카드 간격은 gap 대신 margin 으로 둬야 1/3 이동이 딱 한 벌 길이가 된다 */
+.swl-pay-row { position: absolute; display: flex; --gap: calc(10 * var(--u)); animation: swl-flow-left 40s linear infinite; will-change: transform; }
+.swl-pay-row--2 { animation-name: swl-flow-right; }
+.swl-pay-row li { flex: none; margin-right: var(--gap); }
+@keyframes swl-flow-left { from { transform: translateX(0); } to { transform: translateX(-33.3333%); } }
+@keyframes swl-flow-right { from { transform: translateX(-33.3333%); } to { transform: translateX(0); } }
+@media (prefers-reduced-motion: reduce) { .swl-pay-row { animation: none; } }
 .swl-pay-row--1 { left: calc(-70 * var(--u)); top: calc(3 * var(--u)); }
 .swl-pay-row--2 { left: calc(-40 * var(--u)); top: calc(83 * var(--u)); }
 .swl-pay-row li { display: flex; flex-direction: column; align-items: flex-start; gap: calc(10 * var(--u)); box-sizing: border-box; width: calc(180 * var(--u)); padding: calc(16 * var(--u)) calc(20 * var(--u)); border-radius: calc(6 * var(--u)); background: #fff; font-size: calc(12 * var(--u)); line-height: normal; white-space: nowrap; }
@@ -327,7 +333,7 @@
   .swl-compete-gap { font-size: calc(10 * var(--u)); }
   .swl-chart-source--compete { font-size: calc(8 * var(--u)); }
   .swl-pay-strip { width: calc(480 * var(--u)); height: calc(101.4 * var(--u)); }
-  .swl-pay-row { gap: calc(5 * var(--u)); }
+  .swl-pay-row { --gap: calc(5 * var(--u)); }
   .swl-pay-row--1 { left: calc(-31.111 * var(--u)); top: calc(0.84 * var(--u)); }
   .swl-pay-row--2 { left: calc(-17.778 * var(--u)); top: calc(53.4 * var(--u)); }
   .swl-pay-row li { gap: calc(4 * var(--u)); width: calc(120 * var(--u)); padding: calc(10 * var(--u)); border-radius: calc(4 * var(--u)); font-size: calc(10 * var(--u)); }

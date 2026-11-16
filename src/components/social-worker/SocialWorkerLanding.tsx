@@ -362,12 +362,15 @@ export default function SocialWorkerLanding() {
           <div className="swl-pay-strip">
             {salaryCards.map((row, r) => (
               <ul key={r} className={`swl-pay-row swl-pay-row--${r + 1}`}>
-                {row.map(([title, pay]) => (
-                  <li key={title}>
-                    <strong>{title}</strong>
-                    <span>{pay}</span>
-                  </li>
-                ))}
+                {/* 같은 카드를 세 벌 이어 붙여, 한 벌(1/3)만큼 밀면 처음과 똑같아져 끊김 없이 계속 흐른다 */}
+                {[0, 1, 2].flatMap((copy) =>
+                  row.map(([title, pay]) => (
+                    <li key={`${copy}${title}`} aria-hidden={copy > 0 || undefined}>
+                      <strong>{title}</strong>
+                      <span>{pay}</span>
+                    </li>
+                  )),
+                )}
               </ul>
             ))}
             <span className="swl-pay-dim" aria-hidden />
