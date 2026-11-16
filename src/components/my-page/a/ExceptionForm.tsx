@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import DraftNote from "@/components/common/DraftNote";
 import {
   absenceKinds,
@@ -34,6 +34,8 @@ export default function ExceptionForm({ type, courses }: { type: ExceptionType; 
   const [half, setHalf] = useState("");
   const [round, setRound] = useState("");
   const [weeks, setWeeks] = useState<number[]>([]);
+  const [fileName, setFileName] = useState("");
+  const fileRef = useRef<HTMLInputElement>(null);
   const isAbsence = type === "absence";
   const termChosen = Boolean(year && half && round);
   const termStart = termChosen ? exceptionTermStart(year, half, round) : null;
@@ -219,7 +221,37 @@ export default function ExceptionForm({ type, courses }: { type: ExceptionType; 
             ))}
           </select>
         )}
-        <input id="ex-file" type="file" className="mp-file" />
+        {/* 입력 칸 모양: 파일 이름(없으면 안내) + 지우기 + 파일 선택 버튼. 실제 file 입력은 숨기고 label 로 연다 */}
+        <div className="mp-file-field">
+          <input
+            id="ex-file"
+            ref={fileRef}
+            type="file"
+            className="mp-file-input"
+            onChange={(e) => setFileName(e.target.files?.[0]?.name ?? "")}
+          />
+          <span className={fileName ? "mp-file-name" : "mp-file-name mp-file-name--empty"}>
+            {fileName || "선택된 파일 없음"}
+          </span>
+          {fileName && (
+            <button
+              type="button"
+              className="mp-file-clear"
+              aria-label="첨부한 파일 지우기"
+              onClick={() => {
+                if (fileRef.current) fileRef.current.value = "";
+                setFileName("");
+              }}
+            >
+              <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+                <path d="M3.5 3.5l7 7m0-7l-7 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
+            </button>
+          )}
+          <label htmlFor="ex-file" className="ds-btn ds-btn--secondary ds-btn--sm mp-file-btn">
+            파일 선택
+          </label>
+        </div>
         <p className="pp-note ds-mt-4">{EXCEPTION_FILE_NOTE}</p>
       </div>
 
