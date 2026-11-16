@@ -311,7 +311,8 @@ export const absenceReasons = [
   "천재지변으로 인한 사고",
 ];
 export const absenceProofs = ["입원확인서", "청첩장 또는 혼인신고서", "사망진단서", "동원훈련소집증", "기타"];
-export const EXCEPTION_FILE_NOTE = "(첨부파일 최대 용량 : 10MB / 확장자 : doc, pdf, hwp, ppt, xls, txt, jpg, png, gif)";
+/** 원본 absentApply.asp 의 실제 확장자 검사(expExractAllUsr) 목록대로. 원본 화면 문구(ppt·txt·gif 포함)는 검사와 달랐음 */
+export const EXCEPTION_FILE_NOTE = "(첨부파일 최대 용량 : 10MB / 확장자 : jpg, jpeg, png, pdf, hwp, hwpx, doc, docx, xls, xlsx)";
 
 export type ExceptionStatus = "접수" | "처리 중" | "승인" | "반려";
 
