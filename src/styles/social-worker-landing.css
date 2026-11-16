@@ -399,4 +399,4 @@
 
 /* 랜딩 아래 상담 상자: PC 상담 카드를 경계에서 80px 아래부터 — 원래 사이트 모습과 같게 */
 .page-header-banner > .swl ~ .consultation-options-outer-wrapper .consultation-options-content { padding-top: 115px; }
-.page-header-banner:has(> .swl) { padding-top: 60px; padding-bottom: 475px; } /* 위 60px: 항상 펼쳐진 하위메뉴 바(60px) 아래에서 시작 */
+.page-header-banner:has(> .swl) { padding-top: 59px; padding-bottom: 475px; } /* 위 59px: 항상 펼쳐진 하위메뉴 바(60px)가 헤더 아래 1px 선 위에서 시작하므로, 바 바로 아래에 틈 없이 붙도록 */
