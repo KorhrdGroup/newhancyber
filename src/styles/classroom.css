@@ -114,6 +114,26 @@
 .ds-textarea:focus { outline: none; border-color: var(--color-border-focus); }
 .ds-check { display: inline-flex; align-items: center; gap: var(--space-8); font-size: 14px; color: var(--color-text-default); cursor: pointer; }
 .ds-check input { width: 18px; height: 18px; accent-color: var(--color-bg-brand); }
+/* Figma 체크박스: 20px · 모서리 4 · 체크 10px. 기본은 회색 테두리에 연회색 체크, 선택하면 파란 바탕에 흰 체크 */
+.ds-check input[type="checkbox"] {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-4);
+  background: var(--color-bg-default) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 7.14'%3E%3Cpath fill='%23d9d9d9' d='M9.775.22a.75.75 0 0 1 0 1.06L4.153 6.902a.8.8 0 0 1-1.131 0L.229 4.109A.75.75 0 0 1 1.29 3.049l2.297 2.298L8.714.22a.75.75 0 0 1 1.061 0Z'/%3E%3C/svg%3E") center / 10px auto no-repeat;
+  cursor: pointer;
+}
+.ds-check input[type="checkbox"]:checked {
+  border-color: var(--color-border-brand);
+  background-color: var(--color-border-brand);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 7.14'%3E%3Cpath fill='%23ffffff' d='M9.775.22a.75.75 0 0 1 0 1.06L4.153 6.902a.8.8 0 0 1-1.131 0L.229 4.109A.75.75 0 0 1 1.29 3.049l2.297 2.298L8.714.22a.75.75 0 0 1 1.061 0Z'/%3E%3C/svg%3E");
+}
+.ds-check input[type="checkbox"]:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
+.ds-check input[type="checkbox"]:disabled { background-color: var(--color-bg-disabled); cursor: not-allowed; }
 .ds-label { display: block; margin-bottom: var(--space-8); font-size: 14px; font-weight: 600; color: var(--color-text-strong); }
 
 /* ---------- 페이지 번호 (Figma Pagination) — 표 아래 가운데, 칸 32×32 ---------- */

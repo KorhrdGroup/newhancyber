@@ -16,7 +16,7 @@ import {
 const WEEKS = Array.from({ length: 16 }, (_, i) => `${i + 1}주차`);
 
 /** 필수 칸 표시 */
-const Req = () => <span className="mp-req">* </span>;
+const Req = () => <span className="mp-req">*</span>;
 
 /**
  * U31 각종 예외 신청서 — 원본 /stdMng/exception.asp(공인인증서·중복 PC), absentApply.asp(공결 및 추가시험) 와 같은 칸.
@@ -43,8 +43,7 @@ export default function ExceptionForm({ type, courses }: { type: ExceptionType; 
     <form onSubmit={submit} className="pp-box">
       <h3 className="pp-box-title">{exceptionLabels[type]} 신청</h3>
       <p className="pp-note mp-req-note">
-        <Req />
-        표시는 필수 입력 사항입니다.
+        <Req /> 표시는 필수 입력 사항입니다.
       </p>
 
       {isAbsence && (
@@ -63,8 +62,8 @@ export default function ExceptionForm({ type, courses }: { type: ExceptionType; 
 
       <div className="pp-field">
         <span className="ds-label">
-          <Req />
           학기 구분
+          <Req />
         </span>
         <div className="mp-term">
           <select className="ds-select" aria-label="연도" value={year} onChange={(e) => setYear(e.target.value)}>
@@ -90,8 +89,8 @@ export default function ExceptionForm({ type, courses }: { type: ExceptionType; 
 
       <div className="pp-field">
         <span className="ds-label">
-          <Req />
           신청 과목
+          <Req />
         </span>
         {termChosen ? (
           // TODO: API 고른 학기의 수강 과목 조회
@@ -104,15 +103,15 @@ export default function ExceptionForm({ type, courses }: { type: ExceptionType; 
             ))}
           </div>
         ) : (
-          <p className="pp-note">연도, 학기, 기수를 선택해 주세요.</p>
+          <p className="mp-empty-field">연도, 학기, 기수를 먼저 선택하면 수강 과목이 나옵니다.</p>
         )}
       </div>
 
       {isAbsence ? (
         <div className="pp-field">
           <span className="ds-label">
-            <Req />
             공결 사유
+            <Req />
           </span>
           <div className="mp-choices mp-choices--column">
             {absenceReasons.map((r, i) => (
@@ -126,8 +125,8 @@ export default function ExceptionForm({ type, courses }: { type: ExceptionType; 
       ) : (
         <div className="pp-field">
           <label className="ds-label" htmlFor="ex-reason">
-            <Req />
             예외 사유
+            <Req />
           </label>
           <input id="ex-reason" className="ds-input" />
         </div>
@@ -135,8 +134,8 @@ export default function ExceptionForm({ type, courses }: { type: ExceptionType; 
 
       <div className="pp-field">
         <span className="ds-label">
-          <Req />
           {isAbsence ? "신청 기간 및 주차" : "신청 기간"}
+          <Req />
         </span>
         <div className="pp-row mp-dates">
           <input type="date" className="ds-input" aria-label="시작일" />
