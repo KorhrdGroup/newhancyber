@@ -44,12 +44,13 @@
 .cb-page .lx-table-scroll + .lx-notes { margin-top: var(--space-12); }
 /* 글이 긴 표는 왼쪽 정렬, 날짜·숫자 표는 가운데 */
 .cb-page .lx-table td { text-align: left; }
-.cb-schedule td,
-.cb-quarter td,
-.cb-credit-limit td,
-.cb-semester td,
-.cb-credit-recognition td,
-.cb-schedule-guide td,
+/* (.cb-page .lx-table td 보다 앞서도록 .cb-page 를 붙인다) */
+.cb-page .cb-schedule td,
+.cb-page .cb-quarter td,
+.cb-page .cb-credit-limit td,
+.cb-page .cb-semester td,
+.cb-page .cb-credit-recognition td,
+.cb-page .cb-schedule-guide td,
 .cb-page .lx-table td.cb-category,
 .cb-page .lx-table td.cb-num { text-align: center; }
 .cb-category { font-weight: 600; color: var(--color-text-strong); background: var(--color-bg-subtle); }
