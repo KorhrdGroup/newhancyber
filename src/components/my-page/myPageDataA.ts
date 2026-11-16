@@ -245,7 +245,7 @@ export const demandSurveys: DemandSurvey[] = [
       { id: "q1", type: "radio", text: "다음 학기에도 수강할 계획이 있나요?", options: ["네, 수강할 예정이에요", "아직 정하지 못했어요", "이번 학기로 마칠 예정이에요"] },
       { id: "q2", type: "checkbox", text: "열렸으면 하는 과목을 모두 골라 주세요.", options: ["사회복지실천기술론", "노인복지론", "아동복지론", "정신건강론", "가족복지론"] },
       { id: "q3", type: "radio", text: "한 학기에 몇 과목을 듣고 싶나요?", options: ["1~2과목", "3~4과목", "5과목 이상"] },
-      { id: "q4", type: "textarea", text: "그 밖에 바라는 점이 있으면 적어 주세요.", placeholder: "예: 주말에 실시간 특강이 있으면 좋겠어요." },
+      { id: "q4", type: "textarea", text: "그 밖에 바라는 점이 있으면 적어 주세요. (선택)", placeholder: "예: 주말에 실시간 특강이 있으면 좋겠어요." },
     ],
   },
   {
