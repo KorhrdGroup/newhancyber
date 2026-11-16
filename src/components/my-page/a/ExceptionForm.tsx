@@ -40,11 +40,13 @@ export default function ExceptionForm({ type, courses }: { type: ExceptionType; 
   };
 
   return (
-    <form onSubmit={submit} className="pp-box">
-      <h3 className="pp-box-title">{exceptionLabels[type]} 신청</h3>
-      <p className="pp-note mp-req-note">
-        <Req /> 표시는 필수 입력 사항입니다.
-      </p>
+    <form onSubmit={submit} className="pp-box mp-form">
+      <div className="mp-form-head">
+        <h3 className="pp-box-title">{exceptionLabels[type]} 신청</h3>
+        <p className="pp-note">
+          <Req /> 표시는 필수 입력 사항입니다.
+        </p>
+      </div>
 
       {isAbsence && (
         <div className="pp-field">

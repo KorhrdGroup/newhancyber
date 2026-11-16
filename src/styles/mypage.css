@@ -68,8 +68,13 @@
 .mp-req { color: var(--color-text-danger); }
 .ds-label .mp-req { margin-left: var(--space-4); }
 /* 아직 고를 수 없는 칸: 입력 칸과 같은 높이·모서리, 점선 테두리 + 옅은 회색 바탕 */
-.mp-empty-field { display: flex; align-items: center; min-height: var(--size-control-md); padding: 0 var(--space-12); border: 1px dashed var(--color-border-strong); border-radius: var(--radius-6); background: var(--color-bg-subtle); font-size: 14px; color: var(--color-text-placeholder); }
-.mp-req-note { margin-bottom: var(--space-20); }
+.mp-empty-field { display: flex; align-items: center; min-height: var(--size-control-md); padding: var(--space-8) var(--space-12); border: 1px dashed var(--color-border-strong); border-radius: var(--radius-6); background: var(--color-bg-subtle); font-size: 14px; color: var(--color-text-placeholder); }
+/* 신청서 머리: 제목 왼쪽, 필수 안내 오른쪽 위 */
+.mp-form-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: var(--space-4) var(--space-16); margin-bottom: var(--space-24); }
+.mp-form-head .pp-note { white-space: nowrap; }
+.mp-form-head .pp-box-title { margin: 0; }
+/* 신청서: 항목 사이를 넓게 (공통 16 → 32) */
+.mp-form .pp-field + .pp-field { margin-top: var(--space-32); }
 .mp-dates .ds-input { flex: 0 1 200px; min-width: 0; }
 .mp-choices--column { flex-direction: column; }
 .mp-term { display: grid; grid-template-columns: repeat(3, minmax(0, 160px)); gap: var(--space-8); }
