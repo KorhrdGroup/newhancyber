@@ -81,6 +81,31 @@
 /* 항목 | 값 형태의 세로 표 */
 .ds-table--info th { width: 160px; text-align: left; }
 .ds-table--info td { text-align: left; }
+/* 휴대폰에서 줄마다 카드처럼 쌓는 표 — 첫 칸(ds-table-stack-head)이 카드 제목, 나머지 칸은 data-label 을 앞에 붙인다.
+   마이페이지 결제·환불·장학, 평생교육바우처가 함께 쓴다 */
+@media (max-width: 480px) {
+  .ds-table--stack thead { display: none; }
+  .ds-table--stack,
+  .ds-table--stack tbody,
+  .ds-table--stack tr,
+  .ds-table--stack td { display: block; width: 100%; }
+  .ds-table--stack { border-top: 0; }
+  .ds-table--stack tr { padding: var(--space-12) 0; border-bottom: 1px solid var(--color-border-default); }
+  .ds-table--stack tr:first-child { border-top: 1px solid var(--color-border-default); }
+  .ds-table--stack td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-12);
+    height: auto;
+    padding: var(--space-4) 0;
+    border-bottom: 0;
+    text-align: right;
+  }
+  .ds-table--stack td::before { content: attr(data-label); flex-shrink: 0; font-size: 13px; color: var(--color-text-secondary); text-align: left; }
+  .ds-table--stack td.ds-table-stack-head { font-size: 16px; font-weight: 600; color: var(--color-text-strong); text-align: left; }
+  .ds-table--stack td.ds-table-stack-head::before { display: none; }
+}
 
 /* ---------- 입력 칸 (Figma TextField / Checkbox) ---------- */
 .ds-input,

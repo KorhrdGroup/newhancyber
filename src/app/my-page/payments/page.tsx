@@ -5,7 +5,6 @@ import { formatWon, getPayments, type PaymentStatus } from "@/components/my-clas
 import PopupButton from "@/components/my-classroom/PopupButton";
 import MyPageShell from "@/components/my-page/MyPageShell";
 import { myPagePaymentTabs } from "@/lib/navigation";
-import "@/styles/extra-pages.css";
 
 export const metadata: Metadata = { title: "결제 내역 - 마이페이지" };
 
@@ -24,9 +23,9 @@ export default function PaymentsPage() {
     <MyPageShell title="결제 내역" desc="수강료 결제와 환불 상태를 확인할 수 있어요.">
       <PageTabs items={myPagePaymentTabs} />
       {list.length === 0 ? (
-        <p className="ex-empty">결제 내역이 없어요.</p>
+        <p className="cr-empty">결제 내역이 없어요.</p>
       ) : (
-        <table className="ds-table ex-rtable">
+        <table className="ds-table ds-table--stack">
           <thead>
             <tr>
               <th className="is-left">결제명</th>
@@ -41,7 +40,7 @@ export default function PaymentsPage() {
           <tbody>
             {list.map((p) => (
               <tr key={p.id}>
-                <td className="ex-rtable-head is-left">{p.title}</td>
+                <td className="ds-table-stack-head is-left">{p.title}</td>
                 <td data-label="결제일">{p.paidAt ?? "-"}</td>
                 <td data-label="결제 과목">
                   {p.courses[0].title}
@@ -60,7 +59,7 @@ export default function PaymentsPage() {
           </tbody>
         </table>
       )}
-      <p className="ex-note">
+      <p className="pp-note ds-mt-12">
         영수증 출력과 환불 신청은 결제 상세에서 할 수 있어요.{" "}
         <Link href="/course-registration/refund">환불 규정 보기</Link>
       </p>

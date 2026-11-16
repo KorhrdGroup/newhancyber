@@ -49,12 +49,12 @@ export default function PaymentScholarshipPage() {
       </div>
 
       {list.length === 0 ? (
-        <p className="ex-empty">아직 받은 장학금이 없어요.</p>
+        <p className="cr-empty">아직 받은 장학금이 없어요.</p>
       ) : (
-        <table className="ds-table ex-rtable">
+        <table className="ds-table ds-table--stack">
           <thead>
             <tr>
-              <th>장학명</th>
+              <th className="is-left">장학명</th>
               <th>학기</th>
               <th>장학 금액</th>
               <th>지급 방식</th>
@@ -64,7 +64,7 @@ export default function PaymentScholarshipPage() {
           <tbody>
             {list.map((s, i) => (
               <tr key={i}>
-                <td className="ex-rtable-head">{s.name}</td>
+                <td className="ds-table-stack-head is-left">{s.name}</td>
                 <td data-label="학기">{s.semester}</td>
                 <td data-label="장학 금액">{won(s.amount)}</td>
                 <td data-label="지급 방식">{s.method}</td>
@@ -76,7 +76,7 @@ export default function PaymentScholarshipPage() {
           </tbody>
         </table>
       )}
-      <p className="ex-note">수강료 감면 장학금은 해당 학기 결제 금액에서 바로 빠지고, 계좌 입금은 학기 종료 후 한 달 안에 보내 드려요.</p>
+      <p className="pp-note ds-mt-12">수강료 감면 장학금은 해당 학기 결제 금액에서 바로 빠지고, 계좌 입금은 학기 종료 후 한 달 안에 보내 드려요.</p>
     </MyPageShell>
   );
 }

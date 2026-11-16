@@ -5,7 +5,6 @@ import { sampleRefunds, type RefundStatus } from "@/components/course-registrati
 import PopupButton from "@/components/my-classroom/PopupButton";
 import MyPageShell from "@/components/my-page/MyPageShell";
 import { myPagePaymentTabs } from "@/lib/navigation";
-import "@/styles/extra-pages.css";
 
 export const metadata: Metadata = { title: "환불 내역 - 마이페이지" };
 
@@ -23,12 +22,12 @@ export default function PaymentRefundPage() {
     <MyPageShell title="환불 내역" desc="환불 신청과 처리 상태를 확인할 수 있어요.">
       <PageTabs items={myPagePaymentTabs} />
       {list.length === 0 ? (
-        <p className="ex-empty">환불 신청 내역이 없어요.</p>
+        <p className="cr-empty">환불 신청 내역이 없어요.</p>
       ) : (
-        <table className="ds-table ex-rtable">
+        <table className="ds-table ds-table--stack">
           <thead>
             <tr>
-              <th>결제명</th>
+              <th className="is-left">결제명</th>
               <th>신청일</th>
               <th>환불 금액</th>
               <th>상태</th>
@@ -38,7 +37,7 @@ export default function PaymentRefundPage() {
           <tbody>
             {list.map((r) => (
               <tr key={r.paymentId}>
-                <td className="ex-rtable-head is-left">{r.title}</td>
+                <td className="ds-table-stack-head is-left">{r.title}</td>
                 <td data-label="신청일">{r.appliedAt}</td>
                 <td data-label="환불 금액">{r.amount.toLocaleString("ko-KR")}원</td>
                 <td data-label="상태">
@@ -57,7 +56,7 @@ export default function PaymentRefundPage() {
           </tbody>
         </table>
       )}
-      <p className="ex-note">
+      <p className="pp-note ds-mt-12">
         환불 금액은 신청일과 수강 진행 정도에 따라 달라져요.{" "}
         <Link href="/course-registration/refund">환불 규정 보기</Link>
       </p>

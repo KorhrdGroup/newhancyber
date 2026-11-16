@@ -30,31 +30,6 @@
 .ex-empty { padding: var(--space-48) 0; font-size: 14px; color: var(--color-text-secondary); text-align: center; }
 .ex-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-8); margin-top: var(--space-24); }
 
-/* 모바일에서 표를 카드처럼 (td 의 data-label 을 앞에 붙인다) */
-@media (max-width: 480px) {
-  .ex-rtable thead { display: none; }
-  .ex-rtable,
-  .ex-rtable tbody,
-  .ex-rtable tr,
-  .ex-rtable td { display: block; width: 100%; }
-  .ex-rtable { border-top: 0; }
-  .ex-rtable tr { padding: var(--space-12) 0; border-bottom: 1px solid var(--color-border-default); }
-  .ex-rtable tr:first-child { border-top: 1px solid var(--color-border-default); }
-  .ex-rtable td {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: var(--space-12);
-    height: auto;
-    padding: var(--space-4) 0;
-    border-bottom: 0;
-    text-align: right;
-  }
-  .ex-rtable td::before { content: attr(data-label); flex-shrink: 0; font-size: 13px; color: var(--color-text-secondary); text-align: left; }
-  .ex-rtable td.ex-rtable-head { font-size: 16px; font-weight: 600; color: var(--color-text-strong); text-align: left; }
-  .ex-rtable td.ex-rtable-head::before { display: none; }
-}
-
 /* ---------- 결제하기 ---------- */
 .ex-pay { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: var(--space-24); align-items: start; margin-top: var(--space-24); }
 .ex-pay-main { display: flex; flex-direction: column; gap: var(--space-16); }
