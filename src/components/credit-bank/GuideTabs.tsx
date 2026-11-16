@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import ButtonTabs from "@/components/common/ButtonTabs";
+import DraftNote from "@/components/common/DraftNote";
 import GuideSlider, { type GuideSlide } from "./GuideSlider";
 
 type InfoTabKey = "procedure" | "registration" | "credit" | "degree";
@@ -92,6 +93,10 @@ export default function GuideTabs({ panels }: { panels: Record<InfoTabKey, React
 
         {activeTab === "download" && (
           <div role="tabpanel">
+            <DraftNote>
+              가이드 그림과 PDF 파일이 예전 덧셈원격평생교육원 자료입니다. 한평생원격교육원 자료로 다시 확인해서 바꿔야
+              합니다.
+            </DraftNote>
             <ButtonTabs items={guides} active={activeGuide} onSelect={setActiveGuide} ariaLabel="가이드 종류" className="cb-guide-kinds" />
             {guides
               .filter((guide) => guide.key === activeGuide)
