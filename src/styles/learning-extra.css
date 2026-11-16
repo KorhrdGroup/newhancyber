@@ -92,6 +92,8 @@
 .lx-inquiry-q .ds-accordion-text { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 /* 열린 문의 줄은 회색으로 선택된 것처럼 (호버와 같은 색) */
 .lx-inquiry-list .ds-accordion-item.is-open .lx-inquiry-q { background-color: var(--color-bg-subtle); }
+/* 이의신청 목록: 제목 앞 평가 항목·신청 구분 */
+.lx-inquiry-cat { margin-right: var(--space-8); font-weight: 400; color: var(--color-text-secondary); }
 .lx-inquiry-date { flex-shrink: 0; font-size: 14px; color: var(--color-text-secondary); font-variant-numeric: tabular-nums; }
 .lx-inquiry-detail { padding: 0 var(--space-20) var(--space-20) calc(var(--space-20) + 72px + var(--space-12)); }
 .lx-inquiry-detail > .lx-post-body:first-child { padding-top: var(--space-20); }
@@ -126,6 +128,8 @@
 .lx-answer-head { display: flex; align-items: baseline; gap: var(--space-8); }
 .lx-answer-head strong { font-size: 16px; color: var(--color-text-brand); }
 .lx-answer-head .lx-post-meta { margin-top: 0; }
+.lx-answer-result { font-weight: 600; color: var(--color-text-strong); }
+.lx-answer-result--danger { color: var(--color-text-danger); }
 .lx-answer--waiting { background: var(--color-bg-subtle); text-align: center; }
 /* 답변 대기: 두 줄 모두 같은 크기의 작은 글씨, 첫 줄만 굵게 */
 .lx-answer--waiting p { font-size: 14px; line-height: 1.6; color: var(--color-text-secondary); }
