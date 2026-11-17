@@ -375,7 +375,11 @@ function WhyHanpyeong() {
                 className={`sh-whyc-panel${tab.compact ? " sh-whyc-panel--guide" : ""}${open ? " is-open" : ""}`}
               >
                 <p className="sh-whyc-sub">{tab.subtitle}</p>
-                <ul className="sh-why-items">
+                {/* PC: 항목 수만큼 칸을 나눠 판을 꽉 채운다 (3개 → 3칸, 2개 → 2칸, 6개 → 3칸 두 줄) */}
+                <ul
+                  className="sh-why-items"
+                  style={{ "--why-cols": Math.min(tab.cards.length, 3) } as React.CSSProperties}
+                >
                   {tab.cards.map((card) => (
                     <li key={card.title}>
                       <img src={`${IMG}/main/support/${card.icon}`} alt="" />
