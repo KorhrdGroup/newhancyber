@@ -519,7 +519,7 @@ function WhyHanpyeong() {
                     <li key={card.title}>
                       <img src={`${IMG}/main/support/${card.icon}`} alt="" />
                       <span>
-                        <b>{card.title}</b>
+                        <b>{card.short ?? card.title}</b>
                         {card.lines.map((line) => (
                           <small key={line}>{line}</small>
                         ))}

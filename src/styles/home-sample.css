@@ -517,10 +517,16 @@
 .sh-whyc-panel--pair .sh-why-items small { font-size: 14px; line-height: 1.5; }
 /* 가이드 6개: 세로로 쌓여 빽빽하던 칸 → 3칸 × 2줄은 그대로, 아이콘 왼쪽 가로 배치로 (바탕은 다른 탭과 같은 회색) */
 .sh-whyc-panel--guide .sh-why-items { gap: 12px; }
-.sh-whyc-panel--guide .sh-why-items li { flex-direction: row; justify-content: flex-start; gap: 14px; padding: 0 18px; text-align: left; }
+.sh-whyc-panel--guide .sh-why-items li { flex-direction: row; justify-content: flex-start; gap: 12px; padding: 0 16px; text-align: left; }
 .sh-whyc-panel--guide .sh-why-items span { align-items: flex-start; }
-.sh-whyc-panel--guide .sh-why-items img { width: 44px; height: 44px; }
-.sh-whyc-panel--guide .sh-why-items b { font-size: 15px; line-height: 1.35; }
+.sh-whyc-panel--guide .sh-why-items img { width: 40px; height: 40px; }
+/* 가이드 이름은 모두 한 줄 — 가로 칸에 다 안 들어가는 폭(1279px 이하)에선 아래에서 세로 칸으로 바꾼다 */
+.sh-whyc-panel--guide .sh-why-items b { font-size: 15px; line-height: 1.35; white-space: nowrap; }
+@media (max-width: 1279px) {
+  .sh-whyc-panel--guide .sh-why-items li { flex-direction: column; justify-content: center; gap: 8px; padding: 14px 10px; text-align: center; }
+  .sh-whyc-panel--guide .sh-why-items span { align-items: center; }
+  .sh-whyc-panel--guide .sh-why-items b { font-size: 14px; }
+}
 
 /* 떠 있는 오른쪽 빠른 상담도 왼쪽 빠른 메뉴처럼, 좁은 화면에서는 배너를 지나 스크롤한 뒤에 보인다 (시안 페이지만) */
 @media (max-width: 1599px) {
@@ -553,11 +559,6 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
   .sh-whyc-panel--pair .sh-why-items li { flex-direction: column; justify-content: center; gap: 12px; padding: 20px 16px; text-align: center; }
   .sh-whyc-panel--pair .sh-why-items span { align-items: center; }
   .sh-whyc-panel--pair .sh-why-items img { width: 64px; height: 64px; }
-  /* 가이드 6개: 태블릿 폭에선 가로 칸이 좁아 제목이 세 줄로 꺾이므로 아이콘 위 · 제목 아래 세로 칸으로 */
-  .sh-whyc-panel--guide .sh-why-items li { flex-direction: column; justify-content: center; gap: 8px; padding: 14px 10px; text-align: center; }
-  .sh-whyc-panel--guide .sh-why-items span { align-items: center; }
-  .sh-whyc-panel--guide .sh-why-items img { width: 40px; height: 40px; }
-  .sh-whyc-panel--guide .sh-why-items b { font-size: 14px; }
   .sh-consult { grid-template-columns: minmax(0, 1fr); }
 }
 
@@ -675,7 +676,7 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
   .sh-whyc-panel--guide .sh-why-items li { flex-direction: column; justify-content: center; gap: 6px; padding: 12px 8px; text-align: center; }
   .sh-whyc-panel--guide .sh-why-items span { align-items: center; }
   .sh-whyc-panel--guide .sh-why-items img { width: 36px; height: 36px; }
-  .sh-whyc-panel--guide .sh-why-items b { font-size: 12px; }
+  .sh-whyc-panel--guide .sh-why-items b { font-size: 12px; white-space: normal; }
   .sh-whyc-panel--pair .sh-why-items b { font-size: 15px; }
   .sh-whyc-panel--pair .sh-why-items small { font-size: 13px; }
 }
