@@ -42,7 +42,7 @@ function PlayPause({ playing }: { playing: boolean }) {
   );
 }
 
-/* ---------- 1. 배너 (아래 제목 탭 + 진행 막대 — 번호·화살표 대신) ---------- */
+/* ---------- 1. 배너 (아래 ‹ 01 / 03 › · 진행 막대 · 멈춤) ---------- */
 
 /** 시안 배너 그림: 소매·책 색을 배너 바탕색 계열로 바꾼 본 (원본은 운영 메인이 그대로 씀) */
 const SAMPLE_HERO_ART: Record<HeroSlide["theme"], string> = {
@@ -77,8 +77,9 @@ function SampleHero() {
 
   const toggle = () => {
     if (!swiper) return;
-    if (playing) swiper.autoplay.stop();
-    else swiper.autoplay.start();
+    // pause/resume: 남은 시간을 기억해 막대가 멈춘 자리에서 이어 찬다
+    if (playing) swiper.autoplay.pause();
+    else swiper.autoplay.resume();
     setPlaying(!playing);
   };
 
@@ -104,21 +105,25 @@ function SampleHero() {
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className={`sh-hero-tabs${playing ? "" : " is-paused"}`} role="tablist" aria-label="배너 고르기">
-        {heroSlides.map((slide, i) => (
-          <button
-            key={slide.title}
-            type="button"
-            role="tab"
-            aria-selected={i === index}
-            className={`sh-hero-tab${i === index ? " is-active" : ""}`}
-            onClick={() => swiper?.slideToLoop(i)}
-          >
-            <span className="sh-hero-tab-name">{slide.title}</span>
-            {/* key 를 바꿔 넘어갈 때마다 막대가 처음부터 다시 찬다 */}
-            <span className="sh-hero-bar">{i === index && <i key={`${index}-${playing}`} style={{ animationDuration: `${HERO_DELAY}ms` }} />}</span>
-          </button>
-        ))}
+      {/* 아래 캐러셀 표시: ‹ 01 / 03 › · 자동 넘김 막대 · 멈춤 */}
+      <div className={`sh-hero-ctrl${playing ? "" : " is-paused"}`}>
+        <button type="button" className="sh-hero-arrow" aria-label="이전 배너" onClick={() => swiper?.slidePrev()}>
+          <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M10 3 5 8l5 5" />
+          </svg>
+        </button>
+        <span className="sh-hero-count" aria-live="polite">
+          <b>{String(index + 1).padStart(2, "0")}</b> / {String(heroSlides.length).padStart(2, "0")}
+        </span>
+        <button type="button" className="sh-hero-arrow" aria-label="다음 배너" onClick={() => swiper?.slideNext()}>
+          <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="m6 3 5 5-5 5" />
+          </svg>
+        </button>
+        {/* key 를 바꿔 넘어갈 때마다 막대가 처음부터 다시 찬다 */}
+        <span className="sh-hero-bar">
+          <i key={index} style={{ animationDuration: `${HERO_DELAY}ms` }} />
+        </span>
         <button type="button" className="sh-hero-play" aria-label={playing ? "자동 넘김 멈춤" : "자동 넘김 시작"} onClick={toggle}>
           <PlayPause playing={playing} />
         </button>
@@ -414,7 +419,6 @@ function Consult() {
     <section className="sh-consult">
       {/* 한 줄 띠 (유비온 참고): 왼쪽은 제목 + 동의 두 줄 — 두 줄 높이를 입력칸 높이(48)에 맞춰 위아래 선을 맞춘다 */}
       <div className="sh-consult-intro">
-        <img src={`${IMG}/credit-bank/cb-icon-chat-person.png`} alt="" className="sh-consult-art" />
         <div>
           <div className="sh-consult-head">
             <h3 className="sh-consult-title">회원가입 없이 간편상담</h3>

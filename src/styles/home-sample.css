@@ -86,50 +86,40 @@
 .sh-hero .hb-desc { color: var(--hb-sub); }
 .sh-hero .hb-more { border-color: var(--hb-sub); background: rgba(255, 255, 255, 0.12); color: #fff; }
 
-/* 아래 제목 탭 — 지금 보이는 배너는 막대가 차오른다 */
-.sh-hero-tabs {
+/* 아래 캐러셀 표시 — ‹ 01 / 03 › · 자동 넘김 막대(지금 배너 시간만큼 찬다) · 멈춤 */
+.sh-hero-ctrl {
   position: absolute;
   left: clamp(40px, 5vw, 72px);
-  right: 24px;
-  bottom: 20px;
+  bottom: 24px;
   z-index: 2;
   display: flex;
-  align-items: flex-end;
-  gap: 20px;
+  align-items: center;
+  gap: 4px;
+  color: #fff;
 }
-.sh-hero-tab {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  gap: 8px;
-  padding: 0;
-  border: 0;
-  background: none;
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 14px;
-  font-weight: 700;
-  text-align: left;
-  cursor: pointer;
-}
-.sh-hero-tab.is-active { color: #fff; }
-/* 배너 '자세히보기'(hero.css 공용, 높이 40 안팎) — 시안에서만 R 규칙 Medium 10 */
-.sh-hero .hb-more { border-radius: var(--radius-10); }
-.sh-hero-bar { position: relative; display: block; height: 3px; border-radius: var(--radius-full); background: rgba(255, 255, 255, 0.25); overflow: hidden; }
-.sh-hero-bar i { position: absolute; inset: 0 auto 0 0; width: 0; background: #fff; animation: sh-fill linear forwards; }
-.sh-hero-tabs.is-paused .sh-hero-bar i { width: 100%; animation: none; }
-@keyframes sh-fill { to { width: 100%; } }
+.sh-hero-arrow,
 .sh-hero-play {
   display: grid;
   flex: none;
   place-items: center;
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
+  padding: 0;
   border: 0;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  color: #fff;
+  background: none;
+  color: rgba(255, 255, 255, 0.85);
   cursor: pointer;
 }
+.sh-hero-arrow:hover,
+.sh-hero-play:hover { color: #fff; }
+.sh-hero-count { min-width: 64px; font-size: 14px; color: rgba(255, 255, 255, 0.6); text-align: center; font-variant-numeric: tabular-nums; }
+.sh-hero-count b { font-weight: 700; color: #fff; }
+.sh-hero-bar { position: relative; display: block; width: 160px; height: 3px; margin: 0 12px 0 16px; border-radius: var(--radius-full); background: rgba(255, 255, 255, 0.3); overflow: hidden; }
+.sh-hero-bar i { position: absolute; inset: 0 auto 0 0; width: 0; background: #fff; animation: sh-fill linear forwards; }
+.sh-hero-ctrl.is-paused .sh-hero-bar i { animation-play-state: paused; }
+@keyframes sh-fill { to { width: 100%; } }
+/* 배너 '자세히보기'(hero.css 공용, 높이 40 안팎) — 시안에서만 R 규칙 Medium 10 */
+.sh-hero .hb-more { border-radius: var(--radius-10); }
 
 /* ---------- 2. 개강 일정 줄 ---------- */
 .sh-term {
@@ -365,7 +355,6 @@
   background: linear-gradient(120deg, #eef4ff, #dce8ff);
 }
 .sh-consult-intro { display: flex; align-items: center; gap: 14px; }
-.sh-consult-art { flex: none; width: 48px; height: 48px; object-fit: contain; }
 /* 1줄(24) + 간격(4) + 2줄(20) = 48 → 입력칸 높이와 같다 */
 .sh-consult-head { display: flex; align-items: baseline; margin: 0; white-space: nowrap; }
 .sh-consult-title { font-size: 18px; line-height: 24px; font-weight: 800; letter-spacing: -0.02em; color: var(--color-text-strong, #111); }
@@ -600,9 +589,8 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
   .sh-hero-swiper { height: auto; }
   .sh-hero .hb-inner { padding: 11% 7% 0; }
   .sh-hero .hb-art { height: 46%; bottom: 16%; }
-  .sh-hero-tabs { left: 7%; right: 12px; bottom: 12px; gap: 6px; align-items: center; }
-  .sh-hero-tab-name { display: none; }
-  .sh-hero-play { width: 26px; height: 26px; }
+  .sh-hero-ctrl { left: 7%; bottom: 12px; }
+  .sh-hero-bar { width: 72px; margin: 0 6px 0 10px; }
 
   .sh-term { flex-direction: column; align-items: stretch; gap: 12px; padding: 16px; }
   .sh-term-eyebrow { padding: 0 0 12px; border-right: 0; border-bottom: 1px solid #e3eaf7; }
@@ -657,9 +645,8 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
   .sh-promo-art--wide { width: 92px; }
 
   .sh-consult { padding: 20px 16px; border-radius: var(--radius-16); }
-  /* 휴대폰: 제목 줄에 링크까지 다 안 들어가서 링크는 제목 밑 줄로 */
-  .sh-consult-head { flex-direction: column; align-items: flex-start; }
-  .sh-consult-link { margin: 2px 0 0; padding: 0; border: 0; }
+  /* 휴대폰: 폭이 아주 좁으면 링크는 제목 밑 줄로 */
+  .sh-consult-head { flex-wrap: wrap; }
   /* 휴대폰: 입력칸은 세로로 쌓는다 */
   .sh-consult-form { grid-template-columns: minmax(0, 1fr); }
   .sh-consult-submit { height: 50px; }
