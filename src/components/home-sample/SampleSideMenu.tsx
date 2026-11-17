@@ -39,8 +39,8 @@ const QUICK_LINKS = [
   { label: "자료실", href: "/learning-support/forms-data-room" },
 ];
 
-/** 퀵메뉴 아래 SNS (아이콘만, 이름은 aria-label) — 채널 주소는 추후 전달 예정 */
-const QUICK_SNS = [
+/** 상담 묶음 맨 아래 SNS — 채널 주소는 추후 전달 예정 */
+const SNS_LINKS = [
   { label: "인스타", icon: "/resources/images/main/insta.png" },
   { label: "블로그", icon: "/resources/images/main/naver-blog.png" },
   { label: "유튜브", icon: "/resources/images/main/youtube.png" },
@@ -59,7 +59,7 @@ function SideIcon({ name }: { name: keyof typeof ICONS }) {
 /**
  * 좌우 사이드 플로팅 (PC 1280 이상, 시안 전용).
  * 양쪽 다 '파란 머리 칸 + 흰 카드'를 세로로 쌓는 같은 모양.
- * 왼쪽: QUICK MENU(바로가기 7개 + SNS). 오른쪽: 상담 묶음 — 전화 + 카톡상담 · 학습설계 · 간편상담.
+ * 왼쪽: QUICK MENU(바로가기 7개). 오른쪽: 상담 묶음 — 전화 + 카톡상담 · 학습설계 · 간편상담 · SNS.
  * TOP 버튼은 따로 화면 오른쪽 아래.
  * '간편상담'은 아래 간편상담 바를 열고 닫는다.
  */
@@ -94,15 +94,6 @@ export default function SampleSideMenu({ consultOpen, onToggleConsult }: { consu
           </li>
         ))}
       </ul>
-      <ul className="sh-quick-sns">
-        {QUICK_SNS.map((sns) => (
-          <li key={sns.label}>
-            <a href={TBD_HREF} aria-label={sns.label} title={sns.label}>
-              <img src={sns.icon} alt="" />
-            </a>
-          </li>
-        ))}
-      </ul>
     </nav>
     <nav className={`sh-side${stateClass}`} style={{ top }} aria-label="빠른 상담">
       {/* 기존 메인 '빠른 상담'처럼 번호 바로 밑에 노란 카톡상담 버튼 */}
@@ -131,6 +122,16 @@ export default function SampleSideMenu({ consultOpen, onToggleConsult }: { consu
           <span className="sh-side-name">간편상담</span>
         </span>
       </button>
+      <ul className="sh-side-sns">
+        {SNS_LINKS.map((sns) => (
+          <li key={sns.label}>
+            <a href={TBD_HREF}>
+              <img src={sns.icon} alt="" />
+              {sns.label}
+            </a>
+          </li>
+        ))}
+      </ul>
     </nav>
     {/* 맨 위로: 상담 묶음에서 떼어 화면 오른쪽 아래에 */}
     <button
