@@ -742,7 +742,8 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
 
 /* ---------- 오른쪽 사이드 플로팅 (PC 1280 이상, 22s.kr 참고) — 둥근 알약 버튼을 세로로 ---------- */
 .sh-side,
-.sh-quick { display: none; }
+.sh-quick,
+.sh-top { display: none; }
 @media (min-width: 1280px) {
   /* 기존 플로팅(빠른 메뉴 · 빠른 상담 · SNS · TOP)은 시안에서 이 사이드 메뉴로 바꾼다 */
   body:has(.sh-main) .floating-menu { display: none; }
@@ -835,23 +836,25 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
     width: 112px;
     transition: opacity 0.2s, visibility 0.2s;
   }
-  .sh-quick-head { display: flex; flex-direction: column; gap: 2px; margin: 0; padding: 14px 12px; }
+  .sh-quick-head { display: flex; flex-direction: column; align-items: center; gap: 2px; margin: 0; padding: 14px 12px; text-align: center; }
   .sh-quick-title { font-size: 14px; font-weight: 800; letter-spacing: -0.01em; white-space: nowrap; }
   .sh-quick-list { margin: 0; padding: 4px 0; list-style: none; }
   .sh-quick-list li + li { border-top: 1px solid #eef1f5; }
-  .sh-quick-list a { display: block; padding: 10px 12px; color: var(--color-text-default); font-size: 14px; font-weight: 600; text-decoration: none; }
+  .sh-quick-list a { display: block; padding: 10px 12px; color: var(--color-text-default); font-size: 14px; font-weight: 600; text-align: center; text-decoration: none; }
   .sh-quick-list a:hover { color: var(--color-primary-dark); }
-  .sh-quick-sns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 0; margin: 0; padding: 14px 4px; list-style: none; }
-  .sh-quick-sns a { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--color-text-secondary); font-size: 11px; font-weight: 600; text-decoration: none; white-space: nowrap; }
+  .sh-quick-sns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; padding: 12px 8px; list-style: none; }
+  .sh-quick-sns a { display: grid; place-items: center; }
   .sh-quick-sns img { width: 28px; height: 28px; border-radius: 8px; object-fit: contain; }
-  /* 카톡: 말풍선 그림을 노란 칸 안에 */
-  .sh-quick-sns .sh-quick-kakao { padding: 6px; background: #fee500; }
-  .sh-side-top {
+  /* 맨 위로: 오른쪽 상담 묶음과 같은 세로줄의 오른쪽 끝, 화면 아래. 조금 내린 뒤에 보인다 */
+  .sh-top {
+    position: fixed;
+    right: max(20px, calc((100vw - 1100px) / 2 - 176px - 32px));
+    bottom: 30px;
+    z-index: 901;
     display: grid;
     place-items: center;
     width: 52px;
     height: 52px;
-    margin-top: 4px;
     padding: 0;
     border: 1px solid var(--color-border-strong);
     border-radius: 50%;
@@ -859,7 +862,13 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
     box-shadow: 0 8px 18px rgba(12, 23, 38, 0.1);
     color: var(--color-text-default);
     cursor: pointer;
+    transition: opacity 0.2s, visibility 0.2s, bottom 0.25s;
   }
+  .sh-top:not(.is-scrolled) { opacity: 0; visibility: hidden; }
+}
+/* 화면이 좁으면 아래 간편상담 바(폭 1140)와 겹치므로, 바가 열려 있을 땐 그 위로 */
+@media (min-width: 1280px) and (max-width: 1339px) {
+  .sh-top.is-consult-open { bottom: 124px; }
 }
 /* 1599px 이하에선 사이드 메뉴가 배너 오른쪽 끝을 덮으므로, 조금 내린 뒤에 보인다 */
 @media (min-width: 1280px) and (max-width: 1599px) {

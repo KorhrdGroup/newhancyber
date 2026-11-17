@@ -39,11 +39,10 @@ const QUICK_LINKS = [
   { label: "자료실", href: "/learning-support/forms-data-room" },
 ];
 
-/** 퀵메뉴 아래 SNS — 채널 주소는 추후 전달 예정 */
+/** 퀵메뉴 아래 SNS (아이콘만, 이름은 aria-label) — 채널 주소는 추후 전달 예정 */
 const QUICK_SNS = [
   { label: "인스타", icon: "/resources/images/main/insta.png" },
   { label: "블로그", icon: "/resources/images/main/naver-blog.png" },
-  { label: "카톡상담", icon: "/resources/images/main/kakaotalkFloting.png", kakao: true },
   { label: "유튜브", icon: "/resources/images/main/youtube.png" },
 ];
 
@@ -60,7 +59,8 @@ function SideIcon({ name }: { name: keyof typeof ICONS }) {
 /**
  * 좌우 사이드 플로팅 (PC 1280 이상, 시안 전용).
  * 양쪽 다 '파란 머리 칸 + 흰 카드'를 세로로 쌓는 같은 모양.
- * 왼쪽: QUICK MENU(바로가기 7개 + SNS). 오른쪽: 상담 묶음 — 전화 + 카톡상담 · 학습설계 · 간편상담 · TOP.
+ * 왼쪽: QUICK MENU(바로가기 7개 + SNS). 오른쪽: 상담 묶음 — 전화 + 카톡상담 · 학습설계 · 간편상담.
+ * TOP 버튼은 따로 화면 오른쪽 아래.
  * '간편상담'은 아래 간편상담 바를 열고 닫는다.
  */
 export default function SampleSideMenu({ consultOpen, onToggleConsult }: { consultOpen: boolean; onToggleConsult: () => void }) {
@@ -97,9 +97,8 @@ export default function SampleSideMenu({ consultOpen, onToggleConsult }: { consu
       <ul className="sh-quick-sns">
         {QUICK_SNS.map((sns) => (
           <li key={sns.label}>
-            <a href={TBD_HREF}>
-              <img src={sns.icon} alt="" className={"kakao" in sns ? "sh-quick-kakao" : undefined} />
-              {sns.label}
+            <a href={TBD_HREF} aria-label={sns.label} title={sns.label}>
+              <img src={sns.icon} alt="" />
             </a>
           </li>
         ))}
@@ -132,12 +131,18 @@ export default function SampleSideMenu({ consultOpen, onToggleConsult }: { consu
           <span className="sh-side-name">간편상담</span>
         </span>
       </button>
-      <button type="button" className="sh-side-top" aria-label="맨 위로" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-          <path d="M5 4h14M12 20V9M7 13l5-5 5 5" />
-        </svg>
-      </button>
     </nav>
+    {/* 맨 위로: 상담 묶음에서 떼어 화면 오른쪽 아래에 */}
+    <button
+      type="button"
+      className={`sh-top${stateClass}${consultOpen ? " is-consult-open" : ""}`}
+      aria-label="맨 위로"
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+    >
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M5 4h14M12 20V9M7 13l5-5 5 5" />
+      </svg>
+    </button>
     </>
   );
 }
