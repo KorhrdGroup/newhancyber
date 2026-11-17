@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import LegalDoc from "@/components/footer/LegalDoc";
-import { CONTACT_EMAIL, SUPPORT_PHONE } from "@/lib/contact";
 
 export const metadata: Metadata = { title: "개인정보처리방침" };
 
@@ -11,7 +10,7 @@ export default function PrivacyPage() {
           <div className="privacy-article">
             <h2 className="privacy-article-title">제1조. 서문</h2>
             <p className="privacy-article-text">
-              한평생원격교육원(이하 &quot;교육원&quot;)은 이용자의 자유와 권리 보호를 위해 「개인정보 보호법」 및 관계 법령이 정한 바를 준수하여, 적법하게 개인정보를 처리하고 안전하게 관리하고 있습니다. 이에 「개인정보 보호법」에 따라 이용자에게 개인정보 처리에 관한 절차 및 기준을 안내하고, 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리방침을 수립·공개합니다.
+              ㈜한평생그룹(이하 “회사”)은 이용자의 자유와 권리 보호를 위해 「개인정보 보호법」 및 관계 법령이 정한 바를 준수하여, 적법하게 개인정보를 처리하고 안전하게 관리하고 있습니다. 이에 「개인정보 보호법」에 따라 이용자에게 개인정보 처리에 관한 절차 및 기준을 안내하고, 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리방침을 수립·공개합니다.
             </p>
           </div>
           {/* 개인정보 처리 표시(라벨링) */}
@@ -45,7 +44,7 @@ export default function PrivacyPage() {
                         <img src="/resources/images/footer/privacy/privacy-03.png" alt="개인정보의 보유 기간" className="privacy-labeling-icon-img" />
                       </div>
                       <h3 className="privacy-labeling-item-title">개인정보의 보유 기간</h3>
-                      <p className="privacy-labeling-item-desc">법령이 정하는 경우를 제외하고는 회원 탈퇴시까지</p>
+                      <p className="privacy-labeling-item-desc">법령이 정하는 경우를 제외하고는 회원탈퇴시까지</p>
                     </td>
                     <td className="privacy-labeling-cell">
                       <div className="privacy-labeling-icon">
@@ -60,7 +59,7 @@ export default function PrivacyPage() {
                       </div>
                       <h3 className="privacy-labeling-item-title">개인정보 처리위탁</h3>
                       <p className="privacy-labeling-item-desc">
-                        나이스페이먼츠, 교강사, NICE평가정보(주), (주)교보문고, (주)버킷스튜디오, (주)케이티알파, 한국모바일인증(주)
+                        나이스페이먼츠, 교강사, NICE평가정보㈜, ㈜교보문고, ㈜버킷스튜디오, ㈜케이티알파, 한국모바일인증(주)
                       </p>
                     </td>
                   </tr>
@@ -87,7 +86,7 @@ export default function PrivacyPage() {
                         <img src="/resources/images/footer/privacy/privacy-08.png" alt="권리와 행사 방법" className="privacy-labeling-icon-img" />
                       </div>
                       <h3 className="privacy-labeling-item-title">권리와 행사 방법</h3>
-                      <p className="privacy-labeling-item-desc">개인정보의 조회 및 수정, 회원 탈퇴 및 동의 철회</p>
+                      <p className="privacy-labeling-item-desc">개인정보의 조회 및 수정, 회원 탈퇴 및 동의 철회 등</p>
                     </td>
                     <td className="privacy-labeling-cell">
                       <div className="privacy-labeling-icon">
@@ -101,7 +100,7 @@ export default function PrivacyPage() {
                         <img src="/resources/images/footer/privacy/privacy-10.png" alt="개인정보 보호책임자" className="privacy-labeling-icon-img" />
                       </div>
                       <h3 className="privacy-labeling-item-title">개인정보 보호책임자</h3>
-                      <p className="privacy-labeling-item-desc">양병웅, {SUPPORT_PHONE}, {CONTACT_EMAIL}</p>
+                      <p className="privacy-labeling-item-desc">양병웅, 02-2135-6514, gksvudtod97@naver.com</p>
                     </td>
                   </tr>
                 </tbody>
@@ -155,11 +154,11 @@ export default function PrivacyPage() {
             <h2 className="privacy-article-title-icons">
               제2조. 개인정보의 수집 · 이용 목적, 항목, 보유기간{" "}
               <span className="privacy-article-icons">
-                <img src="/resources/images/footer/privacy/privacy-01.png" alt="개인정보의 수집 · 이용 목적, 항목, 보유기간" className="privacy-article-icon" />
+                <img src="/resources/images/footer/privacy/privacy-01.png" alt="일반 개인정보 수집" className="privacy-article-icon" />
                 {" "}
-                <img src="/resources/images/footer/privacy/privacy-02.png" alt="개인정보의 수집 · 이용 목적, 항목, 보유기간" className="privacy-article-icon" />
+                <img src="/resources/images/footer/privacy/privacy-02.png" alt="개인정보 이용 목적" className="privacy-article-icon" />
                 {" "}
-                <img src="/resources/images/footer/privacy/privacy-03.png" alt="개인정보의 수집 · 이용 목적, 항목, 보유기간" className="privacy-article-icon" />
+                <img src="/resources/images/footer/privacy/privacy-03.png" alt="개인정보의 보유 기간" className="privacy-article-icon" />
               </span>
             </h2>
           </div>
@@ -217,14 +216,11 @@ export default function PrivacyPage() {
                   </tr>
                   <tr>
                     <td className="privacy-data-cell">
-                      만 14세 이상 해외 거주자:
+                      14세이상 국외거주자
                       <br />
                       <ul>
-                        <li>
-                          [필수] 아이디, 이름, 생년월일, 비밀번호, 이메일 주소
-                          <br />
-                        </li>
-                        <li>(선택) 추천인 아이디, 가입경로, 최종학력, 희망과정, 성별</li>
+                        <li>(필수) ID, 이름, 생년월일, 비밀번호, 이메일주소</li>
+                        <li>(선택) 휴대전화번호, 추천인 아이디, 가입경로, 최종학력, 희망과정, 성별</li>
                         <li>*한평생원격교육원에서 선택 사항으로 추가 수집하는 수집 항목 : 학교명, 학점취득목적, 학점 목표학위</li>
                       </ul>
                     </td>
@@ -281,7 +277,6 @@ export default function PrivacyPage() {
                         <li>(필수) 이름, 이메일주소, 휴대전화번호, 상담내역</li>
                         <li>(선택) 단말기기명, OS버젼</li>
                       </ul>
-                      단말기기명, OS버젼
                     </td>
                     <td className="privacy-data-cell">
                       법령상 정하는 경우를 제외하고는 회원탈퇴시까지 이용 및 보관합니다. 단, 비회원이거나 상담시로부터 3년 이내 탈퇴하는 자의 경우, 소비자 불만 또는 분쟁처리를 위해 3년간 보관합니다.
@@ -321,7 +316,7 @@ export default function PrivacyPage() {
                       <ul>
                         <li>1) 상담 진행, 교육과정 설계, 문의사항 응대, 민원해결</li>
                         <li>
-                          2) 광고성 정보 수신에 대하여 별도의 동의를 한 회원에 한하여 &quot;회사&quot;와 각 제휴사의 새로운 서비스, 신상품이나 이벤트, 최신 정보의 안내 등 회원의 취향에 맞는 최적의 정보 제공
+                          2) 광고성 정보 수신에 대하여 별도의 동의를 한 회원에 한하여 “회사”와 각 제휴사의 새로운 서비스, 신상품이나 이벤트, 최신 정보의 안내 등 회원의 취향에 맞는 최적의 정보 제공
                         </li>
                       </ul>
                     </td>
@@ -345,19 +340,7 @@ export default function PrivacyPage() {
                   </tr>
                   <tr>
                     <th className="privacy-data-cell" scope="row">
-                      사회복지사,
-                      <br />
-                      보육교사,
-                      <br />
-                      평생교육사,
-                      <br />
-                      한국어교원,
-                      <br />
-                      건강가정사,
-                      <br />
-                      미용종합면허
-                      <br />
-                      상담신청
+                      사회복지사 상담신청
                     </th>
                     <td className="privacy-data-cell">
                       <ul>
@@ -399,22 +382,14 @@ export default function PrivacyPage() {
                       </ul>
                     </td>
                   </tr>
-                  <tr>
-                    <th className="privacy-data-cell" scope="row">평생교육사 자격증 신청 시</th>
-                    <td className="privacy-data-cell">본인실명확인, 자격검정, 자격증 교부</td>
-                    <td className="privacy-data-cell">
-                      (필수) 성명, 주민등록번호, 주소, 전화번호, 최종학력(학교명, 전공, 입학 및 졸업시기, 학위등록번호), 이수기관(기관명, 이수기간)
-                    </td>
-                    <td className="privacy-data-cell">자격증 교부 시까지 보관합니다.</td>
-                  </tr>
                 </tbody>
               </table>
             </div>
           </div>
           <h2 className="privacy-article-title-icons">
-            제3조(개인정보의 처리 및 보유기간){" "}
+            제3조. 개인정보의 수집 방법{" "}
             <span className="privacy-article-icons">
-              <img src="/resources/images/footer/privacy/privacy-03.png" alt="개인정보의 처리 및 보유기간" className="privacy-article-icon" />
+              <img src="/resources/images/footer/privacy/privacy-04.png" alt="개인정보 수집 방법" className="privacy-article-icon" />
             </span>
           </h2>
           <ul style={{ marginTop: "16px", marginBottom: "24px" }}>
@@ -422,19 +397,18 @@ export default function PrivacyPage() {
             <li className="page-list-plain">1. “웹사이트” 또는 이메일을 통한 수집</li>
             <li className="page-list-plain">2. 전화, 팩스, “회사”가 서비스를 제공하기 위하여 작성하는 신청서 등 서면 및 대면방식의 수집</li>
             <li className="page-list-plain">
-              3. 그 분석 프로그램을 통한 생성정보 수집, ‘쿠키(Cookie)’에 의한 정보 수집 기타 서비스 이용과정에서의 생성정보 자동 수집
+              3. 로그 분석 프로그램을 통한 생성정보 수집, ‘쿠키(Cookie)’에 의한 정보 수집 기타 서비스 이용과정에서의 생성정보 자동 수집
             </li>
           </ul>
           <h2 className="privacy-article-title-icons">
             제4조. 개인정보 처리의 위탁{" "}
-            <img src="/resources/images/footer/privacy/privacy-05.png" alt="개인정보의 처리 및 보유기간" className="privacy-article-icon" />
+            <img src="/resources/images/footer/privacy/privacy-05.png" alt="개인정보 처리위탁" className="privacy-article-icon" />
           </h2>
           <ul style={{ marginTop: "16px", marginBottom: "24px" }}>
             <li className="page-list-plain">
               1. “회사”는 서비스 제공에 관한 계약을 이행하고 이용자의 편의 증진을 위하여 개인정보 처리 업무의 일부를 외부 전문업체에 위탁하고 있으며, 수탁자에 대해서는 개인정보보호법상 “개인정보 위탁 계약서”등을 통하여 관련 법규 및 지침의 준수, 정보보호 및 비밀유지, 제3자 제공 금지, 사고 시 책임부담, 위탁기간 종료 즉시 개인정보의 반납/파기의무 등을 규정하여 관리하고 있습니다
             </li>
             <li className="page-list-plain">2. 위탁한 개인정보는 회원탈퇴, 위탁계약 종료, 이용자의 삭제 요청이 있는 경우 지체 없이 파기합니다.</li>
-            <li className="page-list-plain">2. 전화, 팩스, “회사”가 서비스를 제공하기 위하여 작성하는 신청서 등 서면 및 대면방식의 수집</li>
             <li className="page-list-plain">3. 위탁업무의 내용이나 수탁자가 변경될 경우에는 지체 없이 본 개인정보처리방침을 통하여 공개합니다.</li>
             <li className="page-list-plain">
               4. 개인정보 위탁 업체 및 위탁 내용
@@ -463,23 +437,11 @@ export default function PrivacyPage() {
                   </tr>
                   <tr>
                     <td className="privacy-entrust-cell">
-                      NICE평가정보(주),
+                      NICE평가정보㈜
                       <br />
                       한국모바일인증(주)
                     </td>
                     <td className="privacy-entrust-cell">실명확인 서비스</td>
-                  </tr>
-                  <tr>
-                    <td className="privacy-entrust-cell">(주)케이티알파</td>
-                    <td className="privacy-entrust-cell">기프티콘 비즈콘 서비스를 이용한 기프티콘 발송</td>
-                  </tr>
-                  <tr>
-                    <td className="privacy-entrust-cell">(주)교보문고</td>
-                    <td className="privacy-entrust-cell">전자도서관 운영</td>
-                  </tr>
-                  <tr>
-                    <td className="privacy-entrust-cell">(주)엘지유플러스</td>
-                    <td className="privacy-entrust-cell">SMS/LMS 문자메세지 발송</td>
                   </tr>
                 </tbody>
               </table>
@@ -488,11 +450,7 @@ export default function PrivacyPage() {
           <h2 className="privacy-article-title-icons">
             제5조. 개인정보 제3자 제공{" "}
             <span className="privacy-article-icons">
-              <img src="/resources/images/footer/privacy/privacy-03.png" alt="개인정보의 처리 및 보유기간" className="privacy-article-icon" />
-            </span>
-            {" "}
-            <span className="privacy-article-icons">
-              <img src="/resources/images/footer/privacy/privacy-07.png" alt="개인정보의 처리 및 보유기간" className="privacy-article-icon" />
+              <img src="/resources/images/footer/privacy/privacy-06.png" alt="개인정보 제3자 제공" className="privacy-article-icon" />
             </span>
           </h2>
           <ul style={{ marginTop: "16px", marginBottom: "24px" }}>
@@ -595,11 +553,11 @@ export default function PrivacyPage() {
           <h2 className="privacy-article-title-icons">
             제6조. 개인정보의 파기{" "}
             <span className="privacy-article-icons">
-              <img src="/resources/images/footer/privacy/privacy-03.png" alt="개인정보의 처리 및 보유기간" className="privacy-article-icon" />
+              <img src="/resources/images/footer/privacy/privacy-03.png" alt="개인정보의 보유 기간" className="privacy-article-icon" />
             </span>
             {" "}
             <span className="privacy-article-icons">
-              <img src="/resources/images/footer/privacy/privacy-07.png" alt="개인정보의 처리 및 보유기간" className="privacy-article-icon" />
+              <img src="/resources/images/footer/privacy/privacy-07.png" alt="개인정보 파기" className="privacy-article-icon" />
             </span>
           </h2>
           <ul style={{ marginTop: "16px", marginBottom: "24px" }}>
@@ -684,12 +642,12 @@ export default function PrivacyPage() {
           <h2 className="privacy-article-title-icons">
             제7조. 개인정보 자동 수집 장치의 설치·운영 및 거부에 관한 사항{" "}
             <span className="privacy-article-icons">
-              <img src="/resources/images/footer/privacy/privacy-04.png" alt="개인정보의 처리 및 보유기간" className="privacy-article-icon" />
+              <img src="/resources/images/footer/privacy/privacy-04.png" alt="개인정보 수집 방법" className="privacy-article-icon" />
             </span>
           </h2>
           <ul style={{ marginTop: "16px", marginBottom: "24px" }}>
             <li className="page-list-plain">
-              1.“회사”는 이용자에게 개별적인 맞춤서비스를 제공하기 위해 이용정보를 저장하고 수시로 불러오는 ‘쿠키(cookie)’를 사용합니다.
+              1. “회사”는 이용자에게 개별적인 맞춤서비스를 제공하기 위해 이용정보를 저장하고 수시로 불러오는 ‘쿠키(cookie)’를 사용합니다.
               <br />
             </li>
             <li className="page-list-plain">
@@ -710,12 +668,12 @@ export default function PrivacyPage() {
               &nbsp;&nbsp;- Chrome: 웹브라우저 우측 상단의 설정 메뉴 &gt; 개인정보 및 보안 &gt; 쿠키 및 기타 사이트 데이터
               <br />
             </li>
-            <li className="page-list-plain">3.쿠키 저장을 거부할 경우 서비스 이용에 어려움이 발생할 수 있습니다.</li>
+            <li className="page-list-plain">3) 쿠키 저장을 거부할 경우 서비스 이용에 어려움이 발생할 수 있습니다.</li>
           </ul>
           <h2 className="privacy-article-title-icons">
             제8조. 이용자와 법정대리인의 권리 · 의무 및 행사 방법{" "}
             <span className="privacy-article-icons">
-              <img src="/resources/images/footer/privacy/privacy-08.png" alt="개인정보의 처리 및 보유기간" className="privacy-article-icon" />
+              <img src="/resources/images/footer/privacy/privacy-08.png" alt="권리와 행사 방법" className="privacy-article-icon" />
             </span>
           </h2>
           <ul style={{ marginTop: "16px", marginBottom: "24px" }}>
@@ -726,7 +684,7 @@ export default function PrivacyPage() {
               2. 권리행사는 “회사”에 대해 「개인정보 보호법」시행령에 따라 서면, 전자우편, 모사전송 등을 통하여 할 수 있으며, “회사”는 이에 대해 조치하겠습니다.
             </li>
             <li className="page-list-plain">
-              3.권리행사는 이용자의 법정대리인이나 위임을 받은 자 등 대리인을 통하여 하실 수도 있습니다. 이 경우 위임장을 제출하셔야 합니다.
+              3. 권리행사는 이용자의 법정대리인이나 위임을 받은 자 등 대리인을 통하여 하실 수도 있습니다. 이 경우 위임장을 제출하셔야 합니다.
             </li>
             <li className="page-list-plain">4. 개인정보 열람 및 처리정지 요구는 「개인정보 보호법」에 의하여 이용자의 권리가 제한될 수 있습니다.</li>
             <li className="page-list-plain">
@@ -739,7 +697,7 @@ export default function PrivacyPage() {
           <h2 className="privacy-article-title-icons">
             제9조. 개인정보보호를 위한 대책 수립{" "}
             <span className="privacy-article-icons">
-              <img src="/resources/images/footer/privacy/privacy-09.png" alt="개인정보의 처리 및 보유기간" className="privacy-article-icon" />
+              <img src="/resources/images/footer/privacy/privacy-09.png" alt="정보보호 대책 수립" className="privacy-article-icon" />
             </span>
           </h2>
           {/* 개인정보보호를 위한 기술적, 관리적, 물리적 조치 테이블 */}
@@ -784,7 +742,7 @@ export default function PrivacyPage() {
           <h2 className="privacy-article-title-icons">
             제10조. 개인정보보호책임자 및 개인정보 열람청구{" "}
             <span className="privacy-article-icons">
-              <img src="/resources/images/footer/privacy/privacy-10.png" alt="개인정보의 처리 및 보유기간" className="privacy-article-icon" />
+              <img src="/resources/images/footer/privacy/privacy-10.png" alt="개인정보 보호책임자" className="privacy-article-icon" />
             </span>
           </h2>
           <ul style={{ marginTop: "16px", marginBottom: "24px" }}>
@@ -811,20 +769,18 @@ export default function PrivacyPage() {
                     <td className="privacy-officer-cell">
                       <ul>
                         <li className="page-list-clasic">성 명: 양병웅</li>
-                        <li className="page-list-clasic">전화번호: {SUPPORT_PHONE}</li>
+                        <li className="page-list-clasic">전화번호: 02-2135-6514</li>
                         <li className="page-list-clasic">
-                          전자우편:{" "}
-                          <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+                          전자우편: <a href="mailto:gksvudtod97@naver.com">gksvudtod97@naver.com</a>
                         </li>
                       </ul>
                     </td>
                     <td className="privacy-officer-cell">
                       <ul>
                         <li className="page-list-clasic">담 당: 학사운영팀</li>
-                        <li className="page-list-clasic">전화번호: {SUPPORT_PHONE}</li>
+                        <li className="page-list-clasic">전화번호: 070-8652-2577</li>
                         <li className="page-list-clasic">
-                          전자우편:{" "}
-                          <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+                          전자우편: <a href="mailto:hpsedu20@naver.com">hpsedu20@naver.com</a>
                         </li>
                       </ul>
                     </td>
@@ -841,7 +797,7 @@ export default function PrivacyPage() {
           <h2 className="privacy-article-title-icons">
             제11조. 권익침해 구제방법{" "}
             <span className="privacy-article-icons">
-              <img src="/resources/images/footer/privacy/privacy-09.png" alt="개인정보의 처리 및 보유기간" className="privacy-article-icon" />
+              <img src="/resources/images/footer/privacy/privacy-09.png" alt="정보보호 대책 수립" className="privacy-article-icon" />
             </span>
           </h2>
           <ul style={{ marginTop: "16px", marginBottom: "24px" }}>
