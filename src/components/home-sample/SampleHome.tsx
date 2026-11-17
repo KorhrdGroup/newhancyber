@@ -307,7 +307,8 @@ function Bento() {
 const infoLinks = [
   {
     title: "수강 혜택",
-    href: "/footer/about#tab-scholarship",
+    // 해시(#tab-)로 가면 탭 위치로 내려가 버려서, 맨 위부터 보이게 ?tab= 으로 장학제도 탭만 연다
+    href: "/footer/about?tab=scholarship",
     icon: `${IMG}/credit-bank/cb-icon-coin-cycle.png`,
     // 이동하는 곳(교육원 소개 · 장학제도 탭)에 있는 내용만
     items: ["성적장학금", "국가유공자 전액면제", "기초생활수급자 50% 감면"],
