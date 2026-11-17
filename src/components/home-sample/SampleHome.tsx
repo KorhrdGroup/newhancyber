@@ -336,6 +336,7 @@ function InfoBar() {
               ))}
             </ul>
           </span>
+          <Chevron />
         </Link>
       ))}
     </section>
