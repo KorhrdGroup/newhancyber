@@ -156,7 +156,7 @@
 
   .ex-summary { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-8); }
   .ex-summary .ds-stat { padding: var(--space-12); }
-  .ex-summary .ds-stat-label { font-size: 12px; }
+  .ex-summary .ds-stat-label { font-size: 12px; word-break: keep-all; }
   .ex-summary .ds-stat-value { font-size: 16px; }
   .ex-summary .ds-stat-value small { font-size: 12px; }
 }

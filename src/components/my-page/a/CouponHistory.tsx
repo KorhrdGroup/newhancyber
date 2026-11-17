@@ -3,6 +3,7 @@
 import { useState } from "react";
 import StatusBadge from "./StatusBadge";
 import type { Coupon } from "../myPageDataA";
+import "@/styles/extra-pages.css";
 
 const filters = [
   { label: "전체", match: () => true },
@@ -29,7 +30,7 @@ export default function CouponHistory({ coupons }: { coupons: Coupon[] }) {
 
   return (
     <>
-      <div className="ds-stats">
+      <div className="ds-stats ex-summary">
         <div className="ds-stat">
           <p className="ds-stat-label">사용할 수 있는 쿠폰</p>
           <p className="ds-stat-value ds-text-brand">
