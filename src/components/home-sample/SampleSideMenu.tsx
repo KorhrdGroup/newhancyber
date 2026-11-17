@@ -13,6 +13,13 @@ const HEADER_GAP = 24;
 
 /** 라인 아이콘 (24 그리드, currentColor) */
 const ICONS = {
+  plan: (
+    <>
+      <path d="M9 4h6v3H9z" />
+      <path d="M15 5h2a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h2" />
+      <path d="M9 12h6M9 16h4" />
+    </>
+  ),
   chat: (
     <>
       <path d="M21 12a8 8 0 0 1-11.8 7L4 20.5l1.5-4.8A8 8 0 1 1 21 12Z" />
@@ -52,6 +59,7 @@ function SideIcon({ name }: { name: keyof typeof ICONS }) {
 
 /**
  * 좌우 사이드 플로팅 (PC 1280 이상, 시안 전용).
+ * 양쪽 다 '파란 머리 칸 + 흰 카드'를 세로로 쌓는 같은 모양.
  * 왼쪽: QUICK MENU(바로가기 7개 + SNS). 오른쪽: 상담 묶음 — 전화 + 카톡상담 · 학습설계 · 간편상담 · TOP.
  * '간편상담'은 아래 간편상담 바를 열고 닫는다.
  */
@@ -75,7 +83,10 @@ export default function SampleSideMenu({ consultOpen, onToggleConsult }: { consu
   return (
     <>
     <nav className={`sh-quick${stateClass}`} style={{ top }} aria-label="퀵메뉴">
-      <p className="sh-quick-head">QUICK MENU</p>
+      <p className="sh-quick-head">
+        <span className="sh-side-sub">자주 찾는 메뉴</span>
+        <span className="sh-quick-title">QUICK MENU</span>
+      </p>
       <ul className="sh-quick-list">
         {QUICK_LINKS.map((link) => (
           <li key={link.label}>
@@ -106,13 +117,20 @@ export default function SampleSideMenu({ consultOpen, onToggleConsult }: { consu
           카톡상담
         </a>
       </div>
-      <Link href="/course-registration/learning-design" className="sh-side-item sh-side-item--tall">
-        <span className="sh-side-sub">1:1 무료</span>
-        <span className="sh-side-big">학습설계 신청</span>
+      {/* 번호 아래 두 칸은 같은 모양: 아이콘 + 작은 설명 + 이름 */}
+      <Link href="/course-registration/learning-design" className="sh-side-item">
+        <SideIcon name="plan" />
+        <span className="sh-side-text">
+          <span className="sh-side-sub">1:1 무료</span>
+          <span className="sh-side-name">학습설계 신청</span>
+        </span>
       </Link>
       <button type="button" className={`sh-side-item${consultOpen ? " is-active" : ""}`} aria-pressed={consultOpen} onClick={onToggleConsult}>
         <SideIcon name="chat" />
-        간편상담
+        <span className="sh-side-text">
+          <span className="sh-side-sub">회원가입 없이</span>
+          <span className="sh-side-name">간편상담</span>
+        </span>
       </button>
       <button type="button" className="sh-side-top" aria-label="맨 위로" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

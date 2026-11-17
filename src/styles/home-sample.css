@@ -760,28 +760,41 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
     width: 176px;
     transition: opacity 0.2s, visibility 0.2s;
   }
+  /* 양쪽 공통 카드: 파란 머리 칸(번호 · QUICK MENU)과 흰 카드(바로가기 · 상담 칸) */
+  .sh-side-brand,
+  .sh-quick-head {
+    border-radius: var(--radius-20);
+    background: var(--color-primary-dark);
+    box-shadow: 0 8px 18px rgba(12, 23, 38, 0.1);
+    color: #fff;
+  }
+  .sh-side-item,
+  .sh-quick-list,
+  .sh-quick-sns {
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-20);
+    background: #fff;
+    box-shadow: 0 8px 18px rgba(12, 23, 38, 0.1);
+  }
+  /* 번호 아래 두 칸(학습설계 · 간편상담): 아이콘 + 작은 설명 + 이름, 같은 높이 */
   .sh-side-item {
     display: flex;
     align-items: center;
     gap: 10px;
     width: 100%;
-    height: 44px;
-    padding: 0 14px 0 8px;
-    border: 1px solid var(--color-border-strong);
-    border-radius: var(--radius-full);
-    background: #fff;
-    box-shadow: 0 8px 18px rgba(12, 23, 38, 0.1);
+    height: 64px;
+    padding: 0 14px;
     color: var(--color-text-strong, #111);
-    font-size: 14px;
-    font-weight: 700;
+    font: inherit;
     text-align: left;
     text-decoration: none;
     white-space: nowrap;
     cursor: pointer;
   }
-  .sh-side-item:hover { border-color: var(--color-primary); color: var(--color-primary-dark); }
-  .sh-side-item.is-active { border-color: var(--color-primary); color: var(--color-primary-dark); }
-  .sh-side-item--tall { flex-direction: column; align-items: flex-start; justify-content: center; gap: 2px; height: 72px; padding: 0 18px; border-radius: var(--radius-20); }
+  .sh-side-item:hover,
+  .sh-side-item.is-active { border-color: var(--color-primary); }
+  .sh-side-text { display: flex; flex-direction: column; gap: 2px; }
+  .sh-side-name { font-size: 16px; font-weight: 800; letter-spacing: -0.01em; }
   /* 전화 상담 칸: 번호 + 노란 카톡상담 버튼 */
   .sh-side-brand {
     display: flex;
@@ -789,9 +802,6 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
     gap: 12px;
     width: 100%;
     padding: 16px 14px 14px;
-    border-radius: var(--radius-20);
-    background: var(--color-primary-dark);
-    box-shadow: 0 8px 18px rgba(12, 23, 38, 0.1);
   }
   .sh-side-call { display: flex; flex-direction: column; gap: 2px; color: #fff; text-decoration: none; }
   /* 전화번호는 크게: 아래 카톡 버튼 폭(148)을 꽉 채워 좌우 여백이 14로 같게 */
@@ -812,29 +822,26 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
   .sh-side-kakao:hover { background: #fdd835; }
   .sh-side-kakao img { width: 16px; height: 16px; object-fit: contain; }
   .sh-side-sub { font-size: 12px; font-weight: 600; opacity: 0.75; }
-  .sh-side-big { font-size: 17px; font-weight: 800; letter-spacing: -0.01em; }
-  .sh-side-icon { display: grid; flex: none; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: #eef4ff; color: var(--color-primary-dark); }
+  .sh-side-icon { display: grid; flex: none; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: #eef4ff; color: var(--color-primary-dark); }
   /* 왼쪽 QUICK MENU: 본문(1100) 왼쪽 끝에서 32px 띄운 자리, 좁으면 왼쪽 20px. 위 끝은 오른쪽 상담 묶음과 맞춘다 */
   .sh-quick {
     position: fixed;
     left: max(20px, calc((100vw - 1100px) / 2 - 112px - 32px));
     top: 100px;
     z-index: 901;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
     width: 112px;
-    overflow: hidden;
-    border: 1px solid var(--color-border-strong);
-    border-radius: var(--radius-20);
-    background: #fff;
-    box-shadow: 0 8px 18px rgba(12, 23, 38, 0.1);
     transition: opacity 0.2s, visibility 0.2s;
   }
-  .sh-quick-head { margin: 0; padding: 12px 0; background: var(--color-primary-dark); color: #fff; font-size: 13px; font-weight: 800; letter-spacing: 0.04em; text-align: center; }
-  .sh-quick-list { margin: 0; padding: 2px 0; list-style: none; }
+  .sh-quick-head { display: flex; flex-direction: column; gap: 2px; margin: 0; padding: 14px 12px; }
+  .sh-quick-title { font-size: 14px; font-weight: 800; letter-spacing: -0.01em; white-space: nowrap; }
+  .sh-quick-list { margin: 0; padding: 4px 0; list-style: none; }
   .sh-quick-list li + li { border-top: 1px solid #eef1f5; }
-  .sh-quick-list a { display: block; padding: 10px 6px; color: var(--color-text-default); font-size: 14px; font-weight: 600; text-align: center; text-decoration: none; }
+  .sh-quick-list a { display: block; padding: 10px 12px; color: var(--color-text-default); font-size: 14px; font-weight: 600; text-decoration: none; }
   .sh-quick-list a:hover { color: var(--color-primary-dark); }
-  .sh-quick-sns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 0; margin: 0; padding: 12px 4px 14px; border-top: 1px solid #eef1f5; background: #f6f8fb; list-style: none; }
+  .sh-quick-sns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 0; margin: 0; padding: 14px 4px; list-style: none; }
   .sh-quick-sns a { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--color-text-secondary); font-size: 11px; font-weight: 600; text-decoration: none; white-space: nowrap; }
   .sh-quick-sns img { width: 28px; height: 28px; border-radius: 8px; object-fit: contain; }
   /* 카톡: 말풍선 그림을 노란 칸 안에 */
