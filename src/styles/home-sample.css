@@ -132,26 +132,28 @@
 .sh-term {
   display: flex;
   align-items: center;
-  gap: var(--space-24);
-  padding: 12px 12px 12px 24px;
+  gap: var(--space-16);
+  padding: 12px 12px 12px 20px;
   border-radius: 16px;
   background: #fff;
   box-shadow: 0 4px 20px rgba(17, 90, 237, 0.08);
 }
-.sh-term-eyebrow { display: flex; flex: none; align-items: center; gap: 8px; margin: 0; padding-right: 20px; border-right: 1px solid #e3eaf7; font-size: 15px; font-weight: 800; color: var(--color-primary-dark); }
+.sh-term-eyebrow { display: flex; flex: none; align-items: center; gap: 8px; margin: 0; padding-right: 16px; border-right: 1px solid #e3eaf7; font-size: 15px; font-weight: 800; color: var(--color-primary-dark); }
 .sh-term-dot { width: 8px; height: 8px; border-radius: 50%; background: #2ecc71; box-shadow: 0 0 0 4px rgba(46, 204, 113, 0.18); }
 .sh-term.is-closed .sh-term-eyebrow { color: var(--color-text-secondary); }
 .sh-term.is-closed .sh-term-dot { background: #b0b8c4; box-shadow: 0 0 0 4px rgba(176, 184, 196, 0.2); }
 .sh-term-list {
   display: flex;
   flex: 1;
-  justify-content: space-around;
-  gap: var(--space-16);
+  flex-wrap: wrap; /* 좁아지면 넘치지 않고 둘째 줄로 */
+  justify-content: space-between;
+  gap: 6px var(--space-12);
   margin: 0;
 }
-.sh-term-list > div { display: flex; align-items: center; gap: 10px; }
-.sh-term-list dt { font-size: 14px; color: var(--color-text-secondary); }
-.sh-term-list dd { display: flex; align-items: center; gap: 8px; margin: 0; font-size: 15px; font-weight: 700; color: var(--color-text-strong, #111); }
+.sh-term-list > div { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+.sh-term-list dt { display: flex; align-items: center; gap: 5px; font-size: 14px; color: var(--color-text-secondary); }
+.sh-term-icon { flex: none; width: 18px; height: 18px; color: var(--color-primary); }
+.sh-term-list dd { display: flex; align-items: center; gap: 6px; margin: 0; font-size: 15px; font-weight: 700; color: var(--color-text-strong, #111); }
 .sh-term-list em {
   padding: 2px 8px;
   border-radius: 6px;
@@ -533,10 +535,14 @@ a.sh-info-card:hover .sh-info-title { color: var(--color-primary-dark); }
   background-clip: text;
 }
 
+/* 개강 줄이 두 줄로 접히는 폭 — 양끝 벌림 대신 왼쪽부터 채운다 */
+@media (max-width: 1199px) {
+  .sh-term-list { justify-content: flex-start; column-gap: var(--space-24); }
+}
+
 /* ---------- 태블릿 ---------- */
 @media (max-width: 1024px) {
   .sh-term { flex-wrap: wrap; }
-  .sh-term-list { flex-wrap: wrap; justify-content: flex-start; }
   .sh-bento { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: auto; }
   .sh-bento .sh-benefit-card { grid-column: 1 / -1; grid-row: auto; height: 200px; flex-direction: row; align-items: center; justify-content: space-between; padding: 0 28px 0 36px; }
   .sh-bento .sh-benefit-title { font-size: 28px; }

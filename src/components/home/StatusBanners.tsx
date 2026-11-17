@@ -34,7 +34,7 @@ export function MobileCourseCards() {
 }
 
 /** 학사 알림 줄 라인 아이콘 — 세 개 모두 같은 굵기 · 크기 · 색(글자색 currentColor) */
-const NOTICE_ICONS = {
+export const NOTICE_ICONS = {
   alarm: (
     <>
       <circle cx="12" cy="13" r="8" />
