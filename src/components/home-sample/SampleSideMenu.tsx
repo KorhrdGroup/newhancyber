@@ -94,9 +94,11 @@ export default function SampleSideMenu({ consultOpen, onToggleConsult }: { consu
       >
         <span className="sh-side-sub">자주 찾는 메뉴</span>
         <span className="sh-quick-title">QUICK MENU</span>
-        <svg className="sh-quick-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-          <path d="m6 9 6 6 6-6" />
-        </svg>
+        <span className="sh-quick-handle">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="m6 15 6-6 6 6" />
+          </svg>
+        </span>
       </button>
       <ul id="sh-quick-list" className="sh-quick-list" hidden={!quickOpen}>
         {QUICK_LINKS.map((link) => (

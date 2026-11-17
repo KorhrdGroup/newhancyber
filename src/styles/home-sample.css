@@ -832,17 +832,40 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
     z-index: 901;
     display: flex;
     flex-direction: column;
-    gap: 8px;
     width: 112px;
+    /* 펼치면 머리 칸과 목록이 한 카드로 붙으므로 그림자는 묶음 전체에 */
+    border-radius: var(--radius-20);
+    box-shadow: 0 8px 18px rgba(12, 23, 38, 0.1);
     transition: opacity 0.2s, visibility 0.2s;
   }
-  /* 머리 칸 = 접기/펴기 버튼. 화살표는 펼쳐 있으면 위로 */
-  .sh-quick-head { display: flex; flex-direction: column; align-items: center; gap: 2px; width: 100%; margin: 0; padding: 14px 12px 10px; border: 0; font: inherit; text-align: center; cursor: pointer; }
-  .sh-quick-chevron { margin-top: 2px; opacity: 0.8; transition: transform 0.2s; }
-  .sh-quick-head.is-open .sh-quick-chevron { transform: rotate(180deg); }
+  .sh-quick .sh-quick-head,
+  .sh-quick .sh-quick-list { box-shadow: none; }
+  /* 머리 칸 = 접기/펴기 버튼. 펼쳐 있으면 아래 모서리를 펴서 목록과 잇는다 */
+  .sh-quick-head { position: relative; display: flex; flex-direction: column; align-items: center; gap: 2px; width: 100%; margin: 0; padding: 14px 12px 20px; border: 0; font: inherit; text-align: center; cursor: pointer; }
+  .sh-quick-head.is-open { border-radius: var(--radius-20) var(--radius-20) 0 0; }
+  /* 머리 칸 아래 경계에 반쯤 걸친 둥근 손잡이. 펼쳐 있으면 ∧, 접혀 있으면 ∨ */
+  .sh-quick-handle {
+    position: absolute;
+    left: 50%;
+    bottom: -14px;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--color-border-strong);
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(12, 23, 38, 0.12);
+    color: var(--color-primary-dark);
+    transform: translateX(-50%);
+  }
+  .sh-quick-handle svg { transition: transform 0.2s; }
+  .sh-quick-head:not(.is-open) .sh-quick-handle svg { transform: rotate(180deg); }
+  .sh-quick-head:hover .sh-quick-handle { border-color: var(--color-primary); }
   .sh-quick-list[hidden] { display: none; }
   .sh-quick-title { font-size: 14px; font-weight: 800; letter-spacing: -0.01em; white-space: nowrap; }
-  .sh-quick-list { margin: 0; padding: 4px 0; list-style: none; }
+  .sh-quick-list { margin: 0; padding: 16px 0 4px; border-top: 0; border-radius: 0 0 var(--radius-20) var(--radius-20); list-style: none; }
   /* 구분선은 카드 좌우에서 12px씩 띄워 짧게 */
   .sh-quick-list li { margin: 0 12px; }
   .sh-quick-list li + li { border-top: 1px solid #eef1f5; }
