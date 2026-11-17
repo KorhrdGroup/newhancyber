@@ -18,6 +18,7 @@ import {
   type NoticeTabKey,
 } from "@/components/home/homeData";
 import PrivacyConsentPopup from "@/components/home/PrivacyConsentPopup";
+import SampleSideMenu from "./SampleSideMenu";
 import { NOTICE_ICONS } from "@/components/home/StatusBanners";
 import { tabs as whyTabs } from "@/components/home/WhyChoose";
 import "@/styles/hero.css";
@@ -406,10 +407,9 @@ function Notices() {
 
 /* ---------- 7. 1:1 무료 학습상담 (학습설계 안내 + 간편상담 폼) ---------- */
 
-function Consult() {
+/** PC(1280 이상)에서는 화면 아래에 떠 있는 바 — 닫고 여는 건 오른쪽 사이드 메뉴의 '간편상담' 버튼으로도 한다 */
+function Consult({ closed, onClose }: { closed: boolean; onClose: () => void }) {
   const [privacyOpen, setPrivacyOpen] = useState(false);
-  // PC(1280 이상)에서는 화면 아래에 떠 있는 바 — 닫으면 작은 '간편상담' 버튼만 남는다
-  const [closed, setClosed] = useState(false);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -418,7 +418,6 @@ function Consult() {
   };
 
   return (
-    <>
     <section className={`sh-consult${closed ? " is-closed" : ""}`} aria-label="간편상담 신청">
       {/* 한 줄 띠 (유비온 참고): 왼쪽은 제목 + 동의 두 줄 — 두 줄 높이를 입력칸 높이(48)에 맞춰 위아래 선을 맞춘다 */}
       <div className="sh-consult-intro">
@@ -466,20 +465,13 @@ function Consult() {
           상담 신청하기
         </button>
       </form>
-      <button type="button" className="sh-consult-close" aria-label="간편상담 닫기" onClick={() => setClosed(true)}>
+      <button type="button" className="sh-consult-close" aria-label="간편상담 닫기" onClick={onClose}>
         <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true">
           <path d="m3.5 3.5 9 9M12.5 3.5l-9 9" />
         </svg>
       </button>
       <PrivacyConsentPopup isOpen={privacyOpen} onClose={() => setPrivacyOpen(false)} />
     </section>
-    <button type="button" className={`sh-consult-open${closed ? " is-shown" : ""}`} onClick={() => setClosed(false)}>
-      간편상담 신청
-      <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <path d="m3 10 5-5 5 5" />
-      </svg>
-    </button>
-    </>
   );
 }
 
@@ -563,6 +555,7 @@ function WhyHanpyeong() {
 
 /** /sample — 메인 시안 B (첫 시안 배치 + 제목 탭 배너 · 모집 중 표시 · 페이지 안 무료 상담) */
 export default function SampleHome() {
+  const [consultClosed, setConsultClosed] = useState(false);
   return (
     <main className="sh-main">
       <div className="sh-wrap">
@@ -573,10 +566,11 @@ export default function SampleHome() {
         <Bento />
         <InfoBar />
         <Notices />
-        <Consult />
+        <Consult closed={consultClosed} onClose={() => setConsultClosed(true)} />
       </div>
       <Essentials />
       <WhyHanpyeong />
+      <SampleSideMenu consultOpen={!consultClosed} onToggleConsult={() => setConsultClosed((c) => !c)} />
     </main>
   );
 }
