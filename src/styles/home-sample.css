@@ -836,7 +836,11 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
     width: 112px;
     transition: opacity 0.2s, visibility 0.2s;
   }
-  .sh-quick-head { display: flex; flex-direction: column; align-items: center; gap: 2px; margin: 0; padding: 14px 12px; text-align: center; }
+  /* 머리 칸 = 접기/펴기 버튼. 화살표는 펼쳐 있으면 위로 */
+  .sh-quick-head { display: flex; flex-direction: column; align-items: center; gap: 2px; width: 100%; margin: 0; padding: 14px 12px 10px; border: 0; font: inherit; text-align: center; cursor: pointer; }
+  .sh-quick-chevron { margin-top: 2px; opacity: 0.8; transition: transform 0.2s; }
+  .sh-quick-head.is-open .sh-quick-chevron { transform: rotate(180deg); }
+  .sh-quick-list[hidden] { display: none; }
   .sh-quick-title { font-size: 14px; font-weight: 800; letter-spacing: -0.01em; white-space: nowrap; }
   .sh-quick-list { margin: 0; padding: 4px 0; list-style: none; }
   /* 구분선은 카드 좌우에서 12px씩 띄워 짧게 */

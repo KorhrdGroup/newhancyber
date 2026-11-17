@@ -66,6 +66,8 @@ function SideIcon({ name }: { name: keyof typeof ICONS }) {
 export default function SampleSideMenu({ consultOpen, onToggleConsult }: { consultOpen: boolean; onToggleConsult: () => void }) {
   const [scrolled, setScrolled] = useState(false);
   const [top, setTop] = useState(FLOAT_TOP);
+  /** 퀵메뉴 바로가기 목록: 처음엔 펼쳐 두고, 머리 칸을 누르면 접고 편다 */
+  const [quickOpen, setQuickOpen] = useState(true);
 
   useEffect(() => {
     const onScroll = () => {
@@ -83,11 +85,20 @@ export default function SampleSideMenu({ consultOpen, onToggleConsult }: { consu
   return (
     <>
     <nav className={`sh-quick${stateClass}`} style={{ top }} aria-label="퀵메뉴">
-      <p className="sh-quick-head">
+      <button
+        type="button"
+        className={`sh-quick-head${quickOpen ? " is-open" : ""}`}
+        aria-expanded={quickOpen}
+        aria-controls="sh-quick-list"
+        onClick={() => setQuickOpen((open) => !open)}
+      >
         <span className="sh-side-sub">자주 찾는 메뉴</span>
         <span className="sh-quick-title">QUICK MENU</span>
-      </p>
-      <ul className="sh-quick-list">
+        <svg className="sh-quick-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <path d="m6 9 6 6 6-6" />
+        </svg>
+      </button>
+      <ul id="sh-quick-list" className="sh-quick-list" hidden={!quickOpen}>
         {QUICK_LINKS.map((link) => (
           <li key={link.label}>
             <Link href={link.href}>{link.label}</Link>
