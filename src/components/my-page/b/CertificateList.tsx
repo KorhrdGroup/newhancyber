@@ -24,42 +24,38 @@ export default function CertificateList({
       {rows.length === 0 ? (
         <p className="cr-empty">{emptyText}</p>
       ) : (
-        <div className="cr-table-wrap">
-          <table className="ds-table">
-            <thead>
-              <tr>
-                <th>차수</th>
-                <th>과목명</th>
-                <th>수강 기간</th>
-                <th>상태</th>
-                <th>발급</th>
+        <table className="ds-table ds-table--stack">
+          <thead>
+            <tr>
+              <th className="is-left">과목명</th>
+              <th>차수</th>
+              <th>수강 기간</th>
+              <th>상태</th>
+              <th>발급</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row) => (
+              <tr key={row.id}>
+                <td className="ds-table-stack-head is-left">{row.title}</td>
+                <td data-label="차수">{row.term}</td>
+                <td data-label="수강 기간">{row.period}</td>
+                <td data-label="상태">
+                  <Badge tone={row.tone}>{row.status}</Badge>
+                </td>
+                <td data-label="발급">
+                  {row.printHref ? (
+                    <PopupButton href={row.printHref}>발급받기</PopupButton>
+                  ) : (
+                    <button type="button" className="ds-btn ds-btn--secondary ds-btn--sm" disabled>
+                      발급 불가
+                    </button>
+                  )}
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {rows.map((row) => (
-                <tr key={row.id}>
-                  <td>{row.term}</td>
-                  <td className="is-left">
-                    <strong>{row.title}</strong>
-                  </td>
-                  <td>{row.period}</td>
-                  <td>
-                    <Badge tone={row.tone}>{row.status}</Badge>
-                  </td>
-                  <td>
-                    {row.printHref ? (
-                      <PopupButton href={row.printHref}>발급받기</PopupButton>
-                    ) : (
-                      <button type="button" className="ds-btn ds-btn--secondary ds-btn--sm" disabled>
-                        발급 불가
-                      </button>
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
       )}
     </>
   );
