@@ -412,19 +412,17 @@ function Consult() {
 
   return (
     <section className="sh-consult">
-      {/* 한 줄 띠: 왼쪽 제목 · 오른쪽 입력칸과 버튼을 가로로 (휴대폰은 세로로 쌓인다) */}
+      {/* 한 줄 띠 (유비온 참고): 왼쪽은 제목 + 동의 두 줄 — 두 줄 높이를 입력칸 높이(48)에 맞춰 위아래 선을 맞춘다 */}
       <div className="sh-consult-intro">
         <img src={`${IMG}/credit-bank/cb-icon-chat-person.png`} alt="" className="sh-consult-art" />
         <div>
-          {/* 맨 윗줄: 상담 종류 · 학습설계 신청 글자 링크 (줄을 하나 아껴 동의를 제목 밑에 둔다) */}
-          <p className="sh-consult-eyebrow">
-            1:1 무료 학습상담
+          <div className="sh-consult-head">
+            <h3 className="sh-consult-title">회원가입 없이 간편상담</h3>
             <Link href="/course-registration/learning-design" className="sh-consult-link">
               무료 학습설계 신청
             </Link>
-          </p>
-          <h3 className="sh-consult-title">회원가입 없이 간편상담</h3>
-          {/* 동의는 유비온처럼 제목 바로 밑 (입력칸은 한 줄만) — 폼 밖이라 form 속성으로 연결 */}
+          </div>
+          {/* 폼 밖이라 form 속성으로 폼에 연결 */}
           <label className="sh-consult-agree">
             <input type="checkbox" name="privacy" form="sh-consult-form" required />
             개인정보 수집·이용 동의
@@ -436,7 +434,7 @@ function Consult() {
       </div>
       <form id="sh-consult-form" className="sh-consult-form" onSubmit={handleSubmit}>
         <input type="text" name="name" placeholder="이름" aria-label="이름" required />
-        <input type="tel" name="phone" placeholder="연락처 ('-' 없이)" aria-label="연락처" required />
+        <input type="tel" name="phone" placeholder="연락처" aria-label="연락처 (숫자만)" required />
         <select name="interest" aria-label="관심분야" required defaultValue="">
           <option value="" disabled>
             관심분야
