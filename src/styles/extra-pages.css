@@ -70,17 +70,18 @@
 .ex-agree input { flex-shrink: 0; margin-top: 1px; }
 .ex-pay-btn { width: 100%; margin-top: var(--space-16); }
 
-/* ---------- 장바구니 (데스크톱 전용, 모바일은 원본 cart 화면) ---------- */
+/* ---------- 장바구니 (휴대폰은 한 줄로 쌓고 결제 버튼을 아래 고정) ---------- */
 /* 위에 파란 하위메뉴 줄이 겹쳐 뜨므로 나의 강의실 화면처럼 줄 아래 여백을 둔다 */
-.ex-cart-desktop { padding-top: 60px; }
+.ex-cart { padding-top: 60px; }
 .ex-cart-head { display: flex; justify-content: space-between; align-items: center; gap: var(--space-12); padding-bottom: var(--space-12); border-bottom: 1px solid var(--color-border-default); }
-.ex-cart-check { flex-shrink: 0; width: 18px; height: 18px; accent-color: var(--color-bg-brand); cursor: pointer; }
+.ex-cart-check { flex-shrink: 0; }
+.ex-cart-float { display: none; }
 .ex-cart-links { display: flex; gap: var(--space-4); }
 .ex-pay-btn + .ex-pay-btn { margin-top: var(--space-8); }
 /* 좁은 화면(태블릿)에서는 과목 목록이 눌리지 않게 금액 상자를 아래로 */
 @media (max-width: 1080px) {
-  .ex-cart-desktop .ex-pay { grid-template-columns: 1fr; }
-  .ex-cart-desktop .ex-pay-side { position: static; }
+  .ex-cart .ex-pay { grid-template-columns: 1fr; }
+  .ex-cart .ex-pay-side { position: static; }
 }
 
 /* ---------- 평생교육바우처 ---------- */
@@ -125,7 +126,20 @@
 
 /* ---------- 모바일 ---------- */
 @media (max-width: 480px) {
-  .ex-cart-desktop { display: none; }
+  .ex-cart { padding-top: var(--space-16); }
+  /* 과목 한 줄: [체크][아이콘 이름 ……… 금액] / 아래에 샘플강의 · 강의계획서 */
+  .ex-cart .ex-order-item { display: grid; grid-template-columns: auto auto minmax(0, 1fr) auto; column-gap: var(--space-8); row-gap: var(--space-4); }
+  .ex-cart .ex-order-name { font-size: 15px; }
+  .ex-cart .ex-order-price { font-size: 15px; }
+  .ex-cart .ex-cart-links { grid-column: 3 / -1; grid-row: 2; margin-left: calc(-1 * var(--space-12)); }
+  .ex-cart .ex-pay-side .ex-pay-btn { display: none; }
+  .ex-cart-float { position: fixed; right: 0; bottom: 0; left: 0; z-index: 900; display: block; padding: var(--space-12) var(--space-16) calc(var(--space-12) + env(safe-area-inset-bottom)); border-top: 1px solid var(--color-border-default); background: var(--color-bg-default); box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.08); }
+  .ex-cart-float[hidden] { display: none; }
+  .ex-cart-float .ds-btn { width: 100%; }
+  /* 아래 고정 메뉴가 푸터 끝을 가리지 않게 */
+  body:has(.ex-cart-float) .mobile-footer-section,
+  body:has(.rg-float) .mobile-footer-section { margin-bottom: 76px; }
+  body:has(.rg-float-summary) .mobile-footer-section { margin-bottom: 260px; }
   .ex-tabs { padding: var(--space-16) var(--space-16) 0; }
   /* 위에 파란 제목 띠가 없는 화면: 고정 헤더(70px) 아래로 내린다 */
   .ex-tabs--under-header { padding-top: 86px; }
@@ -243,7 +257,7 @@
 }
 
 @media (max-width: 480px) {
-  .rg-page { padding-top: var(--space-16); padding-bottom: 200px; }
+  .rg-page { padding-top: var(--space-16); }
   .rg-banner { display: none; }
   .rg-semester { margin-top: 0; }
   .rg-schedule { grid-template-columns: 1fr; padding: var(--space-4) var(--space-16); }

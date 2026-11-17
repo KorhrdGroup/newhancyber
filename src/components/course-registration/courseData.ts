@@ -103,12 +103,3 @@ export const sampleCartCourses: CartCourse[] = [
   { name: "가족상담및가족치료", icon: "사", originalPrice: 210000, currentPrice: 210000 },
   { name: "가족생활교육", icon: "사", originalPrice: 210000, currentPrice: 210000 },
 ];
-
-/** 장바구니·결제내역 할인액 — 원본도 쿠폰 계산 전이라 고정값 */
-export const SAMPLE_DISCOUNT = 525000;
-
-/** 장바구니·결제내역 결제 요약 (최종 금액은 0 미만으로 내려가지 않음) */
-export const cartSummary = (prices: number[]) => {
-  const totalFee = prices.reduce((sum, price) => sum + price, 0);
-  return { totalFee, discount: SAMPLE_DISCOUNT, finalAmount: Math.max(totalFee - SAMPLE_DISCOUNT, 0) };
-};
