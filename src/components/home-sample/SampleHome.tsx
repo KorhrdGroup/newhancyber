@@ -43,6 +43,13 @@ function PlayPause({ playing }: { playing: boolean }) {
 
 /* ---------- 1. 배너 (아래 제목 탭 + 진행 막대 — 번호·화살표 대신) ---------- */
 
+/** 시안 배너 그림: 소매·책 색을 배너 바탕색 계열로 바꾼 본 (원본은 운영 메인이 그대로 씀) */
+const SAMPLE_HERO_ART: Record<HeroSlide["theme"], string> = {
+  blue: `${IMG}/main/hero-art-01-sample.png`,
+  green: `${IMG}/main/hero-art-02-sample.png`,
+  purple: `${IMG}/main/hero-art-03-sample.png`,
+};
+
 function HeroSlideBody({ slide }: { slide: HeroSlide }) {
   return (
     <div className={`hb-slide hb-slide--${slide.theme}`}>
@@ -53,7 +60,7 @@ function HeroSlideBody({ slide }: { slide: HeroSlide }) {
           <p className="hb-desc">{slide.desc}</p>
           {slide.href && <span className="hb-more">자세히보기</span>}
         </div>
-        <img src={slide.art} alt="" className="hb-art" />
+        <img src={SAMPLE_HERO_ART[slide.theme]} alt="" className="hb-art" />
       </div>
     </div>
   );

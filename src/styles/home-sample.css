@@ -68,13 +68,14 @@
     radial-gradient(circle at 74% 50%, rgba(255, 255, 255, 0.22) 0, rgba(255, 255, 255, 0) 30%),
     linear-gradient(115deg, var(--hb-bg-1), var(--hb-bg-2));
 }
-.sh-hero .hb-slide--blue { --hb-bg-1: #2c66f0; --hb-bg-2: #1744cc; --hb-hl: #7ff3ff; }
-.sh-hero .hb-slide--green { --hb-bg-1: #22ad62; --hb-bg-2: #128a4b; --hb-hl: #f6ff6b; }
-.sh-hero .hb-slide--purple { --hb-bg-1: #8a6bff; --hb-bg-2: #6545e8; --hb-hl: #ffe674; }
-.sh-hero .hb-eyebrow { color: #fff; }
+/* --hb-hl: 제목 강조색, --hb-sub: 작은 글·설명 (바탕색을 아주 옅게 섞은 흰색) */
+.sh-hero .hb-slide--blue { --hb-bg-1: #2c66f0; --hb-bg-2: #1744cc; --hb-hl: #8ff3ff; --hb-sub: #d6e3ff; }
+.sh-hero .hb-slide--green { --hb-bg-1: #22ad62; --hb-bg-2: #128a4b; --hb-hl: #ecff7e; --hb-sub: #d6f6e3; }
+.sh-hero .hb-slide--purple { --hb-bg-1: #8a6bff; --hb-bg-2: #6545e8; --hb-hl: #ffe27a; --hb-sub: #ebe4ff; }
+.sh-hero .hb-eyebrow { color: var(--hb-sub); }
 .sh-hero .hb-title { color: var(--hb-hl); }
-.sh-hero .hb-desc { color: rgba(255, 255, 255, 0.88); }
-.sh-hero .hb-more { border-color: rgba(255, 255, 255, 0.9); background: transparent; color: #fff; }
+.sh-hero .hb-desc { color: var(--hb-sub); }
+.sh-hero .hb-more { border-color: var(--hb-sub); background: rgba(255, 255, 255, 0.12); color: #fff; }
 
 /* 아래 제목 탭 — 지금 보이는 배너는 막대가 차오른다 */
 .sh-hero-tabs {
