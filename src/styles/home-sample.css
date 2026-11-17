@@ -300,22 +300,7 @@ a.sh-info-card:hover .sh-info-title { color: var(--color-primary-dark); }
 .sh-why-head { margin-bottom: 28px; text-align: center; }
 .sh-why-eyebrow { margin: 0 0 6px; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; color: #8db4ff; }
 .sh-why-title { margin: 0; font-size: 28px; font-weight: 800; letter-spacing: -0.02em; }
-.sh-why-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--space-16);
-}
-.sh-why-card {
-  display: flex;
-  flex-direction: column;
-  padding: 26px 24px 22px;
-  border-radius: 18px;
-  background: #fff;
-  color: var(--color-text);
-}
-.sh-why-num { font-size: 14px; font-weight: 800; color: var(--color-primary); }
-.sh-why-label { margin: 6px 0 4px; font-size: 20px; font-weight: 800; color: var(--color-text-strong, #111); letter-spacing: -0.01em; }
-.sh-why-sub { margin: 0 0 18px; font-size: 14px; color: var(--color-text-secondary); }
+/* 상세 항목: 아이콘 · 이름 · 설명 */
 .sh-why-items { display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 0; list-style: none; }
 .sh-why-items li {
   display: flex;
@@ -329,18 +314,52 @@ a.sh-info-card:hover .sh-info-title { color: var(--color-primary-dark); }
 .sh-why-items span { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .sh-why-items b { font-size: 15px; font-weight: 700; color: var(--color-text-strong, #111); word-break: keep-all; }
 .sh-why-items small { font-size: 13px; color: var(--color-text-secondary); word-break: keep-all; }
-/* 가이드 6개는 2칸 바둑판, 아이콘 위 · 이름 아래 */
-.sh-why-card--guide .sh-why-items { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.sh-why-card--guide .sh-why-items li { flex-direction: column; gap: 6px; padding: 12px 8px; text-align: center; }
-.sh-why-card--guide .sh-why-items img { width: 40px; height: 40px; }
-.sh-why-card--guide .sh-why-items b { font-size: 13px; line-height: 1.35; }
-.sh-why-summary {
-  margin: auto 0 0;
-  padding-top: 18px;
-  font-size: 14px;
-  color: var(--color-text-secondary);
+/* 왼쪽 세 장점(제목·요약) + 오른쪽 고른 것의 상세. 휴대폰은 아코디언 */
+.sh-whyc {
+  display: grid;
+  grid-template-columns: 340px minmax(0, 1fr);
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  gap: 10px 20px;
 }
-.sh-why-summary strong { color: var(--color-primary-dark); }
+.sh-whyc-item { display: contents; }
+.sh-whyc-tab {
+  position: relative;
+  grid-column: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
+  padding: 18px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.sh-whyc-tab:hover { background: rgba(255, 255, 255, 0.12); }
+.sh-whyc-item.is-open .sh-whyc-tab { border-color: #fff; background: #fff; color: var(--color-text-strong, #111); }
+.sh-whyc-label { font-size: 17px; font-weight: 800; letter-spacing: -0.01em; }
+.sh-whyc-summary { font-size: 13px; color: rgba(255, 255, 255, 0.75); }
+.sh-whyc-summary strong { color: #fff; }
+.sh-whyc-item.is-open .sh-whyc-summary { color: var(--color-text-secondary); }
+.sh-whyc-item.is-open .sh-whyc-summary strong { color: var(--color-primary-dark); }
+.sh-whyc-panel {
+  grid-column: 2;
+  grid-row: 1 / -1;
+  padding: 28px;
+  border-radius: 18px;
+  background: #fff;
+  color: var(--color-text);
+}
+.sh-whyc-panel:not(.is-open) { visibility: hidden; }
+.sh-whyc-sub { margin: 0 0 18px; font-size: 18px; font-weight: 800; color: var(--color-text-strong, #111); }
+.sh-whyc-panel--guide .sh-why-items { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.sh-whyc-panel--guide .sh-why-items li { flex-direction: column; gap: 6px; padding: 14px 8px; text-align: center; }
+.sh-whyc-panel--guide .sh-why-items img { width: 44px; height: 44px; }
+.sh-whyc-panel--guide .sh-why-items b { font-size: 14px; line-height: 1.35; }
 
 /* ---------- 7. 1:1 무료 학습상담 ---------- */
 .sh-consult {
@@ -453,7 +472,7 @@ a.sh-info-card:hover .sh-info-title { color: var(--color-primary-dark); }
   .sh-info { grid-template-columns: 1fr 1fr; }
   .sh-info-card--call { grid-column: 1 / -1; }
   .sh-essential-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .sh-why-grid { grid-template-columns: minmax(0, 1fr); }
+  .sh-whyc { grid-template-columns: 280px minmax(0, 1fr); }
   .sh-consult { grid-template-columns: minmax(0, 1fr); }
 }
 
@@ -511,11 +530,30 @@ a.sh-info-card:hover .sh-info-title { color: var(--color-primary-dark); }
   .sh-why { margin-top: var(--space-16); padding: 28px 16px 16px; border-radius: 18px; }
   .sh-why-head { margin-bottom: 18px; }
   .sh-why-title { font-size: 20px; }
-  .sh-why-grid { grid-template-columns: minmax(0, 1fr); gap: 12px; }
-  .sh-why-card { padding: 20px 16px 16px; }
-  .sh-why-label { font-size: 18px; }
-  .sh-why-card--guide .sh-why-items { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .sh-why-card--guide .sh-why-items b { font-size: 12px; }
+  .sh-whyc { display: flex; flex-direction: column; gap: 8px; }
+  .sh-whyc-item { display: block; }
+  .sh-whyc-tab { padding: 16px 44px 16px 16px; }
+  .sh-whyc-tab::after {
+    content: "";
+    position: absolute;
+    top: 22px;
+    right: 20px;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    opacity: 0.7;
+    transform: rotate(45deg);
+  }
+  .sh-whyc-item.is-open .sh-whyc-tab { border-radius: 14px 14px 0 0; }
+  .sh-whyc-item.is-open .sh-whyc-tab::after { top: 26px; transform: rotate(-135deg); }
+  .sh-whyc-label { font-size: 16px; }
+  .sh-whyc-panel { padding: 0 16px 16px; border-radius: 0 0 14px 14px; }
+  .sh-whyc-panel:not(.is-open) { display: none; }
+  .sh-whyc-sub { margin-bottom: 12px; font-size: 14px; font-weight: 700; color: var(--color-text-secondary); }
+  .sh-whyc-panel--guide .sh-why-items { gap: 8px; }
+  .sh-whyc-panel--guide .sh-why-items img { width: 36px; height: 36px; }
+  .sh-whyc-panel--guide .sh-why-items b { font-size: 12px; }
 
   .sh-consult { gap: 20px; padding: 24px 16px 16px; border-radius: 18px; }
   .sh-consult-title { font-size: 22px; padding-right: 72px; }
