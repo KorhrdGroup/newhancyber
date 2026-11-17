@@ -418,6 +418,8 @@
 }
 .sh-essential-grid a:hover { box-shadow: 0 4px 16px rgba(17, 90, 237, 0.12); }
 .sh-essential-grid img { width: 56px; height: 56px; object-fit: contain; }
+/* 이름 칸은 늘 두 줄 높이 — 한 줄 이름은 그 안에서 위아래 가운데, 두 줄 이름과 아랫선이 맞는다 */
+.sh-essential-grid span { display: flex; flex: 1; align-items: center; justify-content: center; min-height: 2.8em; line-height: 1.4; }
 
 /* ---------- 9. 맨 아래 띠 — 왜 한평생일까요 (탭 3개, 화면 폭 꽉 찬 남색 띠 · 안쪽은 본문 폭) ---------- */
 .sh-why {
@@ -632,6 +634,8 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
   .sh-essential-grid { gap: 8px; }
   .sh-essential-grid a { padding: 14px 4px; font-size: 12px; }
   .sh-essential-grid img { width: 40px; height: 40px; }
+  /* 휴대폰은 칸이 좁아 가장 긴 이름이 세 줄 → 이름 칸을 세 줄 높이로 잡아 위아래 줄 카드 높이를 맞춘다 */
+  .sh-essential-grid span { min-height: 4.2em; }
 
   .sh-why { padding: 32px 16px; }
   .sh-why-head { margin-bottom: 18px; }
