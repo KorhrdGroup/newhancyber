@@ -231,6 +231,18 @@ function QuickActions() {
 
 /* ---------- 3. 벤토 — 친구추천 넓게, 고객센터 번호 2칸, 모바일 가이드 세로 기둥 ---------- */
 
+/* 두 번호 모두 같은 운영시간 — 나눠 쓰면 번호마다 시간이 다른 것처럼 읽혀 두 카드에 똑같이 넣는다 */
+function CallHours() {
+  return (
+    <span className="sh-callcard-note">
+      <span>평일 09:00 ~ 18:00</span>
+      <span>
+        <i>점심 12:00 ~ 13:00 ·</i> <i>주말/공휴일 휴무</i>
+      </span>
+    </span>
+  );
+}
+
 function PhoneIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -256,7 +268,7 @@ function Bento() {
           수강신청 · 학습상담
         </span>
         <b className="sh-callcard-num">{phones.registration}</b>
-        <span className="sh-callcard-note">평일 09:00 ~ 18:00</span>
+        <CallHours />
       </a>
       <a href={`tel:${phones.support}`} className="sh-callcard">
         <span className="sh-callcard-head">
@@ -264,9 +276,7 @@ function Bento() {
           학습지원 <small>시험오류 · 학습장애</small>
         </span>
         <b className="sh-callcard-num">{phones.support}</b>
-        <span className="sh-callcard-note">
-          <span>점심 12:00 ~ 13:00 ·</span> <span>주말/공휴일 휴무</span>
-        </span>
+        <CallHours />
       </a>
       <Link href="/learning-support/mobile-guide" className="sh-guide">
         <span className="sh-guide-text">

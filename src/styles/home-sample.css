@@ -268,8 +268,9 @@
 .sh-callcard-head svg { flex: none; width: 20px; height: 20px; color: var(--color-primary); }
 .sh-callcard-head small { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); }
 .sh-callcard-num { font-size: 32px; font-weight: 800; letter-spacing: -0.01em; color: var(--color-primary-dark); white-space: nowrap; }
-.sh-callcard-note { font-size: 13px; color: var(--color-text-secondary); }
-.sh-callcard-note span { white-space: nowrap; }
+.sh-callcard-note { display: flex; flex-direction: column; gap: 2px; font-size: 13px; color: var(--color-text-secondary); }
+.sh-callcard-note span:first-child { font-weight: 700; color: var(--color-text-strong, #111); }
+.sh-callcard-note i { font-style: normal; white-space: nowrap; } /* 폰에서 '주말/'과 '공휴일' 사이가 끊기지 않게 */
 
 /* ---------- 4. 수강 혜택 · 학점은행제 띠 ---------- */
 .sh-infobar {
