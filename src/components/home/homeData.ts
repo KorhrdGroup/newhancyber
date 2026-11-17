@@ -199,6 +199,18 @@ export const interestOptions: SelectOption[] = [
   { value: "etc", label: "기타" },
 ];
 
+/** 상담 희망 시간 — 고객센터 운영시간(평일 09:00~18:00, 점심 12:00~13:00 제외) 안에서 1시간 단위 */
+export const consultTimeOptions: SelectOption[] = [
+  { value: "09", label: "09:00~10:00" },
+  { value: "10", label: "10:00~11:00" },
+  { value: "11", label: "11:00~12:00" },
+  { value: "13", label: "13:00~14:00" },
+  { value: "14", label: "14:00~15:00" },
+  { value: "15", label: "15:00~16:00" },
+  { value: "16", label: "16:00~17:00" },
+  { value: "17", label: "17:00~18:00" },
+];
+
 export const educationOptions: SelectOption[] = [
   { value: "high-school", label: "고등학교 졸업" },
   { value: "college-2", label: "전문대학 졸업(2년제)" },

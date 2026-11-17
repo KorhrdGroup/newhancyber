@@ -8,6 +8,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import {
   currentTerm,
+  consultTimeOptions,
   essentialCards,
   heroSlides,
   interestOptions,
@@ -427,9 +428,19 @@ function Consult() {
         <input type="tel" name="phone" placeholder="연락처 ('-' 없이)" aria-label="연락처" required />
         <select name="interest" aria-label="관심분야" required defaultValue="">
           <option value="" disabled>
-            관심분야 선택
+            관심분야
           </option>
           {interestOptions.map((o) => (
+            <option key={o.value} value={o.value}>
+              {o.label}
+            </option>
+          ))}
+        </select>
+        <select name="time" aria-label="상담 희망 시간" required defaultValue="">
+          <option value="" disabled>
+            상담 시간
+          </option>
+          {consultTimeOptions.map((o) => (
             <option key={o.value} value={o.value}>
               {o.label}
             </option>
