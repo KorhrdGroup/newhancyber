@@ -237,7 +237,7 @@
 /* 모바일 가이드: 오른쪽 세로 기둥 — 글 위, 폰 그림 아래 */
 .sh-bento .sh-guide { grid-column: 9 / 13; grid-row: 1 / 3; height: auto; justify-content: flex-start; padding: 32px 28px; }
 .sh-bento .sh-guide-title { font-size: 24px; }
-.sh-bento .sh-guide-art { right: 24px; bottom: -18px; height: 64%; }
+.sh-bento .sh-guide-art { right: 20px; bottom: -24px; height: 74%; }
 
 .sh-guide {
   --sh-bg: #f1f4f9;
@@ -268,6 +268,7 @@
 .sh-callcard-head svg { flex: none; width: 20px; height: 20px; color: var(--color-primary); }
 .sh-callcard-head small { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); }
 .sh-callcard-num { font-size: 32px; font-weight: 800; letter-spacing: -0.01em; color: var(--color-primary-dark); white-space: nowrap; }
+.sh-callhours { display: none; }
 .sh-callcard-note { display: flex; flex-direction: column; gap: 2px; font-size: 13px; color: var(--color-text-secondary); }
 .sh-callcard-note span:first-child { font-weight: 700; color: var(--color-text-strong, #111); }
 .sh-callcard-note i { font-style: normal; white-space: nowrap; } /* 폰에서 '주말/'과 '공휴일' 사이가 끊기지 않게 */
@@ -365,8 +366,6 @@
 .sh-consult-title { margin: 0; font-size: 30px; font-weight: 800; line-height: 1.35; letter-spacing: -0.02em; color: var(--color-text-strong, #111); }
 .sh-consult-desc { margin: 12px 0 0; font-size: 16px; color: var(--color-text-secondary); word-break: keep-all; }
 .sh-consult-links { display: flex; align-items: center; gap: 18px; margin-top: 28px; }
-.sh-consult-phone { font-size: 14px; color: var(--color-text-secondary); text-decoration: none; }
-.sh-consult-phone b { margin-left: 4px; font-size: 18px; color: var(--color-text-strong, #111); }
 .sh-consult-art { position: absolute; right: 0; top: 0; width: 120px; height: 120px; object-fit: contain; }
 .sh-consult-form { display: flex; flex-direction: column; gap: 10px; padding: 24px; border-radius: 20px; background: #fff; box-shadow: 0 8px 24px rgba(17, 90, 237, 0.1); }
 .sh-consult-form-title { margin: 0 0 4px; font-size: 17px; font-weight: 800; color: var(--color-text-strong, #111); }
@@ -510,6 +509,12 @@
 .sh-whyc-panel--guide .sh-why-items img { width: 44px; height: 44px; }
 .sh-whyc-panel--guide .sh-why-items b { font-size: 14px; line-height: 1.35; }
 
+/* 떠 있는 오른쪽 빠른 상담도 왼쪽 빠른 메뉴처럼, 좁은 화면에서는 배너를 지나 스크롤한 뒤에 보인다 (시안 페이지만) */
+@media (max-width: 1599px) {
+  body:has(.sh-main) .floating-menu:not(.is-scrolled) .floating-right { opacity: 0; visibility: hidden; }
+}
+body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; }
+
 /* 개강 줄이 두 줄로 접히는 폭 — 양끝 벌림 대신 왼쪽부터 채운다 */
 @media (max-width: 1199px) {
   .sh-term-list { justify-content: flex-start; column-gap: var(--space-24); }
@@ -577,12 +582,13 @@
   .sh-callcard-head svg { width: 18px; height: 18px; }
   .sh-callcard-head small { flex-basis: 100%; font-size: 12px; }
   .sh-callcard-num { font-size: 21px; }
-  .sh-callcard-note { font-size: 12px; }
+  .sh-callcard-note { display: none; }
+  .sh-callhours { display: block; grid-column: 1 / -1; margin: -4px 0 0; font-size: 12px; color: var(--color-text-secondary); text-align: center; }
   .sh-infobar-item { gap: 12px; padding: 14px 16px; }
   .sh-infobar-item img { width: 32px; height: 32px; }
   .sh-infobar-title { font-size: 15px; }
-  .sh-infobar-list { gap: 2px 12px; font-size: 13px; }
-  /* 폰에서는 줄이 접혀 세로선이 줄 맨 앞에 남으므로 뺀다 */
+  /* 폰: 줄이 들쭉날쭉 접히지 않게 한 줄에 하나씩 (구분선은 뺀다) */
+  .sh-infobar-list { flex-direction: column; align-items: flex-start; gap: 2px; font-size: 13px; }
   .sh-infobar-list li + li::before { display: none; }
 
   .sh-notice-row { grid-template-columns: minmax(0, 1fr); gap: var(--space-24); }
@@ -601,7 +607,6 @@
   .sh-consult-title { font-size: 22px; padding-right: 72px; }
   .sh-consult-desc { font-size: 14px; }
   .sh-consult-links { flex-direction: column; align-items: stretch; gap: 10px; }
-  .sh-consult-phone { text-align: center; }
   .sh-consult-art { width: 64px; height: 64px; }
   .sh-consult-form { padding: 18px; }
 

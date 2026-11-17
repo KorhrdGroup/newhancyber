@@ -278,6 +278,8 @@ function Bento() {
         <b className="sh-callcard-num">{phones.support}</b>
         <CallHours />
       </a>
+      {/* 폰: 카드가 좁아 시간을 카드마다 쓰면 빽빽해 두 번호 아래에 한 번만 */}
+      <p className="sh-callhours">평일 09:00 ~ 18:00 · 점심 12:00 ~ 13:00 · 주말/공휴일 휴무</p>
       <Link href="/learning-support/mobile-guide" className="sh-guide">
         <span className="sh-guide-text">
           <span className="sh-guide-label">언제 어디서나</span>
@@ -300,7 +302,7 @@ const infoLinks = [
     title: "수강 혜택",
     href: "/footer/about#tab-scholarship",
     icon: `${IMG}/credit-bank/cb-icon-coin-cycle.png`,
-    items: ["교육원 장학제도", "친구추천 이벤트", "카드사 무이자 할부"],
+    items: ["교육원 장학제도", "카드사 무이자 할부"],
   },
   {
     title: "학점은행제 안내",
@@ -421,9 +423,6 @@ function Consult() {
           <Link href="/course-registration/learning-design" className="sh-btn sh-btn--primary">
             무료 학습설계 신청 <Chevron />
           </Link>
-          <a href={`tel:${phones.registration}`} className="sh-consult-phone">
-            전화 상담 <b>{phones.registration}</b>
-          </a>
         </div>
         <img src={`${IMG}/credit-bank/cb-icon-chat-person.png`} alt="" className="sh-consult-art" />
       </div>
