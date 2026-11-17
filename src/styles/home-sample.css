@@ -233,7 +233,8 @@
 .sh-bento .sh-guide-art { right: 20px; bottom: -24px; height: 74%; }
 
 .sh-guide {
-  --sh-bg: #f1f4f9;
+  /* 번호 카드 호버에 쓰던 연파랑을 가이드 바탕으로 */
+  --sh-bg: #eaf1ff;
   --sh-fg: var(--color-text-strong, #111);
   flex-direction: column;
   justify-content: space-between;
@@ -254,9 +255,7 @@
   border-radius: var(--radius-16);
   background: #f3f6fb;
   text-decoration: none;
-  transition: background 0.2s ease;
 }
-.sh-callcard:hover { background: #eaf1ff; }
 .sh-callcard-head { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; font-size: 16px; font-weight: 700; color: var(--color-text-strong, #111); }
 .sh-callcard-head svg { flex: none; width: 20px; height: 20px; color: var(--color-primary); }
 .sh-callcard-head small { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); }
@@ -267,20 +266,17 @@
 .sh-callcard-note i { font-style: normal; white-space: nowrap; } /* 폰에서 '주말/'과 '공휴일' 사이가 끊기지 않게 */
 
 /* ---------- 4. 수강 혜택 · 학점은행제 띠 ---------- */
+/* 위 번호 카드와 같은 연회색 카드 두 장 (테두리 없음) */
 .sh-infobar {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  border: 1px solid #e3eaf7;
-  border-radius: var(--radius-16);
-  background: #fff;
+  gap: var(--space-20);
 }
-.sh-infobar-item { display: flex; align-items: center; gap: 14px; min-width: 0; padding: 16px 24px; color: var(--color-text-secondary); text-decoration: none; }
-.sh-infobar-item + .sh-infobar-item { border-left: 1px solid #e3eaf7; }
+.sh-infobar-item { display: flex; align-items: center; gap: 14px; min-width: 0; padding: 22px 28px; border-radius: var(--radius-16); background: #f3f6fb; color: var(--color-text-secondary); text-decoration: none; }
 .sh-infobar-item img { flex: none; width: 40px; height: 40px; object-fit: contain; }
 .sh-infobar-text { display: flex; flex: 1; flex-direction: column; gap: 4px; min-width: 0; }
 .sh-infobar-item > svg { flex: none; width: 18px; height: 18px; }
 .sh-infobar-title { flex: none; font-size: 16px; font-weight: 700; color: var(--color-text-strong, #111); }
-.sh-infobar-item:hover .sh-infobar-title { color: var(--color-primary-dark); }
 .sh-infobar-list { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 10px; margin: 0; padding: 0; list-style: none; font-size: 14px; }
 /* 항목 안에도 가운뎃점이 있어 구분은 짧은 세로선으로 */
 .sh-infobar-list li { display: flex; align-items: center; gap: 10px; }
@@ -353,7 +349,8 @@
   padding: 24px 32px;
   border-radius: var(--radius-20);
   /* 눈에 잘 띄게 파란 바탕 · 흰 글씨 */
-  background: linear-gradient(120deg, var(--color-primary-dark), var(--color-primary));
+  /* 기본 파랑(#115AED → #3F7EFB)보다 아주 살짝 밝게 */
+  background: linear-gradient(120deg, #1e64f0, #4a86fc);
   color: #fff;
 }
 .sh-consult-intro { display: flex; align-items: center; gap: 14px; }
@@ -376,7 +373,7 @@
     gap: 28px;
     width: min(1140px, calc(100% - 40px));
     padding: 20px 20px 20px 32px;
-    box-shadow: 0 12px 40px rgba(17, 90, 237, 0.35);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
     transform: translateX(-50%);
     transition: opacity 0.25s, transform 0.25s, visibility 0.25s;
   }
@@ -437,10 +434,10 @@
 .sh-consult-agree { display: flex; margin-top: 4px; align-items: center; gap: 6px; height: 20px; font-size: 13px; color: rgba(255, 255, 255, 0.85); }
 .sh-consult-agree input { width: 16px; height: 16px; margin: 0; accent-color: var(--color-primary-darker); }
 .sh-consult-agree button { padding: 0; border: 0; background: none; color: #fff; font-size: 13px; text-decoration: underline; cursor: pointer; }
-/* 파란 바 위에서도 보이게 더 진한 남색 */
+/* 파란 바 위에서도 보이게 진한 남색 (WHY 띠 바탕과 같은 색) */
 .sh-consult-submit { height: 48px; padding: 0 12px; font-size: 16px; white-space: nowrap; }
-.sh-consult-submit.sh-btn--primary { background: var(--color-primary-darker); }
-.sh-consult-submit.sh-btn--primary:hover { background: #00268f; }
+.sh-consult-submit.sh-btn--primary { background: #0f2a6e; }
+.sh-consult-submit.sh-btn--primary:hover { background: #0a1f55; }
 
 /* ---------- 8. 꼭 확인하세요 ---------- */
 .sh-essential {
@@ -548,7 +545,8 @@
   color: var(--color-text);
 }
 .sh-whyc-panel:not(.is-open) { visibility: hidden; }
-.sh-whyc-sub { margin: 0 0 18px; font-size: 18px; font-weight: 800; color: var(--color-text-strong, #111); }
+/* 판 위 한 줄 소개: 가운데, 아래 카드 제목보다 한 단계 가볍게 · 짙은 회색 */
+.sh-whyc-sub { margin: 0 0 18px; font-size: 18px; font-weight: 700; color: var(--color-text-default); text-align: center; }
 /* 항목 칸: 항목 수만큼 나누고(--why-cols) 남은 높이를 꽉 채운다. 아이콘 위 · 글 아래 가운데 */
 .sh-whyc-panel .sh-why-items {
   flex: 1;
@@ -607,7 +605,6 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
   .sh-bento .sh-guide-title { font-size: 22px; }
   .sh-bento .sh-guide-art { right: 18px; bottom: -14px; height: 92%; }
   .sh-infobar { grid-template-columns: minmax(0, 1fr); }
-  .sh-infobar-item + .sh-infobar-item { border-left: 0; border-top: 1px solid #e3eaf7; }
   .sh-essential-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   /* 4칸이 되면 칸이 200px 넘게 커져 정사각형은 속이 텅 빈다 → 정사각형은 PC 8칸에서만 */
   .sh-essential-grid a { aspect-ratio: auto; padding: 20px 8px; }
@@ -665,7 +662,8 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
   .sh-callcard-num { font-size: 21px; }
   .sh-callcard-note { display: none; }
   .sh-callhours { display: block; grid-column: 1 / -1; margin: -4px 0 0; font-size: 12px; color: var(--color-text-secondary); text-align: center; }
-  .sh-infobar-item { gap: 12px; padding: 14px 16px; }
+  .sh-infobar { gap: 12px; }
+  .sh-infobar-item { gap: 12px; padding: 16px; }
   .sh-infobar-item img { width: 32px; height: 32px; }
   .sh-infobar-title { font-size: 15px; }
   /* 폰: 줄이 들쭉날쭉 접히지 않게 한 줄에 하나씩 (구분선은 뺀다) */
@@ -722,7 +720,7 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
   .sh-whyc-label { font-size: 16px; }
   .sh-whyc-panel { padding: 0 16px 16px; border-radius: 0 0 var(--radius-16) var(--radius-16); }
   .sh-whyc-panel:not(.is-open) { display: none; }
-  .sh-whyc-sub { margin-bottom: 12px; font-size: 14px; font-weight: 700; color: var(--color-text-secondary); }
+  .sh-whyc-sub { margin-bottom: 12px; font-size: 14px; font-weight: 600; }
   /* 휴대폰: 설명이 있는 항목은 한 줄씩(아이콘 왼쪽), 가이드 6개만 3칸 */
   .sh-whyc-panel .sh-why-items { grid-template-columns: minmax(0, 1fr); grid-auto-rows: auto; gap: 8px; }
   .sh-whyc-panel .sh-why-items li { flex-direction: row; justify-content: flex-start; gap: 14px; padding: 10px 14px 10px 10px; text-align: left; }
@@ -743,7 +741,9 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
 }
 
 /* ---------- 오른쪽 사이드 플로팅 (PC 1280 이상, 22s.kr 참고) — 둥근 알약 버튼을 세로로 ---------- */
-.sh-side { display: none; }
+.sh-side,
+.sh-quick,
+.sh-top { display: none; }
 @media (min-width: 1280px) {
   /* 기존 플로팅(빠른 메뉴 · 빠른 상담 · SNS · TOP)은 시안에서 이 사이드 메뉴로 바꾼다 */
   body:has(.sh-main) .floating-menu { display: none; }
@@ -751,39 +751,51 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
     position: fixed;
     /* 넓은 화면에선 스크롤바 쪽에 붙지 않게 본문(1100) 오른쪽 끝에서 32px 띄운 자리, 좁으면 오른쪽 20px */
     right: max(20px, calc((100vw - 1100px) / 2 - 176px - 32px));
-    bottom: 30px;
+    /* 위쪽 기준: 스크롤하면 붙는 메뉴 줄(높이 약 62) 아래 */
+    top: 100px;
     z-index: 901;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     gap: 8px;
     width: 176px;
-    transition: bottom 0.25s, opacity 0.2s, visibility 0.2s;
+    transition: opacity 0.2s, visibility 0.2s;
   }
-  /* 간편상담 바가 열려 있으면 바 위로 올린다 */
-  .sh-side.is-consult-open { bottom: 124px; }
+  /* 양쪽 공통 카드: 파란 머리 칸(번호 · QUICK MENU)과 흰 카드(바로가기 · 상담 칸) */
+  .sh-side-brand,
+  .sh-quick-head {
+    border-radius: var(--radius-20);
+    background: var(--color-primary-dark);
+    box-shadow: 0 8px 18px rgba(12, 23, 38, 0.1);
+    color: #fff;
+  }
+  .sh-side-item,
+  .sh-quick-list,
+  .sh-side-sns {
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-20);
+    background: #fff;
+    box-shadow: 0 8px 18px rgba(12, 23, 38, 0.1);
+  }
+  /* 번호 아래 두 칸(학습설계 · 간편상담): 아이콘 + 작은 설명 + 이름, 같은 높이 */
   .sh-side-item {
     display: flex;
     align-items: center;
     gap: 10px;
     width: 100%;
-    height: 44px;
-    padding: 0 14px 0 8px;
-    border: 1px solid var(--color-border-strong);
-    border-radius: var(--radius-full);
-    background: #fff;
-    box-shadow: 0 8px 18px rgba(12, 23, 38, 0.1);
+    height: 64px;
+    padding: 0 14px;
     color: var(--color-text-strong, #111);
-    font-size: 14px;
-    font-weight: 700;
+    font: inherit;
     text-align: left;
     text-decoration: none;
     white-space: nowrap;
     cursor: pointer;
   }
-  .sh-side-item:hover { border-color: var(--color-primary); color: var(--color-primary-dark); }
-  .sh-side-item.is-active { border-color: var(--color-primary); color: var(--color-primary-dark); }
-  .sh-side-item--tall { flex-direction: column; align-items: flex-start; justify-content: center; gap: 2px; height: 72px; padding: 0 18px; border-radius: var(--radius-20); }
+  .sh-side-item:hover,
+  .sh-side-item.is-active { border-color: var(--color-primary); }
+  .sh-side-text { display: flex; flex-direction: column; gap: 2px; }
+  .sh-side-name { font-size: 16px; font-weight: 800; letter-spacing: -0.01em; }
   /* 전화 상담 칸: 번호 + 노란 카톡상담 버튼 */
   .sh-side-brand {
     display: flex;
@@ -791,9 +803,6 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
     gap: 12px;
     width: 100%;
     padding: 16px 14px 14px;
-    border-radius: var(--radius-20);
-    background: var(--color-primary-dark);
-    box-shadow: 0 8px 18px rgba(12, 23, 38, 0.1);
   }
   .sh-side-call { display: flex; flex-direction: column; gap: 2px; color: #fff; text-decoration: none; }
   /* 전화번호는 크게: 아래 카톡 버튼 폭(148)을 꽉 채워 좌우 여백이 14로 같게 */
@@ -814,14 +823,68 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
   .sh-side-kakao:hover { background: #fdd835; }
   .sh-side-kakao img { width: 16px; height: 16px; object-fit: contain; }
   .sh-side-sub { font-size: 12px; font-weight: 600; opacity: 0.75; }
-  .sh-side-big { font-size: 17px; font-weight: 800; letter-spacing: -0.01em; }
-  .sh-side-icon { display: grid; flex: none; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: #eef4ff; color: var(--color-primary-dark); }
-  .sh-side-top {
+  .sh-side-icon { display: grid; flex: none; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: #eef4ff; color: var(--color-primary-dark); }
+  /* 왼쪽 QUICK MENU: 본문(1100) 왼쪽 끝에서 32px 띄운 자리, 좁으면 왼쪽 20px. 위 끝은 오른쪽 상담 묶음과 맞춘다 */
+  .sh-quick {
+    position: fixed;
+    left: max(20px, calc((100vw - 1100px) / 2 - 112px - 32px));
+    top: 100px;
+    z-index: 901;
+    display: flex;
+    flex-direction: column;
+    width: 112px;
+    /* 펼치면 머리 칸과 목록이 한 카드로 붙으므로 그림자는 묶음 전체에 */
+    border-radius: var(--radius-20);
+    box-shadow: 0 8px 18px rgba(12, 23, 38, 0.1);
+    transition: opacity 0.2s, visibility 0.2s;
+  }
+  .sh-quick .sh-quick-head,
+  .sh-quick .sh-quick-list { box-shadow: none; }
+  /* 머리 칸 = 접기/펴기 버튼. 펼쳐 있으면 아래 모서리를 펴서 목록과 잇는다 */
+  .sh-quick-head { position: relative; display: flex; flex-direction: column; align-items: center; gap: 2px; width: 100%; margin: 0; padding: 14px 12px 20px; border: 0; font: inherit; text-align: center; cursor: pointer; }
+  .sh-quick-head.is-open { border-radius: var(--radius-20) var(--radius-20) 0 0; }
+  /* 머리 칸 아래 경계에 반쯤 걸친 둥근 손잡이. 펼쳐 있으면 ∧, 접혀 있으면 ∨ */
+  .sh-quick-handle {
+    position: absolute;
+    left: 50%;
+    bottom: -14px;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--color-border-strong);
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(12, 23, 38, 0.12);
+    color: var(--color-primary-dark);
+    transform: translateX(-50%);
+  }
+  .sh-quick-handle svg { transition: transform 0.2s; }
+  .sh-quick-head:not(.is-open) .sh-quick-handle svg { transform: rotate(180deg); }
+  .sh-quick-head:hover .sh-quick-handle { border-color: var(--color-primary); }
+  .sh-quick-list[hidden] { display: none; }
+  .sh-quick-title { font-size: 14px; font-weight: 800; letter-spacing: -0.01em; white-space: nowrap; }
+  .sh-quick-list { margin: 0; padding: 16px 0 4px; border-top: 0; border-radius: 0 0 var(--radius-20) var(--radius-20); list-style: none; }
+  /* 구분선은 카드 좌우에서 12px씩 띄워 짧게 */
+  .sh-quick-list li { margin: 0 12px; }
+  .sh-quick-list li + li { border-top: 1px solid #eef1f5; }
+  .sh-quick-list a { display: block; padding: 10px 0; color: var(--color-text-default); font-size: 14px; font-weight: 600; text-align: center; text-decoration: none; }
+  .sh-quick-list a:hover { color: var(--color-primary-dark); }
+  /* 상담 묶음 맨 아래 SNS: 아이콘 + 이름 세 칸 */
+  .sh-side-sns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%; margin: 0; padding: 12px 6px; list-style: none; }
+  .sh-side-sns a { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--color-text-secondary); font-size: 12px; font-weight: 600; text-decoration: none; white-space: nowrap; }
+  .sh-side-sns img { width: 28px; height: 28px; border-radius: 8px; object-fit: contain; }
+  /* 맨 위로: 오른쪽 상담 묶음과 같은 세로줄의 오른쪽 끝, 화면 아래. 조금 내린 뒤에 보인다 */
+  .sh-top {
+    position: fixed;
+    right: max(20px, calc((100vw - 1100px) / 2 - 176px - 32px));
+    bottom: 30px;
+    z-index: 901;
     display: grid;
     place-items: center;
     width: 52px;
     height: 52px;
-    margin-top: 4px;
     padding: 0;
     border: 1px solid var(--color-border-strong);
     border-radius: 50%;
@@ -829,9 +892,16 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
     box-shadow: 0 8px 18px rgba(12, 23, 38, 0.1);
     color: var(--color-text-default);
     cursor: pointer;
+    transition: opacity 0.2s, visibility 0.2s, bottom 0.25s;
   }
+  .sh-top:not(.is-scrolled) { opacity: 0; visibility: hidden; }
+}
+/* 화면이 좁으면 아래 간편상담 바(폭 1140)와 겹치므로, 바가 열려 있을 땐 그 위로 */
+@media (min-width: 1280px) and (max-width: 1339px) {
+  .sh-top.is-consult-open { bottom: 124px; }
 }
 /* 1599px 이하에선 사이드 메뉴가 배너 오른쪽 끝을 덮으므로, 조금 내린 뒤에 보인다 */
 @media (min-width: 1280px) and (max-width: 1599px) {
-  .sh-side:not(.is-scrolled) { opacity: 0; visibility: hidden; }
+  .sh-side:not(.is-scrolled),
+  .sh-quick:not(.is-scrolled) { opacity: 0; visibility: hidden; }
 }

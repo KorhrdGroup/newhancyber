@@ -39,11 +39,28 @@ function useHashTab(): TabKey | null {
   return isTabKey(name) ? name : null;
 }
 
+const subscribePopState = (onChange: () => void) => {
+  window.addEventListener("popstate", onChange);
+  return () => window.removeEventListener("popstate", onChange);
+};
+
+/** 주소의 ?tab=xxx 로 열 탭 — 해시와 달리 탭 위치로 내려가지 않고 페이지 맨 위에서 보여 준다 (메인 '수강 혜택' 띠) */
+function useQueryTab(): TabKey | null {
+  const search = useSyncExternalStore(
+    subscribePopState,
+    () => window.location.search,
+    () => "",
+  );
+  const name = new URLSearchParams(search).get("tab") ?? "";
+  return isTabKey(name) ? name : null;
+}
+
 /** 교육원 소개 탭 (데스크톱). 모바일은 탭 없이 MobileAboutContent 를 보여준다. */
 export default function AboutTabs() {
   const hashTab = useHashTab();
+  const queryTab = useQueryTab();
   const [selected, setSelected] = useState<TabKey | null>(null);
-  const activeTab = selected ?? hashTab ?? "greeting";
+  const activeTab = selected ?? hashTab ?? queryTab ?? "greeting";
 
   // 해시가 바뀌면(사이트맵 링크·뒤로가기 등) 클릭으로 고른 탭을 버리고 해시 탭을 따른다
   useEffect(() => {

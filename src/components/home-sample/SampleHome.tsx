@@ -307,15 +307,18 @@ function Bento() {
 const infoLinks = [
   {
     title: "수강 혜택",
-    href: "/footer/about#tab-scholarship",
+    // 해시(#tab-)로 가면 탭 위치로 내려가 버려서, 맨 위부터 보이게 ?tab= 으로 장학제도 탭만 연다
+    href: "/footer/about?tab=scholarship",
     icon: `${IMG}/credit-bank/cb-icon-coin-cycle.png`,
-    items: ["교육원 장학제도", "카드사 무이자 할부"],
+    // 이동하는 곳(교육원 소개 · 장학제도 탭)에 있는 내용만
+    items: ["성적장학금", "국가유공자 전액면제", "기초생활수급자 50% 감면"],
   },
   {
     title: "학점은행제 안내",
     href: "/credit-bank/info",
     icon: `${IMG}/credit-bank/cb-icon-school.png`,
-    items: ["학점은행제란?", "학위 · 자격증 취득 과정", "교육부 평가인정 기관"],
+    // 이동하는 곳(학점은행제란)의 소제목
+    items: ["학점은행제란?", "이용대상", "학점은행제 장점"],
   },
 ];
 
@@ -564,8 +567,9 @@ export default function SampleHome() {
         {/* 실습 신청 · 결제는 자주 찾는 길이라 넘김 없이 개강 줄 바로 아래 */}
         <QuickActions />
         <Bento />
-        <InfoBar />
         <Notices />
+        {/* 수강 혜택 · 학점은행제는 공지 아래 줄로 */}
+        <InfoBar />
         <Consult closed={consultClosed} onClose={() => setConsultClosed(true)} />
       </div>
       <Essentials />
