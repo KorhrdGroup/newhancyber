@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useActionState, useState, type FormEvent } from "react";
+import { login, type LoginState } from "@/app/member/actions";
 import ButtonTabs from "@/components/common/ButtonTabs";
 import "@/styles/classroom.css";
 
@@ -17,11 +18,9 @@ const authMethods: { key: AuthMethod; label: string }[] = [
 export default function LoginForms() {
   const [authMethod, setAuthMethod] = useState<AuthMethod>("cert");
 
-  const handleGeneralLogin = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // TODO: 로그인 API 연동 (userId, userPassword)
-    alert("로그인 API 연동 전입니다.");
-  };
+  // form 의 action 에 서버 액션을 바로 건다 — 화면 스크립트가 아직 준비되기 전에 눌러도 POST 로 서버에 가고
+  // (주소창에 비밀번호가 붙지 않는다), 틀렸을 때는 돌려받은 아이디를 다시 채운다.
+  const [state, formAction, pending] = useActionState<LoginState, FormData>(login, {});
 
   const handleCertLogin = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -38,15 +37,17 @@ export default function LoginForms() {
     <div className="member-cols member-cols--3">
       <section className="member-col">
         <h2 className="member-col-title">일반 로그인</h2>
-        <form className="member-form" onSubmit={handleGeneralLogin}>
+        <form className="member-form" id="generalLoginForm" action={formAction}>
           <input
             type="text"
+            key={state.id ?? ""}
             id="userId"
             name="userId"
             className="ds-input"
             placeholder="아이디를 입력해주세요."
             aria-label="아이디"
             autoComplete="username"
+            defaultValue={state.id}
             required
           />
           <input
@@ -59,8 +60,13 @@ export default function LoginForms() {
             autoComplete="current-password"
             required
           />
-          <button type="submit" className="ds-btn ds-btn--primary ds-btn--lg member-submit">
-            로그인
+          {state.error && (
+            <p className="login-error" role="alert">
+              {state.error}
+            </p>
+          )}
+          <button type="submit" className="ds-btn ds-btn--primary ds-btn--lg member-submit" disabled={pending}>
+            {pending ? "로그인하는 중…" : "로그인"}
           </button>
         </form>
       </section>

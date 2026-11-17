@@ -1,26 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import SignupCompleteInfo from "@/components/member/SignupCompleteInfo";
 import SignupProgress from "@/components/member/SignupProgress";
 import "@/styles/classroom.css";
 
 export const metadata: Metadata = { title: "회원가입 완료" };
 
-// TODO: 가입 API 응답으로 받은 회원 정보로 바꾼다 (원본 샘플 값)
-const member = {
-  name: "홍길동",
-  id: "pluskor",
-  phone: "010-0000-0000",
-  email: "plus@korhrd.com",
-};
-
 export default function SignupCompletePage() {
-  const rows = [
-    { label: "이름", value: member.name },
-    { label: "아이디", value: member.id },
-    { label: "핸드폰", value: member.phone },
-    { label: "이메일", value: member.email },
-  ];
-
   return (
     <main className="wrapper">
       <div className="container member-page">
@@ -34,19 +20,8 @@ export default function SignupCompletePage() {
           </h2>
           <p className="signup-done-desc">한평생원격교육원의 회원이 되신 것을 진심으로 축하합니다.</p>
 
-          <section className="signup-done-info">
-            <h3 className="pp-box-title">회원님의 가입정보입니다.</h3>
-            <table className="ds-table ds-table--info">
-              <tbody>
-                {rows.map((row) => (
-                  <tr key={row.label}>
-                    <th scope="row">{row.label}</th>
-                    <td>{row.value}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </section>
+          {/* 가입 정보는 2단계가 가입을 마치고 브라우저 저장소에 둔 값으로 채운다 */}
+          <SignupCompleteInfo />
 
           <div className="signup-actions">
             <Link href="/" className="ds-btn ds-btn--secondary ds-btn--lg signup-submit">

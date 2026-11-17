@@ -3,6 +3,7 @@ import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import HideOnPopup from "@/components/layout/HideOnPopup";
 import MobileHeader from "@/components/layout/MobileHeader";
+import { MemberProvider } from "@/components/layout/MemberContext";
 import { MobileMenuProvider } from "@/components/layout/MobileMenuContext";
 
 // 퍼블리싱 공통 CSS — 순서 유지 (common → style → footer)
@@ -19,6 +20,9 @@ export const metadata: Metadata = {
   },
 };
 
+// 회원가입 · 로그인 서버 액션이 잠든 Azure DB 를 깨우는 동안(30초~1분) 끊기지 않게
+export const maxDuration = 60;
+
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
@@ -30,16 +34,18 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body>
-        <MobileMenuProvider>
-          <HideOnPopup>
-            <MobileHeader />
-            <Header />
-          </HideOnPopup>
-          {children}
-          <HideOnPopup>
-            <Footer />
-          </HideOnPopup>
-        </MobileMenuProvider>
+        <MemberProvider>
+          <MobileMenuProvider>
+            <HideOnPopup>
+              <MobileHeader />
+              <Header />
+            </HideOnPopup>
+            {children}
+            <HideOnPopup>
+              <Footer />
+            </HideOnPopup>
+          </MobileMenuProvider>
+        </MemberProvider>
       </body>
     </html>
   );

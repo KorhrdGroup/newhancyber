@@ -1,19 +1,35 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState, useTransition, type FormEvent } from "react";
+import { applyStudyPlan } from "@/app/course-registration/learning-design/actions";
 import { CbIconFlow } from "@/components/credit-bank/CbFlow";
 import "@/styles/classroom.css";
 import "@/styles/learning-extra.css";
 import "@/styles/credit-bank.css";
 
-/** 무료학습설계 신청 (원본 learning-design.html) — 진행 순서 그림 + 디자인 시스템 신청서 */
+/** 무료학습설계 신청 (원본 learning-design.html) — 진행 순서 그림 + 디자인 시스템 신청서, 관리자 「학습설계 관리」로 들어간다 */
 export default function LearningDesignContent() {
   const [isConsentOpen, setIsConsentOpen] = useState(false);
+  const [pending, startTransition] = useTransition();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO: 학습설계 신청 API 연동 (new FormData(e.currentTarget))
-    alert("학습설계 신청 API 연동 전입니다.");
+    if (pending) return;
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    startTransition(async () => {
+      try {
+        const result = await applyStudyPlan(data);
+        alert(result.message);
+        if (result.ok) {
+          form.reset();
+        } else if (result.field) {
+          document.getElementById(result.field)?.focus();
+        }
+      } catch {
+        alert("지금은 신청을 받을 수 없어요. 잠시 뒤 다시 시도해 주세요.");
+      }
+    });
   };
 
   return (
@@ -31,7 +47,7 @@ export default function LearningDesignContent() {
           />
         </section>
 
-        <form className="ex-box ex-design-form" onSubmit={handleSubmit}>
+        <form className="ex-box ex-design-form" id="consultation-form" onSubmit={handleSubmit}>
           <h2 className="ex-section-title">학습설계 신청서</h2>
 
           <div className="ex-field-grid">
@@ -39,7 +55,7 @@ export default function LearningDesignContent() {
               <label htmlFor="name" className="ds-label">
                 성명
               </label>
-              <input type="text" id="name" name="name" className="ds-input" placeholder="이름을 입력해주세요" />
+              <input type="text" id="name" name="name" className="ds-input" placeholder="이름을 입력해주세요" maxLength={50} />
             </div>
             <div>
               <label htmlFor="phone" className="ds-label">
@@ -67,14 +83,19 @@ export default function LearningDesignContent() {
             <label htmlFor="consultation-time" className="ds-label">
               희망상담 시간
             </label>
-            <input type="text" id="consultation-time" name="consultation-time" className="ds-input" placeholder="예: 평일 오후 2시 이후" />
+            <input type="text" id="consultation-time" name="consultation-time" className="ds-input" placeholder="예: 평일 오후 2시 이후" maxLength={100} />
           </div>
 
           <div className="ex-field">
             <label htmlFor="inquiry" className="ds-label">
               문의내용
             </label>
-            <textarea id="inquiry" name="inquiry" className="ds-textarea ds-textarea--sm" placeholder="문의내용" />
+            <textarea id="inquiry" name="inquiry" className="ds-textarea ds-textarea--sm" placeholder="문의내용" maxLength={1500} />
+          </div>
+          {/* 자동 등록 프로그램 거르기 — 사람에게는 보이지 않고 화면 읽기 프로그램 · 탭 이동에서도 빠진다. 채워져 오면 서버가 저장하지 않는다 */}
+          <div aria-hidden="true" style={{ position: "absolute", left: "-10000px", width: 1, height: 1, overflow: "hidden" }}>
+            <label htmlFor="ld-extra">이 칸은 비워 두세요</label>
+            <input type="text" id="ld-extra" name="ld-extra" tabIndex={-1} autoComplete="off" defaultValue="" />
           </div>
 
           <div className="ex-field ex-consent">
@@ -119,8 +140,8 @@ export default function LearningDesignContent() {
           </div>
 
           <div className="ex-actions">
-            <button type="submit" className="ds-btn ds-btn--primary ds-btn--lg ex-design-submit">
-              신청하기
+            <button type="submit" className="ds-btn ds-btn--primary ds-btn--lg ex-design-submit" disabled={pending}>
+              {pending ? "신청 중…" : "신청하기"}
             </button>
           </div>
         </form>

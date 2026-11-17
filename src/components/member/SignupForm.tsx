@@ -2,41 +2,24 @@
 
 import { useRouter } from "next/navigation";
 import Script from "next/script";
-import { useRef, useState, type FormEvent } from "react";
+import { startTransition, useActionState, useEffect, useRef, useState, type FormEvent } from "react";
 import { flushSync } from "react-dom";
+import { checkLoginId, signup, type IdCheckResult, type SignupState } from "@/app/member/actions";
+import {
+  EDUCATION_LEVELS,
+  EMAIL_DOMAINS,
+  INTEREST_AREAS,
+  JOIN_PATHS,
+  PHONE_PREFIXES,
+  SIGNUP_CONSENT_KEY,
+  SIGNUP_DONE_KEY,
+  type SignupConsent,
+} from "@/lib/signupOptions";
 import "@/styles/classroom.css";
 import "@/styles/mypage.css";
 import "@/styles/mypage2.css";
 
 const DAUM_POSTCODE_SRC = "https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js";
-
-const phonePrefixes = ["010", "011", "016", "017", "018", "019"];
-const emailDomains = ["naver.com", "gmail.com", "daum.net", "hanmail.net", "yahoo.com"];
-
-const educationLevels = [
-  { value: "high-school", label: "고등학교 졸업" },
-  { value: "college-2", label: "전문대학 졸업(2년제)" },
-  { value: "college-3", label: "전문대학 졸업(3년제)" },
-  { value: "university-enrolled", label: "대학교 재학" },
-  { value: "university-dropout", label: "대학교 중퇴" },
-  { value: "university-4", label: "대학교 졸업(4년제)" },
-  { value: "other", label: "기타" },
-];
-
-const interestAreas = [
-  { value: "social-welfare", label: "사회복지" },
-  { value: "etc", label: "기타" },
-];
-
-const registrationPaths = [
-  { id: "pathNaver", value: "naver", label: "네이버검색" },
-  { id: "pathDaum", value: "daum", label: "다음검색" },
-  { id: "pathOtherSite", value: "other-site", label: "기타사이트검색" },
-  { id: "pathFriend", value: "friend", label: "지인 추천" },
-  { id: "pathAd", value: "ad", label: "인터넷 광고물 이미지" },
-  { id: "pathPoster", value: "poster", label: "포스터(길거리, 버스, 지하철)" },
-  { id: "pathOther", value: "other", label: "기타" },
-];
 
 /** 필수 칸 표시 */
 const Req = () => <span className="mp-req">*</span>;
@@ -66,12 +49,63 @@ function Field({ label, htmlFor, req, children }: { label: string; htmlFor?: str
 /** 회원가입 2단계: 정보 입력 */
 export default function SignupForm() {
   const router = useRouter();
+  const [state, formAction, pending] = useActionState<SignupState, FormData>(signup, {});
+  // 1단계(약관)에서 넘어온 동의 — 없으면 1단계로 돌려보낸다
+  const [consent, setConsent] = useState<SignupConsent | null>(null);
+  const [idCheck, setIdCheck] = useState<IdCheckResult | null>(null);
+  const [checkingId, setCheckingId] = useState(false);
   const [emailDomain, setEmailDomain] = useState("");
   const [postalCode, setPostalCode] = useState("");
   const [address, setAddress] = useState("");
 
   const domainInputRef = useRef<HTMLInputElement>(null);
   const addressDetailRef = useRef<HTMLInputElement>(null);
+  const userIdRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    let saved: SignupConsent | null = null;
+    try {
+      saved = JSON.parse(sessionStorage.getItem(SIGNUP_CONSENT_KEY) ?? "null");
+    } catch {
+      saved = null;
+    }
+    if (saved?.required === true) {
+      // 브라우저 저장소에서 한 번 읽어 화면 상태로 옮긴다 (서버 렌더에서는 읽을 수 없다)
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setConsent(saved);
+    } else {
+      alert("약관 동의 후 가입할 수 있어요.");
+      router.replace("/member/signup");
+    }
+  }, [router]);
+
+  // 가입 결과 — 끝났으면 완료 화면으로, 문제가 있으면 알리고 그 칸으로 커서를 옮긴다
+  useEffect(() => {
+    if (state.done) {
+      try {
+        sessionStorage.setItem(SIGNUP_DONE_KEY, JSON.stringify(state.done));
+        sessionStorage.removeItem(SIGNUP_CONSENT_KEY);
+      } catch {
+        // 저장소를 못 써도 가입은 끝났다 — 완료 화면이 기본 문구만 보인다
+      }
+      router.push("/member/signup/step3");
+    } else if (state.error) {
+      alert(state.error);
+      if (state.field) document.getElementById(state.field)?.focus();
+    }
+  }, [state, router]);
+
+  const handleCheckId = async () => {
+    const id = userIdRef.current?.value ?? "";
+    setCheckingId(true);
+    try {
+      setIdCheck(await checkLoginId(id));
+    } catch {
+      setIdCheck({ ok: false, message: "지금은 확인할 수 없어요. 잠시 뒤 다시 시도해 주세요." });
+    } finally {
+      setCheckingId(false);
+    }
+  };
 
   const handleEmailDomain = (value: string) => {
     if (value === "") {
@@ -100,8 +134,13 @@ export default function SignupForm() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO: 회원가입 API 연동 (new FormData(e.currentTarget)) — 지금은 저장 없이 완료 화면으로만 넘어감
-    router.push("/member/signup/step3");
+    if (pending || !consent) return;
+    const formData = new FormData(e.currentTarget);
+    formData.set("consentRequired", "1");
+    formData.set("consentPrivacyOptional", consent.privacyOptional ? "1" : "0");
+    formData.set("consentMarketing", consent.marketing ? "1" : "0");
+    // form 의 action 으로 넘기면 끝난 뒤 칸이 모두 비워진다 — 오류가 나도 입력이 남도록 직접 부른다
+    startTransition(() => formAction(formData));
   };
 
   return (
@@ -120,22 +159,47 @@ export default function SignupForm() {
           <input type="text" id="userName" name="userName" className="ds-input" placeholder="이름을 입력해주세요." required />
         </Field>
 
+        <Field label="생년월일" htmlFor="birthDate" req>
+          <input
+            type="text"
+            id="birthDate"
+            name="birthDate"
+            className="ds-input"
+            placeholder="8자리 숫자로 입력해주세요. 예) 19900101"
+            inputMode="numeric"
+            autoComplete="bday"
+            maxLength={10}
+            // 자동완성은 1990-01-01 처럼 넣기도 해서 두 모양을 다 받는다
+            pattern="[0-9]{8}|[0-9]{4}-[0-9]{2}-[0-9]{2}"
+            title="8자리 숫자로 입력해 주세요. 예) 19900101"
+            required
+          />
+          <p className="pp-note ds-mt-8">만 14세 이상만 회원가입할 수 있어요.</p>
+        </Field>
+
         <Field label="아이디" htmlFor="userId" req>
           <div className="mq-inline">
             <input
+              ref={userIdRef}
               type="text"
               id="userId"
               name="userId"
               className="ds-input"
               placeholder="6~10자 이내의 영문 소문자/숫자"
               autoComplete="username"
+              maxLength={10}
+              onChange={() => setIdCheck(null)}
               required
             />
-            {/* TODO: 아이디 중복확인 API */}
-            <button type="button" className="ds-btn ds-btn--secondary mq-fixed">
+            <button type="button" className="ds-btn ds-btn--secondary mq-fixed" onClick={handleCheckId} disabled={checkingId}>
               중복확인
             </button>
           </div>
+          {idCheck && (
+            <p className={`form-id-check ${idCheck.ok ? "ok" : "fail"}`} role="status">
+              {idCheck.message}
+            </p>
+          )}
         </Field>
 
         <Field label="비밀번호" htmlFor="userPassword" req>
@@ -165,12 +229,12 @@ export default function SignupForm() {
         <Field label="핸드폰" htmlFor="phonePrefix" req>
           <div className="mq-phone">
             <select id="phonePrefix" name="phonePrefix" className="ds-select" defaultValue="010">
-              {phonePrefixes.map((p) => (
+              {PHONE_PREFIXES.map((p) => (
                 <option key={p}>{p}</option>
               ))}
             </select>
-            <input type="tel" name="phoneMiddle" className="ds-input" inputMode="numeric" maxLength={4} aria-label="핸드폰 가운데 번호" required />
-            <input type="tel" name="phoneLast" className="ds-input" inputMode="numeric" maxLength={4} aria-label="핸드폰 끝 번호" required />
+            <input type="tel" id="phoneMiddle" name="phoneMiddle" className="ds-input" inputMode="numeric" maxLength={4} aria-label="핸드폰 가운데 번호" required />
+            <input type="tel" id="phoneLast" name="phoneLast" className="ds-input" inputMode="numeric" maxLength={4} aria-label="핸드폰 끝 번호" required />
           </div>
         </Field>
 
@@ -192,6 +256,7 @@ export default function SignupForm() {
           </div>
           <input
             type="text"
+            id="userAddress"
             name="userAddress"
             className="ds-input ds-mt-8"
             placeholder="주소"
@@ -203,6 +268,7 @@ export default function SignupForm() {
           <input
             ref={addressDetailRef}
             type="text"
+            id="userAddressDetail"
             name="userAddressDetail"
             className="ds-input ds-mt-8"
             placeholder="상세주소"
@@ -223,7 +289,7 @@ export default function SignupForm() {
               onChange={(e) => handleEmailDomain(e.target.value)}
             >
               <option value="">직접 입력</option>
-              {emailDomains.map((d) => (
+              {EMAIL_DOMAINS.map((d) => (
                 <option key={d}>{d}</option>
               ))}
             </select>
@@ -231,6 +297,7 @@ export default function SignupForm() {
               <input
                 ref={domainInputRef}
                 type="text"
+                id="emailDomainInput"
                 name="emailDomainInput"
                 className="ds-input"
                 placeholder="직접 입력"
@@ -244,11 +311,11 @@ export default function SignupForm() {
         <Field label="SMS/이메일 수신동의">
           <div className="mq-checks">
             <label className="ds-check">
-              <input type="checkbox" name="smsConsent" />
+              <input type="checkbox" id="smsConsent" name="smsConsent" />
               문자(SMS)
             </label>
             <label className="ds-check">
-              <input type="checkbox" name="emailConsent" />
+              <input type="checkbox" id="emailConsent" name="emailConsent" />
               이메일
             </label>
           </div>
@@ -276,13 +343,13 @@ export default function SignupForm() {
           <div className="mq-inline">
             <select id="educationLevel" name="educationLevel" className="ds-select" defaultValue="" required>
               <option value="">최종학력</option>
-              {educationLevels.map((l) => (
+              {EDUCATION_LEVELS.map((l) => (
                 <option key={l.value} value={l.value}>
                   {l.label}
                 </option>
               ))}
             </select>
-            <input type="text" name="schoolName" className="ds-input" placeholder="학교명을 입력해주세요." aria-label="학교명" required />
+            <input type="text" id="schoolName" name="schoolName" className="ds-input" placeholder="학교명을 입력해주세요." aria-label="학교명" required />
           </div>
         </Field>
 
@@ -293,7 +360,7 @@ export default function SignupForm() {
         <Field label="관심분야" htmlFor="interestArea">
           <select id="interestArea" name="interestArea" className="ds-select" defaultValue="">
             <option value="">관심분야를 선택해주세요.</option>
-            {interestAreas.map((a) => (
+            {INTEREST_AREAS.map((a) => (
               <option key={a.value} value={a.value}>
                 {a.label}
               </option>
@@ -303,7 +370,7 @@ export default function SignupForm() {
 
         <Field label="가입경로">
           <div className="mq-checks">
-            {registrationPaths.map((path) => (
+            {JOIN_PATHS.map((path) => (
               <label key={path.id} className="ds-check">
                 <input type="checkbox" id={path.id} name="registrationPath" value={path.value} />
                 {path.label}
@@ -315,7 +382,7 @@ export default function SignupForm() {
         <Field label="환불계좌" htmlFor="bankName">
           <div className="mq-inline">
             <input type="text" id="bankName" name="bankName" className="ds-input signup-bank" placeholder="은행명" />
-            <input type="text" name="accountNumber" className="ds-input" placeholder="계좌번호를 입력해주세요" aria-label="계좌번호" />
+            <input type="text" id="accountNumber" name="accountNumber" className="ds-input" placeholder="계좌번호를 입력해주세요" aria-label="계좌번호" />
           </div>
           <p className="pp-note ds-mt-8">
             * 원활한 환불 처리를 위해 환불 계좌 정보는 반드시 정확하게 입력해 주시기 바랍니다. 학습자 본인의 계좌 정보 오기재로 인해 발생하는 환불
@@ -325,8 +392,8 @@ export default function SignupForm() {
       </section>
 
       <div className="signup-actions">
-        <button type="submit" className="ds-btn ds-btn--primary ds-btn--lg signup-submit">
-          가입하기
+        <button type="submit" className="ds-btn ds-btn--primary ds-btn--lg signup-submit" disabled={pending || !consent}>
+          {pending ? "가입하는 중…" : "가입하기"}
         </button>
       </div>
     </form>
