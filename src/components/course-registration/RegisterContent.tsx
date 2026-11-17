@@ -16,8 +16,10 @@ import {
   type CourseCategory,
 } from "./courseData";
 import { openPopup } from "@/components/my-classroom/PopupButton";
-import MobilePaymentSummary from "./MobilePaymentSummary";
+import Link from "next/link";
 import ButtonTabs from "@/components/common/ButtonTabs";
+import "@/styles/classroom.css";
+import "@/styles/extra-pages.css";
 
 const noopSubscribe = () => () => {};
 
@@ -27,16 +29,20 @@ interface MajorPopupState {
   left: number;
 }
 
-function ScheduleNote({ className }: { className: string }) {
+/** 고른 과목 한 줄: 이름 · 수강료 · 빼기 (PC 요약 상자와 휴대폰 아래 메뉴가 같이 쓴다) */
+function PickedItem({ course, onRemove }: { course: Course; onRemove: () => void }) {
   return (
-    <div className={`register-schedule-note ${className}`}>
-      <p>*수강신청 전 해당일정을 반드시 확인하시기 바랍니다.</p>
-      <p>*학사일정은 교육원 사정에 따라 변경될 수 있습니다.</p>
-    </div>
+    <li className="rg-picked-item">
+      <span className="rg-picked-name">{course.name}</span>
+      <span className="rg-picked-price">{formatPrice(course.fee)}원</span>
+      <button type="button" className="rg-picked-remove" aria-label={`${course.name} 빼기`} onClick={onRemove}>
+        ×
+      </button>
+    </li>
   );
 }
 
-/** 수강신청 (원본 register.html 본문 + 인라인 스크립트) */
+/** 수강신청 (원본 register.html 본문 + 인라인 스크립트) — 디자인 시스템 표 · 탭 · 버튼 */
 export default function RegisterContent() {
   const [activeSemester, setActiveSemester] = useState(semesterSchedules[0].key);
   const [category, setCategory] = useState<CourseCategory | "all">("all");
@@ -105,40 +111,42 @@ export default function RegisterContent() {
   useEffect(() => {
     if (!majorPopup) return;
     const onClick = (e: globalThis.MouseEvent) => {
-      if (!(e.target as Element).closest(".major-popup, .course-major-view-btn")) setMajorPopup(null);
+      if (!(e.target as Element).closest(".rg-major, .rg-major-btn")) setMajorPopup(null);
     };
     document.addEventListener("click", onClick);
     return () => document.removeEventListener("click", onClick);
   }, [majorPopup]);
 
   const major = majorPopup ? majorInfo[majorPopup.course.category] : null;
+  const activeSchedule = semesterSchedules.find((semester) => semester.key === activeSemester) ?? semesterSchedules[0];
+  const scheduleRows = [
+    { label: "개강일", value: activeSchedule.openingDate },
+    { label: "학점인정신청기간", value: activeSchedule.creditPeriod },
+    { label: "학습기간", value: activeSchedule.learningPeriod },
+    { label: "학위신청기간", value: activeSchedule.degreePeriod },
+    { label: "학위취득시기", value: activeSchedule.degreeDate },
+  ];
 
   return (
     <>
       <main className="wrapper">
-        <div className="mobile-register-title-banner">
-          <h1 className="mobile-register-title">수강신청</h1>
-        </div>
-
-        <div className="container" style={{ backgroundColor: "#fff" }}>
-          <div className="consultation-banner">
-            <div className="consultation-banner-content">
-              <p className="consultation-banner-title">
-                잠깐! 전문 플래너의 무료 학습설계 받으신 후<br />
-                수강신청 하세요!
-              </p>
-              {/* 원본도 동작 없음 — 무료학습설계(/course-registration/learning-design) 연결 여부 확인 필요 */}
-              <button className="consultation-banner-button">
-                상담신청 하러가기{" "}
-                <span className="consultation-banner-arrow">
-                  <img src="/resources/images/social-worker/mark.png" alt="arrow" />
-                </span>
-              </button>
-            </div>
+        <div className="ex-page rg-page">
+          <div className="ex-page-head">
+            <h1 className="ex-title">수강신청</h1>
+            <p className="ex-desc">개강 차수와 일정을 확인한 뒤 들을 과목을 골라 주세요.</p>
           </div>
 
-          {/* 학사일정 탭 */}
-          <div className="register-tabs-wrapper">
+          <div className="rg-banner">
+            <p className="rg-banner-text">
+              <strong>잠깐! 전문 플래너의 무료 학습설계</strong>를 받으신 후 수강신청 하세요!
+            </p>
+            <Link href="/course-registration/learning-design" className="ds-btn ds-btn--primary">
+              무료 학습설계 신청하기
+            </Link>
+          </div>
+
+          {/* 개강 차수 · 학사일정 */}
+          <section className="ex-section rg-semester">
             <ButtonTabs
               items={semesterSchedules.map((semester) => ({
                 key: semester.key,
@@ -154,266 +162,224 @@ export default function RegisterContent() {
               className="ds-tabs-box--2line"
               ariaLabel="개강 차수"
             />
-
-            <div className="register-tab-content">
-              {semesterSchedules.map((semester) => (
-                <div
-                  key={semester.key}
-                  id={`tab-${semester.key}`}
-                  className={`register-tab-panel${semester.key === activeSemester ? " active" : ""}`}
-                >
-                  <div className="register-schedule-info">
-                    <div className="register-schedule-row">
-                      <div className="register-schedule-item">
-                        <div className="register-schedule-label">개강일</div>
-                        <div className="register-schedule-value">{semester.openingDate}</div>
-                      </div>
-                      <div className="register-schedule-item">
-                        <div className="register-schedule-label">학점인정신청기간</div>
-                        <div className="register-schedule-value">{semester.creditPeriod}</div>
-                      </div>
-                    </div>
-                    <div className="register-schedule-row">
-                      <div className="register-schedule-item">
-                        <div className="register-schedule-label">학습기간</div>
-                        <div className="register-schedule-value">{semester.learningPeriod}</div>
-                      </div>
-                      <div className="register-schedule-item">
-                        <div className="register-schedule-label">학위신청기간</div>
-                        <div className="register-schedule-value">{semester.degreePeriod}</div>
-                      </div>
-                    </div>
-                    <div className="register-schedule-row">
-                      <div className="register-schedule-item">
-                        <div className="register-schedule-label">학위취득시기</div>
-                        <div className="register-schedule-value">{semester.degreeDate}</div>
-                      </div>
-                      <ScheduleNote className="desktop-only" />
-                    </div>
-                  </div>
-                  <ScheduleNote className="mobile-only" />
+            <dl className="rg-schedule" id={`tab-${activeSchedule.key}`}>
+              {scheduleRows.map((row) => (
+                <div key={row.label} className="rg-schedule-item">
+                  <dt>{row.label}</dt>
+                  <dd>{row.value}</dd>
                 </div>
               ))}
-            </div>
-          </div>
+            </dl>
+            <ul className="rg-notes">
+              <li>수강신청 전 해당 일정을 반드시 확인하시기 바랍니다.</li>
+              <li>학사일정은 교육원 사정에 따라 변경될 수 있습니다.</li>
+            </ul>
+          </section>
 
           {/* 과목 선택 */}
-          <div className="course-selection-section">
+          <section className="ex-section">
+            <h2 className="ex-section-title">과목 선택</h2>
             <ButtonTabs
               items={courseCategoryTabs}
               active={category}
               onSelect={(key) => changeCategory(key as CourseCategory | "all")}
-              className="course-category-tabs"
+              className="rg-category-tabs"
               ariaLabel="과목 구분"
             />
 
-            {/* 모바일 강의 카드 */}
-            <div className="mobile-course-list">
-              {filteredCourses.map((course) => (
-                <div key={course.name} className="mobile-course-card">
-                  <div className="mobile-course-card-header">
-                    <div className="mobile-course-card-header-top">
-                      <div className="mobile-course-icon">사</div>
-                      <div className="mobile-course-title">{course.name}</div>
-                    </div>
-                    <div className="mobile-course-buttons">
-                      <button className="mobile-course-sample-btn" onClick={() => openPopup(sampleLectureHref(course.name))}>
-                        샘플강의
-                      </button>
-                      <button className="mobile-course-syllabus-btn">강의계획서</button>
-                    </div>
-                  </div>
-                  <div className="mobile-course-footer">
-                    <div className="mobile-course-price">
-                      <span className="mobile-course-price-original">{formatPrice(course.fee)}원</span>
-                      <span className="mobile-course-price-current">{formatPrice(course.fee)}원</span>
-                    </div>
-                    <input
-                      type="checkbox"
-                      className="mobile-course-checkbox"
-                      checked={isSelected(course)}
-                      onChange={(e) => setCourseSelected(course, e.target.checked)}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <MobilePaymentSummary
-              totalFee={`${formatPrice(totalPrice)}원`}
-              discount={`-${formatPrice(discount)}원`}
-              finalAmount={`${formatPrice(totalPrice - discount)}원`}
-            />
-
-            <div className="course-table-summary-wrapper">
-              <div className="course-table-wrapper">
-                <table className="course-table">
+            <div className="ex-pay rg-layout">
+              <div className="rg-main">
+                {/* PC 과목 표 */}
+                <table className="ds-table rg-table">
                   <thead>
                     <tr>
-                      <th>과목명</th>
+                      <th className="rg-col-check">
+                        <label className="ds-check">
+                          <input
+                            type="checkbox"
+                            aria-label="보이는 과목 모두 선택"
+                            checked={allFilteredSelected}
+                            onChange={(e) => setFilteredSelected(e.target.checked)}
+                          />
+                        </label>
+                      </th>
+                      <th className="is-left">과목명</th>
                       <th>전공구분</th>
                       <th>해당전공</th>
                       <th>수강료</th>
                       <th>샘플강의</th>
-                      <th>
-                        강의 계획서{" "}
-                        <input
-                          type="checkbox"
-                          id="select-all-syllabus"
-                          className="select-all-syllabus-checkbox"
-                          checked={allFilteredSelected}
-                          onChange={(e) => setFilteredSelected(e.target.checked)}
-                        />
-                      </th>
+                      <th>강의계획서</th>
                     </tr>
                   </thead>
                   <tbody>
                     {filteredCourses.map((course) => (
-                      <tr key={course.name}>
-                        <td className="course-name">{course.name}</td>
-                        <td className="course-major-type">
-                          {course.majorType.map((type) => (
-                            <span key={type} className="course-major-badge">
-                              {type}
-                            </span>
-                          ))}
+                      <tr key={course.name} className={isSelected(course) ? "is-current" : undefined}>
+                        <td className="rg-col-check">
+                          <label className="ds-check">
+                            <input
+                              type="checkbox"
+                              aria-label={`${course.name} 선택`}
+                              checked={isSelected(course)}
+                              onChange={(e) => setCourseSelected(course, e.target.checked)}
+                            />
+                          </label>
                         </td>
-                        <td style={{ position: "relative" }}>
-                          <button className="course-major-view-btn" onClick={(e) => toggleMajorPopup(e, course)}>
+                        <td className="is-left rg-name">{course.name}</td>
+                        <td>
+                          <span className="rg-badges">
+                            {course.majorType.map((type) => (
+                              <span key={type} className={`ds-badge ${type === "교양" ? "ds-badge--neutral" : "ds-badge--brand"}`}>
+                                {type}
+                              </span>
+                            ))}
+                          </span>
+                        </td>
+                        <td>
+                          <button type="button" className="ds-btn ds-btn--secondary ds-btn--sm rg-major-btn" onClick={(e) => toggleMajorPopup(e, course)}>
                             전공보기
                           </button>
                         </td>
-                        <td className="course-fee">{formatPrice(course.fee)}원</td>
+                        <td className="rg-fee">{formatPrice(course.fee)}원</td>
                         <td>
-                          <button className="course-sample-btn" onClick={() => openPopup(sampleLectureHref(course.name))}>
+                          <button type="button" className="ds-btn ds-btn--secondary ds-btn--sm" onClick={() => openPopup(sampleLectureHref(course.name))}>
                             샘플강의
                           </button>
                         </td>
-                        <td className="course-syllabus-cell">
-                          <button className="course-syllabus-btn">강의계획서</button>
-                          <input
-                            type="checkbox"
-                            className="course-syllabus-checkbox"
-                            checked={isSelected(course)}
-                            onChange={(e) => setCourseSelected(course, e.target.checked)}
-                          />
+                        <td>
+                          {/* TODO: 강의계획서 팝업 연결 */}
+                          <button type="button" className="ds-btn ds-btn--secondary ds-btn--sm">
+                            강의계획서
+                          </button>
                         </td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
+
+                {/* 휴대폰 과목 카드 */}
+                <ul className="rg-cards">
+                  {filteredCourses.map((course) => (
+                    <li key={course.name} className={`rg-card${isSelected(course) ? " is-selected" : ""}`}>
+                      <div className="rg-card-head">
+                        <label className="ds-check rg-card-check">
+                          <input
+                            type="checkbox"
+                            checked={isSelected(course)}
+                            onChange={(e) => setCourseSelected(course, e.target.checked)}
+                          />
+                          <span className="rg-card-name">{course.name}</span>
+                        </label>
+                        <span className="rg-card-fee">{formatPrice(course.fee)}원</span>
+                      </div>
+                      <div className="rg-card-foot">
+                        <span className="rg-badges">
+                          {course.majorType.map((type) => (
+                            <span key={type} className={`ds-badge ${type === "교양" ? "ds-badge--neutral" : "ds-badge--brand"}`}>
+                              {type}
+                            </span>
+                          ))}
+                        </span>
+                        <span className="rg-card-btns">
+                          <button type="button" className="ds-btn ds-btn--secondary ds-btn--sm" onClick={() => openPopup(sampleLectureHref(course.name))}>
+                            샘플강의
+                          </button>
+                          <button type="button" className="ds-btn ds-btn--secondary ds-btn--sm">
+                            강의계획서
+                          </button>
+                        </span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
-              {/* 선택된 과목 요약 */}
-              <div className="course-summary">
-                <div className="course-summary-list">
-                  {selectedCourses.map((course) => (
-                    <div key={course.name} className="course-summary-item">
-                      <span className="course-summary-item-name">{course.name}</span>
-                      <span className="course-summary-item-price">{formatPrice(course.fee)}원</span>
-                      <button className="course-summary-item-remove" onClick={() => removeCourse(course)}>
-                        ×
-                      </button>
-                    </div>
-                  ))}
-                </div>
-                <div className="course-summary-footer">
-                  <div className="course-summary-total">
-                    <span className="course-summary-total-text">
-                      총 <span className="course-count">{selectedCourses.length}</span> 과목
-                    </span>
-                    <span className="course-total-price">{formatPrice(totalPrice)}원</span>
+              {/* 고른 과목 요약 (휴대폰은 금액만, 목록·버튼은 아래 메뉴) */}
+              <aside className="ex-pay-side ex-box rg-side" aria-label="고른 과목">
+                <h3 className="ex-section-title rg-side-title">고른 과목</h3>
+                {selectedCourses.length > 0 ? (
+                  <ul className="rg-picked">
+                    {selectedCourses.map((course) => (
+                      <PickedItem key={course.name} course={course} onRemove={() => removeCourse(course)} />
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="rg-picked-empty">과목을 고르면 여기에 담겨요.</p>
+                )}
+                <div className="ex-sum">
+                  <div className="ex-sum-row">
+                    <span>총 수강료 ({selectedCourses.length}과목)</span>
+                    <strong>{formatPrice(totalPrice)}원</strong>
                   </div>
-                  {/* TODO: 장바구니 담기·수강신청 API — 지금은 담지 않고 장바구니 화면으로만 넘어감 */}
-                  <div className="course-summary-buttons">
-                    <button className="course-cart-btn" onClick={goCart}>
-                      장바구니
-                    </button>
-                    <button className="course-register-btn">수강신청</button>
+                  <div className="ex-sum-row">
+                    <span>총 할인액</span>
+                    <strong className={discount > 0 ? "is-discount" : undefined}>-{formatPrice(discount)}원</strong>
+                  </div>
+                  <div className="ex-sum-total">
+                    <span>총 결제 예정 금액</span>
+                    <strong>{formatPrice(totalPrice - discount)}원</strong>
                   </div>
                 </div>
-              </div>
+                {/* TODO: 장바구니 담기·수강신청 API — 지금은 담지 않고 장바구니 화면으로만 넘어감 */}
+                <div className="rg-side-btns">
+                  <button type="button" className="ds-btn ds-btn--secondary ds-btn--lg" onClick={goCart}>
+                    장바구니
+                  </button>
+                  <button type="button" className="ds-btn ds-btn--primary ds-btn--lg">
+                    수강신청
+                  </button>
+                </div>
+              </aside>
             </div>
-          </div>
+          </section>
         </div>
       </main>
 
-      {/* 모바일 하단 플로팅 메뉴 — 과목을 담으면 요약까지(has-items), 사이드바가 열리면 숨김 */}
-      <div
-        className={`mobile-register-floating-menu active${selectedCourses.length > 0 ? " has-items" : ""}`}
-        id="mobileRegisterFloatingMenu"
-        style={isSidebarOpen ? { display: "none" } : undefined}
-      >
-        <div className="mobile-register-floating-summary">
-          <div className="mobile-register-floating-courses">
-            <div className="mobile-register-floating-courses-list">
+      {/* 휴대폰 아래 고정 메뉴 — 과목을 담으면 목록·합계까지, 사이드바가 열리면 숨김 */}
+      <div className="rg-float" hidden={isSidebarOpen}>
+        {selectedCourses.length > 0 && (
+          <div className="rg-float-summary">
+            <ul className="rg-picked">
               {selectedCourses.map((course) => (
-                <div key={course.name} className="mobile-register-floating-course-item">
-                  <span className="mobile-register-floating-course-name">{course.name}</span>
-                  <span className="mobile-register-floating-course-price">{formatPrice(course.fee)}원</span>
-                  <button className="mobile-register-floating-course-remove" onClick={() => removeCourse(course)}>
-                    ×
-                  </button>
-                </div>
+                <PickedItem key={course.name} course={course} onRemove={() => removeCourse(course)} />
               ))}
-            </div>
-            <div className="mobile-register-floating-total">
-              <span className="mobile-register-floating-count">
-                총 <span className="mobile-course-count">{selectedCourses.length}</span> 과목
+            </ul>
+            <div className="rg-float-total">
+              <span>
+                총 <strong>{selectedCourses.length}</strong>과목
               </span>
-              <span className="mobile-register-floating-price">{formatPrice(totalPrice)}원</span>
+              <strong>{formatPrice(totalPrice)}원</strong>
             </div>
           </div>
-        </div>
-        <div className="mobile-register-floating-buttons">
-          <button className="mobile-register-cart-btn" onClick={goCart}>
+        )}
+        <div className="rg-float-btns">
+          <button type="button" className="ds-btn ds-btn--secondary ds-btn--lg" onClick={goCart}>
             장바구니
           </button>
-          <button className="mobile-register-register-btn">수강신청</button>
+          <button type="button" className="ds-btn ds-btn--primary ds-btn--lg">
+            수강신청
+          </button>
         </div>
       </div>
 
       {/* 전공보기 팝업 — 원본처럼 body 에 붙여 버튼 위치 기준으로 띄운다 */}
       {isClient &&
+        majorPopup &&
+        major &&
         createPortal(
-          <div
-            className={`major-popup${majorPopup ? " show" : ""}`}
-            id="major-popup"
-            style={
-              majorPopup
-                ? { top: `${majorPopup.top}px`, left: `${majorPopup.left}px`, transform: "translateY(-50%)" }
-                : undefined
-            }
-          >
-            <div className="major-popup-content">
-              <table className="major-popup-table">
-                {major && (
-                  <tbody>
-                    <tr>
-                      <td className="major-popup-title" rowSpan={2}>
-                        관련
-                        <br />
-                        전공영역
-                      </td>
-                      <td className="major-popup-label" style={{ fontSize: "12px" }}>
-                        학사
-                      </td>
-                      <td className="major-popup-value" style={{ fontSize: "12px" }}>
-                        {major.bachelor}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="major-popup-label" style={{ fontSize: "12px" }}>
-                        전문 학사
-                      </td>
-                      <td className="major-popup-value" style={{ fontSize: "12px" }}>
-                        {major.associate}
-                      </td>
-                    </tr>
-                  </tbody>
-                )}
-              </table>
-            </div>
+          <div className="rg-major" role="dialog" aria-label={`${majorPopup.course.name} 관련 전공영역`} style={{ top: `${majorPopup.top}px`, left: `${majorPopup.left}px` }}>
+            <p className="rg-major-title">관련 전공영역</p>
+            <table className="ds-table ds-table--info">
+              <tbody>
+                <tr>
+                  <th scope="row">학사</th>
+                  <td>{major.bachelor}</td>
+                </tr>
+                <tr>
+                  <th scope="row">전문 학사</th>
+                  <td>{major.associate}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>,
           document.body,
         )}

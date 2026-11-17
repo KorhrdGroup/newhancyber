@@ -182,3 +182,87 @@
   .ex-field + .ex-field { margin-top: var(--space-20); }
   .ex-design-submit { width: 100%; }
 }
+
+/* ---------- 수강신청 ---------- */
+.rg-page { padding-top: var(--space-40); padding-bottom: var(--space-48); }
+.rg-banner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-12) var(--space-24); margin-top: var(--space-24); padding: var(--space-20) var(--space-24); border-radius: var(--radius-12); background: var(--color-bg-brand-subtle); }
+.rg-banner-text { margin: 0; font-size: 16px; line-height: 1.5; color: var(--color-text-default); word-break: keep-all; }
+.rg-banner-text strong { font-weight: 700; color: var(--color-text-brand); }
+
+/* 개강 차수 일정: 항목 | 값 두 칸씩 */
+.rg-schedule { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 var(--space-24); margin: var(--space-12) 0 0; padding: var(--space-8) var(--space-24); border: 1px solid var(--color-border-default); border-radius: var(--radius-8); }
+.rg-schedule-item { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: var(--space-12); padding: var(--space-12) 0; border-bottom: 1px solid var(--color-border-subtle); font-size: 14px; }
+.rg-schedule-item:nth-last-child(-n + 1) { border-bottom: 0; }
+.rg-schedule-item:nth-last-child(2):nth-child(odd) { border-bottom: 0; }
+.rg-schedule dt { font-weight: 600; color: var(--color-text-secondary); }
+.rg-schedule dd { margin: 0; color: var(--color-text-strong); }
+.rg-notes { margin: var(--space-8) 0 0; padding: 0; list-style: none; font-size: 13px; line-height: 1.6; color: var(--color-text-secondary); }
+.rg-notes li::before { content: "* "; }
+
+/* 과목 표 + 고른 과목 상자 */
+.rg-category-tabs { margin-bottom: var(--space-16); }
+.rg-layout { margin-top: 0; grid-template-columns: minmax(0, 1fr) 300px; }
+.rg-table .rg-col-check { width: 44px; }
+.rg-table .ds-check { vertical-align: middle; }
+.rg-name { font-weight: 500; color: var(--color-text-strong); }
+.rg-badges { display: inline-flex; flex-wrap: wrap; justify-content: center; gap: var(--space-4); }
+.rg-fee { font-weight: 600; color: var(--color-text-strong); white-space: nowrap; }
+.rg-side-title { margin-bottom: var(--space-8); }
+.rg-picked { display: flex; flex-direction: column; max-height: 220px; margin: 0 0 var(--space-16); padding: 0; overflow-y: auto; list-style: none; }
+.rg-picked-item { display: flex; align-items: center; gap: var(--space-8); padding: var(--space-8) 0; border-bottom: 1px solid var(--color-border-subtle); font-size: 14px; }
+.rg-picked-name { flex: 1; min-width: 0; color: var(--color-text-default); }
+.rg-picked-price { font-weight: 600; color: var(--color-text-strong); white-space: nowrap; }
+.rg-picked-remove { display: grid; place-items: center; width: 24px; height: 24px; padding: 0; border: 0; border-radius: var(--radius-4); background: none; font-size: 16px; color: var(--color-icon-muted); cursor: pointer; }
+.rg-picked-remove:hover { background: var(--color-bg-muted); color: var(--color-text-danger); }
+.rg-picked-empty { margin: 0 0 var(--space-16); padding: var(--space-16) 0; border-bottom: 1px solid var(--color-border-subtle); font-size: 13px; color: var(--color-text-secondary); }
+.rg-side-btns { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-8); margin-top: var(--space-16); }
+
+/* 휴대폰 과목 카드 (PC 는 표) */
+.rg-cards { display: none; margin: 0; padding: 0; list-style: none; }
+.rg-card { padding: var(--space-16) 0; border-bottom: 1px solid var(--color-border-subtle); }
+.rg-card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-12); }
+.ds-check.rg-card-check { align-items: flex-start; }
+.rg-card-name { font-size: 16px; font-weight: 600; line-height: 1.3; color: var(--color-text-strong); }
+.rg-card-fee { font-size: 16px; font-weight: 700; color: var(--color-text-strong); white-space: nowrap; }
+.rg-card-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-8); margin-top: var(--space-12); padding-left: 28px; }
+.rg-card-btns { display: flex; gap: var(--space-4); }
+
+/* 전공보기 팝업 (버튼 오른쪽) */
+.rg-major { position: absolute; z-index: 1000; width: 360px; padding: var(--space-16); border: 1px solid var(--color-border-default); border-radius: var(--radius-8); background: var(--color-bg-default); box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12); transform: translateY(-50%); }
+.rg-major-title { margin: 0 0 var(--space-8); font-size: 14px; font-weight: 600; color: var(--color-text-strong); }
+.rg-major .ds-table--info th { width: 80px; }
+.rg-major .ds-table th,
+.rg-major .ds-table td { font-size: 13px; }
+
+/* 휴대폰 아래 고정 메뉴 (PC 숨김) */
+.rg-float { display: none; }
+
+@media (max-width: 1024px) {
+  .rg-layout { grid-template-columns: 1fr; }
+  .rg-layout .ex-pay-side { position: static; }
+}
+
+@media (max-width: 480px) {
+  .rg-page { padding-top: var(--space-16); padding-bottom: 200px; }
+  .rg-banner { display: none; }
+  .rg-semester { margin-top: 0; }
+  .rg-schedule { grid-template-columns: 1fr; padding: var(--space-4) var(--space-16); }
+  .rg-schedule-item { grid-template-columns: 112px minmax(0, 1fr); padding: var(--space-8) 0; font-size: 13px; }
+  .rg-schedule-item:nth-last-child(2):nth-child(odd) { border-bottom: 1px solid var(--color-border-subtle); }
+  .rg-notes { font-size: 12px; }
+  .rg-table { display: none; }
+  .rg-cards { display: block; }
+  /* 고른 과목 목록 · 버튼은 아래 고정 메뉴가 맡는다 */
+  .rg-side .rg-side-title,
+  .rg-side .rg-picked,
+  .rg-side .rg-picked-empty,
+  .rg-side .rg-side-btns { display: none; }
+
+  .rg-float { position: fixed; right: 0; bottom: 0; left: 0; z-index: 900; display: block; padding: var(--space-12) var(--space-16) calc(var(--space-12) + env(safe-area-inset-bottom)); border-top: 1px solid var(--color-border-default); background: var(--color-bg-default); box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.08); }
+  .rg-float[hidden] { display: none; }
+  .rg-float .rg-picked { max-height: 112px; margin-bottom: var(--space-8); }
+  .rg-float-total { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: var(--space-12); font-size: 14px; color: var(--color-text-secondary); }
+  .rg-float-total strong { font-weight: 700; color: var(--color-text-strong); }
+  .rg-float-total > strong { font-size: 18px; color: var(--color-text-brand); }
+  .rg-float-btns { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-8); }
+}
