@@ -491,11 +491,7 @@ function WhyBand() {
       <div className="sh-whyband-inner">
         <div className="sh-whyband-head">
           <p className="sh-whyband-eyebrow">WHY 한평생원격교육원</p>
-          <h3 className="sh-whyband-title">
-            왜 한평생원격교육원을{" "}
-            <br />
-            선택할까요?
-          </h3>
+          <h3 className="sh-whyband-title">왜 한평생원격교육원을 선택할까요?</h3>
         </div>
         <ul className="sh-whyband-list">
           {whyTabs.map((tab, i) => (
@@ -504,6 +500,12 @@ function WhyBand() {
               <span>
                 <b>{tab.label}</b>
                 <small>{tab.summary}</small>
+                {/* 기존 탭 상세 카드 이름 — 띠 안에서도 무엇을 해 주는지 다 보이게 */}
+                <ul className="sh-whyband-tags">
+                  {tab.cards.map((card) => (
+                    <li key={card.title}>{card.title.replace("한평생원격교육원 ", "")}</li>
+                  ))}
+                </ul>
               </span>
             </li>
           ))}

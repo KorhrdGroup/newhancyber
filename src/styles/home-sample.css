@@ -430,9 +430,8 @@
 }
 .sh-whyband-inner {
   display: grid;
-  grid-template-columns: 250px minmax(0, 1fr);
-  align-items: center;
-  gap: 32px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 28px;
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 var(--space-20);
@@ -440,13 +439,16 @@
 .sh-whyband-eyebrow { margin: 0 0 8px; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; color: #8db4ff; }
 .sh-whyband-title { margin: 0; font-size: 25px; font-weight: 800; line-height: 1.35; letter-spacing: -0.02em; }
 .sh-whyband-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; padding: 0; list-style: none; }
-.sh-whyband-list li { display: flex; align-items: center; gap: 14px; padding: 4px 20px; }
-.sh-whyband-list li + li { border-left: 1px solid rgba(255, 255, 255, 0.16); }
+.sh-whyband-list > li { display: flex; align-items: flex-start; gap: 16px; padding: 4px 28px; }
+.sh-whyband-list > li:first-child { padding-left: 0; }
+.sh-whyband-list > li + li { border-left: 1px solid rgba(255, 255, 255, 0.16); }
 .sh-whyband-list img { flex: none; width: 56px; height: 56px; padding: 6px; border-radius: 16px; background: rgba(255, 255, 255, 0.1); object-fit: contain; }
 .sh-whyband-list span { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
 .sh-whyband-list b { font-size: 16px; font-weight: 800; line-height: 1.35; word-break: keep-all; }
 .sh-whyband-list small { font-size: 13px; line-height: 1.5; color: #c9d8ff; word-break: keep-all; }
 .sh-whyband-list small strong { color: #fff; }
+.sh-whyband-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 0; padding: 0; list-style: none; }
+.sh-whyband-tags li { padding: 4px 10px; border-radius: 999px; background: rgba(255, 255, 255, 0.1); font-size: 12px; color: #e3ebff; white-space: nowrap; }
 
 /* 개강 줄이 두 줄로 접히는 폭 — 양끝 벌림 대신 왼쪽부터 채운다 */
 @media (max-width: 1199px) {
@@ -466,9 +468,10 @@
   .sh-infobar { grid-template-columns: minmax(0, 1fr); }
   .sh-infobar-item + .sh-infobar-item { border-left: 0; border-top: 1px solid #e3eaf7; }
   .sh-essential-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .sh-whyband-inner { grid-template-columns: minmax(0, 1fr); gap: 24px; }
-  .sh-whyband-title br { display: none; }
-  .sh-whyband-list li:first-child { padding-left: 0; }
+  /* 칸이 좁아 아이콘을 글 위로 — 글 폭을 넓혀 항목 이름이 한 줄에 두세 개씩 들어가게 */
+  .sh-whyband-list > li { flex-direction: column; gap: 12px; padding: 4px 18px; }
+  .sh-whyband-list img { width: 48px; height: 48px; border-radius: 14px; }
+  .sh-whyband-list > li:first-child { padding-left: 0; }
   .sh-consult { grid-template-columns: minmax(0, 1fr); }
 }
 
@@ -555,8 +558,8 @@
   .sh-whyband-inner { gap: 18px; padding: 0 16px; }
   .sh-whyband-title { font-size: 20px; }
   .sh-whyband-list { grid-template-columns: minmax(0, 1fr); }
-  .sh-whyband-list li { gap: 12px; padding: 12px 0; }
-  .sh-whyband-list li + li { border-left: 0; border-top: 1px solid rgba(255, 255, 255, 0.16); }
+  .sh-whyband-list > li { flex-direction: row; gap: 12px; padding: 14px 0; }
+  .sh-whyband-list > li + li { border-left: 0; border-top: 1px solid rgba(255, 255, 255, 0.16); }
   .sh-whyband-list img { width: 48px; height: 48px; border-radius: 14px; }
   .sh-whyband-list b { font-size: 15px; }
 }
