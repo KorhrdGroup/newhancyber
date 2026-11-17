@@ -352,14 +352,16 @@
   gap: 28px;
   padding: 24px 32px;
   border-radius: var(--radius-20);
-  background: linear-gradient(120deg, #eef4ff, #dce8ff);
+  /* 눈에 잘 띄게 파란 바탕 · 흰 글씨 */
+  background: linear-gradient(120deg, var(--color-primary-dark), var(--color-primary));
+  color: #fff;
 }
 .sh-consult-intro { display: flex; align-items: center; gap: 14px; }
 /* 1줄(24) + 간격(4) + 2줄(20) = 48 → 입력칸 높이와 같다 */
 .sh-consult-head { display: flex; align-items: baseline; margin: 0; white-space: nowrap; }
-.sh-consult-title { font-size: 18px; line-height: 24px; font-weight: 800; letter-spacing: -0.02em; color: var(--color-text-strong, #111); }
-.sh-consult-link { margin-left: 10px; padding-left: 10px; border-left: 1px solid #c5d3ea; font-size: 13px; line-height: 14px; font-weight: 500; color: var(--color-text-secondary); text-decoration: none; }
-.sh-consult-link:hover { color: var(--color-primary-dark); text-decoration: underline; text-underline-offset: 2px; }
+.sh-consult-title { font-size: 18px; line-height: 24px; font-weight: 800; letter-spacing: -0.02em; color: #fff; }
+.sh-consult-link { margin-left: 10px; padding-left: 10px; border-left: 1px solid rgba(255, 255, 255, 0.4); font-size: 13px; line-height: 14px; font-weight: 500; color: rgba(255, 255, 255, 0.85); text-decoration: none; }
+.sh-consult-link:hover { color: #fff; text-decoration: underline; text-underline-offset: 2px; }
 .sh-consult-form { display: grid; grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.05fr) minmax(0, 1fr) minmax(0, 1fr) 128px; align-items: center; gap: 10px 8px; }
 /* 닫기 버튼은 PC 플로팅 바에서만 쓴다 (다시 열기는 오른쪽 사이드 메뉴 '간편상담') */
 .sh-consult-close { display: none; }
@@ -374,8 +376,7 @@
     gap: 28px;
     width: min(1140px, calc(100% - 40px));
     padding: 20px 20px 20px 32px;
-    border: 1px solid #d3e0f7;
-    box-shadow: 0 12px 40px rgba(16, 42, 100, 0.18);
+    box-shadow: 0 12px 40px rgba(17, 90, 237, 0.35);
     transform: translateX(-50%);
     transition: opacity 0.25s, transform 0.25s, visibility 0.25s;
   }
@@ -389,10 +390,10 @@
     border: 0;
     border-radius: var(--radius-full);
     background: none;
-    color: var(--color-text-secondary);
+    color: rgba(255, 255, 255, 0.85);
     cursor: pointer;
   }
-  .sh-consult-close:hover { background: rgba(17, 90, 237, 0.08); color: var(--color-text-default); }
+  .sh-consult-close:hover { background: rgba(255, 255, 255, 0.15); color: #fff; }
   /* 바가 떠 있는 동안: 맨 아래 푸터가 가려지지 않게 바 높이만큼 띄우고, TOP 버튼은 바 위로 */
   body:has(.sh-consult:not(.is-closed)) { padding-bottom: 120px; }
 }
@@ -408,7 +409,8 @@
   min-width: 0;
   height: 48px;
   padding: 0 12px;
-  border: 1px solid var(--color-border-strong);
+  /* 파란 바탕 위라 테두리 없이 흰 칸만 */
+  border: 1px solid transparent;
   border-radius: var(--radius-12);
   background-color: #fff;
   color: var(--color-text-default);
@@ -417,7 +419,7 @@
 }
 .sh-consult-form input::placeholder { color: var(--color-text-placeholder); }
 .sh-consult-form input:focus,
-.sh-consult-form select:focus { border-color: var(--color-border-focus); }
+.sh-consult-form select:focus { border-color: var(--color-primary-darker); box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.6); }
 /* Select: 기본 화살표 대신 디자인 시스템 arrow/down 아이콘 (16px, icon/default), 아이콘-글자 간격 8 */
 .sh-consult-form select {
   appearance: none;
@@ -432,10 +434,13 @@
 /* 아직 안 골랐을 때(필수 항목이 비어 :invalid)는 안내 글 색 */
 .sh-consult-form select:invalid { color: var(--color-text-placeholder); }
 .sh-consult-form select option { color: var(--color-text-default); }
-.sh-consult-agree { display: flex; margin-top: 4px; align-items: center; gap: 6px; height: 20px; font-size: 13px; color: var(--color-text-secondary); }
-.sh-consult-agree input { width: 16px; height: 16px; margin: 0; }
-.sh-consult-agree button { padding: 0; border: 0; background: none; color: var(--color-primary-dark); font-size: 13px; text-decoration: underline; cursor: pointer; }
+.sh-consult-agree { display: flex; margin-top: 4px; align-items: center; gap: 6px; height: 20px; font-size: 13px; color: rgba(255, 255, 255, 0.85); }
+.sh-consult-agree input { width: 16px; height: 16px; margin: 0; accent-color: var(--color-primary-darker); }
+.sh-consult-agree button { padding: 0; border: 0; background: none; color: #fff; font-size: 13px; text-decoration: underline; cursor: pointer; }
+/* 파란 바 위에서도 보이게 더 진한 남색 */
 .sh-consult-submit { height: 48px; padding: 0 12px; font-size: 16px; white-space: nowrap; }
+.sh-consult-submit.sh-btn--primary { background: var(--color-primary-darker); }
+.sh-consult-submit.sh-btn--primary:hover { background: #00268f; }
 
 /* ---------- 8. 꼭 확인하세요 ---------- */
 .sh-essential {
@@ -790,9 +795,9 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
     background: var(--color-primary-dark);
     box-shadow: 0 8px 18px rgba(12, 23, 38, 0.1);
   }
-  .sh-side-call { display: flex; flex-direction: column; gap: 2px; padding: 0 4px; color: #fff; text-decoration: none; }
-  /* 전화번호는 크게 */
-  .sh-side-call .sh-side-big { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; }
+  .sh-side-call { display: flex; flex-direction: column; gap: 2px; color: #fff; text-decoration: none; }
+  /* 전화번호는 크게: 아래 카톡 버튼 폭(148)을 꽉 채워 좌우 여백이 14로 같게 */
+  .sh-side-call .sh-side-big { font-size: 29px; font-weight: 800; line-height: 1.2; letter-spacing: -0.01em; }
   .sh-side-kakao {
     display: flex;
     align-items: center;
