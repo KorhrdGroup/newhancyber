@@ -39,11 +39,11 @@ const QUICK_LINKS = [
   { label: "자료실", href: "/learning-support/forms-data-room" },
 ];
 
-/** 상담 묶음 맨 아래 SNS — 채널 주소는 추후 전달 예정 */
+/** 상담 묶음 맨 아래 SNS — 인스타 · 블로그는 기존 사이트와 같은 주소, 유튜브는 추후 전달 예정 */
 const SNS_LINKS = [
-  { label: "인스타", icon: "/resources/images/main/insta.png" },
-  { label: "블로그", icon: "/resources/images/main/naver-blog.png" },
-  { label: "유튜브", icon: "/resources/images/main/youtube.png" },
+  { label: "인스타", icon: "/resources/images/main/insta.png", href: "https://www.instagram.com/hpsedu_official" },
+  { label: "블로그", icon: "/resources/images/main/naver-blog.png", href: "https://blog.naver.com/korhrdgroup" },
+  { label: "유튜브", icon: "/resources/images/main/youtube.png", href: null },
 ];
 
 function SideIcon({ name }: { name: keyof typeof ICONS }) {
@@ -138,7 +138,8 @@ export default function SampleSideMenu({ consultOpen, onToggleConsult }: { consu
       <ul className="sh-side-sns">
         {SNS_LINKS.map((sns) => (
           <li key={sns.label}>
-            <a href={TBD_HREF}>
+            {/* 기존 사이트처럼 새 창으로 */}
+            <a href={sns.href ?? TBD_HREF} {...(sns.href ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
               <img src={sns.icon} alt="" />
               {sns.label}
             </a>
