@@ -428,7 +428,6 @@
   color: #fff;
 }
 .sh-why-head { margin-bottom: 28px; text-align: center; }
-.sh-why-eyebrow { margin: 0 0 6px; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; color: #8db4ff; }
 .sh-why-title { margin: 0; font-size: 28px; font-weight: 800; letter-spacing: -0.02em; }
 /* 상세 항목: 아이콘 · 이름 · 설명 */
 .sh-why-items { display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 0; list-style: none; }

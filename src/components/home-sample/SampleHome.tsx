@@ -488,7 +488,6 @@ function WhyHanpyeong() {
   return (
     <section className="sh-why">
       <div className="sh-why-head">
-        <p className="sh-why-eyebrow">WHY 한평생원격교육원</p>
         <h3 className="sh-why-title">왜 한평생원격교육원을 선택할까요?</h3>
       </div>
       <div className="sh-whyc">
