@@ -511,9 +511,9 @@
 .sh-whyc-panel--pair .sh-why-items img { width: 72px; height: 72px; }
 .sh-whyc-panel--pair .sh-why-items b { font-size: 18px; }
 .sh-whyc-panel--pair .sh-why-items small { font-size: 14px; line-height: 1.5; }
-/* 가이드 6개: 채운 칸 6개가 빽빽하던 것 → 3칸 × 2줄은 그대로, 바탕 대신 옅은 테두리 · 아이콘 왼쪽 가로 배치로 가볍게 */
+/* 가이드 6개: 세로로 쌓여 빽빽하던 칸 → 3칸 × 2줄은 그대로, 아이콘 왼쪽 가로 배치로 (바탕은 다른 탭과 같은 회색) */
 .sh-whyc-panel--guide .sh-why-items { gap: 12px; }
-.sh-whyc-panel--guide .sh-why-items li { flex-direction: row; justify-content: flex-start; gap: 14px; padding: 0 18px; border: 1px solid #e3eaf5; background: #fff; text-align: left; }
+.sh-whyc-panel--guide .sh-why-items li { flex-direction: row; justify-content: flex-start; gap: 14px; padding: 0 18px; text-align: left; }
 .sh-whyc-panel--guide .sh-why-items span { align-items: flex-start; }
 .sh-whyc-panel--guide .sh-why-items img { width: 44px; height: 44px; }
 .sh-whyc-panel--guide .sh-why-items b { font-size: 15px; line-height: 1.35; }
