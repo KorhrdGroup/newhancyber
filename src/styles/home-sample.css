@@ -750,17 +750,16 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
     position: fixed;
     /* 넓은 화면에선 스크롤바 쪽에 붙지 않게 본문(1100) 오른쪽 끝에서 32px 띄운 자리, 좁으면 오른쪽 20px */
     right: max(20px, calc((100vw - 1100px) / 2 - 176px - 32px));
-    bottom: 30px;
+    /* 위쪽 기준: 스크롤하면 붙는 메뉴 줄(높이 약 62) 아래 */
+    top: 100px;
     z-index: 901;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     gap: 8px;
     width: 176px;
-    transition: bottom 0.25s, opacity 0.2s, visibility 0.2s;
+    transition: opacity 0.2s, visibility 0.2s;
   }
-  /* 간편상담 바가 열려 있으면 바 위로 올린다 */
-  .sh-side.is-consult-open { bottom: 124px; }
   .sh-side-item {
     display: flex;
     align-items: center;
@@ -815,11 +814,11 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
   .sh-side-sub { font-size: 12px; font-weight: 600; opacity: 0.75; }
   .sh-side-big { font-size: 17px; font-weight: 800; letter-spacing: -0.01em; }
   .sh-side-icon { display: grid; flex: none; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: #eef4ff; color: var(--color-primary-dark); }
-  /* 왼쪽 QUICK MENU: 본문(1100) 왼쪽 끝에서 32px 띄운 자리, 좁으면 왼쪽 20px. 아래 끝은 오른쪽 상담 묶음과 맞춘다 */
+  /* 왼쪽 QUICK MENU: 본문(1100) 왼쪽 끝에서 32px 띄운 자리, 좁으면 왼쪽 20px. 위 끝은 오른쪽 상담 묶음과 맞춘다 */
   .sh-quick {
     position: fixed;
     left: max(20px, calc((100vw - 1100px) / 2 - 112px - 32px));
-    bottom: 30px;
+    top: 100px;
     z-index: 901;
     display: block;
     width: 112px;
@@ -828,9 +827,8 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
     border-radius: var(--radius-20);
     background: #fff;
     box-shadow: 0 8px 18px rgba(12, 23, 38, 0.1);
-    transition: bottom 0.25s, opacity 0.2s, visibility 0.2s;
+    transition: opacity 0.2s, visibility 0.2s;
   }
-  .sh-quick.is-consult-open { bottom: 124px; }
   .sh-quick-head { margin: 0; padding: 12px 0; background: var(--color-primary-dark); color: #fff; font-size: 13px; font-weight: 800; letter-spacing: 0.04em; text-align: center; }
   .sh-quick-list { margin: 0; padding: 2px 0; list-style: none; }
   .sh-quick-list li + li { border-top: 1px solid #eef1f5; }

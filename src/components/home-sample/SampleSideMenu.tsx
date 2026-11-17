@@ -7,6 +7,9 @@ import { phones } from "@/components/home/homeData";
 
 /** 이 높이(px) 넘게 내리면 '스크롤됨' — 좁은 PC에서 배너를 가리지 않게 그 전엔 숨긴다 */
 const SCROLL_THRESHOLD = 300;
+/** 플로팅 위 끝: 스크롤하면 붙는 메뉴 줄 아래(100px). 머리글이 보이는 동안엔 머리글 밑에서 24px 띄운다 */
+const FLOAT_TOP = 100;
+const HEADER_GAP = 24;
 
 /** 라인 아이콘 (24 그리드, currentColor) */
 const ICONS = {
@@ -54,19 +57,24 @@ function SideIcon({ name }: { name: keyof typeof ICONS }) {
  */
 export default function SampleSideMenu({ consultOpen, onToggleConsult }: { consultOpen: boolean; onToggleConsult: () => void }) {
   const [scrolled, setScrolled] = useState(false);
+  const [top, setTop] = useState(FLOAT_TOP);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > SCROLL_THRESHOLD);
+    const onScroll = () => {
+      setScrolled(window.scrollY > SCROLL_THRESHOLD);
+      const headerBottom = document.querySelector("header.header")?.getBoundingClientRect().bottom ?? 0;
+      setTop(Math.max(FLOAT_TOP, Math.round(headerBottom + HEADER_GAP)));
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const stateClass = `${scrolled ? " is-scrolled" : ""}${consultOpen ? " is-consult-open" : ""}`;
+  const stateClass = scrolled ? " is-scrolled" : "";
 
   return (
     <>
-    <nav className={`sh-quick${stateClass}`} aria-label="퀵메뉴">
+    <nav className={`sh-quick${stateClass}`} style={{ top }} aria-label="퀵메뉴">
       <p className="sh-quick-head">QUICK MENU</p>
       <ul className="sh-quick-list">
         {QUICK_LINKS.map((link) => (
@@ -86,7 +94,7 @@ export default function SampleSideMenu({ consultOpen, onToggleConsult }: { consu
         ))}
       </ul>
     </nav>
-    <nav className={`sh-side${stateClass}`} aria-label="빠른 상담">
+    <nav className={`sh-side${stateClass}`} style={{ top }} aria-label="빠른 상담">
       {/* 기존 메인 '빠른 상담'처럼 번호 바로 밑에 노란 카톡상담 버튼 */}
       <div className="sh-side-brand">
         <a href={`tel:${phones.registration}`} className="sh-side-call">
