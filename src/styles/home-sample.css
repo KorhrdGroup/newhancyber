@@ -350,96 +350,6 @@
 /* 악수 그림은 위아래 여백이 큰 정사각 파일 → 넓은 칸에 여백만 잘라 책 그림과 크기를 맞춘다 */
 .sh-promo-art--wide { width: 116px; object-fit: cover; }
 
-/* ---------- 6. 왜 한평생일까요 ---------- */
-.sh-why {
-  margin-top: var(--space-24);
-  padding: 44px 40px 40px;
-  border-radius: 24px;
-  background: linear-gradient(160deg, #1c3f9e, #0f2a6e);
-  color: #fff;
-}
-.sh-why-head { margin-bottom: 28px; text-align: center; }
-.sh-why-eyebrow { margin: 0 0 6px; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; color: #8db4ff; }
-.sh-why-title { margin: 0; font-size: 28px; font-weight: 800; letter-spacing: -0.02em; }
-/* 상세 항목: 아이콘 · 이름 · 설명 */
-.sh-why-items { display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 0; list-style: none; }
-.sh-why-items li {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 10px 14px 10px 10px;
-  border-radius: 12px;
-  background: #f3f6fb;
-}
-.sh-why-items img { flex: none; width: 52px; height: 52px; object-fit: contain; }
-.sh-why-items span { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
-.sh-why-items b { font-size: 15px; font-weight: 700; color: var(--color-text-strong, #111); word-break: keep-all; }
-.sh-why-items small { font-size: 13px; color: var(--color-text-secondary); word-break: keep-all; }
-/* 왼쪽 세 장점(제목·요약) + 오른쪽 고른 것의 상세. 휴대폰은 아코디언 */
-.sh-whyc {
-  display: grid;
-  grid-template-columns: 340px minmax(0, 1fr);
-  grid-template-rows: repeat(3, minmax(0, 1fr));
-  gap: 10px 20px;
-}
-.sh-whyc-item { display: contents; }
-.sh-whyc-tab {
-  position: relative;
-  grid-column: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 4px;
-  width: 100%;
-  padding: 18px 20px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.06);
-  color: #fff;
-  font: inherit;
-  text-align: left;
-  cursor: pointer;
-}
-.sh-whyc-tab:hover { background: rgba(255, 255, 255, 0.12); }
-.sh-whyc-item.is-open .sh-whyc-tab { border-color: #fff; background: #fff; color: var(--color-text-strong, #111); }
-.sh-whyc-label { font-size: 17px; font-weight: 800; letter-spacing: -0.01em; }
-.sh-whyc-summary { font-size: 13px; color: rgba(255, 255, 255, 0.75); }
-.sh-whyc-summary strong { color: #fff; }
-.sh-whyc-item.is-open .sh-whyc-summary { color: var(--color-text-secondary); }
-.sh-whyc-item.is-open .sh-whyc-summary strong { color: var(--color-primary-dark); }
-.sh-whyc-panel {
-  grid-column: 2;
-  grid-row: 1 / -1;
-  display: flex;
-  flex-direction: column;
-  padding: 28px;
-  border-radius: 18px;
-  background: #fff;
-  color: var(--color-text);
-}
-.sh-whyc-panel:not(.is-open) { visibility: hidden; }
-.sh-whyc-sub { margin: 0 0 18px; font-size: 18px; font-weight: 800; color: var(--color-text-strong, #111); }
-/* 항목 칸: 항목 수만큼 나누고(--why-cols) 남은 높이를 꽉 채운다. 아이콘 위 · 글 아래 가운데 */
-.sh-whyc-panel .sh-why-items {
-  flex: 1;
-  display: grid;
-  grid-template-columns: repeat(var(--why-cols, 3), minmax(0, 1fr));
-  grid-auto-rows: minmax(0, 1fr);
-  gap: 12px;
-}
-.sh-whyc-panel .sh-why-items li {
-  flex-direction: column;
-  justify-content: center;
-  gap: 12px;
-  padding: 20px 16px;
-  text-align: center;
-}
-.sh-whyc-panel .sh-why-items span { align-items: center; gap: 4px; }
-.sh-whyc-panel .sh-why-items img { width: 56px; height: 56px; }
-.sh-whyc-panel--guide .sh-why-items li { gap: 8px; padding: 16px 10px; }
-.sh-whyc-panel--guide .sh-why-items img { width: 44px; height: 44px; }
-.sh-whyc-panel--guide .sh-why-items b { font-size: 14px; line-height: 1.35; }
-
 /* ---------- 7. 1:1 무료 학습상담 ---------- */
 .sh-consult {
   display: grid;
@@ -510,40 +420,33 @@
 .sh-essential-grid a:hover { box-shadow: 0 4px 16px rgba(17, 90, 237, 0.12); }
 .sh-essential-grid img { width: 56px; height: 56px; object-fit: contain; }
 
-/* ---------- 9. 맨 아래 신뢰 띠 ---------- */
-.sh-trust {
-  position: relative;
-  overflow: hidden;
-  padding: 26px 0 28px;
+/* ---------- 9. 맨 아래 띠 — 왜 한평생일까요 (진한 남색 띠, 왼쪽 제목 · 오른쪽 장점 3개) ---------- */
+.sh-whyband {
+  padding: 40px 0;
   background:
-    radial-gradient(ellipse 38% 140% at 50% 50%, rgba(63, 126, 251, 0.45), rgba(63, 126, 251, 0) 70%),
+    radial-gradient(ellipse 40% 160% at 70% 50%, rgba(63, 126, 251, 0.35), rgba(63, 126, 251, 0) 70%),
     linear-gradient(160deg, #1c3f9e, #0f2a6e);
+  color: #fff;
 }
-.sh-trust-inner {
-  display: flex;
+.sh-whyband-inner {
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
   align-items: center;
-  justify-content: center;
-  gap: 36px;
+  gap: 32px;
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 var(--space-20);
 }
-.sh-trust-laurel { flex: none; width: 60px; height: 114px; filter: drop-shadow(0 0 6px rgba(141, 180, 255, 0.45)); }
-.sh-trust-laurel.is-right { transform: scaleX(-1); }
-.sh-trust-spark { fill: #fff; }
-.sh-trust-text { text-align: center; }
-.sh-trust-sub { margin: 0 0 6px; font-size: 16px; font-weight: 600; color: #dce8ff; letter-spacing: -0.01em; }
-.sh-trust-name {
-  margin: 0;
-  font-size: 34px;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 1.25;
-  color: transparent;
-  background: linear-gradient(90deg, #8db4ff 0%, #ffffff 42%, #c9f3ff 58%, #8db4ff 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-}
+.sh-whyband-eyebrow { margin: 0 0 8px; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; color: #8db4ff; }
+.sh-whyband-title { margin: 0; font-size: 25px; font-weight: 800; line-height: 1.35; letter-spacing: -0.02em; }
+.sh-whyband-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; padding: 0; list-style: none; }
+.sh-whyband-list li { display: flex; align-items: center; gap: 14px; padding: 4px 20px; }
+.sh-whyband-list li + li { border-left: 1px solid rgba(255, 255, 255, 0.16); }
+.sh-whyband-list img { flex: none; width: 56px; height: 56px; padding: 6px; border-radius: 16px; background: rgba(255, 255, 255, 0.1); object-fit: contain; }
+.sh-whyband-list span { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.sh-whyband-list b { font-size: 16px; font-weight: 800; line-height: 1.35; word-break: keep-all; }
+.sh-whyband-list small { font-size: 13px; line-height: 1.5; color: #c9d8ff; word-break: keep-all; }
+.sh-whyband-list small strong { color: #fff; }
 
 /* 개강 줄이 두 줄로 접히는 폭 — 양끝 벌림 대신 왼쪽부터 채운다 */
 @media (max-width: 1199px) {
@@ -563,7 +466,9 @@
   .sh-infobar { grid-template-columns: minmax(0, 1fr); }
   .sh-infobar-item + .sh-infobar-item { border-left: 0; border-top: 1px solid #e3eaf7; }
   .sh-essential-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .sh-whyc { grid-template-columns: 280px minmax(0, 1fr); }
+  .sh-whyband-inner { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .sh-whyband-title br { display: none; }
+  .sh-whyband-list li:first-child { padding-left: 0; }
   .sh-consult { grid-template-columns: minmax(0, 1fr); }
 }
 
@@ -632,41 +537,6 @@
   .sh-promo-art { top: auto; bottom: 12px; width: 64px; height: 64px; transform: none; }
   .sh-promo-art--wide { width: 92px; }
 
-  .sh-why { margin-top: var(--space-16); padding: 28px 16px 16px; border-radius: 18px; }
-  .sh-why-head { margin-bottom: 18px; }
-  .sh-why-title { font-size: 20px; }
-  .sh-whyc { display: flex; flex-direction: column; gap: 8px; }
-  .sh-whyc-item { display: block; }
-  .sh-whyc-tab { padding: 16px 44px 16px 16px; }
-  .sh-whyc-tab::after {
-    content: "";
-    position: absolute;
-    top: 22px;
-    right: 20px;
-    width: 8px;
-    height: 8px;
-    border-right: 2px solid currentColor;
-    border-bottom: 2px solid currentColor;
-    opacity: 0.7;
-    transform: rotate(45deg);
-  }
-  .sh-whyc-item.is-open .sh-whyc-tab { border-radius: 14px 14px 0 0; }
-  .sh-whyc-item.is-open .sh-whyc-tab::after { top: 26px; transform: rotate(-135deg); }
-  .sh-whyc-label { font-size: 16px; }
-  .sh-whyc-panel { padding: 0 16px 16px; border-radius: 0 0 14px 14px; }
-  .sh-whyc-panel:not(.is-open) { display: none; }
-  .sh-whyc-sub { margin-bottom: 12px; font-size: 14px; font-weight: 700; color: var(--color-text-secondary); }
-  /* 휴대폰: 설명이 있는 항목은 한 줄씩(아이콘 왼쪽), 가이드 6개만 3칸 */
-  .sh-whyc-panel .sh-why-items { grid-template-columns: minmax(0, 1fr); grid-auto-rows: auto; gap: 8px; }
-  .sh-whyc-panel .sh-why-items li { flex-direction: row; justify-content: flex-start; gap: 14px; padding: 10px 14px 10px 10px; text-align: left; }
-  .sh-whyc-panel .sh-why-items span { align-items: flex-start; gap: 2px; }
-  .sh-whyc-panel .sh-why-items img { width: 52px; height: 52px; }
-  .sh-whyc-panel--guide .sh-why-items { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .sh-whyc-panel--guide .sh-why-items li { flex-direction: column; justify-content: center; gap: 6px; padding: 12px 8px; text-align: center; }
-  .sh-whyc-panel--guide .sh-why-items span { align-items: center; }
-  .sh-whyc-panel--guide .sh-why-items img { width: 36px; height: 36px; }
-  .sh-whyc-panel--guide .sh-why-items b { font-size: 12px; }
-
   .sh-consult { gap: 20px; padding: 24px 16px 16px; border-radius: 18px; }
   .sh-consult-title { font-size: 22px; padding-right: 72px; }
   .sh-consult-desc { font-size: 14px; }
@@ -681,11 +551,14 @@
   .sh-essential-grid a { padding: 14px 4px; font-size: 12px; }
   .sh-essential-grid img { width: 40px; height: 40px; }
 
-  .sh-trust { padding: 20px 0 22px; }
-  .sh-trust-inner { gap: 12px; padding: 0 16px; }
-  .sh-trust-laurel { width: 38px; height: 72px; }
-  .sh-trust-sub { margin-bottom: 4px; font-size: 12px; word-break: keep-all; }
-  .sh-trust-name { font-size: 24px; }
+  .sh-whyband { padding: 28px 0; }
+  .sh-whyband-inner { gap: 18px; padding: 0 16px; }
+  .sh-whyband-title { font-size: 20px; }
+  .sh-whyband-list { grid-template-columns: minmax(0, 1fr); }
+  .sh-whyband-list li { gap: 12px; padding: 12px 0; }
+  .sh-whyband-list li + li { border-left: 0; border-top: 1px solid rgba(255, 255, 255, 0.16); }
+  .sh-whyband-list img { width: 48px; height: 48px; border-radius: 14px; }
+  .sh-whyband-list b { font-size: 15px; }
 }
 
 /* 폰 머리줄(70px, 고정)은 480px 이하에서만 나온다 — 그 아래로 내려 시작 */

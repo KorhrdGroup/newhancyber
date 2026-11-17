@@ -396,63 +396,6 @@ function Notices() {
   );
 }
 
-/* ---------- 6. 왜 한평생일까요 (기존 메인 탭 3개) ----------
-   세 장점의 제목·요약은 늘 보이고, 고른 하나의 상세만 보여 준다 (휴대폰은 아코디언).
-   PC에서는 세 상세를 한 칸에 겹쳐 두고 고른 것만 보여서, 탭을 바꿔도 높이가 그대로다 */
-function WhyHanpyeong() {
-  const [active, setActive] = useState(0);
-  return (
-    <section className="sh-why">
-      <div className="sh-why-head">
-        <p className="sh-why-eyebrow">WHY 한평생원격교육원</p>
-        <h3 className="sh-why-title">왜 한평생원격교육원을 선택할까요?</h3>
-      </div>
-      <div className="sh-whyc">
-        {whyTabs.map((tab, i) => {
-          const open = i === active;
-          return (
-            <div key={tab.key} className={`sh-whyc-item${open ? " is-open" : ""}`}>
-              <button
-                type="button"
-                className="sh-whyc-tab"
-                aria-expanded={open}
-                aria-controls={`sh-whyc-${tab.key}`}
-                onClick={() => setActive(i)}
-              >
-                <span className="sh-whyc-label">{tab.label}</span>
-                <span className="sh-whyc-summary">{tab.summary}</span>
-              </button>
-              <div
-                id={`sh-whyc-${tab.key}`}
-                className={`sh-whyc-panel${tab.compact ? " sh-whyc-panel--guide" : ""}${open ? " is-open" : ""}`}
-              >
-                <p className="sh-whyc-sub">{tab.subtitle}</p>
-                {/* PC: 항목 수만큼 칸을 나눠 판을 꽉 채운다 (3개 → 3칸, 2개 → 2칸, 6개 → 3칸 두 줄) */}
-                <ul
-                  className="sh-why-items"
-                  style={{ "--why-cols": Math.min(tab.cards.length, 3) } as React.CSSProperties}
-                >
-                  {tab.cards.map((card) => (
-                    <li key={card.title}>
-                      <img src={`${IMG}/main/support/${card.icon}`} alt="" />
-                      <span>
-                        <b>{card.title}</b>
-                        {card.lines.map((line) => (
-                          <small key={line}>{line}</small>
-                        ))}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </section>
-  );
-}
-
 /* ---------- 7. 1:1 무료 학습상담 (학습설계 안내 + 간편상담 폼) ---------- */
 
 function Consult() {
@@ -538,67 +481,33 @@ function Essentials() {
   );
 }
 
-/* ---------- 9. 맨 아래 신뢰 띠 (월계수 + 기관 이름) ---------- */
+/* ---------- 9. 맨 아래 띠 — 왜 한평생일까요 (기존 메인 탭 3개를 한 줄 요약으로) ---------- */
 
-/** 월계수 한쪽 가지 — 호를 따라 잎 두 장씩. flip 이면 좌우를 뒤집어 오른쪽 가지 */
-function Laurel({ flip = false }: { flip?: boolean }) {
-  const cx = 76;
-  const cy = 66;
-  const r = 58;
-  const at = (deg: number) => {
-    const t = (deg * Math.PI) / 180;
-    return [cx + r * Math.cos(t), cy + r * Math.sin(t)] as const;
-  };
-  const leaves = [];
-  for (let i = 0; i < 11; i++) {
-    const deg = 106 + i * 14.6;
-    const [x, y] = at(deg);
-    // 가지를 따라 아래에서 위로 올라가는 방향(접선) 기준으로 바깥 · 안쪽에 한 장씩, 위로 갈수록 조금 크게
-    for (const side of [-34, 30]) {
-      leaves.push(
-        <path
-          key={`${i}${side}`}
-          d="M0 0C5.5-5 5.5-14 0-20C-5.5-14-5.5-5 0 0Z"
-          transform={`translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${(deg + 180 + side).toFixed(1)}) scale(${(0.72 + i * 0.03).toFixed(2)})`}
-        />,
-      );
-    }
-  }
-  const [sx, sy] = at(102);
-  const [ex, ey] = at(254);
-  const id = `sh-laurel-${flip ? "r" : "l"}`;
-  return (
-    <svg className={`sh-trust-laurel${flip ? " is-right" : ""}`} viewBox="0 0 72 136" aria-hidden>
-      <defs>
-        <linearGradient id={id} x1="0" y1="1" x2="0" y2="0">
-          <stop offset="0" stopColor="#8db4ff" />
-          <stop offset="0.55" stopColor="#dce8ff" />
-          <stop offset="1" stopColor="#ffffff" />
-        </linearGradient>
-      </defs>
-      <path
-        d={`M${sx.toFixed(1)} ${sy.toFixed(1)}A${r} ${r} 0 0 1 ${ex.toFixed(1)} ${ey.toFixed(1)}`}
-        fill="none"
-        stroke={`url(#${id})`}
-        strokeWidth="1.6"
-        strokeLinecap="round"
-      />
-      <g fill={`url(#${id})`}>{leaves}</g>
-      <path className="sh-trust-spark" d="M50 4l2.2 5.3 5.3 2.2-5.3 2.2-2.2 5.3-2.2-5.3-5.3-2.2 5.3-2.2z" />
-    </svg>
-  );
-}
+const WHY_ICONS = ["support-tab-001.png", "support-tab2-001.png", "support-tab3-001.png"];
 
-function TrustBand() {
+function WhyBand() {
   return (
-    <section className="sh-trust" aria-label="한평생원격교육원">
-      <div className="sh-trust-inner">
-        <Laurel />
-        <div className="sh-trust-text">
-          <p className="sh-trust-sub">한평생만이 가진 교육 노하우, 신뢰할 수 있는 교육기관</p>
-          <p className="sh-trust-name">한평생원격교육원</p>
+    <section className="sh-whyband" aria-label="왜 한평생원격교육원을 선택할까요?">
+      <div className="sh-whyband-inner">
+        <div className="sh-whyband-head">
+          <p className="sh-whyband-eyebrow">WHY 한평생원격교육원</p>
+          <h3 className="sh-whyband-title">
+            왜 한평생원격교육원을{" "}
+            <br />
+            선택할까요?
+          </h3>
         </div>
-        <Laurel flip />
+        <ul className="sh-whyband-list">
+          {whyTabs.map((tab, i) => (
+            <li key={tab.key}>
+              <img src={`${IMG}/main/support/${WHY_ICONS[i]}`} alt="" />
+              <span>
+                <b>{tab.label}</b>
+                <small>{tab.summary}</small>
+              </span>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
@@ -616,11 +525,10 @@ export default function SampleHome() {
         <Bento />
         <InfoBar />
         <Notices />
-        <WhyHanpyeong />
         <Consult />
       </div>
       <Essentials />
-      <TrustBand />
+      <WhyBand />
     </main>
   );
 }
