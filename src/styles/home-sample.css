@@ -505,9 +505,18 @@
 }
 .sh-whyc-panel .sh-why-items span { align-items: center; gap: 4px; }
 .sh-whyc-panel .sh-why-items img { width: 56px; height: 56px; }
-.sh-whyc-panel--guide .sh-why-items li { gap: 8px; padding: 16px 10px; }
-.sh-whyc-panel--guide .sh-why-items img { width: 44px; height: 44px; }
-.sh-whyc-panel--guide .sh-why-items b { font-size: 14px; line-height: 1.35; }
+/* 2개(밀착 관리): 칸이 넓어 비어 보이던 것 → 큰 아이콘 왼쪽 · 글 오른쪽 가로 카드 */
+.sh-whyc-panel--pair .sh-why-items li { flex-direction: row; justify-content: flex-start; gap: 16px; padding: 22px; text-align: left; }
+.sh-whyc-panel--pair .sh-why-items span { align-items: flex-start; gap: 6px; }
+.sh-whyc-panel--pair .sh-why-items img { width: 72px; height: 72px; }
+.sh-whyc-panel--pair .sh-why-items b { font-size: 18px; }
+.sh-whyc-panel--pair .sh-why-items small { font-size: 14px; line-height: 1.5; }
+/* 가이드 6개: 3칸 두 줄이 빽빽하던 것 → 아이콘 왼쪽 가로 목록 2칸 × 3줄 */
+.sh-whyc-panel--guide .sh-why-items { gap: 10px 12px; }
+.sh-whyc-panel--guide .sh-why-items li { flex-direction: row; justify-content: flex-start; gap: 14px; padding: 0 20px; text-align: left; }
+.sh-whyc-panel--guide .sh-why-items span { align-items: flex-start; }
+.sh-whyc-panel--guide .sh-why-items img { width: 40px; height: 40px; }
+.sh-whyc-panel--guide .sh-why-items b { font-size: 15px; line-height: 1.35; }
 
 /* 떠 있는 오른쪽 빠른 상담도 왼쪽 빠른 메뉴처럼, 좁은 화면에서는 배너를 지나 스크롤한 뒤에 보인다 (시안 페이지만) */
 @media (max-width: 1599px) {
@@ -534,6 +543,10 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
   .sh-infobar-item + .sh-infobar-item { border-left: 0; border-top: 1px solid #e3eaf7; }
   .sh-essential-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .sh-whyc { grid-template-columns: 280px minmax(0, 1fr); }
+  /* 판이 좁아 가로 카드는 글이 여러 줄로 접힌다 → 2개 탭도 아이콘 위 · 글 아래 */
+  .sh-whyc-panel--pair .sh-why-items li { flex-direction: column; justify-content: center; gap: 12px; padding: 20px 16px; text-align: center; }
+  .sh-whyc-panel--pair .sh-why-items span { align-items: center; }
+  .sh-whyc-panel--pair .sh-why-items img { width: 64px; height: 64px; }
   .sh-consult { grid-template-columns: minmax(0, 1fr); }
 }
 
@@ -650,6 +663,8 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
   .sh-whyc-panel--guide .sh-why-items span { align-items: center; }
   .sh-whyc-panel--guide .sh-why-items img { width: 36px; height: 36px; }
   .sh-whyc-panel--guide .sh-why-items b { font-size: 12px; }
+  .sh-whyc-panel--pair .sh-why-items b { font-size: 15px; }
+  .sh-whyc-panel--pair .sh-why-items small { font-size: 13px; }
 }
 
 /* 폰 머리줄(70px, 고정)은 480px 이하에서만 나온다 — 그 아래로 내려 시작 */
