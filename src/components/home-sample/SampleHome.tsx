@@ -56,7 +56,10 @@ function HeroSlideBody({ slide }: { slide: HeroSlide }) {
       <div className="hb-inner">
         <div className="hb-text">
           <p className="hb-eyebrow">{slide.eyebrow}</p>
-          <h2 className="hb-title">{slide.title}</h2>
+          <h2 className="hb-title">
+            {/* 흰 제목 + 노란 형광펜 밑줄 */}
+            <span className="sh-hero-mark">{slide.title}</span>
+          </h2>
           <p className="hb-desc">{slide.desc}</p>
           {slide.href && <span className="hb-more">자세히보기</span>}
         </div>
@@ -288,7 +291,7 @@ function InfoCards() {
   );
 }
 
-/* ---------- 5. 공지 탭 + 알려드립니다 ---------- */
+/* ---------- 5. 공지 탭 + 놓치기 쉬운 안내 ---------- */
 
 function Notices() {
   const [active, setActive] = useState<NoticeTabKey>("notice");
@@ -327,7 +330,7 @@ function Notices() {
         </ul>
       </div>
       <div className="sh-promo">
-        <h3 className="sh-sec-title">한평생에서 알려드립니다</h3>
+        <h3 className="sh-sec-title">놓치기 쉬운 안내</h3>
         <div className="sh-promo-cards">
           <Link href="/learning-support/forms-data-room" className="sh-promo-card sh-tone--green">
             <span className="sh-promo-label">자격증 신청 전 꼭 확인!</span>
@@ -568,10 +571,11 @@ export default function SampleHome() {
       <div className="sh-wrap">
         <SampleHero />
         <TermStrip />
+        {/* 우리 강점을 첫 화면 가까이 — 개강 줄 바로 아래 */}
+        <WhyHanpyeong />
         <Benefits />
         <InfoCards />
         <Notices />
-        <WhyHanpyeong />
         <Consult />
       </div>
       <Essentials />
