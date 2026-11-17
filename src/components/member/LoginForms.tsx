@@ -2,6 +2,8 @@
 
 import { useActionState, useState, type FormEvent } from "react";
 import { login, type LoginState } from "@/app/member/actions";
+import ButtonTabs from "@/components/common/ButtonTabs";
+import "@/styles/classroom.css";
 
 const MEMBER_IMG = "/resources/images/member";
 
@@ -12,7 +14,7 @@ const authMethods: { key: AuthMethod; label: string }[] = [
   { key: "simple", label: "간편 인증" },
 ];
 
-/** 일반 로그인 · 공동 인증서/간편 인증 로그인 · SNS 로그인 */
+/** 일반 로그인 · 공동 인증서/간편 인증 로그인 · SNS 로그인 (PC 3칸, 휴대폰은 인증서 칸 없이 세로로) */
 export default function LoginForms() {
   const [authMethod, setAuthMethod] = useState<AuthMethod>("cert");
 
@@ -32,96 +34,75 @@ export default function LoginForms() {
   };
 
   return (
-    <div className="login-sections">
-      <div className="login-section">
-        <h2 className="login-section-title">일반 로그인</h2>
-        <form className="login-form" id="generalLoginForm" action={formAction}>
-          <div className="form-group">
-            <input
-              type="text"
-              key={state.id ?? ""}
-              id="userId"
-              name="userId"
-              className="form-input"
-              placeholder="아이디를 입력해주세요."
-              autoComplete="username"
-              defaultValue={state.id}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type="password"
-              id="userPassword"
-              name="userPassword"
-              className="form-input"
-              placeholder="비밀번호를 입력해주세요."
-              autoComplete="current-password"
-              required
-            />
-          </div>
+    <div className="member-cols member-cols--3">
+      <section className="member-col">
+        <h2 className="member-col-title">일반 로그인</h2>
+        <form className="member-form" id="generalLoginForm" action={formAction}>
+          <input
+            type="text"
+            key={state.id ?? ""}
+            id="userId"
+            name="userId"
+            className="ds-input"
+            placeholder="아이디를 입력해주세요."
+            aria-label="아이디"
+            autoComplete="username"
+            defaultValue={state.id}
+            required
+          />
+          <input
+            type="password"
+            id="userPassword"
+            name="userPassword"
+            className="ds-input"
+            placeholder="비밀번호를 입력해주세요."
+            aria-label="비밀번호"
+            autoComplete="current-password"
+            required
+          />
           {state.error && (
             <p className="login-error" role="alert">
               {state.error}
             </p>
           )}
-          <button type="submit" className="login-btn-primary" disabled={pending}>
+          <button type="submit" className="ds-btn ds-btn--primary ds-btn--lg member-submit" disabled={pending}>
             {pending ? "로그인하는 중…" : "로그인"}
           </button>
         </form>
-      </div>
+      </section>
 
-      <div className="login-section">
-        <h2 className="login-section-title">인증서 · 간편 인증 로그인</h2>
-        {/* member.css 가 #certLoginForm 으로 버튼 간격을 잡는다 */}
-        <form className="login-form" id="certLoginForm" onSubmit={handleCertLogin}>
-          <div className="login-auth-tabs" role="tablist" aria-label="인증 방법">
-            {authMethods.map((m) => (
-              <button
-                key={m.key}
-                type="button"
-                role="tab"
-                aria-selected={authMethod === m.key}
-                className={`login-auth-tab${authMethod === m.key ? " active" : ""}`}
-                onClick={() => setAuthMethod(m.key)}
-              >
-                {m.label}
-              </button>
-            ))}
-          </div>
-          <div className="form-group">
-            <input
-              type="text"
-              id="certUserId"
-              name="certUserId"
-              className="form-input"
-              placeholder="아이디를 입력해주세요."
-              required
-            />
-          </div>
-          <button type="submit" className="login-btn-primary">
+      <section className="member-col member-col--cert">
+        <h2 className="member-col-title">인증서 · 간편 인증 로그인</h2>
+        <form className="member-form" onSubmit={handleCertLogin}>
+          <ButtonTabs items={authMethods} active={authMethod} onSelect={(k) => setAuthMethod(k as AuthMethod)} ariaLabel="인증 방법" />
+          <input
+            type="text"
+            id="certUserId"
+            name="certUserId"
+            className="ds-input"
+            placeholder="아이디를 입력해주세요."
+            aria-label="아이디"
+            required
+          />
+          <button type="submit" className="ds-btn ds-btn--primary ds-btn--lg member-submit">
             로그인
           </button>
         </form>
-      </div>
+      </section>
 
-      <div className="login-section">
-        <h2 className="login-section-title">SNS 로그인</h2>
-        <div className="sns-login-buttons">
-          <button type="button" className="sns-login-btn sns-naver" onClick={handleSnsLogin("naver")}>
-            <span className="sns-icon">
-              <img src={`${MEMBER_IMG}/login-naver.png`} alt="네이버" className="sns-icon-img" />
-            </span>
-            <span className="sns-text">네이버 로그인</span>
+      <section className="member-col">
+        <h2 className="member-col-title">SNS 로그인</h2>
+        <div className="member-sns">
+          <button type="button" className="member-sns-btn member-sns-btn--naver" onClick={handleSnsLogin("naver")}>
+            <img src={`${MEMBER_IMG}/login-naver.png`} alt="" className="member-sns-icon" />
+            <span className="member-sns-text">네이버 로그인</span>
           </button>
-          <button type="button" className="sns-login-btn sns-kakao" onClick={handleSnsLogin("kakao")}>
-            <span className="sns-icon">
-              <img src={`${MEMBER_IMG}/login-kakao.png`} alt="카카오" className="sns-icon-img" />
-            </span>
-            <span className="sns-text">카카오 로그인</span>
+          <button type="button" className="member-sns-btn member-sns-btn--kakao" onClick={handleSnsLogin("kakao")}>
+            <img src={`${MEMBER_IMG}/login-kakao.png`} alt="" className="member-sns-icon" />
+            <span className="member-sns-text">카카오 로그인</span>
           </button>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

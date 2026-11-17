@@ -35,34 +35,30 @@ export default function PcList({ initialPcs, max }: { initialPcs: RegisteredPc[]
       {pcs.length === 0 ? (
         <p className="cr-empty">등록한 PC가 없습니다. 지금 쓰는 PC를 등록해 주세요.</p>
       ) : (
-        <div className="cr-table-wrap">
-          <table className="ds-table">
-            <thead>
-              <tr>
-                <th>번호</th>
-                <th>PC 이름</th>
-                <th>등록일</th>
-                <th>최근 사용일</th>
-                <th>삭제</th>
+        <table className="ds-table ds-table--stack">
+          <thead>
+            <tr>
+              <th className="is-left">PC 이름</th>
+              <th>등록일</th>
+              <th>최근 사용일</th>
+              <th>삭제</th>
+            </tr>
+          </thead>
+          <tbody>
+            {pcs.map((pc) => (
+              <tr key={pc.id}>
+                <td className="ds-table-stack-head is-left">{pc.name}</td>
+                <td data-label="등록일">{pc.registeredAt}</td>
+                <td data-label="최근 사용일">{pc.lastUsedAt}</td>
+                <td data-label="삭제">
+                  <button type="button" className="ds-btn ds-btn--danger ds-btn--sm" onClick={() => remove(pc)}>
+                    삭제
+                  </button>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {pcs.map((pc, i) => (
-                <tr key={pc.id}>
-                  <td>{i + 1}</td>
-                  <td className="is-left">{pc.name}</td>
-                  <td>{pc.registeredAt}</td>
-                  <td>{pc.lastUsedAt}</td>
-                  <td>
-                    <button type="button" className="ds-btn ds-btn--danger ds-btn--sm" onClick={() => remove(pc)}>
-                      삭제
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
       )}
       <div className="pp-actions">
         <button type="button" className="ds-btn ds-btn--primary ds-btn--lg" onClick={register} aria-disabled={full}>

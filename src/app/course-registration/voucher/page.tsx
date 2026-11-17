@@ -35,7 +35,7 @@ export default function CourseVoucherPage() {
 
         <section className="ex-section">
           <h2 className="ex-section-title">지원 대상과 금액</h2>
-          <table className="ds-table ex-rtable">
+          <table className="ds-table ds-table--stack">
             <thead>
               <tr>
                 <th>유형</th>
@@ -46,7 +46,7 @@ export default function CourseVoucherPage() {
             <tbody>
               {voucherTypes.map((v) => (
                 <tr key={v.type}>
-                  <td className="ex-rtable-head">{v.type}</td>
+                  <td className="ds-table-stack-head">{v.type}</td>
                   <td className="is-left" data-label="지원 대상">
                     {v.target}
                   </td>

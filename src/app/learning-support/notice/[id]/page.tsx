@@ -1,28 +1,32 @@
 import type { Metadata } from "next";
-import PostDetail from "@/components/learning-support/PostDetail";
+import { notFound } from "next/navigation";
+import PostView from "@/components/learning-support/PostView";
+import SampleBody from "@/components/learning-support/SampleBody";
+import { findPostWithSiblings, noticePosts } from "@/components/learning-support/boardData";
 import MobilePageBanner from "@/components/layout/MobilePageBanner";
 
 export const metadata: Metadata = { title: "공지사항 상세" };
 
-const NEXT_TITLE = "[한국어교원] 2024-2학기 성적우수수강생 진로선택 학습자 수기";
+// TODO: API — id 로 공지사항 상세와 이전글/다음글을 조회한다 (지금은 목록 샘플에서 찾고 본문은 원본 샘플)
+export default async function LearningNoticeDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const found = findPostWithSiblings([noticePosts], `/learning-support/notice/${id}`);
+  if (!found) notFound();
 
-// TODO: params.id 로 공지사항 상세를 조회한다 (지금은 원본 샘플 그대로)
-export default function LearningNoticeDetailPage() {
   return (
     <>
       <MobilePageBanner name="notice-detail" text="공지사항" />
       <main className="wrapper">
-        <PostDetail
-          mobileInfoTitle="26년 1학기 1차(12월 24일 개강반) 사회복지현장실습 모집 안내문(지방)"
-          title="26년 1학기 1차(12월 24일 개강반) 사회복지현장실습 모집 안내문(지방)"
-          date="25.10.21"
+        <PostView
+          title={found.post.title}
+          date={found.post.date}
           fileName="파일명.PDF"
-          bannerAlt="공지사항 배너"
-          mobilePrev={{ title: "26년 1학기 1차(12월 24일 개강반) 사회복지현장실습", subtitle: "모집 안내문(지방)" }}
-          mobileNext={{ title: "26년 1학기 1차(12월 24일 개강반) 사회복지현장실습", subtitle: "모집 안내문(지방)" }}
-          desktopNext={NEXT_TITLE}
+          prev={found.prev}
+          next={found.next}
           listHref="/learning-support/notice"
-        />
+        >
+          <SampleBody bannerAlt="공지사항 배너" />
+        </PostView>
       </main>
     </>
   );

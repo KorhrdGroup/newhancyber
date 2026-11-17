@@ -1,0 +1,75 @@
+/* 베스트 수강후기 배너 (피그마 252:693, 880×495). PC 는 폭에 맞춰 통째로 늘고 줄며(--u = 폭/880), 휴대폰은 위아래로 쌓는다 */
+.brb { container-type: inline-size; margin: 0 0 var(--space-40); }
+.brb-inner {
+  --u: calc(100cqw / 880);
+  position: relative; overflow: hidden; aspect-ratio: 880 / 495;
+  border-radius: var(--radius-8);
+  background: linear-gradient(180deg, #0050e5, #00078e);
+}
+/* 글 상세 본문(.lx-article-body p)의 문단 여백이 배너 글에 들어오지 않게 */
+.brb .brb-heading, .brb .brb-who, .brb .brb-quote { margin: 0; }
+.brb-confetti {
+  position: absolute; left: calc(-58 * var(--u)); top: calc(-1 * var(--u));
+  width: calc(996 * var(--u)); height: calc(498 * var(--u));
+  object-fit: cover; filter: blur(calc(25 * var(--u))); pointer-events: none;
+}
+.brb-content {
+  position: absolute; left: calc(80 * var(--u)); top: 50%; width: calc(720 * var(--u));
+  transform: translateY(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: calc(30 * var(--u));
+}
+.brb-heading {
+  display: flex; flex-direction: column; align-items: center; text-align: center; white-space: nowrap;
+  line-height: normal; filter: drop-shadow(0 0 calc(5 * var(--u)) rgba(45, 45, 45, 0.2));
+}
+.brb-kicker { font-size: calc(24 * var(--u)); font-weight: 600; color: #fff; }
+.brb-title {
+  font-size: calc(72 * var(--u)); font-weight: 900; color: transparent;
+  background: linear-gradient(180deg, #fff 31.089%, #8ccaff 88.953%);
+  -webkit-background-clip: text; background-clip: text;
+}
+.brb-profile {
+  display: flex; align-items: center; gap: calc(40 * var(--u)); width: 100%;
+  filter: drop-shadow(0 0 calc(5 * var(--u)) rgba(45, 45, 45, 0.2));
+}
+.brb-photo { position: relative; flex: none; width: calc(184 * var(--u)); height: calc(184 * var(--u)); }
+.brb-photo-img { display: block; width: 100%; height: 100%; border-radius: 50%; background: #fff; object-fit: cover; }
+.brb-laurel {
+  position: absolute; left: -20.1%; top: 25.3%; width: 137.5%; height: 100%;
+  max-width: none; pointer-events: none;
+}
+.brb-bubble {
+  /* 줄간격을 넓힌 소감이 넘치지 않게 높이는 내용만큼 (피그마 182 는 최소) */
+  position: relative; flex: 1 1 0; min-width: 0; min-height: calc(182 * var(--u));
+  display: flex; flex-direction: column; justify-content: center; gap: calc(12 * var(--u));
+  padding: calc(18 * var(--u)) calc(20 * var(--u));
+  border-radius: calc(10 * var(--u)); background: #fff; color: #010101; line-height: normal;
+}
+.brb-bubble-tail {
+  /* 돌리면 보이는 폭이 20.9 — 밑변이 말풍선 안으로 2 들어가 틈이 없게 (피그마와 같음) */
+  position: absolute; left: calc(-21.45 * var(--u)); top: 50%;
+  width: calc(26 * var(--u)); height: calc(20.91 * var(--u)); max-width: none;
+  transform: translateY(-50%) rotate(-90deg);
+}
+.brb-who { display: flex; flex-direction: column; gap: calc(6 * var(--u)); white-space: nowrap; }
+.brb-who span { font-size: calc(18 * var(--u)); font-weight: 600; color: var(--color-text-secondary); }
+.brb-who strong { font-size: calc(24 * var(--u)); font-weight: 700; }
+.brb-quote { font-size: calc(16 * var(--u)); font-weight: 500; line-height: 1.65; text-align: justify; word-break: keep-all; }
+
+/* 휴대폰: 통째로 줄이면 글자가 너무 작아져서 제목 → 사진 → 말풍선 순으로 쌓는다 */
+@media (max-width: 480px) {
+  .brb-inner { aspect-ratio: auto; padding: 32px 16px; }
+  .brb-confetti { left: -10%; top: 0; width: 120%; height: 60%; filter: blur(16px); }
+  .brb-content { position: relative; left: auto; top: auto; width: auto; transform: none; gap: 20px; }
+  .brb-heading, .brb-profile { filter: drop-shadow(0 0 4px rgba(45, 45, 45, 0.2)); }
+  .brb-kicker { font-size: 14px; }
+  .brb-title { font-size: 36px; }
+  .brb-profile { flex-direction: column; gap: 52px; } /* 월계수가 사진 아래로 30px 나와서, 말풍선 꼬리가 겹치지 않게 */
+  .brb-photo { width: 120px; height: 120px; }
+  .brb-bubble { flex: none; width: 100%; min-height: 0; gap: 12px; padding: 16px; border-radius: 10px; }
+  .brb-bubble-tail { left: 50%; top: -15px; width: 22px; height: 18px; transform: translateX(-50%); }
+  .brb-who { gap: 4px; white-space: normal; }
+  .brb-who span { font-size: 14px; }
+  .brb-who strong { font-size: 18px; }
+  .brb-quote { font-size: 13px; line-height: 1.7; text-align: left; }
+}

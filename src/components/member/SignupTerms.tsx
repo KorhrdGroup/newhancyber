@@ -9,6 +9,7 @@ import PrivacyProvideText from "./terms/PrivacyProvideText";
 import TermsOfServiceText from "./terms/TermsOfServiceText";
 import TermsBox from "./TermsBox";
 import { SIGNUP_CONSENT_KEY, type SignupConsent } from "@/lib/signupOptions";
+import "@/styles/classroom.css";
 
 type TermKey = "terms" | "agreement1" | "agreement2" | "privacy1" | "privacy2";
 
@@ -80,23 +81,18 @@ export default function SignupTerms() {
   };
 
   return (
-    <>
-      <div className="step1-wrapper">
-        <div className="all-chk-box">
-          <div className="inner">
-            <div className="input-box">
-              <input type="checkbox" id="all_chk" checked={allChecked} onChange={(e) => setAll(e.target.checked)} />
-              <label htmlFor="all_chk">
-                <strong>모든 약관을 확인하고 모두 동의합니다.</strong>
-                <span className="all-chk-detail">
-                  이용약관, 개인정보 수집 및 이용(필수/선택), 정보수집 및 이용(선택), 마케팅 및
-                  광고활용(선택)에 모두 동의합니다.
-                </span>
-              </label>
-            </div>
-          </div>
-        </div>
+    <div className="signup-panel">
+      <label className="ds-check signup-all" htmlFor="all_chk">
+        <input type="checkbox" id="all_chk" checked={allChecked} onChange={(e) => setAll(e.target.checked)} />
+        <span>
+          <strong className="signup-all-title">모든 약관을 확인하고 모두 동의합니다.</strong>
+          <span className="signup-all-desc">
+            이용약관, 개인정보 수집 및 이용(필수/선택), 정보수집 및 이용(선택), 마케팅 및 광고활용(선택)에 모두 동의합니다.
+          </span>
+        </span>
+      </label>
 
+      <ul className="signup-terms">
         {terms.map(({ key, title, required, Text }) => (
           <TermsBox
             key={key}
@@ -109,13 +105,13 @@ export default function SignupTerms() {
             <Text />
           </TermsBox>
         ))}
-      </div>
+      </ul>
 
-      <div className="signup-btn-wrapper">
-        <button type="button" className="signup-next-btn" id="nextBtn" onClick={handleNext}>
+      <div className="signup-actions">
+        <button type="button" className="ds-btn ds-btn--primary ds-btn--lg signup-submit" onClick={handleNext}>
           다음
         </button>
       </div>
-    </>
+    </div>
   );
 }

@@ -35,38 +35,34 @@ export default function TuitionCertificatePage() {
       {payments.length === 0 ? (
         <p className="cr-empty">결제 완료된 내역이 없어요.</p>
       ) : (
-        <div className="cr-table-wrap">
-          <table className="ds-table">
-            <thead>
-              <tr>
-                <th>결제일</th>
-                <th>결제명</th>
-                <th>결제 수단</th>
-                <th>납입 금액</th>
-                <th>상태</th>
-                <th>발급</th>
+        <table className="ds-table ds-table--stack">
+          <thead>
+            <tr>
+              <th className="is-left">결제명</th>
+              <th>결제일</th>
+              <th>결제 수단</th>
+              <th>납입 금액</th>
+              <th>상태</th>
+              <th>발급</th>
+            </tr>
+          </thead>
+          <tbody>
+            {payments.map((p) => (
+              <tr key={p.id}>
+                <td className="ds-table-stack-head is-left">{p.title}</td>
+                <td data-label="결제일">{p.paidAt}</td>
+                <td data-label="결제 수단">{p.method}</td>
+                <td data-label="납입 금액">{formatWon(p.paid)}</td>
+                <td data-label="상태">
+                  <Badge>{p.status}</Badge>
+                </td>
+                <td data-label="발급">
+                  <PopupButton href={`/popup/print/tuition/${p.id}`}>발급받기</PopupButton>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {payments.map((p) => (
-                <tr key={p.id}>
-                  <td>{p.paidAt}</td>
-                  <td className="is-left">
-                    <strong>{p.title}</strong>
-                  </td>
-                  <td>{p.method}</td>
-                  <td>{formatWon(p.paid)}</td>
-                  <td>
-                    <Badge>{p.status}</Badge>
-                  </td>
-                  <td>
-                    <PopupButton href={`/popup/print/tuition/${p.id}`}>발급받기</PopupButton>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
       )}
     </MyPageShell>
   );

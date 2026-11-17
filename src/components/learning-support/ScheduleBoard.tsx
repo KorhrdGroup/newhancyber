@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { BoardTable, MobileBoardList, Pagination, SearchBox } from "./BoardParts";
-import { scheduleDetailHref, schedulePosts, type ScheduleTabKey } from "./boardData";
+import { schedulePosts, type ScheduleTabKey } from "./boardData";
 
 const tabs: { key: ScheduleTabKey; label: string }[] = [
   { key: "theory", label: "이론 과목" },
@@ -20,8 +20,8 @@ const totalOf = (key: ScheduleTabKey) =>
 export default function ScheduleBoard() {
   const [tab, setTab] = useState<ScheduleTabKey>("theory");
 
-  // TODO: API — 탭별 학사일정 목록 조회 (지금은 모든 글이 같은 샘플 상세로 간다)
-  const posts = schedulePosts[tab].map((post, i) => ({ ...post, href: scheduleDetailHref(i) }));
+  // TODO: API — 탭별 학사일정 목록 조회
+  const posts = schedulePosts[tab];
 
   return (
     <>

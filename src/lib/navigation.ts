@@ -168,6 +168,12 @@ export const mobileMenu: (NavGroup & { icon: string })[] = [
   { label: "수강신청", href: "/course-registration/register", icon: "ham-menu-01.png" },
   { label: "장바구니", href: "/course-registration/cart", icon: "ham-menu-02.png" },
   { label: "결제내역", href: "/my-page/payments", icon: "ham-menu-03.png" },
+  {
+    label: "마이페이지",
+    href: "/my-page",
+    icon: "ham-menu-07.png",
+    children: myPageTabs.map(({ label, href }) => ({ label, href })),
+  },
   { label: "사회복지사", href: "/social-worker/info", icon: "ham-menu-04.png" },
   {
     label: "학습지원",

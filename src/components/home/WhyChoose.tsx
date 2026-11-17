@@ -6,7 +6,8 @@ const SUPPORT_IMG = "/resources/images/main/support";
 
 type TabKey = "support" | "management" | "guide";
 
-type WhyCard = { title: string; icon: string; lines: string[] };
+/** short: /sample 시안에서만 쓰는 짧은 이름 (한 줄에 들어가게) */
+type WhyCard = { title: string; short?: string; icon: string; lines: string[] };
 
 /** 세 탭이 같은 카드 틀(아이콘 · 제목 · 설명 줄)을 쓴다 — /sample 시안도 같은 내용을 쓴다 */
 export const tabs: {
@@ -53,7 +54,7 @@ export const tabs: {
     subtitle: "더 나은 학습 여정을 위한 만족 프로젝트",
     compact: true,
     cards: [
-      { title: "한평생원격교육원 OT 가이드", icon: "support-tab3-001.png", lines: [] },
+      { title: "한평생원격교육원 OT 가이드", short: "한평생원격 OT 가이드", icon: "support-tab3-001.png", lines: [] },
       { title: "진행 과정별 가이드", icon: "support-tab3-002.png", lines: [] },
       { title: "실습 가이드", icon: "support-tab3-003.png", lines: [] },
       { title: "학습자등록 가이드", icon: "support-tab3-004.png", lines: [] },

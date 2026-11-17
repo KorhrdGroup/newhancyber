@@ -15,8 +15,8 @@ export default async function FindUserResultPage({ searchParams }: { searchParam
 
   return (
     <main className="wrapper">
-      <div className="find-id-wrapper">
-        <h1 className="find-id-main-title">{isPassword ? "비밀번호 재발급 결과" : "아이디 찾기 결과"}</h1>
+      <div className="container member-page">
+        <h1 className="member-title">{isPassword ? "비밀번호 재발급 결과" : "아이디 찾기 결과"}</h1>
         <div className="ex-find-card">
           <span className="ex-find-icon" aria-hidden="true">
             ✓

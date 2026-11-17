@@ -29,16 +29,18 @@ export default function SignupCompleteInfo() {
   ];
 
   return (
-    <div className="member-info-section">
-      <h3 className="member-info-title">회원님의 가입정보입니다.</h3>
-      <div className="member-info-table">
-        {rows.map((row) => (
-          <div key={row.label} className="member-info-row">
-            <div className="member-info-label">{row.label}</div>
-            <div className="member-info-value">{row.value}</div>
-          </div>
-        ))}
-      </div>
-    </div>
+    <section className="signup-done-info">
+      <h3 className="pp-box-title">회원님의 가입정보입니다.</h3>
+      <table className="ds-table ds-table--info">
+        <tbody>
+          {rows.map((row) => (
+            <tr key={row.label}>
+              <th scope="row">{row.label}</th>
+              <td>{row.value}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </section>
   );
 }

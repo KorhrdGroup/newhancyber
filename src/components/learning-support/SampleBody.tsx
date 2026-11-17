@@ -1,17 +1,17 @@
-/**
- * 공지 상세 본문 샘플 (원본 notice-detail.html 그대로).
- * TODO: API 의 본문 HTML 로 바꾼다.
- */
-export default function SampleNoticeText() {
+/** 공지사항·학사일정 상세 본문 샘플 (원본 notice-detail.html / schedule-detail.html 퍼블리싱 그대로).
+ *  TODO: API — 글 상세의 본문 HTML 로 바꾼다 */
+const lessonPoints = [
+  "선 이수과목 확인 후 수강신청 시 성적증명서 반드시 제출",
+  "1명(한국어학이, 3명(한국어교육)을 합하여 24학점 이상 이수자",
+  "반드시 선 이수과목을 이수한 학습자이어야 수강 가능",
+];
+
+function SampleText() {
   return (
     <>
       <h2>3. 한국어교육실습 구성 및 운영 기준</h2>
-
       <h3>1) 이론수업</h3>
-      <p>
-        온라인 이론 수업으로 진행되며, 강의 주차는 1-3주차입니다. 6강의 중 2강 이상 결석 시 불합격 처리됩니다.
-      </p>
-
+      <p>온라인 이론 수업으로 진행되며, 강의 주차는 1-3주차입니다. 6강의 중 2강 이상 결석 시 불합격 처리됩니다.</p>
       <h3>2) 강의참관</h3>
       <h4>현장 강의참관</h4>
       <p>국립국어원 인증 프로그램 수강생을 위한 강의참관 과정입니다.</p>
@@ -24,10 +24,8 @@ export default function SampleNoticeText() {
         <li>&apos;강의참관 완료증&apos; 제출 필수 (미제출 시 불합격)</li>
         <li>별도 &apos;강의참관 가이드&apos; 참고</li>
       </ul>
-
       <h4>동영상 강의참관</h4>
       <p>온라인 동영상 참관으로 진행되며, 강의 주차는 7-8주차입니다. 1일이라도 결석 시 불합격 처리됩니다.</p>
-
       <h3>3) 모의수업</h3>
       <p>강사의 지도 하에 한국어 학습자 또는 동료 학습자에게 수업을 진행하는 과정입니다.</p>
       <ul>
@@ -38,6 +36,20 @@ export default function SampleNoticeText() {
         <li>수업 시연을 위한 PPT 자료 준비 및 제출</li>
         <li>수업 계획서 및 자료 미제출 시 불합격</li>
       </ul>
+    </>
+  );
+}
+
+export default function SampleBody({ bannerAlt }: { bannerAlt: string }) {
+  return (
+    <>
+      <ul>
+        {lessonPoints.map((point) => (
+          <li key={point}>{point}</li>
+        ))}
+      </ul>
+      <img src="/resources/images/learning-support/grand-opening.png" alt={bannerAlt} className="lx-article-banner" />
+      <SampleText />
     </>
   );
 }

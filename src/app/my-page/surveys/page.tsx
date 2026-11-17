@@ -16,49 +16,49 @@ export default function SatisfactionSurveysPage() {
   return (
     <MyPageShell title="설문조사" desc="여러분의 의견은 이름 없이 모아 강의와 학습 환경을 고치는 데 씁니다.">
       <PageTabs items={surveyTabs} />
-      <div className="cr-table-wrap">
-        <table className="ds-table">
-          <thead>
-            <tr>
-              <th>차수</th>
-              <th>과목</th>
-              <th>조사 기간</th>
-              <th>상태</th>
-              <th>참여</th>
-            </tr>
-          </thead>
-          <tbody>
-            {surveys.map((s) => {
-              const course = getCourse(s.courseId);
-              return (
-                <tr key={s.courseId}>
-                  <td className="mp-nowrap">{course.term}</td>
-                  <td className="is-left">
-                    <strong>{course.title}</strong> <span className="pp-note">{course.classNo}</span>
-                  </td>
-                  <td className="mp-nowrap">
-                    {s.start} ~ {s.end}
-                  </td>
-                  <td>
-                    <StatusBadge>{s.status}</StatusBadge>
-                  </td>
-                  <td>
-                    {s.status === "참여 전" ? (
-                      <PopupButton href={`/popup/survey/${s.courseId}`} className="ds-btn ds-btn--primary ds-btn--sm">
-                        참여하기
-                      </PopupButton>
-                    ) : (
-                      <button type="button" className="ds-btn ds-btn--sm" disabled>
-                        {s.status === "참여 완료" ? "참여 완료" : "참여 불가"}
-                      </button>
-                    )}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
+      <table className="ds-table ds-table--stack">
+        <thead>
+          <tr>
+            <th className="is-left">과목</th>
+            <th>차수</th>
+            <th>조사 기간</th>
+            <th>상태</th>
+            <th>참여</th>
+          </tr>
+        </thead>
+        <tbody>
+          {surveys.map((s) => {
+            const course = getCourse(s.courseId);
+            return (
+              <tr key={s.courseId}>
+                <td className="ds-table-stack-head is-left">
+                  <span>
+                    {course.title} <span className="pp-note">{course.classNo}</span>
+                  </span>
+                </td>
+                <td className="mp-nowrap" data-label="차수">{course.term}</td>
+                <td className="mp-nowrap" data-label="조사 기간">
+                  {s.start} ~ {s.end}
+                </td>
+                <td data-label="상태">
+                  <StatusBadge>{s.status}</StatusBadge>
+                </td>
+                <td data-label="참여">
+                  {s.status === "참여 전" ? (
+                    <PopupButton href={`/popup/survey/${s.courseId}`} className="ds-btn ds-btn--primary ds-btn--sm">
+                      참여하기
+                    </PopupButton>
+                  ) : (
+                    <button type="button" className="ds-btn ds-btn--sm" disabled>
+                      {s.status === "참여 완료" ? "참여 완료" : "참여 불가"}
+                    </button>
+                  )}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
       <p className="pp-note ds-mt-12">과정 만족도 조사를 마쳐야 그 과목의 성적을 볼 수 있습니다.</p>
     </MyPageShell>
   );
