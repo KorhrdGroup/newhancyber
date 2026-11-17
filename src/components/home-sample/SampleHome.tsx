@@ -408,6 +408,8 @@ function Notices() {
 
 function Consult() {
   const [privacyOpen, setPrivacyOpen] = useState(false);
+  // PC(1280 이상)에서는 화면 아래에 떠 있는 바 — 닫으면 작은 '간편상담' 버튼만 남는다
+  const [closed, setClosed] = useState(false);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -416,7 +418,8 @@ function Consult() {
   };
 
   return (
-    <section className="sh-consult">
+    <>
+    <section className={`sh-consult${closed ? " is-closed" : ""}`} aria-label="간편상담 신청">
       {/* 한 줄 띠 (유비온 참고): 왼쪽은 제목 + 동의 두 줄 — 두 줄 높이를 입력칸 높이(48)에 맞춰 위아래 선을 맞춘다 */}
       <div className="sh-consult-intro">
         <div>
@@ -463,8 +466,20 @@ function Consult() {
           상담 신청하기
         </button>
       </form>
+      <button type="button" className="sh-consult-close" aria-label="간편상담 닫기" onClick={() => setClosed(true)}>
+        <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true">
+          <path d="m3.5 3.5 9 9M12.5 3.5l-9 9" />
+        </svg>
+      </button>
       <PrivacyConsentPopup isOpen={privacyOpen} onClose={() => setPrivacyOpen(false)} />
     </section>
+    <button type="button" className={`sh-consult-open${closed ? " is-shown" : ""}`} onClick={() => setClosed(false)}>
+      간편상담 신청
+      <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="m3 10 5-5 5 5" />
+      </svg>
+    </button>
+    </>
   );
 }
 
