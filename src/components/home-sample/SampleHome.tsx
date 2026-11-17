@@ -574,11 +574,10 @@ export default function SampleHome() {
         <TermStrip />
         {/* 실습 신청 · 결제는 자주 찾는 길이라 넘김 없이 개강 줄 바로 아래 */}
         <QuickActions />
-        {/* 우리 강점을 첫 화면 가까이 */}
-        <WhyHanpyeong />
         <Benefits />
         <InfoCards />
         <Notices />
+        <WhyHanpyeong />
         <Consult />
       </div>
       <Essentials />
