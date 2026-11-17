@@ -233,7 +233,8 @@
 .sh-bento .sh-guide-art { right: 20px; bottom: -24px; height: 74%; }
 
 .sh-guide {
-  --sh-bg: #f1f4f9;
+  /* 번호 카드 호버에 쓰던 연파랑을 가이드 바탕으로 */
+  --sh-bg: #eaf1ff;
   --sh-fg: var(--color-text-strong, #111);
   flex-direction: column;
   justify-content: space-between;
@@ -254,9 +255,7 @@
   border-radius: var(--radius-16);
   background: #f3f6fb;
   text-decoration: none;
-  transition: background 0.2s ease;
 }
-.sh-callcard:hover { background: #eaf1ff; }
 .sh-callcard-head { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; font-size: 16px; font-weight: 700; color: var(--color-text-strong, #111); }
 .sh-callcard-head svg { flex: none; width: 20px; height: 20px; color: var(--color-primary); }
 .sh-callcard-head small { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); }
