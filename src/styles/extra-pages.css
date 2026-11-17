@@ -89,7 +89,7 @@
 .ex-hero-title { margin-top: var(--space-8); font-size: 24px; font-weight: 700; line-height: 1.4; color: var(--color-text-strong); }
 .ex-hero-title em { font-style: normal; color: var(--color-text-brand); }
 .ex-hero-desc { margin-top: var(--space-8); font-size: 14px; line-height: 1.6; color: var(--color-text-secondary); }
-.ex-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-12); counter-reset: ex-step; }
+.ex-steps { display: grid; margin: 0; padding: 0; list-style: none; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-12); counter-reset: ex-step; }
 .ex-step { padding: var(--space-20); border: 1px solid var(--color-border-default); border-radius: var(--radius-8); counter-increment: ex-step; }
 .ex-step::before { content: "STEP " counter(ex-step); display: block; margin-bottom: var(--space-8); font-size: 12px; font-weight: 600; color: var(--color-text-brand); }
 .ex-step-title { font-size: 16px; font-weight: 600; color: var(--color-text-strong); }

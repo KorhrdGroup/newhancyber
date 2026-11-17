@@ -1011,89 +1011,23 @@
 .contact-consent-details p:last-child { margin-bottom: 0; }
 .contact-consent-details strong { font-weight: 600; color: var(--color-text-strong); }
 
-/* 사이트맵 스타일 */
-.sitemap-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-  margin-top: 40px;
-}
-
-.sitemap-card {
-  background-color: #f3f8ff;
-  border-radius: 8px;
-  padding: 24px;
-  box-sizing: border-box;
-}
-
-.sitemap-card-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: #010101;
-  margin: 0 0 12px 0;
-  padding: 0;
-}
-
-.sitemap-card-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.sitemap-card-list li {
-  margin-bottom: 8px;
-  padding-left: 0;
-  position: relative;
-}
-
-.sitemap-card-list li:last-child {
-  margin-bottom: 0;
-}
-
-.sitemap-card-list li::before {
-  content: "•";
-  color: #010101;
-  font-weight: 400;
-  display: inline-block;
-  margin-right: 8px;
-}
-
-.sitemap-card-list a {
-  font-size: 16px;
-  color: #010101;
-  text-decoration: none;
-  line-height: 1.6;
-  font-weight: 400;
-  transition: color 0.2s;
-}
-
-.sitemap-card-list a:hover {
-  color: #0066cc;
-  text-decoration: underline;
-}
+/* 사이트맵: 규정 화면과 같은 제목 틀(LegalDoc) 아래 메뉴 묶음 카드 */
+.legal-doc:has(> .sitemap-grid) { border-top: 0; }
+.sitemap-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-16); }
+.sitemap-card { padding: var(--space-24); border: 1px solid var(--color-border-default); border-radius: var(--radius-12); background: var(--color-bg-default); }
+.sitemap-card-title { margin: 0 0 var(--space-12); padding-bottom: var(--space-12); border-bottom: 1px solid var(--color-border-subtle); font-size: 17px; font-weight: 700; color: var(--color-text-strong); }
+.sitemap-card-list { display: flex; flex-direction: column; gap: var(--space-8); margin: 0; padding: 0; list-style: none; }
+.sitemap-card-list a { font-size: 14px; line-height: 1.5; color: var(--color-text-default); text-decoration: none; word-break: keep-all; }
+.sitemap-card-list a:hover { color: var(--color-text-brand); text-decoration: underline; }
 
 @media (max-width: 1024px) {
-  .sitemap-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  .sitemap-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
-@media (max-width: 768px) {
-  .sitemap-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .sitemap-card {
-    padding: 20px;
-  }
-
-  .sitemap-card-title {
-    font-size: 16px;
-    margin-bottom: 12px;
-  }
-
-  .sitemap-card-list a {
-    font-size: 13px;
-  }
+@media (max-width: 480px) {
+  .sitemap-grid { gap: var(--space-8); }
+  .sitemap-card { padding: var(--space-16); }
+  .sitemap-card-title { margin-bottom: var(--space-8); padding-bottom: var(--space-8); font-size: 15px; }
+  .sitemap-card-list { gap: var(--space-4); }
+  .sitemap-card-list a { font-size: 13px; }
 }

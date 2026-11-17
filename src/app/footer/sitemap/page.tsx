@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import LegalDoc from "@/components/footer/LegalDoc";
 import { isVisible } from "@/lib/navigation";
 import type { NavLink } from "@/types/navigation";
 
@@ -9,10 +10,7 @@ export const metadata: Metadata = { title: "사이트맵" };
  * 사이트맵 (원본 footer/sitemap.html 기준).
  * GNB 와 항목·문구가 조금 달라(나의 강의, 회원서비스 등) 따로 둔다.
  */
-/** tight: 원본에서 <li><a> 를 한 줄로 써서 점과 글자 사이 공백이 없던 항목 */
-type SitemapLink = NavLink & { tight?: boolean };
-
-const sections: { title: string; links: SitemapLink[] }[] = [
+const sections: { title: string; links: NavLink[] }[] = [
   {
     title: "학점은행제",
     links: [
@@ -63,14 +61,14 @@ const sections: { title: string; links: SitemapLink[] }[] = [
   {
     title: "나의 강의",
     links: [
-      { label: "나의 강의실", tight: true, href: "/my-classroom" },
-      { label: "나의 결제정보", tight: true, href: "/my-page/payments" },
+      { label: "나의 강의실", href: "/my-classroom" },
+      { label: "나의 결제정보", href: "/my-page/payments" },
       // 원본은 "#" — 페이지가 있어 연결
-      { label: "장바구니", tight: true, href: "/course-registration/cart" },
-      { label: "결제내역/환불요청", tight: true, href: "/my-page/payments/refund" },
-      { label: "개인정보", tight: true, href: "/my-page/profile" },
-      { label: "증명서발급", tight: true, href: "/my-page/certificates" },
-      { label: "공결신청", tight: true, href: "/my-page/exceptions/absence" },
+      { label: "장바구니", href: "/course-registration/cart" },
+      { label: "결제내역/환불요청", href: "/my-page/payments/refund" },
+      { label: "개인정보", href: "/my-page/profile" },
+      { label: "증명서발급", href: "/my-page/certificates" },
+      { label: "공결신청", href: "/my-page/exceptions/absence" },
     ],
   },
   {
@@ -105,14 +103,14 @@ const sections: { title: string; links: SitemapLink[] }[] = [
     title: "회원서비스",
     links: [
       // 원본은 "#" — 페이지가 있어 연결
-      { label: "회원가입", tight: true, href: "/member/signup" },
-      { label: "로그인", tight: true, href: "/member/login" },
-      { label: "아이디/비밀번호찾기", tight: true, href: "/member/find-user" },
+      { label: "회원가입", href: "/member/signup" },
+      { label: "로그인", href: "/member/login" },
+      { label: "아이디/비밀번호찾기", href: "/member/find-user" },
       { label: "개인정보처리방침", href: "/footer/privacy" },
-      { label: "이용약관", tight: true, href: "/footer/terms" },
+      { label: "이용약관", href: "/footer/terms" },
       { label: "운영규칙", href: "/footer/operating-rules" },
       { label: "이메일무단수집거부", href: "/footer/email-refusal" },
-      { label: "불편사항접수", tight: true, href: "/footer/contact" },
+      { label: "불편사항접수", href: "/footer/contact" },
     ],
   },
   {
@@ -129,25 +127,21 @@ const sections: { title: string; links: SitemapLink[] }[] = [
 
 export default function SitemapPage() {
   return (
-    <main className="wrapper ft-page">
-      <div className="container">
-        <div className="sitemap-grid">
-          {sections.map((section) => (
-            <div key={section.title} className="sitemap-card">
-              <h2 className="sitemap-card-title">{section.title}</h2>
-              <ul className="sitemap-card-list">
-                {section.links.filter(isVisible).map((link) => (
-                  <li key={link.label}>
-                    {/* 원본 li 안 줄바꿈이 만들던 공백 — 점과 글자 사이 간격 */}
-                    {!link.tight && " "}
-                    <Link href={link.href}>{link.label}</Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
+    <LegalDoc title="사이트맵" desc="한평생원격교육원 누리집의 모든 메뉴를 한눈에 볼 수 있어요.">
+      <div className="sitemap-grid">
+        {sections.map((section) => (
+          <section key={section.title} className="sitemap-card">
+            <h2 className="sitemap-card-title">{section.title}</h2>
+            <ul className="sitemap-card-list">
+              {section.links.filter(isVisible).map((link) => (
+                <li key={link.label}>
+                  <Link href={link.href}>{link.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))}
       </div>
-    </main>
+    </LegalDoc>
   );
 }
