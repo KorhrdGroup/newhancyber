@@ -3,10 +3,9 @@
 import Link from "next/link";
 import { useState, useSyncExternalStore, type FormEvent } from "react";
 import type { Swiper as SwiperType } from "swiper";
-import { Autoplay, Pagination } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "swiper/css/pagination";
 import {
   currentTerm,
   essentialCards,
@@ -177,25 +176,18 @@ function TermStrip() {
   );
 }
 
-/* ---------- 3. 특별한 혜택 (배너 넘김) + 모바일 학습가이드 ---------- */
+/* ---------- 2-1. 바로가기 — 실습 신청 · 수강료 결제 (기존 메인처럼 늘 보이게) ---------- */
 
-const benefits = [
+const actions = [
   {
-    tone: "purple",
-    label: "추천한 나도, 추천받은 친구도",
-    title: "친구추천 이벤트",
-    art: `${IMG}/main/event-friend-gift.webp`,
-    href: "/event",
-  },
-  {
-    tone: "blue",
+    key: "practice",
     label: "실습반 모집",
     title: "사회복지사 실습 수강 신청",
     art: `${IMG}/main/banner-practice-illust.png`,
     href: "/course-registration/register",
   },
   {
-    tone: "green",
+    key: "pay",
     label: "장바구니에 담은 과목",
     title: "수강료 결제하기",
     art: `${IMG}/main/banner-pay-illust.png`,
@@ -203,30 +195,39 @@ const benefits = [
   },
 ];
 
+function QuickActions() {
+  return (
+    <section className="sh-action" aria-label="바로가기">
+      {actions.map((a) => (
+        <Link key={a.key} href={a.href} className={`sh-action-card sh-action-card--${a.key}`}>
+          <span className="sh-action-text">
+            <span className="sh-action-label">{a.label}</span>
+            <span className="sh-action-title">
+              {a.title}
+              <Chevron />
+            </span>
+          </span>
+          <img src={a.art} alt="" className="sh-action-art" />
+        </Link>
+      ))}
+    </section>
+  );
+}
+
+/* ---------- 3. 친구추천 이벤트 + 모바일 학습가이드 ---------- */
+
 function Benefits() {
   return (
     <section className="sh-sec" aria-label="한평생의 특별한 혜택">
       <div className="sh-benefit">
-        <Swiper
-          className="sh-benefit-swiper"
-          modules={[Autoplay, Pagination]}
-          loop
-          autoplay={{ delay: 4000, disableOnInteraction: false }}
-          pagination={{ clickable: true }}
-        >
-          {benefits.map((b) => (
-            <SwiperSlide key={b.title}>
-              <Link href={b.href} className={`sh-benefit-card sh-tone--${b.tone}`}>
-                <span className="sh-benefit-text">
-                  <span className="sh-benefit-label">{b.label}</span>
-                  <span className="sh-benefit-title">{b.title}</span>
-                  <span className="sh-benefit-more">자세히 보기 →</span>
-                </span>
-                <img src={b.art} alt="" className="sh-benefit-art" />
-              </Link>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        <Link href="/event" className="sh-benefit-card sh-tone--purple">
+          <span className="sh-benefit-text">
+            <span className="sh-benefit-label">추천한 나도, 추천받은 친구도</span>
+            <span className="sh-benefit-title">친구추천 이벤트</span>
+            <span className="sh-benefit-more">자세히 보기 →</span>
+          </span>
+          <img src={`${IMG}/main/event-friend-gift.webp`} alt="" className="sh-benefit-art" />
+        </Link>
         <Link href="/learning-support/mobile-guide" className="sh-guide">
           <span className="sh-guide-text">
             <span className="sh-guide-label">언제 어디서나</span>
@@ -571,7 +572,9 @@ export default function SampleHome() {
       <div className="sh-wrap">
         <SampleHero />
         <TermStrip />
-        {/* 우리 강점을 첫 화면 가까이 — 개강 줄 바로 아래 */}
+        {/* 실습 신청 · 결제는 자주 찾는 길이라 넘김 없이 개강 줄 바로 아래 */}
+        <QuickActions />
+        {/* 우리 강점을 첫 화면 가까이 */}
         <WhyHanpyeong />
         <Benefits />
         <InfoCards />

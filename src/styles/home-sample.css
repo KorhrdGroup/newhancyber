@@ -177,16 +177,40 @@
 }
 .sh-term-go svg { width: 18px; height: 18px; }
 
+/* ---------- 2-1. 바로가기 (실습 신청 · 결제) — 아래 옅은 카드들과 달리 진한 단색으로 눈에 띄게 ---------- */
+.sh-action {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-20);
+}
+.sh-action-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 140px;
+  padding: 0 24px 0 32px;
+  overflow: hidden;
+  border-radius: 16px;
+  color: #fff;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.sh-action-card:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(26, 60, 160, 0.22); }
+.sh-action-card--practice { background: linear-gradient(135deg, #2f7bff, #1a5cff); }
+.sh-action-card--pay { background: linear-gradient(135deg, #1e3a9e, #0f2470); }
+.sh-action-text { display: flex; flex-direction: column; gap: 6px; }
+.sh-action-label { font-size: 15px; color: rgba(255, 255, 255, 0.8); }
+.sh-action-title { display: inline-flex; align-items: center; gap: 6px; font-size: 24px; font-weight: 800; letter-spacing: -0.02em; word-break: keep-all; }
+.sh-action-title svg { flex: none; width: 22px; height: 22px; }
+.sh-action-art { height: 80%; width: auto; max-width: 40%; object-fit: contain; }
+
 /* ---------- 3. 특별한 혜택 ---------- */
 .sh-benefit {
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
   gap: var(--space-20);
 }
-.sh-benefit-swiper { width: 100%; border-radius: 16px; }
-.sh-benefit-swiper .swiper-pagination { bottom: 14px; left: 36px; width: auto; }
-.sh-benefit-swiper .swiper-pagination-bullet { background: #1b2a4a; opacity: 0.2; }
-.sh-benefit-swiper .swiper-pagination-bullet-active { width: 18px; border-radius: 4px; opacity: 0.7; }
 .sh-benefit-card,
 .sh-guide,
 .sh-promo-card {
@@ -542,9 +566,15 @@ a.sh-info-card:hover .sh-info-title { color: var(--color-primary-dark); }
   .sh-term-list > div { justify-content: space-between; }
   .sh-term-go { justify-content: center; }
 
+  .sh-action { grid-template-columns: 1fr; gap: 10px; }
+  .sh-action-card { height: 96px; padding: 0 14px 0 20px; }
+  .sh-action-label { font-size: 13px; }
+  .sh-action-title { font-size: 18px; }
+  .sh-action-title svg { width: 18px; height: 18px; }
+  .sh-action-art { height: 84%; }
+
   .sh-benefit { grid-template-columns: 1fr; gap: 12px; }
   .sh-benefit-card { height: 150px; padding: 0 16px 0 22px; }
-  .sh-benefit-swiper .swiper-pagination { left: 22px; }
   .sh-benefit-title { font-size: 21px; }
   .sh-benefit-label { font-size: 13px; }
   .sh-benefit-more { display: none; }
