@@ -62,6 +62,20 @@
 .sh-hero .hb-more { height: 40px; margin-top: 20px; font-size: 15px; }
 .sh-hero .hb-art { height: 84%; }
 
+/* 배너 색: 진한 단색 바탕 + 흰 글자 + 제목만 밝은 강조색 (유비온 메인 배너 참고) */
+.sh-hero .hb-slide {
+  background:
+    radial-gradient(circle at 74% 50%, rgba(255, 255, 255, 0.22) 0, rgba(255, 255, 255, 0) 30%),
+    linear-gradient(115deg, var(--hb-bg-1), var(--hb-bg-2));
+}
+.sh-hero .hb-slide--blue { --hb-bg-1: #2c66f0; --hb-bg-2: #1744cc; --hb-hl: #7ff3ff; }
+.sh-hero .hb-slide--green { --hb-bg-1: #22ad62; --hb-bg-2: #128a4b; --hb-hl: #f6ff6b; }
+.sh-hero .hb-slide--purple { --hb-bg-1: #8a6bff; --hb-bg-2: #6545e8; --hb-hl: #ffe674; }
+.sh-hero .hb-eyebrow { color: #fff; }
+.sh-hero .hb-title { color: var(--hb-hl); }
+.sh-hero .hb-desc { color: rgba(255, 255, 255, 0.88); }
+.sh-hero .hb-more { border-color: rgba(255, 255, 255, 0.9); background: transparent; color: #fff; }
+
 /* 아래 제목 탭 — 지금 보이는 배너는 막대가 차오른다 */
 .sh-hero-tabs {
   position: absolute;
@@ -81,15 +95,15 @@
   padding: 0;
   border: 0;
   background: none;
-  color: rgba(17, 17, 17, 0.45);
+  color: rgba(255, 255, 255, 0.6);
   font-size: 14px;
   font-weight: 700;
   text-align: left;
   cursor: pointer;
 }
-.sh-hero-tab.is-active { color: #111; }
-.sh-hero-bar { position: relative; display: block; height: 3px; border-radius: 2px; background: rgba(17, 17, 17, 0.12); overflow: hidden; }
-.sh-hero-bar i { position: absolute; inset: 0 auto 0 0; width: 0; background: #111; animation: sh-fill linear forwards; }
+.sh-hero-tab.is-active { color: #fff; }
+.sh-hero-bar { position: relative; display: block; height: 3px; border-radius: 2px; background: rgba(255, 255, 255, 0.25); overflow: hidden; }
+.sh-hero-bar i { position: absolute; inset: 0 auto 0 0; width: 0; background: #fff; animation: sh-fill linear forwards; }
 .sh-hero-tabs.is-paused .sh-hero-bar i { width: 100%; animation: none; }
 @keyframes sh-fill { to { width: 100%; } }
 .sh-hero-play {
@@ -100,8 +114,8 @@
   height: 30px;
   border: 0;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.8);
-  color: #111;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
   cursor: pointer;
 }
 
