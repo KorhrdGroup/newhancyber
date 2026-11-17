@@ -9,26 +9,18 @@ const MEMBER_IMG = "/resources/images/member";
 export default function LoginPage() {
   return (
     <main className="wrapper">
-      <div className="login-wrapper">
-        <h1 className="login-main-title">로그인</h1>
+      <div className="container member-page">
+        <h1 className="member-title">로그인</h1>
         <LoginForms />
 
-        <div className="login-bottom-buttons">
-          <Link href="/member/signup" className="login-bottom-btn signup-btn">
-            <span className="btn-icon">
-              <img src={`${MEMBER_IMG}/join-user.png`} alt="회원가입" className="btn-icon-img" />
-            </span>
-            <span className="btn-text">회원가입</span>
+        <div className="member-links">
+          <Link href="/member/signup" className="ds-btn ds-btn--secondary ds-btn--lg">
+            <img src={`${MEMBER_IMG}/join-user.png`} alt="" className="member-link-icon" />
+            회원가입
           </Link>
-          <Link href="/member/find-user" className="login-bottom-btn find-btn">
-            <span className="btn-icon">
-              <img
-                src={`${MEMBER_IMG}/find-IdPw.png`}
-                alt="아이디 찾기/비밀번호 재발급"
-                className="btn-icon-img"
-              />
-            </span>
-            <span className="btn-text">아이디 찾기/비밀번호 재발급</span>
+          <Link href="/member/find-user" className="ds-btn ds-btn--secondary ds-btn--lg">
+            <img src={`${MEMBER_IMG}/find-IdPw.png`} alt="" className="member-link-icon" />
+            아이디 찾기/비밀번호 재발급
           </Link>
         </div>
       </div>
