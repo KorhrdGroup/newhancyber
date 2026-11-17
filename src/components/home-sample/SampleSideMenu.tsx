@@ -42,7 +42,7 @@ function SideIcon({ name }: { name: keyof typeof ICONS }) {
 
 /**
  * 오른쪽 사이드 플로팅 (PC 1280 이상, 시안 전용) — 둥근 알약 버튼을 세로로 쌓은 모양.
- * 큰 칸 2개(전화 상담 · 학습설계) + 알약 4개 + TOP. '간편상담'은 아래 간편상담 바를 열고 닫는다.
+ * 큰 칸 2개(전화 상담 + 카톡상담 · 학습설계) + 알약 3개 + TOP. '간편상담'은 아래 간편상담 바를 열고 닫는다.
  */
 export default function SampleSideMenu({ consultOpen, onToggleConsult }: { consultOpen: boolean; onToggleConsult: () => void }) {
   const [scrolled, setScrolled] = useState(false);
@@ -56,20 +56,21 @@ export default function SampleSideMenu({ consultOpen, onToggleConsult }: { consu
 
   return (
     <nav className={`sh-side${scrolled ? " is-scrolled" : ""}${consultOpen ? " is-consult-open" : ""}`} aria-label="빠른 메뉴">
-      <a href={`tel:${phones.registration}`} className="sh-side-item sh-side-item--tall sh-side-item--brand">
-        <span className="sh-side-sub">처음 오셨나요? 빠른 상담</span>
-        <span className="sh-side-big">{phones.registration}</span>
-      </a>
+      {/* 기존 메인 '빠른 상담'처럼 번호 바로 밑에 노란 카톡상담 버튼 */}
+      <div className="sh-side-brand">
+        <a href={`tel:${phones.registration}`} className="sh-side-call">
+          <span className="sh-side-sub">처음 오셨나요? 빠른 상담</span>
+          <span className="sh-side-big">{phones.registration}</span>
+        </a>
+        <a href={TBD_HREF} className="sh-side-kakao">
+          <img src="/resources/images/main/kakaotalkFloting.png" alt="" />
+          카톡상담
+        </a>
+      </div>
       <Link href="/course-registration/learning-design" className="sh-side-item sh-side-item--tall">
         <span className="sh-side-sub">1:1 무료</span>
         <span className="sh-side-big">학습설계 신청</span>
       </Link>
-      <a href={TBD_HREF} className="sh-side-item">
-        <span className="sh-side-icon sh-side-icon--kakao">
-          <img src="/resources/images/main/kakaotalkFloting.png" alt="" />
-        </span>
-        카톡상담
-      </a>
       <button type="button" className={`sh-side-item${consultOpen ? " is-active" : ""}`} aria-pressed={consultOpen} onClick={onToggleConsult}>
         <SideIcon name="chat" />
         간편상담

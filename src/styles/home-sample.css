@@ -779,15 +779,38 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
   .sh-side-item:hover { border-color: var(--color-primary); color: var(--color-primary-dark); }
   .sh-side-item.is-active { border-color: var(--color-primary); color: var(--color-primary-dark); }
   .sh-side-item--tall { flex-direction: column; align-items: flex-start; justify-content: center; gap: 2px; height: 72px; padding: 0 18px; border-radius: var(--radius-20); }
-  .sh-side-item--brand { height: 88px; border-color: transparent; background: var(--color-primary-dark); color: #fff; }
+  /* 전화 상담 칸: 번호 + 노란 카톡상담 버튼 */
+  .sh-side-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    padding: 16px 14px 14px;
+    border-radius: var(--radius-20);
+    background: var(--color-primary-dark);
+    box-shadow: 0 8px 18px rgba(12, 23, 38, 0.1);
+  }
+  .sh-side-call { display: flex; flex-direction: column; gap: 2px; padding: 0 4px; color: #fff; text-decoration: none; }
   /* 전화번호는 크게 */
-  .sh-side-item--brand .sh-side-big { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; }
-  .sh-side-item--brand:hover { border-color: transparent; color: #fff; filter: brightness(1.08); }
+  .sh-side-call .sh-side-big { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; }
+  .sh-side-kakao {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 36px;
+    border-radius: var(--radius-10);
+    background: #fee500;
+    color: #3c1e1e;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .sh-side-kakao:hover { background: #fdd835; }
+  .sh-side-kakao img { width: 16px; height: 16px; object-fit: contain; }
   .sh-side-sub { font-size: 12px; font-weight: 600; opacity: 0.75; }
   .sh-side-big { font-size: 17px; font-weight: 800; letter-spacing: -0.01em; }
   .sh-side-icon { display: grid; flex: none; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: #eef4ff; color: var(--color-primary-dark); }
-  .sh-side-icon--kakao { background: #fee500; }
-  .sh-side-icon--kakao img { width: 16px; height: 16px; object-fit: contain; }
   .sh-side-top {
     display: grid;
     place-items: center;
