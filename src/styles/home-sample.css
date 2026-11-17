@@ -353,7 +353,8 @@
   padding: 24px 32px;
   border-radius: var(--radius-20);
   /* 눈에 잘 띄게 파란 바탕 · 흰 글씨 */
-  background: linear-gradient(120deg, var(--color-primary-dark), var(--color-primary));
+  /* 기본 파랑(#115AED → #3F7EFB)보다 아주 살짝 밝게 */
+  background: linear-gradient(120deg, #1e64f0, #4a86fc);
   color: #fff;
 }
 .sh-consult-intro { display: flex; align-items: center; gap: 14px; }
@@ -376,7 +377,7 @@
     gap: 28px;
     width: min(1140px, calc(100% - 40px));
     padding: 20px 20px 20px 32px;
-    box-shadow: 0 12px 40px rgba(17, 90, 237, 0.35);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
     transform: translateX(-50%);
     transition: opacity 0.25s, transform 0.25s, visibility 0.25s;
   }
