@@ -233,7 +233,7 @@
 /* 벤토 안 친구추천: 가로로 넓고 낮게 — 글 왼쪽, 그림 오른쪽 */
 .sh-bento .sh-benefit-card { grid-column: 1 / 9; grid-row: 1; height: auto; padding: 0 40px 0 44px; }
 .sh-bento .sh-benefit-title { font-size: 32px; }
-.sh-bento .sh-info-card { grid-column: span 4; grid-row: 2; }
+.sh-bento .sh-callcard { grid-column: span 4; grid-row: 2; }
 /* 모바일 가이드: 오른쪽 세로 기둥 — 글 위, 폰 그림 아래 */
 .sh-bento .sh-guide { grid-column: 9 / 13; grid-row: 1 / 3; height: auto; justify-content: flex-start; padding: 32px 28px; }
 .sh-bento .sh-guide-title { font-size: 24px; }
@@ -252,37 +252,44 @@
 .sh-guide-title { font-size: 22px; font-weight: 800; line-height: 1.3; word-break: keep-all; }
 .sh-guide-art { position: absolute; right: 18px; bottom: -14px; height: 92%; width: auto; transform: rotate(8deg); }
 
-/* ---------- 3-1. 벤토 안 작은 정보 카드 ---------- */
-.sh-info-card {
-  position: relative;
-  padding: 24px;
+/* ---------- 3-1. 벤토 안 고객센터 번호 카드 ---------- */
+.sh-callcard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px 26px;
   border-radius: 16px;
   background: #f3f6fb;
-  color: var(--color-text);
   text-decoration: none;
-  overflow: hidden;
+  transition: background 0.2s ease;
 }
-.sh-info-title { margin: 0 0 12px; font-size: 17px; font-weight: 700; color: var(--color-text-strong, #111); }
-.sh-info-list { margin: 0; padding: 0; list-style: none; font-size: 14px; line-height: 1.75; color: var(--color-text-secondary); }
-.sh-info-art { position: absolute; right: 14px; bottom: 12px; width: 76px; height: 76px; object-fit: contain; }
-a.sh-info-card:hover .sh-info-title { color: var(--color-primary-dark); }
+.sh-callcard:hover { background: #eaf1ff; }
+.sh-callcard-head { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; font-size: 16px; font-weight: 700; color: var(--color-text-strong, #111); }
+.sh-callcard-head svg { flex: none; width: 20px; height: 20px; color: var(--color-primary); }
+.sh-callcard-head small { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); }
+.sh-callcard-num { font-size: 32px; font-weight: 800; letter-spacing: -0.01em; color: var(--color-primary-dark); white-space: nowrap; }
+.sh-callcard-note { font-size: 13px; color: var(--color-text-secondary); }
+.sh-callcard-note span { white-space: nowrap; }
 
-/* ---------- 4. 고객센터 띠 ---------- */
-.sh-callbar {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-  padding: 18px 28px;
+/* ---------- 4. 수강 혜택 · 학점은행제 띠 ---------- */
+.sh-infobar {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   border: 1px solid #e3eaf7;
   border-radius: 16px;
   background: #fff;
 }
-.sh-callbar-title { margin: 0; font-size: 16px; font-weight: 700; color: var(--color-text-strong, #111); }
-.sh-callbar-tel { display: flex; align-items: baseline; gap: 10px; text-decoration: none; }
-.sh-callbar-tel span { font-size: 14px; color: var(--color-text-secondary); }
-.sh-callbar-tel b { font-size: 22px; font-weight: 800; letter-spacing: -0.01em; color: var(--color-primary-dark); white-space: nowrap; }
-.sh-callbar-hours { display: flex; align-items: baseline; gap: 10px; margin: 0 0 0 auto; font-size: 13px; color: var(--color-text-secondary); }
-.sh-callbar-hours b { font-size: 15px; color: var(--color-text-strong, #111); }
+.sh-infobar-item { display: flex; align-items: center; gap: 14px; min-width: 0; padding: 16px 24px; color: var(--color-text-secondary); text-decoration: none; }
+.sh-infobar-item + .sh-infobar-item { border-left: 1px solid #e3eaf7; }
+.sh-infobar-item img { flex: none; width: 40px; height: 40px; object-fit: contain; }
+.sh-infobar-text { display: flex; flex: 1; flex-direction: column; gap: 4px; min-width: 0; }
+.sh-infobar-item > svg { flex: none; width: 18px; height: 18px; }
+.sh-infobar-title { flex: none; font-size: 16px; font-weight: 700; color: var(--color-text-strong, #111); }
+.sh-infobar-item:hover .sh-infobar-title { color: var(--color-primary-dark); }
+.sh-infobar-list { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 10px; margin: 0; padding: 0; list-style: none; font-size: 14px; }
+/* 항목 안에도 가운뎃점이 있어 구분은 짧은 세로선으로 */
+.sh-infobar-list li { display: flex; align-items: center; gap: 10px; }
+.sh-infobar-list li + li::before { content: ""; width: 1px; height: 10px; background: #d5dbe5; }
 
 /* ---------- 5. 공지(넓게) + 놓치기 쉬운 안내(세로로 2장) ---------- */
 .sh-notice-row {
@@ -548,12 +555,12 @@ a.sh-info-card:hover .sh-info-title { color: var(--color-primary-dark); }
   .sh-bento { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: auto; }
   .sh-bento .sh-benefit-card { grid-column: 1 / -1; height: 200px; padding: 0 28px 0 36px; }
   .sh-bento .sh-benefit-title { font-size: 28px; }
-  .sh-bento .sh-info-card { grid-column: auto; grid-row: auto; min-height: 150px; }
+  .sh-bento .sh-callcard { grid-column: auto; grid-row: auto; min-height: 150px; }
   .sh-bento .sh-guide { grid-column: 1 / -1; grid-row: auto; height: 140px; justify-content: center; padding: 26px 24px; }
   .sh-bento .sh-guide-title { font-size: 22px; }
   .sh-bento .sh-guide-art { right: 18px; bottom: -14px; height: 92%; }
-  .sh-callbar { flex-wrap: wrap; gap: 12px 32px; }
-  .sh-callbar-hours { margin-left: 0; }
+  .sh-infobar { grid-template-columns: minmax(0, 1fr); }
+  .sh-infobar-item + .sh-infobar-item { border-left: 0; border-top: 1px solid #e3eaf7; }
   .sh-essential-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .sh-whyc { grid-template-columns: 280px minmax(0, 1fr); }
   .sh-consult { grid-template-columns: minmax(0, 1fr); }
@@ -599,15 +606,18 @@ a.sh-info-card:hover .sh-info-title { color: var(--color-primary-dark); }
   .sh-bento .sh-guide { height: 110px; padding: 18px 20px; }
   .sh-bento .sh-guide-title { font-size: 18px; }
   .sh-bento .sh-guide-art { height: 110%; }
-  .sh-bento .sh-info-card { min-height: 0; padding: 18px; }
-  .sh-callbar { flex-direction: column; align-items: stretch; gap: 8px; padding: 16px 18px; }
-  .sh-callbar-tel { justify-content: space-between; }
-  .sh-callbar-tel span { font-size: 13px; }
-  .sh-callbar-tel b { font-size: 19px; }
-  .sh-callbar-hours { flex-direction: column; gap: 2px; padding-top: 10px; border-top: 1px solid #e3eaf7; }
-  .sh-info-list { font-size: 13px; }
-  .sh-info-card { display: flex; flex-direction: column; }
-  .sh-info-art { position: static; order: -1; width: 40px; height: 40px; margin-bottom: 8px; }
+  .sh-bento .sh-callcard { min-height: 0; gap: 8px; padding: 16px; }
+  .sh-callcard-head { font-size: 14px; }
+  .sh-callcard-head svg { width: 18px; height: 18px; }
+  .sh-callcard-head small { flex-basis: 100%; font-size: 12px; }
+  .sh-callcard-num { font-size: 21px; }
+  .sh-callcard-note { font-size: 12px; }
+  .sh-infobar-item { gap: 12px; padding: 14px 16px; }
+  .sh-infobar-item img { width: 32px; height: 32px; }
+  .sh-infobar-title { font-size: 15px; }
+  .sh-infobar-list { gap: 2px 12px; font-size: 13px; }
+  /* 폰에서는 줄이 접혀 세로선이 줄 맨 앞에 남으므로 뺀다 */
+  .sh-infobar-list li + li::before { display: none; }
 
   .sh-notice-row { grid-template-columns: minmax(0, 1fr); gap: var(--space-24); }
   .sh-notice-tab { height: 32px; padding: 0 12px; font-size: 14px; }

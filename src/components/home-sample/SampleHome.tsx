@@ -229,7 +229,15 @@ function QuickActions() {
   );
 }
 
-/* ---------- 3. 벤토 — 친구추천을 크게, 혜택·학점은행·모바일 가이드는 작게 ---------- */
+/* ---------- 3. 벤토 — 친구추천 넓게, 고객센터 번호 2칸, 모바일 가이드 세로 기둥 ---------- */
+
+function PhoneIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+    </svg>
+  );
+}
 
 function Bento() {
   return (
@@ -242,24 +250,24 @@ function Bento() {
         </span>
         <img src={`${IMG}/main/event-friend-gift.webp`} alt="" className="sh-benefit-art" />
       </Link>
-      <Link href="/footer/about#tab-scholarship" className="sh-info-card">
-        <h3 className="sh-info-title">수강 혜택</h3>
-        <ul className="sh-info-list">
-          <li>교육원 장학제도</li>
-          <li>친구추천 이벤트</li>
-          <li>카드사 무이자 할부</li>
-        </ul>
-        <img src={`${IMG}/credit-bank/cb-icon-coin-cycle.png`} alt="" className="sh-info-art" />
-      </Link>
-      <Link href="/credit-bank/info" className="sh-info-card">
-        <h3 className="sh-info-title">학점은행제 안내</h3>
-        <ul className="sh-info-list">
-          <li>학점은행제란?</li>
-          <li>학위 · 자격증 취득 과정</li>
-          <li>교육부 평가인정 기관</li>
-        </ul>
-        <img src={`${IMG}/credit-bank/cb-icon-school.png`} alt="" className="sh-info-art" />
-      </Link>
+      <a href={`tel:${phones.registration}`} className="sh-callcard">
+        <span className="sh-callcard-head">
+          <PhoneIcon />
+          수강신청 · 학습상담
+        </span>
+        <b className="sh-callcard-num">{phones.registration}</b>
+        <span className="sh-callcard-note">평일 09:00 ~ 18:00</span>
+      </a>
+      <a href={`tel:${phones.support}`} className="sh-callcard">
+        <span className="sh-callcard-head">
+          <PhoneIcon />
+          학습지원 <small>시험오류 · 학습장애</small>
+        </span>
+        <b className="sh-callcard-num">{phones.support}</b>
+        <span className="sh-callcard-note">
+          <span>점심 12:00 ~ 13:00 ·</span> <span>주말/공휴일 휴무</span>
+        </span>
+      </a>
       <Link href="/learning-support/mobile-guide" className="sh-guide">
         <span className="sh-guide-text">
           <span className="sh-guide-label">언제 어디서나</span>
@@ -275,24 +283,40 @@ function Bento() {
   );
 }
 
-/* ---------- 4. 고객센터 — 상자 대신 얇은 띠 ---------- */
+/* ---------- 4. 수강 혜택 · 학점은행제 안내 — 얇은 띠 ---------- */
 
-function CallBar() {
+const infoLinks = [
+  {
+    title: "수강 혜택",
+    href: "/footer/about#tab-scholarship",
+    icon: `${IMG}/credit-bank/cb-icon-coin-cycle.png`,
+    items: ["교육원 장학제도", "친구추천 이벤트", "카드사 무이자 할부"],
+  },
+  {
+    title: "학점은행제 안내",
+    href: "/credit-bank/info",
+    icon: `${IMG}/credit-bank/cb-icon-school.png`,
+    items: ["학점은행제란?", "학위 · 자격증 취득 과정", "교육부 평가인정 기관"],
+  },
+];
+
+function InfoBar() {
   return (
-    <section className="sh-callbar" aria-label="고객센터">
-      <h3 className="sh-callbar-title">고객센터</h3>
-      <a href={`tel:${phones.registration}`} className="sh-callbar-tel">
-        <span>수강신청 · 학습상담</span>
-        <b>{phones.registration}</b>
-      </a>
-      <a href={`tel:${phones.support}`} className="sh-callbar-tel">
-        <span>학습지원 (시험오류 · 학습장애)</span>
-        <b>{phones.support}</b>
-      </a>
-      <p className="sh-callbar-hours">
-        <b>평일 09:00 ~ 18:00</b>
-        <span>점심 12:00 ~ 13:00 · 주말/공휴일 휴무</span>
-      </p>
+    <section className="sh-infobar" aria-label="수강 혜택 · 학점은행제 안내">
+      {infoLinks.map((info) => (
+        <Link key={info.title} href={info.href} className="sh-infobar-item">
+          <img src={info.icon} alt="" />
+          <span className="sh-infobar-text">
+            <span className="sh-infobar-title">{info.title}</span>
+            <ul className="sh-infobar-list">
+              {info.items.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </span>
+          <Chevron />
+        </Link>
+      ))}
     </section>
   );
 }
@@ -580,7 +604,7 @@ export default function SampleHome() {
         {/* 실습 신청 · 결제는 자주 찾는 길이라 넘김 없이 개강 줄 바로 아래 */}
         <QuickActions />
         <Bento />
-        <CallBar />
+        <InfoBar />
         <Notices />
         <WhyHanpyeong />
         <Consult />
