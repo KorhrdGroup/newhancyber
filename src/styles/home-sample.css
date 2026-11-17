@@ -132,13 +132,13 @@
 .sh-term {
   display: flex;
   align-items: center;
-  gap: var(--space-16);
-  padding: 12px 12px 12px 20px;
+  gap: var(--space-24);
+  padding: 12px 12px 12px 24px;
   border-radius: 16px;
   background: #fff;
   box-shadow: 0 4px 20px rgba(17, 90, 237, 0.08);
 }
-.sh-term-eyebrow { display: flex; flex: none; align-items: center; gap: 8px; margin: 0; padding-right: 16px; border-right: 1px solid #e3eaf7; font-size: 15px; font-weight: 800; color: var(--color-primary-dark); }
+.sh-term-eyebrow { display: flex; flex: none; align-items: center; gap: 8px; margin: 0; padding-right: 20px; border-right: 1px solid #e3eaf7; font-size: 15px; font-weight: 800; color: var(--color-primary-dark); }
 .sh-term-dot { width: 8px; height: 8px; border-radius: 50%; background: #2ecc71; box-shadow: 0 0 0 4px rgba(46, 204, 113, 0.18); }
 .sh-term.is-closed .sh-term-eyebrow { color: var(--color-text-secondary); }
 .sh-term.is-closed .sh-term-dot { background: #b0b8c4; box-shadow: 0 0 0 4px rgba(176, 184, 196, 0.2); }
@@ -146,14 +146,14 @@
   display: flex;
   flex: 1;
   flex-wrap: wrap; /* 좁아지면 넘치지 않고 둘째 줄로 */
-  justify-content: space-between;
-  gap: 6px var(--space-12);
+  justify-content: space-around;
+  gap: 6px var(--space-24);
   margin: 0;
 }
-.sh-term-list > div { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
-.sh-term-list dt { display: flex; align-items: center; gap: 5px; font-size: 14px; color: var(--color-text-secondary); }
-.sh-term-icon { flex: none; width: 18px; height: 18px; color: var(--color-primary); }
-.sh-term-list dd { display: flex; align-items: center; gap: 6px; margin: 0; font-size: 15px; font-weight: 700; color: var(--color-text-strong, #111); }
+.sh-term-list > div { display: flex; align-items: center; gap: 10px; white-space: nowrap; }
+.sh-term-list dt { display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--color-text-secondary); }
+.sh-term-icon { flex: none; width: 20px; height: 20px; color: var(--color-primary); }
+.sh-term-list dd { display: flex; align-items: center; gap: 8px; margin: 0; font-size: 15px; font-weight: 700; color: var(--color-text-strong, #111); }
 .sh-term-list em {
   padding: 2px 8px;
   border-radius: 6px;
@@ -162,7 +162,6 @@
   font-size: 13px;
   font-style: normal;
 }
-.sh-term-list em.is-closed { background: #f1f1f1; color: #888; }
 .sh-term-go {
   display: inline-flex;
   flex: none;

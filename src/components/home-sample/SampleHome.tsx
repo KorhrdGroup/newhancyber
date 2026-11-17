@@ -129,28 +129,13 @@ function SampleHero() {
 /* ---------- 2. 개강 일정 한 줄 ---------- */
 
 const DEADLINE = new Date(currentTerm.applyDeadline).getTime();
-const applyEnd = currentTerm.applyPeriod.split("~")[1].trim();
 
 const noopSubscribe = () => () => {};
-/* 개강 줄 라인 아이콘 — 기존 메인 학사알림 줄과 같은 그림 · 굵기 (개강일 달력만 추가) */
-const TERM_ICONS = {
-  ...NOTICE_ICONS,
-  calendar: (
-    <>
-      <rect x="3" y="4.5" width="18" height="16.5" rx="2" />
-      <path d="M3 9.5h18" />
-      <path d="M8 2.5v4" />
-      <path d="M16 2.5v4" />
-      <path d="M7.5 14h2" />
-      <path d="M14.5 14h2" />
-    </>
-  ),
-};
-
-function TermIcon({ name }: { name: keyof typeof TERM_ICONS }) {
+/* 개강 줄 라인 아이콘 — 기존 메인 학사알림 줄과 같은 그림 · 굵기 */
+function TermIcon({ name }: { name: keyof typeof NOTICE_ICONS }) {
   return (
     <svg className="sh-term-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      {TERM_ICONS[name]}
+      {NOTICE_ICONS[name]}
     </svg>
   );
 }
@@ -183,19 +168,13 @@ function TermStrip() {
         <div>
           <dt>
             <TermIcon name="clipboard" />
-            수강신청 마감
+            수강신청
           </dt>
           <dd>
-            {applyEnd}
-            {dday && <em className={dday === "마감" ? "is-closed" : undefined}>{dday}</em>}
+            {currentTerm.applyPeriod}
+            {/* 마감 뒤에는 앞의 '모집 마감'과 겹치므로 남은 날만 보인다 */}
+            {dday && !closed && <em>{dday}</em>}
           </dd>
-        </div>
-        <div>
-          <dt>
-            <TermIcon name="calendar" />
-            개강일
-          </dt>
-          <dd>{currentTerm.openingDate}</dd>
         </div>
         <div>
           <dt>
