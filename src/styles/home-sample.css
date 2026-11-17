@@ -368,8 +368,8 @@
 .sh-consult-art { flex: none; width: 56px; height: 56px; object-fit: contain; }
 .sh-consult-eyebrow { margin: 0 0 2px; font-size: 13px; font-weight: 700; color: var(--color-primary-dark); }
 .sh-consult-title { margin: 0; font-size: 19px; font-weight: 800; letter-spacing: -0.02em; color: var(--color-text-strong, #111); }
-.sh-consult-link { display: inline-flex; align-items: center; gap: 2px; margin-top: 4px; font-size: 13px; font-weight: 600; color: var(--color-text-secondary); text-decoration: none; }
-.sh-consult-link:hover { color: var(--color-primary-dark); }
+.sh-consult-link { margin-left: 8px; padding-left: 9px; border-left: 1px solid #c5d3ea; font-weight: 500; color: var(--color-text-secondary); text-decoration: none; }
+.sh-consult-link:hover { color: var(--color-primary-dark); text-decoration: underline; text-underline-offset: 2px; }
 .sh-consult-form { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 1fr) 128px; align-items: center; gap: 10px 8px; }
 /* 입력칸이 5칸이라 1279px 이하에서는 제목을 위로 올리고 입력칸 줄을 판 폭 전체로 */
 @media (max-width: 1279px) {
@@ -407,7 +407,7 @@
 /* 아직 안 골랐을 때(필수 항목이 비어 :invalid)는 안내 글 색 */
 .sh-consult-form select:invalid { color: var(--color-text-placeholder); }
 .sh-consult-form select option { color: var(--color-text-default); }
-.sh-consult-agree { grid-column: 1 / -1; display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--color-text-secondary); }
+.sh-consult-agree { display: flex; margin-top: 8px; align-items: center; gap: 6px; font-size: 13px; color: var(--color-text-secondary); }
 .sh-consult-agree input { width: 16px; height: 16px; margin: 0; }
 .sh-consult-agree button { padding: 0; border: 0; background: none; color: var(--color-primary-dark); font-size: 13px; text-decoration: underline; cursor: pointer; }
 .sh-consult-submit { height: 48px; padding: 0 12px; font-size: 16px; white-space: nowrap; }
@@ -658,9 +658,8 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
   .sh-consult { padding: 20px 16px; border-radius: var(--radius-16); }
   .sh-consult-art { width: 52px; height: 52px; }
   .sh-consult-title { font-size: 18px; }
-  /* 휴대폰: 입력칸은 세로로 쌓고, 동의 줄을 버튼 위로 */
+  /* 휴대폰: 입력칸은 세로로 쌓는다 */
   .sh-consult-form { grid-template-columns: minmax(0, 1fr); }
-  .sh-consult-agree { grid-row: 5; }
   .sh-consult-submit { height: 50px; }
 
   .sh-essential { margin-top: 40px; padding: 32px 0 40px; }

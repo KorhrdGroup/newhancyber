@@ -416,14 +416,25 @@ function Consult() {
       <div className="sh-consult-intro">
         <img src={`${IMG}/credit-bank/cb-icon-chat-person.png`} alt="" className="sh-consult-art" />
         <div>
-          <p className="sh-consult-eyebrow">1:1 무료 학습상담</p>
+          {/* 맨 윗줄: 상담 종류 · 학습설계 신청 글자 링크 (줄을 하나 아껴 동의를 제목 밑에 둔다) */}
+          <p className="sh-consult-eyebrow">
+            1:1 무료 학습상담
+            <Link href="/course-registration/learning-design" className="sh-consult-link">
+              무료 학습설계 신청
+            </Link>
+          </p>
           <h3 className="sh-consult-title">회원가입 없이 간편상담</h3>
-          <Link href="/course-registration/learning-design" className="sh-consult-link">
-            무료 학습설계 신청 <Chevron />
-          </Link>
+          {/* 동의는 유비온처럼 제목 바로 밑 (입력칸은 한 줄만) — 폼 밖이라 form 속성으로 연결 */}
+          <label className="sh-consult-agree">
+            <input type="checkbox" name="privacy" form="sh-consult-form" required />
+            개인정보 수집·이용 동의
+            <button type="button" onClick={() => setPrivacyOpen(true)}>
+              내용보기
+            </button>
+          </label>
         </div>
       </div>
-      <form className="sh-consult-form" onSubmit={handleSubmit}>
+      <form id="sh-consult-form" className="sh-consult-form" onSubmit={handleSubmit}>
         <input type="text" name="name" placeholder="이름" aria-label="이름" required />
         <input type="tel" name="phone" placeholder="연락처 ('-' 없이)" aria-label="연락처" required />
         <select name="interest" aria-label="관심분야" required defaultValue="">
@@ -449,13 +460,6 @@ function Consult() {
         <button type="submit" className="sh-btn sh-btn--primary sh-consult-submit">
           상담 신청하기
         </button>
-        <label className="sh-consult-agree">
-          <input type="checkbox" name="privacy" required />
-          개인정보 수집·이용 동의
-          <button type="button" onClick={() => setPrivacyOpen(true)}>
-            내용보기
-          </button>
-        </label>
       </form>
       <PrivacyConsentPopup isOpen={privacyOpen} onClose={() => setPrivacyOpen(false)} />
     </section>
