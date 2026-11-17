@@ -214,62 +214,19 @@ function QuickActions() {
   );
 }
 
-/* ---------- 3. 친구추천 이벤트 + 모바일 학습가이드 ---------- */
+/* ---------- 3. 벤토 — 친구추천을 크게, 혜택·학점은행·모바일 가이드는 작게 ---------- */
 
-function Benefits() {
+function Bento() {
   return (
-    <section className="sh-sec" aria-label="한평생의 특별한 혜택">
-      <div className="sh-benefit">
-        <Link href="/event" className="sh-benefit-card sh-tone--purple">
-          <span className="sh-benefit-text">
-            <span className="sh-benefit-label">추천한 나도, 추천받은 친구도</span>
-            <span className="sh-benefit-title">친구추천 이벤트</span>
-            <span className="sh-benefit-more">자세히 보기 →</span>
-          </span>
-          <img src={`${IMG}/main/event-friend-gift.webp`} alt="" className="sh-benefit-art" />
-        </Link>
-        <Link href="/learning-support/mobile-guide" className="sh-guide">
-          <span className="sh-guide-text">
-            <span className="sh-guide-label">언제 어디서나</span>
-            <span className="sh-guide-title">
-              모바일로{" "}
-              <br />
-              수강하는 법
-            </span>
-          </span>
-          <img src={`${IMG}/main/sample-guide-phone.png`} alt="" className="sh-guide-art" />
-        </Link>
-      </div>
-    </section>
-  );
-}
-
-/* ---------- 4. 고객센터 · 혜택 · 학점은행 카드 ---------- */
-
-function InfoCards() {
-  return (
-    <section className="sh-info">
-      <div className="sh-info-card sh-info-card--call">
-        <h3 className="sh-info-title">고객센터 대표번호</h3>
-        <dl className="sh-call">
-          <div>
-            <dt>수강신청 · 학습상담</dt>
-            <dd>
-              <a href={`tel:${phones.registration}`}>{phones.registration}</a>
-            </dd>
-          </div>
-          <div>
-            <dt>학습지원 (시험오류 · 학습장애)</dt>
-            <dd>
-              <a href={`tel:${phones.support}`}>{phones.support}</a>
-            </dd>
-          </div>
-        </dl>
-        <p className="sh-call-hours">
-          <b>평일 09:00 ~ 18:00</b>
-          <span>점심 12:00 ~ 13:00 · 주말/공휴일 휴무</span>
-        </p>
-      </div>
+    <section className="sh-bento" aria-label="한평생의 특별한 혜택">
+      <Link href="/event" className="sh-benefit-card sh-tone--purple">
+        <span className="sh-benefit-text">
+          <span className="sh-benefit-label">추천한 나도, 추천받은 친구도</span>
+          <span className="sh-benefit-title">친구추천 이벤트</span>
+          <span className="sh-benefit-more">자세히 보기 →</span>
+        </span>
+        <img src={`${IMG}/main/event-friend-gift.webp`} alt="" className="sh-benefit-art" />
+      </Link>
       <Link href="/footer/about#tab-scholarship" className="sh-info-card">
         <h3 className="sh-info-title">수강 혜택</h3>
         <ul className="sh-info-list">
@@ -288,6 +245,39 @@ function InfoCards() {
         </ul>
         <img src={`${IMG}/credit-bank/cb-icon-school.png`} alt="" className="sh-info-art" />
       </Link>
+      <Link href="/learning-support/mobile-guide" className="sh-guide">
+        <span className="sh-guide-text">
+          <span className="sh-guide-label">언제 어디서나</span>
+          <span className="sh-guide-title">
+            모바일로{" "}
+            <br />
+            수강하는 법
+          </span>
+        </span>
+        <img src={`${IMG}/main/sample-guide-phone.png`} alt="" className="sh-guide-art" />
+      </Link>
+    </section>
+  );
+}
+
+/* ---------- 4. 고객센터 — 상자 대신 얇은 띠 ---------- */
+
+function CallBar() {
+  return (
+    <section className="sh-callbar" aria-label="고객센터">
+      <h3 className="sh-callbar-title">고객센터</h3>
+      <a href={`tel:${phones.registration}`} className="sh-callbar-tel">
+        <span>수강신청 · 학습상담</span>
+        <b>{phones.registration}</b>
+      </a>
+      <a href={`tel:${phones.support}`} className="sh-callbar-tel">
+        <span>학습지원 (시험오류 · 학습장애)</span>
+        <b>{phones.support}</b>
+      </a>
+      <p className="sh-callbar-hours">
+        <b>평일 09:00 ~ 18:00</b>
+        <span>점심 12:00 ~ 13:00 · 주말/공휴일 휴무</span>
+      </p>
     </section>
   );
 }
@@ -574,8 +564,8 @@ export default function SampleHome() {
         <TermStrip />
         {/* 실습 신청 · 결제는 자주 찾는 길이라 넘김 없이 개강 줄 바로 아래 */}
         <QuickActions />
-        <Benefits />
-        <InfoCards />
+        <Bento />
+        <CallBar />
         <Notices />
         <WhyHanpyeong />
         <Consult />

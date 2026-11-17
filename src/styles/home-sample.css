@@ -205,10 +205,11 @@
 .sh-action-title svg { flex: none; width: 22px; height: 22px; }
 .sh-action-art { height: 80%; width: auto; max-width: 40%; object-fit: contain; }
 
-/* ---------- 3. 특별한 혜택 ---------- */
-.sh-benefit {
+/* ---------- 3. 벤토 (4칸 × 2줄) — 친구추천 2×2, 혜택·학점은행 1칸씩, 모바일 가이드 가로 2칸 ---------- */
+.sh-bento {
   display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: repeat(2, 160px);
   gap: var(--space-20);
 }
 .sh-benefit-card,
@@ -228,6 +229,11 @@
 .sh-benefit-title { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; word-break: keep-all; }
 .sh-benefit-more { margin-top: 10px; font-size: 14px; font-weight: 600; color: var(--sh-sub); }
 .sh-benefit-art { height: 86%; width: auto; max-width: 46%; object-fit: contain; }
+/* 벤토 안 친구추천: 글은 왼쪽 위, 그림은 오른쪽 아래에 크게 */
+.sh-bento .sh-benefit-card { grid-column: 1 / 3; grid-row: 1 / 3; height: auto; flex-direction: column; align-items: flex-start; justify-content: flex-start; padding: 40px 36px; }
+.sh-bento .sh-benefit-title { font-size: 32px; }
+.sh-bento .sh-benefit-art { position: absolute; right: 24px; bottom: 20px; width: 60%; height: auto; max-width: none; }
+.sh-bento .sh-guide { grid-column: 3 / 5; height: auto; justify-content: center; }
 
 .sh-guide {
   --sh-bg: #f1f4f9;
@@ -242,15 +248,9 @@
 .sh-guide-title { font-size: 22px; font-weight: 800; line-height: 1.3; word-break: keep-all; }
 .sh-guide-art { position: absolute; right: 18px; bottom: -14px; height: 92%; width: auto; transform: rotate(8deg); }
 
-/* ---------- 4. 카드 3개 ---------- */
-.sh-info {
-  display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
-  gap: var(--space-20);
-}
+/* ---------- 3-1. 벤토 안 작은 정보 카드 ---------- */
 .sh-info-card {
   position: relative;
-  min-height: 150px;
   padding: 24px;
   border-radius: 16px;
   background: #f3f6fb;
@@ -263,31 +263,27 @@
 .sh-info-art { position: absolute; right: 14px; bottom: 12px; width: 76px; height: 76px; object-fit: contain; }
 a.sh-info-card:hover .sh-info-title { color: var(--color-primary-dark); }
 
-.sh-info-card--call { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto 1fr; column-gap: 24px; }
-.sh-info-card--call .sh-info-title { grid-column: 1 / -1; }
-.sh-call { display: flex; flex-direction: column; gap: 8px; margin: 0; }
-.sh-call > div { display: flex; flex-direction: column; gap: 2px; }
-.sh-call dt { font-size: 14px; color: var(--color-text-secondary); }
-.sh-call dd { margin: 0; }
-.sh-call a { white-space: nowrap; font-size: 24px; font-weight: 800; color: var(--color-primary-dark); text-decoration: none; letter-spacing: -0.01em; }
-.sh-call-hours {
+/* ---------- 4. 고객센터 띠 ---------- */
+.sh-callbar {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 4px;
-  margin: 0;
-  padding-left: 24px;
-  border-left: 1px solid #dde3ee;
-  font-size: 13px;
-  color: var(--color-text-secondary);
-  text-align: right;
+  align-items: center;
+  gap: 40px;
+  padding: 18px 28px;
+  border: 1px solid #e3eaf7;
+  border-radius: 16px;
+  background: #fff;
 }
-.sh-call-hours b { font-size: 15px; color: var(--color-text-strong, #111); }
+.sh-callbar-title { margin: 0; font-size: 16px; font-weight: 700; color: var(--color-text-strong, #111); }
+.sh-callbar-tel { display: flex; align-items: baseline; gap: 10px; text-decoration: none; }
+.sh-callbar-tel span { font-size: 14px; color: var(--color-text-secondary); }
+.sh-callbar-tel b { font-size: 22px; font-weight: 800; letter-spacing: -0.01em; color: var(--color-primary-dark); white-space: nowrap; }
+.sh-callbar-hours { display: flex; align-items: baseline; gap: 10px; margin: 0 0 0 auto; font-size: 13px; color: var(--color-text-secondary); }
+.sh-callbar-hours b { font-size: 15px; color: var(--color-text-strong, #111); }
 
-/* ---------- 5. 공지 + 알려드립니다 ---------- */
+/* ---------- 5. 공지(넓게) + 놓치기 쉬운 안내(세로로 2장) ---------- */
 .sh-notice-row {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
   gap: var(--space-24);
 }
 .sh-notice-head { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
@@ -332,13 +328,15 @@ a.sh-info-card:hover .sh-info-title { color: var(--color-primary-dark); }
 .sh-notice-text { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .sh-notice-date { flex: none; font-size: 14px; color: var(--color-text-placeholder); }
 
-.sh-promo-cards { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-16); }
-.sh-promo-card { flex-direction: column; gap: 6px; height: 220px; padding: 24px 22px; }
+.sh-promo { display: flex; flex-direction: column; }
+.sh-promo .sh-sec-title { display: flex; align-items: center; height: 36px; margin-bottom: 8px; }
+.sh-promo-cards { display: grid; flex: 1; grid-template-rows: repeat(2, minmax(0, 1fr)); gap: var(--space-12); }
+.sh-promo-card { flex-direction: column; justify-content: center; gap: 4px; padding: 18px 22px; }
 .sh-promo-label { font-size: 13px; color: var(--sh-sub); }
-.sh-promo-title { font-size: 20px; font-weight: 800; line-height: 1.35; word-break: keep-all; }
-.sh-promo-art { position: absolute; right: 16px; bottom: 16px; width: 92px; height: 92px; object-fit: contain; }
+.sh-promo-title { font-size: 18px; font-weight: 800; line-height: 1.35; word-break: keep-all; }
+.sh-promo-art { position: absolute; right: 14px; top: 50%; width: 80px; height: 80px; object-fit: contain; transform: translateY(-50%); }
 /* 악수 그림은 위아래 여백이 큰 정사각 파일 → 넓은 칸에 여백만 잘라 책 그림과 크기를 맞춘다 */
-.sh-promo-art--wide { width: 132px; object-fit: cover; }
+.sh-promo-art--wide { width: 116px; object-fit: cover; }
 
 /* ---------- 6. 왜 한평생일까요 ---------- */
 .sh-why {
@@ -539,8 +537,14 @@ a.sh-info-card:hover .sh-info-title { color: var(--color-primary-dark); }
 @media (max-width: 1024px) {
   .sh-term { flex-wrap: wrap; }
   .sh-term-list { flex-wrap: wrap; justify-content: flex-start; }
-  .sh-info { grid-template-columns: 1fr 1fr; }
-  .sh-info-card--call { grid-column: 1 / -1; }
+  .sh-bento { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: auto; }
+  .sh-bento .sh-benefit-card { grid-column: 1 / -1; grid-row: auto; height: 200px; flex-direction: row; align-items: center; justify-content: space-between; padding: 0 28px 0 36px; }
+  .sh-bento .sh-benefit-title { font-size: 28px; }
+  .sh-bento .sh-benefit-art { position: static; width: auto; height: 86%; max-width: 46%; }
+  .sh-bento .sh-info-card { min-height: 150px; }
+  .sh-bento .sh-guide { grid-column: 1 / -1; height: 140px; }
+  .sh-callbar { flex-wrap: wrap; gap: 12px 32px; }
+  .sh-callbar-hours { margin-left: 0; }
   .sh-essential-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .sh-whyc { grid-template-columns: 280px minmax(0, 1fr); }
   .sh-consult { grid-template-columns: minmax(0, 1fr); }
@@ -573,9 +577,9 @@ a.sh-info-card:hover .sh-info-title { color: var(--color-primary-dark); }
   .sh-action-title svg { width: 18px; height: 18px; }
   .sh-action-art { height: 84%; }
 
-  .sh-benefit { grid-template-columns: 1fr; gap: 12px; }
-  .sh-benefit-card { height: 150px; padding: 0 16px 0 22px; }
-  .sh-benefit-title { font-size: 21px; }
+  .sh-bento { gap: 12px; }
+  .sh-bento .sh-benefit-card { height: 150px; padding: 0 16px 0 22px; }
+  .sh-bento .sh-benefit-title { font-size: 21px; }
   .sh-benefit-label { font-size: 13px; }
   .sh-benefit-more { display: none; }
   .sh-guide { height: 110px; padding: 18px 20px; justify-content: center; }
@@ -583,14 +587,15 @@ a.sh-info-card:hover .sh-info-title { color: var(--color-primary-dark); }
   .sh-guide-title br { display: none; }
   .sh-guide-art { height: 110%; }
 
-  .sh-info { grid-template-columns: 1fr 1fr; gap: 12px; }
-  .sh-info-card { min-height: 0; padding: 18px; }
-  .sh-info-card--call { grid-template-columns: 1fr; }
-  .sh-call a { font-size: 20px; }
-  .sh-call-hours { margin-top: 12px; padding: 12px 0 0; border-left: 0; border-top: 1px solid #dde3ee; text-align: left; }
+  .sh-bento .sh-guide { height: 110px; }
+  .sh-bento .sh-info-card { min-height: 0; padding: 18px; }
+  .sh-callbar { flex-direction: column; align-items: stretch; gap: 8px; padding: 16px 18px; }
+  .sh-callbar-tel { justify-content: space-between; }
+  .sh-callbar-tel span { font-size: 13px; }
+  .sh-callbar-tel b { font-size: 19px; }
+  .sh-callbar-hours { flex-direction: column; gap: 2px; padding-top: 10px; border-top: 1px solid #e3eaf7; }
   .sh-info-list { font-size: 13px; }
   .sh-info-card { display: flex; flex-direction: column; }
-  .sh-info-card--call { display: grid; }
   .sh-info-art { position: static; order: -1; width: 40px; height: 40px; margin-bottom: 8px; }
 
   .sh-notice-row { grid-template-columns: minmax(0, 1fr); gap: var(--space-24); }
@@ -598,10 +603,11 @@ a.sh-info-card:hover .sh-info-title { color: var(--color-primary-dark); }
   .sh-notice-more { font-size: 13px; }
   .sh-notice-list a { height: 46px; font-size: 14px; }
   .sh-notice-date { font-size: 13px; }
-  .sh-promo-cards { gap: 12px; }
-  .sh-promo-card { height: 160px; padding: 18px 16px; }
+  .sh-promo .sh-sec-title { height: auto; margin-bottom: 12px; }
+  .sh-promo-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: none; gap: 12px; }
+  .sh-promo-card { height: 160px; justify-content: flex-start; padding: 18px 16px; }
   .sh-promo-title { font-size: 16px; }
-  .sh-promo-art { width: 64px; height: 64px; }
+  .sh-promo-art { top: auto; bottom: 12px; width: 64px; height: 64px; transform: none; }
   .sh-promo-art--wide { width: 92px; }
 
   .sh-why { margin-top: var(--space-16); padding: 28px 16px 16px; border-radius: 18px; }
