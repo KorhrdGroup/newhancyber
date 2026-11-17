@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
 
 interface TermsBoxProps {
   id: string;
@@ -15,36 +15,31 @@ interface TermsBoxProps {
 /** 약관 한 개: 동의 체크박스 + 내용 펼치기 */
 export default function TermsBox({ id, title, required = false, checked, onChange, children }: TermsBoxProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const bodyId = useId();
 
   return (
-    <div className="terms-box">
-      <div className="inner">
-        <div className="top-txt-box">
-          <div className="input-box">
-            <input type="checkbox" id={id} checked={checked} onChange={(e) => onChange(e.target.checked)} />
-            <label htmlFor={id}>
-              <p>
-                {title} <span className={required ? "essential" : "gray"}>{required ? "(필수)" : "(선택)"}</span>
-              </p>
-            </label>
-          </div>
-          <a
-            href="#"
-            role="button"
-            aria-expanded={isOpen}
-            className={`more-btn${isOpen ? " on" : ""}`}
-            onClick={(e) => {
-              e.preventDefault();
-              setIsOpen((open) => !open);
-            }}
-          >
-            <img src="/resources/images/member/arrow-down.png" alt="열기" className="arrow-icon" />
-          </a>
-        </div>
-        <div className="bottom-txt-box" style={isOpen ? undefined : { display: "none" }}>
-          {children}
-        </div>
+    <li className="signup-term">
+      <div className="signup-term-head">
+        <label className="ds-check signup-term-check" htmlFor={id}>
+          <input type="checkbox" id={id} checked={checked} onChange={(e) => onChange(e.target.checked)} />
+          <span>
+            {title} <span className={required ? "signup-term-req" : "signup-term-opt"}>{required ? "(필수)" : "(선택)"}</span>
+          </span>
+        </label>
+        <button
+          type="button"
+          className={`signup-term-toggle${isOpen ? " is-open" : ""}`}
+          aria-expanded={isOpen}
+          aria-controls={bodyId}
+          aria-label={`${title} 내용 ${isOpen ? "접기" : "보기"}`}
+          onClick={() => setIsOpen((open) => !open)}
+        >
+          <img src="/resources/images/member/arrow-down.png" alt="" />
+        </button>
       </div>
-    </div>
+      <div id={bodyId} className="signup-term-body" hidden={!isOpen}>
+        {children}
+      </div>
+    </li>
   );
 }
