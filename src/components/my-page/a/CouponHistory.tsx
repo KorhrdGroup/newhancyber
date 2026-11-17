@@ -92,38 +92,34 @@ export default function CouponHistory({ coupons }: { coupons: Coupon[] }) {
         {list.length === 0 ? (
           <p className="cr-empty">해당하는 쿠폰이 없습니다.</p>
         ) : (
-          <div className="cr-table-wrap">
-            <table className="ds-table">
-              <thead>
-                <tr>
-                  <th>쿠폰명</th>
-                  <th>할인</th>
-                  <th>사용 기간</th>
-                  <th>상태</th>
-                  <th>사용일</th>
-                  <th>사용 과목</th>
+          <table className="ds-table ds-table--stack">
+            <thead>
+              <tr>
+                <th className="is-left">쿠폰명</th>
+                <th>할인</th>
+                <th>사용 기간</th>
+                <th>상태</th>
+                <th>사용일</th>
+                <th>사용 과목</th>
+              </tr>
+            </thead>
+            <tbody>
+              {list.map((c) => (
+                <tr key={c.id}>
+                  <td className="ds-table-stack-head is-left">{c.name}</td>
+                  <td className="ds-text-brand" data-label="할인">{c.discount}</td>
+                  <td className="mp-nowrap" data-label="사용 기간">
+                    {c.validFrom} ~ {c.validTo}
+                  </td>
+                  <td data-label="상태">
+                    <StatusBadge>{c.status}</StatusBadge>
+                  </td>
+                  <td data-label="사용일">{c.usedAt ?? "-"}</td>
+                  <td data-label="사용 과목">{c.usedCourse ?? "-"}</td>
                 </tr>
-              </thead>
-              <tbody>
-                {list.map((c) => (
-                  <tr key={c.id}>
-                    <td className="is-left">
-                      <strong>{c.name}</strong>
-                    </td>
-                    <td className="ds-text-brand">{c.discount}</td>
-                    <td className="mp-nowrap">
-                      {c.validFrom} ~ {c.validTo}
-                    </td>
-                    <td>
-                      <StatusBadge>{c.status}</StatusBadge>
-                    </td>
-                    <td>{c.usedAt ?? "-"}</td>
-                    <td>{c.usedCourse ?? "-"}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+              ))}
+            </tbody>
+          </table>
         )}
       </section>
     </>

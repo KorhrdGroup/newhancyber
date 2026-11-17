@@ -18,46 +18,40 @@ export default function DemandSurveysPage() {
       {surveys.length === 0 ? (
         <p className="cr-empty">진행 중인 수요 조사가 없습니다.</p>
       ) : (
-        <div className="cr-table-wrap">
-          <table className="ds-table">
-            <thead>
-              <tr>
-                <th>번호</th>
-                <th>설문 제목</th>
-                <th>조사 기간</th>
-                <th>상태</th>
-                <th>참여</th>
+        <table className="ds-table ds-table--stack">
+          <thead>
+            <tr>
+              <th className="is-left">설문 제목</th>
+              <th>조사 기간</th>
+              <th>상태</th>
+              <th>참여</th>
+            </tr>
+          </thead>
+          <tbody>
+            {surveys.map((s) => (
+              <tr key={s.id}>
+                <td className="ds-table-stack-head is-left">{s.title}</td>
+                <td className="mp-nowrap" data-label="조사 기간">
+                  {s.start} ~ {s.end}
+                </td>
+                <td data-label="상태">
+                  <StatusBadge>{s.status}</StatusBadge>
+                </td>
+                <td data-label="참여">
+                  {s.status === "진행 중" ? (
+                    <Link href={`/my-page/surveys/demand/${s.id}`} className="ds-btn ds-btn--primary ds-btn--sm">
+                      참여하기
+                    </Link>
+                  ) : (
+                    <button type="button" className="ds-btn ds-btn--sm" disabled>
+                      {s.status === "참여 완료" ? "참여 완료" : "마감"}
+                    </button>
+                  )}
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {surveys.map((s, i) => (
-                <tr key={s.id}>
-                  <td>{surveys.length - i}</td>
-                  <td className="is-left">
-                    <strong>{s.title}</strong>
-                  </td>
-                  <td className="mp-nowrap">
-                    {s.start} ~ {s.end}
-                  </td>
-                  <td>
-                    <StatusBadge>{s.status}</StatusBadge>
-                  </td>
-                  <td>
-                    {s.status === "진행 중" ? (
-                      <Link href={`/my-page/surveys/demand/${s.id}`} className="ds-btn ds-btn--primary ds-btn--sm">
-                        참여하기
-                      </Link>
-                    ) : (
-                      <button type="button" className="ds-btn ds-btn--sm" disabled>
-                        {s.status === "참여 완료" ? "참여 완료" : "마감"}
-                      </button>
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
       )}
     </MyPageShell>
   );
