@@ -566,8 +566,9 @@ export default function SampleHome() {
         {/* 실습 신청 · 결제는 자주 찾는 길이라 넘김 없이 개강 줄 바로 아래 */}
         <QuickActions />
         <Bento />
-        <InfoBar />
         <Notices />
+        {/* 수강 혜택 · 학점은행제는 공지 아래 줄로 */}
+        <InfoBar />
         <Consult closed={consultClosed} onClose={() => setConsultClosed(true)} />
       </div>
       <Essentials />
