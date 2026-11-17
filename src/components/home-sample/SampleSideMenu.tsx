@@ -22,12 +22,6 @@ const ICONS = {
       <path d="M8 20h8M12 16v4" />
     </>
   ),
-  mobile: (
-    <>
-      <rect x="6" y="2.5" width="12" height="19" rx="2.5" />
-      <path d="M11 18h2" />
-    </>
-  ),
   doc: (
     <>
       <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z" />
@@ -48,7 +42,7 @@ function SideIcon({ name }: { name: keyof typeof ICONS }) {
 
 /**
  * 오른쪽 사이드 플로팅 (PC 1280 이상, 시안 전용) — 둥근 알약 버튼을 세로로 쌓은 모양.
- * 큰 칸 2개(전화 상담 · 학습설계) + 알약 5개 + TOP. '간편상담'은 아래 간편상담 바를 열고 닫는다.
+ * 큰 칸 2개(전화 상담 · 학습설계) + 알약 4개 + TOP. '간편상담'은 아래 간편상담 바를 열고 닫는다.
  */
 export default function SampleSideMenu({ consultOpen, onToggleConsult }: { consultOpen: boolean; onToggleConsult: () => void }) {
   const [scrolled, setScrolled] = useState(false);
@@ -83,10 +77,6 @@ export default function SampleSideMenu({ consultOpen, onToggleConsult }: { consu
       <Link href="/learning-support/remote-support" className="sh-side-item">
         <SideIcon name="remote" />
         원격지원
-      </Link>
-      <Link href="/learning-support/mobile-guide" className="sh-side-item">
-        <SideIcon name="mobile" />
-        모바일 학습가이드
       </Link>
       <Link href="/my-page/certificates" className="sh-side-item">
         <SideIcon name="doc" />

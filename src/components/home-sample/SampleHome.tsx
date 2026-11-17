@@ -291,9 +291,9 @@ function Bento() {
         <span className="sh-guide-text">
           <span className="sh-guide-label">언제 어디서나</span>
           <span className="sh-guide-title">
-            모바일로{" "}
+            모바일{" "}
             <br />
-            수강하는 법
+            수강가이드
           </span>
         </span>
         <img src={`${IMG}/main/sample-guide-phone.png`} alt="" className="sh-guide-art" />
