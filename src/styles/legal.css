@@ -128,15 +128,16 @@
 .legal-tab-panel { margin-top: var(--space-24); border-top: 1px solid var(--color-text-strong); }
 
 /* 영상정보 처리기기 방침 */
-.legal-video-intro { display: flex; align-items: center; gap: var(--space-16); padding: var(--space-24) 0; border-bottom: 1px solid var(--color-border-subtle); }
-.legal-video-icon { flex: none; width: 56px; height: 56px; }
+.legal-video-intro { display: flex; align-items: center; gap: var(--space-12); padding: var(--space-24) 0; border-bottom: 1px solid var(--color-border-subtle); }
+.legal-video-icon { flex: none; width: 36px; height: 36px; }
 .legal-bullets { margin: var(--space-8) 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--space-4); }
 .legal-bullets > li { position: relative; padding-left: 1em; font-size: 15px; line-height: 1.8; color: var(--color-text-default); word-break: keep-all; }
 .legal-bullets > li::before { content: "·"; position: absolute; left: 0.2em; font-weight: 700; }
 .legal-table--wide { max-width: none; }
 @media (max-width: 480px) {
   .legal-tab-panel { margin-top: var(--space-20); }
-  .legal-video-icon { width: 48px; height: 48px; }
+  .legal-video-intro { align-items: flex-start; }
+  .legal-video-icon { width: 32px; height: 32px; margin-top: 2px; }
   .legal-bullets > li { font-size: 14px; line-height: 1.75; }
   .legal-table--wide .ds-table--info th { width: 104px; }
 }
