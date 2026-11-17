@@ -481,35 +481,58 @@ function Essentials() {
   );
 }
 
-/* ---------- 9. 맨 아래 띠 — 왜 한평생일까요 (기존 메인 탭 3개를 한 줄 요약으로) ---------- */
-
-const WHY_ICONS = ["support-tab-001.png", "support-tab2-001.png", "support-tab3-001.png"];
-
-function WhyBand() {
+/* ---------- 9. 맨 아래 띠 — 왜 한평생일까요 (기존 메인 탭 3개) ----------
+   세 장점의 제목·요약은 늘 보이고, 고른 하나의 상세만 보여 준다 (휴대폰은 아코디언).
+   PC에서는 세 상세를 한 칸에 겹쳐 두고 고른 것만 보여서, 탭을 바꿔도 높이가 그대로다 */
+function WhyHanpyeong() {
+  const [active, setActive] = useState(0);
   return (
-    <section className="sh-whyband" aria-label="왜 한평생원격교육원을 선택할까요?">
-      <div className="sh-whyband-inner">
-        <div className="sh-whyband-head">
-          <p className="sh-whyband-eyebrow">WHY 한평생원격교육원</p>
-          <h3 className="sh-whyband-title">왜 한평생원격교육원을 선택할까요?</h3>
-        </div>
-        <ul className="sh-whyband-list">
-          {whyTabs.map((tab, i) => (
-            <li key={tab.key}>
-              <img src={`${IMG}/main/support/${WHY_ICONS[i]}`} alt="" />
-              <span>
-                <b>{tab.label}</b>
-                <small>{tab.summary}</small>
-                {/* 기존 탭 상세 카드 이름 — 띠 안에서도 무엇을 해 주는지 다 보이게 */}
-                <ul className="sh-whyband-tags">
+    <section className="sh-why">
+      <div className="sh-why-head">
+        <p className="sh-why-eyebrow">WHY 한평생원격교육원</p>
+        <h3 className="sh-why-title">왜 한평생원격교육원을 선택할까요?</h3>
+      </div>
+      <div className="sh-whyc">
+        {whyTabs.map((tab, i) => {
+          const open = i === active;
+          return (
+            <div key={tab.key} className={`sh-whyc-item${open ? " is-open" : ""}`}>
+              <button
+                type="button"
+                className="sh-whyc-tab"
+                aria-expanded={open}
+                aria-controls={`sh-whyc-${tab.key}`}
+                onClick={() => setActive(i)}
+              >
+                <span className="sh-whyc-label">{tab.label}</span>
+                <span className="sh-whyc-summary">{tab.summary}</span>
+              </button>
+              <div
+                id={`sh-whyc-${tab.key}`}
+                className={`sh-whyc-panel${tab.compact ? " sh-whyc-panel--guide" : ""}${open ? " is-open" : ""}`}
+              >
+                <p className="sh-whyc-sub">{tab.subtitle}</p>
+                {/* PC: 항목 수만큼 칸을 나눠 판을 꽉 채운다 (3개 → 3칸, 2개 → 2칸, 6개 → 3칸 두 줄) */}
+                <ul
+                  className="sh-why-items"
+                  style={{ "--why-cols": Math.min(tab.cards.length, 3) } as React.CSSProperties}
+                >
                   {tab.cards.map((card) => (
-                    <li key={card.title}>{card.title.replace("한평생원격교육원 ", "")}</li>
+                    <li key={card.title}>
+                      <img src={`${IMG}/main/support/${card.icon}`} alt="" />
+                      <span>
+                        <b>{card.title}</b>
+                        {card.lines.map((line) => (
+                          <small key={line}>{line}</small>
+                        ))}
+                      </span>
+                    </li>
                   ))}
                 </ul>
-              </span>
-            </li>
-          ))}
-        </ul>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </section>
   );
@@ -530,7 +553,7 @@ export default function SampleHome() {
         <Consult />
       </div>
       <Essentials />
-      <WhyBand />
+      <WhyHanpyeong />
     </main>
   );
 }
