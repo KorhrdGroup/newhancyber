@@ -160,3 +160,25 @@
   .ex-summary .ds-stat-value { font-size: 16px; }
   .ex-summary .ds-stat-value small { font-size: 12px; }
 }
+
+/* ---------- 무료학습설계 신청서 ---------- */
+.ex-design-form { margin-top: var(--space-32); }
+.ex-field-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-16); }
+.ex-field-grid + .ex-field,
+.ex-field + .ex-field { margin-top: var(--space-24); }
+.ex-choices { display: flex; flex-wrap: wrap; gap: var(--space-8) var(--space-24); min-height: var(--size-control-md); align-items: center; }
+.ex-consent { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-8); }
+.ex-consent-req { font-weight: 600; color: var(--color-text-brand); }
+.ex-consent-details { margin-top: var(--space-12); padding: var(--space-16) var(--space-20); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-6); background: var(--color-bg-subtle); font-size: 13px; line-height: 1.7; color: var(--color-text-secondary); }
+.ex-consent-details h3 { margin: 0 0 var(--space-12); font-size: 14px; font-weight: 600; color: var(--color-text-strong); }
+.ex-consent-details p { margin: 0 0 var(--space-8); }
+.ex-consent-details p:last-child { margin-bottom: 0; }
+.ex-consent-details strong { font-weight: 600; color: var(--color-text-strong); }
+.ex-design-submit { min-width: 200px; }
+
+@media (max-width: 480px) {
+  .ex-field-grid { grid-template-columns: 1fr; }
+  .ex-field-grid + .ex-field,
+  .ex-field + .ex-field { margin-top: var(--space-20); }
+  .ex-design-submit { width: 100%; }
+}
