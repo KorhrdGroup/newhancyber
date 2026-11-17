@@ -351,28 +351,28 @@
 /* 악수 그림은 위아래 여백이 큰 정사각 파일 → 넓은 칸에 여백만 잘라 책 그림과 크기를 맞춘다 */
 .sh-promo-art--wide { width: 116px; object-fit: cover; }
 
-/* ---------- 7. 1:1 무료 학습상담 ---------- */
+/* ---------- 7. 1:1 무료 학습상담 — 한 줄 띠 (왼쪽 제목 · 오른쪽 입력칸 가로 한 줄 + 동의 줄) ---------- */
 .sh-consult {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 400px;
+  grid-template-columns: 300px minmax(0, 1fr);
   align-items: center;
   gap: 32px;
-  padding: 40px;
-  border-radius: 24px;
+  padding: 24px 32px;
+  border-radius: 20px;
   background: linear-gradient(120deg, #eef4ff, #dce8ff);
 }
-.sh-consult-intro { position: relative; display: flex; flex-direction: column; }
-.sh-consult-eyebrow { margin: 0 0 8px; font-size: 14px; font-weight: 700; color: var(--color-primary-dark); }
-.sh-consult-title { margin: 0; font-size: 30px; font-weight: 800; line-height: 1.35; letter-spacing: -0.02em; color: var(--color-text-strong, #111); }
-.sh-consult-desc { margin: 12px 0 0; font-size: 16px; color: var(--color-text-secondary); word-break: keep-all; }
-.sh-consult-links { display: flex; align-items: center; gap: 18px; margin-top: 28px; }
-.sh-consult-art { position: absolute; right: 0; top: 0; width: 120px; height: 120px; object-fit: contain; }
-.sh-consult-form { display: flex; flex-direction: column; gap: 10px; padding: 24px; border-radius: 20px; background: #fff; box-shadow: 0 8px 24px rgba(17, 90, 237, 0.1); }
-.sh-consult-form-title { margin: 0 0 4px; font-size: 17px; font-weight: 800; color: var(--color-text-strong, #111); }
-.sh-consult-form-title em { font-style: normal; color: var(--color-primary-dark); }
+.sh-consult-intro { display: flex; align-items: center; gap: 14px; }
+.sh-consult-art { flex: none; width: 64px; height: 64px; object-fit: contain; }
+.sh-consult-eyebrow { margin: 0 0 2px; font-size: 13px; font-weight: 700; color: var(--color-primary-dark); }
+.sh-consult-title { margin: 0; font-size: 20px; font-weight: 800; letter-spacing: -0.02em; color: var(--color-text-strong, #111); }
+.sh-consult-link { display: inline-flex; align-items: center; gap: 2px; margin-top: 4px; font-size: 13px; font-weight: 600; color: var(--color-text-secondary); text-decoration: none; }
+.sh-consult-link:hover { color: var(--color-primary-dark); }
+.sh-consult-form { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) minmax(0, 1fr) 140px; align-items: center; gap: 10px 8px; }
 .sh-consult-form input[type="text"],
 .sh-consult-form input[type="tel"],
 .sh-consult-form select {
+  width: 100%;
+  min-width: 0;
   height: 46px;
   padding: 0 14px;
   border: 1px solid #dde3ee;
@@ -380,10 +380,10 @@
   background: #fff;
   font-size: 15px;
 }
-.sh-consult-agree { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--color-text-secondary); }
+.sh-consult-agree { grid-column: 1 / -1; display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--color-text-secondary); }
 .sh-consult-agree input { width: 16px; height: 16px; margin: 0; }
 .sh-consult-agree button { padding: 0; border: 0; background: none; color: var(--color-primary-dark); font-size: 13px; text-decoration: underline; cursor: pointer; }
-.sh-consult-submit { height: 50px; margin-top: 4px; font-size: 16px; }
+.sh-consult-submit { height: 46px; font-size: 15px; }
 
 /* ---------- 8. 꼭 확인하세요 ---------- */
 .sh-essential {
@@ -559,7 +559,7 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
   .sh-whyc-panel--pair .sh-why-items li { flex-direction: column; justify-content: center; gap: 12px; padding: 20px 16px; text-align: center; }
   .sh-whyc-panel--pair .sh-why-items span { align-items: center; }
   .sh-whyc-panel--pair .sh-why-items img { width: 64px; height: 64px; }
-  .sh-consult { grid-template-columns: minmax(0, 1fr); }
+  .sh-consult { grid-template-columns: minmax(0, 1fr); gap: 16px; }
 }
 
 /* ---------- 폰 ---------- */
@@ -628,12 +628,13 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
   .sh-promo-art { top: auto; bottom: 12px; width: 64px; height: 64px; transform: none; }
   .sh-promo-art--wide { width: 92px; }
 
-  .sh-consult { gap: 20px; padding: 24px 16px 16px; border-radius: 18px; }
-  .sh-consult-title { font-size: 22px; padding-right: 72px; }
-  .sh-consult-desc { font-size: 14px; }
-  .sh-consult-links { flex-direction: column; align-items: stretch; gap: 10px; }
-  .sh-consult-art { width: 64px; height: 64px; }
-  .sh-consult-form { padding: 18px; }
+  .sh-consult { padding: 20px 16px; border-radius: 18px; }
+  .sh-consult-art { width: 52px; height: 52px; }
+  .sh-consult-title { font-size: 18px; }
+  /* 휴대폰: 입력칸은 세로로 쌓고, 동의 줄을 버튼 위로 */
+  .sh-consult-form { grid-template-columns: minmax(0, 1fr); }
+  .sh-consult-agree { grid-row: 4; }
+  .sh-consult-submit { height: 50px; }
 
   .sh-essential { margin-top: 40px; padding: 32px 0 40px; }
   .sh-essential-inner { padding: 0 16px; }

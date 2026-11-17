@@ -411,25 +411,18 @@ function Consult() {
 
   return (
     <section className="sh-consult">
+      {/* 한 줄 띠: 왼쪽 제목 · 오른쪽 입력칸과 버튼을 가로로 (휴대폰은 세로로 쌓인다) */}
       <div className="sh-consult-intro">
-        <p className="sh-consult-eyebrow">1:1 무료 학습상담</p>
-        <h3 className="sh-consult-title">
-          학점은행제, 어디서부터
-          <br />
-          시작할지 막막하다면?
-        </h3>
-        <p className="sh-consult-desc">학습설계 담당자가 내 학력과 목표에 맞는 학습 계획을 무료로 세워 드려요.</p>
-        <div className="sh-consult-links">
-          <Link href="/course-registration/learning-design" className="sh-btn sh-btn--primary">
+        <img src={`${IMG}/credit-bank/cb-icon-chat-person.png`} alt="" className="sh-consult-art" />
+        <div>
+          <p className="sh-consult-eyebrow">1:1 무료 학습상담</p>
+          <h3 className="sh-consult-title">회원가입 없이 간편상담</h3>
+          <Link href="/course-registration/learning-design" className="sh-consult-link">
             무료 학습설계 신청 <Chevron />
           </Link>
         </div>
-        <img src={`${IMG}/credit-bank/cb-icon-chat-person.png`} alt="" className="sh-consult-art" />
       </div>
       <form className="sh-consult-form" onSubmit={handleSubmit}>
-        <p className="sh-consult-form-title">
-          회원가입 없이 <em>간편상담</em> 신청
-        </p>
         <input type="text" name="name" placeholder="이름" aria-label="이름" required />
         <input type="tel" name="phone" placeholder="연락처 ('-' 없이)" aria-label="연락처" required />
         <select name="interest" aria-label="관심분야" required defaultValue="">
@@ -442,6 +435,9 @@ function Consult() {
             </option>
           ))}
         </select>
+        <button type="submit" className="sh-btn sh-btn--primary sh-consult-submit">
+          상담 신청하기
+        </button>
         <label className="sh-consult-agree">
           <input type="checkbox" name="privacy" required />
           개인정보 수집·이용 동의
@@ -449,9 +445,6 @@ function Consult() {
             내용보기
           </button>
         </label>
-        <button type="submit" className="sh-btn sh-btn--primary sh-consult-submit">
-          상담 신청하기
-        </button>
       </form>
       <PrivacyConsentPopup isOpen={privacyOpen} onClose={() => setPrivacyOpen(false)} />
     </section>
