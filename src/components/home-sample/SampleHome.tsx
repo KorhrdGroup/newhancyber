@@ -137,12 +137,14 @@ function ddayLabel() {
 function TermStrip() {
   // 서버 시각과 어긋나지 않게 화면에서만 계산 (서버 그림에는 빈칸)
   const dday = useSyncExternalStore(noopSubscribe, ddayLabel, () => null);
+  // 마감이 지나면 '지금 모집 중' 대신 '모집 마감' (TODO: 다음 차수 정보가 오면 그 차수로 바꾼다)
+  const closed = dday === "마감";
 
   return (
-    <section className="sh-term">
+    <section className={`sh-term${closed ? " is-closed" : ""}`}>
       <p className="sh-term-eyebrow">
         <span className="sh-term-dot" aria-hidden="true" />
-        지금 모집 중
+        {closed ? "모집 마감" : "지금 모집 중"}
       </p>
       <dl className="sh-term-list">
         <div>
@@ -166,7 +168,7 @@ function TermStrip() {
         </div>
       </dl>
       <Link href="/course-registration/register" className="sh-term-go">
-        수강신청 <Chevron />
+        {closed ? "다음 개강 보기" : "수강신청"} <Chevron />
       </Link>
     </section>
   );
@@ -343,7 +345,7 @@ function Notices() {
               <br />
               바로가기
             </span>
-            <img src={`${IMG}/pratice-support/pratice-support-02.png`} alt="" className="sh-promo-art" />
+            <img src={`${IMG}/pratice-support/pratice-support-02.png`} alt="" className="sh-promo-art sh-promo-art--wide" />
           </Link>
         </div>
       </div>
