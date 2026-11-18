@@ -1,6 +1,6 @@
 /*
  * 디자인 시스템 v2 — 메인(/)과 같은 모양을 다른 사용자 화면에 입힌다.
- * 묶음별로 옮기는 중이라, 레이아웃에서 .ds2 로 감싼 화면에만 적용한다 (지금: 학점은행제).
+ * 묶음별로 옮기는 중이라, 레이아웃에서 .ds2 로 감싼 화면에만 적용한다 (지금: 학점은행제 · 사회복지사 · 실습지원).
  * 규칙은 한평생원격_디자인시스템_v2.md 6장(부품 규칙)을 따른다:
  *   제목은 굵게(800) · 자간 -2%, 상자는 테두리 대신 연한 바탕(bg-surface) + 모서리 16,
  *   버튼 · 입력 칸 모서리는 높이를 따라 32→6 · 40→10 · 48→12.
@@ -17,7 +17,8 @@
 .ds2 .cb-flow,
 .ds2 .cb-grid,
 .ds2 .cb-steps-row,
-.ds2 .cb-steps-final {
+.ds2 .cb-steps-final,
+.ds2 .lx-doc-status {
   border: 0;
   border-radius: var(--radius-16);
   background: var(--color-bg-surface);
@@ -31,6 +32,7 @@
 
 /* 안내 띠 · 상담 띠: 톤 카드 */
 .ds2 .lx-callout,
+.ds2 .lx-law-box,
 .ds2 .cb-consult { border-radius: var(--radius-16); background: var(--color-bg-tone-blue); }
 .ds2 .cb-consult { padding: var(--space-24) var(--space-28); }
 .ds2 .cb-consult-text { font-weight: 800; letter-spacing: -0.01em; }
@@ -57,8 +59,9 @@
 .ds2 .ds-btn--secondary { border-color: var(--color-border-brand-soft); color: var(--color-text-strong); }
 .ds2 .ds-btn--secondary:hover { border-color: var(--color-border-brand); background: var(--color-bg-default); }
 
-/* ---------- 입력 칸 (40 높이 → 모서리 10) ---------- */
-.ds2 .ds-input { border-radius: var(--radius-10); }
+/* ---------- 입력 칸 · 선택 상자 (40 높이 → 모서리 10) ---------- */
+.ds2 .ds-input,
+.ds2 .ds-select { border-radius: var(--radius-10); }
 
 /* ---------- 탭 ---------- */
 /* 화면끼리 묶는 탭 · 화면 안 전환 탭 → 알약 탭 (고르면 연한 파랑 바탕 + 파란 글자) */
