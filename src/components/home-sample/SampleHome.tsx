@@ -267,7 +267,7 @@ function Bento() {
           <span className="sh-benefit-title">친구추천 이벤트</span>
           <span className="sh-benefit-more">자세히 보기 →</span>
         </span>
-        <img src={`${IMG}/main/event-friend-gift.webp`} alt="" className="sh-benefit-art" />
+        <img src={`${IMG}/main/event-friend-gift-soft.webp`} alt="" className="sh-benefit-art" />
       </Link>
       <a href={`tel:${phones.registration}`} className="sh-callcard">
         <span className="sh-callcard-head">

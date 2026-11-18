@@ -62,7 +62,7 @@
 .sh-hero .hb-title { font-size: clamp(32px, 3.4vw, 48px); }
 .sh-hero .hb-desc { margin-top: 12px; font-size: clamp(15px, 1.25vw, 18px); }
 .sh-hero .hb-more { height: 40px; margin-top: 20px; font-size: 15px; }
-.sh-hero .hb-art { height: 84%; }
+.sh-hero .hb-art { height: 70%; }
 
 /* 배너 색: 진한 단색 바탕 + 흰 글자 + 제목만 밝은 강조색 (유비온 메인 배너 참고) */
 .sh-hero .hb-slide {
@@ -197,7 +197,7 @@
 .sh-action-label { font-size: 15px; color: rgba(255, 255, 255, 0.8); }
 .sh-action-title { display: inline-flex; align-items: center; gap: 6px; font-size: 24px; font-weight: 800; letter-spacing: -0.02em; word-break: keep-all; }
 .sh-action-title svg { flex: none; width: 22px; height: 22px; }
-.sh-action-art { height: 80%; width: auto; max-width: 40%; object-fit: contain; }
+.sh-action-art { height: 66%; width: auto; max-width: 40%; object-fit: contain; }
 
 /* ---------- 3. 벤토 (12칸) — 친구추천 8칸 넓게 · 모바일 가이드 4칸 세로 기둥 · 혜택/학점은행 아래 4칸씩 ---------- */
 .sh-bento {
@@ -222,7 +222,7 @@
 .sh-benefit-label { font-size: 15px; color: var(--sh-sub); }
 .sh-benefit-title { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; word-break: keep-all; }
 .sh-benefit-more { margin-top: 10px; font-size: 14px; font-weight: 600; color: var(--sh-sub); }
-.sh-benefit-art { height: 86%; width: auto; max-width: 46%; object-fit: contain; }
+.sh-benefit-art { height: 72%; width: auto; max-width: 46%; object-fit: contain; }
 /* 벤토 안 친구추천: 가로로 넓고 낮게 — 글 왼쪽, 그림 오른쪽 */
 .sh-bento .sh-benefit-card { grid-column: 1 / 9; grid-row: 1; height: auto; padding: 0 40px 0 44px; }
 .sh-bento .sh-benefit-title { font-size: 32px; }
@@ -230,7 +230,7 @@
 /* 모바일 가이드: 오른쪽 세로 기둥 — 글 위, 폰 그림 아래 */
 .sh-bento .sh-guide { grid-column: 9 / 13; grid-row: 1 / 3; height: auto; justify-content: flex-start; padding: 32px 28px; }
 .sh-bento .sh-guide-title { font-size: 24px; }
-.sh-bento .sh-guide-art { right: 20px; bottom: -24px; height: 74%; }
+.sh-bento .sh-guide-art { right: 20px; bottom: -24px; height: 62%; }
 
 .sh-guide {
   /* 번호 카드 호버에 쓰던 연파랑을 가이드 바탕으로 */
@@ -244,7 +244,7 @@
 .sh-guide-text { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 6px; }
 .sh-guide-label { font-size: 14px; color: #2563eb; }
 .sh-guide-title { font-size: 22px; font-weight: 800; line-height: 1.3; word-break: keep-all; }
-.sh-guide-art { position: absolute; right: 18px; bottom: -14px; height: 92%; width: auto; transform: rotate(8deg); }
+.sh-guide-art { position: absolute; right: 18px; bottom: -14px; height: 78%; width: auto; transform: rotate(8deg); }
 
 /* ---------- 3-1. 벤토 안 고객센터 번호 카드 ---------- */
 .sh-callcard {
@@ -603,7 +603,7 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
   .sh-bento .sh-callcard { grid-column: auto; grid-row: auto; min-height: 150px; }
   .sh-bento .sh-guide { grid-column: 1 / -1; grid-row: auto; height: 140px; justify-content: center; padding: 26px 24px; }
   .sh-bento .sh-guide-title { font-size: 22px; }
-  .sh-bento .sh-guide-art { right: 18px; bottom: -14px; height: 92%; }
+  .sh-bento .sh-guide-art { right: 18px; bottom: -14px; height: 78%; }
   .sh-infobar { grid-template-columns: minmax(0, 1fr); }
   .sh-essential-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   /* 4칸이 되면 칸이 200px 넘게 커져 정사각형은 속이 텅 빈다 → 정사각형은 PC 8칸에서만 */
@@ -625,7 +625,7 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
   .sh-hero { border-radius: var(--radius-16); }
   .sh-hero-swiper { height: auto; }
   .sh-hero .hb-inner { padding: 11% 7% 0; }
-  .sh-hero .hb-art { height: 46%; bottom: 16%; }
+  .sh-hero .hb-art { height: 40%; bottom: 16%; }
   .sh-hero-ctrl { left: 7%; bottom: 12px; }
   .sh-hero-bar { width: 72px; margin: 0 6px 0 10px; }
 
@@ -640,7 +640,7 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
   .sh-action-label { font-size: 13px; }
   .sh-action-title { font-size: 18px; }
   .sh-action-title svg { width: 18px; height: 18px; }
-  .sh-action-art { height: 84%; }
+  .sh-action-art { height: 70%; }
 
   .sh-bento { gap: 12px; }
   .sh-bento .sh-benefit-card { height: 150px; padding: 0 16px 0 22px; }
@@ -650,11 +650,11 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
   .sh-guide { height: 110px; padding: 18px 20px; justify-content: center; }
   .sh-guide-title { font-size: 18px; }
   .sh-guide-title br { display: none; }
-  .sh-guide-art { height: 110%; }
+  .sh-guide-art { height: 92%; }
 
   .sh-bento .sh-guide { height: 110px; padding: 18px 20px; }
   .sh-bento .sh-guide-title { font-size: 18px; }
-  .sh-bento .sh-guide-art { height: 110%; }
+  .sh-bento .sh-guide-art { height: 92%; }
   .sh-bento .sh-callcard { min-height: 0; gap: 8px; padding: 16px; }
   .sh-callcard-head { font-size: 14px; }
   .sh-callcard-head svg { width: 18px; height: 18px; }
