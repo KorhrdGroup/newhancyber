@@ -1,6 +1,6 @@
 /*
  * 디자인 시스템 v2 — 메인(/)과 같은 모양을 다른 사용자 화면에 입힌다.
- * 묶음별로 옮기는 중이라, 레이아웃에서 .ds2 로 감싼 화면에만 적용한다 (지금: 학점은행제 · 사회복지사 · 실습지원 · 수강신청 · 학습지원).
+ * 묶음별로 옮기는 중이라, 레이아웃에서 .ds2 로 감싼 화면에만 적용한다 (지금: 학점은행제 · 사회복지사 · 실습지원 · 수강신청 · 학습지원 · 마이페이지).
  * 규칙은 한평생원격_디자인시스템_v2.md 6장(부품 규칙)을 따른다:
  *   제목은 굵게(800) · 자간 -2%, 상자는 테두리 대신 연한 바탕(bg-surface) + 모서리 16,
  *   버튼 · 입력 칸 모서리는 높이를 따라 32→6 · 40→10 · 48→12.
@@ -126,6 +126,21 @@
 .ds2 .ds-page-btn:hover:not(:disabled):not(.is-current) { border-color: var(--color-border-brand); background: var(--color-bg-default); }
 .ds2 .ds-page-btn.is-current { border-color: var(--color-bg-brand); }
 
+/* ---------- 마이페이지 · 팝업: 상자 · 답변 · 주차 고르기 ---------- */
+.ds2 .pp-box { border: 0; border-radius: var(--radius-16); background: var(--color-bg-surface); }
+.ds2 .pp-box-title { font-weight: 800; letter-spacing: -0.01em; }
+.ds2 .pp-box.mq-answer { background: var(--color-bg-tone-blue); }
+.ds2 .pp-box.mq-waiting { background: var(--color-bg-surface); }
+.ds2 .mq-post-title { font-weight: 800; letter-spacing: -0.02em; }
+.ds2 .mp-week { border-color: var(--color-border-brand-soft); border-radius: var(--radius-12); background: var(--color-bg-default); }
+.ds2 .mp-week:hover:not(:disabled) { border-color: var(--color-border-brand); }
+/* 고를 수 없는 주차: 연한 바탕 카드 위라 흰 칸 + 흐린 글자로 */
+.ds2 .mp-week:disabled { border-color: transparent; background: var(--color-bg-default); opacity: 0.6; }
+/* 마이페이지 상세의 내 글 상자 */
+.ds2 .mp-wrapper .lx-panel { border: 0; border-radius: var(--radius-16); background: var(--color-bg-surface); }
+.ds2 .mp-week[aria-pressed="true"] { border-color: var(--color-border-brand); background: var(--color-bg-brand-soft); }
+.ds2 .ds-textarea { border-radius: var(--radius-10); }
+
 /* ---------- 탭 ---------- */
 /* 화면끼리 묶는 탭 · 화면 안 전환 탭 → 알약 탭 (고르면 연한 파랑 바탕 + 파란 글자) */
 .ds2 .page-tabs { gap: var(--space-6); padding: var(--space-6) 0; border-bottom: 0; }
@@ -156,6 +171,8 @@
 @media (max-width: 480px) {
   .ds2 .page-title { font-size: 22px; }
   .ds2 .lx-section-title { font-size: 18px; }
+  .ds2 .ds-table--stack tr,
+  .ds2 .ds-table--stack tr:first-child { border-color: var(--color-border-cool); }
   .ds2 .page-tab { height: 32px; padding: 0 var(--space-12); font-size: 14px; }
   .ds2 .ds-tabs-box { gap: var(--space-6); }
   .ds2 .ds-tab-box,
