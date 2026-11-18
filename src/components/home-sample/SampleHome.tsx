@@ -58,10 +58,7 @@ function HeroSlideBody({ slide }: { slide: HeroSlide }) {
       <div className="hb-inner">
         <div className="hb-text">
           <p className="hb-eyebrow">{slide.eyebrow}</p>
-          <h2 className="hb-title">
-            {/* 흰 제목 + 노란 형광펜 밑줄 */}
-            <span className="sh-hero-mark">{slide.title}</span>
-          </h2>
+          <h2 className="hb-title">{slide.title}</h2>
           <p className="hb-desc">{slide.desc}</p>
           {slide.href && <span className="hb-more">자세히보기</span>}
         </div>
