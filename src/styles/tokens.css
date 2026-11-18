@@ -1,7 +1,8 @@
 /*
- * 한평생원격 디자인 시스템 토큰
- * Figma「한평생원격 디자인 시스템」 변수의 WEB code syntax 와 같은 이름·값.
- * https://www.figma.com/design/1CreWsV187hPtl4AQmpRBS
+ * 한평생원격 디자인 시스템 토큰 (v2 — 메인 화면 기준, 2026-11-18)
+ * Figma「한평생원격 디자인 시스템 v2」 변수의 WEB code syntax 와 같은 이름·값.
+ * https://www.figma.com/design/cZMatbSuKN1wTCM4Eut6Zs
+ * (v1: https://www.figma.com/design/1CreWsV187hPtl4AQmpRBS — 관리 화면은 v1 값 그대로)
  * 값을 바꿀 때는 Figma 변수와 함께 바꾼다.
  */
 :root {
@@ -16,6 +17,13 @@
   --color-text-danger: #e02a2e;
   --color-text-success: #15803d;
   --color-text-warning: #b45309;
+  --color-text-inverse-secondary: rgba(255, 255, 255, 0.85);
+  --color-text-inverse-muted: rgba(255, 255, 255, 0.6);
+  --color-text-tone-blue: #2563eb;
+  --color-text-tone-purple: #6a4cf0;
+  --color-text-tone-green: #0c9150;
+  --color-text-new: #ff383c;
+  --color-text-kakao: #3c1e1e;
 
   /* 바탕 */
   --color-bg-default: #ffffff;
@@ -23,13 +31,29 @@
   --color-bg-muted: #f5f5f5;
   --color-bg-disabled: #f5f5f5;
   --color-bg-brand: #115aed;
-  --color-bg-brand-hover: #0032bb;
+  --color-bg-brand-hover: #0b4bd0;
   --color-bg-brand-subtle: #f3f8ff;
   --color-bg-danger: #e02a2e;
   --color-bg-danger-subtle: #fff1f1;
   --color-bg-success-subtle: #edfaf1;
   --color-bg-warning-subtle: #fff7ed;
   --color-bg-overlay: rgba(0, 0, 0, 0.5);
+  --color-bg-surface: #f3f6fb;
+  --color-bg-brand-soft: #eaf1ff;
+  --color-bg-brand-strong: #0f2a6e;
+  --color-bg-brand-strong-hover: #0a1f55;
+  --color-bg-tone-blue: #eaf1ff;
+  --color-bg-tone-purple: #f0ecff;
+  --color-bg-tone-green: #e5f7ed;
+  --color-bg-inverse: #010101;
+  --color-bg-inverse-subtle: rgba(255, 255, 255, 0.06);
+  --color-bg-inverse-hover: rgba(255, 255, 255, 0.12);
+  --color-bg-new-subtle: #fff1f1;
+  --color-bg-status-live: #2ecc71;
+  --color-bg-status-closed: #b0b8c4;
+  --color-bg-highlight: #ffd640;
+  --color-bg-kakao: #fee500;
+  --color-bg-kakao-hover: #fdd835;
 
   /* 테두리 */
   --color-border-default: #e0e0e0;
@@ -40,6 +64,12 @@
   --color-border-focus: #3f7efb;
   --color-border-danger: #e02a2e;
   --color-border-control: #939393;
+  --color-border-brand-soft: #d6e2fb;
+  --color-border-cool: #e3eaf7;
+  --color-border-soft: #eef1f5;
+  --color-border-separator: #d5dbe5;
+  --color-border-inverse: rgba(255, 255, 255, 0.4);
+  --color-border-inverse-subtle: rgba(255, 255, 255, 0.18);
 
   /* 아이콘 */
   --color-icon-default: #666666;
@@ -47,17 +77,23 @@
   --color-icon-brand: #115aed;
   --color-icon-inverse: #ffffff;
   --color-icon-danger: #e02a2e;
+  --color-icon-accent: #3f7efb;
 
   /* 간격 */
+  --space-2: 2px;
   --space-4: 4px;
+  --space-6: 6px;
   --space-8: 8px;
+  --space-10: 10px;
   --space-12: 12px;
   --space-16: 16px;
   --space-20: 20px;
   --space-24: 24px;
+  --space-28: 28px;
   --space-32: 32px;
   --space-40: 40px;
   --space-48: 48px;
+  --space-56: 56px;
 
   /* 모서리 */
   --radius-4: 4px;
@@ -73,16 +109,36 @@
   --size-control-sm: 32px;
   --size-control-md: 40px;
   --size-control-lg: 48px;
+  --size-fab: 52px;
+  --size-list-item: 64px;
 
   /* 화면 폭 */
-  --layout-user-pc: 1140px;
+  /* 사용자 화면 본문 1100 (틀 1140 = 본문 + 양옆 20) */
+  --layout-user-pc: 1100px;
+  --layout-gutter-pc: 20px;
+  --layout-gutter-mobile: 16px;
   --layout-admin-pc: 1440px;
   --layout-mobile: 360px;
 
-  /* 그림자 (Figma Shadow/sm·md·lg) */
+  /* 그림자 — 관리 화면용 v1 (Figma Admin/Shadow/sm·md·lg) */
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.1);
+  /* 그림자 — 사용자 화면 v2: 브랜드 카드는 파란빛, 화면 위에 떠 있는 것은 남색빛 */
+  --shadow-brand-sm: 0 4px 20px rgba(17, 90, 237, 0.08);
+  --shadow-brand-md: 0 4px 16px rgba(17, 90, 237, 0.12);
+  --shadow-brand-lg: 0 10px 24px rgba(26, 60, 160, 0.22);
+  --shadow-float-sm: 0 4px 10px rgba(12, 23, 38, 0.12);
+  --shadow-float-md: 0 8px 18px rgba(12, 23, 38, 0.1);
+  --shadow-float-lg: 0 8px 28px rgba(12, 23, 38, 0.12);
+
+  /* 그러데이션 (Figma Gradient/…) — 배너 115° · 카드 135° · 상담 바 120° · WHY 판 160° */
+  --gradient-banner-blue: linear-gradient(115deg, #2f7bff, #1a5cff);
+  --gradient-banner-green: linear-gradient(115deg, #1fbf6c, #0fa85a);
+  --gradient-banner-purple: linear-gradient(115deg, #9a7cff, #7a56ff);
+  --gradient-card-navy: linear-gradient(135deg, #1e3a9e, #0f2470);
+  --gradient-panel-navy: linear-gradient(160deg, #1c3f9e, #0f2a6e);
+  --gradient-consult: linear-gradient(120deg, #1e64f0, #4a86fc);
 }
 
 /* 글자 스타일 (Figma 텍스트 스타일과 같은 이름) — Pretendard */
