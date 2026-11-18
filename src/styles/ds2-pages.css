@@ -39,6 +39,14 @@
 /* 위에 뜨는 전공 고르기 창 */
 .ds2 .rg-major { border-color: var(--color-border-cool); border-radius: var(--radius-16); box-shadow: var(--shadow-float-md); }
 .ds2 .lx-flow-item { border-radius: var(--radius-12); background: var(--color-bg-tone-blue); }
+/* 사회복지사 단계 그림(아이콘 + 점선 + 동그라미 화살표): 학점은행제란 그림처럼 연한 바탕 카드.
+   점선 위 표시 · 글을 가리던 흰 테두리도 바탕색으로 맞춘다 */
+.ds2 .sw-flow { border-radius: var(--radius-16); background: var(--color-bg-surface); }
+.ds2 .sw-flow-divider .sw-mark,
+.ds2 .sw-route-path .sw-pill { box-shadow: 0 0 0 4px var(--color-bg-surface); }
+.ds2 .sw-flow-bracket .sw-pill { box-shadow: 0 0 0 6px var(--color-bg-surface); }
+.ds2 .sw-flow-divider-caption,
+.ds2 .sw-route-arrow { background: var(--color-bg-surface); }
 /* 칸 사이 점선은 연한 바탕 위에서 조금 더 옅게 */
 .ds2 .cb-flow-join--arrow::before,
 .ds2 .cb-grid-item + .cb-grid-item::before,
