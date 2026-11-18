@@ -1,6 +1,6 @@
 /*
  * 디자인 시스템 v2 — 메인(/)과 같은 모양을 다른 사용자 화면에 입힌다.
- * 묶음별로 옮기는 중이라, 레이아웃에서 .ds2 로 감싼 화면에만 적용한다 (지금: 학점은행제 · 사회복지사 · 실습지원 · 수강신청 · 학습지원 · 마이페이지 · 회원).
+ * 묶음별로 옮기는 중이라, 레이아웃에서 .ds2 로 감싼 화면에만 적용한다 (지금: 학점은행제 · 사회복지사 · 실습지원 · 수강신청 · 학습지원 · 마이페이지 · 회원 · 바닥글 화면).
  * 규칙은 한평생원격_디자인시스템_v2.md 6장(부품 규칙)을 따른다:
  *   제목은 굵게(800) · 자간 -2%, 상자는 테두리 대신 연한 바탕(bg-surface) + 모서리 16,
  *   버튼 · 입력 칸 모서리는 높이를 따라 32→6 · 40→10 · 48→12.
@@ -164,6 +164,35 @@
 .ds2 .signup-term-body th,
 .ds2 .signup-term-body td { border-color: var(--color-border-cool); }
 .ds2 .signup-term-body th { background: var(--color-bg-tone-blue); }
+
+/* ---------- 바닥글 화면: 교육원 소개 · 약관 · 방침 · 불편사항 접수 ---------- */
+.ds2 .about-lead-box { border-radius: var(--radius-16); background: var(--color-bg-tone-blue); font-weight: 800; letter-spacing: -0.01em; }
+.ds2 .about-banner,
+.ds2 .about-philosophy-img { border-radius: var(--radius-16); }
+.ds2 .about-map { border-color: var(--color-border-cool); border-radius: var(--radius-16); }
+.ds2 .about-feature-list,
+.ds2 .about-feature,
+.ds2 .about-info,
+.ds2 .about-info-row { border-color: var(--color-border-cool); }
+.ds2 .about-scholarship-table tbody th { background: var(--color-bg-surface); }
+.ds2 .legal-sub { border-radius: var(--radius-12); background: var(--color-bg-surface); }
+.ds2 .legal-article,
+.ds2 .legal-video-intro,
+.ds2 .legal-page .privacy-article-section,
+.ds2 .legal-page .privacy-content > h2.privacy-article-title-icons { border-color: var(--color-border-cool); }
+.ds2 .legal-page .privacy-article-title,
+.ds2 .legal-page .privacy-article-title-icons { font-weight: 800; letter-spacing: -0.01em; }
+.ds2 .legal-page :is(.privacy-labeling-title, .privacy-toc-title, .privacy-data-header, .privacy-entrust-header,
+  .privacy-thirdparty-header, .privacy-retention-header, .privacy-protection-header, .privacy-officer-header) {
+  background-color: var(--color-bg-surface);
+  border-bottom-color: var(--color-border-cool);
+  font-weight: 700;
+}
+.ds2 .legal-page :is(.privacy-labeling-cell, .privacy-toc-cell, .privacy-data-cell, .privacy-entrust-cell,
+  .privacy-thirdparty-cell, .privacy-retention-cell, .privacy-protection-cell, .privacy-officer-cell) { border-color: var(--color-border-cool); }
+.ds2 .privacy-labeling-table-wrapper,
+.ds2 .privacy-labeling-table { border-radius: var(--radius-16); }
+.ds2 .contact-consent-details { border: 0; border-radius: var(--radius-12); background: var(--color-bg-surface); }
 
 /* ---------- 탭 ---------- */
 /* 화면끼리 묶는 탭 · 화면 안 전환 탭 → 알약 탭 (고르면 연한 파랑 바탕 + 파란 글자) */
