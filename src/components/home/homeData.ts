@@ -73,26 +73,6 @@ export const courseOpenings: CourseOpening[] = [
   { semester: "다음 개강반" },
 ];
 
-export interface ScheduleItem {
-  label: string;
-  date: string;
-  highlight?: boolean;
-}
-
-/** 시험·과제 기간은 나의 강의실 샘플(classroomData)과 같은 값 */
-export const learningSchedule = {
-  cohort: `${currentTerm.name} (${currentTerm.openingDate} 개강)`,
-  items: [
-    { label: "개강일", date: "26.11.12 (목)", highlight: true },
-    { label: "학습기간", date: "26.11.12 ~ 27.02.24" },
-    { label: "중간고사", date: "26.12.21 ~ 26.12.27" },
-    { label: "기말고사", date: "27.02.15 ~ 27.02.21" },
-    { label: "토론", date: "26.12.14 ~ 26.12.27" },
-    { label: "과제", date: "26.11.30 ~ 26.12.13" },
-    { label: "퀴즈", date: "26.12.07 ~ 27.01.31" },
-  ] satisfies ScheduleItem[],
-};
-
 export interface NoticePost {
   id: number;
   title: string;
@@ -209,16 +189,6 @@ export const consultTimeOptions: SelectOption[] = [
   { value: "15", label: "15~16시" },
   { value: "16", label: "16~17시" },
   { value: "17", label: "17~18시" },
-];
-
-export const educationOptions: SelectOption[] = [
-  { value: "high-school", label: "고등학교 졸업" },
-  { value: "college-2", label: "전문대학 졸업(2년제)" },
-  { value: "college-3", label: "전문대학 졸업(3년제)" },
-  { value: "university-enrolled", label: "대학교 재학" },
-  { value: "university-dropout", label: "대학교 중퇴" },
-  { value: "university-4", label: "대학교 졸업(4년제)" },
-  { value: "other", label: "기타" },
 ];
 
 export const quickMenuLinks = [
