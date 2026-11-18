@@ -1,15 +1,18 @@
 /*
  * 디자인 시스템 v2 — 메인(/)과 같은 모양을 다른 사용자 화면에 입힌다.
- * 묶음별로 옮기는 중이라, 레이아웃에서 .ds2 로 감싼 화면에만 적용한다 (지금: 학점은행제 · 사회복지사 · 실습지원).
+ * 묶음별로 옮기는 중이라, 레이아웃에서 .ds2 로 감싼 화면에만 적용한다 (지금: 학점은행제 · 사회복지사 · 실습지원 · 수강신청).
  * 규칙은 한평생원격_디자인시스템_v2.md 6장(부품 규칙)을 따른다:
  *   제목은 굵게(800) · 자간 -2%, 상자는 테두리 대신 연한 바탕(bg-surface) + 모서리 16,
  *   버튼 · 입력 칸 모서리는 높이를 따라 32→6 · 40→10 · 48→12.
  */
 
 /* ---------- 글자 ---------- */
-.ds2 .page-title { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.35; color: var(--color-text-strong); }
-.ds2 .lx-desc { margin-top: var(--space-6); font-size: 15px; }
-.ds2 .lx-section-title { font-size: 20px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.4; }
+.ds2 .page-title,
+.ds2 .ex-title { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.35; color: var(--color-text-strong); }
+.ds2 .lx-desc,
+.ds2 .ex-desc { margin-top: var(--space-6); font-size: 15px; }
+.ds2 .lx-section-title,
+.ds2 .ex-section-title { font-size: 20px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.4; }
 
 /* ---------- 상자: 테두리 대신 연한 바탕 카드 ---------- */
 .ds2 .lx-page:not(.lx-page--plain) .lx-panel,
@@ -18,11 +21,23 @@
 .ds2 .cb-grid,
 .ds2 .cb-steps-row,
 .ds2 .cb-steps-final,
-.ds2 .lx-doc-status {
+.ds2 .lx-doc-status,
+.ds2 .ex-box,
+.ds2 .ex-step,
+.ds2 .rg-schedule {
   border: 0;
   border-radius: var(--radius-16);
   background: var(--color-bg-surface);
 }
+.ds2 .ex-contact,
+.ds2 .ex-find-value { border-radius: var(--radius-16); background: var(--color-bg-surface); }
+.ds2 .ex-contact dd { font-weight: 800; letter-spacing: -0.01em; }
+.ds2 .ex-method-guide,
+.ds2 .ex-consent-details { border: 0; border-radius: var(--radius-12); background: var(--color-bg-surface); }
+/* 혼자 떠 있는 카드(아이디 찾기 결과)는 흰 카드 + 파란빛 그림자 */
+.ds2 .ex-find-card { border: 0; border-radius: var(--radius-20); box-shadow: var(--shadow-brand-sm); }
+/* 위에 뜨는 전공 고르기 창 */
+.ds2 .rg-major { border-color: var(--color-border-cool); border-radius: var(--radius-16); box-shadow: var(--shadow-float-md); }
 .ds2 .lx-flow-item { border-radius: var(--radius-12); background: var(--color-bg-tone-blue); }
 /* 칸 사이 점선은 연한 바탕 위에서 조금 더 옅게 */
 .ds2 .cb-flow-join--arrow::before,
@@ -33,6 +48,9 @@
 /* 안내 띠 · 상담 띠: 톤 카드 */
 .ds2 .lx-callout,
 .ds2 .lx-law-box,
+.ds2 .ex-hero,
+.ds2 .ex-memo,
+.ds2 .rg-banner,
 .ds2 .cb-consult { border-radius: var(--radius-16); background: var(--color-bg-tone-blue); }
 .ds2 .cb-consult { padding: var(--space-24) var(--space-28); }
 .ds2 .cb-consult-text { font-weight: 800; letter-spacing: -0.01em; }
@@ -41,6 +59,20 @@
 .ds2 .cb-slider-frame { border: 0; border-radius: var(--radius-16); background: var(--color-bg-surface); }
 .ds2 .cb-slider-nav { border-color: var(--color-border-brand-soft); border-radius: var(--radius-10); }
 .ds2 .cb-slider-nav:hover { border-color: var(--color-border-brand); }
+
+/* ---------- 결제 · 장바구니 ---------- */
+/* 결제 수단: 연한 바탕 카드 위에서도 흰 칸, 48 높이 → 모서리 12 */
+.ds2 .ex-method { border-color: var(--color-border-brand-soft); border-radius: var(--radius-12); background: var(--color-bg-default); }
+.ds2 .ex-method.is-active { border-color: var(--color-border-brand); background: var(--color-bg-brand-soft); font-weight: 700; }
+.ds2 .ex-cart-head,
+.ds2 .ex-sum-total { border-color: var(--color-border-cool); }
+.ds2 .ex-sum-total strong { font-weight: 800; letter-spacing: -0.01em; }
+.ds2 .ex-order-item,
+.ds2 .rg-picked-item,
+.ds2 .rg-picked-empty,
+.ds2 .rg-card,
+.ds2 .rg-schedule-item { border-bottom-color: var(--color-border-cool); }
+.ds2 .ex-order-icon { border-radius: var(--radius-6); }
 
 /* ---------- 표: 머리는 푸른 회색, 줄은 옅은 푸른 선 ---------- */
 .ds2 .ds-table { border-top: 2px solid var(--color-text-strong); }
