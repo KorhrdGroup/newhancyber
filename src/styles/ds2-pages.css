@@ -1,6 +1,6 @@
 /*
  * 디자인 시스템 v2 — 메인(/)과 같은 모양을 다른 사용자 화면에 입힌다.
- * 묶음별로 옮기는 중이라, 레이아웃에서 .ds2 로 감싼 화면에만 적용한다 (지금: 학점은행제 · 사회복지사 · 실습지원 · 수강신청 · 학습지원 · 마이페이지).
+ * 묶음별로 옮기는 중이라, 레이아웃에서 .ds2 로 감싼 화면에만 적용한다 (지금: 학점은행제 · 사회복지사 · 실습지원 · 수강신청 · 학습지원 · 마이페이지 · 회원).
  * 규칙은 한평생원격_디자인시스템_v2.md 6장(부품 규칙)을 따른다:
  *   제목은 굵게(800) · 자간 -2%, 상자는 테두리 대신 연한 바탕(bg-surface) + 모서리 16,
  *   버튼 · 입력 칸 모서리는 높이를 따라 32→6 · 40→10 · 48→12.
@@ -141,6 +141,30 @@
 .ds2 .mp-week[aria-pressed="true"] { border-color: var(--color-border-brand); background: var(--color-bg-brand-soft); }
 .ds2 .ds-textarea { border-radius: var(--radius-10); }
 
+/* ---------- 회원: 로그인 · 가입 단계 · 약관 동의 ---------- */
+.ds2 .member-title { font-weight: 800; letter-spacing: -0.02em; }
+.ds2 .member-col-title,
+.ds2 .signup-done-title { font-weight: 800; letter-spacing: -0.01em; }
+.ds2 .member-col + .member-col { border-color: var(--color-border-cool); }
+.ds2 .member-sns-btn { border-radius: var(--radius-12); }
+.ds2 .member-help { border-radius: var(--radius-16); background: var(--color-bg-surface); }
+.ds2 .member-help-item + .member-help-item { border-color: var(--color-border-cool); }
+.ds2 .signup-step + .signup-step::before { background: var(--color-border-cool); }
+.ds2 .signup-step.is-done::before,
+.ds2 .signup-step.is-current::before { background: var(--color-bg-brand); }
+.ds2 .signup-step-num { background: var(--color-bg-surface); font-weight: 700; }
+.ds2 .signup-step.is-done .signup-step-num { background: var(--color-bg-brand-soft); }
+.ds2 .signup-step.is-current .signup-step-num { background: var(--color-bg-brand); }
+.ds2 .ds-check.signup-all { border-radius: var(--radius-16); background: var(--color-bg-surface); }
+.ds2 .signup-all-title { font-weight: 800; }
+.ds2 .signup-terms { border-color: var(--color-border-cool); border-radius: var(--radius-16); }
+.ds2 .signup-term + .signup-term { border-color: var(--color-border-cool); }
+.ds2 .signup-term-toggle:hover { background: var(--color-bg-surface); }
+.ds2 .signup-term-body { border-radius: var(--radius-12); background: var(--color-bg-surface); }
+.ds2 .signup-term-body th,
+.ds2 .signup-term-body td { border-color: var(--color-border-cool); }
+.ds2 .signup-term-body th { background: var(--color-bg-tone-blue); }
+
 /* ---------- 탭 ---------- */
 /* 화면끼리 묶는 탭 · 화면 안 전환 탭 → 알약 탭 (고르면 연한 파랑 바탕 + 파란 글자) */
 .ds2 .page-tabs { gap: var(--space-6); padding: var(--space-6) 0; border-bottom: 0; }
@@ -171,6 +195,7 @@
 @media (max-width: 480px) {
   .ds2 .page-title { font-size: 22px; }
   .ds2 .lx-section-title { font-size: 18px; }
+  .ds2 .member-sns-btn { border-radius: var(--radius-full); }
   .ds2 .ds-table--stack tr,
   .ds2 .ds-table--stack tr:first-child { border-color: var(--color-border-cool); }
   .ds2 .page-tab { height: 32px; padding: 0 var(--space-12); font-size: 14px; }
