@@ -1,35 +1,16 @@
-import ClosingCta from "@/components/home/ClosingCta";
-import EssentialCheck from "@/components/home/EssentialCheck";
-import EventConsultation from "@/components/home/EventConsultation";
 import FloatingMenu from "@/components/home/FloatingMenu";
-import HeroSwiper from "@/components/home/HeroSwiper";
 import MobileSocialFooter from "@/components/home/MobileSocialFooter";
-import { BannerSection, ContactInfo } from "@/components/home/QuickBanners";
-import ScheduleNotice from "@/components/home/ScheduleNotice";
-import MobileDeadlineBanner from "@/components/home/MobileDeadlineBanner";
-import { AcademicNotice, MobileCourseCards } from "@/components/home/StatusBanners";
-import WhyChoose from "@/components/home/WhyChoose";
-// 메인 완성도 보강 (style.css 뒤에 읽혀 덮어쓴다)
+import SampleHome from "@/components/home-sample/SampleHome";
+/* 떠 있는 메뉴가 배너를 가리지 않게 하는 규칙이 기존 메인 스타일에 있어 같이 불러온다 */
 import "@/styles/home.css";
 
+/** 메인 — 메인 시안 화면 (예전 /sample) */
 export default function HomePage() {
   return (
     <>
-      <main>
-        <MobileDeadlineBanner />
-        <HeroSwiper />
-        <MobileCourseCards />
-        <AcademicNotice />
-        <BannerSection />
-        <ContactInfo />
-        <EventConsultation />
-        <MobileSocialFooter />
-        <ScheduleNotice />
-        <EssentialCheck />
-        {/* 학습자 후기 섹션(reviews-section)은 원본에서도 주석 처리 — 오픈 시 index.html 1333행부터 옮긴다 */}
-        <WhyChoose />
-        <ClosingCta />
-      </main>
+      <SampleHome />
+      {/* 모바일 맨 아래 SNS · 사업자 정보 (기존 메인과 같은 부품) */}
+      <MobileSocialFooter />
       <FloatingMenu />
     </>
   );

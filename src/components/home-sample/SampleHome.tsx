@@ -556,7 +556,7 @@ function WhyHanpyeong() {
   );
 }
 
-/** /sample — 메인 시안 B (첫 시안 배치 + 제목 탭 배너 · 모집 중 표시 · 페이지 안 무료 상담) */
+/** 메인(/) — 메인 시안 B (첫 시안 배치 + 제목 탭 배너 · 모집 중 표시 · 페이지 안 무료 상담) */
 export default function SampleHome() {
   const [consultClosed, setConsultClosed] = useState(false);
   return (

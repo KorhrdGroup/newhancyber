@@ -738,6 +738,8 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
 /* 폰 머리줄(70px, 고정)은 480px 이하에서만 나온다 — 그 아래로 내려 시작 */
 @media (max-width: 480px) {
   .sh-main { padding-top: 82px; }
+  /* 메인(/)에선 머리줄 아래 '회원가입·수강신청·나의 강의실' 줄까지 붙어 111px */
+  body:has(.mobile-nav) .sh-main { padding-top: 123px; }
 }
 
 /* ---------- 오른쪽 사이드 플로팅 (PC 1280 이상, 22s.kr 참고) — 둥근 알약 버튼을 세로로 ---------- */
