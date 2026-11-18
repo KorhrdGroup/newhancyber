@@ -61,7 +61,7 @@
 .ds2 .ds-input { border-radius: var(--radius-10); }
 
 /* ---------- 탭 ---------- */
-/* 화면끼리 묶는 탭 · 화면 안 전환 탭 → 알약 탭 (고르면 검정 바탕 + 흰 글자) */
+/* 화면끼리 묶는 탭 · 화면 안 전환 탭 → 알약 탭 (고르면 연한 파랑 바탕 + 파란 글자) */
 .ds2 .page-tabs { gap: var(--space-6); padding: var(--space-6) 0; border-bottom: 0; }
 .ds2 .page-tab {
   height: 36px;
@@ -73,7 +73,8 @@
   font-weight: 700;
 }
 .ds2 button.page-tab { border: 0; }
-.ds2 .page-tab.is-active { background: var(--color-bg-inverse); color: var(--color-text-inverse); }
+.ds2 .page-tab:hover { color: var(--color-text-brand); }
+.ds2 .page-tab.is-active { background: var(--color-bg-brand-soft); color: var(--color-text-brand); }
 /* 상자 탭(FAQ 분류 · 실습 단계) → 칸을 띄운 둥근 카드 */
 .ds2 .ds-tabs-box { gap: var(--space-8); }
 .ds2 .ds-tab-box {
