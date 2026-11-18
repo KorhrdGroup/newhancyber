@@ -76,13 +76,6 @@
 .sh-hero .hb-slide--purple { --hb-bg-1: #9a7cff; --hb-bg-2: #7a56ff; --hb-sub: #f2eeff; }
 .sh-hero .hb-eyebrow { color: var(--hb-sub); }
 .sh-hero .hb-title { color: #fff; }
-/* 제목 아래쪽 1/3에 노란 형광펜 (줄이 바뀌어도 줄마다 그어진다) */
-.sh-hero-mark {
-  padding: 0 4px;
-  background: linear-gradient(transparent 62%, rgba(255, 214, 64, 0.85) 62%, rgba(255, 214, 64, 0.85) 92%, transparent 92%);
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
-}
 .sh-hero .hb-desc { color: var(--hb-sub); }
 .sh-hero .hb-more { border-color: var(--hb-sub); background: rgba(255, 255, 255, 0.12); color: #fff; }
 
