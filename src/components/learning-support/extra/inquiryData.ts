@@ -74,5 +74,3 @@ export const inquiries: Inquiry[] = [
     },
   },
 ];
-
-export const getInquiry = (id: string) => inquiries.find((item) => item.id === id);
