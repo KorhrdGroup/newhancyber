@@ -19,7 +19,7 @@ const DEFAULT_SCOPES = [
 /**
  * 목록 위 검색 줄: 왼쪽 글 수, 오른쪽 검색 (원본도 동작 없음).
  * filters 는 검색 범위 앞에 붙는 선택 칸(예: 마이페이지 학습 게시판의 학기·과목)
- * lead 는 글 수 앞에 붙는 것(예: 공지사항 구분 토글)
+ * lead 는 글 수 앞에 붙는 것(예: 공지사항 구분 세그먼트)
  */
 export function SearchBox({
   total,
