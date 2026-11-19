@@ -433,16 +433,17 @@
 .pp-side { position: sticky; top: 80px; display: flex; flex-direction: column; gap: var(--space-12); padding: var(--space-16); border: 1px solid var(--color-border-default); border-radius: var(--radius-8); background: var(--color-bg-default); }
 .pp-timer { font-size: 24px; font-weight: 700; line-height: 1.4; color: var(--color-text-brand); text-align: center; font-variant-numeric: tabular-nums; }
 .pp-timer.is-low { color: var(--color-text-danger); }
-/* 푼 문항: 개수 + 진행 막대, 아래 둥근 번호 (푼 문항은 연한 파랑) */
+/* 푼 문항: 개수 + 진행 막대, 아래에 안 푼 문항 번호만 */
 .pp-progress-head { display: flex; justify-content: space-between; align-items: baseline; margin: 0; font-size: 13px; color: var(--color-text-secondary); }
 .pp-progress-head strong { font-size: 16px; font-weight: 700; color: var(--color-text-strong); font-variant-numeric: tabular-nums; }
 .pp-progress-head small { font-size: 13px; font-weight: 400; color: var(--color-text-secondary); }
 .pp-progress-bar { height: 6px; margin-top: var(--space-8); border-radius: var(--radius-full); background: var(--color-bg-muted); overflow: hidden; }
 .pp-progress-bar i { display: block; height: 100%; border-radius: inherit; background: var(--color-bg-brand); transition: width 0.2s ease; }
-.pp-omr { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--space-6); }
-.pp-omr a { display: grid; place-items: center; aspect-ratio: 1; border-radius: var(--radius-full); background: var(--color-bg-subtle); font-size: 12px; color: var(--color-text-secondary); text-decoration: none; font-variant-numeric: tabular-nums; transition: background-color 0.15s, color 0.15s; }
-.pp-omr a:hover { background: var(--color-bg-muted); color: var(--color-text-strong); }
-.pp-omr a.is-done { background: var(--color-bg-brand-soft); color: var(--color-text-brand); font-weight: 700; }
+.pp-blanks-title { margin: 0 0 var(--space-8); font-size: 13px; color: var(--color-text-secondary); }
+.pp-blanks-list { display: flex; flex-wrap: wrap; gap: var(--space-4); }
+.pp-blanks-list a { display: grid; place-items: center; min-width: 26px; height: 24px; padding: 0 var(--space-4); border-radius: var(--radius-6); background: var(--color-bg-subtle); font-size: 12px; color: var(--color-text-default); text-decoration: none; font-variant-numeric: tabular-nums; transition: background-color 0.15s, color 0.15s; }
+.pp-blanks-list a:hover { background: var(--color-bg-brand-soft); color: var(--color-text-brand); }
+.pp-blanks-done { margin: 0; padding: var(--space-8) 0; font-size: 14px; font-weight: 600; color: var(--color-text-success); text-align: center; }
 
 /* 별점 */
 .pp-stars { display: flex; gap: var(--space-4); }

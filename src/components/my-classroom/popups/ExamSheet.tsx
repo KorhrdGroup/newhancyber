@@ -9,6 +9,7 @@ export default function ExamSheet({ questions, minutes, submitLabel }: { questio
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [left, setLeft] = useState(minutes ? minutes * 60 : 0);
   const answered = Object.keys(answers).length;
+  const blanks = questions.filter((q) => answers[q.no] === undefined);
 
   useEffect(() => {
     if (!minutes) return;
@@ -69,17 +70,21 @@ export default function ExamSheet({ questions, minutes, submitLabel }: { questio
             <i style={{ width: `${(answered / questions.length) * 100}%` }} />
           </div>
         </div>
-        {/* 번호를 누르면 그 문항으로 간다. 푼 문항은 연한 파랑 동그라미 */}
-        <nav className="pp-omr" aria-label="문항 바로가기">
-          {questions.map((q) => {
-            const done = answers[q.no] !== undefined;
-            return (
-              <a key={q.no} href={`#q-${q.no}`} className={done ? "is-done" : undefined} aria-label={`${q.no}번${done ? " (풀었음)" : ""}`}>
-                {q.no}
-              </a>
-            );
-          })}
-        </nav>
+        {/* 안 푼 문항만 번호로 보여 준다. 누르면 그 문항으로 간다 */}
+        {blanks.length > 0 ? (
+          <nav className="pp-blanks" aria-label="안 푼 문항 바로가기">
+            <p className="pp-blanks-title">안 푼 문항</p>
+            <div className="pp-blanks-list">
+              {blanks.map((q) => (
+                <a key={q.no} href={`#q-${q.no}`} aria-label={`${q.no}번 문항으로`}>
+                  {q.no}
+                </a>
+              ))}
+            </div>
+          </nav>
+        ) : (
+          <p className="pp-blanks-done">모두 풀었어요</p>
+        )}
         <button type="button" className="ds-btn ds-btn--primary" onClick={submit}>
           {submitLabel}
         </button>
