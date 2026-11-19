@@ -11,7 +11,11 @@ import { courseTerm, courseTitle, getBoardPosts, type BoardKind } from "../myPag
 import "@/styles/classroom.css";
 import "@/styles/learning-extra.css";
 
-const columns: BoardColumn[] = [{ key: "course", label: "학기 / 과목", at: "before-title", width: 240 }];
+// 학기 · 과목을 한 칸에 두 줄로 쌓으면 답답해서 칸을 나눠 한 줄씩 가로로 둔다
+const columns: BoardColumn[] = [
+  { key: "term", label: "학기", at: "before-title", width: 160 },
+  { key: "course", label: "과목", at: "before-title", width: 180 },
+];
 const scopes = [
   { value: "title", label: "제목" },
   { value: "content", label: "내용" },
@@ -33,12 +37,8 @@ export default function BoardTable({ kind }: { kind: BoardKind }) {
     date: post.date,
     href: `/my-page/study-board/post/${post.id}`,
     cells: {
-      course: (
-        <>
-          <span className="lx-board-term">{courseTerm(post.courseId)}</span>
-          {courseTitle(post.courseId)}
-        </>
-      ),
+      term: courseTerm(post.courseId),
+      course: courseTitle(post.courseId),
     },
     meta: <span>{courseTitle(post.courseId)}</span>,
   }));
