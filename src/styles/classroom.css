@@ -132,6 +132,17 @@
   cursor: pointer;
 }
 .ds-textarea--sm { min-height: 100px; }
+/* 검색 칸 지우기(x): 브라우저 기본 x 대신 16px 회색 동그라미 안 흰 x (search-clear.svg), 셀렉트 화살표와 같은 크기 */
+.ds-input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  margin-left: var(--space-8);
+  background: url("/resources/images/ds/search-clear.svg") no-repeat center / 16px 16px;
+  cursor: pointer;
+}
+.ds-input[type="search"]::-webkit-search-cancel-button:hover { opacity: 0.75; }
 .ds-input::placeholder,
 .ds-textarea::placeholder { color: var(--color-text-placeholder); }
 .ds-input:focus,
