@@ -83,7 +83,9 @@
 .ds2 .ex-order-icon { border-radius: var(--radius-6); }
 
 /* ---------- 표: 머리는 푸른 회색, 줄은 옅은 푸른 선 ---------- */
-.ds2 .ds-table { border-top: 2px solid var(--color-text-strong); }
+/* 표 · 질문 목록 위 두꺼운 선: 검정 대신 회색 */
+.ds2 .ds-table,
+.ds2 .ds-accordion { border-top: 2px solid var(--color-border-control); }
 .ds2 .ds-table th { background: var(--color-bg-surface); border-bottom-color: var(--color-border-cool); font-weight: 700; }
 .ds2 .ds-table td { border-bottom-color: var(--color-border-cool); }
 .ds2 .cb-page .lx-table th,
