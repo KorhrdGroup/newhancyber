@@ -233,6 +233,33 @@
 }
 .ds2 .ds-tab-box + .ds-tab-box { margin-left: 0; }
 .ds2 .ds-tab-box.is-active { border-color: var(--color-border-brand); background: var(--color-bg-tone-blue); font-weight: 700; }
+/* 폴더 탭 (시험 적용: 행정절차 가이드만) — 고른 탭이 아래 흰 본문과 이어진다.
+   탭 줄 아래 선은 바탕 그림으로 그려서, 고른 탭의 흰 바탕이 그 선을 덮는다 */
+.ds2 .cb-guide-tabs { padding-top: var(--space-32); }
+.ds2 .cb-guide-tabs .page-tabs {
+  align-items: flex-end;
+  gap: var(--space-4);
+  padding: 0;
+  background: linear-gradient(var(--color-border-cool), var(--color-border-cool)) left bottom / 100% 1px no-repeat;
+}
+.ds2 .cb-guide-tabs button.page-tab {
+  height: 46px;
+  padding: 0 var(--space-20);
+  border: 1px solid transparent;
+  border-bottom: 0;
+  border-radius: var(--radius-12) var(--radius-12) 0 0;
+  background: var(--color-bg-surface);
+  color: var(--color-text-secondary);
+  font-size: 16px;
+}
+.ds2 .cb-guide-tabs button.page-tab:hover { color: var(--color-text-strong); }
+.ds2 .cb-guide-tabs button.page-tab.is-active {
+  height: 52px;
+  border-color: var(--color-border-cool);
+  background: var(--color-bg-default);
+  color: var(--color-text-strong);
+  font-weight: 800;
+}
 
 @media (max-width: 480px) {
   .ds2 .page-title { font-size: 22px; }
@@ -241,6 +268,8 @@
   .ds2 .ds-table--stack tr,
   .ds2 .ds-table--stack tr:first-child { border-color: var(--color-border-cool); }
   .ds2 .page-tab { height: 32px; padding: 0 var(--space-12); font-size: 14px; }
+  .ds2 .cb-guide-tabs button.page-tab { flex: none; height: 42px; padding: 0 var(--space-12); font-size: 14px; }
+  .ds2 .cb-guide-tabs button.page-tab.is-active { height: 46px; }
   .ds2 .ds-tabs-box { gap: var(--space-6); }
   .ds2 .ds-tab-box,
   .ds2 .lx-faq-tabs .ds-tab-box { flex: 1 0 calc(33.334% - var(--space-6)); margin: 0; }
