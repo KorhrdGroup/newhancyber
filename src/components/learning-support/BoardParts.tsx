@@ -19,18 +19,22 @@ const DEFAULT_SCOPES = [
 /**
  * 목록 위 검색 줄: 왼쪽 글 수, 오른쪽 검색 (원본도 동작 없음).
  * filters 는 검색 범위 앞에 붙는 선택 칸(예: 마이페이지 학습 게시판의 학기·과목)
+ * lead 는 글 수 앞에 붙는 것(예: 학사일정 이론/실습 탭 시안)
  */
 export function SearchBox({
   total,
   filters,
+  lead,
   scopes = DEFAULT_SCOPES,
 }: {
   total?: number;
+  lead?: ReactNode;
   filters?: ReactNode;
   scopes?: { value: string; label: string }[];
 }) {
   return (
     <form className="lx-board-bar" role="search">
+      {lead}
       {total !== undefined && (
         <p className="lx-board-count">
           총 <strong>{total}</strong>건

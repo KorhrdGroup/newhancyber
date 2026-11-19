@@ -239,9 +239,26 @@
 .ds2 .ds-tabs-box[data-tab-style="3"] { display: inline-flex; gap: 0; padding: var(--space-4); border-radius: var(--radius-full); background: var(--color-bg-surface); }
 .ds2 .ds-tabs-box[data-tab-style="3"] .ds-tab-box { flex: none; height: 40px; padding: 0 var(--space-24); border: 0; border-radius: var(--radius-full); background: transparent; color: var(--color-text-secondary); }
 .ds2 .ds-tabs-box[data-tab-style="3"] .ds-tab-box.is-active { background: var(--color-bg-brand); color: var(--color-text-inverse); }
+/* 4 작은 알약 토글 (PC·모바일 모두 글자 폭만큼) · 5 같은 토글을 검색 줄 왼쪽에 (모바일은 4와 같음) */
+.ds2 .ds-tabs-box:is([data-tab-style="4"], [data-tab-style="5"]) { display: inline-flex; width: auto; gap: 0; padding: var(--space-4); border-radius: var(--radius-full); background: var(--color-bg-surface); }
+.ds2 .ds-tabs-box:is([data-tab-style="4"], [data-tab-style="5"]) .ds-tab-box { flex: none; height: 32px; padding: 0 var(--space-16); border: 0; border-radius: var(--radius-full); background: transparent; font-size: 14px; color: var(--color-text-secondary); }
+.ds2 .ds-tabs-box:is([data-tab-style="4"], [data-tab-style="5"]) .ds-tab-box.is-active { background: var(--color-bg-brand); color: var(--color-text-inverse); }
+.ds2 .lx-schedule-tabs[data-tab-style="4"] { margin-bottom: var(--space-24); }
+.ds2 .lx-board-bar:has(> [data-tab-style="5"]) { justify-content: flex-start; }
+/* 6 글자 + 세로 구분선 (고른 쪽만 진하게) */
+.ds2 .ds-tabs-box[data-tab-style="6"] { width: auto; gap: 0; }
+.ds2 .ds-tabs-box[data-tab-style="6"] .ds-tab-box { position: relative; flex: none; height: 32px; padding: 0 var(--space-16); border: 0; border-radius: 0; background: transparent; font-weight: 500; color: var(--color-text-muted); }
+.ds2 .ds-tabs-box[data-tab-style="6"] .ds-tab-box:first-child { padding-left: 0; }
+.ds2 .ds-tabs-box[data-tab-style="6"] .ds-tab-box + .ds-tab-box::before { content: ""; position: absolute; top: 50%; left: 0; width: 1px; height: 14px; margin-top: -7px; background: var(--color-border-default); }
+.ds2 .ds-tabs-box[data-tab-style="6"] .ds-tab-box.is-active { font-weight: 700; color: var(--color-text-strong); }
+.ds2 .lx-schedule-tabs[data-tab-style="6"] { margin-bottom: var(--space-16); }
 @media (max-width: 480px) {
   .ds2 .ds-tabs-box[data-tab-style="3"] { display: flex; width: 100%; }
   .ds2 .ds-tabs-box[data-tab-style="3"] .ds-tab-box { flex: 1 1 0; height: 36px; padding: 0 var(--space-12); }
+  .ds2 .ds-tabs-box:is([data-tab-style="4"], [data-tab-style="5"], [data-tab-style="6"]) .ds-tab-box { flex: none; min-height: 0; margin: 0; font-size: 14px; }
+  .ds2 .ds-tabs-box:is([data-tab-style="4"], [data-tab-style="5"]) .ds-tab-box { height: 32px; padding: 0 var(--space-16); }
+  .ds2 .ds-tabs-box[data-tab-style="6"] .ds-tab-box { height: 32px; padding: 0 var(--space-12); }
+  .ds2 .ds-tabs-box[data-tab-style="6"] .ds-tab-box:first-child { padding-left: 0; }
 }
 
 @media (max-width: 480px) {

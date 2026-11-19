@@ -19,54 +19,50 @@ const totalOf = (key: ScheduleTabKey) =>
  */
 export default function ScheduleBoard() {
   const [tab, setTab] = useState<ScheduleTabKey>("theory");
-  // 시안 비교용(임시): 주소 끝 ?tab=1·2·3 으로 이론/실습 탭 모양을 바꿔 본다. 정하면 지운다.
+  // 시안 비교용(임시): 주소 끝 ?tab=1~6 으로 이론/실습 탭 모양을 바꿔 본다. 정하면 지운다.
   const [tabStyle, setTabStyle] = useState<string>();
   useEffect(() => {
     const n = new URLSearchParams(window.location.search).get("tab");
-    if (n && ["1", "2", "3"].includes(n)) setTabStyle(n);
+    if (n && ["1", "2", "3", "4", "5", "6"].includes(n)) setTabStyle(n);
   }, []);
+
+  // 시안 5: 데스크톱은 탭을 따로 두지 않고 검색 줄 왼쪽에 넣는다
+  const inBar = tabStyle === "5";
+  const tabList = (className?: string) => (
+    <div
+      className={`ds-tabs-box${className ? ` ${className}` : ""}`}
+      role="tablist"
+      aria-label="과목 구분"
+      data-tab-style={tabStyle}
+    >
+      {tabs.map((t) => (
+        <button
+          key={t.key}
+          type="button"
+          role="tab"
+          aria-selected={t.key === tab}
+          className={`ds-tab-box${t.key === tab ? " is-active" : ""}`}
+          onClick={() => setTab(t.key)}
+        >
+          {t.label}
+        </button>
+      ))}
+    </div>
+  );
 
   // TODO: API — 탭별 학사일정 목록 조회
   const posts = schedulePosts[tab];
 
   return (
     <>
-      <div className="mobile-schedule-tabs mobile-only">
-        <div className="ds-tabs-box" role="tablist" aria-label="과목 구분" data-tab-style={tabStyle}>
-          {tabs.map((t) => (
-            <button
-              key={t.key}
-              type="button"
-              role="tab"
-              aria-selected={t.key === tab}
-              className={`ds-tab-box${t.key === tab ? " is-active" : ""}`}
-              onClick={() => setTab(t.key)}
-            >
-              {t.label}
-            </button>
-          ))}
-        </div>
-      </div>
+      <div className="mobile-schedule-tabs mobile-only">{tabList()}</div>
 
       <MobileBoardList kind="schedule" posts={posts} />
 
       <div className="practice-support-notice-list-section desktop-only">
         <div className="container" style={{ backgroundColor: "#fff" }}>
-          <div className="ds-tabs-box lx-schedule-tabs" role="tablist" aria-label="과목 구분" data-tab-style={tabStyle}>
-            {tabs.map((t) => (
-              <button
-                key={t.key}
-                type="button"
-                role="tab"
-                aria-selected={t.key === tab}
-                className={`ds-tab-box${t.key === tab ? " is-active" : ""}`}
-                onClick={() => setTab(t.key)}
-              >
-                {t.label}
-              </button>
-            ))}
-          </div>
-          <SearchBox total={totalOf(tab)} />
+          {!inBar && tabList("lx-schedule-tabs")}
+          <SearchBox total={totalOf(tab)} lead={inBar ? tabList() : undefined} />
           <BoardTable posts={posts} />
           <Pagination className="desktop-only" />
         </div>
