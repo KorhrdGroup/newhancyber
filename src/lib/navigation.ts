@@ -97,7 +97,7 @@ export const myPageTabs: NavLink[] = [
   { label: "증명서 발급", href: "/my-page/certificates" },
   { label: "결제 내역", href: "/my-page/payments" },
   { label: "쿠폰 사용내역", href: "/my-page/coupons" },
-  { label: "문의·게시판", href: "/my-page/study-board", match: ["/my-page/inquiries"] },
+  { label: "학습 게시판", href: "/my-page/study-board", match: ["/my-page/inquiries"] },
   { label: "설문조사", href: "/my-page/surveys" },
   { label: "각종 예외 신청", href: "/my-page/exceptions" },
   { label: "성적 이의신청", href: "/my-page/appeals" },
@@ -106,7 +106,7 @@ export const myPageTabs: NavLink[] = [
 
 /* 마이페이지 탭 하나에 묶은 화면들의 작은 탭 */
 
-/** 문의·게시판 (앞의 두 탭은 원본 학습 게시판 탭 이름 그대로. 학습 Q&A 는 2026-11-19 뺌 — 1:1 문의로 충분) */
+/** 학습 게시판 (앞의 두 탭은 원본 학습 게시판 탭 이름 그대로. 학습 Q&A 는 2026-11-19 뺌 — 1:1 문의로 충분) */
 export const myPageBoardTabs: NavLink[] = [
   { label: "학습 공지사항", href: "/my-page/study-board" },
   { label: "학습 자료실", href: "/my-page/study-board/materials" },
