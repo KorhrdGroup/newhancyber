@@ -1,15 +1,10 @@
 /**
- * 추가 화면(결제하기·평생교육바우처·장학후기·운영규칙·찾기 결과·학습설계 결과·결제 현황 탭) 샘플 데이터.
+ * 추가 화면(결제하기·평생교육바우처·운영규칙·찾기 결과·학습설계 결과·결제 현황 탭) 샘플 데이터.
  * TODO: API 연동 시 서버에서 받아온다.
  */
 import type { NavLink } from "@/types/navigation";
 
 /* ---------- 화면 안 탭 ---------- */
-export const reviewTabs: NavLink[] = [
-  { label: "수강후기", href: "/course-registration/reviews" },
-  { label: "장학후기", href: "/course-registration/reviews/scholarship" },
-];
-
 export const learningDesignTabs: NavLink[] = [
   { label: "무료 학습설계 신청", href: "/course-registration/learning-design" },
   { label: "신청 결과 확인", href: "/course-registration/learning-design/result" },
@@ -80,33 +75,6 @@ export const supportContacts = {
   learning: "1661-7768",
   email: "hpsedu20@naver.com",
 };
-
-/* ---------- 장학후기 (게시판 목록) ---------- */
-export interface ScholarshipReview {
-  id: number;
-  title: string;
-  writer: string;
-  date: string;
-  views: number;
-  hasFile?: boolean;
-  best?: boolean;
-}
-
-// TODO: API 장학후기 목록 조회 (원본 /bbs/bbsList.asp?bbs_mng_idx=15 — 실제 사이트엔 아직 글이 없어 샘플)
-export const scholarshipReviews: ScholarshipReview[] = [
-  { id: 1, title: "[사회복지사] 2025-1학기 성적우수장학생 김지현 학습자 장학후기", writer: "한*생", date: "25.10.21", views: 5233, best: true, hasFile: true },
-  { id: 2, title: "[평생교육사] 2024-2학기 성적우수장학생 최현서 학습자 장학후기", writer: "한*생", date: "25.10.21", views: 3120, best: true },
-  { id: 3, title: "[사회복지사] 2024-2학기 성적우수장학생 이설희 학습자 장학후기", writer: "한*생", date: "25.10.21", views: 2874, best: true },
-  { id: 12, title: "[청소년지도사] 2024-2학기 성적우수장학생 맹민영 학습자 장학후기", writer: "한*생", date: "25.10.20", views: 1532 },
-  { id: 11, title: "[사회복지사] 2024-1학기 성적우수장학생 박민수 학습자 장학후기", writer: "김*영", date: "25.10.18", views: 984, hasFile: true },
-  { id: 10, title: "[보육교사] 2024-2학기 성적우수장학생 이지은 학습자 장학후기", writer: "최*호", date: "25.10.15", views: 812 },
-  { id: 9, title: "[경영학] 2024-1학기 성적우수장학생 정수진 학습자 장학후기", writer: "박*수", date: "25.10.11", views: 655 },
-  { id: 8, title: "[심리학] 2024-2학기 성적우수장학생 강민지 학습자 장학후기", writer: "이*희", date: "25.10.02", views: 601, hasFile: true },
-  { id: 7, title: "[사회복지사] 2023-2학기 성적우수장학생 황지훈 학습자 장학후기", writer: "오*진", date: "25.09.24", views: 547 },
-  { id: 6, title: "[평생교육사] 2023-1학기 성적우수장학생 송민규 학습자 장학후기", writer: "신*아", date: "25.09.12", views: 498 },
-  { id: 5, title: "[청소년지도사] 2023-2학기 성적우수장학생 임다은 학습자 장학후기", writer: "조*현", date: "25.08.30", views: 432 },
-  { id: 4, title: "[보육교사] 2023-1학기 성적우수장학생 한소희 학습자 장학후기", writer: "배*민", date: "25.08.19", views: 389 },
-];
 
 /* ---------- 아이디·비밀번호 찾기 결과 ---------- */
 // TODO: API 찾기 결과 (지금은 샘플)

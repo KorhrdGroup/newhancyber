@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import ExTabs from "@/components/course-registration/extra/ExTabs";
-import { reviewTabs } from "@/components/course-registration/extra/extraData";
+import MobilePageBanner from "@/components/layout/MobilePageBanner";
 import { BoardTable, MobileBoardList, Pagination, SearchBox } from "@/components/learning-support/BoardParts";
 import type { BoardPost } from "@/components/learning-support/boardData";
 import { courseReviews as reviews, reviewHref } from "@/components/course-registration/reviewData";
@@ -27,7 +26,7 @@ const posts: BoardPost[] = reviews.map((review) => ({
 export default function CourseReviewsPage() {
   return (
     <>
-      <ExTabs items={reviewTabs} underHeader />
+      <MobilePageBanner name="cart" text="수강후기" />
       <main className="wrapper">
         <MobileBoardList kind="notice" posts={posts} dateLabel="등록일" />
 

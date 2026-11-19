@@ -91,7 +91,6 @@ const sections: { title: string; links: NavLink[] }[] = [
       { label: "수강신청", href: "/course-registration/register" },
       { label: "수강신청 절차", href: "/course-registration/process" },
       { label: "수강후기", href: "/course-registration/reviews" },
-      { label: "장학후기", href: "/course-registration/reviews/scholarship" },
       { label: "학습비 반환규정", href: "/course-registration/refund" },
       { label: "수강규정", href: "/course-registration/regulations" },
       { label: "무료학습설계", href: "/course-registration/learning-design" },
