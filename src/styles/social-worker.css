@@ -1783,31 +1783,35 @@
 /* 전적대 학점 인정 안내: 카드와 같은 회색 상자 */
 .sw-design .lx-panel.sw-design-notes { padding: var(--space-24) var(--space-32); border-radius: var(--radius-16); background: var(--color-bg-surface); }
 .sw-design .sw-design-notes .lx-notes:first-child { margin-top: 0; }
+/* 파란 안내 문구는 카드 다음, 회색 안내 상자 바로 위에 붙여 둔다 */
+.sw-design .lx-callout { margin-top: var(--space-40); }
+.sw-design .lx-callout + .lx-panel.sw-design-notes { margin-top: var(--space-12); }
 @media (max-width: 480px) {
   .sw-design .sw-flow--credit > .sw-flow-group:first-child,
   .sw-design .sw-flow--credit > .sw-flow-group:last-child { flex: none; }
   .sw-design .lx-panel.sw-design-notes { padding: var(--space-20) var(--space-16); }
 }
 
-/* 상담 배너: 낮은 파란 띠 — 왼쪽 3D 말풍선 · 두 줄 문구, 오른쪽 흰 버튼 */
+/* 상담 배너: 밝은 하늘색 낮은 띠 — 왼쪽 3D 손 그림 · 두 줄 문구, 오른쪽 파란 버튼 */
 .sw-consult {
   display: flex;
   align-items: center;
   gap: var(--space-20);
-  margin-top: var(--space-16);
+  margin-top: var(--space-24);
   padding: var(--space-16) var(--space-32) var(--space-16) var(--space-24);
+  border: 1px solid var(--color-bg-brand-soft);
   border-radius: var(--radius-16);
-  background: linear-gradient(100deg, #6ea2ff 0%, var(--color-bg-brand) 55%, #0a3fc0 100%);
-  overflow: hidden;
+  background: linear-gradient(100deg, var(--color-bg-default) 0%, var(--color-bg-brand-subtle) 45%, var(--color-bg-brand-soft) 100%);
 }
-.sw-consult-icon { flex: none; width: 80px; height: 80px; object-fit: contain; filter: drop-shadow(0 6px 12px rgb(0 0 0 / 0.15)); }
-.sw-consult-text { display: flex; flex: 1 1 auto; flex-direction: column; gap: 2px; min-width: 0; margin: 0; color: var(--color-text-inverse); }
-.sw-consult-sub { font-size: 15px; opacity: 0.85; }
-.sw-consult-title { font-size: 22px; font-weight: 700; }
+.sw-consult-icon { flex: none; width: 84px; height: 84px; object-fit: contain; }
+.sw-consult-text { display: flex; flex: 1 1 auto; flex-direction: column; gap: 2px; min-width: 0; margin: 0; }
+.sw-consult-sub { font-size: 15px; color: var(--color-text-secondary); }
+.sw-consult-title { font-size: 22px; font-weight: 700; color: var(--color-text-strong); }
+.sw-consult-title em { font-style: normal; color: var(--color-text-brand); }
 .sw-consult-btn { flex: none; gap: var(--space-4); }
 @media (max-width: 480px) {
   .sw-consult { flex-wrap: wrap; gap: var(--space-12); padding: var(--space-16); }
-  .sw-consult-icon { width: 56px; height: 56px; }
+  .sw-consult-icon { width: 60px; height: 60px; }
   .sw-consult-text { flex: 1 1 0; }
   .sw-consult-sub { font-size: 13px; }
   .sw-consult-title { font-size: 17px; }
