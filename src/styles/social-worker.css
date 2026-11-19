@@ -1024,44 +1024,6 @@
   border-bottom: none;
 }
 
-/* 상담 신청 배너 스타일 */
-.consultation-banner {
-  width: 880px;
-  height: 260px;
-  border-radius: 10px;
-  background-image: url("/resources/images/credit-bank/banner_cautions.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  margin: 20px auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-.consultation-banner-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  text-align: center;
-}
-
-.consultation-banner-title {
-  font-size: 32px;
-  font-weight: 300;
-  color: #ffffff;
-  margin: 0;
-  line-height: 1.4;
-}
-
-.text-consultations {
-  color: #fff;
-  font-weight: 700;
-}
-
 /* 플로팅 상담신청 바 */
 .consultation-floating-bar {
   position: fixed;
@@ -1528,21 +1490,6 @@
   }
 }
 
-/* 모바일: 상담 신청 배너를 화면 폭에 맞춤 (PC용 880px 그대로라 오른쪽이 잘렸음) */
-@media (max-width: 480px) {
-  .consultation-banner {
-    width: auto;
-    height: auto;
-    margin: 16px;
-    padding: 32px 16px;
-    box-sizing: border-box;
-  }
-
-  .consultation-banner-title {
-    font-size: 20px;
-  }
-}
-
 /* 좁은 폰(375px 등): 상담 플로팅 바 문구가 왼쪽으로 잘려서 줄임 */
 @media (max-width: 400px) {
   .consultation-floating-content {
@@ -1621,12 +1568,6 @@
 .sw-sub-list { display: flex; flex-direction: column; gap: var(--space-4); margin-top: var(--space-8); padding-left: var(--space-16); list-style: none; }
 .sw-sub-title { margin-top: var(--space-24); font-size: 15px; font-weight: 600; color: var(--color-text-strong); }
 .sw-sub-tabs { margin-top: var(--space-32); }
-.sw-banner { margin: var(--space-32) auto 0; }
-.sw-banner-btn { margin-top: var(--space-8); }
-
-@media (max-width: 480px) {
-  .sw-banner { margin: var(--space-24) 0 0; }
-}
 
 /* ---------- 단계·흐름 그림 (SwSteps.tsx, Figma wrapper_graphic) ----------
    흰 상자 안에 3D 아이콘 + 글자 칸을 가로로 늘어놓고, 칸 사이에 점선 칸막이(›) 또는 + 표시.
@@ -1833,4 +1774,48 @@
   /* 폰: 꺾인 점선은 빼고 말풍선 → 화살표만 */
   .sw-route-path { background: none; }
   .sw-route-path::before { display: none; }
+}
+
+/* ---------- 대상별 학습설계 (sw-design) ---------- */
+/* 카드 4개의 학점 칸 : 결과 칸 = 3 : 2 로 고정해 가운데 칸막이 위치를 맞춘다 */
+.sw-design .sw-flow--credit > .sw-flow-group:first-child { flex: 3 1 0; }
+.sw-design .sw-flow--credit > .sw-flow-group:last-child { flex: 2 1 0; }
+/* 총 학점 줄: 진한 파랑 대신 연한 파랑 판 + 파란 글자 */
+.sw-design .sw-pill--block { background: var(--color-bg-brand-soft); color: var(--color-text-brand); }
+/* 전적대 학점 인정 안내: 카드와 같은 회색 상자 */
+.sw-design .lx-panel.sw-design-notes { padding: var(--space-24) var(--space-32); border-radius: var(--radius-16); background: var(--color-bg-surface); }
+.sw-design .sw-design-notes .lx-notes:first-child { margin-top: 0; }
+/* 파란 안내 문구는 카드 다음, 회색 안내 상자 바로 위에 붙여 둔다 */
+.sw-design .lx-callout { margin-top: var(--space-40); }
+.sw-design .lx-callout + .lx-panel.sw-design-notes { margin-top: var(--space-12); }
+@media (max-width: 480px) {
+  .sw-design .sw-flow--credit > .sw-flow-group:first-child,
+  .sw-design .sw-flow--credit > .sw-flow-group:last-child { flex: none; }
+  .sw-design .lx-panel.sw-design-notes { padding: var(--space-20) var(--space-16); }
+}
+
+/* 상담 배너: 밝은 하늘색 낮은 띠 — 왼쪽 3D 손 그림 · 두 줄 문구, 오른쪽 파란 버튼 */
+.sw-consult {
+  display: flex;
+  align-items: center;
+  gap: var(--space-20);
+  margin-top: var(--space-24);
+  padding: var(--space-16) var(--space-32) var(--space-16) var(--space-24);
+  border: 1px solid var(--color-bg-brand-soft);
+  border-radius: var(--radius-16);
+  background: linear-gradient(100deg, var(--color-bg-default) 0%, var(--color-bg-brand-subtle) 45%, var(--color-bg-brand-soft) 100%);
+}
+.sw-consult-icon { flex: none; width: 84px; height: 84px; object-fit: contain; }
+.sw-consult-text { display: flex; flex: 1 1 auto; flex-direction: column; gap: 2px; min-width: 0; margin: 0; }
+.sw-consult-sub { font-size: 15px; color: var(--color-text-secondary); }
+.sw-consult-title { font-size: 22px; font-weight: 700; color: var(--color-text-strong); }
+.sw-consult-title em { font-style: normal; color: var(--color-text-brand); }
+.sw-consult-btn { flex: none; gap: var(--space-4); }
+@media (max-width: 480px) {
+  .sw-consult { flex-wrap: wrap; gap: var(--space-12); padding: var(--space-16); }
+  .sw-consult-icon { width: 60px; height: 60px; }
+  .sw-consult-text { flex: 1 1 0; }
+  .sw-consult-sub { font-size: 13px; }
+  .sw-consult-title { font-size: 17px; }
+  .sw-consult-btn { width: 100%; justify-content: center; }
 }
