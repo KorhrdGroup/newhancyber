@@ -118,9 +118,10 @@
 .ds2 .lx-file-chip { background: var(--color-bg-surface); }
 .ds2 .lx-step-divider::before { opacity: 0.6; }
 .ds2 .ds-accordion-item { border-bottom-color: var(--color-border-cool); }
+.ds2 .lx-inquiry-list .ds-accordion-item.is-open .lx-inquiry-q { background-color: var(--color-bg-surface); }
+/* 목록 줄에 마우스를 올렸을 때: 푸른 회색 판(#f3f6fb)은 진해서 더 밝은 회색(#f8f9fa) */
 .ds2 .ds-accordion-q:hover,
-.ds2 .lx-inquiry-list .ds-accordion-item.is-open .lx-inquiry-q,
-.ds2 .lx-board-table tbody tr:hover { background-color: var(--color-bg-surface); }
+.ds2 .lx-board-table tbody tr:hover { background-color: var(--color-bg-subtle); }
 .ds2 .ds-accordion-a { background: var(--color-bg-surface); }
 .ds2 .ds-accordion-empty,
 .ds2 .lx-post-head,
