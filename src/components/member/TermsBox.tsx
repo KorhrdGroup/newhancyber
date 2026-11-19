@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useId } from "react";
 
 interface TermsBoxProps {
   id: string;
@@ -8,13 +8,15 @@ interface TermsBoxProps {
   required?: boolean;
   checked: boolean;
   onChange: (checked: boolean) => void;
+  /** 펼침 상태는 목록이 들고 있다 — 한 번에 하나만 열리게 */
+  isOpen: boolean;
+  onToggle: () => void;
   /** 펼쳤을 때 보이는 약관 본문 */
   children: React.ReactNode;
 }
 
 /** 약관 한 개: 동의 체크박스 + 내용 펼치기 */
-export default function TermsBox({ id, title, required = false, checked, onChange, children }: TermsBoxProps) {
-  const [isOpen, setIsOpen] = useState(false);
+export default function TermsBox({ id, title, required = false, checked, onChange, isOpen, onToggle, children }: TermsBoxProps) {
   const bodyId = useId();
 
   return (
@@ -32,7 +34,7 @@ export default function TermsBox({ id, title, required = false, checked, onChang
           aria-expanded={isOpen}
           aria-controls={bodyId}
           aria-label={`${title} 내용 ${isOpen ? "접기" : "보기"}`}
-          onClick={() => setIsOpen((open) => !open)}
+          onClick={onToggle}
         >
           <img src="/resources/images/member/arrow-down.png" alt="" />
         </button>
