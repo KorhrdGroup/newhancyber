@@ -40,7 +40,7 @@
 
 /* 입력 → 버튼. 칸마다 입력 개수가 달라도 버튼 줄이 맞도록 버튼을 아래로 붙인다 */
 .member-form { display: flex; flex: 1; flex-direction: column; gap: var(--space-8); width: 100%; max-width: 320px; }
-.member-form .ds-input { width: 100%; }
+.member-form .ds-input { width: 100%; height: var(--size-control-lg); } /* 아래 버튼(lg 48)과 같은 높이 — 40 이면 얇아 보임 */
 .member-form .ds-tabs-box .ds-tab-box { flex: 1 1 0; }
 .member-submit { width: 100%; margin-top: auto; }
 .member-form > .ds-input:last-of-type { margin-bottom: var(--space-16); }

@@ -162,6 +162,7 @@
 .ds2 .signup-done-title { font-weight: 800; letter-spacing: -0.01em; }
 .ds2 .member-col + .member-col { border-color: var(--color-border-cool); }
 .ds2 .member-sns-btn { border-radius: var(--radius-12); }
+.ds2 .member-form .ds-input { border-radius: var(--radius-12); } /* 48 높이 → 버튼(lg)과 같은 모서리 12 */
 .ds2 .member-help { border-radius: var(--radius-16); background: var(--color-bg-surface); }
 .ds2 .member-help-item + .member-help-item { border-color: var(--color-border-cool); }
 .ds2 .signup-step + .signup-step::before { background: var(--color-border-cool); }
