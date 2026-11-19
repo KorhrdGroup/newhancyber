@@ -92,6 +92,8 @@
 .ds2 .cb-page .lx-table td { border-right-color: var(--color-border-cool); }
 .ds2 .cb-category { background: var(--color-bg-surface); }
 .ds2 .cb-cell { background: var(--color-bg-tone-blue); }
+/* 학사일정 강조 달은 파란 머리 그대로(위 회색 머리 규칙이 덮지 않게) */
+.ds2 .cb-schedule th.is-active { background: var(--color-bg-brand); border-bottom-color: var(--color-bg-brand); }
 
 /* ---------- 버튼 ---------- */
 .ds2 .ds-btn { border-radius: var(--radius-10); font-weight: 700; }
