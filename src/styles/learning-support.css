@@ -1135,3 +1135,8 @@
     border-top: 1px solid #d9d9d9;
   }
 }
+
+/* 학습자 OT 단계 그림(CbIconFlow) 때문에 불러오는 credit-bank.css 의 .wrapper 여백이 휴대폰에서 덧붙지 않게 */
+@media (max-width: 480px) {
+  main.wrapper:has(.cb-flow) { padding: 0; }
+}

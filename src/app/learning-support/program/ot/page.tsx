@@ -5,6 +5,8 @@ import SectionTabs, { programTabs } from "@/components/learning-support/extra/Se
 import StepDivider from "@/components/learning-support/extra/StepDivider";
 import { SUPPORT_PHONE } from "@/lib/contact";
 import DraftNote from "@/components/common/DraftNote";
+import { CbIconFlow } from "@/components/credit-bank/CbFlow";
+import "@/styles/credit-bank.css";
 
 export const metadata: Metadata = { title: "학습자 OT" };
 
@@ -13,6 +15,15 @@ export const metadata: Metadata = { title: "학습자 OT" };
  * 아래 내용은 이 사이트 FAQ(수료 기준·강의 구성·IP 등록·시험 재접속)와 공동인증서 안내 화면을 바탕으로 새로 썼다.
  * TODO: 교육원에서 OT 영상·자료가 나오면 바꾼다.
  */
+/* 맨 위 단계 그림 — 아래 STEP 1~4 와 같은 순서 */
+const SW_ICON = "/resources/images/social-worker/steps";
+const flow = [
+  { icon: "pc", label: "학습 전 준비", src: `${SW_ICON}/online-apply.png` },
+  { icon: "lecture", label: "강의 듣기", src: `${SW_ICON}/course-book.png` },
+  { icon: "exam", label: "시험·과제", src: `${SW_ICON}/exam-doc.png` },
+  { icon: "aplus", label: "수료와 학점인정" },
+];
+
 const sections: { title: string; items: string[]; links?: { label: string; href: string }[] }[] = [
   {
     title: "학습 전 준비",
@@ -67,6 +78,10 @@ export default function LearningOtPage() {
           원본은 &quot;준비 중&quot; 그림뿐이라 이 사이트의 FAQ와 공동인증서 안내를 바탕으로 임시로
           작성했습니다. 교육원의 OT 영상·자료가 나오면 바꿔야 합니다.
         </DraftNote>
+
+        <section className="lx-panel">
+          <CbIconFlow size="lg" items={flow} joins={["arrow", "arrow", "arrow"]} />
+        </section>
 
         {sections.map((section, i) => (
           <Fragment key={section.title}>
