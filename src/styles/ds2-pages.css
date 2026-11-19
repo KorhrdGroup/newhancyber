@@ -210,6 +210,8 @@
 /* ---------- 탭 ---------- */
 /* 화면끼리 묶는 탭 · 화면 안 전환 탭 → 배포 중인 밑줄 탭(style.css .page-tab) 그대로, 고른 탭 글자만 파랑 대신 진한 회색 */
 .ds2 .page-tab.is-active { color: var(--color-text-default); }
+/* 탭은 줄 전체에 같은 폭으로 나눈다. 칸이 모자라면 글자 폭을 지키고 옆으로 밀어서 본다 (마이페이지 상자 탭은 제외) */
+.ds2 .page-tabs:not(.mp-subtabs) .page-tab { flex: 1 1 0; justify-content: center; min-width: max-content; }
 /* 파란 하위 메뉴 줄 바로 아래 붙는 탭 줄은 조금 띄운다 (마이페이지는 제목 아래라 그대로) */
 .ds2 .lx-tabs:not(.about-tabs) .page-tabs,
 .ds2 .ex-tabs .page-tabs { margin-top: var(--space-32); }
