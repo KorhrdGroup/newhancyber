@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BoardTable, MobileBoardList, Pagination, SearchBox } from "./BoardParts";
 import { schedulePosts, type ScheduleTabKey } from "./boardData";
 
@@ -19,6 +19,12 @@ const totalOf = (key: ScheduleTabKey) =>
  */
 export default function ScheduleBoard() {
   const [tab, setTab] = useState<ScheduleTabKey>("theory");
+  // 시안 비교용(임시): 주소 끝 ?tab=1·2·3 으로 이론/실습 탭 모양을 바꿔 본다. 정하면 지운다.
+  const [tabStyle, setTabStyle] = useState<string>();
+  useEffect(() => {
+    const n = new URLSearchParams(window.location.search).get("tab");
+    if (n && ["1", "2", "3"].includes(n)) setTabStyle(n);
+  }, []);
 
   // TODO: API — 탭별 학사일정 목록 조회
   const posts = schedulePosts[tab];
@@ -26,7 +32,7 @@ export default function ScheduleBoard() {
   return (
     <>
       <div className="mobile-schedule-tabs mobile-only">
-        <div className="ds-tabs-box" role="tablist" aria-label="과목 구분">
+        <div className="ds-tabs-box" role="tablist" aria-label="과목 구분" data-tab-style={tabStyle}>
           {tabs.map((t) => (
             <button
               key={t.key}
@@ -46,7 +52,7 @@ export default function ScheduleBoard() {
 
       <div className="practice-support-notice-list-section desktop-only">
         <div className="container" style={{ backgroundColor: "#fff" }}>
-          <div className="ds-tabs-box lx-schedule-tabs" role="tablist" aria-label="과목 구분">
+          <div className="ds-tabs-box lx-schedule-tabs" role="tablist" aria-label="과목 구분" data-tab-style={tabStyle}>
             {tabs.map((t) => (
               <button
                 key={t.key}
