@@ -130,6 +130,11 @@
 .signup-term-toggle.is-open img { transform: rotate(180deg); }
 
 /* 약관 본문 (terms/*Text 의 원래 마크업: inner · tit · sub-tit · inner-list · dot · table) */
+/* 약관 펼침 — FAQ(ds-accordion-panel)와 같은 움직임 */
+.signup-term-panel { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows 0.3s ease, opacity 0.3s ease; }
+.signup-term-panel.is-open { grid-template-rows: 1fr; opacity: 1; }
+.signup-term-panel-inner { min-height: 0; overflow: hidden; }
+@media (prefers-reduced-motion: reduce) { .signup-term-panel { transition: none; } }
 .signup-term-body { max-height: 320px; overflow-y: auto; margin: 0 var(--space-20) var(--space-16); padding: var(--space-16) var(--space-20); border-radius: var(--radius-8); background: var(--color-bg-subtle); font-size: 13px; line-height: 1.7; color: var(--color-text-secondary); }
 .signup-term-body ul,
 .signup-term-body ol { margin: 0; padding: 0; list-style: none; }

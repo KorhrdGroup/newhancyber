@@ -37,8 +37,11 @@ export default function TermsBox({ id, title, required = false, checked, onChang
           <img src="/resources/images/member/arrow-down.png" alt="" />
         </button>
       </div>
-      <div id={bodyId} className="signup-term-body" hidden={!isOpen}>
-        {children}
+      {/* FAQ 처럼 늘 그려 두고 높이만 0 ↔ 원래 높이로 부드럽게 펼친다. 닫혀 있을 땐 inert 로 읽기·포커스 제외 */}
+      <div id={bodyId} className={`signup-term-panel${isOpen ? " is-open" : ""}`} inert={!isOpen}>
+        <div className="signup-term-panel-inner">
+          <div className="signup-term-body">{children}</div>
+        </div>
       </div>
     </li>
   );
