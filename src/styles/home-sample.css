@@ -124,7 +124,7 @@
   background: #fff;
   box-shadow: 0 4px 20px rgba(17, 90, 237, 0.08);
 }
-.sh-term-eyebrow { display: flex; flex: none; align-items: center; gap: 8px; margin: 0; padding-right: 20px; border-right: 1px solid #e3eaf7; font-size: 15px; font-weight: 800; color: var(--color-primary-dark); }
+.sh-term-eyebrow { display: flex; flex: none; align-items: center; gap: 8px; margin: 0; padding-right: 20px; border-right: 1px solid var(--color-border-cool); font-size: 15px; font-weight: 800; color: var(--color-primary-dark); }
 .sh-term-dot { width: 8px; height: 8px; border-radius: 50%; background: #2ecc71; box-shadow: 0 0 0 4px rgba(46, 204, 113, 0.18); }
 .sh-term.is-closed .sh-term-eyebrow { color: var(--color-text-secondary); }
 .sh-term.is-closed .sh-term-dot { background: #b0b8c4; box-shadow: 0 0 0 4px rgba(176, 184, 196, 0.2); }
@@ -246,7 +246,7 @@
   justify-content: space-between;
   padding: 24px 26px;
   border-radius: var(--radius-16);
-  background: #f3f6fb;
+  background: var(--color-bg-surface);
   text-decoration: none;
 }
 .sh-callcard-head { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; font-size: 16px; font-weight: 700; color: var(--color-text-strong, #111); }
@@ -265,7 +265,7 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--space-20);
 }
-.sh-infobar-item { display: flex; align-items: center; gap: 14px; min-width: 0; padding: 22px 28px; border-radius: var(--radius-16); background: #f3f6fb; color: var(--color-text-secondary); text-decoration: none; }
+.sh-infobar-item { display: flex; align-items: center; gap: 14px; min-width: 0; padding: 22px 28px; border-radius: var(--radius-16); background: var(--color-bg-surface); color: var(--color-text-secondary); text-decoration: none; }
 .sh-infobar-item img { flex: none; width: 40px; height: 40px; object-fit: contain; }
 .sh-infobar-text { display: flex; flex: 1; flex-direction: column; gap: 4px; min-width: 0; }
 .sh-infobar-item > svg { flex: none; width: 18px; height: 18px; }
@@ -283,7 +283,7 @@
 }
 .sh-notice-head { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
 /* 공지 · 학사일정 · 실습공지: 게시판 목록 위 세그먼트(ds2-pages.css .ds-tabs-box--segment)와 같은 모양 */
-.sh-notice-seg { display: inline-flex; padding: var(--space-4); border-radius: var(--radius-8); background: var(--color-bg-surface); }
+.sh-notice-seg { display: inline-flex; padding: var(--space-4); border-radius: var(--radius-8); background: var(--color-bg-muted); }
 .sh-notice-tab {
   height: 32px;
   padding: 0 16px;
@@ -438,7 +438,7 @@
 .sh-essential {
   margin-top: 56px;
   padding: 48px 0 56px;
-  background: #f3f6fb;
+  background: var(--color-bg-surface);
 }
 .sh-essential-inner { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--space-20); }
 .sh-essential-grid {
@@ -491,7 +491,7 @@
   gap: 14px;
   padding: 10px 14px 10px 10px;
   border-radius: var(--radius-12);
-  background: #f3f6fb;
+  background: var(--color-bg-surface);
 }
 .sh-why-items img { flex: none; width: 52px; height: 52px; object-fit: contain; }
 .sh-why-items span { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
@@ -625,7 +625,7 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
   .sh-hero-bar { width: 72px; margin: 0 6px 0 10px; }
 
   .sh-term { flex-direction: column; align-items: stretch; gap: 12px; padding: 16px; }
-  .sh-term-eyebrow { padding: 0 0 12px; border-right: 0; border-bottom: 1px solid #e3eaf7; }
+  .sh-term-eyebrow { padding: 0 0 12px; border-right: 0; border-bottom: 1px solid var(--color-border-cool); }
   .sh-term-list { flex-direction: column; gap: 8px; }
   .sh-term-list > div { justify-content: space-between; }
   .sh-term-go { justify-content: center; }

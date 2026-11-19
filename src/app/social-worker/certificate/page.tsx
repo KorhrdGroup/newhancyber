@@ -10,8 +10,7 @@ export const metadata: Metadata = { title: "자격증 발급 안내" };
 export default function SocialWorkerCertificatePage() {
   return (
     <main className="wrapper">
-      {/* 회색 판 색 시험: 이 화면만 푸른 회색 대신 밝은 회색 (ds2-pages.css .sw-cert) */}
-      <div className="container lx-page lx-page--top lx-page--plain sw-cert">
+      <div className="container lx-page lx-page--top lx-page--plain">
         <h1 className="page-title">자격증 발급 안내</h1>
         <p className="lx-desc">사회복지사 자격증 교부·재교부 절차와 구비서류, 수수료를 안내합니다.</p>
 

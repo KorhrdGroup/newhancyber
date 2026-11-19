@@ -38,7 +38,7 @@
   --color-bg-success-subtle: #edfaf1;
   --color-bg-warning-subtle: #fff7ed;
   --color-bg-overlay: rgba(0, 0, 0, 0.5);
-  --color-bg-surface: #f3f6fb;
+  --color-bg-surface: #f8f9fa; /* 회색 판 (2026-11-19 푸른 회색 #f3f6fb → 밝은 회색) */
   --color-bg-brand-soft: #eaf1ff;
   --color-bg-brand-strong: #0f2a6e;
   --color-bg-brand-strong-hover: #0a1f55;
@@ -65,7 +65,7 @@
   --color-border-danger: #e02a2e;
   --color-border-control: #939393;
   --color-border-brand-soft: #d6e2fb;
-  --color-border-cool: #e3eaf7;
+  --color-border-cool: #eaeaea; /* 표 · 목록 줄 선 (2026-11-19 옅은 푸른 선 #e3eaf7 → 회색, 회색 판과 맞춤) */
   --color-border-soft: #eef1f5;
   --color-border-separator: #d5dbe5;
   --color-border-inverse: rgba(255, 255, 255, 0.4);
