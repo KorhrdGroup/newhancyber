@@ -19,7 +19,7 @@ const DEFAULT_SCOPES = [
 /**
  * 목록 위 검색 줄: 왼쪽 글 수, 오른쪽 검색 (원본도 동작 없음).
  * filters 는 검색 범위 앞에 붙는 선택 칸(예: 마이페이지 학습 게시판의 학기·과목)
- * lead 는 글 수 앞에 붙는 것(예: 학사일정 이론/실습 탭 시안)
+ * lead 는 글 수 앞에 붙는 것(예: 공지사항 구분 토글)
  */
 export function SearchBox({
   total,
@@ -130,6 +130,7 @@ export function BoardTable({
             </td>
             {cells(beforeTitle, post)}
             <td className="is-left">
+              {post.tag && <span className="ds-badge ds-badge--neutral lx-board-tag">{post.tag}</span>}
               {post.href ? (
                 <Link href={post.href} className="ds-table-link">
                   {post.title}
@@ -204,6 +205,7 @@ export function MobileBoardList({
               )}
             </div>
             <div className={c("title")}>
+              {post.tag && <span className="ds-badge ds-badge--neutral mobile-board-tag">{post.tag}</span>}
               {post.title}
               {post.meta && <span className="mobile-board-meta">{post.meta}</span>}
             </div>

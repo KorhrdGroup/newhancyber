@@ -533,7 +533,6 @@
   .mobile-notice-detail-info,
   .mobile-notice-detail-content,
   .mobile-schedule-banner,
-  .mobile-schedule-tabs,
   .mobile-schedule-list,
   .mobile-footer-section {
     display: block;
@@ -646,15 +645,6 @@
     font-size: 24px;
     font-weight: 600;
     display: inline-block;
-  }
-
-  /* 모바일 학사일정 탭 */
-  .mobile-schedule-tabs {
-    display: flex;
-    width: 100%;
-    padding: 0 16px;
-    margin-top: 20px;
-    box-sizing: border-box;
   }
 
   /* 모바일 학사일정 목록 */
