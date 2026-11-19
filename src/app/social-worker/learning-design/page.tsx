@@ -17,6 +17,21 @@ export default function SocialWorkerLearningDesignPage() {
           상담 후 진행해주시기 바랍니다.
         </p>
 
+        {/* 상담 배너: 위 안내 문구(담당자와 상담) 바로 아래에 낮은 띠로 */}
+        <div className="sw-consult">
+          <img className="sw-consult-icon" src="/resources/images/credit-bank/cb-icon-chat-person.png" alt="" />
+          <p className="sw-consult-text">
+            <span className="sw-consult-sub">잠깐! 학점은행제 도움을 받고싶다면</span>
+            <strong className="sw-consult-title">지금 바로 상담신청하세요!</strong>
+          </p>
+          <Link href="/course-registration/learning-design" className="ds-btn ds-btn--secondary ds-btn--lg sw-consult-btn">
+            상담신청 하러가기
+            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M6.25 4.5 9.75 8l-3.5 3.5" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </Link>
+        </div>
+
         <PracticeSection title="고등학교 졸업자">
           <CreditFlow
             label="고등학교 졸업자 학습설계"
@@ -87,22 +102,6 @@ export default function SocialWorkerLearningDesignPage() {
             <li className="page-list-plain">(3) 성적이 60점 또는 D- 이상인 학습과목 인정</li>
           </ul>
         </section>
-
-        <div className="consultation-banner sw-banner">
-          <div className="consultation-banner-content">
-            <p className="consultation-banner-title">
-              잠깐! 학점은행제 도움을 받고싶다면
-              <br />
-              지금 바로 <span className="text-consultations">상담신청</span>하세요!
-            </p>
-            <Link href="/course-registration/learning-design" className="ds-btn ds-btn--secondary ds-btn--lg sw-banner-btn">
-              상담신청 하러가기
-              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M6.25 4.5 9.75 8l-3.5 3.5" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </Link>
-          </div>
-        </div>
       </div>
     </main>
   );
