@@ -1382,6 +1382,13 @@ main {
   padding-top: 59px;
 }
 
+/* 수강신청 화면(course-registration.css)에서 넘어오면 그쪽 .container 회색 상자가 남아 이미지를 감싼다 — 기본 틀로 되돌림 */
+.container.event-container {
+  margin: 0 auto;
+  padding: 0;
+  background: none;
+}
+
 .event-image-container {
   width: 100%;
   display: flex;
