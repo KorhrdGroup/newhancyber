@@ -1,4 +1,3 @@
-import Link from "next/link";
 import {
   BoardTable as BoardListTable,
   MobileBoardList,
@@ -16,15 +15,13 @@ const columns: BoardColumn[] = [
   { key: "term", label: "학기", at: "before-title", width: 160 },
   { key: "course", label: "과목", at: "before-title", width: 180 },
 ];
-/** 학습 Q&A 만 맨 끝에 답변 상태 칸 (1:1 문의 목록과 같은 배지) */
-const qnaColumns: BoardColumn[] = [...columns, { key: "answer", label: "답변", at: "end", width: 120 }];
 const scopes = [
   { value: "title", label: "제목" },
   { value: "content", label: "내용" },
 ];
 
 /**
- * U28 학습 게시판 목록 (학습 공지사항·학습 자료실·학습 Q&A 공통).
+ * U28 학습 게시판 목록 (학습 공지사항·학습 자료실 공통).
  * 원본 /stdMng/stdBbs/bbsList.asp 처럼 칸은 번호 · 학기/과목 · 제목, 검색은 학기 · 과목 · 제목/내용.
  */
 export default function BoardTable({ kind }: { kind: BoardKind }) {
@@ -32,13 +29,6 @@ export default function BoardTable({ kind }: { kind: BoardKind }) {
   const posts = getBoardPosts(kind);
   const courseIds = [...new Set(posts.map((post) => post.courseId))];
   const terms = [...new Set(courseIds.map(courseTerm))];
-
-  const answerBadge = (answered: boolean) =>
-    answered ? (
-      <span className="ds-badge ds-badge--success">답변 완료</span>
-    ) : (
-      <span className="ds-badge ds-badge--neutral">답변 대기</span>
-    );
 
   const list: ListPost[] = posts.map((post, i) => ({
     number: String(posts.length - i),
@@ -48,14 +38,8 @@ export default function BoardTable({ kind }: { kind: BoardKind }) {
     cells: {
       term: courseTerm(post.courseId),
       course: courseTitle(post.courseId),
-      answer: answerBadge(Boolean(post.answer)),
     },
-    meta: (
-      <>
-        <span>{courseTitle(post.courseId)}</span>
-        {kind === "qna" && answerBadge(Boolean(post.answer))}
-      </>
-    ),
+    meta: <span>{courseTitle(post.courseId)}</span>,
   }));
 
   const filters = (
@@ -77,14 +61,6 @@ export default function BoardTable({ kind }: { kind: BoardKind }) {
     </>
   );
 
-  const ask = kind === "qna" && (
-    <div className="lx-board-actions">
-      <Link href="/my-page/study-board/qna/write" className="ds-btn ds-btn--primary">
-        문의하기
-      </Link>
-    </div>
-  );
-
   return (
     <>
       <div className="desktop-only">
@@ -96,11 +72,10 @@ export default function BoardTable({ kind }: { kind: BoardKind }) {
         <>
           <MobileBoardList kind="notice" posts={list} dateLabel={null} />
           <div className="desktop-only">
-            <BoardListTable posts={list} columns={kind === "qna" ? qnaColumns : columns} dateLabel={null} />
+            <BoardListTable posts={list} columns={columns} dateLabel={null} />
           </div>
         </>
       )}
-      {ask}
       {posts.length > 0 && <Pagination pages={1} />}
     </>
   );

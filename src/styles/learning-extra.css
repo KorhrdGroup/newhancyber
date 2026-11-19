@@ -340,8 +340,6 @@
 .lx-board-table tr.is-notice .ds-table-link { font-weight: 600; }
 /* 더 붙는 칸(과목·작성자·조회 등): 줄바꿈 없이 */
 .lx-board-cell { white-space: nowrap; }
-/* 목록 아래 버튼 줄 (학습 Q&A 글쓰기) */
-.lx-board-actions { display: flex; justify-content: flex-end; margin-top: var(--space-16); }
 /* 모바일 게시판 목록 (MobileBoardList kind="notice") — learning-support.css 에서 옮김.
    학습지원 CSS 는 .wrapper·.container 도 바꿔서 마이페이지·수강신청 화면에서는 불러오지 않는다 */
 @media (max-width: 480px) {

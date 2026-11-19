@@ -11,14 +11,14 @@ import {
   getBoardPost,
 } from "@/components/my-page/myPageDataA";
 import { myPageBoardTabs, TBD_HREF } from "@/lib/navigation";
-// 글 상세 틀(PostView)·답변 상자 스타일
+// 글 상세 틀(PostView) 스타일
 import "@/styles/learning-extra.css";
 
 export const metadata: Metadata = { title: "학습 게시판 - 마이페이지" };
 
 const postHref = (id: string) => `/my-page/study-board/post/${id}`;
 
-/** U28 학습 게시판 — 글 보기 (세 게시판 공통). 공지사항 상세와 같은 글 상세 틀(PostView), Q&A 는 아래에 답변 상자 */
+/** U28 학습 게시판 — 글 보기 (두 게시판 공통). 공지사항 상세와 같은 글 상세 틀(PostView) */
 export default async function StudyBoardPostPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   // TODO: API 학습 게시판 글 조회 (조회수 올림 포함)
@@ -28,7 +28,7 @@ export default async function StudyBoardPostPage({ params }: { params: Promise<{
   const listHref = boardListHref[post.kind];
 
   return (
-    <MyPageShell title="학습 게시판" desc="수강 중인 과목의 공지, 질문과 답변, 학습 자료를 모아 볼 수 있습니다.">
+    <MyPageShell title="학습 게시판" desc="수강 중인 과목의 공지와 학습 자료, 내 1:1 문의를 모아 볼 수 있습니다.">
       {/* 글 보기 주소는 게시판마다 같아서, 글이 속한 게시판 탭을 직접 켠다 */}
       <nav className="page-tabs">
         {myPageBoardTabs.map((tab) => (
@@ -73,28 +73,6 @@ export default async function StudyBoardPostPage({ params }: { params: Promise<{
         {post.body.map((p) => (
           <p key={p}>{p}</p>
         ))}
-
-        {post.kind === "qna" &&
-          (post.answer ? (
-            <section className="lx-answer">
-              <div className="lx-answer-head">
-                <strong>답변</strong>
-                <span className="lx-post-meta">
-                  {post.answer.author} · {post.answer.date}
-                </span>
-              </div>
-              <div className="lx-post-body">
-                {post.answer.body.map((p) => (
-                  <p key={p}>{p}</p>
-                ))}
-              </div>
-            </section>
-          ) : (
-            <section className="lx-answer lx-answer--waiting">
-              <p>답변 대기 중입니다.</p>
-              <p>답변이 달리면 이 화면에서 볼 수 있습니다.</p>
-            </section>
-          ))}
       </PostView>
     </MyPageShell>
   );
