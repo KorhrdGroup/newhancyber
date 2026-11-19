@@ -288,7 +288,7 @@
 }
 .ds-accordion-a { align-items: flex-start; padding: var(--space-20); background: var(--color-bg-subtle); }
 .ds-accordion-a .ds-accordion-mark { font-size: 16px; font-weight: 600; color: var(--color-text-secondary); }
-.ds-accordion-a .ds-accordion-text { flex: 1; min-width: 0; margin: 0; font-size: 14px; line-height: 1.5; color: var(--color-text-default); }
+.ds-accordion-a .ds-accordion-text { flex: 1; min-width: 0; margin: 0; font-size: 16px; line-height: 1.6; color: var(--color-text-default); }
 .ds-accordion-empty { padding: var(--space-48) 0; border-bottom: 1px solid var(--color-border-subtle); font-size: 14px; text-align: center; color: var(--color-text-secondary); }
 
 /* ---------- 진도 막대 ---------- */

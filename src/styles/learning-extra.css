@@ -543,10 +543,11 @@
   .lx-faq-tabs .ds-tab-box { flex: 1 0 33.334%; height: 44px; margin: 0 0 -1px -1px; padding: 0 var(--space-8); font-size: 14px; }
   .lx-faq-bar { flex-direction: column-reverse; align-items: stretch; margin-top: var(--space-24); }
   .lx-faq-search { width: 100%; }
-  /* 학사일정 모바일 이론/실습 탭 — FAQ 모바일 탭과 같은 크기 */
   .ds-accordion-q,
   .ds-accordion-a { padding: var(--space-16); }
-  .ds-accordion-q .ds-accordion-text { font-size: 15px; }
+  /* 답변 글자도 질문과 같은 크기 */
+  .ds-accordion-q .ds-accordion-text,
+  .ds-accordion-a .ds-accordion-text { font-size: 15px; }
 
   .lx-tabs { padding: 0 var(--space-16); }
   .lx-tabs .page-tab { flex: 1; justify-content: center; }
