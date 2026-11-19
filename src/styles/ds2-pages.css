@@ -233,32 +233,35 @@
 }
 .ds2 .ds-tab-box + .ds-tab-box { margin-left: 0; }
 .ds2 .ds-tab-box.is-active { border-color: var(--color-border-brand); background: var(--color-bg-tone-blue); font-weight: 700; }
-/* 글자 + 세로 구분선 탭 (시험 적용: 행정절차 가이드만) — 바탕 없이 글자만, 탭 사이 짧은 세로선, 고른 탭은 파란 글자 */
-.ds2 .cb-guide-tabs { padding-top: var(--space-32); }
-.ds2 .cb-guide-tabs .page-tabs { align-items: center; gap: 0; padding: 0; }
+/* 파란 밑줄 탭 (시험 적용: 행정절차 가이드만) — 아래 연한 선 위에 고른 탭만 파란 줄, 글자는 검정 */
+.ds2 .cb-guide-tabs { padding-top: var(--space-24); }
+.ds2 .cb-guide-tabs .page-tabs {
+  gap: var(--space-8);
+  padding: 0;
+  background: linear-gradient(var(--color-border-cool), var(--color-border-cool)) left bottom / 100% 1px no-repeat;
+}
 .ds2 .cb-guide-tabs button.page-tab {
   position: relative;
-  height: 40px;
-  padding: 0 var(--space-20);
+  height: 52px;
+  padding: 0 var(--space-16);
   border: 0;
   border-radius: 0;
   background: none;
   color: var(--color-text-secondary);
-  font-size: 17px;
-}
-.ds2 .cb-guide-tabs button.page-tab:first-child { padding-left: 0; }
-.ds2 .cb-guide-tabs button.page-tab + .page-tab::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 50%;
-  width: 1px;
-  height: 16px;
-  margin-top: -8px;
-  background: var(--color-border-brand-soft);
+  font-size: 16px;
 }
 .ds2 .cb-guide-tabs button.page-tab:hover { color: var(--color-text-strong); }
-.ds2 .cb-guide-tabs button.page-tab.is-active { background: none; color: var(--color-text-brand); font-weight: 800; }
+.ds2 .cb-guide-tabs button.page-tab.is-active { background: none; color: var(--color-text-strong); font-weight: 800; }
+.ds2 .cb-guide-tabs button.page-tab.is-active::after {
+  content: "";
+  position: absolute;
+  left: var(--space-16);
+  right: var(--space-16);
+  bottom: 0;
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+  background: var(--color-bg-brand);
+}
 
 @media (max-width: 480px) {
   .ds2 .page-title { font-size: 22px; }
@@ -267,8 +270,9 @@
   .ds2 .ds-table--stack tr,
   .ds2 .ds-table--stack tr:first-child { border-color: var(--color-border-cool); }
   .ds2 .page-tab { height: 32px; padding: 0 var(--space-12); font-size: 14px; }
-  .ds2 .cb-guide-tabs button.page-tab { flex: none; height: 36px; padding: 0 var(--space-12); font-size: 15px; }
-  .ds2 .cb-guide-tabs button.page-tab:first-child { padding-left: 0; }
+  .ds2 .cb-guide-tabs .page-tabs { gap: 0; }
+  .ds2 .cb-guide-tabs button.page-tab { flex: none; height: 46px; padding: 0 var(--space-12); font-size: 15px; }
+  .ds2 .cb-guide-tabs button.page-tab.is-active::after { left: var(--space-12); right: var(--space-12); }
   .ds2 .ds-tabs-box { gap: var(--space-6); }
   .ds2 .ds-tab-box,
   .ds2 .lx-faq-tabs .ds-tab-box { flex: 1 0 calc(33.334% - var(--space-6)); margin: 0; }
