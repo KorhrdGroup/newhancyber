@@ -132,7 +132,7 @@
   cursor: pointer;
 }
 .ds-textarea--sm { min-height: 100px; }
-/* 검색 칸 지우기(x): 브라우저 기본 x 대신 16px 회색 동그라미 안 흰 x (search-clear.svg), 셀렉트 화살표와 같은 크기 */
+/* 검색 칸 지우기(x): 브라우저 기본 x 대신 16px 칸의 회색 선 x (search-clear.svg), 셀렉트 화살표와 같은 색 · 굵기 */
 .ds-input[type="search"]::-webkit-search-cancel-button {
   -webkit-appearance: none;
   appearance: none;
