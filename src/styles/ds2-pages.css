@@ -270,3 +270,6 @@
   .ds2 .ds-tabs-box:not(.ds-tabs-box--segment) > .ds-tab-box:first-child:nth-last-child(4),
   .ds2 .ds-tabs-box:not(.ds-tabs-box--segment) > .ds-tab-box:first-child:nth-last-child(4) ~ .ds-tab-box { flex-basis: calc(50% - var(--space-6)); }
 }
+
+/* 회색 판 색 시험 (자격증 발급 안내만): 사이트 전체 푸른 회색 판(#f3f6fb) 대신 밝은 회색(#f8f9fa). 정하면 tokens 로 옮기고 지운다 */
+.ds2 .sw-cert { --color-bg-surface: var(--color-bg-subtle); }
