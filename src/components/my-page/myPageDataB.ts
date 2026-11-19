@@ -224,11 +224,6 @@ export function getAppeals(kind: AppealKind): Appeal[] {
   return appeals.filter((a) => a.kind === kind);
 }
 
-export function getAppeal(id: string, kind: AppealKind): Appeal | undefined {
-  // TODO: API 이의신청 상세 조회
-  return appeals.find((a) => a.id === id && a.kind === kind);
-}
-
 /* ------------------------------------------------------------------ */
 /* U35 내 정보 수정                                                     */
 /* ------------------------------------------------------------------ */

@@ -17,7 +17,7 @@ export const AppealBadge = ({ appeal }: { appeal: Appeal }) => (
   <span className={`ds-badge ds-badge--${appealStatusTone[appeal.status]}`}>{appeal.status}</span>
 );
 
-/** 신청 사유 + 첨부 — 목록의 펼침 칸과 상세 화면이 함께 쓴다 (1:1 문의 글과 같은 모양) */
+/** 신청 사유 + 첨부 — 목록의 펼침 칸 (1:1 문의 글과 같은 모양) */
 export function AppealBody({ appeal }: { appeal: Appeal }) {
   return (
     <>
@@ -57,24 +57,5 @@ export function AppealResult({ appeal }: { appeal: Appeal }) {
       <p>{appeal.status === "접수" ? "접수되었습니다." : "검토 중입니다."}</p>
       <p>담당자가 확인한 뒤 처리 결과를 알려 드립니다.</p>
     </section>
-  );
-}
-
-/** U34 이의신청 상세 — 1:1 문의 상세와 같은 틀 (상태 배지 · 제목(없으면 과목명) · 과목/구분/신청일 → 사유 → 처리 결과) */
-export default function AppealDetail({ appeal }: { appeal: Appeal }) {
-  return (
-    <>
-      <article className="lx-panel lx-post">
-        <div className="lx-post-head">
-          <AppealBadge appeal={appeal} />
-          <h2 className="lx-post-title">{appeal.title ?? appeal.courseTitle}</h2>
-          <p className="lx-post-meta">
-            {appeal.title && `과목 ${appeal.courseTitle} · `}구분 {appeal.item} · 신청일 {appeal.appliedAt}
-          </p>
-        </div>
-        <AppealBody appeal={appeal} />
-      </article>
-      <AppealResult appeal={appeal} />
-    </>
   );
 }
