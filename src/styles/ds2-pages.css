@@ -128,7 +128,8 @@
 .ds2 .lx-article-body,
 .ds2 .lx-article-nav,
 .ds2 .lx-article-nav-row + .lx-article-nav-row { border-color: var(--color-border-cool); }
-.ds2 .lx-article-head { border-top-color: var(--color-text-strong); }
+/* 상세 글 머리 위 두꺼운 선은 뺀다 (위 탭 · 메뉴 줄과 겹쳐 무거움). 제목 아래 옅은 선만 남긴다 */
+.ds2 .lx-article-head { border-top: 0; }
 .ds2 .lx-post-title { font-weight: 800; letter-spacing: -0.02em; }
 
 /* 쪽 번호 (32 높이 → 모서리 6) */
