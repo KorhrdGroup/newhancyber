@@ -31,7 +31,7 @@ export default function ExamSheet({ questions, minutes, submitLabel }: { questio
     <div className="pp-exam">
       <div>
         {questions.map((q) => (
-          <fieldset key={q.no} className="pp-question">
+          <fieldset key={q.no} id={`q-${q.no}`} className="pp-question">
             <legend className="pp-question-text">
               {q.no}. {q.text}
             </legend>
@@ -57,16 +57,29 @@ export default function ExamSheet({ questions, minutes, submitLabel }: { questio
             </div>
           </>
         ) : null}
-        <div className="pp-note">
-          푼 문항 {answered} / {questions.length}
+        <div className="pp-progress">
+          <p className="pp-progress-head">
+            <span>푼 문항</span>
+            <strong>
+              {answered}
+              <small> / {questions.length}</small>
+            </strong>
+          </p>
+          <div className="pp-progress-bar" aria-hidden="true">
+            <i style={{ width: `${(answered / questions.length) * 100}%` }} />
+          </div>
         </div>
-        <div className="pp-omr">
-          {questions.map((q) => (
-            <span key={q.no} className={answers[q.no] !== undefined ? "is-done" : undefined}>
-              {q.no}
-            </span>
-          ))}
-        </div>
+        {/* 번호를 누르면 그 문항으로 간다. 푼 문항은 연한 파랑 동그라미 */}
+        <nav className="pp-omr" aria-label="문항 바로가기">
+          {questions.map((q) => {
+            const done = answers[q.no] !== undefined;
+            return (
+              <a key={q.no} href={`#q-${q.no}`} className={done ? "is-done" : undefined} aria-label={`${q.no}번${done ? " (풀었음)" : ""}`}>
+                {q.no}
+              </a>
+            );
+          })}
+        </nav>
         <button type="button" className="ds-btn ds-btn--primary" onClick={submit}>
           {submitLabel}
         </button>
