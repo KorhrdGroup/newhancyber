@@ -74,7 +74,7 @@ export default function GuideTabs({ panels }: { panels: Record<InfoTabKey, React
     <>
       <ButtonTabs
         variant="line"
-        className="lx-tabs--under-header cb-guide-tabs"
+        className="lx-tabs--under-header"
         items={tabs}
         active={activeTab}
         onSelect={(key) => setActiveTab(key as TabKey)}

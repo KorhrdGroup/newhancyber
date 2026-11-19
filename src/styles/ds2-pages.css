@@ -208,20 +208,11 @@
 .ds2.pp .ds-stat { background: var(--color-bg-default); }
 
 /* ---------- 탭 ---------- */
-/* 화면끼리 묶는 탭 · 화면 안 전환 탭 → 알약 탭 (고르면 연한 파랑 바탕 + 파란 글자) */
-.ds2 .page-tabs { gap: var(--space-6); padding: var(--space-6) 0; border-bottom: 0; }
-.ds2 .page-tab {
-  height: 36px;
-  margin-bottom: 0;
-  padding: 0 var(--space-16);
-  border: 0;
-  border-radius: var(--radius-full);
-  font-size: 15px;
-  font-weight: 700;
-}
-.ds2 button.page-tab { border: 0; }
-.ds2 .page-tab:hover { color: var(--color-text-brand); }
-.ds2 .page-tab.is-active { background: var(--color-bg-brand-soft); color: var(--color-text-brand); }
+/* 화면끼리 묶는 탭 · 화면 안 전환 탭 → 배포 중인 밑줄 탭(style.css .page-tab) 그대로, 고른 탭 글자만 파랑 대신 진한 회색 */
+.ds2 .page-tab.is-active { color: var(--color-text-default); }
+/* 파란 하위 메뉴 줄 바로 아래 붙는 탭 줄은 조금 띄운다 (마이페이지는 제목 아래라 그대로) */
+.ds2 .lx-tabs:not(.about-tabs) .page-tabs,
+.ds2 .ex-tabs .page-tabs { margin-top: var(--space-32); }
 /* 상자 탭(FAQ 분류 · 실습 단계) → 칸을 띄운 둥근 카드 */
 .ds2 .ds-tabs-box { gap: var(--space-8); }
 .ds2 .ds-tab-box {
@@ -233,28 +224,6 @@
 }
 .ds2 .ds-tab-box + .ds-tab-box { margin-left: 0; }
 .ds2 .ds-tab-box.is-active { border-color: var(--color-border-brand); background: var(--color-bg-tone-blue); font-weight: 700; }
-/* 기존(배포 중) 밑줄 탭 (시험 적용: 행정절차 가이드만) — style.css 의 .page-tab 값 그대로, 고른 탭 글자만 파랑 대신 진한 회색.
-   .ds2 알약 탭 규칙을 이 탭에서만 되돌린다 */
-.ds2 .cb-guide-tabs .page-tabs { gap: 0; padding: 0; border-bottom: 1px solid var(--color-border-default); }
-.ds2 .cb-guide-tabs button.page-tab {
-  height: 48px;
-  margin-bottom: -1px;
-  padding: 0 var(--space-20);
-  border: 0;
-  border-bottom: 2px solid transparent;
-  border-radius: 0;
-  background: none;
-  color: var(--color-text-secondary);
-  font-size: 16px;
-  font-weight: 500;
-}
-.ds2 .cb-guide-tabs button.page-tab:hover { color: var(--color-text-strong); }
-.ds2 .cb-guide-tabs button.page-tab.is-active {
-  border-bottom-color: var(--color-bg-brand);
-  background: none;
-  color: var(--color-text-default);
-  font-weight: 600;
-}
 
 @media (max-width: 480px) {
   .ds2 .page-title { font-size: 22px; }
@@ -262,8 +231,8 @@
   .ds2 .member-sns-btn { border-radius: var(--radius-full); }
   .ds2 .ds-table--stack tr,
   .ds2 .ds-table--stack tr:first-child { border-color: var(--color-border-cool); }
-  .ds2 .page-tab { height: 32px; padding: 0 var(--space-12); font-size: 14px; }
-  .ds2 .cb-guide-tabs button.page-tab { height: 44px; padding: 0 var(--space-12); font-size: 14px; }
+  .ds2 .lx-tabs:not(.about-tabs) .page-tabs,
+  .ds2 .ex-tabs .page-tabs { margin-top: var(--space-16); }
   .ds2 .ds-tabs-box { gap: var(--space-6); }
   .ds2 .ds-tab-box,
   .ds2 .lx-faq-tabs .ds-tab-box { flex: 1 0 calc(33.334% - var(--space-6)); margin: 0; }
