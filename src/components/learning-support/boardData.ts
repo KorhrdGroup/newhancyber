@@ -39,6 +39,8 @@ export const noticePosts: BoardPost[] = [
  * 학사일정 — 운영 사이트(hancyber.co.kr) 학사일정 글 그대로. 이론/실습을 나누지 않고 한 목록에 두고,
  * 실습 글은 운영 사이트 제목 말머리 [사회복지현장실습] 대신 tag 배지로 보인다
  */
+export const SCHEDULE_TAGS = ["사회복지현장실습"] as const;
+
 export const schedulePosts: BoardPost[] = [
   { tag: "사회복지현장실습", title: "2026년 11월 26일 개강반(27년 1-1차) 학사일정 안내", date: "26.11.09" },
   { title: "2026년 11월 26일 개강반(27년 1-1차) 학사일정 안내", date: "26.11.09" },

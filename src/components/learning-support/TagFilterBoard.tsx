@@ -2,23 +2,32 @@
 
 import { useState } from "react";
 import { BoardTable, MobileBoardList, Pagination, SearchBox } from "./BoardParts";
-import { NOTICE_CATEGORIES, noticePosts } from "./boardData";
-
-const filters = ["전체", ...NOTICE_CATEGORIES];
+import type { BoardPost } from "./boardData";
 
 /**
- * 공지사항 목록: 운영 사이트의 구분(교육원 · 자격증 · 학점은행제)을 작은 토글로 고른다.
- * 데스크톱은 검색 줄 왼쪽, 모바일은 목록 위. 글마다 구분은 제목 앞 배지로 보인다.
+ * 글의 분류 배지(tag)로 거르는 게시판 목록 — 공지사항(교육원 · 자격증 · 학점은행제), 학사일정(사회복지현장실습).
+ * 작은 알약 토글은 데스크톱은 검색 줄 왼쪽, 모바일은 목록 위. 글마다 분류는 제목 앞 배지로 보인다.
  */
-export default function NoticeBoard() {
-  const [filter, setFilter] = useState<string>("전체");
+export default function TagFilterBoard({
+  kind,
+  posts: allPosts,
+  tags,
+  label,
+}: {
+  kind: "notice" | "schedule";
+  posts: BoardPost[];
+  tags: readonly string[];
+  /** 토글 묶음의 읽기 이름 (예: "공지 구분") */
+  label: string;
+}) {
+  const [filter, setFilter] = useState("전체");
 
-  // TODO: API — 구분별 공지사항 목록 조회
-  const posts = filter === "전체" ? noticePosts : noticePosts.filter((p) => p.tag === filter);
+  // TODO: API — 분류별 목록 조회
+  const posts = filter === "전체" ? allPosts : allPosts.filter((p) => p.tag === filter);
 
   const toggle = (
-    <div className="ds-tabs-box ds-tabs-box--toggle" role="tablist" aria-label="공지 구분">
-      {filters.map((f) => (
+    <div className="ds-tabs-box ds-tabs-box--toggle" role="tablist" aria-label={label}>
+      {["전체", ...tags].map((f) => (
         <button
           key={f}
           type="button"
@@ -37,7 +46,7 @@ export default function NoticeBoard() {
   return (
     <>
       <div className="lx-board-toggle mobile-only">{toggle}</div>
-      {posts.length > 0 ? <MobileBoardList kind="notice" posts={posts} /> : <div className="mobile-only">{empty}</div>}
+      {posts.length > 0 ? <MobileBoardList kind={kind} posts={posts} /> : <div className="mobile-only">{empty}</div>}
 
       <div className="practice-support-notice-list-section desktop-only">
         <div className="container" style={{ backgroundColor: "#fff" }}>
