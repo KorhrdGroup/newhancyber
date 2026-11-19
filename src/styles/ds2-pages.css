@@ -227,10 +227,10 @@
 .ds2 .ds-tab-box + .ds-tab-box { margin-left: 0; }
 .ds2 .ds-tab-box.is-active { border-color: var(--color-border-brand); background: var(--color-bg-tone-blue); font-weight: 700; }
 
-/* 작은 알약 토글 (공지사항 구분처럼 목록을 거르는 선택) — 글자 폭만큼, 고른 칸만 파랑 */
+/* 작은 알약 토글 (공지사항 구분처럼 목록을 거르는 선택) — 글자 폭만큼. 위 파란 메뉴 줄과 겹치지 않게 파랑 없이 회색 판 위 흰 칸 + 진한 글자 */
 .ds2 .ds-tabs-box--toggle { display: inline-flex; flex-wrap: nowrap; width: auto; gap: 0; padding: var(--space-4); border-radius: var(--radius-full); background: var(--color-bg-surface); }
 .ds2 .ds-tabs-box--toggle .ds-tab-box { flex: none; height: 32px; min-height: 0; margin: 0; padding: 0 var(--space-16); border: 0; border-radius: var(--radius-full); background: transparent; font-size: 14px; font-weight: 600; color: var(--color-text-secondary); }
-.ds2 .ds-tabs-box--toggle .ds-tab-box.is-active { background: var(--color-bg-brand); color: var(--color-text-inverse); }
+.ds2 .ds-tabs-box--toggle .ds-tab-box.is-active { background: var(--color-bg-default); color: var(--color-text-strong); font-weight: 700; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12); }
 /* 검색 줄 왼쪽에 토글이 오면 글 수는 토글 바로 옆, 검색은 오른쪽 끝 */
 .ds2 .lx-board-bar:has(> .ds-tabs-box--toggle) { justify-content: flex-start; }
 /* 게시판 제목 앞 분류 배지 (공지 구분 · 학사일정 실습) */
