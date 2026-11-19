@@ -233,34 +233,27 @@
 }
 .ds2 .ds-tab-box + .ds-tab-box { margin-left: 0; }
 .ds2 .ds-tab-box.is-active { border-color: var(--color-border-brand); background: var(--color-bg-tone-blue); font-weight: 700; }
-/* 파란 밑줄 탭 (시험 적용: 행정절차 가이드만) — 아래 연한 선 위에 고른 탭만 파란 줄, 글자는 검정 */
-.ds2 .cb-guide-tabs { padding-top: var(--space-24); }
-.ds2 .cb-guide-tabs .page-tabs {
-  gap: var(--space-8);
-  padding: 0;
-  background: linear-gradient(var(--color-border-cool), var(--color-border-cool)) left bottom / 100% 1px no-repeat;
-}
+/* 기존(배포 중) 밑줄 탭 (시험 적용: 행정절차 가이드만) — style.css 의 .page-tab 값 그대로, 고른 탭 글자만 파랑 대신 진한 회색.
+   .ds2 알약 탭 규칙을 이 탭에서만 되돌린다 */
+.ds2 .cb-guide-tabs .page-tabs { gap: 0; padding: 0; border-bottom: 1px solid var(--color-border-default); }
 .ds2 .cb-guide-tabs button.page-tab {
-  position: relative;
-  height: 52px;
-  padding: 0 var(--space-16);
+  height: 48px;
+  margin-bottom: -1px;
+  padding: 0 var(--space-20);
   border: 0;
+  border-bottom: 2px solid transparent;
   border-radius: 0;
   background: none;
   color: var(--color-text-secondary);
   font-size: 16px;
+  font-weight: 500;
 }
 .ds2 .cb-guide-tabs button.page-tab:hover { color: var(--color-text-strong); }
-.ds2 .cb-guide-tabs button.page-tab.is-active { background: none; color: var(--color-text-strong); font-weight: 800; }
-.ds2 .cb-guide-tabs button.page-tab.is-active::after {
-  content: "";
-  position: absolute;
-  left: var(--space-16);
-  right: var(--space-16);
-  bottom: 0;
-  height: 3px;
-  border-radius: 3px 3px 0 0;
-  background: var(--color-bg-brand);
+.ds2 .cb-guide-tabs button.page-tab.is-active {
+  border-bottom-color: var(--color-bg-brand);
+  background: none;
+  color: var(--color-text-default);
+  font-weight: 600;
 }
 
 @media (max-width: 480px) {
@@ -270,9 +263,7 @@
   .ds2 .ds-table--stack tr,
   .ds2 .ds-table--stack tr:first-child { border-color: var(--color-border-cool); }
   .ds2 .page-tab { height: 32px; padding: 0 var(--space-12); font-size: 14px; }
-  .ds2 .cb-guide-tabs .page-tabs { gap: 0; }
-  .ds2 .cb-guide-tabs button.page-tab { flex: none; height: 46px; padding: 0 var(--space-12); font-size: 15px; }
-  .ds2 .cb-guide-tabs button.page-tab.is-active::after { left: var(--space-12); right: var(--space-12); }
+  .ds2 .cb-guide-tabs button.page-tab { height: 44px; padding: 0 var(--space-12); font-size: 14px; }
   .ds2 .ds-tabs-box { gap: var(--space-6); }
   .ds2 .ds-tab-box,
   .ds2 .lx-faq-tabs .ds-tab-box { flex: 1 0 calc(33.334% - var(--space-6)); margin: 0; }
