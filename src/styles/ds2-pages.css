@@ -231,8 +231,10 @@
 .ds2 .ds-tabs-box--toggle { display: inline-flex; flex-wrap: nowrap; width: auto; gap: 0; padding: var(--space-4); border-radius: var(--radius-full); background: var(--color-bg-surface); }
 .ds2 .ds-tabs-box--toggle .ds-tab-box { flex: none; height: 32px; min-height: 0; margin: 0; padding: 0 var(--space-16); border: 0; border-radius: var(--radius-full); background: transparent; font-size: 14px; font-weight: 600; color: var(--color-text-secondary); }
 .ds2 .ds-tabs-box--toggle .ds-tab-box.is-active { background: var(--color-bg-default); color: var(--color-text-strong); font-weight: 700; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12); }
-/* 검색 줄 왼쪽에 토글이 오면 글 수는 토글 바로 옆, 검색은 오른쪽 끝 */
+/* 검색 줄 왼쪽에 토글이 오면 토글은 왼쪽 끝, 글 수는 검색 칸 바로 왼쪽에 붙인다 */
 .ds2 .lx-board-bar:has(> .ds-tabs-box--toggle) { justify-content: flex-start; }
+.ds2 .lx-board-bar:has(> .ds-tabs-box--toggle) .lx-board-count { margin-left: auto; }
+.ds2 .lx-board-bar:has(> .ds-tabs-box--toggle) .lx-board-search { margin-left: 0; }
 /* 게시판 제목 앞 분류 배지 (공지 구분 · 학사일정 실습) */
 .ds2 .lx-board-tag { margin-right: var(--space-8); vertical-align: middle; }
 .ds2 .mobile-board-tag { display: flex; width: fit-content; height: 20px; margin-bottom: var(--space-4); padding: 0 var(--space-6); font-size: 11px; }
