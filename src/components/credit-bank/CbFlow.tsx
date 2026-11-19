@@ -25,8 +25,6 @@ export interface CbFlowItem {
   /** 아이콘 이름 (cb-icon-{icon}.png) */
   icon: string;
   label: string;
-  /** 다른 폴더의 3D 아이콘을 쓸 때 그림 주소 (없으면 cb-icon-{icon}.png) */
-  src?: string;
 }
 
 /**
@@ -45,7 +43,7 @@ export function CbIconFlow({ items, joins, size = "md" }: { items: CbFlowItem[];
             </span>
           )}
           <div className="cb-flow-card">
-            <img src={item.src ?? `${ICON}/cb-icon-${item.icon}.png`} alt="" className="cb-flow-icon" />
+            <img src={`${ICON}/cb-icon-${item.icon}.png`} alt="" className="cb-flow-icon" />
             <span className="cb-flow-label">{item.label}</span>
           </div>
         </li>

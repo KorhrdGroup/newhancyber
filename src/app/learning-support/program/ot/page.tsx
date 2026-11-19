@@ -5,8 +5,6 @@ import SectionTabs, { programTabs } from "@/components/learning-support/extra/Se
 import StepDivider from "@/components/learning-support/extra/StepDivider";
 import { SUPPORT_PHONE } from "@/lib/contact";
 import DraftNote from "@/components/common/DraftNote";
-import { CbIconFlow } from "@/components/credit-bank/CbFlow";
-import "@/styles/credit-bank.css";
 
 export const metadata: Metadata = { title: "학습자 OT" };
 
@@ -15,18 +13,13 @@ export const metadata: Metadata = { title: "학습자 OT" };
  * 아래 내용은 이 사이트 FAQ(수료 기준·강의 구성·IP 등록·시험 재접속)와 공동인증서 안내 화면을 바탕으로 새로 썼다.
  * TODO: 교육원에서 OT 영상·자료가 나오면 바꾼다.
  */
-/* 맨 위 단계 그림 — 아래 STEP 1~4 와 같은 순서 */
+/* 각 STEP 오른쪽 3D 그림 — 사이트에 있던 아이콘을 다시 쓴다 */
 const SW_ICON = "/resources/images/social-worker/steps";
-const flow = [
-  { icon: "pc", label: "학습 전 준비", src: `${SW_ICON}/online-apply.png` },
-  { icon: "lecture", label: "강의 듣기", src: `${SW_ICON}/course-book.png` },
-  { icon: "exam", label: "시험·과제", src: `${SW_ICON}/exam-doc.png` },
-  { icon: "aplus", label: "수료와 학점인정" },
-];
 
-const sections: { title: string; items: string[]; links?: { label: string; href: string }[] }[] = [
+const sections: { title: string; icon: string; items: string[]; links?: { label: string; href: string }[] }[] = [
   {
     title: "학습 전 준비",
+    icon: `${SW_ICON}/online-apply.png`,
     items: [
       "아직 수강신청 전이라면 수강신청 절차를 먼저 확인해 주세요. 결제까지 마치면 개강일부터 나의 강의실에서 학습할 수 있습니다.",
       "대리출석·대리시험을 막기 위해 학습할 PC를 학습자 PC(IP)로 등록해야 합니다. 등록된 PC에서만 출석·시험이 인정됩니다.",
@@ -42,6 +35,7 @@ const sections: { title: string; items: string[]; links?: { label: string; href:
   },
   {
     title: "강의 듣기",
+    icon: `${SW_ICON}/course-book.png`,
     items: [
       "강좌는 총 15주 과정으로, 중간고사·기말고사 기간을 뺀 13주 강의로 이루어져 있습니다.",
       "주차별로 정해진 학습 기간 안에 그 주의 강의를 모두 들어야 출석으로 인정됩니다.",
@@ -50,6 +44,7 @@ const sections: { title: string; items: string[]; links?: { label: string; href:
   },
   {
     title: "시험·과제",
+    icon: `${SW_ICON}/exam-doc.png`,
     items: [
       "중간고사·기말고사는 학사일정에 정해진 기간에만 볼 수 있습니다.",
       "시험 중 컴퓨터가 꺼져도 시험 기준시간(중간·기말 1시간, 쪽지시험 30분) 안에는 다시 접속할 수 있습니다.",
@@ -59,6 +54,7 @@ const sections: { title: string; items: string[]; links?: { label: string; href:
   },
   {
     title: "수료와 학점인정",
+    icon: "/resources/images/credit-bank/cb-icon-aplus.png",
     items: [
       "성적 60점 이상, 출석 80% 이상을 모두 채워야 수료할 수 있습니다.",
       "과목마다 평가 기준이 다를 수 있으니 수강신청 화면의 강좌 강의 평가서를 확인해 주세요.",
@@ -79,33 +75,32 @@ export default function LearningOtPage() {
           작성했습니다. 교육원의 OT 영상·자료가 나오면 바꿔야 합니다.
         </DraftNote>
 
-        <section className="lx-panel">
-          <CbIconFlow size="lg" items={flow} joins={["arrow", "arrow", "arrow"]} />
-        </section>
-
         {sections.map((section, i) => (
           <Fragment key={section.title}>
             {i > 0 && <StepDivider />}
-            <section className="lx-panel">
-              <h2 className="lx-section-title">
-                <span className="lx-step-label">STEP {i + 1}</span> {section.title}
-              </h2>
-              <ul className="lx-notes">
-                {section.items.map((item) => (
-                  <li key={item} className="page-list-item">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              {section.links && (
-                <div className="lx-ot-links">
-                  {section.links.map((link) => (
-                    <Link key={link.href} href={link.href} className="ds-btn ds-btn--secondary ds-btn--sm">
-                      {link.label}
-                    </Link>
+            <section className="lx-panel lx-ot-step">
+              <div className="lx-ot-step-body">
+                <h2 className="lx-section-title">
+                  <span className="lx-step-label">STEP {i + 1}</span> {section.title}
+                </h2>
+                <ul className="lx-notes">
+                  {section.items.map((item) => (
+                    <li key={item} className="page-list-item">
+                      {item}
+                    </li>
                   ))}
-                </div>
-              )}
+                </ul>
+                {section.links && (
+                  <div className="lx-ot-links">
+                    {section.links.map((link) => (
+                      <Link key={link.href} href={link.href} className="ds-btn ds-btn--secondary ds-btn--sm">
+                        {link.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <img className="lx-ot-step-icon" src={section.icon} alt="" />
             </section>
           </Fragment>
         ))}
