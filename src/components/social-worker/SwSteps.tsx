@@ -117,7 +117,7 @@ export function ApplyFlow() {
 export function Level2Flow() {
   return (
     <Flow size="lg" label="사회복지사 2급 취득 절차">
-      <Step icon="online-apply.png" title="덧셈수강신청" />
+      <Step icon="online-apply.png" title="수강신청" />
       <Divider />
       <Group grow={2}>
         <Step icon="course-book.png" title="과목이수" />

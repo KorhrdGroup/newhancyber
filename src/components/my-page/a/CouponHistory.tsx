@@ -75,14 +75,14 @@ export default function CouponHistory({ coupons }: { coupons: Coupon[] }) {
       </form>
 
       <section className="cr-section">
-        <div className="page-tabs mp-subtabs" role="tablist" aria-label="쿠폰 거르기">
+        <div className="ds-tabs-box ds-tabs-box--segment mp-filter" role="tablist" aria-label="쿠폰 거르기">
           {filters.map((f, i) => (
             <button
               key={f.label}
               type="button"
               role="tab"
               aria-selected={filter === i}
-              className={`page-tab${filter === i ? " is-active" : ""}`}
+              className={`ds-tab-box${filter === i ? " is-active" : ""}`}
               onClick={() => setFilter(i)}
             >
               {f.label}

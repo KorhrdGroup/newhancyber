@@ -38,7 +38,6 @@ export default function ContactForm() {
   return (
     <form className="pp-box mp-form" onSubmit={handleSubmit}>
       <div className="mp-form-head">
-        <h1 className="pp-box-title">불편사항 접수</h1>
         <p className="pp-note">
           <Req /> 표시는 필수 입력 사항입니다.
         </p>

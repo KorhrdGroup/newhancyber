@@ -58,6 +58,8 @@ const initialChecks: Record<TermKey, boolean> = {
 export default function SignupTerms() {
   const router = useRouter();
   const [checks, setChecks] = useState(initialChecks);
+  // 약관 내용은 한 번에 하나만 펼친다 (FAQ 와 같음)
+  const [openKey, setOpenKey] = useState<string | null>(null);
   const allChecked = Object.values(checks).every(Boolean);
 
   const setAll = (checked: boolean) =>
@@ -101,6 +103,8 @@ export default function SignupTerms() {
             required={required}
             checked={checks[key]}
             onChange={(checked) => setChecks((prev) => ({ ...prev, [key]: checked }))}
+            isOpen={openKey === key}
+            onToggle={() => setOpenKey(openKey === key ? null : key)}
           >
             <Text />
           </TermsBox>

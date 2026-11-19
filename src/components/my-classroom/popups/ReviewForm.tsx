@@ -26,7 +26,10 @@ export default function ReviewForm() {
         <div className="pp-stars" role="radiogroup" aria-label="별점">
           {[1, 2, 3, 4, 5].map((n) => (
             <button key={n} type="button" role="radio" aria-checked={stars === n} aria-label={`${n}점`} className={`pp-star${n <= stars ? " is-on" : ""}`} onClick={() => setStars(n)}>
-              ★
+              {/* 같은 색 굵은 테두리 + 둥근 이음으로 꼭짓점을 둥글게 */}
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 3.2l2.7 5.5 6.1.9-4.4 4.3 1 6-5.4-2.9-5.4 2.9 1-6-4.4-4.3 6.1-.9z" fill="currentColor" stroke="currentColor" strokeWidth="2.4" strokeLinejoin="round" />
+              </svg>
             </button>
           ))}
         </div>

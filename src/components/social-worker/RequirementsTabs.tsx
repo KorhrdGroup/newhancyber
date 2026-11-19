@@ -45,7 +45,7 @@ export function RequirementsSubTabs({ panels }: { panels: TabPanel[] }) {
 
   return (
     <>
-      <ButtonTabs className="sw-sub-tabs" items={panels} active={activeKey} onSelect={setActiveKey} ariaLabel="1급 안내 구분" />
+      <ButtonTabs className="ds-tabs-box--segment sw-sub-tabs" items={panels} active={activeKey} onSelect={setActiveKey} ariaLabel="1급 안내 구분" />
       {panels.map((panel) => (
         <div key={panel.key} role="tabpanel" aria-label={panel.label} hidden={panel.key !== activeKey}>
           {panel.content}

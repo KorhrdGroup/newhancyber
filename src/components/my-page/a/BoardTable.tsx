@@ -1,4 +1,3 @@
-import Link from "next/link";
 import {
   BoardTable as BoardListTable,
   MobileBoardList,
@@ -11,14 +10,18 @@ import { courseTerm, courseTitle, getBoardPosts, type BoardKind } from "../myPag
 import "@/styles/classroom.css";
 import "@/styles/learning-extra.css";
 
-const columns: BoardColumn[] = [{ key: "course", label: "학기 / 과목", at: "before-title", width: 240 }];
+// 학기 · 과목을 한 칸에 두 줄로 쌓으면 답답해서 칸을 나눠 한 줄씩 가로로 둔다
+const columns: BoardColumn[] = [
+  { key: "term", label: "학기", at: "before-title", width: 160 },
+  { key: "course", label: "과목", at: "before-title", width: 180 },
+];
 const scopes = [
   { value: "title", label: "제목" },
   { value: "content", label: "내용" },
 ];
 
 /**
- * U28 학습 게시판 목록 (학습 공지사항·학습 자료실·학습 Q&A 공통).
+ * U28 학습 게시판 목록 (학습 공지사항·학습 자료실 공통).
  * 원본 /stdMng/stdBbs/bbsList.asp 처럼 칸은 번호 · 학기/과목 · 제목, 검색은 학기 · 과목 · 제목/내용.
  */
 export default function BoardTable({ kind }: { kind: BoardKind }) {
@@ -33,12 +36,8 @@ export default function BoardTable({ kind }: { kind: BoardKind }) {
     date: post.date,
     href: `/my-page/study-board/post/${post.id}`,
     cells: {
-      course: (
-        <>
-          <span className="lx-board-term">{courseTerm(post.courseId)}</span>
-          {courseTitle(post.courseId)}
-        </>
-      ),
+      term: courseTerm(post.courseId),
+      course: courseTitle(post.courseId),
     },
     meta: <span>{courseTitle(post.courseId)}</span>,
   }));
@@ -62,14 +61,6 @@ export default function BoardTable({ kind }: { kind: BoardKind }) {
     </>
   );
 
-  const ask = kind === "qna" && (
-    <div className="lx-board-actions">
-      <Link href="/my-page/study-board/qna/write" className="ds-btn ds-btn--primary">
-        문의하기
-      </Link>
-    </div>
-  );
-
   return (
     <>
       <div className="desktop-only">
@@ -85,7 +76,6 @@ export default function BoardTable({ kind }: { kind: BoardKind }) {
           </div>
         </>
       )}
-      {ask}
       {posts.length > 0 && <Pagination pages={1} />}
     </>
   );

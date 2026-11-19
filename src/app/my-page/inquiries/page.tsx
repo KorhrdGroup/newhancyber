@@ -15,7 +15,7 @@ export const metadata: Metadata = { title: "1:1 문의 - 학습 게시판 - 마�
 export default function PersonalInquiriesPage() {
   // TODO: API — 로그인한 학습자의 문의 목록 (학습지원 1:1 문의와 같은 데이터)
   return (
-    <MyPageShell title="학습 게시판" desc="수강 중인 과목의 공지, 질문과 답변, 학습 자료를 모아 볼 수 있습니다.">
+    <MyPageShell title="학습 게시판" desc="수강 중인 과목의 공지와 학습 자료, 내 1:1 문의를 모아 볼 수 있습니다.">
       <PageTabs items={myPageBoardTabs} />
       <div className="lx-board-bar">
         <p className="lx-board-count">

@@ -1,0 +1,290 @@
+/*
+ * 디자인 시스템 v2 — 메인(/)과 같은 모양을 다른 사용자 화면에 입힌다.
+ * 묶음별로 옮기는 중이라, 레이아웃에서 .ds2 로 감싼 화면에만 적용한다 (지금: 학점은행제 · 사회복지사 · 실습지원 · 수강신청 · 학습지원 · 마이페이지 · 회원 · 바닥글 화면 · 팝업).
+ * 규칙은 한평생원격_디자인시스템_v2.md 6장(부품 규칙)을 따른다:
+ *   제목은 굵게(800) · 자간 -2%, 상자는 테두리 대신 연한 바탕(bg-surface) + 모서리 16,
+ *   버튼 · 입력 칸 모서리는 높이를 따라 32→6 · 40→10 · 48→12.
+ */
+
+/* ---------- 글자 ---------- */
+.ds2 .page-title,
+.ds2 .ex-title { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.35; color: var(--color-text-strong); }
+.ds2 .lx-desc,
+.ds2 .ex-desc { margin-top: var(--space-6); font-size: 15px; }
+.ds2 .lx-section-title,
+.ds2 .ex-section-title { font-size: 20px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.4; }
+
+/* ---------- 상자: 테두리 대신 연한 바탕 카드 ---------- */
+.ds2 .lx-page:not(.lx-page--plain) .lx-panel,
+.ds2 .lx-step,
+.ds2 .cb-flow,
+.ds2 .cb-grid,
+.ds2 .cb-steps-row,
+.ds2 .cb-steps-final,
+.ds2 .lx-doc-status,
+.ds2 .ex-box,
+.ds2 .ex-step,
+.ds2 .rg-schedule {
+  border: 0;
+  border-radius: var(--radius-16);
+  background: var(--color-bg-surface);
+}
+.ds2 .ex-contact,
+.ds2 .ex-find-value { border-radius: var(--radius-16); background: var(--color-bg-surface); }
+.ds2 .ex-contact dd { font-weight: 800; letter-spacing: -0.01em; }
+.ds2 .ex-method-guide,
+.ds2 .ex-consent-details { border: 0; border-radius: var(--radius-12); background: var(--color-bg-surface); }
+/* 혼자 떠 있는 카드(아이디 찾기 결과)는 흰 카드 + 파란빛 그림자 */
+.ds2 .ex-find-card { border: 0; border-radius: var(--radius-20); box-shadow: var(--shadow-brand-sm); }
+/* 위에 뜨는 전공 고르기 창 */
+.ds2 .rg-major { border-color: var(--color-border-cool); border-radius: var(--radius-16); box-shadow: var(--shadow-float-md); }
+.ds2 .lx-flow-item { border-radius: var(--radius-12); background: var(--color-bg-tone-blue); }
+/* 사회복지사 단계 그림(아이콘 + 점선 + 동그라미 화살표): 학점은행제란 그림처럼 연한 바탕 카드.
+   점선 위 표시 · 글을 가리던 흰 테두리도 바탕색으로 맞춘다 */
+.ds2 .sw-flow { border-radius: var(--radius-16); background: var(--color-bg-surface); }
+.ds2 .sw-flow-divider .sw-mark,
+.ds2 .sw-route-path .sw-pill { box-shadow: 0 0 0 4px var(--color-bg-surface); }
+.ds2 .sw-flow-bracket .sw-pill { box-shadow: 0 0 0 6px var(--color-bg-surface); }
+.ds2 .sw-flow-divider-caption,
+.ds2 .sw-route-arrow { background: var(--color-bg-surface); }
+/* 칸 사이 점선은 연한 바탕 위에서 조금 더 옅게 */
+.ds2 .cb-flow-join--arrow::before,
+.ds2 .cb-grid-item + .cb-grid-item::before,
+.ds2 .cb-grid-item:nth-child(n + 5)::after,
+.ds2 .cb-steps-down::before { opacity: 0.6; }
+
+/* 안내 띠 · 상담 띠: 톤 카드 */
+.ds2 .lx-callout,
+.ds2 .lx-law-box,
+.ds2 .ex-hero,
+.ds2 .ex-memo,
+.ds2 .rg-banner,
+.ds2 .cb-consult { border-radius: var(--radius-16); background: var(--color-bg-tone-blue); }
+.ds2 .cb-consult { padding: var(--space-24) var(--space-28); }
+.ds2 .cb-consult-text { font-weight: 800; letter-spacing: -0.01em; }
+
+/* 그림 넘김 틀 */
+.ds2 .cb-slider-frame { border: 0; border-radius: var(--radius-16); background: var(--color-bg-surface); }
+.ds2 .cb-slider-nav { border-color: var(--color-border-brand-soft); border-radius: var(--radius-10); }
+.ds2 .cb-slider-nav:hover { border-color: var(--color-border-brand); }
+
+/* ---------- 결제 · 장바구니 ---------- */
+/* 결제 수단: 연한 바탕 카드 위에서도 흰 칸, 48 높이 → 모서리 12 */
+.ds2 .ex-method { border-color: var(--color-border-brand-soft); border-radius: var(--radius-12); background: var(--color-bg-default); }
+.ds2 .ex-method.is-active { border-color: var(--color-border-brand); background: var(--color-bg-brand-soft); font-weight: 700; }
+.ds2 .ex-cart-head,
+.ds2 .ex-sum-total { border-color: var(--color-border-cool); }
+.ds2 .ex-sum-total strong { font-weight: 800; letter-spacing: -0.01em; }
+.ds2 .ex-order-item,
+.ds2 .rg-picked-item,
+.ds2 .rg-picked-empty,
+.ds2 .rg-card,
+.ds2 .rg-schedule-item { border-bottom-color: var(--color-border-cool); }
+.ds2 .ex-order-icon { border-radius: var(--radius-6); }
+
+/* ---------- 표: 머리는 푸른 회색, 줄은 옅은 푸른 선 ---------- */
+/* 표 · 질문 목록 위 두꺼운 선: 검정 대신 회색 */
+.ds2 .ds-table,
+.ds2 .ds-accordion { border-top: 2px solid var(--color-border-control); }
+.ds2 .ds-table th { background: var(--color-bg-surface); border-bottom-color: var(--color-border-cool); font-weight: 700; }
+.ds2 .ds-table td { border-bottom-color: var(--color-border-cool); }
+.ds2 .cb-page .lx-table th,
+.ds2 .cb-page .lx-table td { border-right-color: var(--color-border-cool); }
+.ds2 .cb-category { background: var(--color-bg-surface); }
+.ds2 .cb-cell { background: var(--color-bg-tone-blue); }
+/* 월별 일정표 (Figma 935:6432): 둥근 테두리 상자, 신청 달만 파란 머리 · 나머지 달은 흐린 회색, 칸은 흰색 */
+.ds2 .cb-schedule { border: 1px solid var(--color-border-strong); border-collapse: separate; border-spacing: 0; border-radius: var(--radius-8); overflow: hidden; }
+.ds2 .cb-page .cb-schedule th,
+.ds2 .cb-page .cb-schedule td { border-right: 1px solid var(--color-border-strong); border-bottom: 1px solid var(--color-border-strong); }
+.ds2 .cb-page .cb-schedule th:last-child,
+.ds2 .cb-page .cb-schedule td:last-child { border-right: 0; }
+.ds2 .cb-page .cb-schedule tbody tr:last-child td { border-bottom: 0; }
+.ds2 .cb-schedule th { height: 40px; font-size: 14px; font-weight: 600; }
+.ds2 .cb-schedule:has(th.is-active) th:not(.is-active) { background: var(--color-border-subtle); color: var(--color-text-disabled); }
+.ds2 .cb-schedule th.is-active { background: var(--color-bg-brand); color: var(--color-text-inverse); }
+.ds2 .cb-schedule td { background: var(--color-bg-surface); }
+.ds2 .cb-schedule td.cb-cell { background: var(--color-bg-default); font-weight: 500; color: var(--color-text-strong); }
+.ds2 .cb-schedule:has(.cb-em) td.cb-cell { color: var(--color-text-placeholder); }
+.ds2 .cb-schedule .cb-em { font-weight: 600; color: var(--color-text-brand); }
+
+/* ---------- 버튼 ---------- */
+.ds2 .ds-btn { border-radius: var(--radius-10); font-weight: 700; }
+.ds2 .ds-btn--sm { border-radius: var(--radius-6); }
+.ds2 .ds-btn--lg { border-radius: var(--radius-12); font-size: 15px; }
+/* 흰 버튼: 메인 기본 버튼처럼 연한 파란 테두리, 마우스 올리면 파란 테두리 */
+.ds2 .ds-btn--secondary { border-color: var(--color-border-brand-soft); color: var(--color-text-strong); }
+.ds2 .ds-btn--secondary:not(:disabled):not([aria-disabled="true"]):hover { border-color: var(--color-border-brand); background: var(--color-bg-default); }
+/* 누를 수 없는 버튼(예: 수료증 '발급 불가'): 회색 그대로, 마우스 올려도 바뀌지 않음 */
+.ds2 .ds-btn--secondary:disabled,
+.ds2 .ds-btn--secondary[aria-disabled="true"] { background: var(--color-bg-disabled); color: var(--color-text-disabled); border-color: transparent; }
+
+/* ---------- 입력 칸 · 선택 상자 (40 높이 → 모서리 10) ---------- */
+.ds2 .ds-input,
+.ds2 .ds-select { border-radius: var(--radius-10); }
+
+/* ---------- 학습지원: 학사일정 카드 · 답변 상자 · 숫자 카드 · 접는 목록 · 글 보기 ---------- */
+.ds2 .lx-term { border: 1px solid transparent; border-radius: var(--radius-16); background: var(--color-bg-surface); }
+/* 지금 학기: 흰 카드를 파란 테두리 + 파란빛 그림자로 띄움 */
+.ds2 .lx-term.is-open { border-color: var(--color-border-brand); background: var(--color-bg-default); box-shadow: var(--shadow-brand-sm); }
+.ds2 .lx-term-head { border-bottom-color: var(--color-border-cool); }
+.ds2 .lx-answer { border-radius: var(--radius-16); background: var(--color-bg-tone-blue); }
+.ds2 .lx-answer--waiting { background: var(--color-bg-surface); }
+.ds2 .ds-stat { border: 0; border-radius: var(--radius-16); background: var(--color-bg-surface); }
+.ds2 .lx-remote-contacts .ds-stat { background: var(--color-bg-tone-blue); }
+.ds2 .ds-stat-value { font-weight: 800; letter-spacing: -0.01em; }
+.ds2 .lx-file-chip { background: var(--color-bg-surface); }
+.ds2 .lx-step-divider::before { opacity: 0.6; }
+.ds2 .ds-accordion-item { border-bottom-color: var(--color-border-cool); }
+.ds2 .lx-inquiry-list .ds-accordion-item.is-open .lx-inquiry-q { background-color: var(--color-bg-surface); }
+/* 목록 줄에 마우스를 올렸을 때: 밝은 회색(#f8f9fa) */
+.ds2 .ds-accordion-q:hover,
+.ds2 .lx-board-table tbody tr:hover { background-color: var(--color-bg-subtle); }
+.ds2 .ds-accordion-a { background: var(--color-bg-surface); }
+.ds2 .ds-accordion-empty,
+.ds2 .lx-post-head,
+.ds2 .lx-article-head,
+.ds2 .lx-article-body,
+.ds2 .lx-article-nav,
+.ds2 .lx-article-nav-row + .lx-article-nav-row { border-color: var(--color-border-cool); }
+/* 상세 글 머리 위 두꺼운 선은 뺀다 (위 탭 · 메뉴 줄과 겹쳐 무거움). 제목 아래 옅은 선만 남긴다 */
+.ds2 .lx-article-head { border-top: 0; }
+.ds2 .lx-post-title { font-weight: 800; letter-spacing: -0.02em; }
+
+/* 쪽 번호 (32 높이 → 모서리 6) */
+.ds2 .ds-page-btn { border-color: var(--color-border-brand-soft); border-radius: var(--radius-6); }
+.ds2 .ds-page-btn:hover:not(:disabled):not(.is-current) { border-color: var(--color-border-brand); background: var(--color-bg-default); }
+.ds2 .ds-page-btn.is-current { border-color: var(--color-bg-brand); }
+
+/* ---------- 마이페이지 · 팝업: 상자 · 답변 · 주차 고르기 ---------- */
+.ds2 .pp-box { border: 0; border-radius: var(--radius-16); background: var(--color-bg-surface); }
+.ds2 .pp-box-title { font-weight: 800; letter-spacing: -0.01em; }
+.ds2 .pp-box.mq-answer { background: var(--color-bg-tone-blue); }
+.ds2 .pp-box.mq-waiting { background: var(--color-bg-surface); }
+.ds2 .mq-post-title { font-weight: 800; letter-spacing: -0.02em; }
+.ds2 .mp-week { border-color: var(--color-border-brand-soft); border-radius: var(--radius-12); background: var(--color-bg-default); }
+.ds2 .mp-week:hover:not(:disabled) { border-color: var(--color-border-brand); }
+/* 고를 수 없는 주차: 연한 바탕 카드 위라 흰 칸 + 흐린 글자로 */
+.ds2 .mp-week:disabled { border-color: transparent; background: var(--color-bg-default); opacity: 0.6; }
+/* 마이페이지 상세의 내 글 상자 */
+.ds2 .mp-wrapper .lx-panel { border: 0; border-radius: var(--radius-16); background: var(--color-bg-surface); }
+.ds2 .mp-week[aria-pressed="true"] { border-color: var(--color-border-brand); background: var(--color-bg-brand-soft); }
+.ds2 .ds-textarea { border-radius: var(--radius-10); }
+
+/* ---------- 회원: 로그인 · 가입 단계 · 약관 동의 ---------- */
+.ds2 .member-title { font-weight: 800; letter-spacing: -0.02em; }
+.ds2 .member-col-title,
+.ds2 .signup-done-title { font-weight: 800; letter-spacing: -0.01em; }
+.ds2 .member-col + .member-col { border-color: var(--color-border-cool); }
+.ds2 .member-sns-btn { border-radius: var(--radius-12); }
+.ds2 .member-form .ds-input { border-radius: var(--radius-12); } /* 48 높이 → 버튼(lg)과 같은 모서리 12 */
+.ds2 .member-help { border-radius: var(--radius-16); background: var(--color-bg-surface); }
+.ds2 .member-help-item + .member-help-item { border-color: var(--color-border-cool); }
+.ds2 .signup-step + .signup-step::before { background: var(--color-border-cool); }
+.ds2 .signup-step.is-done::before,
+.ds2 .signup-step.is-current::before { background: var(--color-bg-brand); }
+.ds2 .signup-step-num { background: var(--color-bg-surface); font-weight: 700; }
+.ds2 .signup-step.is-done .signup-step-num { background: var(--color-bg-brand-soft); }
+.ds2 .signup-step.is-current .signup-step-num { background: var(--color-bg-brand); }
+.ds2 .ds-check.signup-all { border-radius: var(--radius-16); background: var(--color-bg-surface); }
+.ds2 .signup-all-title { font-weight: 800; }
+.ds2 .signup-terms { border-color: var(--color-border-cool); border-radius: var(--radius-16); }
+.ds2 .signup-term + .signup-term { border-color: var(--color-border-cool); }
+.ds2 .signup-term-toggle:hover { background: var(--color-bg-surface); }
+.ds2 .signup-term-body { border-radius: var(--radius-12); background: var(--color-bg-surface); }
+.ds2 .signup-term-body th,
+.ds2 .signup-term-body td { border-color: var(--color-border-cool); }
+.ds2 .signup-term-body th { background: var(--color-bg-tone-blue); }
+
+/* ---------- 바닥글 화면: 교육원 소개 · 약관 · 방침 · 불편사항 접수 ---------- */
+.ds2 .about-lead-box { border-radius: var(--radius-16); background: var(--color-bg-tone-blue); font-weight: 800; letter-spacing: -0.01em; }
+.ds2 .about-banner,
+.ds2 .about-philosophy-img { border-radius: var(--radius-16); }
+.ds2 .about-map { border-color: var(--color-border-cool); border-radius: var(--radius-16); }
+.ds2 .about-feature-list,
+.ds2 .about-feature,
+.ds2 .about-info,
+.ds2 .about-info-row { border-color: var(--color-border-cool); }
+.ds2 .about-scholarship-table tbody th { background: var(--color-bg-surface); }
+.ds2 .legal-sub { border-radius: var(--radius-12); background: var(--color-bg-surface); }
+.ds2 .legal-article,
+.ds2 .legal-video-intro,
+.ds2 .legal-page .privacy-article-section,
+.ds2 .legal-page .privacy-content > h2.privacy-article-title-icons { border-color: var(--color-border-cool); }
+.ds2 .legal-page .privacy-article-title,
+.ds2 .legal-page .privacy-article-title-icons { font-weight: 800; letter-spacing: -0.01em; }
+.ds2 .legal-page :is(.privacy-labeling-title, .privacy-toc-title, .privacy-data-header, .privacy-entrust-header,
+  .privacy-thirdparty-header, .privacy-retention-header, .privacy-protection-header, .privacy-officer-header) {
+  background-color: var(--color-bg-surface);
+  border-bottom-color: var(--color-border-cool);
+  font-weight: 700;
+}
+.ds2 .legal-page :is(.privacy-labeling-cell, .privacy-toc-cell, .privacy-data-cell, .privacy-entrust-cell,
+  .privacy-thirdparty-cell, .privacy-retention-cell, .privacy-protection-cell, .privacy-officer-cell) { border-color: var(--color-border-cool); }
+.ds2 .privacy-labeling-table-wrapper,
+.ds2 .privacy-labeling-table { border-radius: var(--radius-16); }
+.ds2 .contact-consent-details { border: 0; border-radius: var(--radius-12); background: var(--color-bg-surface); }
+
+/* 팝업: 바탕이 이미 옅은 색이라, 상자는 흰 카드로 띄운다 */
+.ds2.pp { background: var(--color-bg-surface); }
+.ds2.pp .pp-box,
+.ds2.pp .ds-stat { background: var(--color-bg-default); }
+
+/* ---------- 탭 ---------- */
+/* 화면끼리 묶는 탭 · 화면 안 전환 탭 → 배포 중인 밑줄 탭(style.css .page-tab) 그대로, 고른 탭 글자만 파랑 대신 진한 회색 */
+.ds2 .page-tab.is-active { color: var(--color-text-default); }
+/* 탭은 줄 전체에 같은 폭으로 나눈다. 칸이 모자라면 글자 폭을 지키고 옆으로 밀어서 본다 (마이페이지 상자 탭은 제외) */
+.ds2 .page-tabs:not(.mp-subtabs) .page-tab { flex: 1 1 0; justify-content: center; min-width: max-content; }
+/* 파란 하위 메뉴 줄 바로 아래 붙는 탭 줄은 조금 띄운다 (마이페이지는 제목 아래라 그대로) */
+.ds2 .lx-tabs:not(.about-tabs) .page-tabs,
+.ds2 .ex-tabs .page-tabs { margin-top: var(--space-32); }
+/* 상자 탭(FAQ 분류 · 실습 단계) → 칸을 띄운 둥근 카드 */
+.ds2 .ds-tabs-box { gap: var(--space-8); }
+.ds2 .ds-tab-box {
+  margin-left: 0;
+  border: 1px solid transparent;
+  border-radius: var(--radius-12);
+  background: var(--color-bg-surface);
+  font-weight: 600;
+}
+.ds2 .ds-tab-box + .ds-tab-box { margin-left: 0; }
+.ds2 .ds-tab-box.is-active { border-color: var(--color-border-brand); background: var(--color-bg-tone-blue); font-weight: 700; }
+
+/* 세그먼트 (공지사항 구분처럼 목록을 거르는 선택) — 글자 폭만큼 네모난 칸. 위 파란 메뉴 줄과 겹치지 않게 파랑 없이 회색 판 위 흰 칸 + 진한 글자 */
+.ds2 .ds-tabs-box--segment { display: inline-flex; flex-wrap: nowrap; width: auto; gap: 0; padding: var(--space-4); border-radius: var(--radius-8); background: var(--color-bg-muted); /* 회색 판(#f8f9fa)보다 한 단계 진하게 — 흰 칸이 보이도록 */ }
+.ds2 .ds-tabs-box--segment .ds-tab-box { flex: none; height: 32px; min-height: 0; margin: 0; padding: 0 var(--space-16); border: 0; border-radius: var(--radius-6); background: transparent; font-size: 14px; font-weight: 600; color: var(--color-text-secondary); }
+.ds2 .ds-tabs-box--segment .ds-tab-box.is-active { background: var(--color-bg-default); color: var(--color-text-strong); font-weight: 700; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12); }
+/* 검색 줄 왼쪽에 세그먼트가 오면 세그먼트는 왼쪽 끝, 글 수는 검색 칸 바로 왼쪽에 붙인다 */
+.ds2 .lx-board-bar:has(> .ds-tabs-box--segment) { justify-content: flex-start; }
+.ds2 .lx-board-bar:has(> .ds-tabs-box--segment) .lx-board-count { margin-left: auto; }
+.ds2 .lx-board-bar:has(> .ds-tabs-box--segment) .lx-board-search { margin-left: 0; }
+/* 게시판 글 수: 글자는 흐린 회색, 숫자도 파랑 대신 무채색 */
+.ds2 .lx-board-count { color: var(--color-text-placeholder); }
+.ds2 .lx-board-count strong { color: var(--color-text-default); }
+/* 게시판 검색 버튼: 위 서브메뉴 줄과 같은 파랑 (--color-primary #3F7EFB) */
+.ds2 .lx-board-search .ds-btn--primary { background: var(--color-primary); }
+.ds2 .lx-board-search .ds-btn--primary:hover { background: var(--color-bg-brand); }
+/* 게시판 제목 앞 분류 배지 (공지 구분 · 학사일정 실습) */
+.ds2 .lx-board-tag { margin-right: var(--space-8); vertical-align: middle; }
+.ds2 .mobile-board-tag { display: flex; width: fit-content; height: 20px; margin-bottom: var(--space-4); padding: 0 var(--space-6); font-size: 11px; }
+@media (max-width: 480px) {
+  .ds2 .lx-board-segment { padding: var(--space-16) var(--space-16) 0; }
+  /* 상자 탭의 모바일 칸 나누기(3칸 · 4칸이면 2+2, 위 :not 으로도 뺌)를 받지 않고 글자 폭만큼 */
+  .ds2 .ds-tabs-box.ds-tabs-box--segment { gap: 0; }
+  .ds2 .ds-tabs-box.ds-tabs-box--segment > .ds-tab-box:nth-child(n) { flex: none; padding: 0 var(--space-12); }
+}
+
+@media (max-width: 480px) {
+  .ds2 .page-title { font-size: 22px; }
+  .ds2 .lx-section-title { font-size: 18px; }
+  .ds2 .member-sns-btn { border-radius: var(--radius-full); }
+  .ds2 .ds-table--stack tr,
+  .ds2 .ds-table--stack tr:first-child { border-color: var(--color-border-cool); }
+  .ds2 .lx-tabs:not(.about-tabs) .page-tabs,
+  .ds2 .ex-tabs .page-tabs { margin-top: var(--space-16); }
+  .ds2 .ds-tabs-box { gap: var(--space-6); }
+  .ds2 .ds-tab-box,
+  .ds2 .lx-faq-tabs .ds-tab-box { flex: 1 0 calc(33.334% - var(--space-6)); margin: 0; }
+  /* 4칸이면 2+2 */
+  .ds2 .ds-tabs-box:not(.ds-tabs-box--segment) > .ds-tab-box:first-child:nth-last-child(4),
+  .ds2 .ds-tabs-box:not(.ds-tabs-box--segment) > .ds-tab-box:first-child:nth-last-child(4) ~ .ds-tab-box { flex-basis: calc(50% - var(--space-6)); }
+}

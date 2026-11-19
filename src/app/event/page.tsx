@@ -18,7 +18,7 @@ export default function EventPage() {
         />
       </div>
       <EventMain>
-        <div className="container">
+        <div className="container event-container">
           {/* 데스크톱 이미지 — 모바일은 위의 mobile-event-banner */}
           <div className="event-page desktop-only">
             <div className="event-image-container">

@@ -11,21 +11,17 @@ import { getCourse } from "@/components/my-classroom/classroomData";
 /* U28 학습 게시판                                                       */
 /* ------------------------------------------------------------------ */
 
-export type BoardKind = "notice" | "qna" | "materials";
+export type BoardKind = "notice" | "materials";
 
 export const boardListHref: Record<BoardKind, string> = {
   notice: "/my-page/study-board",
-  qna: "/my-page/study-board/qna",
   materials: "/my-page/study-board/materials",
 };
 
 export const boardLabels: Record<BoardKind, string> = {
   notice: "학습 공지사항",
-  qna: "학습 Q&A",
   materials: "학습 자료실",
 };
-
-export type AnswerStatus = "답변 완료" | "답변 대기";
 
 export interface BoardPost {
   id: string;
@@ -39,8 +35,6 @@ export interface BoardPost {
   body: string[];
   /** TODO: 첨부파일 다운로드 링크 (지금은 파일 이름만) */
   files?: string[];
-  /** 학습 Q&A 답변 */
-  answer?: { author: string; date: string; body: string[] };
 }
 
 const boardPosts: BoardPost[] = [
@@ -81,49 +75,6 @@ const boardPosts: BoardPost[] = [
     date: "2026.11.03",
     views: 154,
     body: ["1주차 강의는 11월 12일 0시에 열립니다. 강의계획서를 먼저 읽어 보시면 학습 흐름을 잡는 데 도움이 됩니다."],
-  },
-  {
-    id: "q204",
-    kind: "qna",
-    courseId: "c101",
-    title: "3주차 강의 영상이 중간에 멈춰요",
-    author: "홍길동",
-    date: "2026.11.09",
-    views: 12,
-    body: ["3주차 2차시 영상이 10분쯤에서 멈추고 더 넘어가지 않습니다. 다른 브라우저로도 해 봤는데 같습니다."],
-    answer: {
-      author: "운영팀",
-      date: "2026.11.10",
-      body: [
-        "불편을 드려 죄송합니다. 해당 영상 파일을 다시 올렸으니 새로고침 후 다시 들어 주세요.",
-        "같은 문제가 계속되면 학습지원센터(1661-7768)로 연락 주시면 바로 도와드리겠습니다.",
-      ],
-    },
-  },
-  {
-    id: "q203",
-    kind: "qna",
-    courseId: "c102",
-    title: "과제 분량은 몇 쪽이 적당한가요?",
-    author: "홍길동",
-    date: "2026.11.08",
-    views: 8,
-    body: ["사례 분석 보고서 과제의 분량 기준이 따로 있는지 궁금합니다."],
-  },
-  {
-    id: "q202",
-    kind: "qna",
-    courseId: "c001",
-    title: "기말고사 점수 확인은 언제 되나요?",
-    author: "홍길동",
-    date: "2026.09.25",
-    views: 21,
-    body: ["기말고사를 마쳤는데 점수는 언제부터 볼 수 있는지 알고 싶습니다."],
-    answer: {
-      author: "박정책 교수",
-      date: "2026.09.26",
-      body: ["성적은 학습 기간이 끝나고 강의 평가를 마치면 '종료된 과목'에서 볼 수 있습니다."],
-    },
   },
   {
     id: "m302",

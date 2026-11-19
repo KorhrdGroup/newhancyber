@@ -224,6 +224,12 @@
 
 /* ---------- 학습자 OT ---------- */
 .lx-ot-links { display: flex; flex-wrap: wrap; gap: var(--space-8); margin-top: var(--space-16); }
+/* 학습자 OT: STEP 하나씩 회색 상자, 오른쪽에 3D 그림 */
+.lx-page--plain .lx-ot-step { display: flex; align-items: center; gap: var(--space-24); margin-top: var(--space-16); padding: var(--space-32) var(--space-40); border-radius: var(--radius-16); background: var(--color-bg-surface); }
+.lx-page--plain .lx-ot-step:first-of-type { margin-top: var(--space-40); }
+.lx-ot-step + .lx-step-divider { margin-top: var(--space-16); }
+.lx-ot-step-body { flex: 1 1 auto; min-width: 0; }
+.lx-ot-step-icon { flex: none; width: 140px; height: 140px; object-fit: contain; }
 
 /* ---------- 검토 필요 표시 (DraftNote) ---------- */
 /* 원본에 내용이 없어 안내 문구를 임시로 쓴 곳 */
@@ -317,7 +323,6 @@
   margin-bottom: var(--space-12);
 }
 /* 학사일정 이론/실습 탭 (FAQ 분류와 같은 상자 탭) — 아래 검색 줄과 간격은 FAQ 와 같게 */
-.lx-schedule-tabs { margin-bottom: var(--space-32); }
 .lx-board-count { font-size: 14px; color: var(--color-text-secondary); }
 .lx-board-count strong { font-weight: 600; color: var(--color-text-brand); }
 .lx-board-search { display: flex; gap: var(--space-8); width: 480px; max-width: 100%; margin-left: auto; }
@@ -327,7 +332,6 @@
 .lx-board-search--wide .ds-select { flex-basis: 96px; }
 .lx-board-search--wide .ds-input { min-width: 160px; }
 .lx-board-search .lx-board-filter { flex: 0 1 160px; min-width: 0; }
-.lx-board-term { display: block; font-size: 13px; color: var(--color-text-secondary); }
 .lx-board-col-num { width: 96px; }
 .lx-board-col-date { width: 120px; }
 /* 공지 글: 줄 바탕을 칠하면 Brand 배지가 묻혀서, 제목만 굵게 */
@@ -342,8 +346,6 @@
 .lx-board-table tr.is-notice .ds-table-link { font-weight: 600; }
 /* 더 붙는 칸(과목·작성자·조회 등): 줄바꿈 없이 */
 .lx-board-cell { white-space: nowrap; }
-/* 목록 아래 버튼 줄 (학습 Q&A 글쓰기) */
-.lx-board-actions { display: flex; justify-content: flex-end; margin-top: var(--space-16); }
 /* 모바일 게시판 목록 (MobileBoardList kind="notice") — learning-support.css 에서 옮김.
    학습지원 CSS 는 .wrapper·.container 도 바꿔서 마이페이지·수강신청 화면에서는 불러오지 않는다 */
 @media (max-width: 480px) {
@@ -547,12 +549,11 @@
   .lx-faq-tabs .ds-tab-box { flex: 1 0 33.334%; height: 44px; margin: 0 0 -1px -1px; padding: 0 var(--space-8); font-size: 14px; }
   .lx-faq-bar { flex-direction: column-reverse; align-items: stretch; margin-top: var(--space-24); }
   .lx-faq-search { width: 100%; }
-  /* 학사일정 모바일 이론/실습 탭 — FAQ 모바일 탭과 같은 크기 */
-  .mobile-schedule-tabs .ds-tabs-box { width: 100%; }
-  .mobile-schedule-tabs .ds-tab-box { height: 44px; padding: 0 var(--space-8); font-size: 14px; }
   .ds-accordion-q,
   .ds-accordion-a { padding: var(--space-16); }
-  .ds-accordion-q .ds-accordion-text { font-size: 15px; }
+  /* 답변 글자도 질문과 같은 크기 */
+  .ds-accordion-q .ds-accordion-text,
+  .ds-accordion-a .ds-accordion-text { font-size: 15px; }
 
   .lx-tabs { padding: 0 var(--space-16); }
   .lx-tabs .page-tab { flex: 1; justify-content: center; }
@@ -564,6 +565,10 @@
   .container.lx-page--top { padding-top: calc(70px + var(--space-24)); }
   .lx-head { flex-direction: column; align-items: stretch; }
   .lx-panel { padding: var(--space-16); }
+  /* 학습자 OT: 글은 상자 폭을 다 쓰고, 그림은 작게 제목 오른쪽 위에 */
+  .lx-page--plain .lx-ot-step { position: relative; display: block; padding: var(--space-20) var(--space-16); }
+  .lx-ot-step .lx-section-title { display: flex; align-items: center; min-height: 40px; padding-right: 56px; }
+  .lx-ot-step-icon { position: absolute; top: var(--space-12); right: var(--space-12); width: 52px; height: 52px; }
   .lx-answer { padding: var(--space-16); }
   .lx-post-title { font-size: 18px; }
   .lx-article-title { font-size: 20px; }

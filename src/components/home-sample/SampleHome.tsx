@@ -349,19 +349,22 @@ function Notices() {
   return (
     <section className="sh-notice-row">
       <div className="sh-notice">
-        <div className="sh-notice-head" role="tablist">
-          {noticeTabs.map((t) => (
-            <button
-              key={t.key}
-              type="button"
-              role="tab"
-              aria-selected={t.key === active}
-              className={`sh-notice-tab${t.key === active ? " is-active" : ""}`}
-              onClick={() => setActive(t.key)}
-            >
-              {t.label}
-            </button>
-          ))}
+        <div className="sh-notice-head">
+          {/* 게시판 목록 위 세그먼트와 같은 모양: 회색 판 위 고른 칸만 흰 칸 */}
+          <div className="sh-notice-seg" role="tablist" aria-label="게시판">
+            {noticeTabs.map((t) => (
+              <button
+                key={t.key}
+                type="button"
+                role="tab"
+                aria-selected={t.key === active}
+                className={`sh-notice-tab${t.key === active ? " is-active" : ""}`}
+                onClick={() => setActive(t.key)}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
           <Link href={tab.basePath} className="sh-notice-more">
             전체보기 <Chevron />
           </Link>

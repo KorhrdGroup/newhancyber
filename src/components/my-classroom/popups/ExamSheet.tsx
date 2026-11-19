@@ -9,6 +9,9 @@ export default function ExamSheet({ questions, minutes, submitLabel }: { questio
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [left, setLeft] = useState(minutes ? minutes * 60 : 0);
   const answered = Object.keys(answers).length;
+  const blanks = questions.filter((q) => answers[q.no] === undefined);
+  // 처음부터 번호가 잔뜩 보이면 부담스러워서, 남은 문항이 10개 이하일 때만 번호를 보여 준다
+  const SHOW_BLANKS_AT = 10;
 
   useEffect(() => {
     if (!minutes) return;
@@ -31,7 +34,7 @@ export default function ExamSheet({ questions, minutes, submitLabel }: { questio
     <div className="pp-exam">
       <div>
         {questions.map((q) => (
-          <fieldset key={q.no} className="pp-question">
+          <fieldset key={q.no} id={`q-${q.no}`} className="pp-question">
             <legend className="pp-question-text">
               {q.no}. {q.text}
             </legend>
@@ -57,16 +60,33 @@ export default function ExamSheet({ questions, minutes, submitLabel }: { questio
             </div>
           </>
         ) : null}
-        <div className="pp-note">
-          푼 문항 {answered} / {questions.length}
+        <div className="pp-progress">
+          <p className="pp-progress-head">
+            <span>푼 문항</span>
+            <strong>
+              {answered}
+              <small> / {questions.length}</small>
+            </strong>
+          </p>
+          <div className="pp-progress-bar" aria-hidden="true">
+            <i style={{ width: `${(answered / questions.length) * 100}%` }} />
+          </div>
         </div>
-        <div className="pp-omr">
-          {questions.map((q) => (
-            <span key={q.no} className={answers[q.no] !== undefined ? "is-done" : undefined}>
-              {q.no}
-            </span>
-          ))}
-        </div>
+        {/* 안 푼 문항만 번호로 보여 준다(거의 다 풀었을 때만). 누르면 그 문항으로 간다 */}
+        {blanks.length === 0 ? (
+          <p className="pp-blanks-done">모두 풀었어요</p>
+        ) : blanks.length <= SHOW_BLANKS_AT ? (
+          <nav className="pp-blanks" aria-label="안 푼 문항 바로가기">
+            <p className="pp-blanks-title">안 푼 문항</p>
+            <div className="pp-blanks-list">
+              {blanks.map((q) => (
+                <a key={q.no} href={`#q-${q.no}`} aria-label={`${q.no}번 문항으로`}>
+                  {q.no}
+                </a>
+              ))}
+            </div>
+          </nav>
+        ) : null}
         <button type="button" className="ds-btn ds-btn--primary" onClick={submit}>
           {submitLabel}
         </button>

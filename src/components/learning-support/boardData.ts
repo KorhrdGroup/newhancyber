@@ -13,6 +13,8 @@ export interface BoardPost {
   emphasized?: boolean;
   /** 원본에서 링크가 있던 글만 */
   href?: string;
+  /** 제목 앞 작은 분류 배지 (예: 공지사항 구분 "교육원", 학사일정 "사회복지현장실습") */
+  tag?: string;
   /** 번호 대신 보일 배지 글자 (예: 수강후기 "BEST"). isNotice 면 "공지" */
   badge?: string;
   /** 더 붙는 칸의 값 (BoardTable columns 의 key 로 찾음) */
@@ -21,97 +23,33 @@ export interface BoardPost {
   meta?: React.ReactNode;
 }
 
-const notice = (title: string, id: number): BoardPost => ({
-  number: "공지",
-  title,
-  date: "25.10.21",
-  isNotice: true,
-  emphasized: true,
-  href: `/learning-support/notice/${id}`,
-});
-/** 공지사항 전체 글 수 (가데이터). 일반 글 번호는 이 수부터 1씩 줄어든다 — 실제 게시판처럼 최신 글이 큰 번호 */
-export const NOTICE_TOTAL = 48;
+/** 공지사항 구분 (운영 사이트 공지사항의 구분 선택과 같음) */
+export const NOTICE_CATEGORIES = ["교육원", "자격증", "학점은행제"] as const;
 
-const post = (title: string, id: number, number: number): BoardPost => ({
-  number: String(number),
-  title,
-  date: "25.10.21",
-  href: `/learning-support/notice/${id}`,
-});
-
-/** 공지사항 — 데스크톱 표 (원본 notice.html 표) */
+/** 공지사항 — 운영 사이트(hancyber.co.kr) 공지사항 글 그대로. 데스크톱 표와 모바일 목록이 같이 쓴다 */
 export const noticePosts: BoardPost[] = [
-  notice("학습지원 공지사항입니다.", 0),
-  notice("온라인 학습 안내", 1),
-  notice("2025년 학습 일정 안내", 2),
-  notice("수강신청 방법 안내", 3),
-  notice("학습 지원 프로그램 안내", 4),
-  post("모바일 학습 가이드 업데이트 안내", 5, NOTICE_TOTAL - 0),
-  post("원격지원 서비스 이용 안내", 6, NOTICE_TOTAL - 1),
-  post("학습 자료실 이용 방법", 7, NOTICE_TOTAL - 2),
-  post("FAQ 업데이트 안내", 8, NOTICE_TOTAL - 3),
-  post("학사일정 변경 안내", 9, NOTICE_TOTAL - 4),
-  post("학습 지원 프로그램 신청 안내", 10, NOTICE_TOTAL - 5),
-  post("온라인 강의 접속 방법 안내", 11, NOTICE_TOTAL - 6),
-  post("학습 지원 센터 운영 시간 안내", 12, NOTICE_TOTAL - 7),
-];
+  { tag: "교육원", title: "[2026년 11월] 카드사 무이자 할부 안내", date: "26.10.31" },
+  { tag: "교육원", title: "[2026년 10월] 카드사 무이자 할부 안내", date: "26.10.08" },
+  { tag: "교육원", title: "[2026년 9월] 카드사 무이자 할부 안내", date: "26.10.08" },
+  { tag: "교육원", title: "[2026년 8월] 카드사 무이자 할부 안내", date: "26.10.08" },
+  { tag: "교육원", title: "[2026년 7월] 카드사 무이자 할부 안내", date: "26.10.08" },
+].map((p, index, list) => ({ ...p, number: String(list.length - index), href: `/learning-support/notice/${index}` }));
 
 /**
- * 공지사항 — 모바일 목록 (원본 notice.html 스크립트의 notices 배열).
- * 원본도 데스크톱 표와 글 목록이 다르다. API 를 붙이면 하나로 합친다.
+ * 학사일정 — 운영 사이트(hancyber.co.kr) 학사일정 글 그대로. 이론/실습을 나누지 않고 한 목록에 두고,
+ * 실습 글은 운영 사이트 제목 말머리 [사회복지현장실습] 대신 tag 배지로 보인다
  */
-export const mobileNoticePosts: BoardPost[] = [
-  { number: "공지", title: "26년 1학기 1차(12월 24일 개강반) 사회복지...", date: "25.10.21", isNotice: true },
-  { number: "공지", title: "26년 1학기 1차(12월 24일 개강반) 사회복지...", date: "25.10.21", isNotice: true },
-  { number: "공지", title: "25년 2학기 3차(09월 03일 개강반) 보육실...", date: "25.10.21", isNotice: true },
-  { number: "공지", title: "[필독] 사회복지현장실습 서류 제출 안내(Q&A)", date: "25.10.21", isNotice: true },
-  { number: String(NOTICE_TOTAL - 0), title: "26년 1학기 1차(12월 24일 개강반) 사회복지...", date: "25.10.21" },
-  { number: String(NOTICE_TOTAL - 1), title: "26년 1학기 1차(12월 24일 개강반) 사회복지...", date: "25.10.21" },
-  { number: String(NOTICE_TOTAL - 2), title: "25년 2학기 3차(09월 03일 개강반) 보육실...", date: "25.10.21" },
-  { number: String(NOTICE_TOTAL - 3), title: "26년 1학기 1차(12월 24일 개강반) 사회복지...", date: "25.10.21" },
-  { number: String(NOTICE_TOTAL - 4), title: "가족생활교육", date: "25.10.21" },
-  { number: String(NOTICE_TOTAL - 5), title: "26년 1학기 1차(12월 24일 개강반) 사회복지...", date: "25.10.21" },
-].map((p, index) => ({ ...p, href: `/learning-support/notice/${index}` }));
+export const SCHEDULE_TAGS = ["사회복지현장실습"] as const;
 
-export type ScheduleTabKey = "theory" | "practice";
+export const schedulePosts: BoardPost[] = [
+  { tag: "사회복지현장실습", title: "2026년 11월 26일 개강반(27년 1-1차) 학사일정 안내", date: "26.11.09" },
+  { title: "2026년 11월 26일 개강반(27년 1-1차) 학사일정 안내", date: "26.11.09" },
+  { tag: "사회복지현장실습", title: "2026년 11월 12일 개강반(26년 2-4차) 학사일정 안내", date: "26.11.09" },
+  { title: "2026년 11월 12일 개강반(26년 2-4차) 학사일정 안내", date: "26.10.31" },
+  { title: "2026년 10월 15일 개강반(26년 2-3차) 학사일정 안내", date: "26.10.12" },
+  { title: "2026년 09월 10일 개강반(26년 2-2차) 학사일정 안내", date: "26.10.08" },
+].map((p, index, list) => ({ ...p, number: String(list.length - index), href: `/learning-support/schedule/${index}` }));
 
-const schedule = (title: string, number?: number): BoardPost => ({
-  number: number === undefined ? "공지" : String(number),
-  title,
-  date: "25.10.21",
-  isNotice: number === undefined,
-  emphasized: number === undefined,
-});
-
-/** 학사일정 — 이론 과목 / 실습과목 (원본 schedule.html) */
-const scheduleByTab: Record<ScheduleTabKey, BoardPost[]> = {
-  theory: [
-    schedule("[공지] 25년 제 4차 평생교육사 자격증 단체 접수 안내"),
-    schedule("[2025년 2학기 2차] (07/10 개강반) 학사일정 안내"),
-    schedule("[2025년 2학기 1차] (06/19 개강반) 학사일정 안내"),
-    schedule("[2025년 1학기 7차] (06/15 개강반) 학사일정 안내"),
-    schedule("[2025년 1학기 6차] (04/15 개강반) 학사일정 안내", 36),
-    schedule("[2025년 1학기 5차] (03/20 개강반) 학사일정 안내", 35),
-    schedule("[2025년 1학기 4차] (02/15 개강반) 학사일정 안내", 34),
-    schedule("[2025년 1학기 3차] (01/20 개강반) 학사일정 안내", 33),
-    schedule("[2024년 2학기 8차] (12/10 개강반) 학사일정 안내", 32),
-    schedule("[2024년 2학기 7차] (11/15 개강반) 학사일정 안내", 31),
-  ],
-  practice: [
-    schedule("실습과목 학사일정 안내"),
-    schedule("실습과목 수강신청 안내", 12),
-    schedule("실습과목 진행 일정 안내", 11),
-  ],
-};
-
-/** 상세 주소 id 는 두 탭 글을 이어 붙인 순번 (이론 0~9, 실습 10~) */
-let scheduleSeq = 0;
-export const schedulePosts: Record<ScheduleTabKey, BoardPost[]> = {
-  theory: scheduleByTab.theory.map((p) => ({ ...p, href: `/learning-support/schedule/${scheduleSeq++}` })),
-  practice: scheduleByTab.practice.map((p) => ({ ...p, href: `/learning-support/schedule/${scheduleSeq++}` })),
-};
-
-/** 서식자료실 전체 글 수 (가데이터). 번호는 최신 글부터 이 수에서 1씩 줄어든다 */
 export const FORM_TOTAL = 58;
 
 /** 서식자료실 (원본 forms-data-room.html). 원본은 첫 글만 상세 링크가 있다. */
