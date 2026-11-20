@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import MobilePageBanner from "@/components/layout/MobilePageBanner";
 import OrgBoard from "@/components/practice-support/OrgBoard";
-import { ORG_BASE_DATE, ORG_TOTAL } from "@/components/practice-support/orgData";
+import { ORG_AREAS, ORG_BASE_DATE, ORG_TOTAL } from "@/components/practice-support/orgData";
 // 모바일 목록 · 파란 제목 띠 스타일은 학습지원 CSS 에만 있어서 같이 불러온다 (실습공지사항과 같음)
 import "@/styles/learning-support.css";
 import "@/styles/classroom.css";
@@ -10,7 +10,9 @@ import "@/styles/learning-extra.css";
 export const metadata: Metadata = { title: "실습기관 안내" };
 
 /** 원본 /stdSup/practiceOrgList.asp — 보건복지부 사회복지현장실습 선정기관 목록 */
-export default function PracticeOrganizationsPage() {
+export default async function PracticeOrganizationsPage({ searchParams }: { searchParams: Promise<{ area?: string }> }) {
+  const { area } = await searchParams;
+  const initialArea = ORG_AREAS.find((a) => a === area) ?? "전체";
   return (
     <>
       <MobilePageBanner name="notice" text="실습기관 안내" />
@@ -33,7 +35,7 @@ export default function PracticeOrganizationsPage() {
               </svg>
             </a>
           </div>
-          <OrgBoard />
+          <OrgBoard initialArea={initialArea} />
         </div>
       </main>
     </>

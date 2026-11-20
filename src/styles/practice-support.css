@@ -1295,3 +1295,26 @@
   /* 목록을 위 지역 칸과 같은 폭으로 (공통 모바일 목록은 자체 좌우 16 여백이 있음) */
   .po-page .mobile-notice-list { margin-top: 0; padding: 0; }
 }
+
+/* ---------- 실습기관 상세 (/practice-support/organizations/[no]) ---------- */
+.po-view-cat { margin-bottom: var(--space-8); font-size: 14px; font-weight: 600; color: var(--color-text-brand); }
+.po-view .page-title { margin-bottom: var(--space-24); }
+.po-addr { display: inline-flex; flex-wrap: wrap; align-items: center; gap: var(--space-8); }
+.po-tel { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.po-view .lx-ref-notes { margin-top: var(--space-12); }
+.po-view .lx-ref-notes a { font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+.po-view-btns { display: flex; justify-content: center; gap: var(--space-8); margin: var(--space-32) 0 var(--space-40); }
+.po-view .lx-panel.po-near { padding: var(--space-24) var(--space-32); border-radius: var(--radius-16); background: var(--color-bg-surface); }
+.po-near ul { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-8); margin: 0; padding: 0; list-style: none; }
+.po-near a {
+  display: block; padding: var(--space-12) var(--space-16); overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+  border: 1px solid var(--color-border-subtle); border-radius: var(--radius-8); background: #fff;
+  font-size: 14px; font-weight: 500; color: var(--color-text-strong); text-decoration: none;
+}
+.po-near a:hover { border-color: var(--color-bg-brand); color: var(--color-text-brand); }
+@media (max-width: 480px) {
+  .po-view-btns { margin: var(--space-24) 0 var(--space-32); }
+  .po-view-btns .ds-btn { flex: 1 1 0; }
+  .po-view .lx-panel.po-near { padding: var(--space-20) var(--space-16); }
+  .po-near ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
