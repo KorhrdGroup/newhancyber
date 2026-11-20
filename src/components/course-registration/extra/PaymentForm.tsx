@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { formatPrice, sampleCartCourses } from "../courseData";
+import MajorBadges from "../MajorBadges";
 import { payMethods, sampleCoupons, type PayMethod } from "./extraData";
 
 /** 결제하기: 주문 과목 · 쿠폰 할인 · 결제 수단 · 약관 동의 · 최종 결제 금액 */
@@ -39,8 +40,10 @@ export default function PaymentForm() {
           <ul className="ex-order">
             {courses.map((course, i) => (
               <li key={i} className="ex-order-item">
-                <span className="ex-order-icon">{course.icon}</span>
-                <span className="ex-order-name">{course.name}</span>
+                <span className="ex-order-name">
+                  {course.name}
+                  <MajorBadges name={course.name} />
+                </span>
                 <span className="ex-order-price">
                   {course.originalPrice !== course.currentPrice && <del>{formatPrice(course.originalPrice)}원</del>}
                   {formatPrice(course.currentPrice)}원

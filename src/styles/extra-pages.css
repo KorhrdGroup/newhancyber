@@ -37,8 +37,9 @@
 .ex-order { display: flex; flex-direction: column; }
 .ex-order-item { display: flex; align-items: center; gap: var(--space-12); padding: var(--space-12) 0; border-bottom: 1px solid var(--color-border-subtle); }
 .ex-order-item:last-child { border-bottom: 0; }
-.ex-order-icon { display: grid; place-items: center; flex-shrink: 0; width: 24px; height: 24px; border-radius: var(--radius-4); background: var(--color-bg-brand); color: var(--color-text-inverse); font-size: 12px; font-weight: 600; }
 .ex-order-name { flex: 1; min-width: 0; font-size: 16px; font-weight: 500; color: var(--color-text-strong); }
+.ex-order-badges { display: inline-flex; flex-wrap: wrap; gap: var(--space-4); margin-left: var(--space-8); vertical-align: 2px; }
+.ds2 .ex-order-badges .ds-badge--neutral { background: var(--color-bg-default); } /* 회색 판 위라 흰 배지 (나의 강의실 과목 카드와 같음) */
 .ex-order-price { text-align: right; font-size: 16px; font-weight: 600; color: var(--color-text-strong); white-space: nowrap; }
 .ex-order-price del { display: block; font-size: 12px; font-weight: 400; color: var(--color-text-placeholder); }
 .ex-coupon { display: flex; flex-direction: column; gap: var(--space-8); }
@@ -125,10 +126,10 @@
 @media (max-width: 480px) {
   .ex-cart { padding-top: var(--space-16); }
   /* 과목 한 줄: [체크][아이콘 이름 ……… 금액] / 아래에 샘플강의 · 강의계획서 */
-  .ex-cart .ex-order-item { display: grid; grid-template-columns: auto auto minmax(0, 1fr) auto; column-gap: var(--space-8); row-gap: var(--space-4); }
+  .ex-cart .ex-order-item { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; column-gap: var(--space-8); row-gap: var(--space-4); }
   .ex-cart .ex-order-name { font-size: 15px; }
   .ex-cart .ex-order-price { font-size: 15px; }
-  .ex-cart .ex-cart-links { grid-column: 3 / -1; grid-row: 2; margin-left: calc(-1 * var(--space-12)); }
+  .ex-cart .ex-cart-links { grid-column: 2 / -1; grid-row: 2; margin-left: calc(-1 * var(--space-12)); }
   .ex-cart .ex-pay-side .ex-pay-btn { display: none; }
   .ex-cart-float { position: fixed; right: 0; bottom: 0; left: 0; z-index: 900; display: block; padding: var(--space-12) var(--space-16) calc(var(--space-12) + env(safe-area-inset-bottom)); border-top: 1px solid var(--color-border-default); background: var(--color-bg-default); box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.08); }
   .ex-cart-float[hidden] { display: none; }

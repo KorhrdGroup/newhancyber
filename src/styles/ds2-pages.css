@@ -81,7 +81,6 @@
 .ds2 .rg-picked-empty,
 .ds2 .rg-card,
 .ds2 .rg-schedule-item { border-bottom-color: var(--color-border-cool); }
-.ds2 .ex-order-icon { border-radius: var(--radius-6); }
 
 /* ---------- 표: 머리는 푸른 회색, 줄은 옅은 푸른 선 ---------- */
 /* 표 · 질문 목록 위 두꺼운 선: 검정 대신 회색 */
