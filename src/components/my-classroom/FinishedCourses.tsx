@@ -14,6 +14,7 @@ export default function FinishedCourses() {
       <div className="container cr-page">
         <ClassroomHeader
           title="종료된 과목"
+          desc="수강을 마친 과목의 성적을 확인하고, 복습 기간 동안 강의를 다시 들을 수 있어요."
           actions={
             <>
               <PopupButton href="/popup/print/transcript/all">성적증명서 출력</PopupButton>

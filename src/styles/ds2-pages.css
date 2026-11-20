@@ -1,6 +1,6 @@
 /*
  * 디자인 시스템 v2 — 메인(/)과 같은 모양을 다른 사용자 화면에 입힌다.
- * 묶음별로 옮기는 중이라, 레이아웃에서 .ds2 로 감싼 화면에만 적용한다 (지금: 학점은행제 · 사회복지사 · 실습지원 · 수강신청 · 학습지원 · 마이페이지 · 회원 · 바닥글 화면 · 팝업).
+ * 묶음별로 옮기는 중이라, 레이아웃에서 .ds2 로 감싼 화면에만 적용한다 (지금: 학점은행제 · 사회복지사 · 실습지원 · 수강신청 · 학습지원 · 마이페이지 · 나의 강의실 · 회원 · 바닥글 화면 · 팝업).
  * 규칙은 한평생원격_디자인시스템_v2.md 6장(부품 규칙)을 따른다:
  *   제목은 굵게(800) · 자간 -2%, 상자는 테두리 대신 연한 바탕(bg-surface) + 모서리 16,
  *   버튼 · 입력 칸 모서리는 높이를 따라 32→6 · 40→10 · 48→12.
@@ -228,6 +228,11 @@
 .ds2.pp { background: var(--color-bg-surface); }
 .ds2.pp .pp-box,
 .ds2.pp .ds-stat { background: var(--color-bg-default); }
+/* 차시 학습: 영상 · 차시 목록도 모서리 16, 목록은 테두리 없는 흰 카드 */
+.ds2.pp .pp-video { border-radius: var(--radius-16); }
+.ds2.pp .pp-lessons { border: 0; border-radius: var(--radius-16); }
+.ds2.pp .pp-lesson { border-bottom-color: var(--color-border-cool); }
+.ds2.pp .pp-lesson.is-current { background: var(--color-bg-brand-soft); font-weight: 700; }
 
 /* ---------- 탭 ---------- */
 /* 화면끼리 묶는 탭 · 화면 안 전환 탭 → 배포 중인 밑줄 탭(style.css .page-tab) 그대로, 고른 탭 글자만 파랑 대신 진한 회색 */
@@ -287,4 +292,39 @@
   /* 4칸이면 2+2 */
   .ds2 .ds-tabs-box:not(.ds-tabs-box--segment) > .ds-tab-box:first-child:nth-last-child(4),
   .ds2 .ds-tabs-box:not(.ds-tabs-box--segment) > .ds-tab-box:first-child:nth-last-child(4) ~ .ds-tab-box { flex-basis: calc(50% - var(--space-6)); }
+}
+
+/* ---------- 나의 강의실 (.mc — my-classroom 레이아웃) ---------- */
+.mc .cr-title { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.35; }
+.mc .cr-desc { margin-top: var(--space-6); font-size: 15px; }
+.mc .cr-section-title { font-size: 20px; font-weight: 800; letter-spacing: -0.02em; }
+/* 과목 카드 · 과목 머리: 테두리 대신 연한 바탕 카드 */
+.mc .cr-card,
+.mc .cr-room-head { padding: var(--space-28) var(--space-32); border: 0; border-radius: var(--radius-16); background: var(--color-bg-surface); }
+.mc .cr-card-title,
+.mc .cr-room-title { font-weight: 800; letter-spacing: -0.02em; }
+.mc .cr-alert { border-radius: var(--radius-10); }
+/* 연한 바탕 위 진도 막대: 빈 칸을 한 단계 진하게 */
+.mc .cr-card .ds-progress-track,
+.mc .cr-room-head .ds-progress-track { background: var(--color-border-cool); }
+/* 바로가기: 3D 그림 + 이름, 연한 바탕 카드 */
+.mc .cr-shortcut { height: auto; gap: var(--space-8); padding: var(--space-20) var(--space-12) var(--space-16); border: 0; border-radius: var(--radius-16); background: var(--color-bg-surface); font-weight: 600; color: var(--color-text-strong); transition: background-color 0.15s; }
+.mc .cr-shortcut:hover { background: var(--color-bg-brand-subtle); color: var(--color-text-brand); }
+.mc .cr-shortcut-icon { display: block; width: 56px; height: 56px; border-radius: 0; background: none; object-fit: contain; }
+/* 시험 · 과제 카드 */
+.mc .cr-eval { padding: var(--space-20); border: 0; border-radius: var(--radius-16); background: var(--color-bg-surface); }
+.mc .cr-eval-title { font-weight: 700; }
+/* 연한 바탕 위 누를 수 없는 버튼은 흰 칸으로 */
+.mc .cr-eval .ds-btn:disabled { background: var(--color-bg-default); }
+/* 주차별 출석 띠 */
+.mc .cr-attend { border: 0; border-radius: var(--radius-16); background: var(--color-bg-surface); }
+.mc .cr-attend-cell { border-right-color: var(--color-border-cool); }
+@media (max-width: 768px) {
+  .mc .cr-title { font-size: 24px; }
+  .mc .cr-card,
+  .mc .cr-room-head { padding: var(--space-20); }
+  .mc .cr-shortcut-icon { width: 48px; height: 48px; }
+  /* 숫자 카드 4개: 한 줄씩 길게 쌓지 않고 2칸씩 */
+  .mc .ds-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-8); }
+  .mc .ds-stat { padding: var(--space-16); }
 }

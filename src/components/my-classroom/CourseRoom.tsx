@@ -4,6 +4,14 @@ import { TodoButton } from "./PopupActions";
 import PopupButton from "./PopupButton";
 import { assessmentLabels, getAssessments, getAttendance, getCourse, getLessons, type Assessment } from "./classroomData";
 
+/** 바로가기 3D 그림 (학점은행제 · 사회복지사 안내에서 쓰는 그림 묶음) */
+const CB_ICON = "/resources/images/credit-bank";
+const SW_ICON = "/resources/images/social-worker/steps";
+
+function ShortcutIcon({ src }: { src: string }) {
+  return <img className="cr-shortcut-icon" src={src} alt="" aria-hidden />;
+}
+
 function assessmentHref(courseId: string, a: Assessment) {
   if (a.type === "midterm" || a.type === "final") return `/popup/exam/${courseId}/${a.type}/notice`;
   return `/popup/assessments/${courseId}/${a.type}`;
@@ -20,10 +28,10 @@ export default function CourseRoom({ courseId, mode }: { courseId: string; mode:
   const weeks = Array.from(new Set(lessons.map((l) => l.week)));
 
   const shortcuts = [
-    { label: "출석 현황", icon: "출", href: `/popup/attendance/${course.id}` },
-    { label: "강의계획서", icon: "계", href: `/popup/syllabus/${course.id}` },
-    { label: "성적 보기", icon: "성", href: `/popup/grade/${course.id}` },
-    { label: "강의 평가", icon: "평", href: `/popup/survey/${course.id}` },
+    { label: "출석 현황", icon: `${CB_ICON}/cb-icon-receipt-check.png`, href: `/popup/attendance/${course.id}` },
+    { label: "강의계획서", icon: `${SW_ICON}/course-book.png`, href: `/popup/syllabus/${course.id}` },
+    { label: "성적 보기", icon: `${CB_ICON}/cb-icon-aplus.png`, href: `/popup/grade/${course.id}` },
+    { label: "강의 평가", icon: `${SW_ICON}/apply-form.png`, href: `/popup/survey/${course.id}` },
   ];
 
   return (
@@ -74,21 +82,15 @@ export default function CourseRoom({ courseId, mode }: { courseId: string; mode:
           <div className="cr-shortcuts">
             {shortcuts.map((s) => (
               <PopupButton key={s.label} href={s.href} className="cr-shortcut">
-                <span className="cr-shortcut-icon" aria-hidden>
-                  {s.icon}
-                </span>
+                <ShortcutIcon src={s.icon} />
                 {s.label}
               </PopupButton>
             ))}
             <TodoButton className="cr-shortcut" label="학습 게시판" message="학습 게시판은">
-              <span className="cr-shortcut-icon" aria-hidden>
-                글
-              </span>
+              <ShortcutIcon src={`${CB_ICON}/cb-icon-chat-person.png`} />
             </TodoButton>
             <TodoButton className="cr-shortcut" label="참고자료" message="참고자료실은">
-              <span className="cr-shortcut-icon" aria-hidden>
-                자
-              </span>
+              <ShortcutIcon src={`${CB_ICON}/cb-icon-books.png`} />
             </TodoButton>
           </div>
         </section>
