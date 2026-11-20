@@ -179,13 +179,23 @@ export default function RegisterContent() {
           {/* 과목 선택 */}
           <section className="ex-section">
             <h2 className="ex-section-title">과목 선택</h2>
-            <ButtonTabs
-              items={courseCategoryTabs}
-              active={category}
-              onSelect={(key) => changeCategory(key as CourseCategory | "all")}
-              className="rg-category-tabs"
-              ariaLabel="과목 구분"
-            />
+            {/* 자격 과정이 늘어나도 다음 줄로 넘어가도록 알약 버튼 (과목 수 함께) */}
+            <div className="rg-cats" role="group" aria-label="과목 구분">
+              {courseCategoryTabs.map((tab) => (
+                <button
+                  key={tab.key}
+                  type="button"
+                  className={`rg-cat${tab.key === category ? " is-active" : ""}`}
+                  aria-pressed={tab.key === category}
+                  onClick={() => changeCategory(tab.key)}
+                >
+                  {tab.label}
+                  <span className="rg-cat-count">
+                    {tab.key === "all" ? courses.length : courses.filter((course) => course.category === tab.key).length}
+                  </span>
+                </button>
+              ))}
+            </div>
 
             <div className="ex-pay rg-layout">
               <div className="rg-main">
