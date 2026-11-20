@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import MobilePageBanner from "@/components/layout/MobilePageBanner";
-import OrgBoard from "@/components/practice-support/OrgBoard";
+import OrgBoard, { ExtArrow } from "@/components/practice-support/OrgBoard";
 import { ORG_AREAS, ORG_BASE_DATE, ORG_TOTAL } from "@/components/practice-support/orgData";
 // 모바일 목록 · 파란 제목 띠 스타일은 학습지원 CSS 에만 있어서 같이 불러온다 (실습공지사항과 같음)
 import "@/styles/learning-support.css";
@@ -30,9 +30,7 @@ export default async function PracticeOrganizationsPage({ searchParams }: { sear
             </div>
             <a className="ds-btn ds-btn--secondary po-ext" href="https://www.welfare.net/lic/" target="_blank" rel="noopener noreferrer">
               사회복지사 자격관리센터
-              <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="none">
-                <path d="M6 3.5h6.5V10M12.5 3.5 4 12" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
+              <ExtArrow />
             </a>
           </div>
           <OrgBoard initialArea={initialArea} />
