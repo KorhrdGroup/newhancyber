@@ -218,6 +218,10 @@
 .ds2 .rg-semester-tabs .ds-tab-box.is-active .ds-tab-title { font-weight: 700; color: var(--color-text-strong); }
 .ds2 .rg-semester .rg-schedule { margin-top: 0; background: var(--color-bg-brand-subtle); }
 .ds2 .rg-semester .rg-schedule .rg-schedule-item { border-bottom: 0; } /* 옅은 하늘색 판 안에서는 줄 선 없이 */
+/* 일정 이름은 나의 강의실 과목 정보처럼 흰 이름표 라벨 + 진한 값 */
+.ds2 .rg-semester .rg-schedule .rg-schedule-item { display: flex; align-items: center; gap: var(--space-12); padding: var(--space-8) 0; }
+.ds2 .rg-semester .rg-schedule dt { flex-shrink: 0; width: 112px; padding: 2px var(--space-8); border-radius: var(--radius-6); background: var(--color-bg-default); font-size: 12px; font-weight: 600; line-height: 1.6; text-align: center; }
+.ds2 .rg-semester .rg-schedule dd { font-weight: 500; }
 .ds2 .rg-semester:has(.rg-semester-tabs .ds-tab-box:first-child.is-active) .rg-schedule { border-top-left-radius: 0; }
 
 /* 과목 표 + 고른 과목 상자 */
