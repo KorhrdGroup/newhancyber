@@ -159,7 +159,7 @@ export default function RegisterContent() {
               }))}
               active={activeSemester}
               onSelect={setActiveSemester}
-              className="ds-tabs-box--2line"
+              className="ds-tabs-box--2line rg-semester-tabs"
               ariaLabel="개강 차수"
             />
             <dl className="rg-schedule" id={`tab-${activeSchedule.key}`}>
@@ -179,11 +179,12 @@ export default function RegisterContent() {
           {/* 과목 선택 */}
           <section className="ex-section">
             <h2 className="ex-section-title">과목 선택</h2>
+            {/* 메인 공지사항 · 학사일정 · 실습공지와 같은 세그먼트 */}
             <ButtonTabs
               items={courseCategoryTabs}
               active={category}
               onSelect={(key) => changeCategory(key as CourseCategory | "all")}
-              className="rg-category-tabs"
+              className="ds-tabs-box--segment rg-category-tabs"
               ariaLabel="과목 구분"
             />
 
@@ -228,7 +229,7 @@ export default function RegisterContent() {
                         <td>
                           <span className="rg-badges">
                             {course.majorType.map((type) => (
-                              <span key={type} className={`ds-badge ${type === "교양" ? "ds-badge--neutral" : "ds-badge--brand"}`}>
+                              <span key={type} className="ds-badge ds-badge--neutral">
                                 {type}
                               </span>
                             ))}
@@ -274,7 +275,7 @@ export default function RegisterContent() {
                       <div className="rg-card-foot">
                         <span className="rg-badges">
                           {course.majorType.map((type) => (
-                            <span key={type} className={`ds-badge ${type === "교양" ? "ds-badge--neutral" : "ds-badge--brand"}`}>
+                            <span key={type} className="ds-badge ds-badge--neutral">
                               {type}
                             </span>
                           ))}

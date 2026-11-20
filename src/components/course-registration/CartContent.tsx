@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useMobileMenu } from "@/components/layout/MobileMenuContext";
 import { openPopup } from "@/components/my-classroom/PopupButton";
 import { formatPrice, sampleCartCourses, sampleLectureHref } from "./courseData";
+import MajorBadges from "./MajorBadges";
 
 /** 장바구니 — 결제하기 화면과 같은 틀 (휴대폰은 한 줄로 쌓고 결제 버튼을 아래에 고정) */
 export default function CartContent() {
@@ -63,8 +64,10 @@ export default function CartContent() {
                       onChange={(e) => toggle(i, e.target.checked)}
                     />
                   </label>
-                  <span className="ex-order-icon">{course.icon}</span>
-                  <span className="ex-order-name">{course.name}</span>
+                  <span className="ex-order-name">
+                    {course.name}
+                    <MajorBadges name={course.name} />
+                  </span>
                   {/* TODO: 강의계획서 팝업 연결 */}
                   <span className="ex-cart-links">
                     <button

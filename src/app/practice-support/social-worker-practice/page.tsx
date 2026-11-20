@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Metadata } from "next";
 import PracticeTabs from "@/components/practice-support/PracticeTabs";
 import {
@@ -120,6 +121,12 @@ export default function SocialWorkerPracticePage() {
                   { href: "https://www.welfare.net/prm/find-training-center/current-stat/", text: "사회복지현장실습기관 선정 현황" },
                 ]}
               />
+              {/* 우리 사이트의 지역별 선정기관 목록으로 */}
+              <div className="lx-ot-links po-link-row">
+                <Link href="/practice-support/organizations" className="ds-btn ds-btn--secondary ds-btn--sm">
+                  지역별 실습기관 안내 보기
+                </Link>
+              </div>
               <InfoTable
                 caption="사회복지현장실습 기관 섭외"
                 rows={[

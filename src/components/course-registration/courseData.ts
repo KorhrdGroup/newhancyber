@@ -90,16 +90,15 @@ export const sampleLectureHref = (name: string) => `/popup/sample-lecture/${enco
 
 export interface CartCourse {
   name: string;
-  icon: string;
   originalPrice: number;
   currentPrice: number;
 }
 
 /** 장바구니·결제내역 샘플 강의 (cart.html / payment-history.html) */
 export const sampleCartCourses: CartCourse[] = [
-  { name: "가족 복지론", icon: "사", originalPrice: 210000, currentPrice: 210000 },
-  { name: "가족상담및가족치료", icon: "사", originalPrice: 210000, currentPrice: 210000 },
-  { name: "가족상담및가족치료", icon: "사", originalPrice: 210000, currentPrice: 210000 },
-  { name: "가족상담및가족치료", icon: "사", originalPrice: 210000, currentPrice: 210000 },
-  { name: "가족생활교육", icon: "사", originalPrice: 210000, currentPrice: 210000 },
+  { name: "가족 복지론", originalPrice: 210000, currentPrice: 210000 },
+  { name: "가족상담및가족치료", originalPrice: 210000, currentPrice: 210000 },
+  { name: "가족상담및가족치료", originalPrice: 210000, currentPrice: 210000 },
+  { name: "가족상담및가족치료", originalPrice: 210000, currentPrice: 210000 },
+  { name: "가족생활교육", originalPrice: 210000, currentPrice: 210000 },
 ];

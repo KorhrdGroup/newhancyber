@@ -37,8 +37,9 @@
 .ex-order { display: flex; flex-direction: column; }
 .ex-order-item { display: flex; align-items: center; gap: var(--space-12); padding: var(--space-12) 0; border-bottom: 1px solid var(--color-border-subtle); }
 .ex-order-item:last-child { border-bottom: 0; }
-.ex-order-icon { display: grid; place-items: center; flex-shrink: 0; width: 24px; height: 24px; border-radius: var(--radius-4); background: var(--color-bg-brand); color: var(--color-text-inverse); font-size: 12px; font-weight: 600; }
 .ex-order-name { flex: 1; min-width: 0; font-size: 16px; font-weight: 500; color: var(--color-text-strong); }
+.ex-order-badges { display: inline-flex; flex-wrap: wrap; gap: var(--space-4); margin-left: var(--space-8); vertical-align: 2px; }
+.ds2 .ex-order-badges .ds-badge--neutral { background: var(--color-bg-default); } /* 회색 판 위라 흰 배지 (나의 강의실 과목 카드와 같음) */
 .ex-order-price { text-align: right; font-size: 16px; font-weight: 600; color: var(--color-text-strong); white-space: nowrap; }
 .ex-order-price del { display: block; font-size: 12px; font-weight: 400; color: var(--color-text-placeholder); }
 .ex-coupon { display: flex; flex-direction: column; gap: var(--space-8); }
@@ -125,10 +126,10 @@
 @media (max-width: 480px) {
   .ex-cart { padding-top: var(--space-16); }
   /* 과목 한 줄: [체크][아이콘 이름 ……… 금액] / 아래에 샘플강의 · 강의계획서 */
-  .ex-cart .ex-order-item { display: grid; grid-template-columns: auto auto minmax(0, 1fr) auto; column-gap: var(--space-8); row-gap: var(--space-4); }
+  .ex-cart .ex-order-item { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; column-gap: var(--space-8); row-gap: var(--space-4); }
   .ex-cart .ex-order-name { font-size: 15px; }
   .ex-cart .ex-order-price { font-size: 15px; }
-  .ex-cart .ex-cart-links { grid-column: 3 / -1; grid-row: 2; margin-left: calc(-1 * var(--space-12)); }
+  .ex-cart .ex-cart-links { grid-column: 2 / -1; grid-row: 2; margin-left: calc(-1 * var(--space-12)); }
   .ex-cart .ex-pay-side .ex-pay-btn { display: none; }
   .ex-cart-float { position: fixed; right: 0; bottom: 0; left: 0; z-index: 900; display: block; padding: var(--space-12) var(--space-16) calc(var(--space-12) + env(safe-area-inset-bottom)); border-top: 1px solid var(--color-border-default); background: var(--color-bg-default); box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.08); }
   .ex-cart-float[hidden] { display: none; }
@@ -209,9 +210,25 @@
 .rg-schedule dd { margin: 0; color: var(--color-text-strong); }
 .rg-notes { margin: var(--space-8) 0 0; padding: 0; list-style: none; font-size: 13px; line-height: 1.6; color: var(--color-text-secondary); }
 .rg-notes li::before { content: "* "; }
+/* 개강 차수 — 폴더 탭: 고른 탭이 아래 일정 상자(회색 판)와 이어져 '이 차수의 일정'임을 보여준다. 파랑 없음 */
+.ds2 .rg-semester-tabs { display: flex; align-items: flex-end; gap: var(--space-4); width: auto; }
+.ds2 .rg-semester-tabs .ds-tab-box { flex: none; min-width: 200px; min-height: 0; margin: 0; padding: var(--space-12) var(--space-24); border: 1px solid var(--color-border-default); border-bottom: 0; border-radius: var(--radius-12) var(--radius-12) 0 0; background: var(--color-bg-default); }
+.ds2 .rg-semester-tabs .ds-tab-title { font-weight: 600; color: var(--color-text-secondary); }
+.ds2 .rg-semester-tabs .ds-tab-box:hover .ds-tab-title { color: var(--color-text-strong); }
+.ds2 .rg-semester-tabs .ds-tab-box.is-active { border-color: var(--color-bg-brand-subtle); background: var(--color-bg-brand-subtle); }
+.ds2 .rg-semester-tabs .ds-tab-box.is-active .ds-tab-title { font-weight: 700; color: var(--color-text-strong); }
+.ds2 .rg-semester .rg-schedule { margin-top: 0; background: var(--color-bg-brand-subtle); }
+.ds2 .rg-semester .rg-schedule .rg-schedule-item { border-bottom: 0; } /* 옅은 하늘색 판 안에서는 줄 선 없이 */
+/* 일정 이름은 나의 강의실 과목 정보처럼 흰 이름표 라벨 + 진한 값 */
+.ds2 .rg-semester .rg-schedule .rg-schedule-item { display: flex; align-items: center; gap: var(--space-12); padding: var(--space-8) 0; }
+.ds2 .rg-semester .rg-schedule dt { flex-shrink: 0; width: 112px; padding: 2px var(--space-8); border-radius: var(--radius-6); background: var(--color-bg-default); font-size: 12px; font-weight: 600; line-height: 1.6; text-align: center; }
+.ds2 .rg-semester .rg-schedule dd { font-weight: 500; }
+.ds2 .rg-semester:has(.rg-semester-tabs .ds-tab-box:first-child.is-active) .rg-schedule { border-top-left-radius: 0; }
 
 /* 과목 표 + 고른 과목 상자 */
 .rg-category-tabs { margin-bottom: var(--space-16); }
+/* 자격 과정이 늘어 한 줄을 넘으면 회색 판 안에서 다음 줄로 (화면 밖으로 밀려나지 않게) */
+.ds2 .ds-tabs-box--segment.rg-category-tabs { flex-wrap: wrap; max-width: 100%; }
 .rg-layout { margin-top: 0; grid-template-columns: minmax(0, 1fr) 300px; }
 .rg-table .rg-col-check { width: 44px; }
 .rg-table .ds-check { vertical-align: middle; }
@@ -261,6 +278,7 @@
   .rg-schedule-item { grid-template-columns: 112px minmax(0, 1fr); padding: var(--space-8) 0; font-size: 13px; }
   .rg-schedule-item:nth-last-child(2):nth-child(odd) { border-bottom: 1px solid var(--color-border-subtle); }
   .rg-notes { font-size: 12px; }
+  .ds2 .rg-semester-tabs .ds-tab-box { flex: 1; min-width: 0; padding: var(--space-10) var(--space-12); }
   .rg-table { display: none; }
   .rg-cards { display: block; }
   /* 고른 과목 목록 · 버튼은 아래 고정 메뉴가 맡는다 */

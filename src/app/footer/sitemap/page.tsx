@@ -34,6 +34,7 @@ const sections: { title: string; links: NavLink[] }[] = [
     links: [
       { label: "실습공지사항", href: "/practice-support/notice" },
       { label: "서류제출", href: "/practice-support/documents" },
+      { label: "실습기관 안내", href: "/practice-support/organizations" },
       { label: "FAQ", href: "/practice-support/faq" },
       { label: "사회복지사실습", href: "/practice-support/social-worker-practice" },
       { label: "보육교사실습", href: "/practice-support/childcare-teacher-practice" },

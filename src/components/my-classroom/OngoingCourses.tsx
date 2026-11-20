@@ -17,6 +17,7 @@ export default function OngoingCourses() {
       <div className="container cr-page">
         <ClassroomHeader
           title="진행 중인 과목"
+          desc="수강 중인 과목의 강의를 듣고, 시험·과제에 참여하세요."
           actions={
             <>
               <PopupButton href="/popup/payment/p2611001">결제 내역</PopupButton>
