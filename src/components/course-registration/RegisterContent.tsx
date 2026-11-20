@@ -228,7 +228,7 @@ export default function RegisterContent() {
                         <td>
                           <span className="rg-badges">
                             {course.majorType.map((type) => (
-                              <span key={type} className={`ds-badge ${type === "교양" ? "ds-badge--neutral" : "ds-badge--brand"}`}>
+                              <span key={type} className="ds-badge ds-badge--neutral">
                                 {type}
                               </span>
                             ))}
@@ -274,7 +274,7 @@ export default function RegisterContent() {
                       <div className="rg-card-foot">
                         <span className="rg-badges">
                           {course.majorType.map((type) => (
-                            <span key={type} className={`ds-badge ${type === "교양" ? "ds-badge--neutral" : "ds-badge--brand"}`}>
+                            <span key={type} className="ds-badge ds-badge--neutral">
                               {type}
                             </span>
                           ))}

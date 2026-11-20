@@ -48,7 +48,7 @@ export default function FinishedCourses() {
                       <strong>{course.title}</strong> <span className="pp-note">{course.classNo}</span>
                     </td>
                     <td>
-                      <Badge tone="brand">{course.category}</Badge>
+                      <Badge tone="neutral">{course.category}</Badge>
                     </td>
                     <td>{course.credit}</td>
                     <td>

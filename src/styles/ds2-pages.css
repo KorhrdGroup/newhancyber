@@ -315,6 +315,7 @@
 .mc .cr-card-meta .ds-badge--brand { background: var(--color-bg-default); color: var(--color-text-secondary); }
 .mc .ds-progress-value { color: var(--color-text-strong); }
 .mc .cr-eval-type { color: var(--color-text-secondary); }
+.mc .cr-grade { font-weight: 700; color: var(--color-text-strong); }
 /* 연한 바탕 위 진도 막대: 빈 칸을 한 단계 진하게 */
 .mc .cr-card .ds-progress-track,
 .mc .cr-room-head .ds-progress-track { background: var(--color-border-cool); }
