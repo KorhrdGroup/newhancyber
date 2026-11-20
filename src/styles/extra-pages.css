@@ -211,12 +211,9 @@
 .rg-notes li::before { content: "* "; }
 
 /* 과목 표 + 고른 과목 상자 */
-.rg-cats { display: flex; flex-wrap: wrap; gap: var(--space-8); margin-bottom: var(--space-16); }
-.rg-cat { display: inline-flex; align-items: center; gap: var(--space-6); height: 40px; padding: 0 var(--space-16); border: 1px solid var(--color-border-default); border-radius: var(--radius-full); background: var(--color-bg-default); font-size: 14px; font-weight: 500; color: var(--color-text-default); cursor: pointer; transition: border-color 0.15s; }
-.rg-cat:hover { border-color: var(--color-border-control); }
-.rg-cat-count { font-size: 12px; color: var(--color-text-secondary); }
-.rg-cat.is-active { border-color: var(--color-text-strong); background: var(--color-text-strong); font-weight: 600; color: var(--color-text-inverse); }
-.rg-cat.is-active .rg-cat-count { color: inherit; }
+.rg-category-tabs { margin-bottom: var(--space-16); }
+/* 자격 과정이 늘어 한 줄을 넘으면 회색 판 안에서 다음 줄로 (화면 밖으로 밀려나지 않게) */
+.ds2 .ds-tabs-box--segment.rg-category-tabs { flex-wrap: wrap; max-width: 100%; }
 .rg-layout { margin-top: 0; grid-template-columns: minmax(0, 1fr) 300px; }
 .rg-table .rg-col-check { width: 44px; }
 .rg-table .ds-check { vertical-align: middle; }
