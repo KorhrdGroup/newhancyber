@@ -26,56 +26,67 @@ export default function FinishedCourses() {
         {courses.length === 0 ? (
           <p className="cr-empty">종료된 과목이 없습니다.</p>
         ) : (
-          <div className="cr-table-wrap">
-            <table className="ds-table">
-              <thead>
-                <tr>
-                  <th>차수</th>
-                  <th>과목명</th>
-                  <th>이수 구분</th>
-                  <th>학점</th>
-                  <th>수강 기간</th>
-                  <th>복습 기간</th>
-                  <th>성적</th>
-                  <th>관리</th>
-                </tr>
-              </thead>
-              <tbody>
-                {courses.map((course) => (
-                  <tr key={course.id}>
-                    <td>{course.term}</td>
-                    <td className="is-left">
-                      <strong>{course.title}</strong> <span className="pp-note">{course.classNo}</span>
-                    </td>
-                    <td>
-                      <Badge tone="neutral">{course.category}</Badge>
-                    </td>
-                    <td>{course.credit}</td>
-                    <td>
-                      {course.studyStart}
-                      <br />~ {course.studyEnd}
-                    </td>
-                    <td>~ {course.reviewEnd}</td>
-                    <td>
-                      <span className="cr-grade">{course.grade?.letter ?? "-"}</span>
-                    </td>
-                    <td>
-                      <div className="pp-row pp-row--center">
-                        <PopupButton href={`/popup/grade/${course.id}`}>성적 보기</PopupButton>
-                        <Link href={`/my-classroom/finished/${course.id}`} className="ds-btn ds-btn--primary ds-btn--sm">
-                          복습하기
-                        </Link>
-                        <PopupButton href={`/popup/print/certificate/${course.id}`}>수료증</PopupButton>
-                        <PopupButton href={`/popup/review-write/${course.id}`} className="ds-btn ds-btn--ghost ds-btn--sm">
-                          수강후기 쓰기
-                        </PopupButton>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <p className="pp-note ds-mt-12">
+          <div className="cr-list">
+            {courses.map((course) => (
+              <article key={course.id} className="cr-card">
+                <div className="cr-card-main">
+                  <div className="cr-card-meta">
+                    <span>{course.term}</span>
+                    <Badge tone="neutral">{course.category}</Badge>
+                    <span>{course.credit}학점</span>
+                  </div>
+                  <h3 className="cr-card-title">
+                    {course.title}
+                    <span>{course.classNo}</span>
+                  </h3>
+                  <dl className="cr-card-info">
+                    <div>
+                      <dt>수강 기간</dt>
+                      <dd>
+                        {course.studyStart} ~ {course.studyEnd}
+                      </dd>
+                    </div>
+                    <div>
+                      <dt>교강사</dt>
+                      <dd>{course.instructor}</dd>
+                    </div>
+                    <div>
+                      <dt>복습 기간</dt>
+                      <dd>~ {course.reviewEnd}</dd>
+                    </div>
+                    <div>
+                      <dt>성적</dt>
+                      <dd>
+                        {course.grade ? (
+                          <>
+                            <span className="cr-grade">{course.grade.letter}</span> {course.grade.total}점
+                          </>
+                        ) : (
+                          "-"
+                        )}
+                      </dd>
+                    </div>
+                  </dl>
+                </div>
+                <div className="cr-card-side cr-card-side--stack">
+                  <Link href={`/my-classroom/finished/${course.id}`} className="ds-btn ds-btn--primary">
+                    복습하기
+                  </Link>
+                  <div className="cr-card-side-row">
+                    <PopupButton href={`/popup/grade/${course.id}`} className="ds-btn ds-btn--secondary">
+                      성적 보기
+                    </PopupButton>
+                    <PopupButton href={`/popup/print/certificate/${course.id}`} className="ds-btn ds-btn--secondary">
+                      수료증
+                    </PopupButton>
+                  </div>
+                  <PopupButton href={`/popup/review-write/${course.id}`} className="ds-btn ds-btn--ghost ds-btn--sm">
+                    수강후기 쓰기
+                  </PopupButton>
+                </div>
+              </article>
+            ))}
+            <p className="pp-note">
               복습 기간에는 강의만 다시 들을 수 있고, 시험·과제에는 참여할 수 없습니다.
             </p>
           </div>

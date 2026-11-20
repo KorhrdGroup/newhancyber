@@ -235,19 +235,19 @@ export default function RegisterContent() {
                           </span>
                         </td>
                         <td>
-                          <button type="button" className="ds-btn ds-btn--secondary ds-btn--sm rg-major-btn" onClick={(e) => toggleMajorPopup(e, course)}>
+                          <button type="button" className="rg-link rg-major-btn" onClick={(e) => toggleMajorPopup(e, course)}>
                             전공보기
                           </button>
                         </td>
                         <td className="rg-fee">{formatPrice(course.fee)}원</td>
                         <td>
-                          <button type="button" className="ds-btn ds-btn--secondary ds-btn--sm" onClick={() => openPopup(sampleLectureHref(course.name))}>
+                          <button type="button" className="rg-link" onClick={() => openPopup(sampleLectureHref(course.name))}>
                             샘플강의
                           </button>
                         </td>
                         <td>
                           {/* TODO: 강의계획서 팝업 연결 */}
-                          <button type="button" className="ds-btn ds-btn--secondary ds-btn--sm">
+                          <button type="button" className="rg-link">
                             강의계획서
                           </button>
                         </td>

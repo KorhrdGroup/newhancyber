@@ -312,10 +312,15 @@
 .mc .cr-card-info dt::after { content: none; }
 .mc .cr-card-info dd { font-weight: 500; color: var(--color-text-strong); }
 /* 파란색은 누를 곳(강의실 입장 · 참여하기 · 이어 보기)과 진도 막대에만 — 이수구분 · 진도 숫자 · 평가 종류는 회색 */
-.mc .cr-card-meta .ds-badge--brand { background: var(--color-bg-default); color: var(--color-text-secondary); }
+.mc .cr-card-meta .ds-badge--brand,
+.mc .cr-card-meta .ds-badge--neutral { background: var(--color-bg-default); color: var(--color-text-secondary); }
 .mc .ds-progress-value { color: var(--color-text-strong); }
 .mc .cr-eval-type { color: var(--color-text-secondary); }
 .mc .cr-grade { font-weight: 700; color: var(--color-text-strong); }
+/* 종료된 과목 카드 — 성적은 정보 줄 안에서, 버튼은 복습하기 / 성적 보기·수료증 / 수강후기 */
+.mc .cr-card-info .cr-grade { font-size: 16px; }
+.mc .cr-card-side-row { display: flex; gap: var(--space-8); }
+.mc .cr-card-side-row .ds-btn { flex: 1; padding: 0 var(--space-8); }
 /* 연한 바탕 위 진도 막대: 빈 칸을 한 단계 진하게 */
 .mc .cr-card .ds-progress-track,
 .mc .cr-room-head .ds-progress-track { background: var(--color-border-cool); }
@@ -336,6 +341,7 @@
   .mc .cr-card,
   .mc .cr-room-head { padding: var(--space-20); }
   .mc .cr-shortcut-icon { width: 48px; height: 48px; }
+  .mc .cr-card-side--stack { flex-direction: column; }
   /* 숫자 카드 4개: 한 줄씩 길게 쌓지 않고 2칸씩 */
   .mc .ds-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-8); }
   .mc .ds-stat { padding: var(--space-16); }
