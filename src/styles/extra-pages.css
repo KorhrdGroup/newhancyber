@@ -209,6 +209,15 @@
 .rg-schedule dd { margin: 0; color: var(--color-text-strong); }
 .rg-notes { margin: var(--space-8) 0 0; padding: 0; list-style: none; font-size: 13px; line-height: 1.6; color: var(--color-text-secondary); }
 .rg-notes li::before { content: "* "; }
+/* 개강 차수 — 폴더 탭: 고른 탭이 아래 일정 상자(회색 판)와 이어져 '이 차수의 일정'임을 보여준다. 파랑 없음 */
+.ds2 .rg-semester-tabs { display: flex; align-items: flex-end; gap: var(--space-4); width: auto; }
+.ds2 .rg-semester-tabs .ds-tab-box { flex: none; min-width: 200px; min-height: 0; margin: 0; padding: var(--space-12) var(--space-24); border: 1px solid var(--color-border-default); border-bottom: 0; border-radius: var(--radius-12) var(--radius-12) 0 0; background: var(--color-bg-default); }
+.ds2 .rg-semester-tabs .ds-tab-title { font-weight: 600; color: var(--color-text-secondary); }
+.ds2 .rg-semester-tabs .ds-tab-box:hover .ds-tab-title { color: var(--color-text-strong); }
+.ds2 .rg-semester-tabs .ds-tab-box.is-active { border-color: var(--color-bg-surface); background: var(--color-bg-surface); }
+.ds2 .rg-semester-tabs .ds-tab-box.is-active .ds-tab-title { font-weight: 700; color: var(--color-text-strong); }
+.ds2 .rg-semester .rg-schedule { margin-top: 0; }
+.ds2 .rg-semester:has(.rg-semester-tabs .ds-tab-box:first-child.is-active) .rg-schedule { border-top-left-radius: 0; }
 
 /* 과목 표 + 고른 과목 상자 */
 .rg-category-tabs { margin-bottom: var(--space-16); }
@@ -217,9 +226,6 @@
 .rg-layout { margin-top: 0; grid-template-columns: minmax(0, 1fr) 300px; }
 .rg-table .rg-col-check { width: 44px; }
 .rg-table .ds-check { vertical-align: middle; }
-/* 표 안 보조 동작(전공보기 · 샘플강의 · 강의계획서)은 버튼 대신 밑줄 글자 — 줄마다 버튼 3개씩 쌓이지 않게 */
-.rg-link { padding: var(--space-4) 0; border: 0; background: none; font: inherit; font-size: 14px; color: var(--color-text-default); text-decoration: underline; text-decoration-color: var(--color-border-control); text-underline-offset: 3px; cursor: pointer; }
-.rg-link:hover { color: var(--color-text-strong); text-decoration-color: currentColor; }
 .rg-name { font-weight: 500; color: var(--color-text-strong); }
 .rg-badges { display: inline-flex; flex-wrap: wrap; justify-content: center; gap: var(--space-4); }
 .rg-fee { font-weight: 600; color: var(--color-text-strong); white-space: nowrap; }
@@ -266,6 +272,7 @@
   .rg-schedule-item { grid-template-columns: 112px minmax(0, 1fr); padding: var(--space-8) 0; font-size: 13px; }
   .rg-schedule-item:nth-last-child(2):nth-child(odd) { border-bottom: 1px solid var(--color-border-subtle); }
   .rg-notes { font-size: 12px; }
+  .ds2 .rg-semester-tabs .ds-tab-box { flex: 1; min-width: 0; padding: var(--space-10) var(--space-12); }
   .rg-table { display: none; }
   .rg-cards { display: block; }
   /* 고른 과목 목록 · 버튼은 아래 고정 메뉴가 맡는다 */
