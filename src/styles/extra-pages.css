@@ -214,9 +214,10 @@
 .ds2 .rg-semester-tabs .ds-tab-box { flex: none; min-width: 200px; min-height: 0; margin: 0; padding: var(--space-12) var(--space-24); border: 1px solid var(--color-border-default); border-bottom: 0; border-radius: var(--radius-12) var(--radius-12) 0 0; background: var(--color-bg-default); }
 .ds2 .rg-semester-tabs .ds-tab-title { font-weight: 600; color: var(--color-text-secondary); }
 .ds2 .rg-semester-tabs .ds-tab-box:hover .ds-tab-title { color: var(--color-text-strong); }
-.ds2 .rg-semester-tabs .ds-tab-box.is-active { border-color: var(--color-bg-surface); background: var(--color-bg-surface); }
+.ds2 .rg-semester-tabs .ds-tab-box.is-active { border-color: var(--color-bg-brand-subtle); background: var(--color-bg-brand-subtle); }
 .ds2 .rg-semester-tabs .ds-tab-box.is-active .ds-tab-title { font-weight: 700; color: var(--color-text-strong); }
-.ds2 .rg-semester .rg-schedule { margin-top: 0; }
+.ds2 .rg-semester .rg-schedule { margin-top: 0; background: var(--color-bg-brand-subtle); }
+.ds2 .rg-semester .rg-schedule .rg-schedule-item { border-bottom: 0; } /* 옅은 하늘색 판 안에서는 줄 선 없이 */
 .ds2 .rg-semester:has(.rg-semester-tabs .ds-tab-box:first-child.is-active) .rg-schedule { border-top-left-radius: 0; }
 
 /* 과목 표 + 고른 과목 상자 */
