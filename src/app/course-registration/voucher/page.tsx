@@ -28,15 +28,17 @@ export default function CourseVoucherPage() {
           <section className="ex-section">
             <div className="ex-hero">
               <img className="ex-hero-icon" src="/resources/images/credit-bank/cb-icon-hands.png" alt="" aria-hidden />
-              <p className="ex-hero-label">평생교육이용권</p>
-              <p className="ex-hero-title">
-                1인당 연간 <em>35만원</em> 지원
-              </p>
-              <p className="ex-hero-desc">
-                배우고 싶은 성인 학습자가 평생교육 강좌를 들을 수 있도록 지원해요.
-                <br />
-                우수 이용자는 최대 70만원까지 받을 수 있어요.
-              </p>
+              <div>
+                <p className="ex-hero-label">평생교육이용권</p>
+                <p className="ex-hero-title">
+                  1인당 연간 <em>35만원</em> 지원
+                </p>
+                <p className="ex-hero-desc">
+                  배우고 싶은 성인 학습자가 평생교육 강좌를 들을 수 있도록 지원해요.
+                  <br />
+                  우수 이용자는 최대 70만원까지 받을 수 있어요.
+                </p>
+              </div>
             </div>
           </section>
 
@@ -78,38 +80,39 @@ export default function CourseVoucherPage() {
 
           <section className="ex-section">
             <h2 className="ex-section-title">이용 방법</h2>
-            {/* 무료학습설계 진행 순서처럼 연한 판 하나에 그림 + 점선 칸막이 + 화살표 */}
-            <ol className="ex-vflow">
-              {voucherSteps.map((step, i) => (
-                <li key={step.title}>
-                  {i > 0 && <span className="ex-vflow-arrow" aria-hidden />}
-                  <img className="ex-vflow-icon" src={step.icon} alt="" aria-hidden />
-                  <div>
-                    <p className="ex-vflow-title">
-                      <span className="ex-vflow-num">{i + 1}</span>
-                      {step.title}
-                    </p>
-                    <p className="ex-vflow-desc">{step.desc}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-            {/* 안내 문구 + 신청 · 수강신청 버튼을 한 상자로 */}
-            <div className="ex-cta">
-              <p className="ex-note">
-                신청 기간과 필요한 서류는 해마다 달라요.{" "}
-                <a href={VOUCHER_SITE} target="_blank" rel="noopener noreferrer">
-                  평생교육이용권 누리집
-                </a>
-                에서 공고를 확인해 주세요.
-              </p>
-              <div className="ex-actions">
-                <a href={VOUCHER_SITE} target="_blank" rel="noopener noreferrer" className="ds-btn ds-btn--secondary ds-btn--lg">
-                  평생교육이용권 신청하기
-                </a>
-                <Link href="/course-registration/register" className="ds-btn ds-btn--primary ds-btn--lg">
-                  수강신청 하러 가기
-                </Link>
+            {/* 무료학습설계 진행 순서처럼 연한 판 하나에 그림 + 점선 칸막이 + 화살표, 아래에 안내 문구 + 버튼 */}
+            <div className="ex-vflow-box">
+              <ol className="ex-vflow">
+                {voucherSteps.map((step, i) => (
+                  <li key={step.title}>
+                    {i > 0 && <span className="ex-vflow-arrow" aria-hidden />}
+                    <img className="ex-vflow-icon" src={step.icon} alt="" aria-hidden />
+                    <div>
+                      <p className="ex-vflow-title">
+                        <span className="ex-vflow-num">{i + 1}</span>
+                        {step.title}
+                      </p>
+                      <p className="ex-vflow-desc">{step.desc}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+              <div className="ex-cta">
+                <p className="ex-note">
+                  신청 기간과 필요한 서류는 해마다 달라요.{" "}
+                  <a href={VOUCHER_SITE} target="_blank" rel="noopener noreferrer">
+                    평생교육이용권 누리집
+                  </a>
+                  에서 공고를 확인해 주세요.
+                </p>
+                <div className="ex-actions">
+                  <a href={VOUCHER_SITE} target="_blank" rel="noopener noreferrer" className="ds-btn ds-btn--secondary ds-btn--lg">
+                    평생교육이용권 신청하기
+                  </a>
+                  <Link href="/course-registration/register" className="ds-btn ds-btn--primary ds-btn--lg">
+                    수강신청 하러 가기
+                  </Link>
+                </div>
               </div>
             </div>
           </section>
