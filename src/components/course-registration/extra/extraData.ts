@@ -46,7 +46,7 @@ export const payMethods: { key: PayMethod; label: string; guide: string }[] = [
 export const voucherTypes = [
   {
     type: "일반(지역특화)",
-    target: "만 19세 이상 성인 중 기초생활수급자, 차상위계층, 광역 지자체 공고 조건에 맞는 분",
+    target: "만 19세 이상 성인 중 기초생활수급자·차상위계층·광역 지자체 공고 조건에 맞는 분",
     amount: "1인당 35만원",
   },
   {

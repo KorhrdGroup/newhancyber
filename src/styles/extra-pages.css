@@ -93,12 +93,13 @@
 /* 위에 파란 하위메뉴 줄이 겹쳐 뜨므로 장바구니처럼 줄 아래 여백 (휴대폰은 아래 .ex-page 여백으로 되돌아감) */
 .ex-voucher { padding-top: 60px; }
 /* 지원 대상과 금액: 유형별 카드, 안은 흰 이름표 라벨 + 진한 값 */
+/* 지원 대상 글이 세 카드 모두 두 줄에 들어가도록 카드 안쪽 여백·이름표 간격을 조금 줄임 */
 .ex-vtypes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-12); margin: 0; padding: 0; list-style: none; }
-.ex-vtype { padding: var(--space-20) var(--space-24); border-radius: var(--radius-16); background: var(--color-bg-surface); }
+.ex-vtype { padding: var(--space-20); border-radius: var(--radius-16); background: var(--color-bg-surface); }
 .ex-vtype-name { font-size: 17px; font-weight: 600; line-height: 1.4; color: var(--color-text-strong); }
 .ex-vtype-info { display: flex; flex-direction: column; gap: var(--space-10); margin: var(--space-12) 0 0; }
-.ex-vtype-info > div { display: flex; align-items: flex-start; gap: var(--space-10); }
-.ex-vtype-info dt { flex-shrink: 0; min-width: 64px; padding: 2px var(--space-8); border-radius: var(--radius-6); background: var(--color-bg-default); font-size: 12px; font-weight: 500; line-height: 1.6; color: var(--color-text-secondary); text-align: center; }
+.ex-vtype-info > div { display: flex; align-items: flex-start; gap: var(--space-8); }
+.ex-vtype-info dt { flex-shrink: 0; padding: 2px var(--space-8); border-radius: var(--radius-6); background: var(--color-bg-default); font-size: 12px; font-weight: 500; line-height: 1.6; color: var(--color-text-secondary); text-align: center; }
 .ex-vtype-info dd { margin: 0; font-size: 14px; font-weight: 400; line-height: 1.6; color: var(--color-text-default); word-break: keep-all; }
 .ex-vtype-info .is-amount { font-weight: 600; color: var(--color-text-strong); }
 /* 쓸 수 있는 곳: 회색 카드 2칸 */
