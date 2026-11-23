@@ -31,8 +31,8 @@
 
 /* 친구 추천 */
 .evl-hero { gap: calc(100 * var(--u)); padding: calc(100 * var(--u)) 0; background: linear-gradient(to bottom, #ffe778 68%, #fff6cc); }
-.evl-hero-bg { position: absolute; z-index: -1; top: calc(50% - 232.75 * var(--u)); left: calc(50% - 17.32 * var(--u)); width: calc(1357.86 * var(--u)); height: calc(867.38 * var(--u)); overflow: hidden; transform: translate(-50%, -50%) rotate(-1.82deg); }
-.evl-hero-bg img { position: absolute; top: -2.92%; left: 0; width: 100%; height: 122.06%; }
+.evl-hero-bg { position: absolute; z-index: -1; top: 0; left: 50%; width: calc(1080 * var(--u)); transform: translateX(-50%); -webkit-mask-image: linear-gradient(to bottom, #000 82%, transparent); mask-image: linear-gradient(to bottom, #000 82%, transparent); }
+.evl-hero-bg img { display: block; width: 100%; height: auto; }
 .evl-hero-title { display: flex; flex-direction: column; align-items: center; font-family: "Paperlogy"; font-weight: 500; line-height: normal; color: #010101; filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.75)); }
 .evl-hero-line1 { font-size: calc(50 * var(--u)); }
 .evl-hero-line1 b { font-weight: 700; }
@@ -129,7 +129,7 @@
   .evl-r1 .evl-closing { line-height: 1.5; }
 
   .evl-hero { gap: calc(40 * var(--u)); padding: calc(60 * var(--u)) calc(20 * var(--u)) calc(50 * var(--u)); }
-  .evl-hero-bg { top: calc(-40 * var(--u)); left: 50%; width: calc(760 * var(--u)); height: calc(560 * var(--u)); transform: translateX(-50%) rotate(-1.82deg); }
+  .evl-hero-bg { width: calc(640 * var(--u)); }
   .evl-hero-line1 { font-size: calc(24 * var(--u)); }
   .evl-hero-line2 { font-size: calc(58 * var(--u)); }
   .evl-coupons { flex-direction: column; align-items: center; gap: calc(36 * var(--u)); }
