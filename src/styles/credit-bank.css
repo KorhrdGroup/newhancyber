@@ -110,51 +110,15 @@
   .cb-guide-head { flex-wrap: wrap; }
 }
 
-/* ---------- 단계 그림 (CbFlow) — Figma '학점은행제' wrapper_graphic 을 코드로 ---------- */
-.cb-flow,
-.cb-grid,
-.cb-steps-row,
-.cb-steps-choices { margin: 0; padding: 0; list-style: none; }
-.cb-flow,
-.cb-grid,
-.cb-steps-row,
-.cb-steps-final {
-  border: 1px solid var(--color-border-subtle);
-  border-radius: var(--radius-8);
-  background: var(--color-bg-default);
-}
-.cb-flow,
-.cb-grid,
-.cb-steps { margin-top: var(--space-16); }
+/* ---------- 이용대상 아이콘 격자 (CbIconGrid) — 단계 흐름은 공통 흐름도(step-tiles.css) ---------- */
+.cb-grid { margin: var(--space-16) 0 0; padding: 0; list-style: none; border: 1px solid var(--color-border-subtle); border-radius: var(--radius-8); background: var(--color-bg-default); }
 
 /* 점선 (2px 선 · 2px 띄움) */
-.cb-flow-join--arrow::before,
-.cb-grid-item + .cb-grid-item::before,
-.cb-steps-down::before {
+.cb-grid-item + .cb-grid-item::before {
   content: "";
   position: absolute;
   background: repeating-linear-gradient(to bottom, var(--color-icon-muted) 0 2px, transparent 2px 4px);
 }
-
-/* 동그라미 표시 */
-.cb-mark { display: inline-flex; position: relative; z-index: 1; color: var(--color-border-brand-subtle); }
-.cb-mark svg { display: block; }
-.cb-mark--down svg { transform: rotate(90deg); }
-
-/* 아이콘 흐름: 아이콘 + 이름 칸이 + · › 로 이어진다 */
-.cb-flow { display: flex; align-items: center; padding: var(--space-20) 0; }
-.cb-flow--lg { padding: 10px 0; }
-/* li 는 줄만 나누고 칸 배치는 ol 이 한다 → 아이콘 칸 너비가 모두 같다 */
-.cb-flow-item,
-.cb-steps-item { display: contents; }
-.cb-flow-card { display: flex; flex: 1 1 0; flex-direction: column; align-items: center; justify-content: center; gap: 10px; min-width: 0; height: 140px; }
-.cb-flow--lg .cb-flow-card { height: 180px; }
-.cb-flow-icon { width: 100px; height: 100px; object-fit: contain; }
-.cb-flow-label { font-size: 14px; font-weight: 600; line-height: 1.4; color: var(--color-text-strong); text-align: center; word-break: keep-all; }
-.cb-flow--lg .cb-flow-label { font-size: 16px; }
-.cb-flow-join { position: relative; display: flex; flex: none; align-items: center; justify-content: center; width: 20px; margin: 0 4px; }
-.cb-flow-join--arrow { align-self: stretch; }
-.cb-flow-join--arrow::before { top: 0; bottom: 0; left: 50%; width: 1px; }
 
 /* 아이콘 격자 (이용대상) */
 .cb-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); row-gap: 12px; padding: var(--space-20); }
@@ -172,43 +136,9 @@
   background: repeating-linear-gradient(to right, var(--color-icon-muted) 0 2px, transparent 2px 4px);
 }
 .cb-grid-icon { width: 80px; height: 80px; object-fit: contain; }
-.cb-grid-label { font-size: 12px; font-weight: 600; line-height: 1.4; color: var(--color-text-strong); text-align: center; word-break: keep-all; }
-
-/* 학점은행제 흐름도 */
-.cb-steps-row { display: flex; padding: var(--space-20); }
-.cb-steps-row .cb-flow-join { height: 140px; }
-.cb-steps-text { display: flex; flex: 1 1 0; flex-direction: column; justify-content: center; gap: 10px; min-width: 0; padding: var(--space-20); }
-.cb-step-no { font-size: 16px; font-weight: 700; line-height: 1; color: var(--color-text-brand); white-space: nowrap; }
-.cb-steps-label { font-size: 16px; font-weight: 500; line-height: 1.3; color: var(--color-text-strong); word-break: keep-all; }
-.cb-steps-down { position: relative; display: flex; justify-content: center; align-items: center; height: 20px; margin: 10px 0; }
-.cb-steps-down::before {
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: repeating-linear-gradient(to right, var(--color-icon-muted) 0 2px, transparent 2px 4px);
-}
-.cb-steps-final { display: flex; align-items: center; gap: 10px; padding: var(--space-20) var(--space-40); }
-.cb-steps-choices { display: flex; flex: 1 1 0; align-items: center; min-width: 0; }
-.cb-steps-choice { display: flex; flex: 1 1 0; align-items: center; min-width: 0; }
-.cb-steps-choice .cb-flow-card { height: auto; padding: var(--space-20); }
-.cb-steps-choice .cb-flow-icon { width: 80px; height: 80px; }
-.cb-steps-choice .cb-flow-label { font-size: 16px; font-weight: 500; }
-.cb-steps-or { flex: none; font-size: 16px; font-weight: 700; color: var(--color-text-strong); }
+.cb-grid-label { font-size: 13px; font-weight: 500; line-height: 1.4; color: var(--color-text-strong); text-align: center; word-break: keep-all; }
 
 @media (max-width: 768px) {
-  /* 흐름은 한 줄에 하나씩 쌓고, 사이 표시는 아래 방향으로 */
-  .cb-flow,
-  .cb-flow--lg { flex-direction: column; align-items: stretch; padding: var(--space-12) var(--space-16); }
-  .cb-flow-card,
-  .cb-flow--lg .cb-flow-card { flex-direction: row; justify-content: flex-start; gap: var(--space-16); height: auto; padding: var(--space-4) 0; }
-  .cb-flow-icon { width: 56px; height: 56px; }
-  .cb-flow-label,
-  .cb-flow--lg .cb-flow-label { font-size: 15px; text-align: left; }
-  .cb-flow-join { width: 56px; height: 20px; margin: var(--space-4) 0; }
-  .cb-flow-join--arrow::before { display: none; }
-  .cb-flow-join .cb-mark--right svg { transform: rotate(90deg); }
-
   .cb-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: var(--space-12); }
   .cb-grid-item { height: auto; min-height: 132px; padding: var(--space-8) var(--space-4); }
   .cb-grid-item:nth-child(4n + 1)::before { display: block; }
@@ -223,15 +153,4 @@
     background: repeating-linear-gradient(to right, var(--color-icon-muted) 0 2px, transparent 2px 4px);
   }
   .cb-grid-icon { width: 64px; height: 64px; }
-
-  .cb-steps-row { flex-direction: column; padding: var(--space-12) var(--space-16); }
-  .cb-steps-row .cb-flow-join { width: 100%; height: 20px; margin: var(--space-4) 0; }
-  .cb-steps-text { flex-direction: row; align-items: baseline; gap: var(--space-12); padding: var(--space-8) 0; }
-  .cb-step-no { min-width: 56px; }
-  .cb-steps-final { flex-direction: column; align-items: flex-start; padding: var(--space-16); }
-  .cb-steps-choices { width: 100%; }
-  .cb-steps-choice .cb-flow-card { flex-direction: column; justify-content: center; gap: var(--space-8); padding: var(--space-8) 0; }
-  .cb-steps-choice .cb-flow-icon { width: 56px; height: 56px; }
-  .cb-steps-choice .cb-flow-label { font-size: 13px; text-align: center; }
-  .cb-steps-or { font-size: 13px; }
 }

@@ -932,7 +932,7 @@
 
 /* 무료학습설계·환불 절차 단계 (예전 한 장 그림 → CbIconFlow) */
 .cr-step-panel { width: 100%; margin-bottom: 40px; }
-.cr-step-panel .cb-flow { margin: 0; border: 0; border-radius: 0; background: none; }
+.cr-step-panel .st-flow { margin: 0; }
 
 /* ---------- 수강규정 · 학습비 반환규정 (흰 바탕 안내 틀 + 디자인 시스템 표) ---------- */
 .cr-rules .lx-notes + .lx-table-scroll { margin-top: var(--space-16); }

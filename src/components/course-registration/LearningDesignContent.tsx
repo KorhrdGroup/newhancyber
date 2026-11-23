@@ -5,6 +5,7 @@ import { applyStudyPlan } from "@/app/course-registration/learning-design/action
 import "@/styles/classroom.css";
 import "@/styles/learning-extra.css";
 import "@/styles/credit-bank.css";
+import StepTiles from "@/components/common/StepTiles";
 
 /** 진행 순서 — 바우처 「이용 방법」과 같은 판 (그림 · 한 줄 설명, 번호 없음) */
 const designSteps = [
@@ -45,20 +46,7 @@ export default function LearningDesignContent() {
           <h2 className="ex-section-title" id="design-steps-title">
             진행 순서
           </h2>
-          <div className="ex-vflow-box">
-            <ol className="ex-vflow ex-vflow--3">
-              {designSteps.map((step, i) => (
-                <li key={step.title}>
-                  {i > 0 && <span className="ex-vflow-arrow" aria-hidden />}
-                  <img className="ex-vflow-icon" src={step.icon} alt="" aria-hidden />
-                  <div>
-                    <p className="ex-vflow-title">{step.title}</p>
-                    <p className="ex-vflow-desc">{step.desc}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </div>
+          <StepTiles items={designSteps.map((step) => ({ icon: step.icon, title: step.title, desc: step.desc }))} />
         </section>
 
         <form className="ex-box ex-design-form" id="consultation-form" onSubmit={handleSubmit}>

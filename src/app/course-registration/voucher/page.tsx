@@ -9,6 +9,7 @@ import {
 } from "@/components/course-registration/extra/extraData";
 import "@/styles/classroom.css";
 import "@/styles/extra-pages.css";
+import StepTiles from "@/components/common/StepTiles";
 
 export const metadata: Metadata = { title: "평생교육바우처" };
 
@@ -80,23 +81,9 @@ export default function CourseVoucherPage() {
 
           <section className="ex-section">
             <h2 className="ex-section-title">이용 방법</h2>
-            {/* 무료학습설계 진행 순서처럼 연한 판 하나에 그림 + 점선 칸막이 + 화살표, 아래에 안내 문구 + 버튼 */}
+            {/* 연한 판 하나에 공통 흐름도(타일 + 연결 배지), 아래에 안내 문구 + 버튼 */}
             <div className="ex-vflow-box">
-              <ol className="ex-vflow">
-                {voucherSteps.map((step, i) => (
-                  <li key={step.title}>
-                    {i > 0 && <span className="ex-vflow-arrow" aria-hidden />}
-                    <img className="ex-vflow-icon" src={step.icon} alt="" aria-hidden />
-                    <div>
-                      <p className="ex-vflow-title">
-                        <span className="ex-vflow-num">{i + 1}</span>
-                        {step.title}
-                      </p>
-                      <p className="ex-vflow-desc">{step.desc}</p>
-                    </div>
-                  </li>
-                ))}
-              </ol>
+              <StepTiles plain numbered items={voucherSteps.map((step) => ({ icon: step.icon, title: step.title, desc: step.desc }))} />
               <div className="ex-cta">
                 <p className="ex-note">
                   신청 기간과 필요한 서류는 해마다 달라요.{" "}

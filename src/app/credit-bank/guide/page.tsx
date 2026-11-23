@@ -9,7 +9,6 @@ const procedure = (
   <>
     <section className="lx-panel">
       <CbIconFlow
-        size="lg"
         items={[
           { icon: "person", label: "학습자 등록" },
           { icon: "aplus", label: "학점인정 신청" },

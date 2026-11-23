@@ -51,6 +51,7 @@ export default function SocialWorkerLearningDesignPage() {
               { label: "필수", value: "10 과목" },
               { label: "선택", value: "7 과목" },
             ]}
+            total="총 17과목 이수"
             results={[{ icon: "license.png", title: "사회복지2급 자격증 취득" }]}
           />
         </PracticeSection>
