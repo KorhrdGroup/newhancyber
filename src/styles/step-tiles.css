@@ -66,7 +66,9 @@
 /* 한 단계 안에 + 로 묶인 두 항목 */
 .st-pair { display: flex; flex: 1; justify-content: center; gap: var(--space-40); width: 100%; }
 .st-part { position: relative; display: flex; flex: 1; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-8); min-width: 0; }
-.st-plus { position: absolute; top: 50%; left: calc(var(--space-40) / -2); display: flex; color: var(--color-icon-muted); transform: translate(-50%, -50%); }
+/* + 표시: 화살표 배지와 같은 회색 동그라미 (조금 작게) */
+.st-plus { position: absolute; top: 50%; left: calc(var(--space-40) / -2); display: flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; background: var(--color-icon-muted); color: #fff; transform: translate(-50%, -50%); }
+.st-plus svg { width: 14px; height: 14px; }
 /* 여럿 중 하나 (choices): 흰 칸 하나 안에 줄을 쌓고 사이에 "or" 구분선 */
 .st-choices { display: flex; flex-direction: column; justify-content: center; align-self: stretch; margin: auto 0; padding: var(--space-8) var(--space-12); border-radius: var(--radius-12); background: var(--color-bg-default); list-style: none; }
 /* 흰 타일 안에서는 상자 없이 줄만, 이웃 타일처럼 가운데로 모음 */
@@ -88,9 +90,10 @@
 .st-or::after { content: ""; flex: 1; height: 1px; background: var(--color-border-subtle); }
 /* 더해지는 숫자 (figures): 항목마다 작은 칸을 칸 너비에 고르게 펼치고 사이에 회색 +, 아래 연파랑 합계 띠 */
 .st-figures { display: flex; flex: 1; flex-direction: column; justify-content: center; gap: var(--space-12); align-self: stretch; }
-.st-figure-row { display: grid; grid-auto-columns: minmax(0, 1fr); grid-auto-flow: column; gap: var(--space-24); }
+.st-figure-row { display: grid; grid-auto-columns: minmax(0, 1fr); grid-auto-flow: column; gap: var(--space-32); }
 .st-figure { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: var(--space-16) var(--space-8); border-radius: var(--radius-12); background: var(--color-bg-surface); white-space: nowrap; }
-.st-figure .st-plus { top: 50%; left: calc(var(--space-24) / -2); }
+.st-figure .st-plus { top: 50%; left: calc(var(--space-32) / -2); width: 22px; height: 22px; }
+.st-figure .st-plus svg { width: 12px; height: 12px; }
 .st-figure-label { font-size: 14px; font-weight: 500; color: var(--color-text-secondary); }
 .st-figure-value { font-size: 22px; font-weight: 700; line-height: 1.3; color: var(--color-text-brand); }
 .st-total { padding: var(--space-10) var(--space-12); border-radius: var(--radius-12); background: var(--color-bg-tone-blue); font-size: 15px; font-weight: 500; color: var(--color-text-brand); text-align: center; }
@@ -126,14 +129,14 @@
   .st-join { top: calc(var(--space-16) / -2); left: 50%; width: 26px; height: 26px; }
   .st-join svg { transform: rotate(90deg); }
   /* 묶인 두 항목: 위아래로, 각각 아이콘 왼쪽 · 이름 오른쪽 */
-  .st-pair { flex-direction: column; gap: var(--space-20); }
+  .st-pair { flex-direction: column; gap: var(--space-28); }
   .st-part { flex-direction: row; justify-content: flex-start; gap: var(--space-16); }
   .st-part .st-text { align-self: center; }
   .st-part .st-icon { width: 56px; height: 56px; margin: 0; }
-  .st-part > .st-plus { top: calc(var(--space-20) / -2); left: 28px; }
-  .st-figure-row { gap: var(--space-20); }
+  .st-part > .st-plus { top: calc(var(--space-28) / -2); left: 28px; width: 22px; height: 22px; }
+  .st-figure-row { gap: var(--space-24); }
   .st-figure { padding: var(--space-12) var(--space-4); }
-  .st-figure .st-plus { left: calc(var(--space-20) / -2); }
+  .st-figure .st-plus { left: calc(var(--space-24) / -2); width: 20px; height: 20px; }
   .st-figure-value { font-size: 17px; }
   .st-total { font-size: 14px; }
 }
