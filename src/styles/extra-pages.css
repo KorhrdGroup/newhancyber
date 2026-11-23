@@ -38,6 +38,10 @@
 .ex-order-item { display: flex; align-items: center; gap: var(--space-12); padding: var(--space-12) 0; border-bottom: 1px solid var(--color-border-subtle); }
 .ex-order-item:last-child { border-bottom: 0; }
 .ex-order-name { flex: 1; min-width: 0; font-size: 16px; font-weight: 500; color: var(--color-text-strong); }
+/* 결제하기: 제목 오른쪽 과목 변경 버튼, 과목 이름 위 과정 이름 */
+.ex-order-head { display: flex; justify-content: space-between; align-items: center; gap: var(--space-12); margin-bottom: var(--space-12); }
+.ex-order-head .ex-section-title { margin-bottom: 0; }
+.ex-order-course { display: block; margin-bottom: 2px; font-size: 13px; font-weight: 500; color: var(--color-text-secondary); }
 .ex-order-badges { display: inline-flex; flex-wrap: wrap; gap: var(--space-4); margin-left: var(--space-8); vertical-align: 2px; }
 .ds2 .ex-order-badges .ds-badge--neutral { background: var(--color-bg-default); } /* 회색 판 위라 흰 배지 (나의 강의실 과목 카드와 같음) */
 .ex-order-price { text-align: right; font-size: 16px; font-weight: 600; color: var(--color-text-strong); white-space: nowrap; }

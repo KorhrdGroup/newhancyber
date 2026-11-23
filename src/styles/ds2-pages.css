@@ -78,6 +78,7 @@
 .ds2 .ex-method-guide,
 .ds2 .ex-agree { padding: var(--space-12) var(--space-16); border: 0; border-radius: var(--radius-12); background: var(--color-bg-default); }
 .ds2 .ex-agree { display: flex; }
+.ex-agree { word-break: keep-all; } /* 낱말 중간에서 줄이 끊기지 않게 */
 .ex-agree .ex-link { white-space: nowrap; }
 .ds2 .ex-cart-head,
 .ds2 .ex-sum-total { border-color: var(--color-border-cool); }

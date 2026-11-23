@@ -3,9 +3,15 @@
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useMobileMenu } from "@/components/layout/MobileMenuContext";
-import { formatPrice, sampleCartCourses } from "../courseData";
+import { courseCategoryTabs, findCourseByName, formatPrice, sampleCartCourses } from "../courseData";
 import MajorBadges from "../MajorBadges";
 import { payMethods, sampleCoupons, type PayMethod } from "./extraData";
+
+/** 과목이 속한 과정 이름 (수강신청 과목 구분 탭 이름과 같음, 예: 사회복지사) */
+const courseLabel = (name: string) => {
+  const category = findCourseByName(name)?.category;
+  return courseCategoryTabs.find((tab) => tab.key === category)?.label;
+};
 
 /** 결제하기: 수강신청 과목 · 쿠폰 할인 · 결제 수단 · 약관 동의 · 최종 결제 금액 */
 export default function PaymentForm() {
@@ -38,11 +44,17 @@ export default function PaymentForm() {
     <form className="ex-pay ex-pay--float" onSubmit={handleSubmit}>
       <div className="ex-pay-main">
         <section className="ex-box">
-          <h2 className="ex-section-title">수강신청 과목 ({courses.length})</h2>
+          <div className="ex-order-head">
+            <h2 className="ex-section-title">수강신청 과목 ({courses.length})</h2>
+            <Link href="/course-registration/cart" className="ds-btn ds-btn--secondary ds-btn--sm">
+              과목 변경
+            </Link>
+          </div>
           <ul className="ex-order">
             {courses.map((course, i) => (
               <li key={i} className="ex-order-item">
                 <span className="ex-order-name">
+                  {courseLabel(course.name) && <span className="ex-order-course">{courseLabel(course.name)}</span>}
                   {course.name}
                   <MajorBadges name={course.name} />
                 </span>
