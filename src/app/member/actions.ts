@@ -14,7 +14,7 @@ import {
 } from "@/lib/db/members";
 import { registerMemberPc } from "@/lib/db/pcRegistrations";
 import { clearFailures, lockedMinutes, recordFailure } from "@/lib/loginThrottle";
-import { createMemberSession, deleteMemberSession, getCurrentMember } from "@/lib/memberAuth";
+import { createMemberSession, getCurrentMember } from "@/lib/memberAuth";
 import { ensureDeviceId } from "@/lib/memberDevice";
 import { hashPassword, needsRehash, passwordVersion, verifyPassword } from "@/lib/password";
 import {
@@ -197,10 +197,7 @@ export async function currentMember(): Promise<{ name: string; loginId: string }
   }
 }
 
-/** 로그아웃 — 쿠키만 지운다. 머리말(MemberProvider)이 상태를 바로 바꾸고 첫 화면으로 보낸다. */
-export async function logout(): Promise<void> {
-  await deleteMemberSession();
-}
+// 로그아웃은 서버 액션이 아니라 src/app/member/logout/route.ts (화면을 다시 그리지 않게)
 
 // ── 회원가입 ────────────────────────────────────────────
 

@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { currentMember, logout } from "@/app/member/actions";
+import { currentMember } from "@/app/member/actions";
 
 export interface CurrentMember {
   name: string;
@@ -42,7 +42,9 @@ export function MemberProvider({ children }: { children: React.ReactNode }) {
 
   const signOut = useCallback(async () => {
     try {
-      await logout();
+      // 서버 액션이 아니라 화면을 다시 그리지 않는 주소로 (src/app/member/logout/route.ts 설명 참고)
+      const res = await fetch("/member/logout", { method: "POST", credentials: "same-origin" });
+      if (!res.ok) throw new Error(`logout ${res.status}`);
     } catch {
       // 쿠키가 그대로라 상태를 바꾸면 다음 화면에서 다시 로그인된 것처럼 보인다 — 바꾸지 않고 알린다
       alert("로그아웃하지 못했어요. 잠시 뒤 다시 시도해 주세요.");

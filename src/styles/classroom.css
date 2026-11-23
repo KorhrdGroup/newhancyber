@@ -224,7 +224,7 @@
 }
 .ds-tab-box + .ds-tab-box { margin-left: -1px; }
 /* 링크(<a>)로 쓰는 탭 칸 — 버튼처럼 글자를 위아래 가운데에 (DB 게시판의 구분 세그먼트는 주소로 움직여서 링크) */
-a.ds-tab-box { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; }
+a.ds-tab-box { display: inline-flex; align-items: center; justify-content: center; text-align: center; text-decoration: none; }
 .ds-tab-box:hover { color: var(--color-text-strong); }
 .ds-tab-box.is-active {
   position: relative;
