@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import DbTermBody from "@/components/footer/DbTermBody";
+import { getSiteTerms } from "@/lib/site";
 import LegalDoc from "@/components/footer/LegalDoc";
 import { operatingRules, type RuleArticle } from "@/components/course-registration/extra/extraData";
 import "@/styles/classroom.css";
@@ -95,10 +97,12 @@ function Article({ article }: { article: RuleArticle }) {
 }
 
 /** 운영규칙 (원본 /inc/footer/useTerms.asp — 학사관리규정). 이용약관과 같은 조항 틀: 장(1. 총칙) → 조문(2-1.) → 번호 항목 */
-export default function OperatingRulesPage() {
+/** 관리자 「약관 관리」의 운영규칙이 있으면 그것을, 없으면 아래 코드 안 문서를 */
+export default async function OperatingRulesPage() {
+  const term = (await getSiteTerms())["운영규칙"];
   return (
     <LegalDoc title="운영규칙" desc="학점은행제 학사관리지침(원격기반 교육훈련기관)에 따른 한평생원격교육원의 학사관리규정입니다.">
-      {operatingRules.map((section) => (
+      {term ? <DbTermBody term={term} /> : operatingRules.map((section) => (
         <section key={section.title} className="legal-article">
           <h2 className="legal-article-title">{section.title}</h2>
           {section.articles.map((article) => (

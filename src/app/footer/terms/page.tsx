@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import DbTermBody from "@/components/footer/DbTermBody";
+import { getSiteTerms } from "@/lib/site";
 import LegalDoc, { LegalArticle, type LegalArticleData } from "@/components/footer/LegalDoc";
 
 export const metadata: Metadata = { title: "이용약관" };
@@ -184,12 +186,16 @@ const articles: LegalArticleData[] = [
 ];
 
 /** 이용약관 — 원본은 한 문단에 줄바꿈으로 이어 붙인 글이라, 조항 · 번호 항목 · 가)나) 목록으로 나눠 그린다 */
-export default function TermsPage() {
+/** 관리자 「약관 관리」의 이용약관이 있으면 그것을, 없으면 아래 코드 안 문서를 */
+export default async function TermsPage() {
+  const term = (await getSiteTerms())["이용약관"];
   return (
-    <LegalDoc title="이용약관" desc="한평생원격교육원 서비스 이용에 관한 회원의 권리, 의무 및 책임 사항입니다. (시행일 2025년 3월 1일)">
-      {articles.map((a) => (
-        <LegalArticle key={a.title} article={a} />
-      ))}
+    <LegalDoc
+      title="이용약관"
+      // 관리자 약관으로 바뀌면 옛 시행일은 빼고 본문(관리자 글)에 맡긴다
+      desc={term ? "한평생원격교육원 서비스 이용에 관한 회원의 권리, 의무 및 책임 사항입니다." : "한평생원격교육원 서비스 이용에 관한 회원의 권리, 의무 및 책임 사항입니다. (시행일 2025년 3월 1일)"}
+    >
+      {term ? <DbTermBody term={term} /> : articles.map((a) => <LegalArticle key={a.title} article={a} />)}
     </LegalDoc>
   );
 }

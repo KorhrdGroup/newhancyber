@@ -1,8 +1,9 @@
 import MobileFooter from "@/components/layout/MobileFooter";
+import type { SiteInfo } from "@/lib/site";
 import { socialLinks } from "./homeData";
 
 /** 모바일 소셜 링크 + 모바일 푸터 (데스크톱 푸터는 모바일에서 숨김) */
-export default function MobileSocialFooter() {
+export default function MobileSocialFooter({ info = null }: { info?: SiteInfo | null }) {
   return (
     <section className="mobile-social-footer-section">
       <div className="mobile-social-section">
@@ -15,7 +16,7 @@ export default function MobileSocialFooter() {
         </div>
       </div>
 
-      <MobileFooter />
+      <MobileFooter info={info} />
     </section>
   );
 }

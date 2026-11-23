@@ -6,13 +6,15 @@ import { useState } from "react";
 import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 import { hasMobileNav, mobileMenu, mobileQuickLinks } from "@/lib/navigation";
 import { REGISTRATION_PHONE, SUPPORT_PHONE } from "@/lib/contact";
+import type { SiteInfo } from "@/lib/site";
 import { useMember } from "./MemberContext";
 import { useMobileMenu } from "./MobileMenuContext";
 
 const MOBILE_IMG = "/resources/images/mobile";
 
 /** 모바일 헤더 + 햄버거 사이드바 (데스크톱에서는 CSS 로 숨김) */
-export default function MobileHeader() {
+/** info: 관리자 「기본정보 관리」 — 옆 메뉴 아래 문의 번호 (없으면 코드 값). 옆 메뉴 목록은 아이콘이 붙은 모바일 전용 구성이라 코드 그대로 */
+export default function MobileHeader({ info }: { info: SiteInfo | null }) {
   const pathname = usePathname();
   const { member, signOut } = useMember();
   const { isOpen, open, close } = useMobileMenu();
@@ -200,8 +202,8 @@ export default function MobileHeader() {
 
         <div className="mobile-sidebar-footer">
           <div className="mobile-sidebar-contact">
-            <div>수강신청 문의 : {REGISTRATION_PHONE}</div>
-            <div>학습지원 문의 : {SUPPORT_PHONE}</div>
+            <div>수강신청 문의 : {info?.enrollPhone ?? REGISTRATION_PHONE}</div>
+            <div>학습지원 문의 : {info?.supportPhone ?? SUPPORT_PHONE}</div>
           </div>
         </div>
       </div>

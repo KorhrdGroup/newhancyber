@@ -141,3 +141,6 @@
   .legal-bullets > li { font-size: 14px; line-height: 1.75; }
   .legal-table--wide .ds-table--info th { width: 104px; }
 }
+
+/* 관리자 「약관 관리」에서 쓴 본문 — 글자 그대로, 줄바꿈만 살린다 */
+.legal-text--plain { white-space: pre-wrap; overflow-wrap: anywhere; }

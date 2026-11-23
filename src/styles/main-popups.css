@@ -1,0 +1,63 @@
+/* 메인 팝업 (관리자 「팝업 관리」) — 왼쪽 위에서부터 나란히, 휴대폰은 한 장씩 가운데 */
+.mp-popups {
+  position: fixed;
+  top: 120px;
+  left: var(--space-24, 24px);
+  z-index: 1000;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--space-16, 16px);
+  max-width: calc(100vw - 48px);
+  pointer-events: none;
+}
+
+.mp-popup {
+  width: 360px;
+  max-width: 100%;
+  border-radius: var(--radius-8, 8px);
+  background: var(--color-bg-default, #fff);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+  pointer-events: auto;
+}
+
+.mp-popup-link { display: block; }
+.mp-popup-img { display: block; width: 100%; height: auto; }
+
+.mp-popup-foot {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--color-border-default, #e5e7eb);
+  background: var(--color-bg-subtle, #f8f9fb);
+}
+
+.mp-popup-btn {
+  flex: 1;
+  height: 44px;
+  padding: 0 var(--space-12, 12px);
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 14px;
+  color: var(--color-text-secondary, #555);
+  cursor: pointer;
+}
+.mp-popup-btn + .mp-popup-btn { border-left: 1px solid var(--color-border-default, #e5e7eb); }
+.mp-popup-btn:hover { color: var(--color-text-strong, #111); }
+.mp-popup-btn--close { flex: 0 0 96px; font-weight: 600; }
+
+@media (max-width: 767px) {
+  .mp-popups {
+    top: 72px;
+    left: 50%;
+    transform: translateX(-50%);
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: calc(100vw - 32px);
+    max-width: 360px;
+    max-height: calc(100vh - 96px);
+    overflow-y: auto;
+  }
+  .mp-popup { width: 100%; }
+}

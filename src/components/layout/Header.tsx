@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Fragment, useEffect, useRef, useState } from "react";
+import type { NavGroup } from "@/types/navigation";
 import { useMember } from "./MemberContext";
 import {
   authLinks,
@@ -17,7 +18,9 @@ import { activeNavHref } from "@/components/common/PageTabs";
 /** 이 높이(px) 이상 스크롤하면 GNB 를 상단에 고정한다 (common.js 와 동일) */
 const STICKY_THRESHOLD = 100;
 
-export default function Header() {
+/** menus: 관리자 「탑 메뉴 관리」(site_menus) — 비어 있으면(null) 코드의 gnb */
+export default function Header({ menus }: { menus: NavGroup[] | null }) {
+  const groups = menus ?? gnb;
   const pathname = usePathname();
   const navRef = useRef<HTMLDivElement>(null);
   const [isSticky, setIsSticky] = useState(false);
@@ -112,7 +115,7 @@ export default function Header() {
         <div className="header-nav-container">
           <nav className="gnb">
             <ul className="gnb-list">
-              {gnb.map((item) => {
+              {groups.map((item) => {
                 const children = item.children?.filter(isVisible) ?? [];
                 // 앞부분이 겹치는 메뉴(/my-classroom, /my-classroom/finished)는 가장 길게 맞는 것만 켠다
                 const activeHref = children

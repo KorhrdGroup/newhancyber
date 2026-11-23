@@ -909,3 +909,6 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
   .sh-side:not(.is-scrolled),
   .sh-quick:not(.is-scrolled) { opacity: 0; visibility: hidden; }
 }
+
+/* 배너가 한 장이면 넘김 표시를 숨긴다 (display 규칙이 hidden 속성을 덮지 않게) */
+.sh-hero-ctrl[hidden] { display: none; }

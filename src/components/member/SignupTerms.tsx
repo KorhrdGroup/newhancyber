@@ -13,6 +13,9 @@ import "@/styles/classroom.css";
 
 type TermKey = "terms" | "agreement1" | "agreement2" | "privacy1" | "privacy2";
 
+/** 관리자 「약관 관리」(site_terms)에 쓴 글 — 있으면 그 칸의 코드 안 문서 대신 글자 그대로 보인다 (이용약관 · 개인정보 수집 및 이용(필수) · 마케팅) */
+export type SignupTermTexts = Partial<Record<TermKey, string>>;
+
 const terms: {
   key: TermKey;
   title: string;
@@ -55,7 +58,7 @@ const initialChecks: Record<TermKey, boolean> = {
 };
 
 /** 회원가입 1단계: 약관 동의 */
-export default function SignupTerms() {
+export default function SignupTerms({ texts = {} }: { texts?: SignupTermTexts }) {
   const router = useRouter();
   const [checks, setChecks] = useState(initialChecks);
   // 약관 내용은 한 번에 하나만 펼친다 (FAQ 와 같음)
@@ -106,7 +109,7 @@ export default function SignupTerms() {
             isOpen={openKey === key}
             onToggle={() => setOpenKey(openKey === key ? null : key)}
           >
-            <Text />
+            {texts[key] ? <div style={{ whiteSpace: "pre-wrap", overflowWrap: "anywhere" }}>{texts[key]}</div> : <Text />}
           </TermsBox>
         ))}
       </ul>

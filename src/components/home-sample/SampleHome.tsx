@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useSyncExternalStore, type FormEvent } from "react";
+import { useState, useSyncExternalStore, useTransition, type FormEvent } from "react";
+import { applyConsultation } from "@/app/consult/actions";
 import type { Swiper as SwiperType } from "swiper";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -19,6 +20,8 @@ import {
   type NoticeTabKey,
 } from "@/components/home/homeData";
 import PrivacyConsentPopup from "@/components/home/PrivacyConsentPopup";
+import type { SiteBanner, SitePopup } from "@/lib/site";
+import MainPopups from "./MainPopups";
 import SampleSideMenu from "./SampleSideMenu";
 import { NOTICE_ICONS } from "@/components/home/StatusBanners";
 import { tabs as whyTabs } from "@/components/home/WhyChoose";
@@ -53,23 +56,43 @@ const SAMPLE_HERO_ART: Record<HeroSlide["theme"], string> = {
   purple: `${IMG}/main/hero-art-03-sample.png`,
 };
 
+/** 코드 배너(관리자 배너가 없을 때) — 그림은 시안 본으로 */
+const CODE_SLIDES: HeroSlide[] = heroSlides.map((slide) => ({ ...slide, art: SAMPLE_HERO_ART[slide.theme] }));
+const THEMES: HeroSlide["theme"][] = ["blue", "green", "purple"];
+
+/**
+ * 관리자 「메인 배너 관리」(site_banners) → 지금 배너 모양 (사용자 결정 11/23: 지금 모양 유지).
+ * 제목 · 설명은 글자로, 설명 첫 줄은 윗줄 작은 문구, 올린 그림은 오른쪽 그림 자리, 바탕색은 순서대로 파랑 · 초록 · 보라.
+ */
+function bannerSlides(banners: SiteBanner[] | null): HeroSlide[] {
+  if (!banners) return CODE_SLIDES;
+  return banners.map((b, i) => ({
+    theme: THEMES[i % THEMES.length],
+    eyebrow: b.eyebrow ?? "",
+    title: b.title,
+    desc: b.desc,
+    art: b.image,
+    href: b.href ?? undefined,
+  }));
+}
+
 function HeroSlideBody({ slide }: { slide: HeroSlide }) {
   return (
     <div className={`hb-slide hb-slide--${slide.theme}`}>
       <div className="hb-inner">
         <div className="hb-text">
-          <p className="hb-eyebrow">{slide.eyebrow}</p>
+          {slide.eyebrow && <p className="hb-eyebrow">{slide.eyebrow}</p>}
           <h2 className="hb-title">{slide.title}</h2>
           <p className="hb-desc">{slide.desc}</p>
           {slide.href && <span className="hb-more">자세히보기</span>}
         </div>
-        <img src={SAMPLE_HERO_ART[slide.theme]} alt="" className="hb-art" />
+        <img src={slide.art} alt="" className="hb-art" />
       </div>
     </div>
   );
 }
 
-function SampleHero() {
+function SampleHero({ slides }: { slides: HeroSlide[] }) {
   const [swiper, setSwiper] = useState<SwiperType | null>(null);
   const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(true);
@@ -87,13 +110,14 @@ function SampleHero() {
       <Swiper
         className="sh-hero-swiper"
         modules={[Autoplay]}
-        loop
-        autoplay={{ delay: HERO_DELAY, disableOnInteraction: false }}
+        // 배너가 한 장이면(관리자 배너 1개) 넘김 · 반복 없이 그대로 — Swiper 반복은 2장 이상에서만 된다
+        loop={slides.length > 1}
+        autoplay={slides.length > 1 ? { delay: HERO_DELAY, disableOnInteraction: false } : false}
         onSwiper={setSwiper}
         onSlideChange={(s) => setIndex(s.realIndex)}
       >
-        {heroSlides.map((slide) => (
-          <SwiperSlide key={slide.title}>
+        {slides.map((slide, i) => (
+          <SwiperSlide key={`${i}-${slide.title}`}>
             {slide.href ? (
               <Link href={slide.href} className="sh-hero-link">
                 <HeroSlideBody slide={slide} />
@@ -104,15 +128,15 @@ function SampleHero() {
           </SwiperSlide>
         ))}
       </Swiper>
-      {/* 아래 캐러셀 표시: ‹ 01 / 03 › · 자동 넘김 막대 · 멈춤 */}
-      <div className={`sh-hero-ctrl${playing ? "" : " is-paused"}`}>
+      {/* 아래 캐러셀 표시: ‹ 01 / 03 › · 자동 넘김 막대 · 멈춤 (한 장이면 숨김) */}
+      <div className={`sh-hero-ctrl${playing ? "" : " is-paused"}`} hidden={slides.length < 2}>
         <button type="button" className="sh-hero-arrow" aria-label="이전 배너" onClick={() => swiper?.slidePrev()}>
           <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="M10 3 5 8l5 5" />
           </svg>
         </button>
         <span className="sh-hero-count" aria-live="polite">
-          <b>{String(index + 1).padStart(2, "0")}</b> / {String(heroSlides.length).padStart(2, "0")}
+          <b>{String(index + 1).padStart(2, "0")}</b> / {String(slides.length).padStart(2, "0")}
         </span>
         <button type="button" className="sh-hero-arrow" aria-label="다음 배너" onClick={() => swiper?.slideNext()}>
           <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -421,11 +445,24 @@ function Notices({ boardPosts }: { boardPosts: MainBoardPosts }) {
 /** PC(1280 이상)에서는 화면 아래에 떠 있는 바 — 닫고 여는 건 오른쪽 사이드 메뉴의 '간편상담' 버튼으로도 한다 */
 function Consult({ closed, onClose }: { closed: boolean; onClose: () => void }) {
   const [privacyOpen, setPrivacyOpen] = useState(false);
+  const [pending, startTransition] = useTransition();
 
+  // 관리자 「간편 상담 관리」(dbo.consultations)로 들어간다 — src/app/consult/actions.ts
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO: 상담 신청 API 연동 (new FormData(e.currentTarget))
-    alert("상담 신청 API 연동 전입니다.");
+    if (pending) return;
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    startTransition(async () => {
+      try {
+        const result = await applyConsultation(data);
+        alert(result.message);
+        if (result.ok) form.reset();
+        else if (result.field) (form.elements.namedItem(result.field) as HTMLElement | null)?.focus?.();
+      } catch {
+        alert("지금은 상담 신청을 받을 수 없어요. 잠시 뒤 다시 시도해 주세요.");
+      }
+    });
   };
 
   return (
@@ -450,8 +487,8 @@ function Consult({ closed, onClose }: { closed: boolean; onClose: () => void }) 
         </div>
       </div>
       <form id="sh-consult-form" className="sh-consult-form" onSubmit={handleSubmit}>
-        <input type="text" name="name" placeholder="이름" aria-label="이름" required />
-        <input type="tel" name="phone" placeholder="연락처" aria-label="연락처 (숫자만)" required />
+        <input type="text" name="name" placeholder="이름" aria-label="이름" required maxLength={50} />
+        <input type="tel" name="phone" placeholder="연락처" aria-label="연락처 (숫자만)" required maxLength={13} />
         <select name="interest" aria-label="관심분야" required defaultValue="">
           <option value="" disabled>
             관심분야
@@ -472,8 +509,13 @@ function Consult({ closed, onClose }: { closed: boolean; onClose: () => void }) 
             </option>
           ))}
         </select>
-        <button type="submit" className="sh-btn sh-btn--primary sh-consult-submit">
-          상담 신청하기
+        {/* 자동 등록 프로그램 거르기 — 사람에게는 안 보이고 탭 이동에서도 빠진다 */}
+        <div aria-hidden="true" style={{ position: "absolute", left: "-10000px", width: 1, height: 1, overflow: "hidden" }}>
+          <label htmlFor="sh-extra">이 칸은 비워 두세요</label>
+          <input type="text" id="sh-extra" name="sh-extra" tabIndex={-1} autoComplete="off" defaultValue="" />
+        </div>
+        <button type="submit" className="sh-btn sh-btn--primary sh-consult-submit" disabled={pending}>
+          {pending ? "신청 중…" : "상담 신청하기"}
         </button>
       </form>
       <button type="button" className="sh-consult-close" aria-label="간편상담 닫기" onClick={onClose}>
@@ -565,12 +607,22 @@ function WhyHanpyeong() {
 }
 
 /** 메인(/) — 메인 시안 B (첫 시안 배치 + 제목 탭 배너 · 모집 중 표시 · 페이지 안 무료 상담) */
-export default function SampleHome({ boardPosts }: { boardPosts: MainBoardPosts }) {
+export default function SampleHome({
+  boardPosts,
+  banners,
+  popups,
+}: {
+  boardPosts: MainBoardPosts;
+  /** 관리자 메인 배너 — null 이면 코드 배너 */
+  banners: SiteBanner[] | null;
+  /** 지금 띄울 팝업 (관리자 「팝업 관리」) */
+  popups: SitePopup[];
+}) {
   const [consultClosed, setConsultClosed] = useState(false);
   return (
     <main className="sh-main">
       <div className="sh-wrap">
-        <SampleHero />
+        <SampleHero slides={bannerSlides(banners)} />
         <TermStrip />
         {/* 실습 신청 · 결제는 자주 찾는 길이라 넘김 없이 개강 줄 바로 아래 */}
         <QuickActions />
@@ -582,6 +634,7 @@ export default function SampleHome({ boardPosts }: { boardPosts: MainBoardPosts 
       </div>
       <Essentials />
       <WhyHanpyeong />
+      <MainPopups popups={popups} />
       <SampleSideMenu consultOpen={!consultClosed} onToggleConsult={() => setConsultClosed((c) => !c)} />
     </main>
   );

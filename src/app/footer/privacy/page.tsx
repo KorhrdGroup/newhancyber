@@ -1,14 +1,21 @@
 import type { Metadata } from "next";
+import DbTermBody from "@/components/footer/DbTermBody";
+import { getSiteTerms } from "@/lib/site";
 import LegalDoc from "@/components/footer/LegalDoc";
 import PrivacyTabs from "@/components/footer/PrivacyTabs";
 import VideoPolicy from "@/components/footer/VideoPolicy";
 
 export const metadata: Metadata = { title: "개인정보처리방침" };
 
-export default function PrivacyPage() {
+/** 관리자 「약관 관리」의 개인정보 처리 방침이 있으면 그것을(영상정보 방침 탭은 그대로), 없으면 아래 코드 안 문서를 */
+export default async function PrivacyPage() {
+  const term = (await getSiteTerms())["개인정보 처리 방침"];
   return (
     <LegalDoc title="개인정보처리방침" desc="한평생원격교육원이 이용자의 개인정보를 어떻게 수집 · 이용 · 보관 · 파기하는지 안내합니다.">
       <PrivacyTabs video={<VideoPolicy />}>
+        {term ? (
+          <DbTermBody term={term} />
+        ) : (
         <div className="privacy-content">
           <div className="privacy-article">
             <h2 className="privacy-article-title">제1조. 서문</h2>
@@ -820,6 +827,7 @@ export default function PrivacyPage() {
             <li className="page-list-plain">• 본 개인정보처리방침은 2023년 9월 11일 부터 적용됩니다.</li>
           </ul>
         </div>
+        )}
       </PrivacyTabs>
     </LegalDoc>
   );

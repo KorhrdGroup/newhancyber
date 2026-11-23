@@ -60,6 +60,17 @@
   width: auto;
 }
 
+/* 로고가 없는 관련 사이트(관리자가 새로 넣은 기관)는 이름 글자로 — 로고 높이에 맞춘다 */
+.footer-auth-text {
+  display: flex;
+  align-items: center;
+  height: 29px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-secondary, #555);
+  white-space: nowrap;
+}
+
 /* 링크 띠 */
 .footer-menu {
   background-color: #f7f8fa;

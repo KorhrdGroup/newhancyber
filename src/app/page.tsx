@@ -6,6 +6,7 @@ import SampleHome, { type MainBoardPosts } from "@/components/home-sample/Sample
 import { kstDate } from "@/components/learning-support/DbBoard";
 import { isDbConfigured } from "@/lib/db/client";
 import { latestBoardPosts, type BoardListRow } from "@/lib/db/boardPosts";
+import { getLayoutSite, getMainSite } from "@/lib/site";
 /* 떠 있는 메뉴가 배너를 가리지 않게 하는 규칙이 기존 메인 스타일에 있어 같이 불러온다 */
 import "@/styles/home.css";
 
@@ -46,12 +47,13 @@ async function loadMainBoardPosts(): Promise<MainBoardPosts> {
 
 /** 메인 — 메인 시안 화면 (예전 /sample) */
 export default async function HomePage() {
-  const boardPosts = await loadMainBoardPosts();
+  // 메인 배너 · 팝업은 관리자 「홈페이지 관리」(DB 027) — 비거나 못 읽으면 코드 배너, 팝업 없음
+  const [boardPosts, { banners, popups }, { info }] = await Promise.all([loadMainBoardPosts(), getMainSite(), getLayoutSite()]);
   return (
     <>
-      <SampleHome boardPosts={boardPosts} />
+      <SampleHome boardPosts={boardPosts} banners={banners} popups={popups} />
       {/* 모바일 맨 아래 SNS · 사업자 정보 (기존 메인과 같은 부품) */}
-      <MobileSocialFooter />
+      <MobileSocialFooter info={info} />
       <FloatingMenu />
     </>
   );
