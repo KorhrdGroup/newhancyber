@@ -61,8 +61,6 @@
 /* 평생교육바우처 맨 위 상자: 연한 회색, 파란색은 '35만원'에만 */
 .ds2 .ex-hero { border-radius: var(--radius-16); background: var(--color-bg-surface); }
 .ds2 .ex-hero-label { color: var(--color-text-secondary); }
-/* 이용 방법 단계: 파란 'STEP n' 대신 검정 번호 동그라미 (신청 결과 확인 단계와 같음) */
-.ds2 .ex-step::before { content: counter(ex-step); display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; margin-bottom: var(--space-12); border-radius: var(--radius-full); background: var(--color-text-strong); font-size: 12px; font-weight: 700; color: var(--color-text-inverse); }
 .ds2 .cb-consult { padding: var(--space-24) var(--space-28); }
 .ds2 .cb-consult-text { font-weight: 700; letter-spacing: -0.01em; }
 

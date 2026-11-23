@@ -27,6 +27,7 @@ export default function CourseVoucherPage() {
 
           <section className="ex-section">
             <div className="ex-hero">
+              <img className="ex-hero-icon" src="/resources/images/credit-bank/cb-icon-hands.png" alt="" aria-hidden />
               <p className="ex-hero-label">평생교육이용권</p>
               <p className="ex-hero-title">
                 1인당 연간 <em>35만원</em> 지원
@@ -64,18 +65,32 @@ export default function CourseVoucherPage() {
           <section className="ex-section">
             <h2 className="ex-section-title">쓸 수 있는 곳</h2>
             <ul className="ex-uses">
-              <li>평생교육이용권 사용기관에 등록된 강좌의 수강료</li>
-              <li>해당 강좌의 교재비</li>
+              <li>
+                <img src="/resources/images/credit-bank/cb-icon-school.png" alt="" aria-hidden />
+                평생교육이용권 사용기관에 등록된 강좌의 수강료
+              </li>
+              <li>
+                <img src="/resources/images/credit-bank/cb-icon-books.png" alt="" aria-hidden />
+                해당 강좌의 교재비
+              </li>
             </ul>
           </section>
 
           <section className="ex-section">
             <h2 className="ex-section-title">이용 방법</h2>
-            <ol className="ex-steps">
-              {voucherSteps.map((step) => (
-                <li key={step.title} className="ex-step">
-                  <p className="ex-step-title">{step.title}</p>
-                  <p className="ex-step-desc">{step.desc}</p>
+            {/* 무료학습설계 진행 순서처럼 연한 판 하나에 그림 + 점선 칸막이 + 화살표 */}
+            <ol className="ex-vflow">
+              {voucherSteps.map((step, i) => (
+                <li key={step.title}>
+                  {i > 0 && <span className="ex-vflow-arrow" aria-hidden />}
+                  <img className="ex-vflow-icon" src={step.icon} alt="" aria-hidden />
+                  <div>
+                    <p className="ex-vflow-title">
+                      <span className="ex-vflow-num">{i + 1}</span>
+                      {step.title}
+                    </p>
+                    <p className="ex-vflow-desc">{step.desc}</p>
+                  </div>
                 </li>
               ))}
             </ol>
