@@ -127,7 +127,7 @@
 .ex-vflow-icon { width: 96px; height: 96px; object-fit: contain; }
 .ex-vflow-title { display: inline-flex; align-items: center; gap: var(--space-6); margin-top: var(--space-12); font-size: 16px; font-weight: 600; color: var(--color-text-strong); }
 /* 숫자는 글꼴상 1px 위에 떠서 padding-top 으로 원 한가운데로, 원은 제목 글자 높이에 맞춰 1px 위로 */
-.ex-vflow-num { position: relative; top: -1px; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; width: 20px; height: 20px; padding-top: 2px; border-radius: var(--radius-full); background: var(--color-text-strong); font-size: 11px; font-weight: 700; color: var(--color-text-inverse); }
+.ex-vflow-num { position: relative; top: -1px; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; width: 20px; height: 20px; padding-top: 2px; border-radius: var(--radius-full); background: var(--color-icon-default); font-size: 11px; font-weight: 700; color: var(--color-text-inverse); }
 /* 숫자 1은 글자 모양이 왼쪽으로 쏠려 보여 살짝 오른쪽으로 */
 .ex-vflow li:first-child .ex-vflow-num { padding-left: 1.5px; }
 /* 설명 글은 칸을 꽉 채우지 않게 폭을 줄이고(점선과 여유), 네 단계 모두 고르게 두 줄로 */
