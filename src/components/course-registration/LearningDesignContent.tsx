@@ -2,10 +2,16 @@
 
 import { useState, useTransition, type FormEvent } from "react";
 import { applyStudyPlan } from "@/app/course-registration/learning-design/actions";
-import { CbIconFlow } from "@/components/credit-bank/CbFlow";
 import "@/styles/classroom.css";
 import "@/styles/learning-extra.css";
 import "@/styles/credit-bank.css";
+
+/** 진행 순서 — 바우처 「이용 방법」과 같은 판 (그림 · 한 줄 설명, 번호 없음) */
+const designSteps = [
+  { title: "무료학습설계 신청", desc: "아래 신청서를 작성해 보내요.", icon: "/resources/images/credit-bank/cb-icon-scroll-pen.png" },
+  { title: "검토", desc: "담당자가 신청 내용을 살펴봐요.", icon: "/resources/images/credit-bank/cb-icon-magnifier.png" },
+  { title: "전문가 연결", desc: "학습설계 전문가가 연락드려요.", icon: "/resources/images/credit-bank/cb-icon-chat-person.png" },
+];
 
 /** 무료학습설계 신청 (원본 learning-design.html) — 진행 순서 그림 + 디자인 시스템 신청서, 관리자 「학습설계 관리」로 들어간다 */
 export default function LearningDesignContent() {
@@ -35,16 +41,24 @@ export default function LearningDesignContent() {
   return (
     <main className="wrapper">
       <div className="ex-page">
-        <section className="cr-step-panel" aria-label="무료학습설계 진행 순서">
-          <CbIconFlow
-            size="lg"
-            items={[
-              { icon: "scroll-pen", label: "무료학습설계 신청" },
-              { icon: "magnifier", label: "검토" },
-              { icon: "chat-person", label: "전문가 연결" },
-            ]}
-            joins={["arrow", "arrow"]}
-          />
+        <section className="cr-step-panel" aria-labelledby="design-steps-title">
+          <h2 className="ex-section-title" id="design-steps-title">
+            진행 순서
+          </h2>
+          <div className="ex-vflow-box">
+            <ol className="ex-vflow ex-vflow--3">
+              {designSteps.map((step, i) => (
+                <li key={step.title}>
+                  {i > 0 && <span className="ex-vflow-arrow" aria-hidden />}
+                  <img className="ex-vflow-icon" src={step.icon} alt="" aria-hidden />
+                  <div>
+                    <p className="ex-vflow-title">{step.title}</p>
+                    <p className="ex-vflow-desc">{step.desc}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
         </section>
 
         <form className="ex-box ex-design-form" id="consultation-form" onSubmit={handleSubmit}>

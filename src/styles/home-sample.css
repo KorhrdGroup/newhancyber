@@ -185,6 +185,8 @@
 }
 .sh-action-card:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(26, 60, 160, 0.22); }
 .sh-action-card--practice { background: linear-gradient(135deg, #2f7bff, #1a5cff); }
+/* 손·하트가 파란 바탕에 묻히지 않게 아주 살짝 밝게 */
+.sh-action-card--practice .sh-action-art { filter: brightness(1.1); }
 .sh-action-card--pay { background: linear-gradient(135deg, #1e3a9e, #0f2470); }
 .sh-action-text { display: flex; flex-direction: column; gap: 6px; }
 .sh-action-label { font-size: 15px; color: rgba(255, 255, 255, 0.8); }
@@ -333,7 +335,9 @@
 .sh-promo-title { font-size: 18px; font-weight: 800; line-height: 1.35; word-break: keep-all; }
 .sh-promo-art { position: absolute; right: 14px; top: 50%; width: 80px; height: 80px; object-fit: contain; transform: translateY(-50%); }
 /* 악수 그림은 위아래 여백이 큰 정사각 파일 → 넓은 칸에 여백만 잘라 책 그림과 크기를 맞춘다 */
-.sh-promo-art--wide { width: 116px; object-fit: cover; }
+.sh-promo-art--wide { width: 104px; height: 72px; object-fit: cover; }
+/* 책 그림은 칸 안에서 차지하는 면적이 작아 악수보다 작아 보임 → 한 단계 키워 눈으로 보이는 크기를 맞춘다 */
+.sh-promo-art:not(.sh-promo-art--wide) { right: 18px; width: 88px; height: 88px; }
 
 /* ---------- 7. 1:1 무료 학습상담 — 한 줄 띠 (왼쪽 제목 · 오른쪽 입력칸 가로 한 줄 + 동의 줄) ---------- */
 .sh-consult {
@@ -558,7 +562,7 @@
   text-align: center;
 }
 .sh-whyc-panel .sh-why-items span { align-items: center; gap: 4px; }
-.sh-whyc-panel .sh-why-items img { width: 56px; height: 56px; }
+.sh-whyc-panel .sh-why-items img { width: 80px; height: 80px; }
 /* 2개(밀착 관리): 칸이 넓어 비어 보이던 것 → 큰 아이콘 왼쪽 · 글 오른쪽 가로 카드 */
 .sh-whyc-panel--pair .sh-why-items li { flex-direction: row; justify-content: flex-start; gap: 16px; padding: 22px; text-align: left; }
 .sh-whyc-panel--pair .sh-why-items span { align-items: flex-start; gap: 6px; }
@@ -675,7 +679,8 @@ body:has(.sh-main) .floating-right { transition: opacity 0.2s, visibility 0.2s; 
   .sh-promo-card { height: 160px; justify-content: flex-start; padding: 18px 16px; }
   .sh-promo-title { font-size: 16px; }
   .sh-promo-art { top: auto; bottom: 12px; width: 64px; height: 64px; transform: none; }
-  .sh-promo-art--wide { width: 92px; }
+  .sh-promo-art--wide { width: 84px; height: 58px; }
+  .sh-promo-art:not(.sh-promo-art--wide) { right: 16px; width: 70px; height: 70px; }
 
   .sh-consult { padding: 20px 16px; border-radius: var(--radius-16); }
   /* 휴대폰: 폭이 아주 좁으면 링크는 제목 밑 줄로 */

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import EventLanding from "@/components/event/EventLanding";
 import EventMain from "@/components/event/EventMain";
 
 export const metadata: Metadata = { title: "친구 추천 이벤트" };
@@ -11,23 +12,13 @@ export default function EventPage() {
         <div className="mobile-event-title-banner">
           <span className="mobile-event-title-text">친구추천 이벤트</span>
         </div>
-        <img
-          src="/resources/images/main/friends-event-mobile.webp"
-          alt="친구 추천 이벤트"
-          className="mobile-event-banner-img"
-        />
+        <EventLanding />
       </div>
       <EventMain>
         <div className="container event-container">
-          {/* 데스크톱 이미지 — 모바일은 위의 mobile-event-banner */}
+          {/* 데스크톱 — 모바일은 위의 mobile-event-banner. 예전 통이미지를 코드로 (Figma 1791:5834) */}
           <div className="event-page desktop-only">
-            <div className="event-image-container">
-              <img
-                src="/resources/images/main/friends-event.webp"
-                alt="친구 추천 이벤트"
-                className="event-page-image"
-              />
-            </div>
+            <EventLanding />
           </div>
         </div>
       </EventMain>

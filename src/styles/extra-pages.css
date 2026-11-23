@@ -38,6 +38,10 @@
 .ex-order-item { display: flex; align-items: center; gap: var(--space-12); padding: var(--space-12) 0; border-bottom: 1px solid var(--color-border-subtle); }
 .ex-order-item:last-child { border-bottom: 0; }
 .ex-order-name { flex: 1; min-width: 0; font-size: 16px; font-weight: 500; color: var(--color-text-strong); }
+/* 결제하기: 제목 오른쪽 과목 변경 버튼, 과목 이름 위 과정 이름 */
+.ex-order-head { display: flex; justify-content: space-between; align-items: center; gap: var(--space-12); margin-bottom: var(--space-12); }
+.ex-order-head .ex-section-title { margin-bottom: 0; }
+.ex-order-course { display: block; margin-bottom: 2px; font-size: 13px; font-weight: 500; color: var(--color-text-secondary); }
 .ex-order-badges { display: inline-flex; flex-wrap: wrap; gap: var(--space-4); margin-left: var(--space-8); vertical-align: 2px; }
 .ds2 .ex-order-badges .ds-badge--neutral { background: var(--color-bg-default); } /* 회색 판 위라 흰 배지 (나의 강의실 과목 카드와 같음) */
 .ex-order-price { text-align: right; font-size: 16px; font-weight: 600; color: var(--color-text-strong); white-space: nowrap; }
@@ -86,6 +90,62 @@
 }
 
 /* ---------- 평생교육바우처 ---------- */
+/* 위에 파란 하위메뉴 줄이 겹쳐 뜨므로 장바구니처럼 줄 아래 여백 (휴대폰은 아래 .ex-page 여백으로 되돌아감) */
+.ex-voucher { padding-top: 60px; }
+/* 지원 대상과 금액: 유형별 카드, 안은 흰 이름표 라벨 + 진한 값 */
+/* 지원 대상 글이 세 카드 모두 두 줄에 들어가도록 카드 안쪽 여백·이름표 간격을 조금 줄임 */
+.ex-vtypes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-12); margin: 0; padding: 0; list-style: none; }
+.ex-vtype { padding: var(--space-20); border-radius: var(--radius-16); background: var(--color-bg-surface); }
+.ex-vtype-name { font-size: 17px; font-weight: 600; line-height: 1.4; color: var(--color-text-strong); }
+.ex-vtype-info { display: flex; flex-direction: column; gap: var(--space-10); margin: var(--space-12) 0 0; }
+.ex-vtype-info > div { display: flex; align-items: flex-start; gap: var(--space-8); }
+.ex-vtype-info dt { flex-shrink: 0; padding: 2px var(--space-8); border-radius: var(--radius-6); background: var(--color-bg-default); font-size: 12px; font-weight: 500; line-height: 1.6; color: var(--color-text-secondary); text-align: center; }
+.ex-vtype-info dd { margin: 0; font-size: 14px; font-weight: 400; line-height: 1.6; color: var(--color-text-default); word-break: keep-all; }
+.ex-vtype-info .is-amount { font-weight: 600; color: var(--color-text-strong); }
+/* 쓸 수 있는 곳: 회색 카드 2칸 */
+.ex-uses { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-12) var(--space-24); margin: 0; padding: 0; list-style: none; }
+.ex-uses li { display: flex; align-items: center; gap: var(--space-16); padding: var(--space-16) var(--space-24); border-radius: var(--radius-16); background: var(--color-bg-surface); font-size: 15px; font-weight: 400; line-height: 1.5; color: var(--color-text-default); word-break: keep-all; }
+.ex-uses img { flex-shrink: 0; width: 48px; height: 48px; object-fit: contain; }
+/* 화면 전체 리듬: 묶음 사이 간격 · 제목 아래 간격을 한 가지로 */
+.ex-voucher .ex-section { margin-top: var(--space-48); }
+.ex-voucher .ex-page-head + .ex-section { margin-top: var(--space-32); }
+.ex-voucher .ex-section-title { margin-bottom: var(--space-16); }
+/* 맨 위 상자: 글은 왼쪽 맞춤, 두 손 그림은 오른쪽에 크게 (배너처럼 양쪽 균형) */
+.ex-voucher .ex-hero { display: flex; flex-direction: row-reverse; align-items: center; justify-content: space-between; gap: var(--space-28); padding: var(--space-28) var(--space-56) var(--space-28) var(--space-40); text-align: left; }
+.ex-hero-icon { flex-shrink: 0; width: 148px; height: 148px; margin: calc(-1 * var(--space-12)) 0; object-fit: contain; }
+.ex-voucher .ex-hero-title { margin-top: var(--space-4); }
+/* 글자 굵기 단계: 800 화면 제목 · 700 상자 큰 문구와 묶음 제목 · 600 카드 이름 · 단계 이름 · 금액 · 500 라벨 · 번호 · 400 설명 */
+.ex-voucher .ex-hero-label { font-weight: 500; }
+/* 이용 방법 단계 사이 화살표 (휴대폰은 아래 방향) */
+.ex-vflow-box { border-radius: var(--radius-16); background: var(--color-bg-surface); }
+.ex-vflow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; padding: var(--space-28) 0; list-style: none; }
+/* 3단계 (무료학습설계 진행 순서) */
+.ex-vflow--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.ex-vflow li { position: relative; display: flex; flex-direction: column; align-items: center; padding: 0 var(--space-20); text-align: center; word-break: keep-all; }
+.ex-vflow li + li { border-left: 1px dashed var(--color-border-default); }
+/* 화살표는 점선 칸막이의 세로 가운데 */
+.ex-vflow-arrow { position: absolute; top: calc(50% - 11px); left: -11px; width: 22px; height: 22px; border-radius: var(--radius-full); background: var(--color-border-brand-subtle); }
+.ex-vflow-arrow::after { content: ""; position: absolute; top: 50%; left: 50%; width: 6px; height: 6px; border-top: 2px solid #fff; border-right: 2px solid #fff; transform: translate(-65%, -50%) rotate(45deg); }
+.ex-vflow-icon { width: 96px; height: 96px; object-fit: contain; }
+.ex-vflow-title { display: inline-flex; align-items: center; gap: var(--space-6); margin-top: var(--space-12); font-size: 16px; font-weight: 600; color: var(--color-text-strong); }
+/* 숫자는 글꼴상 1px 위에 떠서 padding-top 으로 원 한가운데로, 원은 제목 글자 높이에 맞춰 1px 위로 */
+.ex-vflow-num { position: relative; top: -1px; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; width: 20px; height: 20px; padding-top: 2px; border-radius: var(--radius-full); background: var(--color-icon-default); font-size: 11px; font-weight: 700; color: var(--color-text-inverse); }
+/* 숫자 1은 글자 모양이 왼쪽으로 쏠려 보여 살짝 오른쪽으로 */
+.ex-vflow li:first-child .ex-vflow-num { padding-left: 1.5px; }
+/* 설명 글은 칸을 꽉 채우지 않게 폭을 줄이고(점선과 여유), 네 단계 모두 고르게 두 줄로 */
+.ex-vflow-desc { max-width: 200px; margin-top: var(--space-8); font-size: 14px; line-height: 1.5; color: var(--color-text-secondary); text-wrap: balance; }
+/* 안내 문구 + 버튼 상자: 왼쪽 안내, 오른쪽 버튼 */
+.ex-cta { display: flex; align-items: center; justify-content: space-between; gap: var(--space-16) var(--space-24); margin: 0 var(--space-24); padding: var(--space-20) 0 var(--space-24); border-top: 1px solid var(--color-border-default); }
+.ex-cta .ex-note { margin: 0; font-size: 14px; word-break: keep-all; }
+.ex-cta .ex-actions { flex-shrink: 0; margin: 0; }
+/* 문의: 연한 회색 안내 띠 한 줄 (왼쪽 물음, 오른쪽에 전화·이메일을 세로선으로 나란히) */
+.ex-help { display: flex; align-items: center; justify-content: space-between; gap: var(--space-24); padding: var(--space-24) var(--space-32); border-radius: var(--radius-16); background: var(--color-bg-surface); }
+.ex-help-title { margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; color: var(--color-text-strong); }
+.ex-voucher .ex-contacts { display: flex; gap: 0; margin: 0; }
+.ds2 .ex-voucher .ex-contact { display: flex; align-items: baseline; gap: var(--space-8); padding: 0 var(--space-24); border-radius: 0; background: none; }
+.ds2 .ex-voucher .ex-contact:last-child { padding-right: 0; }
+.ds2 .ex-voucher .ex-contact + .ex-contact { border-left: 1px solid var(--color-border-default); }
+.ds2 .ex-voucher .ex-contact dd { margin: 0; font-size: 15px; font-weight: 600; }
 .ex-hero { padding: var(--space-32) var(--space-24); border-radius: var(--radius-12); background: var(--color-bg-brand-subtle); text-align: center; }
 .ex-hero-label { font-size: 14px; font-weight: 600; color: var(--color-text-brand); }
 .ex-hero-title { margin-top: var(--space-8); font-size: 24px; font-weight: 700; line-height: 1.4; color: var(--color-text-strong); }
@@ -114,10 +174,23 @@
 /* ---------- 무료 학습설계 신청 결과 ---------- */
 .ex-lookup { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; gap: var(--space-12); align-items: end; }
 .ex-lookup .ds-label { margin-bottom: var(--space-8); }
-.ex-result-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-8); margin-bottom: var(--space-16); }
-.ex-result-head h3 { font-size: 18px; font-weight: 600; color: var(--color-text-strong); }
-.ex-memo { margin-top: var(--space-16); padding: var(--space-16); border-radius: var(--radius-6); background: var(--color-bg-brand-subtle); font-size: 14px; line-height: 1.6; color: var(--color-text-default); }
-.ex-memo strong { display: block; margin-bottom: var(--space-4); font-size: 13px; color: var(--color-text-brand); }
+/* 상담 진행 단계: 접수 → 상담 중 → 상담 완료, 지금 단계는 진한 테두리 (결제 수단 고른 칸과 같음) */
+.ex-result-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-8); margin: var(--space-4) 0 var(--space-20); padding: 0; list-style: none; }
+.ex-result-steps li { display: flex; align-items: center; gap: var(--space-8); padding: var(--space-12) var(--space-16); border-radius: var(--radius-12); background: var(--color-bg-default); font-size: 14px; font-weight: 500; color: var(--color-text-secondary); }
+.ex-result-step-num { display: inline-flex; flex-shrink: 0; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: var(--radius-full); background: var(--color-bg-surface); font-size: 12px; font-weight: 700; color: var(--color-text-secondary); }
+.ex-result-steps .is-done { color: var(--color-text-strong); }
+.ex-result-steps .is-current { box-shadow: inset 0 0 0 2px var(--color-text-strong); font-weight: 700; color: var(--color-text-strong); }
+.ex-result-steps .is-done .ex-result-step-num,
+.ex-result-steps .is-current .ex-result-step-num { background: var(--color-text-strong); color: var(--color-text-inverse); }
+/* 신청 결과 정보: 흰 이름표 라벨 + 진한 값 (나의 강의실 과목 정보와 같음) */
+.ex-result-info { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-10) var(--space-24); margin: 0; }
+.ex-result-info > div { display: flex; align-items: center; gap: var(--space-10); }
+.ex-result-info dt { flex-shrink: 0; min-width: 72px; padding: 2px var(--space-8); border-radius: var(--radius-6); background: var(--color-bg-default); font-size: 12px; font-weight: 600; line-height: 1.6; color: var(--color-text-secondary); text-align: center; }
+.ex-result-info dd { margin: 0; font-size: 15px; font-weight: 500; color: var(--color-text-strong); }
+.ex-memo { margin-top: var(--space-20); padding: var(--space-16) var(--space-20); border-radius: var(--radius-12); background: var(--color-bg-default); font-size: 14px; line-height: 1.6; color: var(--color-text-default); }
+.ex-memo strong { display: block; margin-bottom: var(--space-4); font-size: 14px; font-weight: 700; color: var(--color-text-strong); }
+/* 조회 전: 연한 상자 안에 안내 + 신청 버튼 */
+.ex-lookup-empty { display: flex; flex-direction: column; align-items: center; gap: var(--space-16); padding: var(--space-40) var(--space-24); border-radius: var(--radius-16); background: var(--color-bg-surface); font-size: 14px; line-height: 1.6; color: var(--color-text-secondary); text-align: center; word-break: keep-all; }
 
 /* ---------- 결제 현황 탭 ---------- */
 .ex-summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-12); margin-bottom: var(--space-24); }
@@ -130,7 +203,8 @@
   .ex-cart .ex-order-name { font-size: 15px; }
   .ex-cart .ex-order-price { font-size: 15px; }
   .ex-cart .ex-cart-links { grid-column: 2 / -1; grid-row: 2; margin-left: calc(-1 * var(--space-12)); }
-  .ex-cart .ex-pay-side .ex-pay-btn { display: none; }
+  .ex-cart .ex-pay-side .ex-pay-btn,
+  .ex-pay--float .ex-pay-side .ex-pay-btn { display: none; }
   .ex-cart-float { position: fixed; right: 0; bottom: 0; left: 0; z-index: 900; display: block; padding: var(--space-12) var(--space-16) calc(var(--space-12) + env(safe-area-inset-bottom)); border-top: 1px solid var(--color-border-default); background: var(--color-bg-default); box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.08); }
   .ex-cart-float[hidden] { display: none; }
   .ex-cart-float .ds-btn { width: 100%; }
@@ -156,6 +230,28 @@
 
   .ex-hero { padding: var(--space-24) var(--space-16); }
   .ex-hero-title { font-size: 20px; }
+  .ex-vtypes,
+  .ex-uses { grid-template-columns: 1fr; }
+  .ex-vflow { grid-template-columns: 1fr; padding: var(--space-8) var(--space-16); }
+  .ex-vflow li { flex-direction: row; gap: var(--space-16); padding: var(--space-16) 0; text-align: left; }
+  .ex-vflow li + li { border-top: 1px dashed var(--color-border-default); border-left: 0; }
+  .ex-vflow-arrow { top: -11px; left: 50%; transform: translateX(-50%) rotate(90deg); }
+  .ex-vflow-icon { flex-shrink: 0; width: 64px; height: 64px; }
+  .ex-vflow-title { margin-top: 0; }
+  .ex-vflow-desc { max-width: none; text-wrap: pretty; }
+  .ex-hero-icon { width: 72px; height: 72px; margin: 0; }
+  .ex-help { flex-direction: column; align-items: stretch; gap: var(--space-8); padding: var(--space-16) var(--space-20); }
+  .ex-voucher .ex-contacts { flex-direction: column; }
+  .ds2 .ex-voucher .ex-contact { justify-content: space-between; padding: var(--space-12) 0; }
+  .ds2 .ex-voucher .ex-contact + .ex-contact { border-top: 1px solid var(--color-border-default); border-left: 0; }
+  .ex-cta { flex-direction: column; align-items: stretch; margin: 0 var(--space-16); padding: var(--space-16) 0 var(--space-20); }
+  .ex-voucher .ex-section { margin-top: var(--space-40); }
+  .ex-voucher .ex-page-head + .ex-section { margin-top: 0; }
+  .ex-voucher .ex-hero { gap: var(--space-12); padding: var(--space-20); }
+  .ex-uses li { padding: var(--space-12) var(--space-16); }
+  .ex-cta .ex-actions { flex-direction: column; }
+  .ex-cta .ex-actions .ds-btn { width: 100%; }
+  .ex-vtype { padding: var(--space-16) var(--space-20); }
   .ex-steps,
   .ex-contacts { grid-template-columns: 1fr; }
 
@@ -165,6 +261,9 @@
 
   .ex-lookup { grid-template-columns: 1fr; }
   .ex-lookup .ds-btn { width: 100%; }
+  .ex-result-steps li { flex-direction: column; gap: var(--space-4); padding: var(--space-10) var(--space-4); font-size: 13px; text-align: center; }
+  .ex-result-info { grid-template-columns: 1fr; }
+  .ex-lookup-empty { padding: var(--space-32) var(--space-16); }
 
   .ex-summary { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-8); }
   .ex-summary .ds-stat { padding: var(--space-12); }

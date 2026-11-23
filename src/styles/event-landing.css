@@ -1,0 +1,189 @@
+/*
+ * 친구 추천 이벤트 상세 (EventLanding)
+ * Figma 1791:5834 (PC 1080 폭). 휴대폰은 예전 모바일 통이미지(480 폭) 배치를 따른다.
+ * 크기는 디자인 폭 기준 단위 --u 로 적는다 (PC 폭/1080, 휴대폰 폭/480) — 통이미지처럼 화면 폭에 맞춰 비율 그대로 줄어든다.
+ */
+
+@font-face { font-family: "Paperlogy"; font-weight: 500; font-display: swap; src: url("/resources/fonts/landing/Paperlogy-5Medium.woff2") format("woff2"); }
+@font-face { font-family: "Paperlogy"; font-weight: 600; font-display: swap; src: url("/resources/fonts/landing/Paperlogy-6SemiBold.woff2") format("woff2"); }
+@font-face { font-family: "Paperlogy"; font-weight: 700; font-display: swap; src: url("/resources/fonts/landing/Paperlogy-7Bold.woff2") format("woff2"); }
+@font-face { font-family: "Paperlogy"; font-weight: 800; font-display: swap; src: url("/resources/fonts/landing/Paperlogy-8ExtraBold.woff2") format("woff2"); }
+@font-face { font-family: "Paperlogy"; font-weight: 900; font-display: swap; src: url("/resources/fonts/landing/Paperlogy-9Black.woff2") format("woff2"); }
+
+.evl { width: 100%; max-width: 1080px; margin: 0 auto; container-type: inline-size; overflow-x: clip; }
+.evl-inner { --u: calc(100cqw / 1080); font-family: "Pretendard", sans-serif; color: #181818; word-break: keep-all; }
+.evl :where(section) { position: relative; isolation: isolate; overflow: hidden; display: flex; flex-direction: column; align-items: center; box-sizing: border-box; text-align: center; }
+.evl :where(img) { display: block; max-width: none; }
+.evl :where(h1, h2, p, ul, ol) { margin: 0; padding: 0; }
+.evl :where(ul) { list-style: none; }
+.evl :where(em) { font-style: normal; }
+.evl-mo-br { display: none; }
+
+/* 공통: Reason 이름표 · 제목 · 카드 제목 · 마무리 문장 */
+.evl-reason { display: inline-flex; align-items: center; justify-content: center; height: calc(60 * var(--u)); padding: 0 calc(24 * var(--u)); border-radius: calc(30 * var(--u)); background: #ff9011; font-family: "Paperlogy"; font-weight: 900; font-size: calc(30 * var(--u)); line-height: 1; color: #fff; }
+.evl-reason-head { display: flex; flex-direction: column; align-items: center; gap: calc(14 * var(--u)); line-height: 1; }
+.evl-reason-sub { font-size: calc(20 * var(--u)); font-weight: 500; color: #181818; }
+.evl-reason-title { font-family: "Paperlogy"; font-weight: 700; font-size: calc(52 * var(--u)); color: #010101; }
+.evl-card-title { font-size: calc(20 * var(--u)); font-weight: 700; color: #181818; }
+.evl-card-title em { color: #ff4d00; }
+.evl-closing { position: relative; font-size: calc(24 * var(--u)); font-weight: 500; line-height: 1.4; color: #333; }
+.evl-closing em { font-weight: 700; color: #ff4d00; }
+
+/* 친구 추천 */
+.evl-hero { gap: calc(100 * var(--u)); padding: calc(100 * var(--u)) 0; background: linear-gradient(to bottom, #ffe778 68%, #fff6cc); }
+.evl-hero-bg { position: absolute; z-index: -1; top: 0; left: 50%; width: calc(1080 * var(--u)); transform: translateX(-50%); -webkit-mask-image: linear-gradient(to bottom, #000 82%, transparent); mask-image: linear-gradient(to bottom, #000 82%, transparent); }
+.evl-hero-bg img { display: block; width: 100%; height: auto; }
+.evl-hero-title { display: flex; flex-direction: column; align-items: center; font-family: "Paperlogy"; font-weight: 500; line-height: normal; color: #010101; filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.75)); }
+.evl-hero-line1 { font-size: calc(50 * var(--u)); }
+.evl-hero-line1 b { font-weight: 700; }
+.evl-hero-line2 { font-weight: 900; font-size: calc(100 * var(--u)); }
+.evl-hero-line2 em { color: #5a11ed; }
+
+.evl-coupons { display: flex; justify-content: center; gap: calc(10 * var(--u)); width: 100%; }
+.evl-coupon { position: relative; display: flex; align-items: center; justify-content: space-between; width: calc(400 * var(--u)); padding: calc(3 * var(--u)) calc(30 * var(--u)) 0; box-sizing: border-box; border-radius: calc(8 * var(--u)); background: #fff; filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.2)); text-align: left; }
+.evl-coupon img { width: calc(172 * var(--u)); height: calc(172 * var(--u)); }
+.evl-coupon-text { font-size: calc(24 * var(--u)); font-weight: 800; line-height: 1.4; color: #5a11ed; }
+.evl-coupon-label { position: absolute; top: calc(-20 * var(--u)); left: 50%; padding: calc(10 * var(--u)) calc(12 * var(--u)); border-radius: calc(50 * var(--u)); background: #7e3ffb; font-family: "Paperlogy"; font-weight: 600; font-size: calc(20 * var(--u)); line-height: 1; color: #fff; white-space: nowrap; transform: translateX(-50%); }
+.evl-coupon--friend .evl-coupon-text { color: #ff7b00; }
+.evl-coupon--friend .evl-coupon-label { background: #ff9011; }
+
+.evl-notes { display: flex; flex-direction: column; align-items: center; gap: calc(18 * var(--u)); }
+.evl-notes-label { padding: calc(10 * var(--u)) calc(12 * var(--u)); border-radius: calc(50 * var(--u)); background: #ff4d00; font-family: "Paperlogy"; font-weight: 600; font-size: calc(24 * var(--u)); line-height: 1; color: #fff; }
+.evl-notes-list { width: calc(830 * var(--u)); padding: calc(30 * var(--u)) calc(60 * var(--u)) calc(30 * var(--u)) calc(84 * var(--u)); box-sizing: border-box; border-radius: calc(8 * var(--u)); background: #fff6cc; list-style: decimal; font-size: calc(16 * var(--u)); font-weight: 500; line-height: 1.7; color: #181818; text-align: left; }
+.evl-notes-list b { font-weight: 700; }
+
+/* 띠 제목 */
+.evl-band { padding: calc(50 * var(--u)) 0; background: linear-gradient(to bottom, #d175ff, #6211ed); }
+.evl-band p { display: flex; align-items: center; font-family: "Paperlogy"; font-weight: 500; font-size: calc(50 * var(--u)); line-height: 1; color: #fff; white-space: nowrap; }
+.evl-band b { margin: 0 calc(5 * var(--u)) 0 calc(17 * var(--u)); font-weight: 800; font-size: calc(62 * var(--u)); color: #ffef84; text-shadow: 0 0 8px rgba(255, 255, 255, 0.25); }
+
+/* Reason 1 — 위는 연한 노랑, 아래로 주황 물결 (물결 끝이 웃는 학습자 그림에 걸친다) */
+.evl-r1 { gap: calc(40 * var(--u)); padding: calc(100 * var(--u)) calc(124 * var(--u)) calc(50 * var(--u)); background: #fff7db; }
+.evl-r1-wave { position: absolute; z-index: -1; top: 0; left: 0; width: 100%; height: calc(100% - 216 * var(--u)); }
+.evl-agents { display: flex; justify-content: center; gap: calc(16 * var(--u)); width: 100%; }
+.evl-agent { display: flex; flex-direction: column; align-items: center; gap: calc(10 * var(--u)); width: calc(270 * var(--u)); padding-top: calc(20 * var(--u)); box-sizing: border-box; overflow: hidden; border: calc(6 * var(--u)) solid #fff; border-radius: calc(8 * var(--u)); background: #fff7db; box-shadow: 0 0 8px rgba(0, 0, 0, 0.2); }
+.evl-agent-desc { font-size: calc(14 * var(--u)); font-weight: 500; line-height: normal; color: #333; white-space: nowrap; }
+.evl-agent img { width: calc(170 * var(--u)); height: calc(170 * var(--u)); }
+.evl-learner { width: calc(267 * var(--u)); height: calc(267 * var(--u)); filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.65)); }
+.evl-r1 .evl-closing { line-height: 1; }
+
+/* Reason 2 — 카드 두 장을 엇갈리게, 가운데 + 표시 */
+.evl-r2 { gap: calc(40 * var(--u)); padding: calc(50 * var(--u)) calc(124 * var(--u)); background: radial-gradient(ellipse 60% 50% at 50% 50%, #fffef9 0%, #fff4cf 50%, #ffeba4 100%); }
+.evl-cares { display: grid; }
+.evl-cares > li { grid-area: 1 / 1; }
+.evl-care { display: flex; flex-direction: column; align-items: center; gap: calc(10 * var(--u)); width: calc(310 * var(--u)); padding: calc(20 * var(--u)) 0; box-sizing: border-box; border-radius: calc(20 * var(--u)); background: #fff; box-shadow: 0 0 18px rgba(0, 0, 0, 0.15); }
+.evl-care + .evl-care { margin: calc(51 * var(--u)) 0 0 calc(324 * var(--u)); }
+.evl-care img { width: calc(100 * var(--u)); height: calc(100 * var(--u)); }
+.evl-care-sub { font-size: calc(16 * var(--u)); font-weight: 600; color: #333; }
+.evl-care-list { font-size: calc(14 * var(--u)); font-weight: 500; line-height: 1.4; color: #656565; }
+.evl-care-list li::before { content: "•"; margin-right: calc(6 * var(--u)); }
+.evl-care-plus { z-index: 1; margin: calc(162 * var(--u)) 0 0 calc(297 * var(--u)); }
+.evl-care-plus img { width: calc(40 * var(--u)); height: calc(40 * var(--u)); }
+
+/* Reason 3 */
+.evl-r3 { gap: calc(40 * var(--u)); padding: calc(50 * var(--u)) calc(124 * var(--u)); background: #fffbeb; }
+.evl-r3 .evl-reason-title { font-size: calc(48 * var(--u)); }
+.evl-devices { display: flex; align-items: center; padding: calc(20 * var(--u)); border-radius: calc(8 * var(--u)); background: #fff; filter: drop-shadow(0 0 9px rgba(0, 0, 0, 0.15)); }
+.evl-device { display: flex; align-items: center; gap: calc(10 * var(--u)); text-align: left; }
+.evl-device + .evl-device { height: calc(130 * var(--u)); border-left: 1px solid #939393; }
+.evl-device img { width: calc(138 * var(--u)); height: calc(138 * var(--u)); }
+.evl-device > div { display: flex; flex-direction: column; gap: calc(10 * var(--u)); width: calc(280 * var(--u)); }
+.evl-device-title { font-family: "Paperlogy"; font-weight: 600; font-size: calc(20 * var(--u)); line-height: 1; color: #181818; }
+.evl-device-desc { font-size: calc(16 * var(--u)); font-weight: 500; line-height: 1.4; color: #656565; white-space: nowrap; }
+.evl-r3-note { font-size: calc(20 * var(--u)); font-weight: 500; line-height: 1; color: #333; }
+
+/* Reason 4 — 보라 바탕, 아래쪽에 옅은 화살 무늬 */
+.evl-r4 { gap: calc(24 * var(--u)); padding: calc(100 * var(--u)); background: linear-gradient(to bottom, #a0f 13.8%, #723eff); color: #fff; }
+.evl-r4-bg { position: absolute; z-index: -1; top: calc(1196 * var(--u)); left: calc(-39 * var(--u)); width: calc(1158 * var(--u)); height: calc(572 * var(--u)); object-fit: cover; object-position: top; mix-blend-mode: color-burn; }
+.evl-r4 .evl-reason { background: #5f00cb; }
+.evl-r4-title { font-family: "Paperlogy"; font-weight: 700; font-size: calc(50 * var(--u)); line-height: normal; }
+.evl-r4-sub { font-size: calc(26 * var(--u)); font-weight: 600; line-height: normal; }
+.evl-guides { display: flex; flex-direction: column; align-items: center; width: calc(840 * var(--u)); padding: calc(20 * var(--u)) 0; box-sizing: border-box; border-radius: calc(8 * var(--u)); background: #fff; list-style: none; }
+.evl-guide { position: relative; display: flex; align-items: center; justify-content: space-between; width: calc(810 * var(--u)); height: calc(129 * var(--u)); padding: calc(20 * var(--u)); box-sizing: border-box; color: #333; text-align: left; }
+/* 가이드 사이: 점선 + 가운데 아래 화살표 동그라미 */
+.evl-guide + .evl-guide { margin-top: calc(40 * var(--u)); }
+.evl-guide + .evl-guide::before { content: ""; position: absolute; top: calc(-20 * var(--u)); left: calc(25 * var(--u)); right: calc(25 * var(--u)); border-top: 1px dashed #b8b8b8; }
+.evl-guide + .evl-guide::after { content: ""; position: absolute; top: calc(-30 * var(--u)); left: 50%; width: calc(20 * var(--u)); height: calc(20 * var(--u)); border-radius: 50%; background: #b298ff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M6 8l4 4 4-4' fill='none' stroke='white' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 100% no-repeat; transform: translateX(-50%); }
+.evl-guide img { width: calc(110 * var(--u)); height: calc(110 * var(--u)); }
+.evl-guide > div { display: flex; flex-direction: column; gap: calc(16 * var(--u)); width: calc(620 * var(--u)); line-height: normal; white-space: nowrap; }
+.evl-guide-title { font-size: calc(28 * var(--u)); font-weight: 700; }
+.evl-guide-desc { font-size: calc(20 * var(--u)); font-weight: 400; }
+.evl-r4-closing { font-family: "Paperlogy"; font-weight: 600; font-size: calc(35 * var(--u)); line-height: 1.6; }
+.evl-r4-closing b { font-weight: 800; }
+
+/* 휴대폰 (480 폭 기준) — 카드는 세로로 쌓고, Reason 3 은 카드 두 장 */
+@media (max-width: 480px) {
+  .evl { max-width: 480px; }
+  .evl-inner { --u: calc(100cqw / 480); }
+  .evl-mo-br { display: inline; }
+  .evl-pc-br { display: none; }
+  /* 휴대폰 파란 제목 띠(56px) 아래에서 시작 — 예전 .mobile-event-banner-img 와 같은 자리 */
+  .mobile-event-banner .evl { margin-top: 56px; }
+
+  .evl-reason { height: calc(34 * var(--u)); padding: 0 calc(16 * var(--u)); border-radius: calc(17 * var(--u)); font-size: calc(17 * var(--u)); }
+  .evl-reason-head { gap: calc(8 * var(--u)); }
+  .evl-reason-sub { font-size: calc(12 * var(--u)); }
+  .evl-reason-title, .evl-r3 .evl-reason-title { font-size: calc(30 * var(--u)); }
+  .evl-card-title { font-size: calc(17 * var(--u)); }
+  .evl-closing { font-size: calc(17 * var(--u)); line-height: 1.5; }
+  .evl-r1 .evl-closing { line-height: 1.5; }
+
+  .evl-hero { gap: calc(40 * var(--u)); padding: calc(60 * var(--u)) calc(20 * var(--u)) calc(50 * var(--u)); }
+  .evl-hero-bg { width: calc(640 * var(--u)); }
+  .evl-hero-line1 { font-size: calc(24 * var(--u)); }
+  .evl-hero-line2 { font-size: calc(58 * var(--u)); }
+  .evl-coupons { flex-direction: column; align-items: center; gap: calc(36 * var(--u)); }
+  .evl-coupon { width: calc(330 * var(--u)); padding: calc(10 * var(--u)) calc(24 * var(--u)) calc(4 * var(--u)); }
+  .evl-coupon img { width: calc(120 * var(--u)); height: calc(120 * var(--u)); }
+  .evl-coupon-text { font-size: calc(19 * var(--u)); }
+  .evl-coupon-label { top: calc(-15 * var(--u)); padding: calc(7 * var(--u)) calc(10 * var(--u)); font-size: calc(15 * var(--u)); }
+  .evl-notes { gap: calc(12 * var(--u)); width: 100%; }
+  .evl-notes-label { padding: calc(7 * var(--u)) calc(10 * var(--u)); font-size: calc(16 * var(--u)); }
+  .evl-notes-list { width: 100%; padding: calc(16 * var(--u)) calc(14 * var(--u)) calc(16 * var(--u)) calc(30 * var(--u)); font-size: calc(12.5 * var(--u)); line-height: 1.6; }
+
+  .evl-band { padding: calc(22 * var(--u)) 0; }
+  .evl-band p { font-size: calc(22 * var(--u)); }
+  .evl-band b { margin: 0 calc(3 * var(--u)) 0 calc(8 * var(--u)); font-size: calc(26 * var(--u)); }
+
+  .evl-r1 { gap: calc(24 * var(--u)); padding: calc(50 * var(--u)) calc(20 * var(--u)) calc(40 * var(--u)); }
+  .evl-r1-wave { height: calc(100% - 230 * var(--u)); }
+  .evl-agents { flex-direction: column; align-items: center; gap: calc(16 * var(--u)); }
+  .evl-agent { width: calc(280 * var(--u)); }
+  .evl-agent-desc { font-size: calc(13 * var(--u)); }
+  .evl-agent img { width: calc(160 * var(--u)); height: calc(160 * var(--u)); }
+  .evl-learner { width: calc(200 * var(--u)); height: calc(200 * var(--u)); }
+
+  .evl-r2 { gap: calc(24 * var(--u)); padding: calc(50 * var(--u)) calc(20 * var(--u)); }
+  .evl-care { gap: calc(8 * var(--u)); width: calc(210 * var(--u)); padding: calc(16 * var(--u)) 0; border-radius: calc(14 * var(--u)); }
+  .evl-care + .evl-care { margin: calc(40 * var(--u)) 0 0 calc(230 * var(--u)); }
+  .evl-care img { width: calc(70 * var(--u)); height: calc(70 * var(--u)); }
+  .evl-care-sub { font-size: calc(12.5 * var(--u)); }
+  .evl-care-list { font-size: calc(11.5 * var(--u)); }
+  .evl-care-plus { margin: calc(120 * var(--u)) 0 0 calc(205 * var(--u)); }
+  .evl-care-plus img { width: calc(30 * var(--u)); height: calc(30 * var(--u)); }
+
+  .evl-r3 { gap: calc(24 * var(--u)); padding: calc(50 * var(--u)) calc(20 * var(--u)); }
+  .evl-devices { flex-direction: column; align-items: stretch; gap: calc(14 * var(--u)); width: calc(340 * var(--u)); padding: 0; background: none; filter: none; }
+  .evl-device { gap: calc(12 * var(--u)); padding: calc(12 * var(--u)) calc(16 * var(--u)); border-radius: calc(8 * var(--u)); background: #fff; box-shadow: 0 0 9px rgba(0, 0, 0, 0.12); }
+  .evl-device + .evl-device { height: auto; border-left: 0; }
+  .evl-device img { width: calc(80 * var(--u)); height: calc(80 * var(--u)); }
+  .evl-device > div { gap: calc(6 * var(--u)); width: auto; }
+  .evl-device-title { font-size: calc(17 * var(--u)); }
+  .evl-device-desc { font-size: calc(12.5 * var(--u)); }
+  .evl-r3-note { font-size: calc(11.5 * var(--u)); }
+
+  .evl-r4 { gap: calc(16 * var(--u)); padding: calc(60 * var(--u)) calc(20 * var(--u)); }
+  .evl-r4-bg { top: auto; bottom: 0; left: 0; width: 100%; height: calc(360 * var(--u)); }
+  .evl-r4-title { font-size: calc(32 * var(--u)); }
+  .evl-r4-sub { font-size: calc(13 * var(--u)); }
+  .evl-guides { width: 100%; padding: calc(10 * var(--u)) 0; }
+  .evl-guide { justify-content: flex-start; gap: calc(14 * var(--u)); width: 100%; height: auto; padding: calc(12 * var(--u)) calc(18 * var(--u)); }
+  .evl-guide + .evl-guide { margin-top: calc(24 * var(--u)); }
+  .evl-guide + .evl-guide::before { top: calc(-12 * var(--u)); left: calc(18 * var(--u)); right: calc(18 * var(--u)); }
+  .evl-guide + .evl-guide::after { top: calc(-20 * var(--u)); width: calc(16 * var(--u)); height: calc(16 * var(--u)); }
+  .evl-guide img { flex-shrink: 0; width: calc(50 * var(--u)); height: calc(50 * var(--u)); }
+  .evl-guide > div { gap: calc(5 * var(--u)); width: auto; white-space: normal; }
+  .evl-guide-title { font-size: calc(16 * var(--u)); }
+  .evl-guide-desc { font-size: calc(11.5 * var(--u)); line-height: 1.4; }
+  .evl-r4-closing { font-size: calc(16 * var(--u)); }
+}
