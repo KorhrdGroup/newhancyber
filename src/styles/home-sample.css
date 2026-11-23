@@ -185,6 +185,8 @@
 }
 .sh-action-card:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(26, 60, 160, 0.22); }
 .sh-action-card--practice { background: linear-gradient(135deg, #2f7bff, #1a5cff); }
+/* 손·하트가 파란 바탕에 묻히지 않게 아주 살짝 밝게 */
+.sh-action-card--practice .sh-action-art { filter: brightness(1.1); }
 .sh-action-card--pay { background: linear-gradient(135deg, #1e3a9e, #0f2470); }
 .sh-action-text { display: flex; flex-direction: column; gap: 6px; }
 .sh-action-label { font-size: 15px; color: rgba(255, 255, 255, 0.8); }
