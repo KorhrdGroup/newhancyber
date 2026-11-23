@@ -95,15 +95,15 @@
 /* 지원 대상과 금액: 유형별 카드, 안은 흰 이름표 라벨 + 진한 값 */
 .ex-vtypes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-12); margin: 0; padding: 0; list-style: none; }
 .ex-vtype { padding: var(--space-20) var(--space-24); border-radius: var(--radius-16); background: var(--color-bg-surface); }
-.ex-vtype-name { font-size: 17px; font-weight: 700; line-height: 1.4; color: var(--color-text-strong); }
+.ex-vtype-name { font-size: 17px; font-weight: 600; line-height: 1.4; color: var(--color-text-strong); }
 .ex-vtype-info { display: flex; flex-direction: column; gap: var(--space-10); margin: var(--space-12) 0 0; }
 .ex-vtype-info > div { display: flex; align-items: flex-start; gap: var(--space-10); }
-.ex-vtype-info dt { flex-shrink: 0; min-width: 64px; padding: 2px var(--space-8); border-radius: var(--radius-6); background: var(--color-bg-default); font-size: 12px; font-weight: 600; line-height: 1.6; color: var(--color-text-secondary); text-align: center; }
-.ex-vtype-info dd { margin: 0; font-size: 14px; font-weight: 500; line-height: 1.6; color: var(--color-text-strong); word-break: keep-all; }
-.ex-vtype-info .is-amount { font-weight: 700; }
+.ex-vtype-info dt { flex-shrink: 0; min-width: 64px; padding: 2px var(--space-8); border-radius: var(--radius-6); background: var(--color-bg-default); font-size: 12px; font-weight: 500; line-height: 1.6; color: var(--color-text-secondary); text-align: center; }
+.ex-vtype-info dd { margin: 0; font-size: 14px; font-weight: 400; line-height: 1.6; color: var(--color-text-default); word-break: keep-all; }
+.ex-vtype-info .is-amount { font-weight: 600; color: var(--color-text-strong); }
 /* 쓸 수 있는 곳: 회색 카드 2칸 */
 .ex-uses { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-12) var(--space-24); margin: 0; padding: 0; list-style: none; }
-.ex-uses li { display: flex; align-items: center; gap: var(--space-16); padding: var(--space-16) var(--space-24); border-radius: var(--radius-16); background: var(--color-bg-surface); font-size: 15px; font-weight: 500; line-height: 1.5; color: var(--color-text-strong); word-break: keep-all; }
+.ex-uses li { display: flex; align-items: center; gap: var(--space-16); padding: var(--space-16) var(--space-24); border-radius: var(--radius-16); background: var(--color-bg-surface); font-size: 15px; font-weight: 400; line-height: 1.5; color: var(--color-text-default); word-break: keep-all; }
 .ex-uses img { flex-shrink: 0; width: 48px; height: 48px; object-fit: contain; }
 /* 화면 전체 리듬: 묶음 사이 간격 · 제목 아래 간격을 한 가지로 */
 .ex-voucher .ex-section { margin-top: var(--space-48); }
@@ -113,6 +113,8 @@
 .ex-voucher .ex-hero { display: flex; align-items: center; gap: var(--space-28); padding: var(--space-28) var(--space-40); text-align: left; }
 .ex-hero-icon { flex-shrink: 0; width: 104px; height: 104px; object-fit: contain; }
 .ex-voucher .ex-hero-title { margin-top: var(--space-4); }
+/* 글자 굵기 단계: 800 화면 제목 · 700 상자 큰 문구와 묶음 제목 · 600 카드 이름 · 단계 이름 · 금액 · 500 라벨 · 번호 · 400 설명 */
+.ex-voucher .ex-hero-label { font-weight: 500; }
 /* 이용 방법 단계 사이 화살표 (휴대폰은 아래 방향) */
 .ex-vflow-box { border-radius: var(--radius-16); background: var(--color-bg-surface); }
 .ex-vflow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; padding: var(--space-28) 0; list-style: none; }
@@ -121,7 +123,7 @@
 .ex-vflow-arrow { position: absolute; top: 44px; left: -11px; width: 22px; height: 22px; border-radius: var(--radius-full); background: var(--color-border-brand-subtle); }
 .ex-vflow-arrow::after { content: ""; position: absolute; top: 50%; left: 50%; width: 6px; height: 6px; border-top: 2px solid #fff; border-right: 2px solid #fff; transform: translate(-65%, -50%) rotate(45deg); }
 .ex-vflow-icon { width: 96px; height: 96px; object-fit: contain; }
-.ex-vflow-title { display: inline-flex; align-items: center; gap: var(--space-6); margin-top: var(--space-12); font-size: 16px; font-weight: 700; color: var(--color-text-strong); }
+.ex-vflow-title { display: inline-flex; align-items: center; gap: var(--space-6); margin-top: var(--space-12); font-size: 16px; font-weight: 600; color: var(--color-text-strong); }
 .ex-vflow-num { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: var(--radius-full); background: var(--color-text-strong); font-size: 11px; font-weight: 700; color: var(--color-text-inverse); }
 .ex-vflow-desc { margin-top: var(--space-6); font-size: 13px; line-height: 1.5; color: var(--color-text-secondary); }
 /* 안내 문구 + 버튼 상자: 왼쪽 안내, 오른쪽 버튼 */
@@ -133,7 +135,7 @@
 .ex-voucher .ex-contacts { gap: 0; border-top: 1px solid var(--color-border-cool); border-bottom: 1px solid var(--color-border-cool); }
 .ds2 .ex-voucher .ex-contact { display: flex; align-items: center; justify-content: space-between; gap: var(--space-12); padding: var(--space-16) var(--space-20); border-radius: 0; background: none; }
 .ds2 .ex-voucher .ex-contact + .ex-contact { border-left: 1px solid var(--color-border-cool); }
-.ds2 .ex-voucher .ex-contact dd { margin: 0; font-size: 15px; font-weight: 600; }
+.ds2 .ex-voucher .ex-contact dd { margin: 0; font-size: 15px; font-weight: 500; }
 .ex-hero { padding: var(--space-32) var(--space-24); border-radius: var(--radius-12); background: var(--color-bg-brand-subtle); text-align: center; }
 .ex-hero-label { font-size: 14px; font-weight: 600; color: var(--color-text-brand); }
 .ex-hero-title { margin-top: var(--space-8); font-size: 24px; font-weight: 700; line-height: 1.4; color: var(--color-text-strong); }
