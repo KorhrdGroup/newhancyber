@@ -68,11 +68,11 @@ export default function CourseVoucherPage() {
             <h2 className="ex-section-title">쓸 수 있는 곳</h2>
             <ul className="ex-uses">
               <li>
-                <img src="/resources/images/credit-bank/cb-icon-school.png" alt="" aria-hidden />
+                <img src="/resources/images/credit-bank/cb-icon-tuition.png" alt="" aria-hidden />
                 평생교육이용권 사용기관에 등록된 강좌의 수강료
               </li>
               <li>
-                <img src="/resources/images/credit-bank/cb-icon-books.png" alt="" aria-hidden />
+                <img src="/resources/images/credit-bank/cb-icon-textbook-price.png" alt="" aria-hidden />
                 해당 강좌의 교재비
               </li>
             </ul>
