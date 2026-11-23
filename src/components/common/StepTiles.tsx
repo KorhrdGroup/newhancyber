@@ -12,7 +12,12 @@ export interface StepTile {
   icon?: string;
   title?: ReactNode;
   desc?: ReactNode;
-  /** 아이콘·이름 대신 넣을 내용 (예: 셋 중 하나 목록) */
+  /** 여럿 중 하나: 아이콘 + 이름 줄을 "or" 로 쌓는다 (label 은 이름 위 작은 글) */
+  choices?: { icon: string; title: ReactNode; label?: ReactNode }[];
+  /** 더해지는 숫자: 구분 + 값을 + 로 잇고, total 은 아래 합계 띠 */
+  figures?: { label: string; value: string }[];
+  total?: string;
+  /** 아이콘·이름 대신 넣을 내용 */
   content?: ReactNode;
 }
 
@@ -27,15 +32,54 @@ const Plus = () => (
   </svg>
 );
 
-const Body = ({ item }: { item: StepTile }) => (
-  <>
-    {item.icon && <img className="st-icon" src={item.icon} alt="" />}
-    <span className="st-text">
-      {item.title && <span className="st-title">{item.title}</span>}
-      {item.desc && <span className="st-desc">{item.desc}</span>}
-    </span>
-  </>
-);
+function Body({ item }: { item: StepTile }) {
+  if (item.content) return <>{item.content}</>;
+  if (item.choices)
+    return (
+      <ul className="st-choices">
+        {item.choices.map((choice, i) => (
+          <li key={i} className="st-choice">
+            {i > 0 && <span className="st-or">or</span>}
+            <span className="st-choice-row">
+              <img className="st-choice-icon" src={choice.icon} alt="" />
+              <span className="st-choice-text">
+                {choice.label && <span className="st-choice-label">{choice.label}</span>}
+                <span className="st-choice-title">{choice.title}</span>
+              </span>
+            </span>
+          </li>
+        ))}
+      </ul>
+    );
+  if (item.figures)
+    return (
+      <span className="st-figures">
+        <span className="st-figure-row">
+          {item.figures.map((f, i) => (
+            <span key={f.label} className="st-figure">
+              {i > 0 && (
+                <span className="st-plus" aria-hidden="true">
+                  <Plus />
+                </span>
+              )}
+              <span className="st-figure-label">{f.label}</span>
+              <strong className="st-figure-value">{f.value}</strong>
+            </span>
+          ))}
+        </span>
+        {item.total && <span className="st-total">{item.total}</span>}
+      </span>
+    );
+  return (
+    <>
+      {item.icon && <img className="st-icon" src={item.icon} alt="" />}
+      <span className="st-text">
+        {item.title && <span className="st-title">{item.title}</span>}
+        {item.desc && <span className="st-desc">{item.desc}</span>}
+      </span>
+    </>
+  );
+}
 
 export default function StepTiles({
   items,
@@ -43,6 +87,7 @@ export default function StepTiles({
   label,
   plain = false,
   wideLast = false,
+  weights,
 }: {
   items: StepTile[];
   /** joins[i] = i번째와 i+1번째 사이. 기본은 모두 "arrow". "plus" 는 같은 단계로 묶음 */
@@ -52,6 +97,8 @@ export default function StepTiles({
   plain?: boolean;
   /** 마지막 타일을 조금 넓게 (안에 목록을 넣을 때) */
   wideLast?: boolean;
+  /** 단계별 너비 비율 (여러 흐름도의 배지 위치를 맞출 때). 없으면 묶인 항목 수만큼 */
+  weights?: number[];
 }) {
   // "plus" 로 이어진 항목끼리 한 단계로 묶는다
   const steps: StepTile[][] = [];
@@ -59,7 +106,7 @@ export default function StepTiles({
     if (i > 0 && joins?.[i - 1] === "plus") steps[steps.length - 1].push(item);
     else steps.push([item]);
   });
-  const grouped = steps.some((s) => s.length > 1);
+  const cols = weights ?? (steps.some((s) => s.length > 1) ? steps.map((s) => s.length) : undefined);
 
   return (
     <ol
@@ -67,8 +114,7 @@ export default function StepTiles({
       style={
         {
           "--st-n": steps.length,
-          // 묶인 단계는 항목 수만큼 넓게
-          ...(grouped && { "--st-cols": steps.map((s) => `minmax(0, ${s.length}fr)`).join(" ") }),
+          ...(cols && { "--st-cols": cols.map((w) => `minmax(0, ${w}fr)`).join(" ") }),
         } as CSSProperties
       }
       aria-label={label}
@@ -95,7 +141,7 @@ export default function StepTiles({
               ))}
             </span>
           ) : (
-            step[0].content ?? <Body item={step[0]} />
+            <Body item={step[0]} />
           )}
         </li>
       ))}

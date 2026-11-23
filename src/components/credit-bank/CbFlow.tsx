@@ -47,22 +47,12 @@ export function CbStepFlow({
   steps: CbFlowItem[];
   finals: CbFlowItem[];
 }) {
-  const last = (
-    <ul className="cb-steps-final">
-      {finals.map((item, i) => (
-        <li key={item.label} className="cb-steps-choice">
-          {i > 0 && <span className="cb-steps-or">or</span>}
-          <span className="cb-steps-choice-row">
-            <img src={`${ICON}/cb-icon-${item.icon}.png`} alt="" className="cb-steps-choice-icon" />
-            <span className="cb-steps-choice-label">{item.label}</span>
-          </span>
-        </li>
-      ))}
-    </ul>
-  );
   return (
     <StepTiles
-      items={[...steps.map((item) => ({ icon: `${ICON}/cb-icon-${item.icon}.png`, title: item.label })), { content: last }]}
+      items={[
+        ...steps.map((item) => ({ icon: `${ICON}/cb-icon-${item.icon}.png`, title: item.label })),
+        { choices: finals.map((item) => ({ icon: `${ICON}/cb-icon-${item.icon}.png`, title: item.label })) },
+      ]}
       wideLast
     />
   );

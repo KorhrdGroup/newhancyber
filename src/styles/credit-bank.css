@@ -138,14 +138,6 @@
 .cb-grid-icon { width: 80px; height: 80px; object-fit: contain; }
 .cb-grid-label { font-size: 13px; font-weight: 500; line-height: 1.4; color: var(--color-text-strong); text-align: center; word-break: keep-all; }
 
-/* 학점은행제 흐름도 STEP 5 타일: 셋 중 하나 */
-.cb-steps-final { display: flex; flex: 1; flex-direction: column; justify-content: center; align-self: stretch; margin: var(--space-4) 0 0; padding: 0; list-style: none; }
-.cb-steps-choice { display: flex; flex-direction: column; }
-.cb-steps-choice-row { display: flex; align-items: center; gap: var(--space-10); padding: var(--space-8) var(--space-12); border-radius: var(--radius-12); background: var(--color-bg-default); text-align: left; }
-.cb-steps-choice-icon { flex: none; width: 36px; height: 36px; object-fit: contain; }
-.cb-steps-choice-label { font-size: 14px; font-weight: 500; line-height: 1.35; color: var(--color-text-strong); word-break: keep-all; }
-.cb-steps-or { padding: 5px 0; font-size: 12px; font-weight: 600; line-height: 1; color: var(--color-text-secondary); text-align: center; }
-
 @media (max-width: 768px) {
   .cb-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: var(--space-12); }
   .cb-grid-item { height: auto; min-height: 132px; padding: var(--space-8) var(--space-4); }
