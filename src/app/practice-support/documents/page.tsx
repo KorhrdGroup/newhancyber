@@ -168,6 +168,9 @@ export default function PracticeDocumentsPage() {
                     <td className="is-left">{preparation[doc.id]?.how}</td>
                     <td>
                       <Badge>{doc.status}</Badge>
+                      {doc.status === "반려" && doc.note && (
+                        <p className="lx-doc-note">{doc.note}</p>
+                      )}
                     </td>
                     <td>
                       {preparation[doc.id]?.hasForm ? (
