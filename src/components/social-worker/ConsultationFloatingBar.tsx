@@ -3,8 +3,6 @@
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { DESKTOP_SECTION_ID, MOBILE_SECTION_ID } from "./ConsultationOptions";
 
-const SW_IMG = "/resources/images/social-worker";
-
 /** 이 폭(px) 이하는 모바일 (퍼블리싱 CSS 와 같은 기준) */
 const MOBILE_MAX_WIDTH = 480;
 
@@ -70,16 +68,12 @@ export default function ConsultationFloatingBar() {
         </p>
         <p className="consultation-floating-text mobile-only">잠깐! 도움을 받고싶다면 지금 바로</p>
         <a href={`#${MOBILE_SECTION_ID}`} className="consultation-floating-btn" onClick={scrollToOptions}>
-          <img
-            src={`${SW_IMG}/button_desktop.png`}
-            alt="상담 신청"
-            className="consultation-floating-btn-img desktop-only"
-          />
-          <img
-            src={`${SW_IMG}/button_mobile.png`}
-            alt="상담 신청"
-            className="consultation-floating-btn-img mobile-only"
-          />
+          {/* 예전 형광 그러데이션 버튼 그림 대신 글자 버튼 */}
+          <span className="desktop-only">신청하러 가기</span>
+          <span className="mobile-only">상담 신청</span>
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" className="consultation-floating-btn-arrow">
+            <path d="M6 3.5 10.5 8 6 12.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
         </a>
       </div>
     </div>
