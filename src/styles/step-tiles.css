@@ -39,8 +39,10 @@
 .st-tile:last-child:not(:first-child) .st-no { background: var(--color-bg-default); }
 .st-icon { width: 84px; height: 84px; margin: 2px 0 6px; object-fit: contain; }
 /* 안에 목록·숫자가 든 타일이 있어 높을 때: 나머지 타일은 아이콘·글자를 남은 공간 가운데로 */
-.st-flow:has(.st-choices, .st-figures) .st-icon { margin-top: auto; }
-.st-flow:has(.st-choices, .st-figures) .st-text:last-child { margin-bottom: auto; }
+@media (min-width: 769px) {
+  .st-flow:has(.st-choices, .st-figures) .st-icon { margin-top: auto; }
+  .st-flow:has(.st-choices, .st-figures) .st-text:last-child { margin-bottom: auto; }
+}
 .st-text { display: flex; flex-direction: column; align-items: center; gap: 6px; }
 .st-title { font-size: 16px; font-weight: 600; line-height: 1.4; color: var(--color-text-strong); word-break: keep-all; }
 .st-desc { font-size: 14px; font-weight: 400; line-height: 1.5; color: var(--color-text-secondary); word-break: keep-all; text-wrap: balance; }
@@ -99,10 +101,12 @@
     text-align: left;
   }
   .st-no { grid-area: no; justify-self: start; }
+  /* STEP 꼬리표 없는 흐름도: 아이콘 옆에 글자만 */
+  .st-flow--unnumbered .st-tile { grid-template-areas: "icon text"; }
+  .st-flow--unnumbered .st-text { align-self: center; }
   /* 아이콘 없는 타일(목록·숫자): 꼬리표도 왼쪽 끝부터 */
   .st-tile:has(> .st-choices, > .st-figures) .st-no { grid-column: 1 / -1; }
-  .st-icon,
-  .st-flow--wide-last .st-icon { grid-area: icon; width: 56px; height: 56px; margin: 0; }
+  .st-icon { grid-area: icon; width: 56px; height: 56px; margin: 0; }
   .st-text { grid-area: text; align-items: flex-start; gap: 4px; align-self: start; }
   .st-title { font-size: 15px; }
   .st-desc { font-size: 13px; }

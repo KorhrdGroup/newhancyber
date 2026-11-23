@@ -88,6 +88,7 @@ export default function StepTiles({
   plain = false,
   wideLast = false,
   weights,
+  numbered = true,
 }: {
   items: StepTile[];
   /** joins[i] = i번째와 i+1번째 사이. 기본은 모두 "arrow". "plus" 는 같은 단계로 묶음 */
@@ -99,6 +100,8 @@ export default function StepTiles({
   wideLast?: boolean;
   /** 단계별 너비 비율 (여러 흐름도의 배지 위치를 맞출 때). 없으면 묶인 항목 수만큼 */
   weights?: number[];
+  /** STEP 01… 꼬리표. 차례로 밟는 절차가 아닌 그림(개념·조건·학점 합계)은 false */
+  numbered?: boolean;
 }) {
   // "plus" 로 이어진 항목끼리 한 단계로 묶는다
   const steps: StepTile[][] = [];
@@ -110,7 +113,7 @@ export default function StepTiles({
 
   return (
     <ol
-      className={`st-flow${plain ? " st-flow--plain" : ""}${wideLast ? " st-flow--wide-last" : ""}`}
+      className={`st-flow${plain ? " st-flow--plain" : ""}${numbered ? "" : " st-flow--unnumbered"}${wideLast ? " st-flow--wide-last" : ""}`}
       style={
         {
           "--st-n": steps.length,
@@ -126,7 +129,7 @@ export default function StepTiles({
               <Chevron />
             </span>
           )}
-          <span className="st-no">STEP {String(i + 1).padStart(2, "0")}</span>
+          {numbered && <span className="st-no">STEP {String(i + 1).padStart(2, "0")}</span>}
           {step.length > 1 ? (
             <span className="st-pair">
               {step.map((part, j) => (

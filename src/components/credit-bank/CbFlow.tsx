@@ -17,8 +17,23 @@ export interface CbFlowItem {
  * 아이콘 + 이름이 옆으로 이어지는 흐름 (예: 학교에서의 학습경험 + 다양한 형태의 학습과 자격 › 학점 인정 › 학위 수여).
  * 공통 흐름도(타일 + 연결 배지)로 그린다. joins[i] 는 i번째와 i+1번째 사이: "plus" 는 +, "arrow" 는 ›.
  */
-export function CbIconFlow({ items, joins }: { items: CbFlowItem[]; joins: ("plus" | "arrow")[] }) {
-  return <StepTiles items={items.map((item) => ({ icon: `${ICON}/cb-icon-${item.icon}.png`, title: item.label }))} joins={joins} />;
+export function CbIconFlow({
+  items,
+  joins,
+  numbered = true,
+}: {
+  items: CbFlowItem[];
+  joins: ("plus" | "arrow")[];
+  /** 차례로 밟는 절차가 아니면 false (STEP 꼬리표 없음) */
+  numbered?: boolean;
+}) {
+  return (
+    <StepTiles
+      items={items.map((item) => ({ icon: `${ICON}/cb-icon-${item.icon}.png`, title: item.label }))}
+      joins={joins}
+      numbered={numbered}
+    />
+  );
 }
 
 /** 아이콘 + 두 줄 설명 격자 (이용대상). 넓은 화면 4열, 폰 2열, 칸 사이는 점선 */

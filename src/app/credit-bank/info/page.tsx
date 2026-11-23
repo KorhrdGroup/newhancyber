@@ -27,6 +27,7 @@ export default function CreditBankInfoPage() {
               { icon: "graduation", label: "학위 수여" },
             ]}
             joins={["plus", "arrow", "arrow"]}
+            numbered={false}
           />
         </section>
 
