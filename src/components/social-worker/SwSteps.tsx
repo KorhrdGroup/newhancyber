@@ -1,4 +1,5 @@
 import type { CSSProperties, ReactNode } from "react";
+import StepTiles from "@/components/common/StepTiles";
 
 /* 사회복지사 안내 화면의 단계·흐름 그림 (Figma wrapper_graphic) — 예전 통째 그림(social-wooker0N.png)을 코드로 옮김.
    3D 아이콘만 그림 파일이고, 글자·점선·화살표(mark)·말풍선은 코드로 그린다.
@@ -187,7 +188,7 @@ export function CreditFlow({
   );
 }
 
-/** 자격증 교부 신청절차 */
+/** 자격증 교부 신청절차 — 공통 흐름도(타일 + 연결 배지) */
 export function IssueFlow() {
   const steps = [
     { icon: "bank.png", title: "협회 선정", sub: ["본인의 지역에 따라", "지방협회 선정"] },
@@ -196,22 +197,19 @@ export function IssueFlow() {
     { icon: "certificate-2.png", title: "자격증 수령", sub: ["신청 시 기입한 주소로", "등기 발송된 자격증 수령"] },
   ];
   return (
-    <Flow label="사회복지사자격증 교부 신청절차" className="sw-flow--issue">
-      {steps.flatMap((s, i) => [
-        ...(i > 0 ? [<Divider key={`d${i}`} />] : []),
-        <Step
-          key={s.title}
-          icon={s.icon}
-          title={s.title}
-          sub={
-            <>
-              {s.sub[0]}
-              <br />
-              {s.sub[1]}
-            </>
-          }
-        />,
-      ])}
-    </Flow>
+    <StepTiles
+      label="사회복지사자격증 교부 신청절차"
+      items={steps.map((s) => ({
+        icon: iconBase + s.icon,
+        title: s.title,
+        desc: (
+          <>
+            {s.sub[0]}
+            <br />
+            {s.sub[1]}
+          </>
+        ),
+      }))}
+    />
   );
 }

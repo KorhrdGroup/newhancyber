@@ -29,7 +29,6 @@ export default function CourseRefundPage() {
         <PracticeSection title="환불 절차">
           <div className="cr-step-panel">
             <CbIconFlow
-              size="lg"
               items={[
                 { icon: "scroll-pen", label: "환불신청서" },
                 { icon: "coin-cycle", label: "환불금 산정" },

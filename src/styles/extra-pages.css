@@ -116,24 +116,8 @@
 .ex-voucher .ex-hero-title { margin-top: var(--space-4); }
 /* 글자 굵기 단계: 800 화면 제목 · 700 상자 큰 문구와 묶음 제목 · 600 카드 이름 · 단계 이름 · 금액 · 500 라벨 · 번호 · 400 설명 */
 .ex-voucher .ex-hero-label { font-weight: 500; }
-/* 이용 방법 단계 사이 화살표 (휴대폰은 아래 방향) */
+/* 이용 방법: 연한 판 안에 공통 흐름도 + 안내·버튼 */
 .ex-vflow-box { border-radius: var(--radius-16); background: var(--color-bg-surface); }
-.ex-vflow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; padding: var(--space-28) 0; list-style: none; }
-/* 3단계 (무료학습설계 진행 순서) */
-.ex-vflow--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.ex-vflow li { position: relative; display: flex; flex-direction: column; align-items: center; padding: 0 var(--space-20); text-align: center; word-break: keep-all; }
-.ex-vflow li + li { border-left: 1px dashed var(--color-border-default); }
-/* 화살표는 점선 칸막이의 세로 가운데 */
-.ex-vflow-arrow { position: absolute; top: calc(50% - 11px); left: -11px; width: 22px; height: 22px; border-radius: var(--radius-full); background: var(--color-border-brand-subtle); }
-.ex-vflow-arrow::after { content: ""; position: absolute; top: 50%; left: 50%; width: 6px; height: 6px; border-top: 2px solid #fff; border-right: 2px solid #fff; transform: translate(-65%, -50%) rotate(45deg); }
-.ex-vflow-icon { width: 96px; height: 96px; object-fit: contain; }
-.ex-vflow-title { display: inline-flex; align-items: center; gap: var(--space-6); margin-top: var(--space-12); font-size: 16px; font-weight: 600; color: var(--color-text-strong); }
-/* 숫자는 글꼴상 1px 위에 떠서 padding-top 으로 원 한가운데로, 원은 제목 글자 높이에 맞춰 1px 위로 */
-.ex-vflow-num { position: relative; top: -1px; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; width: 20px; height: 20px; padding-top: 2px; border-radius: var(--radius-full); background: var(--color-icon-default); font-size: 11px; font-weight: 700; color: var(--color-text-inverse); }
-/* 숫자 1은 글자 모양이 왼쪽으로 쏠려 보여 살짝 오른쪽으로 */
-.ex-vflow li:first-child .ex-vflow-num { padding-left: 1.5px; }
-/* 설명 글은 칸을 꽉 채우지 않게 폭을 줄이고(점선과 여유), 네 단계 모두 고르게 두 줄로 */
-.ex-vflow-desc { max-width: 200px; margin-top: var(--space-8); font-size: 14px; line-height: 1.5; color: var(--color-text-secondary); text-wrap: balance; }
 /* 안내 문구 + 버튼 상자: 왼쪽 안내, 오른쪽 버튼 */
 .ex-cta { display: flex; align-items: center; justify-content: space-between; gap: var(--space-16) var(--space-24); margin: 0 var(--space-24); padding: var(--space-20) 0 var(--space-24); border-top: 1px solid var(--color-border-default); }
 .ex-cta .ex-note { margin: 0; font-size: 14px; word-break: keep-all; }
@@ -232,13 +216,6 @@
   .ex-hero-title { font-size: 20px; }
   .ex-vtypes,
   .ex-uses { grid-template-columns: 1fr; }
-  .ex-vflow { grid-template-columns: 1fr; padding: var(--space-8) var(--space-16); }
-  .ex-vflow li { flex-direction: row; gap: var(--space-16); padding: var(--space-16) 0; text-align: left; }
-  .ex-vflow li + li { border-top: 1px dashed var(--color-border-default); border-left: 0; }
-  .ex-vflow-arrow { top: -11px; left: 50%; transform: translateX(-50%) rotate(90deg); }
-  .ex-vflow-icon { flex-shrink: 0; width: 64px; height: 64px; }
-  .ex-vflow-title { margin-top: 0; }
-  .ex-vflow-desc { max-width: none; text-wrap: pretty; }
   .ex-hero-icon { width: 72px; height: 72px; margin: 0; }
   .ex-help { flex-direction: column; align-items: stretch; gap: var(--space-8); padding: var(--space-16) var(--space-20); }
   .ex-voucher .ex-contacts { flex-direction: column; }

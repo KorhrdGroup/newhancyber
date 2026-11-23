@@ -13,6 +13,7 @@ import {
 import "@/styles/classroom.css";
 import "@/styles/learning-extra.css";
 import "@/styles/extra-pages.css";
+import StepTiles from "@/components/common/StepTiles";
 
 export const metadata: Metadata = { title: "서류제출" };
 
@@ -130,20 +131,7 @@ export default function PracticeDocumentsPage() {
 
         <section className="lx-panel">
           <h2 className="lx-section-title">제출 순서</h2>
-          <div className="ex-vflow-box">
-            <ol className="ex-vflow ex-vflow--3">
-              {steps.map((step, i) => (
-                <li key={step.title}>
-                  {i > 0 && <span className="ex-vflow-arrow" aria-hidden />}
-                  <img className="ex-vflow-icon" src={step.icon} alt="" aria-hidden />
-                  <div>
-                    <p className="ex-vflow-title">{step.title}</p>
-                    <p className="ex-vflow-desc">{step.text}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </div>
+          <StepTiles items={steps.map((step) => ({ icon: step.icon, title: step.title, desc: step.text }))} />
         </section>
 
         <section className="lx-panel">

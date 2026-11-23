@@ -18,9 +18,7 @@
 /* ---------- 상자: 테두리 대신 연한 바탕 카드 ---------- */
 .ds2 .lx-page:not(.lx-page--plain) .lx-panel,
 .ds2 .lx-step,
-.ds2 .cb-flow,
 .ds2 .cb-grid,
-.ds2 .cb-steps,
 .ds2 .lx-doc-status,
 .ds2 .ex-box,
 .ds2 .ex-step,
@@ -47,7 +45,6 @@
 .ds2 .sw-flow-divider-caption,
 .ds2 .sw-route-arrow { background: var(--color-bg-surface); }
 /* 칸 사이 점선은 연한 바탕 위에서 조금 더 옅게 */
-.ds2 .cb-flow-join--arrow::before,
 .ds2 .cb-grid-item + .cb-grid-item::before,
 .ds2 .cb-grid-item:nth-child(n + 5)::after { opacity: 0.6; }
 
