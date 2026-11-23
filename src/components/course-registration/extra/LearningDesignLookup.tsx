@@ -4,11 +4,8 @@ import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { sampleDesignResult, type DesignStatus, type LearningDesignResult } from "./extraData";
 
-const statusBadge: Record<DesignStatus, string> = {
-  접수: "ds-badge--neutral",
-  "상담 중": "ds-badge--warning",
-  "상담 완료": "ds-badge--success",
-};
+/** 상담 진행 단계 — 신청 결과의 상태값 순서 */
+const designSteps: DesignStatus[] = ["접수", "상담 중", "상담 완료"];
 
 /** 무료 학습설계 신청 결과 확인: 이름·연락처로 조회 → 결과 카드 */
 export default function LearningDesignLookup() {
@@ -52,48 +49,59 @@ export default function LearningDesignLookup() {
 
       <section className="ex-section">
         {result ? (
-          <div className="ex-box">
-            <div className="ex-result-head">
-              <h3>학습설계 신청 결과</h3>
-              <span className={`ds-badge ${statusBadge[result.status]}`}>{result.status}</span>
-            </div>
-            <table className="ds-table ds-table--info">
-              <tbody>
-                <tr>
-                  <th>신청일</th>
-                  <td>{result.appliedAt}</td>
-                </tr>
-                <tr>
-                  <th>희망 전공</th>
-                  <td>{result.major}</td>
-                </tr>
-                <tr>
-                  <th>상담 방법</th>
-                  <td>{result.consultType}</td>
-                </tr>
-                <tr>
-                  <th>담당자</th>
-                  <td>{result.manager}</td>
-                </tr>
-              </tbody>
-            </table>
-            <div className="ex-memo">
-              <strong>담당자 메모</strong>
-              {result.memo}
-            </div>
-          </div>
+          <ResultCard result={result} />
         ) : (
-          <p className="ex-empty">
-            이름과 휴대폰 번호를 넣고 조회하면 신청 결과를 볼 수 있어요.
-            <br />
-            아직 신청 전이라면{" "}
-            <Link href="/course-registration/learning-design" className="ex-link">
+          <div className="ex-lookup-empty">
+            <p>
+              이름과 휴대폰 번호를 넣고 조회하면 신청 결과를 볼 수 있어요.
+              <br />
+              아직 신청 전이라면 무료 학습설계 신청부터 해 주세요.
+            </p>
+            <Link href="/course-registration/learning-design" className="ds-btn ds-btn--secondary">
               무료 학습설계 신청
             </Link>
-            부터 해 주세요.
-          </p>
+          </div>
         )}
       </section>
     </>
+  );
+}
+
+function ResultCard({ result }: { result: LearningDesignResult }) {
+  const current = designSteps.indexOf(result.status);
+  const info = [
+    ["신청일", result.appliedAt],
+    ["희망 전공", result.major],
+    ["상담 방법", result.consultType],
+    ["담당자", result.manager],
+  ];
+  return (
+    <div className="ex-box">
+      <h3 className="ex-section-title">학습설계 신청 결과</h3>
+      <ol className="ex-result-steps" aria-label="상담 진행 단계">
+        {designSteps.map((step, i) => (
+          <li
+            key={step}
+            className={i < current ? "is-done" : i === current ? "is-current" : undefined}
+            aria-current={i === current ? "step" : undefined}
+          >
+            <span className="ex-result-step-num">{i + 1}</span>
+            {step}
+          </li>
+        ))}
+      </ol>
+      <dl className="ex-result-info">
+        {info.map(([label, value]) => (
+          <div key={label}>
+            <dt>{label}</dt>
+            <dd>{value}</dd>
+          </div>
+        ))}
+      </dl>
+      <div className="ex-memo">
+        <strong>담당자 메모</strong>
+        {result.memo}
+      </div>
+    </div>
   );
 }
