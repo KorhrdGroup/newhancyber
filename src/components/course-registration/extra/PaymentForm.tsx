@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
+import { useMobileMenu } from "@/components/layout/MobileMenuContext";
 import { formatPrice, sampleCartCourses } from "../courseData";
 import MajorBadges from "../MajorBadges";
 import { payMethods, sampleCoupons, type PayMethod } from "./extraData";
@@ -14,6 +15,7 @@ export default function PaymentForm() {
   const [couponCode, setCouponCode] = useState("");
   const [method, setMethod] = useState<PayMethod>("card");
   const [agreed, setAgreed] = useState(false);
+  const { isOpen: isSidebarOpen } = useMobileMenu();
 
   const totalFee = courses.reduce((sum, course) => sum + course.currentPrice, 0);
   const coupon = sampleCoupons.find((c) => c.id === couponId) ?? sampleCoupons[0];
@@ -33,7 +35,7 @@ export default function PaymentForm() {
   };
 
   return (
-    <form className="ex-pay" onSubmit={handleSubmit}>
+    <form className="ex-pay ex-pay--float" onSubmit={handleSubmit}>
       <div className="ex-pay-main">
         <section className="ex-box">
           <h2 className="ex-section-title">주문 과목 ({courses.length})</h2>
@@ -143,6 +145,13 @@ export default function PaymentForm() {
           {formatPrice(finalAmount)}원 결제하기
         </button>
       </aside>
+
+      {/* 휴대폰 아래 고정 결제 버튼 (장바구니와 같음) — 약관 동의 전에는 눌리지 않고, 사이드바가 열리면 숨김 */}
+      <div className="ex-cart-float" hidden={isSidebarOpen}>
+        <button type="submit" className="ds-btn ds-btn--primary ds-btn--lg" disabled={!agreed}>
+          {formatPrice(finalAmount)}원 결제하기
+        </button>
+      </div>
     </form>
   );
 }
