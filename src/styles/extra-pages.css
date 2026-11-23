@@ -119,6 +119,8 @@
 /* 이용 방법 단계 사이 화살표 (휴대폰은 아래 방향) */
 .ex-vflow-box { border-radius: var(--radius-16); background: var(--color-bg-surface); }
 .ex-vflow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; padding: var(--space-28) 0; list-style: none; }
+/* 3단계 (무료학습설계 진행 순서) */
+.ex-vflow--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .ex-vflow li { position: relative; display: flex; flex-direction: column; align-items: center; padding: 0 var(--space-20); text-align: center; word-break: keep-all; }
 .ex-vflow li + li { border-left: 1px dashed var(--color-border-default); }
 /* 화살표는 점선 칸막이의 세로 가운데 */
