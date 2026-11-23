@@ -6,7 +6,7 @@ import "@/styles/classroom.css";
 import "@/styles/learning-extra.css";
 import "@/styles/credit-bank.css";
 
-/** 진행 순서 — 바우처 「이용 방법」과 같은 판 (그림 · 번호 · 한 줄 설명) */
+/** 진행 순서 — 바우처 「이용 방법」과 같은 판 (그림 · 한 줄 설명, 번호 없음) */
 const designSteps = [
   { title: "무료학습설계 신청", desc: "아래 신청서를 작성해 보내요.", icon: "/resources/images/credit-bank/cb-icon-scroll-pen.png" },
   { title: "검토", desc: "담당자가 신청 내용을 살펴봐요.", icon: "/resources/images/credit-bank/cb-icon-magnifier.png" },
@@ -52,10 +52,7 @@ export default function LearningDesignContent() {
                   {i > 0 && <span className="ex-vflow-arrow" aria-hidden />}
                   <img className="ex-vflow-icon" src={step.icon} alt="" aria-hidden />
                   <div>
-                    <p className="ex-vflow-title">
-                      <span className="ex-vflow-num">{i + 1}</span>
-                      {step.title}
-                    </p>
+                    <p className="ex-vflow-title">{step.title}</p>
                     <p className="ex-vflow-desc">{step.desc}</p>
                   </div>
                 </li>
