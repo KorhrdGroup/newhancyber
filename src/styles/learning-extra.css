@@ -642,5 +642,27 @@
   .lx-doc-status-stats { gap: var(--space-24); }
   .lx-doc-status-actions .ds-btn { flex: 1; }
   .lx-doc-progress { width: 100%; }
-  .lx-doc-table { min-width: 760px; } /* 칸이 6개라 좁게 눌려 글이 한두 글자씩 꺾이지 않게 */
+  /* 제출 서류: 표 → 서류 카드 (이름·상태 / 내용 / 준비 방법 / 내려받기·올리기 버튼) */
+  .lx-docs .lx-table-scroll { overflow: visible; }
+  .lx-docs .lx-doc-table { display: block; min-width: 0; border-top: 0; }
+  .lx-docs .lx-doc-table thead { display: none; }
+  .lx-docs .lx-doc-table tbody { display: flex; flex-direction: column; gap: var(--space-12); }
+  .lx-docs .lx-doc-table tr { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "name state" "desc desc" "how how" "form submit"; align-items: center; row-gap: var(--space-6); column-gap: var(--space-8); padding: var(--space-16); border: 1px solid var(--color-border-default); border-radius: var(--radius-12); background: var(--color-bg-default); }
+  .lx-docs .lx-doc-table td,
+  .lx-docs .lx-doc-table tr td { display: block; height: auto; padding: 0; border: 0; text-align: left; white-space: normal !important; }
+  .lx-docs .lx-doc-table .lx-doc-name { grid-area: name; font-size: 15px; }
+  .lx-docs .lx-doc-table .lx-doc-state { grid-area: state; justify-self: end; }
+  .lx-docs .lx-doc-table .lx-doc-desc { grid-area: desc; font-size: 14px; color: var(--color-text-default); }
+  .lx-docs .lx-doc-table .lx-doc-how { grid-area: how; font-size: 13px; color: var(--color-text-secondary); }
+  .lx-docs .lx-doc-table .lx-doc-how::before { content: "준비 방법 · "; }
+  .lx-docs .lx-doc-table .lx-doc-form { grid-area: form; margin-top: var(--space-6); }
+  .lx-docs .lx-doc-table .lx-doc-form.is-empty { display: none; }
+  .lx-docs .lx-doc-table .lx-doc-submit { grid-area: submit; margin-top: var(--space-6); }
+  .lx-docs .lx-doc-table .lx-doc-form.is-empty + .lx-doc-submit { grid-column: 1 / -1; }
+  .lx-docs .lx-doc-table .lx-doc-form .ds-btn,
+  .lx-docs .lx-doc-table .lx-doc-submit .ds-btn { width: 100%; }
+  /* 반려 사유: 그 카드 아래쪽에 붙임 */
+  .lx-docs .lx-doc-table tr.has-note { border-bottom: 0; border-radius: var(--radius-12) var(--radius-12) 0 0; padding-bottom: var(--space-12); }
+  .lx-docs .lx-doc-table .lx-doc-note-row { display: block; margin-top: calc(-1 * var(--space-12)); padding: 0 var(--space-16) var(--space-16); border: 1px solid var(--color-border-default); border-top: 0; border-radius: 0 0 var(--radius-12) var(--radius-12); }
+  .lx-doc-note { flex-direction: column; gap: 2px; padding: var(--space-10) var(--space-12); }
 }

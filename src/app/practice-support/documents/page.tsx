@@ -166,15 +166,15 @@ export default function PracticeDocumentsPage() {
                   return (
                   <Fragment key={doc.id}>
                   <tr className={note ? "has-note" : undefined}>
-                    <td className="is-left">
+                    <td className="is-left lx-doc-name">
                       <strong>{doc.name}</strong>
                     </td>
-                    <td className="is-left">{doc.description}</td>
-                    <td className="is-left">{preparation[doc.id]?.how}</td>
-                    <td>
+                    <td className="is-left lx-doc-desc">{doc.description}</td>
+                    <td className="is-left lx-doc-how">{preparation[doc.id]?.how}</td>
+                    <td className="lx-doc-state">
                       <Badge>{doc.status}</Badge>
                     </td>
-                    <td>
+                    <td className={`lx-doc-form${preparation[doc.id]?.hasForm ? "" : " is-empty"}`}>
                       {preparation[doc.id]?.hasForm ? (
                         <TodoButton
                           className="ds-btn ds-btn--secondary ds-btn--sm"
@@ -185,7 +185,7 @@ export default function PracticeDocumentsPage() {
                         "-"
                       )}
                     </td>
-                    <td>
+                    <td className="lx-doc-submit">
                       {/* TODO: API 서류 파일 올리기 (나의 강의실 팝업과 같은 처리) */}
                       <TodoButton
                         className={`ds-btn ds-btn--sm ${doc.status === "제출 완료" ? "ds-btn--secondary" : "ds-btn--primary"}`}
