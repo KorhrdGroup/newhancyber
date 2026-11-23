@@ -109,9 +109,9 @@
 .ex-voucher .ex-section { margin-top: var(--space-48); }
 .ex-voucher .ex-page-head + .ex-section { margin-top: var(--space-32); }
 .ex-voucher .ex-section-title { margin-bottom: var(--space-16); }
-/* 맨 위 상자: 다른 묶음처럼 왼쪽 맞춤, 그림은 왼쪽 */
-.ex-voucher .ex-hero { display: flex; align-items: center; gap: var(--space-28); padding: var(--space-28) var(--space-40); text-align: left; }
-.ex-hero-icon { flex-shrink: 0; width: 104px; height: 104px; object-fit: contain; }
+/* 맨 위 상자: 글은 왼쪽 맞춤, 두 손 그림은 오른쪽에 크게 (배너처럼 양쪽 균형) */
+.ex-voucher .ex-hero { display: flex; flex-direction: row-reverse; align-items: center; justify-content: space-between; gap: var(--space-28); padding: var(--space-28) var(--space-56) var(--space-28) var(--space-40); text-align: left; }
+.ex-hero-icon { flex-shrink: 0; width: 148px; height: 148px; margin: calc(-1 * var(--space-12)) 0; object-fit: contain; }
 .ex-voucher .ex-hero-title { margin-top: var(--space-4); }
 /* 글자 굵기 단계: 800 화면 제목 · 700 상자 큰 문구와 묶음 제목 · 600 카드 이름 · 단계 이름 · 금액 · 500 라벨 · 번호 · 400 설명 */
 .ex-voucher .ex-hero-label { font-weight: 500; }
@@ -228,13 +228,13 @@
   .ex-vflow-arrow { top: -11px; left: 50%; transform: translateX(-50%) rotate(90deg); }
   .ex-vflow-icon { flex-shrink: 0; width: 64px; height: 64px; }
   .ex-vflow-title { margin-top: 0; }
-  .ex-hero-icon { width: 64px; height: 64px; }
+  .ex-hero-icon { width: 72px; height: 72px; margin: 0; }
   .ds2 .ex-voucher .ex-contact { padding: var(--space-12) var(--space-4); }
   .ds2 .ex-voucher .ex-contact + .ex-contact { border-top: 1px solid var(--color-border-cool); border-left: 0; }
   .ex-cta { flex-direction: column; align-items: stretch; margin: 0 var(--space-16); padding: var(--space-16) 0 var(--space-20); }
   .ex-voucher .ex-section { margin-top: var(--space-40); }
   .ex-voucher .ex-page-head + .ex-section { margin-top: 0; }
-  .ex-voucher .ex-hero { gap: var(--space-16); padding: var(--space-20); }
+  .ex-voucher .ex-hero { gap: var(--space-12); padding: var(--space-20); }
   .ex-uses li { padding: var(--space-12) var(--space-16); }
   .ex-cta .ex-actions { flex-direction: column; }
   .ex-cta .ex-actions .ds-btn { width: 100%; }
