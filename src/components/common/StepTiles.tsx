@@ -3,7 +3,7 @@ import "@/styles/step-tiles.css";
 
 /**
  * 공통 흐름도 — 타일 + 연결 배지 (2026-11-23 새 공통 모양).
- * 단계마다 흰 타일(STEP 꼬리표 · 3D 아이콘 · 이름 · 설명), 타일 사이 경계에 회색 동그라미 배지(› 다음).
+ * 단계마다 흰 타일((numbered 일 때) STEP 꼬리표 · 3D 아이콘 · 이름 · 설명), 타일 사이 경계에 회색 동그라미 배지(› 다음).
  * "plus" 로 이어진 항목은 한 단계라서 한 타일 안에 + 로 나란히 둔다.
  * highlightLast: 마지막 타일이 얻는 결과(학위·자격증·응시 자격)일 때만 연파랑으로 도착점 표시. PC 가로 · 폰(768px 이하) 세로로 쌓고 배지는 아래 방향.
  */
@@ -88,7 +88,7 @@ export default function StepTiles({
   plain = false,
   wideLast = false,
   weights,
-  numbered = true,
+  numbered = false,
   highlightLast = false,
 }: {
   items: StepTile[];
@@ -101,7 +101,7 @@ export default function StepTiles({
   wideLast?: boolean;
   /** 단계별 너비 비율 (여러 흐름도의 배지 위치를 맞출 때). 없으면 묶인 항목 수만큼 */
   weights?: number[];
-  /** STEP 01… 꼬리표. 차례로 밟는 절차가 아닌 그림(개념·조건·학점 합계)은 false */
+  /** STEP 01… 꼬리표. 화살표로 순서는 보이므로 원본에도 번호가 있던 흐름도(학점은행제 흐름도·바우처)에만 켠다 */
   numbered?: boolean;
   /** 마지막 단계가 얻는 결과(학위·자격증 등)면 연파랑. 그냥 절차의 끝이면 false */
   highlightLast?: boolean;

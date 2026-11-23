@@ -83,7 +83,7 @@ export default function CourseVoucherPage() {
             <h2 className="ex-section-title">이용 방법</h2>
             {/* 연한 판 하나에 공통 흐름도(타일 + 연결 배지), 아래에 안내 문구 + 버튼 */}
             <div className="ex-vflow-box">
-              <StepTiles plain items={voucherSteps.map((step) => ({ icon: step.icon, title: step.title, desc: step.desc }))} />
+              <StepTiles plain numbered items={voucherSteps.map((step) => ({ icon: step.icon, title: step.title, desc: step.desc }))} />
               <div className="ex-cta">
                 <p className="ex-note">
                   신청 기간과 필요한 서류는 해마다 달라요.{" "}
