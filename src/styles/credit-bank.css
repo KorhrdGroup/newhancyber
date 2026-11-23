@@ -170,7 +170,7 @@
   background: repeating-linear-gradient(to right, var(--color-icon-muted) 0 2px, transparent 2px 4px);
 }
 .cb-grid-icon { width: 80px; height: 80px; object-fit: contain; }
-.cb-grid-label { font-size: 12px; font-weight: 500; line-height: 1.4; color: var(--color-text-strong); text-align: center; word-break: keep-all; }
+.cb-grid-label { font-size: 13px; font-weight: 500; line-height: 1.4; color: var(--color-text-strong); text-align: center; word-break: keep-all; }
 
 /* 학점은행제 흐름도: 위는 점점 진해지는 STEP 화살표 띠, 아래는 단계별 흰 카드. 선·그림자 없이 면으로만. STEP 5는 남색 띠 아래 셋 중 하나 */
 .cb-steps { padding: var(--space-24); }
