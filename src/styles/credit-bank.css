@@ -204,6 +204,9 @@
 .cb-steps-icon { width: 80px; height: 80px; object-fit: contain; }
 .cb-steps-label { font-size: 15px; font-weight: 500; line-height: 1.4; color: var(--color-text-strong); word-break: keep-all; }
 .cb-steps-final { display: flex; flex: 1; flex-direction: column; justify-content: center; margin: 0; padding: var(--space-8) var(--space-16); border-radius: var(--radius-16); background: var(--color-bg-default); list-style: none; }
+/* 카드는 위 화살표 띠보다 양쪽으로 조금 좁게 */
+.cb-steps-card,
+.cb-steps-final { margin-inline: 10px; }
 .cb-steps-choice { display: flex; flex-direction: column; }
 .cb-steps-choice-row { display: flex; align-items: center; gap: var(--space-12); padding: var(--space-6) 0; }
 .cb-steps-choice-icon { flex: none; width: 40px; height: 40px; object-fit: contain; }
@@ -248,6 +251,8 @@
   .cb-steps-col--final .cb-steps-seg { padding-bottom: 0; border-radius: var(--radius-8); -webkit-mask: none; mask: none; }
   .cb-steps-card { flex-direction: row; justify-content: flex-start; gap: var(--space-12); padding: var(--space-12); text-align: left; }
   .cb-steps-icon { width: 52px; height: 52px; }
+  .cb-steps-card,
+  .cb-steps-final { margin-inline: 0; }
   .cb-steps-final { padding: var(--space-8) var(--space-12); }
   .cb-steps-choice-icon { width: 36px; height: 36px; }
   .cb-steps-choice-label { font-size: 14px; }
