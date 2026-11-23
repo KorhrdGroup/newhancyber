@@ -185,10 +185,15 @@
   font-weight: 700;
   color: #fff;
   white-space: nowrap;
-  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%, 14px 50%);
+  /* 화살표 모양: 왼쪽 홈 · 가운데 · 오른쪽 뾰족 끝을 마스크 세 장으로. 끝 그림은 모서리가 둥근(r 3) 다각형 */
+  --seg-l: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 40' preserveAspectRatio='none'%3E%3Cpolygon points='6.24,3 30,3 30,37 6.24,37 19.84,20' stroke='black' stroke-width='6' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --seg-r: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 40' preserveAspectRatio='none'%3E%3Cpolygon points='-10,3 2.56,3 16.16,20 2.56,37 -10,37' stroke='black' stroke-width='6' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --seg-mask: var(--seg-l) left / 20px 100% no-repeat, linear-gradient(#000 0 0) center / calc(100% - 38px) 100% no-repeat, var(--seg-r) right / 20px 100% no-repeat;
+  -webkit-mask: var(--seg-mask);
+  mask: var(--seg-mask);
 }
-.cb-steps-col:first-child .cb-steps-seg { border-radius: var(--radius-8) 0 0 var(--radius-8); clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%); }
-.cb-steps-col--final .cb-steps-seg { border-radius: 0 var(--radius-8) var(--radius-8) 0; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 14px 50%); }
+.cb-steps-col:first-child .cb-steps-seg { --seg-l: linear-gradient(#000 0 0); border-radius: var(--radius-8) 0 0 var(--radius-8); }
+.cb-steps-col--final .cb-steps-seg { --seg-r: linear-gradient(#000 0 0); border-radius: 0 var(--radius-8) var(--radius-8) 0; }
 /* 단계가 갈수록 진해지는 파랑 (흰 글자가 읽히는 밝기부터 → 브랜드 파랑 → 남색) */
 .cb-steps-col:nth-child(1) .cb-steps-seg { background: #4a8af6; }
 .cb-steps-col:nth-child(2) .cb-steps-seg { background: #3479f3; }
@@ -203,7 +208,7 @@
 .cb-steps-choice-row { display: flex; align-items: center; gap: var(--space-12); padding: var(--space-6) 0; }
 .cb-steps-choice-icon { flex: none; width: 40px; height: 40px; object-fit: contain; }
 .cb-steps-choice-label { font-size: 15px; font-weight: 600; line-height: 1.35; color: var(--color-text-strong); word-break: keep-all; }
-.cb-steps-or { padding: 2px 0 2px 52px; font-size: 12px; font-weight: 600; line-height: 1; color: var(--color-text-secondary); }
+.cb-steps-or { padding: 2px 0; font-size: 12px; font-weight: 600; line-height: 1; color: var(--color-text-secondary); text-align: center; }
 
 @media (max-width: 768px) {
   /* 흐름은 한 줄에 하나씩 쌓고, 사이 표시는 아래 방향으로 */
@@ -239,12 +244,11 @@
   .cb-steps-col { flex-direction: row; gap: var(--space-8); }
   .cb-steps-seg,
   .cb-steps-col:first-child .cb-steps-seg,
-  .cb-steps-col--final .cb-steps-seg { flex: none; width: 64px; height: auto; padding-bottom: 8px; font-size: 12px; border-radius: var(--radius-8) var(--radius-8) 0 0; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), 50% 100%, 0 calc(100% - 10px)); }
-  .cb-steps-col--final .cb-steps-seg { padding-bottom: 0; border-radius: var(--radius-8); clip-path: none; }
+  .cb-steps-col--final .cb-steps-seg { flex: none; width: 64px; height: auto; padding-bottom: 8px; font-size: 12px; border-radius: var(--radius-8) var(--radius-8) 0 0; --seg-mask: linear-gradient(#000 0 0) top / 100% calc(100% - 13px) no-repeat, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 14' preserveAspectRatio='none'%3E%3Cpolygon points='3,-8 61,-8 61,2.9 32,10.9 3,2.9' stroke='black' stroke-width='6' stroke-linejoin='round'/%3E%3C/svg%3E") bottom / 100% 14px no-repeat; }
+  .cb-steps-col--final .cb-steps-seg { padding-bottom: 0; border-radius: var(--radius-8); -webkit-mask: none; mask: none; }
   .cb-steps-card { flex-direction: row; justify-content: flex-start; gap: var(--space-12); padding: var(--space-12); text-align: left; }
   .cb-steps-icon { width: 52px; height: 52px; }
   .cb-steps-final { padding: var(--space-8) var(--space-12); }
   .cb-steps-choice-icon { width: 36px; height: 36px; }
   .cb-steps-choice-label { font-size: 14px; }
-  .cb-steps-or { padding-left: 48px; }
 }
