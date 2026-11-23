@@ -21,17 +21,21 @@ export function CbIconFlow({
   items,
   joins,
   numbered = true,
+  highlightLast = false,
 }: {
   items: CbFlowItem[];
   joins: ("plus" | "arrow")[];
   /** 차례로 밟는 절차가 아니면 false (STEP 꼬리표 없음) */
   numbered?: boolean;
+  /** 마지막이 얻는 결과(학위 수여 등)면 연파랑 */
+  highlightLast?: boolean;
 }) {
   return (
     <StepTiles
       items={items.map((item) => ({ icon: `${ICON}/cb-icon-${item.icon}.png`, title: item.label }))}
       joins={joins}
       numbered={numbered}
+      highlightLast={highlightLast}
     />
   );
 }
@@ -69,6 +73,7 @@ export function CbStepFlow({
         { choices: finals.map((item) => ({ icon: `${ICON}/cb-icon-${item.icon}.png`, title: item.label })) },
       ]}
       wideLast
+      highlightLast
     />
   );
 }

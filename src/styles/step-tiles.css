@@ -23,7 +23,7 @@
   background: var(--color-bg-default);
   text-align: center;
 }
-.st-tile:last-child:not(:first-child) { background: var(--color-bg-tone-blue); }
+.st-flow--goal .st-tile:last-child { background: var(--color-bg-tone-blue); }
 /* STEP 꼬리표 */
 .st-no {
   align-self: flex-start;
@@ -36,7 +36,7 @@
   letter-spacing: 0.02em;
   color: var(--color-text-secondary);
 }
-.st-tile:last-child:not(:first-child) .st-no { background: var(--color-bg-default); }
+.st-flow--goal .st-tile:last-child .st-no { background: var(--color-bg-default); }
 .st-icon { width: 84px; height: 84px; margin: 2px 0 6px; object-fit: contain; }
 /* 안에 목록·숫자가 든 타일이 있어 높을 때: 나머지 타일은 아이콘·글자를 남은 공간 가운데로 */
 @media (min-width: 769px) {

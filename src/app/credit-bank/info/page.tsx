@@ -28,6 +28,7 @@ export default function CreditBankInfoPage() {
             ]}
             joins={["plus", "arrow", "arrow"]}
             numbered={false}
+            highlightLast
           />
         </section>
 

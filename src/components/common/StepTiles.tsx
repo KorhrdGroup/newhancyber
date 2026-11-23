@@ -5,7 +5,7 @@ import "@/styles/step-tiles.css";
  * 공통 흐름도 — 타일 + 연결 배지 (2026-11-23 새 공통 모양).
  * 단계마다 흰 타일(STEP 꼬리표 · 3D 아이콘 · 이름 · 설명), 타일 사이 경계에 회색 동그라미 배지(› 다음).
  * "plus" 로 이어진 항목은 한 단계라서 한 타일 안에 + 로 나란히 둔다.
- * 마지막 타일은 연파랑으로 도착점 표시. PC 가로 · 폰(768px 이하) 세로로 쌓고 배지는 아래 방향.
+ * highlightLast: 마지막 타일이 얻는 결과(학위·자격증·응시 자격)일 때만 연파랑으로 도착점 표시. PC 가로 · 폰(768px 이하) 세로로 쌓고 배지는 아래 방향.
  */
 export interface StepTile {
   /** 아이콘 그림 주소 */
@@ -89,6 +89,7 @@ export default function StepTiles({
   wideLast = false,
   weights,
   numbered = true,
+  highlightLast = false,
 }: {
   items: StepTile[];
   /** joins[i] = i번째와 i+1번째 사이. 기본은 모두 "arrow". "plus" 는 같은 단계로 묶음 */
@@ -102,6 +103,8 @@ export default function StepTiles({
   weights?: number[];
   /** STEP 01… 꼬리표. 차례로 밟는 절차가 아닌 그림(개념·조건·학점 합계)은 false */
   numbered?: boolean;
+  /** 마지막 단계가 얻는 결과(학위·자격증 등)면 연파랑. 그냥 절차의 끝이면 false */
+  highlightLast?: boolean;
 }) {
   // "plus" 로 이어진 항목끼리 한 단계로 묶는다
   const steps: StepTile[][] = [];
@@ -113,7 +116,7 @@ export default function StepTiles({
 
   return (
     <ol
-      className={`st-flow${plain ? " st-flow--plain" : ""}${numbered ? "" : " st-flow--unnumbered"}${wideLast ? " st-flow--wide-last" : ""}`}
+      className={`st-flow${plain ? " st-flow--plain" : ""}${numbered ? "" : " st-flow--unnumbered"}${highlightLast ? " st-flow--goal" : ""}${wideLast ? " st-flow--wide-last" : ""}`}
       style={
         {
           "--st-n": steps.length,

@@ -16,6 +16,7 @@ const procedure = (
           { icon: "graduation", label: "학위수여" },
         ]}
         joins={["arrow", "arrow", "arrow"]}
+        highlightLast
       />
       <div className="lx-table-scroll">
         <table className="ds-table lx-table cb-schedule">
