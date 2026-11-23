@@ -1,13 +1,20 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import InquiryList from "@/components/learning-support/extra/InquiryList";
-import { inquiries } from "@/components/learning-support/extra/inquiryData";
+import { InquiryLoginNeeded, InquiryUnavailable, toInquiries } from "@/components/learning-support/extra/MemberInquiries";
+import { loadCurrentMember, loadMemberInquiries } from "@/lib/publicBoards";
 
 export const metadata: Metadata = { title: "1:1 문의" };
 
-// TODO: 로그인 확인 — 로그인하지 않았으면 /member/login 으로 보낸다 (원본도 로그인해야 열림)
-// TODO: API — 로그인한 학습자의 문의 목록·페이지 정보
-export default function LearningInquiryPage() {
+/**
+ * 1:1 문의 — board_posts.qna 가운데 로그인한 회원이 쓴 글만(author_type member · author_id 회원 번호).
+ * 답변은 관리자 「게시판 관리 › 1:1 문의」의 answer_content · answered_at. 로그인하지 않았으면 목록 자리에 로그인 안내.
+ */
+export default async function LearningInquiryPage() {
+  const member = await loadCurrentMember();
+  const list = member && member !== "failed" ? await loadMemberInquiries(member.memberId) : null;
+  const items = list ? toInquiries(list.rows) : [];
+
   return (
     <main className="wrapper">
       <div className="container lx-page lx-page--top lx-page--plain">
@@ -21,12 +28,20 @@ export default function LearningInquiryPage() {
           </Link>
         </div>
 
-        <div className="lx-board-bar lx-inquiry-bar">
-          <p className="lx-board-count">
-            총 <strong>{inquiries.length}</strong>건
-          </p>
-        </div>
-        <InquiryList items={inquiries} />
+        {member === null ? (
+          <InquiryLoginNeeded />
+        ) : member === "failed" || list?.failed ? (
+          <InquiryUnavailable />
+        ) : (
+          <>
+            <div className="lx-board-bar lx-inquiry-bar">
+              <p className="lx-board-count">
+                총 <strong>{items.length}</strong>건
+              </p>
+            </div>
+            <InquiryList items={items} />
+          </>
+        )}
       </div>
     </main>
   );

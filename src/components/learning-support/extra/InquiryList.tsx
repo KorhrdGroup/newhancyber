@@ -1,19 +1,32 @@
 "use client";
 
 import { useState } from "react";
-import type { Inquiry } from "./inquiryData";
 import "@/styles/learning-extra.css";
+
+/** 1:1 문의 한 줄 — board_posts.qna (본문 · 답변은 글자 그대로, 줄바꿈만 살려 보인다) */
+export interface Inquiry {
+  id: string;
+  title: string;
+  /** 문의일 (YY.MM.DD) */
+  date: string;
+  body: string;
+  answer?: {
+    date: string;
+    body: string;
+  };
+}
 
 /**
  * 1:1 문의 목록 — FAQ 와 같은 질문 접기(Accordion). 줄을 누르면 페이지 이동 없이 그 자리에서
  * 내 문의 글과 답변(또는 답변 대기 안내)이 부드럽게 펼쳐진다. 한 번에 하나만 열린다.
+ * 관리자 1:1 문의는 첨부가 없어서(관리자 boards.ts files: false) 첨부 칸도 없다.
  */
-export default function InquiryList({ items }: { items: Inquiry[] }) {
+export default function InquiryList({ items, emptyText = "남긴 문의가 없습니다." }: { items: Inquiry[]; emptyText?: string }) {
   const [openId, setOpenId] = useState<string | null>(null);
 
   return (
     <div className="ds-accordion lx-inquiry-list">
-      {items.length === 0 && <p className="ds-accordion-empty">남긴 문의가 없습니다.</p>}
+      {items.length === 0 && <p className="ds-accordion-empty">{emptyText}</p>}
       {items.map((item) => {
         const isOpen = openId === item.id;
         const panelId = `inquiry-${item.id}`;
@@ -42,26 +55,8 @@ export default function InquiryList({ items }: { items: Inquiry[] }) {
               <div className="ds-accordion-panel-inner">
                 <div className="lx-inquiry-detail">
                   <div className="lx-post-body">
-                    {item.body.map((line, i) => (
-                      <p key={i}>{line}</p>
-                    ))}
+                    <p className="lx-article-text">{item.body}</p>
                   </div>
-                  {item.fileName && (
-                    // TODO: 첨부파일 다운로드 링크
-                    <p className="lx-file-chip" aria-label={`첨부파일 ${item.fileName}`}>
-                      <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none">
-                        <path
-                          d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                      {item.fileName}
-                    </p>
-                  )}
-
                   {item.answer ? (
                     <section className="lx-answer">
                       <div className="lx-answer-head">
@@ -69,9 +64,7 @@ export default function InquiryList({ items }: { items: Inquiry[] }) {
                         <span className="lx-post-meta">답변일 {item.answer.date}</span>
                       </div>
                       <div className="lx-post-body">
-                        {item.answer.body.map((line, i) => (
-                          <p key={i}>{line}</p>
-                        ))}
+                        <p className="lx-article-text">{item.answer.body}</p>
                       </div>
                     </section>
                   ) : (

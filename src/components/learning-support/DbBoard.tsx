@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { BOARD_PAGE_SIZE, isSearchScope, type BoardListRow, type SearchScope } from "@/lib/db/boardPosts";
-import { BoardTable, MobileBoardList, Pagination, SearchBox } from "./BoardParts";
+import { BoardTable, MobileBoardList, Pagination, SearchBox, type BoardColumn } from "./BoardParts";
 import type { BoardPost } from "./boardData";
 
 /**
- * DB 게시판(공지사항 · 학사일정 · 실습공지사항) 목록 화면 — 서버에서 그린다.
+ * DB 게시판(공지사항 · 학사일정 · 실습공지사항 · 자료실 · 수강후기) 목록 화면 — 서버에서 그린다.
  * 구분 세그먼트 · 검색 · 페이지 번호는 모두 주소(?tag= &q= &scope= &page=)로 움직인다.
  * 모양은 예전 TagFilterBoard(샘플 데이터용)와 같다.
  */
@@ -97,6 +97,10 @@ export default function DbBoardList({
   tags,
   label,
   failed,
+  topPosts = [],
+  topTotal,
+  columns,
+  dateLabel,
 }: {
   kind: "notice" | "schedule";
   basePath: string;
@@ -109,7 +113,16 @@ export default function DbBoardList({
   label?: string;
   /** DB 를 읽지 못했을 때 — 빈 목록 대신 안내 */
   failed?: boolean;
+  /** 쪽마다 목록 맨 위에 붙는 글 (수강후기 위 BEST 장학후기) — 쪽 번호 · 글 수 계산과 따로 */
+  topPosts?: BoardPost[];
+  /** 「총 N건」에 더할 topPosts 쪽 전체 글 수 (보이는 것보다 많을 때). 없으면 topPosts 개수 */
+  topTotal?: number;
+  /** 번호 · 제목 · 날짜 말고 더 붙는 칸 (수강후기의 학습자명) */
+  columns?: BoardColumn[];
+  /** 날짜 칸 이름 (기본 「작성일」) */
+  dateLabel?: string;
 }) {
+  const shown = [...topPosts, ...posts];
   const pages = Math.max(1, Math.ceil(total / BOARD_PAGE_SIZE));
   // 세그먼트 칸은 다른 주소로 가는 링크라서 탭(role=tab)이 아니라 이동 메뉴(nav)로 읽히게 하고, 지금 칸은 aria-current
   const segment = tags ? (
@@ -145,12 +158,12 @@ export default function DbBoardList({
   return (
     <>
       {segment && <div className="lx-board-segment mobile-only">{segment}</div>}
-      {posts.length > 0 ? <MobileBoardList kind={kind} posts={posts} /> : <div className="mobile-only">{empty}</div>}
+      {shown.length > 0 ? <MobileBoardList kind={kind} posts={shown} dateLabel={dateLabel} /> : <div className="mobile-only">{empty}</div>}
 
       <div className="practice-support-notice-list-section desktop-only">
         <div className="container" style={{ backgroundColor: "#fff" }}>
-          <SearchBox total={total} lead={segment ?? undefined} search={search} />
-          {posts.length > 0 ? <BoardTable posts={posts} /> : empty}
+          <SearchBox total={total + (topTotal ?? topPosts.length)} lead={segment ?? undefined} search={search} />
+          {shown.length > 0 ? <BoardTable posts={shown} columns={columns} dateLabel={dateLabel} /> : empty}
           <Pagination className="desktop-only" pages={pages} current={params.page} hrefFor={hrefFor} />
         </div>
       </div>

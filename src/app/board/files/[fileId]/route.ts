@@ -2,8 +2,8 @@ import { isDbConfigured } from "@/lib/db/client";
 import { getPublicBoardFile } from "@/lib/db/boardPosts";
 
 /**
- * 공개 게시판(공지사항 · 학사일정 · 실습공지사항) 첨부 받기 — 관리자 사이트의 /board/files/{번호} 와 같은 모양.
- * 지운 글 · 지운 첨부 · 다른 게시판(1:1 문의 · 학습 게시판 등)의 첨부는 404.
+ * 공개 게시판(공지사항 · 학사일정 · 실습공지사항 · 자료실 · 장학후기) 첨부 받기 — 관리자 사이트의 /board/files/{번호} 와 같은 모양.
+ * 지운 글 · 지운 첨부 · 다른 게시판(1:1 문의 · 학습 게시판 등)의 첨부 · 장학후기 썸네일(→ /board/thumbs)은 404.
  * 브라우저가 열어 보지 않고 늘 내려받게 한다(올린 파일 종류와 상관없이) — 첨부 안 스크립트가 이 사이트에서 돌지 않게.
  */
 export async function GET(_req: Request, { params }: { params: Promise<{ fileId: string }> }) {

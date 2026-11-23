@@ -21,6 +21,8 @@ interface FaqListProps {
   desc?: string;
   /** 분류가 둘 이상일 때만 위에 분류 탭이 나온다 (실습지원 FAQ 는 분류 하나 → 탭 없음) */
   sections?: FaqSection[];
+  /** DB 를 읽지 못했을 때 — 목록 자리에 이 안내를 보인다 */
+  unavailable?: string;
 }
 
 /**
@@ -31,6 +33,7 @@ export default function FaqList({
   title = "자주 묻는 질문",
   desc = "궁금한 내용을 분류나 검색어로 찾아보세요. 찾는 답이 없으면 1:1 문의를 남겨 주세요.",
   sections = faqSections,
+  unavailable,
 }: FaqListProps) {
   const allItems = flatten(sections);
   const tabs = sections.length > 1 ? [ALL, ...sections.map((section) => section.title)] : [];
@@ -100,7 +103,13 @@ export default function FaqList({
       </form>
 
       <div className="ds-accordion">
-        {items.length === 0 && <p className="ds-accordion-empty">찾는 질문이 없어요. 다른 검색어로 찾아보세요.</p>}
+        {unavailable ? (
+          <p className="ds-accordion-empty">{unavailable}</p>
+        ) : (
+          items.length === 0 && (
+            <p className="ds-accordion-empty">{allItems.length === 0 ? "등록된 질문이 없습니다." : "찾는 질문이 없어요. 다른 검색어로 찾아보세요."}</p>
+          )
+        )}
         {items.map((item) => {
           const isOpen = openKey === item.key;
           const answerId = `faq-answer-${item.key}`;
