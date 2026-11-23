@@ -68,7 +68,7 @@ export default function ConsultationFloatingBar() {
         </p>
         <p className="consultation-floating-text mobile-only">잠깐! 도움을 받고싶다면 지금 바로</p>
         <a href={`#${MOBILE_SECTION_ID}`} className="consultation-floating-btn" onClick={scrollToOptions}>
-          {/* 예전 형광 그러데이션 버튼 그림 대신 글자 버튼 (연두 = 혜택 제목 강조색) */}
+          {/* 예전 형광 그러데이션 버튼 그림 대신 글자 버튼 */}
           <span className="desktop-only">신청하러 가기</span>
           <span className="mobile-only">상담 신청</span>
           <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" className="consultation-floating-btn-arrow">
