@@ -260,7 +260,8 @@
 .lx-doc-status-course { font-size: 14px; font-weight: 600; color: var(--color-text-strong); }
 .lx-doc-status-stats { display: flex; gap: var(--space-40); margin-top: var(--space-12); }
 .lx-doc-status-actions { display: flex; flex-wrap: wrap; gap: var(--space-8); }
-.lx-doc-table td:first-child { white-space: nowrap; }
+.lx-doc-table td:first-child,
+.lx-doc-table tr:not(.lx-doc-note-row) td:nth-last-child(-n+3) { white-space: nowrap; }
 /* 진행 막대 + 다시 낼 서류(반려 사유) */
 .lx-doc-progress { width: 280px; height: 6px; margin-top: var(--space-12); border-radius: var(--radius-full); background: var(--color-border-default); overflow: hidden; }
 .lx-doc-progress span { display: block; height: 100%; border-radius: inherit; background: var(--color-text-strong); }
@@ -641,4 +642,5 @@
   .lx-doc-status-stats { gap: var(--space-24); }
   .lx-doc-status-actions .ds-btn { flex: 1; }
   .lx-doc-progress { width: 100%; }
+  .lx-doc-table { min-width: 760px; } /* 칸이 6개라 좁게 눌려 글이 한두 글자씩 꺾이지 않게 */
 }

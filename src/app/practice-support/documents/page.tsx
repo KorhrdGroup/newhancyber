@@ -20,7 +20,7 @@ export const metadata: Metadata = { title: "서류제출" };
  * 원본은 제목만 있는 빈 페이지 (README: "자체개발").
  * 서류 6종은 원본 나의 강의실 실습 과목의 사전 서류(기본정보·성적증명서·개인정보활용동의서·
  * 실습생 프로파일·실습일정표·실습기관현황서)를 따랐고, 나머지 안내는 새로 썼다.
- * 실제 파일 올리기는 나의 강의실의 '실습 서류 제출' 팝업에서 한다.
+ * 파일 올리기는 아래 표의 서류마다 하고, 나의 강의실 '실습 서류 제출' 팝업에서도 할 수 있다.
  */
 const preparation: Record<string, { how: string; hasForm: boolean }> = {
   basic: { how: "제출 화면에서 바로 입력", hasForm: false },
@@ -42,7 +42,7 @@ const steps = [
   },
   {
     title: "올리기",
-    text: "나의 강의실 > 실습 과목 > 실습 서류 제출에서 파일을 올립니다.",
+    text: "아래 표에서 서류마다 파일을 올립니다.",
     icon: `${ICON}/cb-icon-doc-upload.png`,
   },
 ];
@@ -157,6 +157,7 @@ export default function PracticeDocumentsPage() {
                   <th>준비 방법</th>
                   <th>내 상태</th>
                   <th>서식</th>
+                  <th>제출</th>
                 </tr>
               </thead>
               <tbody>
@@ -184,11 +185,23 @@ export default function PracticeDocumentsPage() {
                         "-"
                       )}
                     </td>
+                    <td>
+                      {/* TODO: API 서류 파일 올리기 (나의 강의실 팝업과 같은 처리) */}
+                      <TodoButton
+                        className={`ds-btn ds-btn--sm ${doc.status === "제출 완료" ? "ds-btn--secondary" : "ds-btn--primary"}`}
+                        label={
+                          doc.id === "basic"
+                            ? doc.status === "미제출" ? "입력하기" : "고치기"
+                            : doc.status === "미제출" ? "파일 올리기" : "다시 올리기"
+                        }
+                        message={doc.id === "basic" ? "기본정보 입력은" : `${doc.name} 올리기는`}
+                      />
+                    </td>
                   </tr>
                   {/* 반려 사유: 그 서류 줄 바로 아래 한 줄 띠 */}
                   {note && (
                     <tr className="lx-doc-note-row">
-                      <td colSpan={5} className="is-left">
+                      <td colSpan={6} className="is-left">
                         <p className="lx-doc-note">
                           <strong>반려 사유</strong>
                           {note}
