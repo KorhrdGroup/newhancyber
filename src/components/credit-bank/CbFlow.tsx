@@ -97,23 +97,27 @@ export function CbStepFlow({
             </div>
           </li>
         ))}
+        {/* 마지막 단계: 셋 중 하나를 세로로 쌓은 칸 */}
+        <li className="cb-steps-item">
+          <span className="cb-flow-join cb-flow-join--arrow">
+            <CbMark kind="right" />
+          </span>
+          <div className="cb-steps-final">
+            <span className="cb-step-no">STEP {steps.length + 1}</span>
+            <ul className="cb-steps-choices">
+              {finals.map((item, i) => (
+                <li key={item.label} className="cb-steps-choice">
+                  {i > 0 && <span className="cb-steps-or">or</span>}
+                  <span className="cb-steps-choice-row">
+                    <img src={`${ICON}/cb-icon-${item.icon}.png`} alt="" className="cb-steps-choice-icon" />
+                    <span className="cb-steps-choice-label">{item.label}</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </li>
       </ol>
-      {/* 마지막 단계: 세 갈래 중 하나 */}
-      <div className="cb-steps-branch">
-        <CbMark kind="down" />
-        <span className="cb-step-no">STEP {steps.length + 1}</span>
-      </div>
-      <ul className="cb-steps-choices">
-        {finals.map((item, i) => (
-          <li key={item.label} className="cb-steps-choice">
-            {i > 0 && <span className="cb-steps-or">or</span>}
-            <div className="cb-steps-choice-card">
-              <img src={`${ICON}/cb-icon-${item.icon}.png`} alt="" className="cb-steps-icon" />
-              <span className="cb-steps-label">{item.label}</span>
-            </div>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }

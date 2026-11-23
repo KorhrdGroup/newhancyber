@@ -172,24 +172,25 @@
 .cb-grid-icon { width: 80px; height: 80px; object-fit: contain; }
 .cb-grid-label { font-size: 12px; font-weight: 600; line-height: 1.4; color: var(--color-text-strong); text-align: center; word-break: keep-all; }
 
-/* 학점은행제 흐름도: 한 판 안에 STEP 1~4 가로 흐름 → 아래로 세 갈래(STEP 5) */
-.cb-steps { padding: var(--space-24) var(--space-20) var(--space-32); }
-.cb-steps-row { display: flex; }
-.cb-steps-card { display: flex; flex: 1 1 0; flex-direction: column; align-items: center; gap: var(--space-12); min-width: 0; padding: 0 var(--space-8); text-align: center; }
-.cb-steps-icon { width: 80px; height: 80px; object-fit: contain; }
+/* 학점은행제 흐름도: STEP 1~5 한 줄. 마지막 칸에 셋 중 하나를 세로로 쌓는다 */
+.cb-steps { padding: var(--space-24) var(--space-20); }
+.cb-steps-row { display: flex; align-items: stretch; }
+.cb-steps-card { display: flex; flex: 1 1 0; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-12); min-width: 0; padding: 0 var(--space-4); text-align: center; }
+.cb-steps-icon { width: 72px; height: 72px; object-fit: contain; }
 .cb-steps-text { display: flex; flex-direction: column; align-items: center; gap: 6px; }
 .cb-step-no { font-size: 14px; font-weight: 700; line-height: 1; color: var(--color-text-brand); white-space: nowrap; }
-.cb-steps-label { font-size: 16px; font-weight: 600; line-height: 1.4; color: var(--color-text-strong); word-break: keep-all; }
-.cb-steps-branch { display: flex; flex-direction: column; align-items: center; gap: var(--space-8); margin-top: var(--space-24); padding-bottom: var(--space-8); }
-/* 세 갈래 괄호 선: 가운데에서 내려와 세 카드 가운데로 */
-.cb-steps-choices { --cb-gap: 48px; position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: var(--cb-gap); padding-top: var(--space-24); }
-.cb-steps-choices::before,
-.cb-steps-choices::after { content: ""; position: absolute; top: 0; border-color: var(--color-border-brand-subtle); border-style: solid; }
-.cb-steps-choices::before { left: calc((100% - 2 * var(--cb-gap)) / 6); right: calc((100% - 2 * var(--cb-gap)) / 6); height: var(--space-24); border-width: 1px 1px 0; border-radius: var(--radius-12) var(--radius-12) 0 0; }
-.cb-steps-choices::after { left: 50%; height: var(--space-24); border-width: 0 0 0 1px; }
-.cb-steps-choice { position: relative; display: flex; }
-.cb-steps-choice-card { display: flex; flex: 1; flex-direction: column; align-items: center; gap: var(--space-12); padding: var(--space-20) var(--space-12); border-radius: var(--radius-16); background: var(--color-bg-default); text-align: center; }
-.cb-steps-or { position: absolute; top: 50%; left: calc(var(--cb-gap) / -2); transform: translate(-50%, -50%); font-size: 14px; font-weight: 600; color: var(--color-text-secondary); }
+.cb-steps-label { font-size: 15px; font-weight: 600; line-height: 1.4; color: var(--color-text-strong); word-break: keep-all; }
+.cb-steps-final { display: flex; flex: 1.3 1 0; flex-direction: column; gap: var(--space-8); min-width: 0; padding: var(--space-16); border-radius: var(--radius-16); background: var(--color-bg-default); }
+.cb-steps-final > .cb-step-no { align-self: center; }
+.cb-steps-choices { display: flex; flex-direction: column; }
+.cb-steps-choice { display: flex; flex-direction: column; }
+.cb-steps-choice-row { display: flex; align-items: center; gap: var(--space-8); }
+.cb-steps-choice-icon { flex: none; width: 40px; height: 40px; object-fit: contain; }
+.cb-steps-choice-label { font-size: 14px; font-weight: 600; line-height: 1.35; color: var(--color-text-strong); word-break: keep-all; }
+/* or: 가운데 글자 + 양옆 가는 선 */
+.cb-steps-or { display: flex; align-items: center; gap: var(--space-8); margin: 2px 0; font-size: 12px; font-weight: 600; line-height: 1; color: var(--color-text-secondary); }
+.cb-steps-or::before,
+.cb-steps-or::after { content: ""; flex: 1; height: 1px; background: var(--color-border-default); }
 
 @media (max-width: 768px) {
   /* 흐름은 한 줄에 하나씩 쌓고, 사이 표시는 아래 방향으로 */
@@ -221,16 +222,8 @@
 
   .cb-steps { padding: var(--space-16); }
   .cb-steps-row { flex-direction: column; }
-  .cb-steps-card { flex-direction: row; gap: var(--space-16); padding: var(--space-4) 0; text-align: left; }
-  .cb-steps-row .cb-steps-icon { width: 56px; height: 56px; }
+  .cb-steps-card { flex-direction: row; justify-content: flex-start; gap: var(--space-16); padding: var(--space-4) 0; text-align: left; }
+  .cb-steps-icon { width: 56px; height: 56px; }
   .cb-steps-text { align-items: flex-start; }
-  .cb-steps-label { font-size: 15px; }
-  .cb-steps-branch { margin-top: var(--space-16); }
-  .cb-steps-choices { --cb-gap: 20px; padding-top: var(--space-20); }
-  .cb-steps-choices::before,
-  .cb-steps-choices::after { height: var(--space-20); }
-  .cb-steps-choice-card { gap: var(--space-8); padding: var(--space-12) var(--space-4); }
-  .cb-steps-choice-card .cb-steps-icon { width: 52px; height: 52px; }
-  .cb-steps-choice-card .cb-steps-label { font-size: 13px; }
-  .cb-steps-or { font-size: 12px; }
+  .cb-steps-final > .cb-step-no { align-self: flex-start; }
 }
