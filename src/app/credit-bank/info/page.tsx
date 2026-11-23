@@ -65,7 +65,12 @@ export default function CreditBankInfoPage() {
         <section className="lx-panel">
           <h2 className="lx-section-title">학점은행제 흐름도</h2>
           <CbStepFlow
-            steps={["학위-전공 선택", "학습 설계 및 상담", "학습자 등록 / 학습하기", "학점인정 신청"]}
+            steps={[
+              { icon: "magnifier", label: "학위-전공 선택" },
+              { icon: "chat-person", label: "학습 설계 및 상담" },
+              { icon: "tuition", label: "학습자 등록 / 학습하기" },
+              { icon: "aplus", label: "학점인정 신청" },
+            ]}
             finals={[
               { icon: "graduation", label: "학위 신청 및 학위수여" },
               { icon: "license", label: "자격증 취득" },

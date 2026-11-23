@@ -20,8 +20,7 @@
 .ds2 .lx-step,
 .ds2 .cb-flow,
 .ds2 .cb-grid,
-.ds2 .cb-steps-row,
-.ds2 .cb-steps-final,
+.ds2 .cb-steps,
 .ds2 .lx-doc-status,
 .ds2 .ex-box,
 .ds2 .ex-step,
@@ -50,8 +49,7 @@
 /* 칸 사이 점선은 연한 바탕 위에서 조금 더 옅게 */
 .ds2 .cb-flow-join--arrow::before,
 .ds2 .cb-grid-item + .cb-grid-item::before,
-.ds2 .cb-grid-item:nth-child(n + 5)::after,
-.ds2 .cb-steps-down::before { opacity: 0.6; }
+.ds2 .cb-grid-item:nth-child(n + 5)::after { opacity: 0.6; }
 
 /* 안내 띠 · 상담 띠: 톤 카드 */
 .ds2 .lx-callout,

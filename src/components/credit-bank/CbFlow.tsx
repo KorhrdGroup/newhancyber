@@ -75,45 +75,45 @@ export function CbStepFlow({
   steps,
   finals,
 }: {
-  steps: string[];
+  steps: CbFlowItem[];
   finals: CbFlowItem[];
 }) {
   return (
     <div className="cb-steps">
       <ol className="cb-steps-row">
-        {steps.map((label, i) => (
-          <li key={label} className="cb-steps-item">
+        {steps.map((item, i) => (
+          <li key={item.label} className="cb-steps-item">
             {i > 0 && (
               <span className="cb-flow-join cb-flow-join--arrow">
                 <CbMark kind="right" />
               </span>
             )}
-            <div className="cb-steps-text">
-              <span className="cb-step-no">STEP {i + 1}</span>
-              <span className="cb-steps-label">{label}</span>
+            <div className="cb-steps-card">
+              <img src={`${ICON}/cb-icon-${item.icon}.png`} alt="" className="cb-steps-icon" />
+              <div className="cb-steps-text">
+                <span className="cb-step-no">STEP {i + 1}</span>
+                <span className="cb-steps-label">{item.label}</span>
+              </div>
             </div>
           </li>
         ))}
       </ol>
-      <div className="cb-steps-down">
+      {/* 마지막 단계: 세 갈래 중 하나 */}
+      <div className="cb-steps-branch">
         <CbMark kind="down" />
-      </div>
-      <div className="cb-steps-final">
         <span className="cb-step-no">STEP {steps.length + 1}</span>
-        <ul className="cb-steps-choices">
-          {finals.map((item, i) => (
-            <li key={item.label} className="cb-steps-choice">
-              {i > 0 && (
-                <span className="cb-steps-or">or</span>
-              )}
-              <div className="cb-flow-card">
-                <img src={`${ICON}/cb-icon-${item.icon}.png`} alt="" className="cb-flow-icon" />
-                <span className="cb-flow-label">{item.label}</span>
-              </div>
-            </li>
-          ))}
-        </ul>
       </div>
+      <ul className="cb-steps-choices">
+        {finals.map((item, i) => (
+          <li key={item.label} className="cb-steps-choice">
+            {i > 0 && <span className="cb-steps-or">or</span>}
+            <div className="cb-steps-choice-card">
+              <img src={`${ICON}/cb-icon-${item.icon}.png`} alt="" className="cb-steps-icon" />
+              <span className="cb-steps-label">{item.label}</span>
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
