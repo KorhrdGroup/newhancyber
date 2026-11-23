@@ -26,14 +26,20 @@ export function SearchBox({
   filters,
   lead,
   scopes = DEFAULT_SCOPES,
+  search,
 }: {
   total?: number;
   lead?: ReactNode;
   filters?: ReactNode;
   scopes?: { value: string; label: string }[];
+  /**
+   * 주면 실제로 검색한다 — action 주소로 scope · q 를 GET 으로 보낸다(DB 게시판).
+   * 없으면 예전처럼 모양만 (아직 샘플 데이터인 게시판).
+   */
+  search?: { action: string; q?: string; scope?: string; hidden?: Record<string, string> };
 }) {
   return (
-    <form className="lx-board-bar" role="search">
+    <form className="lx-board-bar" role="search" action={search?.action} method={search ? "get" : undefined}>
       {lead}
       {total !== undefined && (
         <p className="lx-board-count">
@@ -42,16 +48,25 @@ export function SearchBox({
       )}
       <div className={`lx-board-search${filters ? " lx-board-search--wide" : ""}`}>
         {filters}
-        <select className="ds-select" aria-label="검색 범위">
+        {search &&
+          Object.entries(search.hidden ?? {}).map(([name, value]) => <input key={name} type="hidden" name={name} value={value} />)}
+        <select className="ds-select" aria-label="검색 범위" name={search ? "scope" : undefined} defaultValue={search?.scope}>
           {scopes.map((s) => (
             <option key={s.value} value={s.value}>
               {s.label}
             </option>
           ))}
         </select>
-        <input type="search" className="ds-input" placeholder="검색어를 입력하세요" aria-label="검색어" />
-        {/* TODO: 검색 API */}
-        <button type="button" className="ds-btn ds-btn--primary">
+        <input
+          type="search"
+          className="ds-input"
+          placeholder="검색어를 입력하세요"
+          aria-label="검색어"
+          name={search ? "q" : undefined}
+          defaultValue={search?.q}
+          maxLength={search ? 100 : undefined}
+        />
+        <button type={search ? "submit" : "button"} className="ds-btn ds-btn--primary">
           검색
         </button>
       </div>
@@ -149,8 +164,54 @@ export function BoardTable({
   );
 }
 
-/** 페이지 번호 (Figma Pagination). 원본도 1페이지 고정, 동작 없음. TODO: 목록 API 의 페이지 정보로 */
-export function Pagination({ className, pages = 5 }: { className?: string; pages?: number }) {
+/**
+ * 페이지 번호 (Figma Pagination). hrefFor 를 주면 실제 페이지 이동(DB 게시판) — current 둘레로 5쪽까지 보인다.
+ * 없으면 예전처럼 1페이지 고정 모양만 (아직 샘플 데이터인 게시판).
+ */
+export function Pagination({
+  className,
+  pages = 5,
+  current,
+  hrefFor,
+}: {
+  className?: string;
+  pages?: number;
+  current?: number;
+  hrefFor?: (page: number) => string;
+}) {
+  if (hrefFor) {
+    const total = Math.max(1, pages);
+    const now = Math.min(Math.max(1, current ?? 1), total);
+    const start = Math.max(1, Math.min(now - 2, total - 4));
+    const shown = Array.from({ length: Math.min(5, total) }, (_, i) => start + i);
+    const arrow = (page: number, dir: "left" | "right", label: string) =>
+      page < 1 || page > total ? (
+        <button type="button" className="ds-page-btn" disabled aria-label={label}>
+          <img src={`${DS_IMG}/arrow-${dir}.svg`} alt="" />
+        </button>
+      ) : (
+        <Link href={hrefFor(page)} className="ds-page-btn" aria-label={label} style={plainLink}>
+          <img src={`${DS_IMG}/arrow-${dir}.svg`} alt="" />
+        </Link>
+      );
+    return (
+      <nav className={["ds-pagination", className].filter(Boolean).join(" ")} aria-label="페이지 번호">
+        {arrow(now - 1, "left", "이전 페이지")}
+        {shown.map((page) => (
+          <Link
+            key={page}
+            href={hrefFor(page)}
+            className={`ds-page-btn${page === now ? " is-current" : ""}`}
+            aria-current={page === now ? "page" : undefined}
+            style={page === now ? { textDecoration: "none" } : plainLink}
+          >
+            {page}
+          </Link>
+        ))}
+        {arrow(now + 1, "right", "다음 페이지")}
+      </nav>
+    );
+  }
   return (
     <nav className={["ds-pagination", className].filter(Boolean).join(" ")} aria-label="페이지 번호">
       <button type="button" className="ds-page-btn" disabled aria-label="이전 페이지">

@@ -520,6 +520,9 @@
 .lx-article-meta dt { font-weight: 600; color: var(--color-text-default); }
 .lx-article-meta dd { color: var(--color-text-secondary); }
 .lx-article-file { color: var(--color-text-brand); text-decoration: underline; text-underline-offset: 2px; }
+.lx-article-files { display: inline-flex; flex-wrap: wrap; gap: var(--space-4) var(--space-12); }
+/* DB 게시판 본문 — 글자 그대로, 줄바꿈만 살린다 (HTML 로 넣지 않는다) */
+.lx-article-text { white-space: pre-wrap; overflow-wrap: anywhere; }
 .lx-article-body { padding: var(--space-40) var(--space-8); border-bottom: 1px solid var(--color-border-default); font-size: 16px; line-height: 1.7; color: var(--color-text-default); word-break: keep-all; }
 .lx-article-body > :first-child { margin-top: 0; }
 .lx-article-body h2 { margin: var(--space-40) 0 var(--space-16); font-size: 20px; font-weight: 700; line-height: 1.4; color: var(--color-text-strong); }

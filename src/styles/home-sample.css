@@ -312,6 +312,8 @@
   font-size: 15px;
 }
 .sh-notice-list a:hover .sh-notice-text { color: var(--color-primary-dark); }
+/* 글이 없거나 DB 를 못 읽을 때 한 줄 안내 */
+.sh-notice-empty { display: flex; align-items: center; height: 50px; padding: 0 4px; border-bottom: 1px solid var(--color-border-light); font-size: 15px; color: var(--color-text-secondary, #6b7280); }
 .sh-notice-new {
   display: grid;
   flex: none;

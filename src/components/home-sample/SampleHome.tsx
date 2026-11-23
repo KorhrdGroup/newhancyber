@@ -15,6 +15,7 @@ import {
   noticeTabs,
   phones,
   type HeroSlide,
+  type NoticePost,
   type NoticeTabKey,
 } from "@/components/home/homeData";
 import PrivacyConsentPopup from "@/components/home/PrivacyConsentPopup";
@@ -342,9 +343,13 @@ function InfoBar() {
 
 /* ---------- 5. 공지 탭 + 놓치기 쉬운 안내 ---------- */
 
-function Notices() {
+/** 메인 공지 탭에 보일 글 — 메인(page.tsx)이 DB 에서 읽어 넘긴다. null 이면 DB 를 읽지 못한 것 */
+export type MainBoardPosts = Record<NoticeTabKey, NoticePost[]> | null;
+
+function Notices({ boardPosts }: { boardPosts: MainBoardPosts }) {
   const [active, setActive] = useState<NoticeTabKey>("notice");
   const tab = noticeTabs.find((t) => t.key === active) ?? noticeTabs[0];
+  const posts = boardPosts?.[tab.key] ?? [];
 
   return (
     <section className="sh-notice-row">
@@ -370,7 +375,10 @@ function Notices() {
           </Link>
         </div>
         <ul className="sh-notice-list">
-          {tab.posts.slice(0, 5).map((post) => (
+          {posts.length === 0 && (
+            <li className="sh-notice-empty">{boardPosts ? "등록된 글이 없습니다." : "지금은 글을 불러올 수 없어요."}</li>
+          )}
+          {posts.slice(0, 5).map((post) => (
             <li key={post.id}>
               <Link href={`${tab.basePath}/${post.id}`}>
                 {post.isNew && <span className="sh-notice-new">N</span>}
@@ -557,7 +565,7 @@ function WhyHanpyeong() {
 }
 
 /** 메인(/) — 메인 시안 B (첫 시안 배치 + 제목 탭 배너 · 모집 중 표시 · 페이지 안 무료 상담) */
-export default function SampleHome() {
+export default function SampleHome({ boardPosts }: { boardPosts: MainBoardPosts }) {
   const [consultClosed, setConsultClosed] = useState(false);
   return (
     <main className="sh-main">
@@ -567,7 +575,7 @@ export default function SampleHome() {
         {/* 실습 신청 · 결제는 자주 찾는 길이라 넘김 없이 개강 줄 바로 아래 */}
         <QuickActions />
         <Bento />
-        <Notices />
+        <Notices boardPosts={boardPosts} />
         {/* 수강 혜택 · 학점은행제는 공지 아래 줄로 */}
         <InfoBar />
         <Consult closed={consultClosed} onClose={() => setConsultClosed(true)} />

@@ -1,32 +1,28 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import PostView from "@/components/learning-support/PostView";
-import SampleBody from "@/components/learning-support/SampleBody";
-import { findPostWithSiblings, noticePosts } from "@/components/learning-support/boardData";
+import DbPostView, { DbPostUnavailable } from "@/components/learning-support/DbPostView";
 import MobilePageBanner from "@/components/layout/MobilePageBanner";
+import { loadBoardPost } from "@/lib/publicBoards";
 
 export const metadata: Metadata = { title: "공지사항 상세" };
 
-// TODO: API — id 로 공지사항 상세와 이전글/다음글을 조회한다 (지금은 목록 샘플에서 찾고 본문은 원본 샘플)
+const BASE = "/learning-support/notice";
+
+/** 공지사항 상세 — 구분(교육원 등)은 제목 앞 말머리로 */
 export default async function LearningNoticeDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const found = findPostWithSiblings([noticePosts], `/learning-support/notice/${id}`);
-  if (!found) notFound();
+  const post = await loadBoardPost("notice", id);
+  if (post === "missing") notFound();
 
   return (
     <>
       <MobilePageBanner name="notice-detail" text="공지사항" />
       <main className="wrapper">
-        <PostView
-          title={found.post.title}
-          date={found.post.date}
-          fileName="파일명.PDF"
-          prev={found.prev}
-          next={found.next}
-          listHref="/learning-support/notice"
-        >
-          <SampleBody bannerAlt="공지사항 배너" />
-        </PostView>
+        {post === "failed" ? (
+          <DbPostUnavailable basePath={BASE} />
+        ) : (
+          <DbPostView post={post} basePath={BASE} title={post.category ? `[${post.category}] ${post.title}` : post.title} />
+        )}
       </main>
     </>
   );

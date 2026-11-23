@@ -11,8 +11,10 @@ export interface PostNavLink {
 interface PostViewProps {
   title: string;
   date: string;
-  /** TODO: 첨부파일 다운로드 링크 (지금은 파일명만) */
+  /** 샘플 게시판용 — 첨부파일 이름만 (받기 주소 없음). DB 게시판은 files 를 쓴다 */
   fileName?: string;
+  /** DB 게시판의 첨부 — 이름과 받기 주소. 빈 배열이면 「없음」 */
+  files?: { name: string; href: string }[];
   prev?: PostNavLink;
   next?: PostNavLink;
   /** 제목 아래 정보 줄. 주면 기본(작성일 · 첨부파일) 대신 이 항목들을 순서대로 보여 준다 (예: 수강후기의 작성자 · 수강 과정 · 조회) */
@@ -40,7 +42,26 @@ function NavRow({ label, link }: { label: string; link?: PostNavLink }) {
 }
 
 /** 게시글 상세 (공지사항·관련기관 소식·학사일정·서식자료실). 디자인 시스템 색·간격·버튼으로 그린다 */
-export default function PostView({ title, date, fileName, prev, next, meta, listHref, framed = true, className, children }: PostViewProps) {
+export default function PostView({ title, date, fileName, files, prev, next, meta, listHref, framed = true, className, children }: PostViewProps) {
+  const fileValue = files ? (
+    files.length > 0 ? (
+      <span className="lx-article-files">
+        {files.map((f) => (
+          <a key={f.href} href={f.href} className="lx-article-file" download>
+            {f.name}
+          </a>
+        ))}
+      </span>
+    ) : (
+      "없음"
+    )
+  ) : fileName ? (
+    <a href={TBD_HREF} className="lx-article-file">
+      {fileName}
+    </a>
+  ) : (
+    "없음"
+  );
   return (
     <article className={[framed ? "container lx-page lx-article" : "lx-article lx-article--bare", className].filter(Boolean).join(" ")}>
       <header className="lx-article-head">
@@ -49,16 +70,7 @@ export default function PostView({ title, date, fileName, prev, next, meta, list
           {(
             meta ?? [
               { label: "작성일", value: date },
-              {
-                label: "첨부파일",
-                value: fileName ? (
-                  <a href={TBD_HREF} className="lx-article-file">
-                    {fileName}
-                  </a>
-                ) : (
-                  "없음"
-                ),
-              },
+              { label: "첨부파일", value: fileValue },
             ]
           ).map((item) => (
             <div key={item.label}>
