@@ -11,6 +11,7 @@ import {
 } from "@/components/my-classroom/classroomData";
 import "@/styles/classroom.css";
 import "@/styles/learning-extra.css";
+import "@/styles/extra-pages.css";
 
 export const metadata: Metadata = { title: "서류제출" };
 
@@ -29,15 +30,19 @@ const preparation: Record<string, { how: string; hasForm: boolean }> = {
   agency: { how: "실습기관에서 작성·직인", hasForm: true },
 };
 
+/** 제출 순서 — 바우처 「이용 방법」 · 무료학습설계 「진행 순서」와 같은 그림 판 */
+const ICON = "/resources/images/credit-bank";
 const steps = [
-  { title: "서식 내려받기", text: "아래 표에서 필요한 서식을 내려받습니다." },
+  { title: "서식 내려받기", text: "아래 표에서 필요한 서식을 내려받습니다.", icon: `${ICON}/cb-icon-doc-download.png` },
   {
     title: "작성·서명",
     text: "서식을 작성하고, 서명이나 직인이 필요한 서류는 빠짐없이 받습니다.",
+    icon: `${ICON}/cb-icon-scroll-pen.png`,
   },
   {
     title: "올리기",
     text: "나의 강의실 > 실습 과목 > 실습 서류 제출에서 파일을 올립니다.",
+    icon: `${ICON}/cb-icon-doc-upload.png`,
   },
 ];
 
@@ -45,12 +50,13 @@ export default function PracticeDocumentsPage() {
   // TODO: API 로그인한 학습자의 실습 과목·서류 제출 현황 조회 (지금은 샘플 실습 과목 c103)
   const course = getCourse("c103");
   const done = practiceDocs.filter((d) => d.status === "제출 완료").length;
-  const rejected = practiceDocs.filter((d) => d.status === "반려").length;
+  const rejectedDocs = practiceDocs.filter((d) => d.status === "반려");
+  const rejected = rejectedDocs.length;
 
   return (
     <main className="wrapper">
       {/* .content-section 은 안의 h2 를 32px 로 키워서(style.css) 학습자 OT 화면과 같은 틀을 쓴다 */}
-      <div className="container lx-page lx-page--plain">
+      <div className="container lx-page lx-page--plain lx-docs">
         <h1 className="page-title">서류제출</h1>
         <p className="lx-desc">
           실습 과목을 신청했다면 실습을 시작하기 전에 아래 서류 6가지를 모두
@@ -85,6 +91,27 @@ export default function PracticeDocumentsPage() {
                   <dd className={`ds-stat-value${rejected > 0 ? " ds-text-danger" : ""}`}>{rejected}</dd>
                 </div>
               </dl>
+              {/* 진행 막대: 낸 서류 비율 */}
+              <div
+                className="lx-doc-progress"
+                role="progressbar"
+                aria-label="낸 서류"
+                aria-valuemin={0}
+                aria-valuemax={practiceDocs.length}
+                aria-valuenow={done}
+              >
+                <span style={{ width: `${(done / practiceDocs.length) * 100}%` }} />
+              </div>
+              {rejectedDocs.length > 0 && (
+                <ul className="lx-doc-rejected">
+                  {rejectedDocs.map((doc) => (
+                    <li key={doc.id}>
+                      <strong>{doc.name}</strong>
+                      {doc.note && <span>{doc.note}</span>}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
             <div className="lx-doc-status-actions">
               <PopupButton
@@ -102,15 +129,20 @@ export default function PracticeDocumentsPage() {
 
         <section className="lx-panel">
           <h2 className="lx-section-title">제출 순서</h2>
-          <ol className="lx-flow lx-flow--3">
-            {steps.map((step, i) => (
-              <li key={step.title} className="lx-flow-item">
-                <span className="lx-flow-num">STEP {i + 1}</span>
-                <strong>{step.title}</strong>
-                <span className="lx-flow-desc">{step.text}</span>
-              </li>
-            ))}
-          </ol>
+          <div className="ex-vflow-box">
+            <ol className="ex-vflow ex-vflow--3">
+              {steps.map((step, i) => (
+                <li key={step.title}>
+                  {i > 0 && <span className="ex-vflow-arrow" aria-hidden />}
+                  <img className="ex-vflow-icon" src={step.icon} alt="" aria-hidden />
+                  <div>
+                    <p className="ex-vflow-title">{step.title}</p>
+                    <p className="ex-vflow-desc">{step.text}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
         </section>
 
         <section className="lx-panel">
