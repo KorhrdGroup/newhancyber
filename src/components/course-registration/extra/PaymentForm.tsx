@@ -7,7 +7,7 @@ import { formatPrice, sampleCartCourses } from "../courseData";
 import MajorBadges from "../MajorBadges";
 import { payMethods, sampleCoupons, type PayMethod } from "./extraData";
 
-/** 결제하기: 주문 과목 · 쿠폰 할인 · 결제 수단 · 약관 동의 · 최종 결제 금액 */
+/** 결제하기: 수강신청 과목 · 쿠폰 할인 · 결제 수단 · 약관 동의 · 최종 결제 금액 */
 export default function PaymentForm() {
   // TODO: API 장바구니에서 고른 과목 조회 (지금은 장바구니 샘플 전체)
   const courses = sampleCartCourses;
@@ -38,7 +38,7 @@ export default function PaymentForm() {
     <form className="ex-pay ex-pay--float" onSubmit={handleSubmit}>
       <div className="ex-pay-main">
         <section className="ex-box">
-          <h2 className="ex-section-title">주문 과목 ({courses.length})</h2>
+          <h2 className="ex-section-title">수강신청 과목 ({courses.length})</h2>
           <ul className="ex-order">
             {courses.map((course, i) => (
               <li key={i} className="ex-order-item">
@@ -134,7 +134,7 @@ export default function PaymentForm() {
         <label className="ds-check ex-agree">
           <input type="checkbox" checked={agreed} onChange={(e) => setAgreed(e.target.checked)} />
           <span>
-            (필수) 주문 과목과 결제 금액을 확인했으며,{" "}
+            (필수) 수강신청 과목과 결제 금액을 확인했으며,{" "}
             <Link href="/course-registration/refund" className="ex-link">
               환불 규정
             </Link>

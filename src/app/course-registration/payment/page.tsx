@@ -15,7 +15,7 @@ export default function CoursePaymentPage() {
         <div className="ex-page">
           <div className="ex-page-head">
             <h1 className="ex-title">결제하기</h1>
-            <p className="ex-desc">주문 과목과 결제 금액을 확인하고 결제 수단을 골라 주세요.</p>
+            <p className="ex-desc">수강신청 과목과 결제 금액을 확인하고 결제 수단을 골라 주세요.</p>
           </div>
           <PaymentForm />
         </div>
