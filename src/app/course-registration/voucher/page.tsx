@@ -118,27 +118,29 @@ export default function CourseVoucherPage() {
           </section>
 
           <section className="ex-section">
-            <h2 className="ex-section-title">문의</h2>
-            <dl className="ex-contacts">
-              <div className="ex-contact">
-                <dt>수강신청 문의</dt>
-                <dd>
-                  <a href={`tel:${supportContacts.registration}`}>{supportContacts.registration}</a>
-                </dd>
-              </div>
-              <div className="ex-contact">
-                <dt>학습지원 문의</dt>
-                <dd>
-                  <a href={`tel:${supportContacts.learning}`}>{supportContacts.learning}</a>
-                </dd>
-              </div>
-              <div className="ex-contact">
-                <dt>이메일</dt>
-                <dd>
-                  <a href={`mailto:${supportContacts.email}`}>{supportContacts.email}</a>
-                </dd>
-              </div>
-            </dl>
+            <div className="ex-help">
+              <h2 className="ex-help-title">궁금한 점이 있으신가요?</h2>
+              <dl className="ex-contacts">
+                <div className="ex-contact">
+                  <dt>수강신청 문의</dt>
+                  <dd>
+                    <a href={`tel:${supportContacts.registration}`}>{supportContacts.registration}</a>
+                  </dd>
+                </div>
+                <div className="ex-contact">
+                  <dt>학습지원 문의</dt>
+                  <dd>
+                    <a href={`tel:${supportContacts.learning}`}>{supportContacts.learning}</a>
+                  </dd>
+                </div>
+                <div className="ex-contact">
+                  <dt>이메일</dt>
+                  <dd>
+                    <a href={`mailto:${supportContacts.email}`}>{supportContacts.email}</a>
+                  </dd>
+                </div>
+              </dl>
+            </div>
           </section>
         </div>
       </main>

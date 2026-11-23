@@ -133,12 +133,14 @@
 .ex-cta { display: flex; align-items: center; justify-content: space-between; gap: var(--space-16) var(--space-24); margin: 0 var(--space-24); padding: var(--space-20) 0 var(--space-24); border-top: 1px solid var(--color-border-default); }
 .ex-cta .ex-note { margin: 0; font-size: 14px; word-break: keep-all; }
 .ex-cta .ex-actions { flex-shrink: 0; margin: 0; }
-/* 문의: 한 줄 작은 카드 (이름 왼쪽, 번호 오른쪽) */
-/* 문의: 상자 없이 한 줄 (위아래 옅은 선, PC는 칸 사이 세로선) */
-.ex-voucher .ex-contacts { gap: 0; border-top: 1px solid var(--color-border-cool); border-bottom: 1px solid var(--color-border-cool); }
-.ds2 .ex-voucher .ex-contact { display: flex; align-items: center; justify-content: space-between; gap: var(--space-12); padding: var(--space-16) var(--space-20); border-radius: 0; background: none; }
-.ds2 .ex-voucher .ex-contact + .ex-contact { border-left: 1px solid var(--color-border-cool); }
-.ds2 .ex-voucher .ex-contact dd { margin: 0; font-size: 15px; font-weight: 500; }
+/* 문의: 연한 회색 안내 띠 한 줄 (왼쪽 물음, 오른쪽에 전화·이메일을 세로선으로 나란히) */
+.ex-help { display: flex; align-items: center; justify-content: space-between; gap: var(--space-24); padding: var(--space-24) var(--space-32); border-radius: var(--radius-16); background: var(--color-bg-surface); }
+.ex-help-title { margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; color: var(--color-text-strong); }
+.ex-voucher .ex-contacts { display: flex; gap: 0; margin: 0; }
+.ds2 .ex-voucher .ex-contact { display: flex; align-items: baseline; gap: var(--space-8); padding: 0 var(--space-24); border-radius: 0; background: none; }
+.ds2 .ex-voucher .ex-contact:last-child { padding-right: 0; }
+.ds2 .ex-voucher .ex-contact + .ex-contact { border-left: 1px solid var(--color-border-default); }
+.ds2 .ex-voucher .ex-contact dd { margin: 0; font-size: 15px; font-weight: 600; }
 .ex-hero { padding: var(--space-32) var(--space-24); border-radius: var(--radius-12); background: var(--color-bg-brand-subtle); text-align: center; }
 .ex-hero-label { font-size: 14px; font-weight: 600; color: var(--color-text-brand); }
 .ex-hero-title { margin-top: var(--space-8); font-size: 24px; font-weight: 700; line-height: 1.4; color: var(--color-text-strong); }
@@ -233,8 +235,10 @@
   .ex-vflow-title { margin-top: 0; }
   .ex-vflow-desc { max-width: none; text-wrap: pretty; }
   .ex-hero-icon { width: 72px; height: 72px; margin: 0; }
-  .ds2 .ex-voucher .ex-contact { padding: var(--space-12) var(--space-4); }
-  .ds2 .ex-voucher .ex-contact + .ex-contact { border-top: 1px solid var(--color-border-cool); border-left: 0; }
+  .ex-help { flex-direction: column; align-items: stretch; gap: var(--space-8); padding: var(--space-16) var(--space-20); }
+  .ex-voucher .ex-contacts { flex-direction: column; }
+  .ds2 .ex-voucher .ex-contact { justify-content: space-between; padding: var(--space-12) 0; }
+  .ds2 .ex-voucher .ex-contact + .ex-contact { border-top: 1px solid var(--color-border-default); border-left: 0; }
   .ex-cta { flex-direction: column; align-items: stretch; margin: 0 var(--space-16); padding: var(--space-16) 0 var(--space-20); }
   .ex-voucher .ex-section { margin-top: var(--space-40); }
   .ex-voucher .ex-page-head + .ex-section { margin-top: 0; }
