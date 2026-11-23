@@ -26,7 +26,7 @@
 .st-flow--goal .st-tile:last-child { background: var(--color-bg-tone-blue); }
 /* STEP 꼬리표 */
 .st-no {
-  align-self: flex-start;
+  align-self: center;
   padding: 4px 9px;
   border-radius: var(--radius-full);
   background: var(--color-bg-muted);
