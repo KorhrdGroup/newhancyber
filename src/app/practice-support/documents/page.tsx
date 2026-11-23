@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Fragment } from "react";
 import Link from "next/link";
 import { SUPPORT_PHONE } from "@/lib/contact";
 import DraftNote from "@/components/common/DraftNote";
@@ -159,8 +160,11 @@ export default function PracticeDocumentsPage() {
                 </tr>
               </thead>
               <tbody>
-                {practiceDocs.map((doc) => (
-                  <tr key={doc.id}>
+                {practiceDocs.map((doc) => {
+                  const note = doc.status === "반려" ? doc.note : undefined;
+                  return (
+                  <Fragment key={doc.id}>
+                  <tr className={note ? "has-note" : undefined}>
                     <td className="is-left">
                       <strong>{doc.name}</strong>
                     </td>
@@ -168,9 +172,6 @@ export default function PracticeDocumentsPage() {
                     <td className="is-left">{preparation[doc.id]?.how}</td>
                     <td>
                       <Badge>{doc.status}</Badge>
-                      {doc.status === "반려" && doc.note && (
-                        <p className="lx-doc-note">{doc.note}</p>
-                      )}
                     </td>
                     <td>
                       {preparation[doc.id]?.hasForm ? (
@@ -184,7 +185,20 @@ export default function PracticeDocumentsPage() {
                       )}
                     </td>
                   </tr>
-                ))}
+                  {/* 반려 사유: 그 서류 줄 바로 아래 한 줄 띠 */}
+                  {note && (
+                    <tr className="lx-doc-note-row">
+                      <td colSpan={5} className="is-left">
+                        <p className="lx-doc-note">
+                          <strong>반려 사유</strong>
+                          {note}
+                        </p>
+                      </td>
+                    </tr>
+                  )}
+                  </Fragment>
+                  );
+                })}
               </tbody>
             </table>
           </div>

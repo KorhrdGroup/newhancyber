@@ -267,7 +267,10 @@
 .lx-doc-rejected { display: flex; flex-direction: column; gap: var(--space-4); margin-top: var(--space-12); list-style: none; font-size: 14px; color: var(--color-text-default); }
 .lx-doc-rejected li { display: flex; flex-wrap: wrap; gap: 0 var(--space-8); }
 .lx-doc-rejected strong { font-weight: 600; color: var(--color-text-danger, #e5332a); }
-.lx-doc-note { max-width: 150px; margin: var(--space-6) auto 0; font-size: 12px; line-height: 1.45; color: var(--color-text-danger, #e5332a); word-break: keep-all; }
+.lx-doc-table tr.has-note td { border-bottom: 0; }
+.lx-doc-table .lx-doc-note-row td { padding-top: 0; }
+.lx-doc-note { display: flex; gap: var(--space-12); padding: var(--space-10) var(--space-16); border-radius: var(--radius-8); background: #fff4f4; font-size: 13px; line-height: 1.5; color: var(--color-text-default); }
+.lx-doc-note strong { flex: none; font-weight: 600; color: var(--color-text-danger, #e5332a); }
 /* 파란색 줄이기: 표 머리 · 아래 안내 띠는 회색 (파랑은 누르는 버튼에만) */
 .lx-docs .lx-doc-table thead th { background: var(--color-bg-surface); color: var(--color-text-strong); }
 .lx-docs .lx-callout { background: var(--color-bg-surface); color: var(--color-text-default); }
