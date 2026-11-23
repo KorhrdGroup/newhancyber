@@ -126,7 +126,8 @@
 .ex-vflow-icon { width: 96px; height: 96px; object-fit: contain; }
 .ex-vflow-title { display: inline-flex; align-items: center; gap: var(--space-6); margin-top: var(--space-12); font-size: 16px; font-weight: 600; color: var(--color-text-strong); }
 .ex-vflow-num { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: var(--radius-full); background: var(--color-text-strong); font-size: 11px; font-weight: 700; color: var(--color-text-inverse); }
-.ex-vflow-desc { margin-top: var(--space-6); font-size: 13px; line-height: 1.5; color: var(--color-text-secondary); }
+/* 설명 글은 칸을 꽉 채우지 않게 폭을 줄이고(점선과 여유), 네 단계 모두 고르게 두 줄로 */
+.ex-vflow-desc { max-width: 200px; margin-top: var(--space-8); font-size: 14px; line-height: 1.5; color: var(--color-text-secondary); text-wrap: balance; }
 /* 안내 문구 + 버튼 상자: 왼쪽 안내, 오른쪽 버튼 */
 .ex-cta { display: flex; align-items: center; justify-content: space-between; gap: var(--space-16) var(--space-24); margin: 0 var(--space-24); padding: var(--space-20) 0 var(--space-24); border-top: 1px solid var(--color-border-default); }
 .ex-cta .ex-note { margin: 0; font-size: 14px; word-break: keep-all; }
@@ -229,6 +230,7 @@
   .ex-vflow-arrow { top: -11px; left: 50%; transform: translateX(-50%) rotate(90deg); }
   .ex-vflow-icon { flex-shrink: 0; width: 64px; height: 64px; }
   .ex-vflow-title { margin-top: 0; }
+  .ex-vflow-desc { max-width: none; text-wrap: pretty; }
   .ex-hero-icon { width: 72px; height: 72px; margin: 0; }
   .ds2 .ex-voucher .ex-contact { padding: var(--space-12) var(--space-4); }
   .ds2 .ex-voucher .ex-contact + .ex-contact { border-top: 1px solid var(--color-border-cool); border-left: 0; }

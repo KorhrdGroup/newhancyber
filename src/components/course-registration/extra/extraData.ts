@@ -66,7 +66,7 @@ export const voucherSteps = [
   { title: "이용권 신청", desc: "평생교육이용권 누리집에서 공고를 확인하고 신청해요.", icon: "/resources/images/social-worker/steps/online-apply.png" },
   { title: "선정·발급", desc: "선정되면 이용권(카드)이 발급되고 금액이 충전돼요.", icon: "/resources/images/social-worker/steps/bank-card.png" },
   { title: "수강신청", desc: "교육원에서 과목을 골라 장바구니에 담아요.", icon: "/resources/images/social-worker/steps/course-book.png" },
-  { title: "바우처로 결제", desc: "결제하기에서 결제 수단을 ‘평생교육바우처’로 골라요.", icon: "/resources/images/credit-bank/cb-icon-receipt-check.png" },
+  { title: "바우처로 결제", desc: "결제하기에서 결제 수단을 ‘평생교육바우처’\u2060로 골라요.", icon: "/resources/images/credit-bank/cb-icon-receipt-check.png" },
 ];
 
 export const VOUCHER_SITE = "https://www.lllcard.kr/main/main/mainView.do";
