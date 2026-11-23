@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import DbBoardList, { readListParams, splitTitleTag, toBoardPosts } from "@/components/learning-support/DbBoard";
+import DbBoardList, { readListParams, redirectIfPastEnd, splitTitleTag, toBoardPosts } from "@/components/learning-support/DbBoard";
 import { SCHEDULE_TAGS } from "@/components/learning-support/boardData";
 import SectionTabs, { scheduleTabs } from "@/components/learning-support/extra/SectionTabs";
 import MobilePageBanner from "@/components/layout/MobilePageBanner";
@@ -22,6 +22,7 @@ export default async function LearningSchedulePage({ searchParams }: { searchPar
     scope: params.scope,
     page: params.page,
   });
+  redirectIfPastEnd(BASE, params, total);
   const posts = toBoardPosts(rows, { basePath: BASE, total, page: params.page, tagOf: (row) => splitTitleTag(row.title, SCHEDULE_TAGS) });
 
   return (

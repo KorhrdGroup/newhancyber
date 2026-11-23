@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import DbBoardList, { readListParams, toBoardPosts } from "@/components/learning-support/DbBoard";
+import DbBoardList, { readListParams, redirectIfPastEnd, toBoardPosts } from "@/components/learning-support/DbBoard";
 import MobilePageBanner from "@/components/layout/MobilePageBanner";
 import { loadBoardList } from "@/lib/publicBoards";
 // 모바일 목록 · 파란 제목 띠 스타일은 학습지원 CSS 에만 있어서 같이 불러온다 (실습지원 CSS 엔 모바일 스타일이 없음)
@@ -15,6 +15,7 @@ const BASE = "/practice-support/notice";
 export default async function PracticeNoticePage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
   const params = readListParams(await searchParams);
   const { rows, total, failed } = await loadBoardList({ board: "practice_notice", q: params.q, scope: params.scope, page: params.page });
+  redirectIfPastEnd(BASE, params, total);
   const posts = toBoardPosts(rows, { basePath: BASE, total, page: params.page, tagOf: (row) => ({ title: row.title }) });
 
   return (

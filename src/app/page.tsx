@@ -1,3 +1,4 @@
+import { PHASE_PRODUCTION_BUILD } from "next/constants";
 import FloatingMenu from "@/components/home/FloatingMenu";
 import MobileSocialFooter from "@/components/home/MobileSocialFooter";
 import type { NoticePost } from "@/components/home/homeData";
@@ -35,6 +36,10 @@ async function loadMainBoardPosts(): Promise<MainBoardPosts> {
   } catch (err) {
     const e = err as { name?: string; number?: number };
     console.error("메인 공지 읽기 실패", [e?.name, e?.number].filter(Boolean).join(" "));
+    // 1분마다 새로 만들다가 DB 가 잠깐 안 되면 오류를 다시 던진다 — Next 는 그때 마지막으로 잘 만든 메인을 계속 보여 준다
+    // (잡아서 null 을 돌려주면 「불러올 수 없어요」 메인이 정상 결과로 1분 동안 저장된다).
+    // 빌드 중(아직 잘 만든 메인이 없다)과 개발 서버에서는 메인이 통째로 깨지지 않게 안내 문구로 둔다.
+    if (process.env.NEXT_PHASE !== PHASE_PRODUCTION_BUILD && process.env.NODE_ENV === "production") throw err;
     return null;
   }
 }

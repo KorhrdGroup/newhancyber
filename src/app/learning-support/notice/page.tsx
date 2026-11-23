@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import DbBoardList, { readListParams, toBoardPosts } from "@/components/learning-support/DbBoard";
+import DbBoardList, { readListParams, redirectIfPastEnd, toBoardPosts } from "@/components/learning-support/DbBoard";
 import SectionTabs, { noticeTabs } from "@/components/learning-support/extra/SectionTabs";
 import MobilePageBanner from "@/components/layout/MobilePageBanner";
 import { NOTICE_CATEGORY_VALUES } from "@/lib/db/boardPosts";
@@ -13,6 +13,7 @@ const BASE = "/learning-support/notice";
 export default async function LearningNoticePage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
   const params = readListParams(await searchParams, NOTICE_CATEGORY_VALUES);
   const { rows, total, failed } = await loadBoardList({ board: "notice", category: params.tag, q: params.q, scope: params.scope, page: params.page });
+  redirectIfPastEnd(BASE, params, total);
   const posts = toBoardPosts(rows, {
     basePath: BASE,
     total,

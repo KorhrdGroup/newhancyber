@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { BOARD_PAGE_SIZE, isSearchScope, type BoardListRow, type SearchScope } from "@/lib/db/boardPosts";
 import { BoardTable, MobileBoardList, Pagination, SearchBox } from "./BoardParts";
 import type { BoardPost } from "./boardData";
@@ -53,6 +54,15 @@ export function listHref(basePath: string, p: Partial<ListParams>): string {
   return s ? `${basePath}?${s}` : basePath;
 }
 
+/**
+ * 글 수보다 뒤쪽 쪽 번호(오래된 주소 · 북마크, 글이 지워져 쪽이 줄었을 때)면 마지막 쪽으로 보낸다.
+ * 목록을 읽은 뒤 부른다 — 글이 하나도 없거나 DB 를 못 읽었으면 그대로 둔다.
+ */
+export function redirectIfPastEnd(basePath: string, params: ListParams, total: number): void {
+  const last = Math.max(1, Math.ceil(total / BOARD_PAGE_SIZE));
+  if (total > 0 && params.page > last) redirect(listHref(basePath, { ...params, page: last }));
+}
+
 /** 제목 맨 앞 말머리 「[사회복지현장실습] …」를 떼어 배지로 — tags 에 있는 말머리만 */
 export function splitTitleTag(title: string, tags: readonly string[]): { tag?: string; title: string } {
   const m = /^\[([^\]]+)\]\s*/.exec(title);
@@ -101,24 +111,23 @@ export default function DbBoardList({
   failed?: boolean;
 }) {
   const pages = Math.max(1, Math.ceil(total / BOARD_PAGE_SIZE));
+  // 세그먼트 칸은 다른 주소로 가는 링크라서 탭(role=tab)이 아니라 이동 메뉴(nav)로 읽히게 하고, 지금 칸은 aria-current
   const segment = tags ? (
-    <div className="ds-tabs-box ds-tabs-box--segment" role="tablist" aria-label={label}>
+    <nav className="ds-tabs-box ds-tabs-box--segment" aria-label={label}>
       {[null, ...tags].map((t) => {
         const active = t === params.tag;
         return (
           <Link
             key={t ?? "전체"}
             href={listHref(basePath, { ...params, tag: t, page: 1 })}
-            role="tab"
-            aria-selected={active}
+            aria-current={active ? "page" : undefined}
             className={`ds-tab-box${active ? " is-active" : ""}`}
-            style={{ textDecoration: "none" }}
           >
             {t ?? "전체"}
           </Link>
         );
       })}
-    </div>
+    </nav>
   ) : null;
   const empty = (
     <p className="cr-empty">
