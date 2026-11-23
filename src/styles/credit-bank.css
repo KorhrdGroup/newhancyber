@@ -114,7 +114,7 @@
 .cb-flow,
 .cb-grid,
 .cb-steps-row,
-.cb-steps-choices { margin: 0; padding: 0; list-style: none; }
+.cb-steps-final { margin: 0; padding: 0; list-style: none; }
 .cb-flow,
 .cb-grid,
 .cb-steps {
@@ -172,25 +172,38 @@
 .cb-grid-icon { width: 80px; height: 80px; object-fit: contain; }
 .cb-grid-label { font-size: 12px; font-weight: 600; line-height: 1.4; color: var(--color-text-strong); text-align: center; word-break: keep-all; }
 
-/* 학점은행제 흐름도: STEP 1~5 한 줄. 마지막 칸에 셋 중 하나를 세로로 쌓는다 */
-.cb-steps { padding: var(--space-24) var(--space-20); }
-.cb-steps-row { display: flex; align-items: stretch; }
-.cb-steps-card { display: flex; flex: 1 1 0; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-12); min-width: 0; padding: 0 var(--space-4); text-align: center; }
+/* 학점은행제 흐름도: 위는 점점 진해지는 STEP 화살표 띠, 아래는 단계별 흰 카드. STEP 5는 남색 띠 + 연파랑 카드에 셋 중 하나 */
+.cb-steps { padding: var(--space-24); }
+.cb-steps-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)) minmax(0, 1.35fr); column-gap: var(--space-8); }
+.cb-steps-col { display: flex; flex-direction: column; gap: var(--space-12); min-width: 0; }
+.cb-steps-seg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%, 14px 50%);
+}
+.cb-steps-col:first-child .cb-steps-seg { border-radius: var(--radius-8) 0 0 var(--radius-8); clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%); }
+.cb-steps-col--final .cb-steps-seg { border-radius: 0 var(--radius-8) var(--radius-8) 0; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 14px 50%); }
+/* 단계가 갈수록 진해지는 파랑 (연파랑 → 브랜드 파랑 → 남색) */
+.cb-steps-col:nth-child(1) .cb-steps-seg { background: #9cc3ff; color: var(--color-bg-brand-strong); }
+.cb-steps-col:nth-child(2) .cb-steps-seg { background: #6fa3fb; }
+.cb-steps-col:nth-child(3) .cb-steps-seg { background: #4687f7; }
+.cb-steps-col:nth-child(4) .cb-steps-seg { background: #2a6ff2; }
+.cb-steps-col--final .cb-steps-seg { background: var(--color-bg-brand-strong); }
+.cb-steps-card { display: flex; flex: 1; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-12); padding: var(--space-20) var(--space-12); border-radius: var(--radius-16); background: var(--color-bg-default); box-shadow: var(--shadow-brand-sm); text-align: center; }
 .cb-steps-icon { width: 72px; height: 72px; object-fit: contain; }
-.cb-steps-text { display: flex; flex-direction: column; align-items: center; gap: 6px; }
-.cb-step-no { font-size: 14px; font-weight: 700; line-height: 1; color: var(--color-text-brand); white-space: nowrap; }
 .cb-steps-label { font-size: 15px; font-weight: 600; line-height: 1.4; color: var(--color-text-strong); word-break: keep-all; }
-.cb-steps-final { display: flex; flex: 1.3 1 0; flex-direction: column; gap: var(--space-8); min-width: 0; padding: var(--space-16); border-radius: var(--radius-16); background: var(--color-bg-default); }
-.cb-steps-final > .cb-step-no { align-self: center; }
-.cb-steps-choices { display: flex; flex-direction: column; }
+.cb-steps-final { display: flex; flex: 1; flex-direction: column; justify-content: center; margin: 0; padding: var(--space-12); border-radius: var(--radius-16); background: var(--color-bg-tone-blue); list-style: none; }
 .cb-steps-choice { display: flex; flex-direction: column; }
-.cb-steps-choice-row { display: flex; align-items: center; gap: var(--space-8); }
-.cb-steps-choice-icon { flex: none; width: 40px; height: 40px; object-fit: contain; }
+.cb-steps-choice-row { display: flex; align-items: center; gap: var(--space-8); padding: var(--space-8) var(--space-12); border-radius: var(--radius-12); background: var(--color-bg-default); }
+.cb-steps-choice-icon { flex: none; width: 32px; height: 32px; object-fit: contain; }
 .cb-steps-choice-label { font-size: 14px; font-weight: 600; line-height: 1.35; color: var(--color-text-strong); word-break: keep-all; }
-/* or: 가운데 글자 + 양옆 가는 선 */
-.cb-steps-or { display: flex; align-items: center; gap: var(--space-8); margin: 2px 0; font-size: 12px; font-weight: 600; line-height: 1; color: var(--color-text-secondary); }
-.cb-steps-or::before,
-.cb-steps-or::after { content: ""; flex: 1; height: 1px; background: var(--color-border-default); }
+.cb-steps-or { padding: 5px 0; font-size: 12px; font-weight: 600; line-height: 1; color: var(--color-text-secondary); text-align: center; }
 
 @media (max-width: 768px) {
   /* 흐름은 한 줄에 하나씩 쌓고, 사이 표시는 아래 방향으로 */
@@ -220,10 +233,15 @@
   }
   .cb-grid-icon { width: 64px; height: 64px; }
 
+  /* 휴대폰: 한 줄에 한 단계. 왼쪽 띠는 아래를 가리키는 화살표 모양 */
   .cb-steps { padding: var(--space-16); }
-  .cb-steps-row { flex-direction: column; }
-  .cb-steps-card { flex-direction: row; justify-content: flex-start; gap: var(--space-16); padding: var(--space-4) 0; text-align: left; }
-  .cb-steps-icon { width: 56px; height: 56px; }
-  .cb-steps-text { align-items: flex-start; }
-  .cb-steps-final > .cb-step-no { align-self: flex-start; }
+  .cb-steps-row { grid-template-columns: minmax(0, 1fr); row-gap: var(--space-8); }
+  .cb-steps-col { flex-direction: row; gap: var(--space-8); }
+  .cb-steps-seg,
+  .cb-steps-col:first-child .cb-steps-seg,
+  .cb-steps-col--final .cb-steps-seg { flex: none; width: 64px; height: auto; padding-bottom: 8px; font-size: 12px; border-radius: var(--radius-8) var(--radius-8) 0 0; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), 50% 100%, 0 calc(100% - 10px)); }
+  .cb-steps-col--final .cb-steps-seg { padding-bottom: 0; border-radius: var(--radius-8); clip-path: none; }
+  .cb-steps-card { flex-direction: row; justify-content: flex-start; gap: var(--space-12); padding: var(--space-12); text-align: left; }
+  .cb-steps-icon { width: 48px; height: 48px; }
+  .cb-steps-final { padding: var(--space-8); }
 }

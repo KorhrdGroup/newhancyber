@@ -82,40 +82,28 @@ export function CbStepFlow({
     <div className="cb-steps">
       <ol className="cb-steps-row">
         {steps.map((item, i) => (
-          <li key={item.label} className="cb-steps-item">
-            {i > 0 && (
-              <span className="cb-flow-join cb-flow-join--arrow">
-                <CbMark kind="right" />
-              </span>
-            )}
+          <li key={item.label} className="cb-steps-col">
+            <span className="cb-steps-seg">STEP {i + 1}</span>
             <div className="cb-steps-card">
               <img src={`${ICON}/cb-icon-${item.icon}.png`} alt="" className="cb-steps-icon" />
-              <div className="cb-steps-text">
-                <span className="cb-step-no">STEP {i + 1}</span>
-                <span className="cb-steps-label">{item.label}</span>
-              </div>
+              <span className="cb-steps-label">{item.label}</span>
             </div>
           </li>
         ))}
-        {/* 마지막 단계: 셋 중 하나를 세로로 쌓은 칸 */}
-        <li className="cb-steps-item">
-          <span className="cb-flow-join cb-flow-join--arrow">
-            <CbMark kind="right" />
-          </span>
-          <div className="cb-steps-final">
-            <span className="cb-step-no">STEP {steps.length + 1}</span>
-            <ul className="cb-steps-choices">
-              {finals.map((item, i) => (
-                <li key={item.label} className="cb-steps-choice">
-                  {i > 0 && <span className="cb-steps-or">or</span>}
-                  <span className="cb-steps-choice-row">
-                    <img src={`${ICON}/cb-icon-${item.icon}.png`} alt="" className="cb-steps-choice-icon" />
-                    <span className="cb-steps-choice-label">{item.label}</span>
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
+        {/* 마지막 단계: 셋 중 하나 */}
+        <li className="cb-steps-col cb-steps-col--final">
+          <span className="cb-steps-seg">STEP {steps.length + 1}</span>
+          <ul className="cb-steps-final">
+            {finals.map((item, i) => (
+              <li key={item.label} className="cb-steps-choice">
+                {i > 0 && <span className="cb-steps-or">or</span>}
+                <span className="cb-steps-choice-row">
+                  <img src={`${ICON}/cb-icon-${item.icon}.png`} alt="" className="cb-steps-choice-icon" />
+                  <span className="cb-steps-choice-label">{item.label}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
         </li>
       </ol>
     </div>
