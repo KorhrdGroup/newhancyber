@@ -39,7 +39,6 @@ export function Level1Flow() {
   return (
     <StepTiles
       label="사회복지사 1급 응시자격"
-      highlightLast
       items={[
         { icon: iconBase + "certificate-2.png", title: "사회복지사 2급" },
         {
@@ -73,7 +72,6 @@ export function CreditFlow({
       joins={["arrow", ...results.slice(1).map(() => "plus" as const)]}
       // 학습설계 카드 4개의 배지 위치를 맞춘다: 학점 칸 : 결과 칸 = 1 : 1
       weights={[1, 1]}
-      highlightLast
     />
   );
 }

@@ -20,18 +20,14 @@ export interface CbFlowItem {
 export function CbIconFlow({
   items,
   joins,
-  highlightLast = false,
 }: {
   items: CbFlowItem[];
   joins: ("plus" | "arrow")[];
-  /** 마지막이 얻는 결과(학위 수여 등)면 연파랑 */
-  highlightLast?: boolean;
 }) {
   return (
     <StepTiles
       items={items.map((item) => ({ icon: `${ICON}/cb-icon-${item.icon}.png`, title: item.label }))}
       joins={joins}
-      highlightLast={highlightLast}
     />
   );
 }
@@ -69,7 +65,6 @@ export function CbStepFlow({
         { choices: finals.map((item) => ({ icon: `${ICON}/cb-icon-${item.icon}.png`, title: item.label })) },
       ]}
       wideLast
-      highlightLast
       numbered
     />
   );
