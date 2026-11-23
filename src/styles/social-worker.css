@@ -1031,7 +1031,7 @@
   left: 0;
   right: 0;
   width: 100%;
-  background-color: #1a237e;
+  background-color: #0f2a6e;
   z-index: 1000;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -1055,7 +1055,7 @@
 }
 
 .consultation-floating-text {
-  font-size: 32px;
+  font-size: 26px;
   font-weight: 500;
   color: #ffffff;
   margin: 0;
@@ -1067,28 +1067,34 @@
   font-weight: 700;
 }
 
+/* 상담 신청 버튼: 연두 알약 (혜택 제목 강조색 #69ffac) + 남색 글자 */
 .consultation-floating-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0;
-  background: none;
+  gap: 4px;
+  height: 48px;
+  padding: 0 22px;
   border: none;
+  border-radius: 999px;
+  background: #69ffac;
+  color: #0f2a6e;
+  font-size: 18px;
+  font-weight: 700;
+  white-space: nowrap;
   text-decoration: none;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background-color 0.2s ease;
   flex-shrink: 0;
 }
 
-.consultation-floating-btn:active {
-  transform: translateY(0);
+.consultation-floating-btn:hover {
+  background: #4ff59a;
 }
 
-.consultation-floating-btn-img {
-  height: auto;
-  max-height: 50px;
-  width: auto;
-  display: block;
+.consultation-floating-btn-arrow {
+  width: 15px;
+  height: 15px;
 }
 
 /* 상담 옵션 영역 (메인 콘텐츠) */
@@ -1133,6 +1139,7 @@
   opacity: 1 !important;
 }
 
+/* 예전 background.png 와 같은 색: 위 #3f7efb → 아래 #5e07ce */
 .consultation-options-background {
   position: absolute;
   top: 0;
@@ -1144,18 +1151,7 @@
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
-}
-
-.consultation-options-background-img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
-  display: block;
-  z-index: 0;
+  background: linear-gradient(180deg, #3f7efb 0%, #5e07ce 100%);
 }
 
 .consultation-options-content {
@@ -1396,14 +1392,6 @@
     overflow: hidden !important;
   }
 
-  .consultation-options-background-img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    object-position: center !important;
-    display: block !important;
-  }
-
   .consultation-options-content {
     position: relative !important;
     z-index: 1 !important;
@@ -1453,22 +1441,28 @@
 
   /* 플로팅 배너 모바일 스타일 */
   .consultation-floating-bar {
-    height: 80px;
+    height: 64px;
   }
 
   .consultation-floating-content {
     padding: 12px 15px;
-    gap: 20px;
+    gap: 10px;
   }
 
   .consultation-floating-text {
-    font-size: 20px;
+    font-size: 15px;
     white-space: normal;
   }
 
-  .consultation-floating-btn-img {
-    width: 120px;
-    height: 50px;
+  .consultation-floating-btn {
+    height: 38px;
+    padding: 0 14px;
+    font-size: 14px;
+  }
+
+  .consultation-floating-btn-arrow {
+    width: 12px;
+    height: 12px;
   }
 
   /* 모바일 상담 옵션 화살표 */
@@ -1498,12 +1492,11 @@
 
   .consultation-floating-text {
     min-width: 0;
-    font-size: 16px;
+    font-size: 14px;
   }
 
-  .consultation-floating-btn-img {
-    width: 108px;
-    height: 45px;
+  .consultation-floating-btn {
+    padding: 0 12px;
   }
 }
 

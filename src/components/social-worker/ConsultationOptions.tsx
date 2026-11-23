@@ -6,8 +6,13 @@ const SW_IMG = "/resources/images/social-worker";
 export const MOBILE_SECTION_ID = "consultation-options-section-mobile";
 export const DESKTOP_SECTION_ID = "consultation-options-section";
 
+/** 버튼 안 › (예전 arrow-right.png 그림 대신 글자색을 따르는 선) */
 function ArrowIcon({ className }: { className: string }) {
-  return <img src={`${SW_IMG}/arrow-right.png`} alt="" className={className} />;
+  return (
+    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" className={className}>
+      <path d="M6 3.5 10.5 8 6 12.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
 }
 
 /**
@@ -21,13 +26,8 @@ export default function ConsultationOptions({ variant }: { variant: "mobile" | "
     <div className={`consultation-options-outer-wrapper${isMobile ? " mobile-only" : ""}`}>
       <div className="consultation-options-wrapper">
         <div className="consultation-options-section" id={isMobile ? MOBILE_SECTION_ID : DESKTOP_SECTION_ID}>
-          <div className="consultation-options-background">
-            <img
-              src={`${SW_IMG}/background.png`}
-              alt="배경 이미지"
-              className="consultation-options-background-img"
-            />
-          </div>
+          {/* 배경: 예전 background.png 와 같은 파랑→보라 세로 그러데이션을 CSS 로 */}
+          <div className="consultation-options-background" />
           <div className="consultation-options-content">
             {/* 전화 상담 */}
             <div className="consultation-option consultation-option-call">
