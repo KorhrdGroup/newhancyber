@@ -2,14 +2,14 @@
  * 디자인 시스템 v2 — 메인(/)과 같은 모양을 다른 사용자 화면에 입힌다.
  * 묶음별로 옮기는 중이라, 레이아웃에서 .ds2 로 감싼 화면에만 적용한다 (지금: 학점은행제 · 사회복지사 · 실습지원 · 수강신청 · 학습지원 · 마이페이지 · 나의 강의실 · 회원 · 바닥글 화면 · 팝업).
  * 규칙은 한평생원격_디자인시스템_v2.md 6장(부품 규칙)을 따른다:
- *   제목은 굵게(800) · 자간 -2%, 상자는 테두리 대신 연한 바탕(bg-surface) + 모서리 16,
+ *   제목은 굵게(700) · 자간 -2%, 상자는 테두리 대신 연한 바탕(bg-surface) + 모서리 16,
  *   버튼 · 입력 칸 모서리는 높이를 따라 32→6 · 40→10 · 48→12.
  */
 
 /* ---------- 글자 ----------
-   가장 굵게(800)는 화면 큰 제목과 큰 숫자에만. 소제목 · 카드/상자 제목 · 강조 문장은 한 단계 아래(700) */
+   화면 큰 제목은 700 (800은 너무 튀어서 한 단계 낮춤). 소제목 · 카드/상자 제목 · 강조 문장도 700, 크기로 구분 */
 .ds2 .page-title,
-.ds2 .ex-title { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.35; color: var(--color-text-strong); }
+.ds2 .ex-title { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.35; color: var(--color-text-strong); }
 .ds2 .lx-desc,
 .ds2 .ex-desc { margin-top: var(--space-6); font-size: 15px; }
 .ds2 .lx-section-title,
