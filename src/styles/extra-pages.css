@@ -101,6 +101,21 @@
 .ex-vtype-info dt { flex-shrink: 0; min-width: 64px; padding: 2px var(--space-8); border-radius: var(--radius-6); background: var(--color-bg-default); font-size: 12px; font-weight: 600; line-height: 1.6; color: var(--color-text-secondary); text-align: center; }
 .ex-vtype-info dd { margin: 0; font-size: 14px; font-weight: 500; line-height: 1.6; color: var(--color-text-strong); word-break: keep-all; }
 .ex-vtype-info .is-amount { font-weight: 700; }
+/* 쓸 수 있는 곳: 회색 카드 2칸 */
+.ex-uses { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-12); margin: 0; padding: 0; list-style: none; }
+.ex-uses li { padding: var(--space-16) var(--space-20); border-radius: var(--radius-16); background: var(--color-bg-surface); font-size: 15px; font-weight: 500; line-height: 1.5; color: var(--color-text-strong); }
+/* 이용 방법 단계 사이 화살표 (휴대폰은 아래 방향) */
+.ex-voucher .ex-steps { gap: var(--space-28); }
+.ex-voucher .ex-step { position: relative; }
+.ex-voucher .ex-step-desc { word-break: keep-all; }
+.ex-voucher .ex-step:not(:last-child)::after { content: ""; position: absolute; top: 50%; right: -18px; width: 8px; height: 8px; border-top: 2px solid var(--color-border-control); border-right: 2px solid var(--color-border-control); transform: translateY(-50%) rotate(45deg); }
+/* 안내 문구 + 버튼 상자: 왼쪽 안내, 오른쪽 버튼 */
+.ex-cta { display: flex; align-items: center; justify-content: space-between; gap: var(--space-16) var(--space-24); margin-top: var(--space-16); padding: var(--space-20) var(--space-24); border-radius: var(--radius-16); background: var(--color-bg-surface); }
+.ex-cta .ex-note { margin: 0; font-size: 14px; word-break: keep-all; }
+.ex-cta .ex-actions { flex-shrink: 0; margin: 0; }
+/* 문의: 한 줄 작은 카드 (이름 왼쪽, 번호 오른쪽) */
+.ds2 .ex-voucher .ex-contact { display: flex; align-items: center; justify-content: space-between; gap: var(--space-12); padding: var(--space-12) var(--space-20); }
+.ds2 .ex-voucher .ex-contact dd { margin: 0; font-size: 15px; font-weight: 600; }
 .ex-hero { padding: var(--space-32) var(--space-24); border-radius: var(--radius-12); background: var(--color-bg-brand-subtle); text-align: center; }
 .ex-hero-label { font-size: 14px; font-weight: 600; color: var(--color-text-brand); }
 .ex-hero-title { margin-top: var(--space-8); font-size: 24px; font-weight: 700; line-height: 1.4; color: var(--color-text-strong); }
@@ -185,7 +200,12 @@
 
   .ex-hero { padding: var(--space-24) var(--space-16); }
   .ex-hero-title { font-size: 20px; }
-  .ex-vtypes { grid-template-columns: 1fr; }
+  .ex-vtypes,
+  .ex-uses { grid-template-columns: 1fr; }
+  .ex-voucher .ex-step:not(:last-child)::after { top: auto; right: auto; bottom: -19px; left: 50%; transform: translateX(-50%) rotate(135deg); }
+  .ex-cta { flex-direction: column; align-items: stretch; padding: var(--space-16) var(--space-20); }
+  .ex-cta .ex-actions { flex-direction: column; }
+  .ex-cta .ex-actions .ds-btn { width: 100%; }
   .ex-vtype { padding: var(--space-16) var(--space-20); }
   .ex-steps,
   .ex-contacts { grid-template-columns: 1fr; }

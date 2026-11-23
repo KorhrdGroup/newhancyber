@@ -63,7 +63,7 @@ export default function CourseVoucherPage() {
 
           <section className="ex-section">
             <h2 className="ex-section-title">쓸 수 있는 곳</h2>
-            <ul className="ex-list">
+            <ul className="ex-uses">
               <li>평생교육이용권 사용기관에 등록된 강좌의 수강료</li>
               <li>해당 강좌의 교재비</li>
             </ul>
@@ -79,20 +79,23 @@ export default function CourseVoucherPage() {
                 </li>
               ))}
             </ol>
-            <p className="ex-note">
-              신청 기간과 필요한 서류는 해마다 달라요.{" "}
-              <a href={VOUCHER_SITE} target="_blank" rel="noopener noreferrer">
-                평생교육이용권 누리집
-              </a>
-              에서 공고를 확인해 주세요.
-            </p>
-            <div className="ex-actions">
-              <a href={VOUCHER_SITE} target="_blank" rel="noopener noreferrer" className="ds-btn ds-btn--secondary ds-btn--lg">
-                평생교육이용권 신청하기
-              </a>
-              <Link href="/course-registration/register" className="ds-btn ds-btn--primary ds-btn--lg">
-                수강신청 하러 가기
-              </Link>
+            {/* 안내 문구 + 신청 · 수강신청 버튼을 한 상자로 */}
+            <div className="ex-cta">
+              <p className="ex-note">
+                신청 기간과 필요한 서류는 해마다 달라요.{" "}
+                <a href={VOUCHER_SITE} target="_blank" rel="noopener noreferrer">
+                  평생교육이용권 누리집
+                </a>
+                에서 공고를 확인해 주세요.
+              </p>
+              <div className="ex-actions">
+                <a href={VOUCHER_SITE} target="_blank" rel="noopener noreferrer" className="ds-btn ds-btn--secondary ds-btn--lg">
+                  평생교육이용권 신청하기
+                </a>
+                <Link href="/course-registration/register" className="ds-btn ds-btn--primary ds-btn--lg">
+                  수강신청 하러 가기
+                </Link>
+              </div>
             </div>
           </section>
 
