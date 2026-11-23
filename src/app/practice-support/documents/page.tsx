@@ -177,10 +177,14 @@ export default function PracticeDocumentsPage() {
                     <td className={`lx-doc-form${preparation[doc.id]?.hasForm ? "" : " is-empty"}`}>
                       {preparation[doc.id]?.hasForm ? (
                         <TodoButton
-                          className="ds-btn ds-btn--secondary ds-btn--sm"
+                          className="lx-doc-dl"
                           label="내려받기"
                           message={`${doc.name} 서식 내려받기는`}
-                        />
+                        >
+                          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden>
+                            <path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                        </TodoButton>
                       ) : (
                         "-"
                       )}
@@ -188,7 +192,7 @@ export default function PracticeDocumentsPage() {
                     <td className="lx-doc-submit">
                       {/* TODO: API 서류 파일 올리기 (나의 강의실 팝업과 같은 처리) */}
                       <TodoButton
-                        className={`ds-btn ds-btn--sm ${doc.status === "제출 완료" ? "ds-btn--secondary" : "ds-btn--primary"}`}
+                        className="ds-btn ds-btn--secondary ds-btn--sm"
                         label={
                           doc.id === "basic"
                             ? doc.status === "미제출" ? "입력하기" : "고치기"
