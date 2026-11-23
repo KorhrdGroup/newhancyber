@@ -77,14 +77,14 @@
 .st-choice-label { font-size: 12px; font-weight: 500; line-height: 1.3; color: var(--color-text-secondary); }
 .st-choice-title { font-size: 14px; font-weight: 500; line-height: 1.35; color: var(--color-text-strong); word-break: keep-all; }
 .st-or { padding: 5px 0; font-size: 12px; font-weight: 600; line-height: 1; color: var(--color-text-secondary); text-align: center; }
-/* 더해지는 숫자 (figures): 구분 + 값, 사이에 회색 +, 아래 합계 띠 */
-.st-figures { display: flex; flex: 1; flex-direction: column; justify-content: center; gap: var(--space-16); align-self: stretch; }
-.st-figure-row { display: flex; justify-content: center; gap: var(--space-40); }
-.st-figure { position: relative; display: flex; flex-direction: column; align-items: center; gap: 4px; white-space: nowrap; }
-.st-figure .st-plus { top: 50%; }
+/* 더해지는 숫자 (figures): 항목마다 작은 칸을 칸 너비에 고르게 펼치고 사이에 회색 +, 아래 연파랑 합계 띠 */
+.st-figures { display: flex; flex: 1; flex-direction: column; justify-content: center; gap: var(--space-12); align-self: stretch; }
+.st-figure-row { display: grid; grid-auto-columns: minmax(0, 1fr); grid-auto-flow: column; gap: var(--space-24); }
+.st-figure { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: var(--space-16) var(--space-8); border-radius: var(--radius-12); background: var(--color-bg-surface); white-space: nowrap; }
+.st-figure .st-plus { top: 50%; left: calc(var(--space-24) / -2); }
 .st-figure-label { font-size: 14px; font-weight: 500; color: var(--color-text-secondary); }
-.st-figure-value { font-size: 20px; font-weight: 700; line-height: 1.3; color: var(--color-text-strong); }
-.st-total { padding: var(--space-8) var(--space-12); border-radius: var(--radius-12); background: var(--color-bg-subtle); font-size: 14px; font-weight: 600; color: var(--color-text-strong); text-align: center; }
+.st-figure-value { font-size: 22px; font-weight: 700; line-height: 1.3; color: var(--color-text-brand); }
+.st-total { padding: var(--space-10) var(--space-12); border-radius: var(--radius-12); background: var(--color-bg-tone-blue); font-size: 15px; font-weight: 700; color: var(--color-text-brand); text-align: center; }
 .st-flow--plain .st-join { box-shadow: 0 0 0 5px var(--st-ring, var(--color-bg-surface)); }
 
 @media (max-width: 768px) {
@@ -119,7 +119,9 @@
   .st-part .st-text { align-self: center; }
   .st-part .st-icon { width: 56px; height: 56px; margin: 0; }
   .st-part > .st-plus { top: calc(var(--space-20) / -2); left: 28px; }
-  .st-figure-row { gap: var(--space-32); }
-  .st-figure .st-plus { left: calc(var(--space-32) / -2); }
+  .st-figure-row { gap: var(--space-20); }
+  .st-figure { padding: var(--space-12) var(--space-4); }
+  .st-figure .st-plus { left: calc(var(--space-20) / -2); }
   .st-figure-value { font-size: 17px; }
+  .st-total { font-size: 14px; }
 }

@@ -71,8 +71,8 @@ export function CreditFlow({
       label={label}
       items={[{ figures: credits, total }, ...results.map((r) => ({ icon: iconBase + r.icon, title: r.title }))]}
       joins={["arrow", ...results.slice(1).map(() => "plus" as const)]}
-      // 학습설계 카드 4개의 배지 위치를 맞춘다: 학점 칸 3 : 결과 칸 2
-      weights={[3, 2]}
+      // 학습설계 카드 4개의 배지 위치를 맞춘다: 학점 칸 : 결과 칸 = 1 : 1
+      weights={[1, 1]}
       numbered={false}
     />
   );
