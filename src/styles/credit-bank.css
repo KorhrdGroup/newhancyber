@@ -172,7 +172,7 @@
 .cb-grid-icon { width: 80px; height: 80px; object-fit: contain; }
 .cb-grid-label { font-size: 12px; font-weight: 600; line-height: 1.4; color: var(--color-text-strong); text-align: center; word-break: keep-all; }
 
-/* 학점은행제 흐름도: 위는 점점 진해지는 STEP 화살표 띠, 아래는 단계별 흰 카드. STEP 5는 남색 띠 + 연파랑 카드에 셋 중 하나 */
+/* 학점은행제 흐름도: 위는 점점 진해지는 STEP 화살표 띠, 아래는 단계별 흰 카드. 선·그림자 없이 면으로만. STEP 5는 남색 띠 아래 셋 중 하나 */
 .cb-steps { padding: var(--space-24); }
 .cb-steps-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)) minmax(0, 1.35fr); column-gap: var(--space-8); }
 .cb-steps-col { display: flex; flex-direction: column; gap: var(--space-12); min-width: 0; }
@@ -195,17 +195,15 @@
 .cb-steps-col:nth-child(3) .cb-steps-seg { background: #2068f0; }
 .cb-steps-col:nth-child(4) .cb-steps-seg { background: var(--color-bg-brand); }
 .cb-steps-col--final .cb-steps-seg { background: var(--color-bg-brand-strong); }
-.cb-steps-card { display: flex; flex: 1; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-16); padding: var(--space-24) var(--space-12); border-radius: var(--radius-16); background: var(--color-bg-default); box-shadow: var(--shadow-brand-sm); text-align: center; }
+.cb-steps-card { display: flex; flex: 1; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-16); padding: var(--space-24) var(--space-12); border-radius: var(--radius-16); background: var(--color-bg-default); text-align: center; }
 .cb-steps-icon { width: 80px; height: 80px; object-fit: contain; }
 .cb-steps-label { font-size: 15px; font-weight: 600; line-height: 1.4; color: var(--color-text-strong); word-break: keep-all; }
-.cb-steps-final { display: flex; flex: 1; flex-direction: column; justify-content: center; margin: 0; padding: var(--space-8) var(--space-16); border-radius: var(--radius-16); background: var(--color-bg-default); box-shadow: inset 0 0 0 1.5px var(--color-border-brand-subtle), var(--shadow-brand-sm); list-style: none; }
+.cb-steps-final { display: flex; flex: 1; flex-direction: column; justify-content: center; margin: 0; padding: var(--space-8) var(--space-16); border-radius: var(--radius-16); background: var(--color-bg-default); list-style: none; }
 .cb-steps-choice { display: flex; flex-direction: column; }
 .cb-steps-choice-row { display: flex; align-items: center; gap: var(--space-12); padding: var(--space-6) 0; }
 .cb-steps-choice-icon { flex: none; width: 40px; height: 40px; object-fit: contain; }
 .cb-steps-choice-label { font-size: 15px; font-weight: 600; line-height: 1.35; color: var(--color-text-strong); word-break: keep-all; }
-.cb-steps-or { display: flex; align-items: center; gap: var(--space-8); font-size: 12px; font-weight: 600; line-height: 1; color: var(--color-text-secondary); }
-.cb-steps-or::before,
-.cb-steps-or::after { content: ""; flex: 1; height: 1px; background: var(--color-border-default); }
+.cb-steps-or { padding: 2px 0 2px 52px; font-size: 12px; font-weight: 600; line-height: 1; color: var(--color-text-secondary); }
 
 @media (max-width: 768px) {
   /* 흐름은 한 줄에 하나씩 쌓고, 사이 표시는 아래 방향으로 */
@@ -248,4 +246,5 @@
   .cb-steps-final { padding: var(--space-8) var(--space-12); }
   .cb-steps-choice-icon { width: 36px; height: 36px; }
   .cb-steps-choice-label { font-size: 14px; }
+  .cb-steps-or { padding-left: 48px; }
 }
