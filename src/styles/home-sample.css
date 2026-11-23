@@ -558,7 +558,7 @@
   text-align: center;
 }
 .sh-whyc-panel .sh-why-items span { align-items: center; gap: 4px; }
-.sh-whyc-panel .sh-why-items img { width: 56px; height: 56px; }
+.sh-whyc-panel .sh-why-items img { width: 80px; height: 80px; }
 /* 2개(밀착 관리): 칸이 넓어 비어 보이던 것 → 큰 아이콘 왼쪽 · 글 오른쪽 가로 카드 */
 .sh-whyc-panel--pair .sh-why-items li { flex-direction: row; justify-content: flex-start; gap: 16px; padding: 22px; text-align: left; }
 .sh-whyc-panel--pair .sh-why-items span { align-items: flex-start; gap: 6px; }
