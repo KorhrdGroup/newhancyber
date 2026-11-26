@@ -28,9 +28,12 @@ export interface Course {
   practiceDocsDone?: boolean;
   /** 종료된 과목: 성적 */
   grade?: GradeResult;
+  /** DB 수강 상태 (수강 대기 · 수강 중 · 수료 · 미수료) — 샘플은 없음 */
+  status?: string;
 }
 
-export type LessonStatus = "완료" | "학습 중" | "미학습" | "예정";
+/** 「학습 가능」은 DB 화면 — 차시별 학습 기록이 없어 열렸는지만 알 때 (src/lib/classroom.ts) */
+export type LessonStatus = "완료" | "학습 중" | "미학습" | "예정" | "학습 가능";
 
 export interface Lesson {
   id: string;
@@ -89,7 +92,14 @@ export interface GradeResult {
 export interface ExamQuestion {
   no: number;
   text: string;
+  /** 객관식 보기 — 비면 글로 답하는 문항(단답형 · 서술형) */
   options: string[];
+  /** DB 문항 번호(question_id) — 답안 제출 때 쓴다 (샘플은 없음) */
+  id?: number;
+  /** DB 문항 종류 — 객관식 · 단답형 · 서술형 */
+  type?: string;
+  /** 배점 (DB) */
+  score?: number;
 }
 
 export interface PracticeDoc {

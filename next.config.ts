@@ -21,6 +21,9 @@ const nextConfig: NextConfig = {
   // 동기화하지 않아서, 빌드 중 "routes.d 2.ts" 같은 충돌 사본이 생기지 않는다.
   // Vercel 은 빌드 결과를 .next 에서만 찾으므로 Vercel 빌드(VERCEL=1)에서는 기본값을 쓴다.
   distDir: process.env.VERCEL ? ".next" : ".next.nosync",
+  // 장학 신청은 증빙 파일(합계 4MB)을 서버 액션으로 올린다 — 기본 한도(1MB) 대신 Vercel 요청 한도(4.5MB)까지 (LMS 와 같은 값).
+  // 파일 크기 · 종류는 액션이 다시 검사한다 (src/lib/scholarshipOptions.ts · app/popup/scholarship/[paymentId]/actions.ts)
+  experimental: { serverActions: { bodySizeLimit: "4.5mb" } },
   // 기존 퍼블리싱 주소(*.html)로 들어와도 새 주소로 보낸다.
   async redirects() {
     return [

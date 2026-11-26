@@ -1,13 +1,14 @@
 import Link from "next/link";
+import { getMyFinishedCourses } from "@/lib/classroom";
+import { isDbConfigured } from "@/lib/db/client";
 import { Badge } from "./ClassroomUI";
 import ClassroomHeader from "./ClassroomHeader";
 import PopupButton from "./PopupButton";
-import { getFinishedCourses } from "./classroomData";
 
-/** U38 나의 강의실 — 종료된 과목 */
-export default function FinishedCourses() {
-  // TODO: API 종료 과목 조회
-  const courses = getFinishedCourses();
+/** U38 나의 강의실 — 종료된 과목 (로그인한 회원의 수료 · 미수료, DB 가 없으면 샘플) */
+export default async function FinishedCourses() {
+  const isDb = isDbConfigured();
+  const courses = await getMyFinishedCourses();
 
   return (
     <main className="wrapper">
@@ -16,10 +17,17 @@ export default function FinishedCourses() {
           title="종료된 과목"
           desc="수강을 마친 과목의 성적을 확인하고, 복습 기간 동안 강의를 다시 들을 수 있어요."
           actions={
-            <>
-              <PopupButton href="/popup/print/transcript/all">성적증명서 출력</PopupButton>
-              <PopupButton href="/popup/payment/p2606001">결제 내역</PopupButton>
-            </>
+            isDb ? (
+              // 성적증명서는 아직 샘플이라 DB 화면에서는 뺀다
+              <Link href="/my-page/payments" className="ds-btn ds-btn--secondary">
+                결제 내역
+              </Link>
+            ) : (
+              <>
+                <PopupButton href="/popup/print/transcript/all">성적증명서 출력</PopupButton>
+                <PopupButton href="/popup/payment/p2606001">결제 내역</PopupButton>
+              </>
+            )
           }
         />
 
@@ -32,6 +40,7 @@ export default function FinishedCourses() {
                 <div className="cr-card-main">
                   <div className="cr-card-meta">
                     <span>{course.term}</span>
+                    {course.status && <Badge>{course.status}</Badge>}
                     <Badge tone="neutral">{course.category}</Badge>
                     <span>{course.credit}학점</span>
                   </div>
@@ -52,7 +61,7 @@ export default function FinishedCourses() {
                     </div>
                     <div>
                       <dt>복습 기간</dt>
-                      <dd>~ {course.reviewEnd}</dd>
+                      <dd>{course.reviewEnd ? `~ ${course.reviewEnd}` : "-"}</dd>
                     </div>
                     <div>
                       <dt>성적</dt>

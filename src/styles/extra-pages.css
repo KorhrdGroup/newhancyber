@@ -42,6 +42,10 @@
 .ex-order-head { display: flex; justify-content: space-between; align-items: center; gap: var(--space-12); margin-bottom: var(--space-12); }
 .ex-order-head .ex-section-title { margin-bottom: 0; }
 .ex-order-course { display: block; margin-bottom: 2px; font-size: 13px; font-weight: 500; color: var(--color-text-secondary); }
+/* 결제하기 — 결제하지 못한 까닭 (결제 버튼 위) */
+.ex-pay-error { margin: var(--space-8) 0; font-size: 14px; color: var(--color-text-danger); }
+/* 장바구니 과목 이름 위 학기 이름 「2027년도 1학기 1차」 */
+.ex-order-sub { display: block; margin-bottom: 2px; font-size: 13px; font-weight: 400; color: var(--color-text-secondary); }
 .ex-order-badges { display: inline-flex; flex-wrap: wrap; gap: var(--space-4); margin-left: var(--space-8); vertical-align: 2px; }
 .ds2 .ex-order-badges .ds-badge--neutral { background: var(--color-bg-default); } /* 회색 판 위라 흰 배지 (나의 강의실 과목 카드와 같음) */
 .ex-order-price { text-align: right; font-size: 16px; font-weight: 600; color: var(--color-text-strong); white-space: nowrap; }

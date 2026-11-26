@@ -45,8 +45,18 @@ export const heroSlides: HeroSlide[] = [
   },
 ];
 
-/** 지금 모집 중인 차수 (실제 사이트 수강신청 화면 2026-11 기준) */
-export const currentTerm = {
+/** 메인 「지금 모집 중」 한 줄 — DB 는 src/lib/courses.ts getRecruitingTerm() 이 이 모양으로 */
+export interface RecruitingTerm {
+  name: string;
+  openingDate: string;
+  applyPeriod: string;
+  studyPeriod: string;
+  /** 수강신청 마감 (모바일 카운트다운) — ISO, 한국 시각 */
+  applyDeadline: string;
+}
+
+/** DB 를 쓸 수 없을 때의 모집 정보 (코드 값 — 실제 사이트 수강신청 화면 2026-11 기준) */
+export const currentTerm: RecruitingTerm = {
   name: "2026년도 2학기 4차",
   openingDate: "11월 12일",
   applyPeriod: "2026.10.15 ~ 2026.11.11",

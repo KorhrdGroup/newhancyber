@@ -6,12 +6,14 @@ export const metadata: Metadata = { title: "로그인" };
 
 const MEMBER_IMG = "/resources/images/member";
 
-export default function LoginPage() {
+/** ?next=/course-registration/cart 처럼 오면 로그인한 뒤 그 주소로 돌아간다 (검사는 서버 액션 safeNext) */
+export default async function LoginPage({ searchParams }: { searchParams: Promise<{ next?: string | string[] }> }) {
+  const { next } = await searchParams;
   return (
     <main className="wrapper">
       <div className="container member-page">
         <h1 className="member-title">로그인</h1>
-        <LoginForms />
+        <LoginForms next={typeof next === "string" ? next : undefined} />
 
         <div className="member-links">
           <Link href="/member/signup" className="ds-btn ds-btn--secondary ds-btn--lg">

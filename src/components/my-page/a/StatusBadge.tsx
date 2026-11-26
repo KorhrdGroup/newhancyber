@@ -9,6 +9,7 @@ const tones: Record<string, Tone> = {
   "사용 가능": "brand",
   "사용 완료": "neutral",
   "기간 만료": "neutral",
+  "사용 취소": "neutral",
   "진행 중": "brand",
   마감: "neutral",
   접수: "neutral",

@@ -1,15 +1,20 @@
 import Link from "next/link";
+import { getMyOngoingCourses } from "@/lib/classroom";
+import { isDbConfigured } from "@/lib/db/client";
 import { Badge, ProgressBar } from "./ClassroomUI";
 import ClassroomHeader from "./ClassroomHeader";
 import PopupButton from "./PopupButton";
-import { getLessons, getOngoingCourses } from "./classroomData";
+import { getLessons } from "./classroomData";
 
-/** U37 나의 강의실 — 진행 중인 과목 */
-export default function OngoingCourses() {
-  // TODO: API 수강 중 과목 조회
-  const courses = getOngoingCourses();
+/** U37 나의 강의실 — 진행 중인 과목 (로그인한 회원의 수강 대기 · 수강 중, DB 가 없으면 샘플) */
+export default async function OngoingCourses() {
+  const isDb = isDbConfigured();
+  const courses = await getMyOngoingCourses();
   const avgProgress = courses.length ? Math.round(courses.reduce((sum, c) => sum + c.progress, 0) / courses.length) : 0;
-  const todo = courses.reduce((sum, c) => sum + getLessons(c.id).filter((l) => l.status === "학습 중" || l.status === "미학습").length, 0);
+  // DB 는 차시별 학습 기록이 없어 이 칸 대신 「개강 전」 과목 수를 보인다
+  const todo = isDb
+    ? courses.filter((c) => c.status === "수강 대기").length
+    : courses.reduce((sum, c) => sum + getLessons(c.id).filter((l) => l.status === "학습 중" || l.status === "미학습").length, 0);
   const credits = courses.reduce((sum, c) => sum + c.credit, 0);
 
   return (
@@ -19,10 +24,17 @@ export default function OngoingCourses() {
           title="진행 중인 과목"
           desc="수강 중인 과목의 강의를 듣고, 시험·과제에 참여하세요."
           actions={
-            <>
-              <PopupButton href="/popup/payment/p2611001">결제 내역</PopupButton>
-              <PopupButton href="/popup/print/enrollment/p2611001">수강확인서 출력</PopupButton>
-            </>
+            isDb ? (
+              // 결제 내역은 마이페이지 목록으로 (DB 결제), 수강확인서는 아직 샘플이라 DB 화면에서는 뺀다
+              <Link href="/my-page/payments" className="ds-btn ds-btn--secondary">
+                결제 내역
+              </Link>
+            ) : (
+              <>
+                <PopupButton href="/popup/payment/p2611001">결제 내역</PopupButton>
+                <PopupButton href="/popup/print/enrollment/p2611001">수강확인서 출력</PopupButton>
+              </>
+            )
           }
         />
 
@@ -49,10 +61,10 @@ export default function OngoingCourses() {
             </div>
           </div>
           <div className="ds-stat">
-            <div className="ds-stat-label">지금 들을 수 있는 차시</div>
+            <div className="ds-stat-label">{isDb ? "개강 전 과목" : "지금 들을 수 있는 차시"}</div>
             <div className="ds-stat-value">
               {todo}
-              <small>개</small>
+              <small>{isDb ? "과목" : "개"}</small>
             </div>
           </div>
         </div>
@@ -66,6 +78,7 @@ export default function OngoingCourses() {
                 <div className="cr-card-main">
                   <div className="cr-card-meta">
                     <span>{course.term}</span>
+                    {course.status && <Badge>{course.status}</Badge>}
                     <Badge tone={course.isPractice ? "warning" : "brand"}>{course.category}</Badge>
                     <span>{course.credit}학점</span>
                   </div>
