@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
+import { isDbConfigured } from "@/lib/db/client";
+import { getMemberPayment } from "@/lib/db/payments";
+import { getCurrentMember } from "@/lib/memberAuth";
+import { getLayoutSite } from "@/lib/site";
 import { CloseButton, PrintButton } from "@/components/my-classroom/PopupActions";
 import {
   formatWon,
@@ -79,12 +83,49 @@ function CourseTable({ courses, withGrade }: { courses: Course[]; withGrade?: bo
   );
 }
 
+/** 영수증을 줄 수 있는 결제 상태 — 돈을 받은 결제만 (입금 대기 · 결제 취소는 영수증이 없다) */
+const RECEIPT_STATUSES = ["결제 완료", "부분 환불", "환불 접수", "환불 진행 중", "환불 반려", "환불 완료"];
+
+/** 한국 날짜 「2026년 11월 26일」 */
+function todayKstLong(): string {
+  const d = new Date(Date.now() + 9 * 3600_000);
+  return `${d.getUTCFullYear()}년 ${d.getUTCMonth() + 1}월 ${d.getUTCDate()}일`;
+}
+
+/**
+ * 영수증 데이터 — DB 면 로그인한 회원 자신의 결제(다른 회원 결제 · 받은 돈이 없는 결제면 404),
+ * 교육원 정보는 LMS 「홈페이지 관리 › 기본정보 관리」(site_info) 값, 없으면 코드 값. DB 설정이 없으면 샘플.
+ */
+async function loadReceipt(id: string) {
+  if (!isDbConfigured()) {
+    return { p: getPayment(id), receiver: sampleLearner.name, org: institution, issuedOn: issueDate };
+  }
+  const paymentId = Number(id);
+  if (!Number.isSafeInteger(paymentId) || paymentId <= 0) notFound();
+  const member = await getCurrentMember();
+  if (!member) redirect(`/member/login?next=${encodeURIComponent(`/popup/print/payment-receipt/${paymentId}`)}`);
+  const [p, { info }] = await Promise.all([getMemberPayment(member.memberId, paymentId), getLayoutSite()]);
+  if (!p || !RECEIPT_STATUSES.includes(p.status)) notFound();
+  const org = {
+    ...institution,
+    representative: info?.ceoName?.trim() || institution.representative,
+    businessNo: info?.businessNo?.trim() || institution.businessNo,
+    address: info?.address?.trim() || institution.address,
+    phone: info?.enrollPhone?.trim() || institution.phone,
+  };
+  return { p, receiver: member.name, org, issuedOn: todayKstLong() };
+}
+
 export default async function PrintPopup({ params }: { params: Promise<{ docType: string; id: string }> }) {
   const { docType, id } = await params;
   if (!(docType in titles)) notFound();
   const type = docType as DocType;
   // TODO: API 증명서 발급 (발급 번호·발급 이력 저장)
   const docNo = `제 ${new Date().getFullYear()}-${id.toUpperCase()} 호`;
+  // 영수증은 DB 결제 (나머지 증명서는 아직 샘플) — 날짜 · 교육원 정보도 영수증일 때만 바꾼다
+  const receipt = type === "payment-receipt" ? await loadReceipt(id) : null;
+  const org = receipt?.org ?? institution;
+  const issuedOn = receipt?.issuedOn ?? issueDate;
 
   let body: React.ReactNode;
   if (type === "enrollment") {
@@ -188,14 +229,14 @@ export default async function PrintPopup({ params }: { params: Promise<{ docType
       </>
     );
   } else {
-    const p = getPayment(id);
+    const { p, receiver } = receipt!;
     body = (
       <>
         <table className="doc-table">
           <tbody>
             <tr>
               <th>받는 분</th>
-              <td>{sampleLearner.name}</td>
+              <td>{receiver}</td>
               <th>결제일</th>
               <td>{p.paidAt ?? "-"}</td>
             </tr>
@@ -217,14 +258,15 @@ export default async function PrintPopup({ params }: { params: Promise<{ docType
             </tr>
           </thead>
           <tbody>
-            {p.courses.map((c) => (
-              <tr key={c.title}>
+            {p.courses.map((c, i) => (
+              <tr key={`${i}-${c.title}`}>
                 <td>{c.title}</td>
                 <td>{formatWon(c.price)}</td>
               </tr>
             ))}
+            {/* 과목 줄은 정가, 할인(쿠폰 · 할인가 · 장학 감면은 결제 금액에 이미 반영) 뒤 합계는 실제 결제 금액 */}
             <tr>
-              <td>쿠폰 할인</td>
+              <td>할인</td>
               <td>- {formatWon(p.coupon)}</td>
             </tr>
             <tr>
@@ -235,7 +277,7 @@ export default async function PrintPopup({ params }: { params: Promise<{ docType
         </table>
         <p className="doc-text">위 금액을 정히 영수합니다.</p>
         <p className="doc-foot">
-          사업자등록번호 {institution.businessNo} · 대표 {institution.representative} · {institution.address}
+          사업자등록번호 {org.businessNo} · 대표 {org.representative} · {org.address}
         </p>
       </>
     );
@@ -251,14 +293,14 @@ export default async function PrintPopup({ params }: { params: Promise<{ docType
         <p className="doc-no">{docNo}</p>
         <h1 className="doc-title">{titles[type]}</h1>
         {body}
-        <p className="doc-date">{issueDate}</p>
+        <p className="doc-date">{issuedOn}</p>
         <p className="doc-sign">
-          {institution.name}장
+          {org.name}장
           <span className="doc-seal" aria-hidden>
             직인
           </span>
         </p>
-        <p className="doc-foot">문의 {institution.phone}</p>
+        <p className="doc-foot">문의 {org.phone}</p>
       </article>
     </>
   );

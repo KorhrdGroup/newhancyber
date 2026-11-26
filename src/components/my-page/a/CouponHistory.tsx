@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
+import { registerCoupon } from "@/app/my-page/coupons/actions";
 import StatusBadge from "./StatusBadge";
 import type { Coupon } from "../myPageDataA";
 import "@/styles/extra-pages.css";
@@ -11,21 +13,42 @@ const filters = [
   { label: "사용한 쿠폰", match: (c: Coupon) => c.status === "사용 완료" },
 ];
 
-/** U29 쿠폰 사용내역 — 요약, 쿠폰 등록, 목록(전체/보유/사용 거르기) */
-export default function CouponHistory({ coupons }: { coupons: Coupon[] }) {
+/**
+ * U29 쿠폰 사용내역 — 요약, 쿠폰 등록, 목록(전체/보유/사용 거르기).
+ * canRegister 면 쿠폰 번호를 실제로 등록한다 (DB). 결과는 알림 창 대신 입력칸 아래에 보인다.
+ */
+export default function CouponHistory({ coupons, canRegister = false }: { coupons: Coupon[]; canRegister?: boolean }) {
   const [filter, setFilter] = useState(0);
   const [code, setCode] = useState("");
+  const [message, setMessage] = useState<{ ok: boolean; text: string } | null>(null);
+  const [isSending, startSending] = useTransition();
+  const router = useRouter();
   const list = coupons.filter(filters[filter].match);
   const count = (status: Coupon["status"]) => coupons.filter((c) => c.status === status).length;
 
   const register = (e: React.FormEvent) => {
     e.preventDefault();
     if (!code.trim()) {
-      alert("쿠폰 번호를 적어 주세요.");
+      setMessage({ ok: false, text: "쿠폰 번호를 적어 주세요." });
       return;
     }
-    // TODO: API 쿠폰 등록 (code)
-    alert("쿠폰 등록 API 연동 전입니다.");
+    if (!canRegister) {
+      setMessage({ ok: false, text: "샘플 화면이라 등록하지 않아요." });
+      return;
+    }
+    setMessage(null);
+    startSending(async () => {
+      const result = await registerCoupon(code);
+      if (result.needLogin) {
+        router.push(`/member/login?next=${encodeURIComponent("/my-page/coupons")}`);
+        return;
+      }
+      setMessage({ ok: result.ok, text: result.message });
+      if (result.ok) {
+        setCode("");
+        router.refresh();
+      }
+    });
   };
 
   return (
@@ -67,10 +90,15 @@ export default function CouponHistory({ coupons }: { coupons: Coupon[] }) {
             onChange={(e) => setCode(e.target.value)}
             autoComplete="off"
           />
-          <button type="submit" className="ds-btn ds-btn--primary">
+          <button type="submit" className="ds-btn ds-btn--primary" disabled={isSending}>
             등록
           </button>
         </div>
+        {message && (
+          <p className={`ds-mt-8 ${message.ok ? "ds-text-brand" : "ds-text-danger"}`} role={message.ok ? "status" : "alert"}>
+            {message.text}
+          </p>
+        )}
         <p className="pp-note ds-mt-8">등록한 쿠폰은 수강신청 결제 화면에서 쓸 수 있습니다.</p>
       </form>
 

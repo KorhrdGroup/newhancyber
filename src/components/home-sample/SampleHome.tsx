@@ -8,7 +8,6 @@ import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import {
-  currentTerm,
   consultTimeOptions,
   essentialCards,
   heroSlides,
@@ -18,6 +17,7 @@ import {
   type HeroSlide,
   type NoticePost,
   type NoticeTabKey,
+  type RecruitingTerm,
 } from "@/components/home/homeData";
 import PrivacyConsentPopup from "@/components/home/PrivacyConsentPopup";
 import type { SiteBanner, SitePopup } from "@/lib/site";
@@ -157,8 +157,6 @@ function SampleHero({ slides }: { slides: HeroSlide[] }) {
 
 /* ---------- 2. 개강 일정 한 줄 ---------- */
 
-const DEADLINE = new Date(currentTerm.applyDeadline).getTime();
-
 const noopSubscribe = () => () => {};
 /* 개강 줄 라인 아이콘 — 기존 메인 학사알림 줄과 같은 그림 · 굵기 */
 function TermIcon({ name }: { name: keyof typeof NOTICE_ICONS }) {
@@ -169,15 +167,18 @@ function TermIcon({ name }: { name: keyof typeof NOTICE_ICONS }) {
   );
 }
 
-function ddayLabel() {
-  const days = Math.ceil((DEADLINE - Date.now()) / 86400000);
+function ddayLabel(deadline: number) {
+  const days = Math.ceil((deadline - Date.now()) / 86400000);
   return days < 0 ? "마감" : days === 0 ? "D-day" : `D-${days}`;
 }
 
-function TermStrip() {
+/** 수강신청을 받는 학기가 없으면(관리자가 다음 학기를 아직 안 열었으면) 줄을 숨긴다 */
+function TermStrip({ term }: { term: RecruitingTerm | null }) {
+  const deadline = term ? new Date(term.applyDeadline).getTime() : 0;
   // 서버 시각과 어긋나지 않게 화면에서만 계산 (서버 그림에는 빈칸)
-  const dday = useSyncExternalStore(noopSubscribe, ddayLabel, () => null);
-  // 마감이 지나면 '지금 모집 중' 대신 '모집 마감' (TODO: 다음 차수 정보가 오면 그 차수로 바꾼다)
+  const dday = useSyncExternalStore(noopSubscribe, () => (term ? ddayLabel(deadline) : null), () => null);
+  if (!term) return null;
+  // 마감이 지나면 '지금 모집 중' 대신 '모집 마감' — DB 는 마감한 학기를 1분 안에 빼고 다음 학기를 보여 준다(그 사이 잠깐만 '모집 마감')
   const closed = dday === "마감";
 
   return (
@@ -192,7 +193,7 @@ function TermStrip() {
             <TermIcon name="alarm" />
             모집
           </dt>
-          <dd>{currentTerm.name}</dd>
+          <dd>{term.name}</dd>
         </div>
         <div>
           <dt>
@@ -200,7 +201,7 @@ function TermStrip() {
             수강신청
           </dt>
           <dd>
-            {currentTerm.applyPeriod}
+            {term.applyPeriod}
             {/* 마감 뒤에는 앞의 '모집 마감'과 겹치므로 남은 날만 보인다 */}
             {dday && !closed && <em>{dday}</em>}
           </dd>
@@ -210,7 +211,7 @@ function TermStrip() {
             <TermIcon name="pencil" />
             학습기간
           </dt>
-          <dd>{currentTerm.studyPeriod}</dd>
+          <dd>{term.studyPeriod}</dd>
         </div>
       </dl>
       <Link href="/course-registration/register" className="sh-term-go">
@@ -611,8 +612,11 @@ export default function SampleHome({
   boardPosts,
   banners,
   popups,
+  term,
 }: {
   boardPosts: MainBoardPosts;
+  /** 지금 모집 중인 학기 (LMS 학사일정 관리) — null 이면 줄을 숨긴다 */
+  term: RecruitingTerm | null;
   /** 관리자 메인 배너 — null 이면 코드 배너 */
   banners: SiteBanner[] | null;
   /** 지금 띄울 팝업 (관리자 「팝업 관리」) */
@@ -623,7 +627,7 @@ export default function SampleHome({
     <main className="sh-main">
       <div className="sh-wrap">
         <SampleHero slides={bannerSlides(banners)} />
-        <TermStrip />
+        <TermStrip term={term} />
         {/* 실습 신청 · 결제는 자주 찾는 길이라 넘김 없이 개강 줄 바로 아래 */}
         <QuickActions />
         <Bento />

@@ -122,7 +122,7 @@ export const courseTerm = (courseId: string) => getCourse(courseId).term;
 /* U29 쿠폰 사용내역                                                     */
 /* ------------------------------------------------------------------ */
 
-export type CouponStatus = "사용 가능" | "사용 완료" | "기간 만료";
+export type CouponStatus = "사용 가능" | "사용 완료" | "기간 만료" | "사용 취소";
 
 export interface Coupon {
   id: string;

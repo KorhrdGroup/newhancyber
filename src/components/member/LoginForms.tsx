@@ -15,7 +15,8 @@ const authMethods: { key: AuthMethod; label: string }[] = [
 ];
 
 /** 일반 로그인 · 공동 인증서/간편 인증 로그인 · SNS 로그인 (PC 3칸, 휴대폰은 인증서 칸 없이 세로로) */
-export default function LoginForms() {
+/** next — 로그인한 뒤 돌아갈 홈페이지 주소 (예: 장바구니). 서버 액션이 같은 사이트 주소인지 다시 본다(safeNext) */
+export default function LoginForms({ next }: { next?: string }) {
   const [authMethod, setAuthMethod] = useState<AuthMethod>("cert");
 
   // form 의 action 에 서버 액션을 바로 건다 — 화면 스크립트가 아직 준비되기 전에 눌러도 POST 로 서버에 가고
@@ -38,6 +39,7 @@ export default function LoginForms() {
       <section className="member-col">
         <h2 className="member-col-title">일반 로그인</h2>
         <form className="member-form" id="generalLoginForm" action={formAction}>
+          {next && <input type="hidden" name="next" value={next} />}
           <input
             type="text"
             key={state.id ?? ""}
