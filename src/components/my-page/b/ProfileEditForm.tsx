@@ -1,10 +1,32 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
-import { educationLevels, emailDomains, phonePrefixes, type sampleMember } from "../myPageDataB";
+import Script from "next/script";
+import { useRouter } from "next/navigation";
+import { useRef, useState, useTransition } from "react";
+import { saveProfile, type ProfileInput } from "@/app/my-page/profile/actions";
+import { educationLevels, emailDomains, phonePrefixes } from "../myPageDataB";
 
-type Member = typeof sampleMember;
+const DAUM_POSTCODE_SRC = "https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js";
+
+/** 수정 화면에 처음 채울 값 (서버가 회원 정보에서 만든다) */
+export interface ProfileFormMember {
+  userId: string;
+  name: string;
+  birth: string;
+  phone: [string, string, string];
+  emailId: string;
+  emailDomain: string;
+  postalCode: string;
+  address: string;
+  addressDetail: string;
+  /** EDUCATION_LEVELS 의 value (모르는 값이면 "") */
+  education: string;
+  schoolName: string;
+  major: string;
+  smsConsent: boolean;
+  emailConsent: boolean;
+}
 
 /** 필수 칸 표시 */
 const Req = () => <span className="mp-req">*</span>;
@@ -31,65 +53,99 @@ function Field({ label, htmlFor, req, children }: { label: string; htmlFor?: str
   );
 }
 
-/** U35 내 정보 수정 2단계 — 회원 정보 수정 (항목은 회원가입 SignupForm 과 같음) */
-export default function ProfileEditForm({ member }: { member: Member }) {
+/**
+ * U35 내 정보 수정 2단계 — 회원 정보 수정 (항목 · 검사는 회원가입과 같음). 저장은 서버 액션 saveProfile 이
+ * 다시 검사하고, 1단계 확인(10분)이 끝났으면 1단계로 돌려보낸다. 알림 창 대신 화면 안에 안내한다.
+ */
+export default function ProfileEditForm({ member }: { member: ProfileFormMember }) {
+  const router = useRouter();
   const [phone, setPhone] = useState(member.phone);
   const [emailId, setEmailId] = useState(member.emailId);
-  const [emailDomain, setEmailDomain] = useState(emailDomains.includes(member.emailDomain) ? member.emailDomain : "");
-  const [emailDomainInput, setEmailDomainInput] = useState(emailDomains.includes(member.emailDomain) ? "" : member.emailDomain);
-  // TODO: 우편번호 찾기 연결 시 setter 를 꺼내 씀
-  const [postalCode] = useState(member.postalCode);
-  const [address] = useState(member.address);
+  const knownDomain = (emailDomains as readonly string[]).includes(member.emailDomain);
+  const [emailDomain, setEmailDomain] = useState(knownDomain ? member.emailDomain : "");
+  const [emailDomainInput, setEmailDomainInput] = useState(knownDomain ? "" : member.emailDomain);
+  const [postalCode, setPostalCode] = useState(member.postalCode);
+  const [address, setAddress] = useState(member.address);
   const [addressDetail, setAddressDetail] = useState(member.addressDetail);
   const [education, setEducation] = useState(member.education);
+  const [schoolName, setSchoolName] = useState(member.schoolName);
+  const [major, setMajor] = useState(member.major);
   const [newPassword, setNewPassword] = useState("");
   const [newPasswordConfirm, setNewPasswordConfirm] = useState("");
   const [smsConsent, setSmsConsent] = useState(member.smsConsent);
   const [emailConsent, setEmailConsent] = useState(member.emailConsent);
+  const [notice, setNotice] = useState<{ ok: boolean; text: string } | null>(null);
+  const [withdrawInfo, setWithdrawInfo] = useState(false);
+  const [pending, start] = useTransition();
+  const detailRef = useRef<HTMLInputElement>(null);
 
   const setPhonePart = (i: 0 | 1 | 2, v: string) => {
-    const next = [...phone] as Member["phone"];
-    next[i] = v.replace(/\D/g, "");
+    const next = [...phone] as ProfileFormMember["phone"];
+    next[i] = i === 0 ? v : v.replace(/\D/g, "");
     setPhone(next);
   };
 
   const findPostcode = () => {
-    // TODO: 우편번호 찾기 (회원가입 SignupForm 처럼 다음 우편번호 서비스 연결 → 우편번호·주소 채움)
-    alert("우편번호 찾기 연동 전입니다.");
+    if (!window.daum?.Postcode) {
+      setNotice({ ok: false, text: "주소 검색을 불러오는 중이에요. 잠시 뒤 다시 눌러 주세요." });
+      return;
+    }
+    new window.daum.Postcode({
+      oncomplete: (data) => {
+        setPostalCode(data.zonecode);
+        setAddress(data.userSelectedType === "R" ? data.roadAddress : data.jibunAddress);
+        setAddressDetail("");
+        detailRef.current?.focus();
+      },
+    }).open();
+  };
+
+  const fail = (text: string, field?: string) => {
+    setNotice({ ok: false, text });
+    if (field) document.getElementById(field)?.focus();
   };
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!phone[1] || !phone[2]) {
-      alert("휴대폰 번호를 입력해 주세요.");
-      return;
-    }
-    if (!emailId || !(emailDomain || emailDomainInput)) {
-      alert("이메일을 입력해 주세요.");
-      return;
-    }
-    if (newPassword || newPasswordConfirm) {
-      if (!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[^A-Za-z\d]).{8,20}$/.test(newPassword)) {
-        alert("새 비밀번호는 8~20자의 영문·숫자·특수문자를 섞어 주세요.");
+    if (!phone[1] || !phone[2]) return fail("휴대폰 번호를 입력해 주세요.", "edit-phone");
+    if (!emailId || !(emailDomain || emailDomainInput)) return fail("이메일을 입력해 주세요.", "edit-email");
+    if (newPassword && newPassword !== newPasswordConfirm) return fail("새 비밀번호 확인이 새 비밀번호와 달라요.", "edit-new-password-confirm");
+    const input: ProfileInput = {
+      phonePrefix: phone[0],
+      phoneMiddle: phone[1],
+      phoneLast: phone[2],
+      emailLocal: emailId,
+      emailDomain: emailDomain || emailDomainInput,
+      postalCode,
+      address,
+      addressDetail,
+      education,
+      schoolName,
+      major,
+      newPassword,
+      newPasswordConfirm,
+      smsAgree: smsConsent,
+      emailAgree: emailConsent,
+    };
+    setNotice(null);
+    start(async () => {
+      const r = await saveProfile(input);
+      if (r.expired) {
+        router.push("/my-page/profile");
         return;
       }
-      if (newPassword !== newPasswordConfirm) {
-        alert("새 비밀번호가 서로 달라요. 다시 확인해 주세요.");
-        return;
-      }
-    }
-    // TODO: API 회원 정보 수정 (phone, email, address, education, newPassword, smsConsent, emailConsent)
-    alert("내 정보 수정 API 연동 전입니다.");
-  };
-
-  const withdraw = () => {
-    if (!confirm("정말 탈퇴할까요? 탈퇴하면 학습 기록을 다시 볼 수 없어요.")) return;
-    // TODO: API 회원 탈퇴 (탈퇴 사유·안내 화면은 정해지면 추가)
-    alert("회원 탈퇴 API 연동 전입니다.");
+      if (r.ok) {
+        setNewPassword("");
+        setNewPasswordConfirm("");
+        setNotice({ ok: true, text: r.message });
+        router.refresh();
+      } else fail(r.message, r.field);
+    });
   };
 
   return (
-    <form onSubmit={submit}>
+    <form onSubmit={submit} noValidate>
+      <Script src={DAUM_POSTCODE_SRC} strategy="afterInteractive" />
       <section className="pp-box mp-form">
         <div className="mp-form-head">
           <h3 className="pp-box-title">기본 정보</h3>
@@ -105,7 +161,7 @@ export default function ProfileEditForm({ member }: { member: Member }) {
           <p className="mp-static">{member.name}</p>
         </Field>
         <Field label="생년월일">
-          <p className="mp-static">{member.birth}</p>
+          <p className="mp-static">{member.birth || "-"}</p>
         </Field>
       </section>
 
@@ -137,7 +193,7 @@ export default function ProfileEditForm({ member }: { member: Member }) {
             )}
           </div>
         </Field>
-        <Field label="주소" htmlFor="edit-postal">
+        <Field label="주소" htmlFor="edit-postal" req>
           <div className="mq-inline">
             <input id="edit-postal" className="ds-input mq-postal" value={postalCode} readOnly placeholder="우편번호" />
             <button type="button" className="ds-btn ds-btn--secondary mq-fixed" onClick={findPostcode}>
@@ -145,9 +201,18 @@ export default function ProfileEditForm({ member }: { member: Member }) {
             </button>
           </div>
           <input className="ds-input ds-mt-8" value={address} readOnly placeholder="주소" aria-label="주소" />
-          <input className="ds-input ds-mt-8" value={addressDetail} placeholder="상세주소" aria-label="상세주소" onChange={(e) => setAddressDetail(e.target.value)} />
+          <input
+            id="edit-address-detail"
+            ref={detailRef}
+            className="ds-input ds-mt-8"
+            value={addressDetail}
+            placeholder="상세주소"
+            aria-label="상세주소"
+            maxLength={200}
+            onChange={(e) => setAddressDetail(e.target.value)}
+          />
         </Field>
-        <Field label="최종학력" htmlFor="edit-education">
+        <Field label="최종학력" htmlFor="edit-education" req>
           <select id="edit-education" className="ds-select" value={education} onChange={(e) => setEducation(e.target.value)}>
             <option value="">최종학력을 선택해 주세요.</option>
             {educationLevels.map((l) => (
@@ -157,11 +222,17 @@ export default function ProfileEditForm({ member }: { member: Member }) {
             ))}
           </select>
         </Field>
+        <Field label="학교명" htmlFor="edit-school" req>
+          <input id="edit-school" className="ds-input" maxLength={100} value={schoolName} onChange={(e) => setSchoolName(e.target.value)} />
+        </Field>
+        <Field label="전공" htmlFor="edit-major">
+          <input id="edit-major" className="ds-input" maxLength={100} value={major} onChange={(e) => setMajor(e.target.value)} />
+        </Field>
       </section>
 
       <section className="pp-box mp-form">
         <h3 className="pp-box-title mq-form-title">비밀번호 변경</h3>
-        <p className="pp-note mq-form-desc">바꿀 때만 입력하세요. 비워 두면 지금 비밀번호를 그대로 써요.</p>
+        <p className="pp-note mq-form-desc">바꿀 때만 입력하세요. 비워 두면 지금 비밀번호를 그대로 써요. 바꾸면 다른 기기에서는 다시 로그인해야 해요.</p>
         <Field label="새 비밀번호" htmlFor="edit-new-password">
           <input
             id="edit-new-password"
@@ -169,6 +240,7 @@ export default function ProfileEditForm({ member }: { member: Member }) {
             className="ds-input"
             placeholder="8~20자 이내의 영문/숫자/특수문자"
             autoComplete="new-password"
+            maxLength={20}
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
           />
@@ -180,6 +252,7 @@ export default function ProfileEditForm({ member }: { member: Member }) {
             className="ds-input"
             placeholder="새 비밀번호를 한 번 더 입력해 주세요."
             autoComplete="new-password"
+            maxLength={20}
             value={newPasswordConfirm}
             onChange={(e) => setNewPasswordConfirm(e.target.value)}
           />
@@ -203,19 +276,29 @@ export default function ProfileEditForm({ member }: { member: Member }) {
         </p>
       </section>
 
+      {notice && (
+        <p className={notice.ok ? "ds-text-success" : "ds-text-danger"} role={notice.ok ? "status" : "alert"}>
+          {notice.text}
+        </p>
+      )}
       <div className="pp-actions">
         <Link href="/my-page/certificates" className="ds-btn ds-btn--secondary">
           취소
         </Link>
-        <button type="submit" className="ds-btn ds-btn--primary">
-          저장
+        <button type="submit" className="ds-btn ds-btn--primary" disabled={pending}>
+          {pending ? "저장하는 중…" : "저장"}
         </button>
       </div>
       <p className="mq-withdraw">
-        <button type="button" className="ds-btn ds-btn--ghost ds-btn--sm" onClick={withdraw}>
+        <button type="button" className="ds-btn ds-btn--ghost ds-btn--sm" onClick={() => setWithdrawInfo((v) => !v)} aria-expanded={withdrawInfo}>
           회원 탈퇴
         </button>
       </p>
+      {withdrawInfo && (
+        <p className="pp-note ds-text-center" role="status">
+          회원 탈퇴는 수강 · 결제 기록 확인이 필요해 학습지원센터에서 도와드려요. 1:1 문의로 남겨 주세요.
+        </p>
+      )}
     </form>
   );
 }
