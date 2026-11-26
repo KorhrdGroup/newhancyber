@@ -139,3 +139,85 @@ export function isDuplicateKey(err: unknown): boolean {
     ?? (err as { originalError?: { info?: { number?: number } } })?.originalError?.info?.number;
   return n === 2627 || n === 2601;
 }
+
+// ── 내 정보 수정 (마이페이지) ─────────────────────────────
+
+export interface MemberProfile {
+  loginId: string;
+  name: string;
+  /** YYYY.MM.DD (없으면 null) */
+  birthDate: string | null;
+  phone: string | null;
+  email: string | null;
+  postalCode: string | null;
+  address: string | null;
+  addressDetail: string | null;
+  /** 가입할 때 고른 보기 글 그대로 (예: 「고등학교 졸업」) */
+  educationLevel: string | null;
+  schoolName: string | null;
+  major: string | null;
+  smsAgree: boolean;
+  emailAgree: boolean;
+}
+
+export async function readMemberProfile(memberId: number): Promise<MemberProfile | null> {
+  const pool = await getPool();
+  const r = await pool.request().input("id", sql.Int, memberId).query<MemberProfile>(`
+    SELECT login_id AS loginId, name, REPLACE(CONVERT(CHAR(10), birth_date, 23), '-', '.') AS birthDate, phone, email,
+      postal_code AS postalCode, address, address_detail AS addressDetail, education_level AS educationLevel,
+      school_name AS schoolName, major, sms_agree AS smsAgree, email_agree AS emailAgree
+    FROM dbo.members WHERE member_id = @id AND is_active = 1`);
+  return r.recordset[0] ?? null;
+}
+
+export interface MemberProfileInput {
+  phone: string;
+  email: string;
+  postalCode: string;
+  address: string;
+  addressDetail: string;
+  educationLevel: string;
+  schoolName: string;
+  major: string | null;
+  smsAgree: boolean;
+  emailAgree: boolean;
+}
+
+/**
+ * 회원이 고칠 수 있는 칸만 바꾼다 (아이디 · 이름 · 생년월일 · 주민번호는 관리자 회원 관리에서만).
+ * newHash 가 있으면 비밀번호도 바꾸는데, 확인한 뒤 그사이 비밀번호가 바뀌었으면(oldHash 와 다르면) 아무것도 저장하지 않는다.
+ * 결과: ok · changed(그사이 비밀번호가 바뀜) · missing(계정 없음 · 사용 중지)
+ */
+export async function updateMemberProfile(
+  memberId: number,
+  input: MemberProfileInput,
+  password: { oldHash: string; newHash: string } | null,
+): Promise<"ok" | "changed" | "missing"> {
+  const pool = await getPool();
+  const r = await pool
+    .request()
+    .input("id", sql.Int, memberId)
+    .input("phone", sql.NVarChar(20), input.phone)
+    .input("email", sql.NVarChar(100), input.email)
+    .input("postalCode", sql.NVarChar(10), input.postalCode)
+    .input("address", sql.NVarChar(200), input.address)
+    .input("addressDetail", sql.NVarChar(200), input.addressDetail)
+    .input("educationLevel", sql.NVarChar(30), input.educationLevel)
+    .input("schoolName", sql.NVarChar(100), input.schoolName)
+    .input("major", sql.NVarChar(100), input.major)
+    .input("smsAgree", sql.Bit, input.smsAgree)
+    .input("emailAgree", sql.Bit, input.emailAgree)
+    .input("oldHash", sql.NVarChar(200), password?.oldHash ?? null)
+    .input("newHash", sql.NVarChar(200), password?.newHash ?? null).query<{ result: string }>(`
+      UPDATE dbo.members
+      SET phone = @phone, email = @email, postal_code = @postalCode, address = @address, address_detail = @addressDetail,
+          education_level = @educationLevel, school_name = @schoolName, major = @major,
+          sms_agree = @smsAgree, email_agree = @emailAgree,
+          password_hash = COALESCE(@newHash, password_hash), updated_at = SYSDATETIME()
+      WHERE member_id = @id AND is_active = 1 AND (@newHash IS NULL OR password_hash = @oldHash);
+      DECLARE @n INT = @@ROWCOUNT;
+      SELECT CASE WHEN @n > 0 THEN N'ok'
+                  WHEN EXISTS (SELECT 1 FROM dbo.members WHERE member_id = @id AND is_active = 1) THEN N'changed'
+                  ELSE N'missing' END AS result;`);
+  return (r.recordset[0]?.result as "ok" | "changed" | "missing") ?? "missing";
+}

@@ -1,29 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useActionState } from "react";
+import { confirmProfilePassword, type ConfirmState } from "@/app/my-page/profile/actions";
 
 /** 필수 칸 표시 */
 const Req = () => <span className="mp-req">*</span>;
 
-/** U35 내 정보 수정 1단계 — 비밀번호 확인 */
+/** U35 내 정보 수정 1단계 — 비밀번호 확인 (맞으면 서버가 수정 화면으로 보낸다) */
 export default function PasswordConfirmForm({ userId }: { userId: string }) {
-  const router = useRouter();
-  const [password, setPassword] = useState("");
-
-  const submit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!password) {
-      alert("비밀번호를 입력해 주세요.");
-      return;
-    }
-    // TODO: API 비밀번호 확인 (틀리면 알림 후 머무름, 맞으면 수정 화면 접근 허용)
-    router.push("/my-page/profile/edit");
-  };
+  const [state, action, pending] = useActionState<ConfirmState, FormData>(confirmProfilePassword, {});
 
   return (
-    <form onSubmit={submit} className="pp-box mp-form mq-confirm">
+    <form action={action} className="pp-box mp-form mq-confirm">
       <div className="mp-form-head">
         <h3 className="pp-box-title">현재 비밀번호 입력</h3>
       </div>
@@ -39,21 +28,28 @@ export default function PasswordConfirmForm({ userId }: { userId: string }) {
         </label>
         <input
           id="confirm-password"
+          name="password"
           type="password"
           className="ds-input"
           placeholder="영문, 숫자, 특수문자 조합 8~20자"
           autoComplete="current-password"
           maxLength={20}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          required
+          aria-invalid={state.error ? true : undefined}
+          aria-describedby={state.error ? "confirm-error" : undefined}
         />
+        {state.error && (
+          <p id="confirm-error" className="ds-text-danger ds-mt-8" role="alert">
+            {state.error}
+          </p>
+        )}
       </div>
       <div className="pp-actions">
         <Link href="/my-page/certificates" className="ds-btn ds-btn--secondary">
           취소
         </Link>
-        <button type="submit" className="ds-btn ds-btn--primary">
-          확인
+        <button type="submit" className="ds-btn ds-btn--primary" disabled={pending}>
+          {pending ? "확인하는 중…" : "확인"}
         </button>
       </div>
     </form>
